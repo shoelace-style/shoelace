@@ -110,7 +110,7 @@
           .map(
             method => `
               <tr>
-                <td class="nowrap"><code>${escapeHtml(method.name)}</code></td>
+                <td class="nowrap"><code>${escapeHtml(method.name)}()</code></td>
                 <td>${escapeHtml(method.description)}</td>
                 <td>
                   ${
@@ -283,6 +283,7 @@
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&apos;')
+      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" rel="noopener noreferrer" target="_blank">$1</a>')
       .replace(/`(.*?)`/g, '<code>$1</code>');
   }
 
@@ -434,7 +435,7 @@
             To import this component from [the CDN](https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace) using a script tag:
 
             \`\`\`html
-            <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${metadata.package.version}/${component.path}"></script>
+            <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${metadata.package.version}/dist/${component.path}"></script>
             \`\`\`
             </sl-tab-panel>
 
@@ -442,14 +443,14 @@
             To import this component from [the CDN](https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace) using a JavaScript import:
 
             \`\`\`js
-            import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${metadata.package.version}/${component.path}';
+            import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${metadata.package.version}/dist/${component.path}';
             \`\`\`
             </sl-tab-panel>
 
             <sl-tab-panel name="bundler">\n
             To import this component using [a bundler](/getting-started/installation#bundling):
             \`\`\`js
-            import '@shoelace-style/shoelace/${component.path}';
+            import '@shoelace-style/shoelace/dist/${component.path}';
             \`\`\`
             </sl-tab-panel>
 
@@ -484,12 +485,21 @@
           `;
         }
 
+        if (component.slots?.length) {
+          result += `
+            ## Slots
+            ${createSlotsTable(component.slots)}
+
+            _Learn more about [using slots](/getting-started/usage#slots)._
+          `;
+        }
+
         if (props?.length) {
           result += `
-            ## Properties
+            ## Attributes & Properties
             ${createPropsTable(props)}
 
-            _Learn more about [properties and attributes](/getting-started/usage#properties)._
+            _Learn more about [attributes and properties](/getting-started/usage#properties)._
           `;
         }
 
@@ -509,15 +519,6 @@
             ${createMethodsTable(methods)}
 
             _Learn more about [calling methods](/getting-started/usage#methods)._
-          `;
-        }
-
-        if (component.slots?.length) {
-          result += `
-            ## Slots
-            ${createSlotsTable(component.slots)}
-
-            _Learn more about [using slots](/getting-started/usage#slots)._
           `;
         }
 

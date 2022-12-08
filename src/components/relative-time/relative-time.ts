@@ -33,8 +33,12 @@ export default class SlRelativeTime extends ShoelaceElement {
   @state() private relativeTime = '';
   @state() private titleTime = '';
 
-  /** The date from which to calculate time from. */
-  @property() date: Date | string;
+  /**
+   * The date from which to calculate time from. If not set, the current date and time will be used. When passing a
+   * string, it's strongly recommended to use the ISO 8601 format to ensure timezones are handled correctly. To convert
+   * a date to this format in JavaScript, use [`date.toISOString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString).
+   */
+  @property() date: Date | string = new Date();
 
   /** The formatting style to use. */
   @property() format: 'long' | 'short' | 'narrow' = 'long';

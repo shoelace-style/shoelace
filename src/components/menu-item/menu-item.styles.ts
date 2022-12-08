@@ -33,6 +33,7 @@ export default css`
 
   .menu-item .menu-item__label {
     flex: 1 1 auto;
+    display: inline-block;
   }
 
   .menu-item .menu-item__prefix {
@@ -41,7 +42,7 @@ export default css`
     align-items: center;
   }
 
-  .menu-item .menu-item__prefix ::slotted(*) {
+  .menu-item .menu-item__prefix::slotted(*) {
     margin-inline-end: var(--sl-spacing-x-small);
   }
 
@@ -51,7 +52,7 @@ export default css`
     align-items: center;
   }
 
-  .menu-item .menu-item__suffix ::slotted(*) {
+  .menu-item .menu-item__suffix::slotted(*) {
     margin-inline-start: var(--sl-spacing-x-small);
   }
 

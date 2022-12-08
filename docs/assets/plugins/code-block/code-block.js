@@ -146,8 +146,6 @@
               </div>
 
               <div class="code-block__buttons">
-                ${hasReact ? ` ${htmlButton} ${reactButton} ` : ''}
-
                 <button
                   type="button"
                   class="code-block__button code-block__toggle"
@@ -166,6 +164,8 @@
                     <polyline points="6 9 12 15 18 9"></polyline>
                   </svg>
                 </button>
+
+                ${hasReact ? ` ${htmlButton} ${reactButton} ` : ''}
 
                 ${!code.classList.contains('no-codepen') ? codePenButton : ''}
               </div>
@@ -232,36 +232,45 @@
 
   // Toggle source mode
   document.addEventListener('click', event => {
-    const button = event.target.closest('button');
+    const button = event.target.closest('.code-block__button');
+    const codeBlock = button?.closest('.code-block');
 
     if (button?.classList.contains('code-block__button--html')) {
+      // Show HTML
       setFlavor('html');
+      toggleSource(codeBlock, true);
     } else if (button?.classList.contains('code-block__button--react')) {
+      // Show React
       setFlavor('react');
+      toggleSource(codeBlock, true);
+    } else if (button?.classList.contains('code-block__toggle')) {
+      // Toggle source
+      toggleSource(codeBlock);
     } else {
       return;
     }
 
     // Update flavor buttons
-    [...document.querySelectorAll('.code-block')].forEach(codeBlock => {
-      codeBlock
-        .querySelector('.code-block__button--html')
-        ?.classList.toggle('code-block__button--selected', flavor === 'html');
-      codeBlock
-        .querySelector('.code-block__button--react')
-        ?.classList.toggle('code-block__button--selected', flavor === 'react');
+    [...document.querySelectorAll('.code-block')].forEach(cb => {
+      cb.querySelector('.code-block__button--html')?.classList.toggle(
+        'code-block__button--selected',
+        flavor === 'html'
+      );
+      cb.querySelector('.code-block__button--react')?.classList.toggle(
+        'code-block__button--selected',
+        flavor === 'react'
+      );
     });
   });
 
-  // Expand and collapse code blocks
-  document.addEventListener('click', event => {
-    const toggle = event.target.closest('.code-block__toggle');
+  function toggleSource(codeBlock, force) {
+    const toggle = codeBlock.querySelector('.code-block__toggle');
+
     if (toggle) {
-      const codeBlock = event.target.closest('.code-block');
-      codeBlock.classList.toggle('code-block--expanded');
+      codeBlock.classList.toggle('code-block--expanded', force === undefined ? undefined : force);
       event.target.setAttribute('aria-expanded', codeBlock.classList.contains('code-block--expanded'));
     }
-  });
+  }
 
   // Show pulse when copying
   document.addEventListener('click', event => {

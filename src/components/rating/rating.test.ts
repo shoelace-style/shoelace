@@ -1,4 +1,7 @@
 import { expect, fixture, html } from '@open-wc/testing';
+import { sendKeys } from '@web/test-runner-commands';
+import sinon from 'sinon';
+import { clickOnElement } from '../../internal/test';
 import type SlRating from './rating';
 
 describe('<sl-rating>', () => {
@@ -6,7 +9,7 @@ describe('<sl-rating>', () => {
     const el = await fixture<SlRating>(html` <sl-rating label="Test"></sl-rating> `);
     await expect(el).to.be.accessible();
 
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(base.getAttribute('role')).to.equal('slider');
     expect(base.getAttribute('aria-disabled')).to.equal('false');
@@ -20,7 +23,7 @@ describe('<sl-rating>', () => {
 
   it('should be readonly with the readonly attribute', async () => {
     const el = await fixture<SlRating>(html` <sl-rating label="Test" readonly></sl-rating> `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(base.getAttribute('aria-readonly')).to.equal('true');
     expect(base.getAttribute('class')).to.equal(' rating rating--readonly ');
@@ -28,7 +31,7 @@ describe('<sl-rating>', () => {
 
   it('should be disabled with the disabled attribute', async () => {
     const el = await fixture<SlRating>(html` <sl-rating label="Test" disabled></sl-rating> `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(base.getAttribute('aria-disabled')).to.equal('true');
     expect(base.getAttribute('class')).to.equal(' rating rating--disabled ');
@@ -36,23 +39,58 @@ describe('<sl-rating>', () => {
 
   it('should set max value by attribute', async () => {
     const el = await fixture<SlRating>(html` <sl-rating label="Test" max="12"></sl-rating> `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(base.getAttribute('aria-valuemax')).to.equal('12');
   });
 
   it('should set selected value by attribute', async () => {
     const el = await fixture<SlRating>(html` <sl-rating label="Test" value="3"></sl-rating> `);
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(base.getAttribute('aria-valuenow')).to.equal('3');
+  });
+
+  it('should emit sl-change when clicked', async () => {
+    const el = await fixture<SlRating>(html` <sl-rating></sl-rating> `);
+    const lastSymbol = el.shadowRoot!.querySelector<HTMLSpanElement>('.rating__symbol:last-child')!;
+    const changeHandler = sinon.spy();
+
+    el.addEventListener('sl-change', changeHandler);
+
+    await clickOnElement(lastSymbol);
+    await el.updateComplete;
+
+    expect(changeHandler).to.have.been.calledOnce;
+    expect(el.value).to.equal(5);
+  });
+
+  it('should emit sl-change when the value is changed with the keyboard', async () => {
+    const el = await fixture<SlRating>(html` <sl-rating></sl-rating> `);
+    const changeHandler = sinon.spy();
+
+    el.addEventListener('sl-change', changeHandler);
+    el.focus();
+    await el.updateComplete;
+    await sendKeys({ press: 'ArrowRight' });
+    await el.updateComplete;
+
+    expect(changeHandler).to.have.been.calledOnce;
+    expect(el.value).to.equal(1);
+  });
+
+  it('should not emit sl-change when the value is changed programmatically', async () => {
+    const el = await fixture<SlRating>(html` <sl-rating label="Test" value="1"></sl-rating> `);
+    el.addEventListener('sl-change', () => expect.fail('sl-change incorrectly emitted'));
+    el.value = 5;
+    await el.updateComplete;
   });
 
   describe('focus', () => {
     it('should focus inner div', async () => {
       const el = await fixture<SlRating>(html` <sl-rating label="Test"></sl-rating> `);
 
-      const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+      const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
       el.focus();
       await el.updateComplete;

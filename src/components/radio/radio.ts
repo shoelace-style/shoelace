@@ -20,11 +20,11 @@ import type { CSSResultGroup } from 'lit';
  * @event sl-blur - Emitted when the control loses focus.
  * @event sl-focus - Emitted when the control gains focus.
  *
- * @csspart base - The component's internal wrapper.
- * @csspart control - The radio control.
- * @csspart control--checked - The radio control if radio is checked.
- * @csspart checked-icon - The checked icon.
- * @csspart label - The radio label.
+ * @csspart base - The component's base wrapper.
+ * @csspart control - The circular container that wraps the radio's checked state.
+ * @csspart control--checked - The radio control when the radio is checked.
+ * @csspart checked-icon - The checked icon, an `<sl-icon>` element.
+ * @csspart label - The container that wraps the radio's label.
  */
 @customElement('sl-radio')
 export default class SlRadio extends ShoelaceElement {
@@ -33,7 +33,7 @@ export default class SlRadio extends ShoelaceElement {
   @state() checked = false;
   @state() protected hasFocus = false;
 
-  /** The radio's value attribute. */
+  /** The radio's value. When selected, the radio group will receive this value. */
   @property() value: string;
 
   /** Disables the radio. */
@@ -99,9 +99,7 @@ export default class SlRadio extends ShoelaceElement {
           ${this.checked ? html` <sl-icon part="checked-icon" library="system" name="radio"></sl-icon> ` : ''}
         </span>
 
-        <span part="label" class="radio__label">
-          <slot></slot>
-        </span>
+        <slot part="label" class="radio__label"></slot>
       </span>
     `;
   }

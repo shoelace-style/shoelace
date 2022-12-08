@@ -7,7 +7,7 @@ According to [The A11Y Project](https://www.a11yproject.com/posts/2013-01-11-how
 Since visually hidden content can receive focus when tabbing, the element will become visible when something inside receives focus. This behavior is intentional, as sighted keyboards user won't be able to determine where the focus indicator is without it.
 
 ```html preview
-<div style="min-height: 100px;">
+<div style="min-height: 1.875rem;">
   <sl-visually-hidden>
     <a href="#">Skip to main content</a>
   </sl-visually-hidden>
@@ -30,7 +30,7 @@ In this example, the link will open a new window. Screen readers will announce "
 
 ### Content Conveyed By Context
 
-Adding a title or label may seem redundant at times, but they're very helpful for unsighted users. Rather than omit them, you can provide context to unsighted users with visually hidden content.
+Adding a label may seem redundant at times, but they're very helpful for unsighted users. Rather than omit them, you can provide context to unsighted users with visually hidden content that will be announced by assistive devices such as screen readers.
 
 ```html preview
 <sl-card style="width: 100%; max-width: 360px;">

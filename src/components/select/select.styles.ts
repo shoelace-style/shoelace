@@ -147,11 +147,11 @@ export default css`
   .select__icon {
     flex: 0 0 auto;
     display: inline-flex;
-    transition: var(--sl-transition-medium) transform ease;
+    transition: var(--sl-transition-medium) rotate ease;
   }
 
   .select--open .select__icon {
-    transform: rotate(-180deg);
+    rotate: -180deg;
   }
 
   /* Placeholder */
@@ -196,7 +196,7 @@ export default css`
     min-height: var(--sl-input-height-small);
   }
 
-  .select--small .select__prefix ::slotted(*) {
+  .select--small .select__prefix::slotted(*) {
     margin-inline-start: var(--sl-input-spacing-small);
   }
 
@@ -208,7 +208,7 @@ export default css`
     margin-inline-end: var(--sl-input-spacing-small);
   }
 
-  .select--small .select__suffix ::slotted(*) {
+  .select--small .select__suffix::slotted(*) {
     margin-inline-end: var(--sl-input-spacing-small);
   }
 
@@ -239,7 +239,7 @@ export default css`
     min-height: var(--sl-input-height-medium);
   }
 
-  .select--medium .select__prefix ::slotted(*) {
+  .select--medium .select__prefix::slotted(*) {
     margin-inline-start: var(--sl-input-spacing-medium);
   }
 
@@ -251,7 +251,7 @@ export default css`
     margin-inline-end: var(--sl-input-spacing-medium);
   }
 
-  .select--medium .select__suffix ::slotted(*) {
+  .select--medium .select__suffix::slotted(*) {
     margin-inline-end: var(--sl-input-spacing-medium);
   }
 
@@ -282,7 +282,7 @@ export default css`
     min-height: var(--sl-input-height-large);
   }
 
-  .select--large .select__prefix ::slotted(*) {
+  .select--large .select__prefix::slotted(*) {
     margin-inline-start: var(--sl-input-spacing-large);
   }
 
@@ -294,7 +294,7 @@ export default css`
     margin-inline-end: var(--sl-input-spacing-large);
   }
 
-  .select--large .select__suffix ::slotted(*) {
+  .select--large .select__suffix::slotted(*) {
     margin-inline-end: var(--sl-input-spacing-large);
   }
 

@@ -9,6 +9,7 @@ export default css`
   }
 
   .menu-label {
+    display: inline-block;
     font-family: var(--sl-font-sans);
     font-size: var(--sl-font-size-small);
     font-weight: var(--sl-font-weight-semibold);

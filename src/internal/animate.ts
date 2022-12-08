@@ -1,6 +1,6 @@
-//
-// Animates an element using keyframes. Returns a promise that resolves after the animation completes or gets canceled.
-//
+/**
+ * Animates an element using keyframes. Returns a promise that resolves after the animation completes or gets canceled.
+ */
 export function animateTo(el: HTMLElement, keyframes: Keyframe[], options?: KeyframeAnimationOptions) {
   return new Promise(resolve => {
     if (options?.duration === Infinity) {
@@ -17,9 +17,7 @@ export function animateTo(el: HTMLElement, keyframes: Keyframe[], options?: Keyf
   });
 }
 
-//
-// Parses a CSS duration and returns the number of milliseconds.
-//
+/** Parses a CSS duration and returns the number of milliseconds. */
 export function parseDuration(delay: number | string) {
   delay = delay.toString().toLowerCase();
 
@@ -34,17 +32,15 @@ export function parseDuration(delay: number | string) {
   return parseFloat(delay);
 }
 
-//
-// Tells if the user has enabled the "reduced motion" setting in their browser or OS.
-//
+/** Tells if the user has enabled the "reduced motion" setting in their browser or OS. */
 export function prefersReducedMotion() {
   const query = window.matchMedia('(prefers-reduced-motion: reduce)');
   return query.matches;
 }
 
-//
-// Stops all active animations on the target element. Returns a promise that resolves after all animations are canceled.
-//
+/**
+ * Stops all active animations on the target element. Returns a promise that resolves after all animations are canceled.
+ */
 export function stopAnimations(el: HTMLElement) {
   return Promise.all(
     el.getAnimations().map(animation => {
@@ -59,8 +55,10 @@ export function stopAnimations(el: HTMLElement) {
   );
 }
 
-// We can't animate `height: auto`, but we can calculate the height and shim keyframes by replacing it with the
-// element's scrollHeight before the animation.
+/**
+ * We can't animate `height: auto`, but we can calculate the height and shim keyframes by replacing it with the
+ * element's scrollHeight before the animation.
+ */
 export function shimKeyframesHeightAuto(keyframes: Keyframe[], calculatedHeight: number) {
   return keyframes.map(keyframe => ({
     ...keyframe,

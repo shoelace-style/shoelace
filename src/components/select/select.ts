@@ -13,6 +13,7 @@ import '../icon/icon';
 import '../menu/menu';
 import '../tag/tag';
 import styles from './select.styles';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type SlDropdown from '../dropdown/dropdown';
 import type SlIconButton from '../icon-button/icon-button';
 import type SlMenuItem from '../menu-item/menu-item';
@@ -33,37 +34,38 @@ import type { TemplateResult, CSSResultGroup } from 'lit';
  * @dependency sl-tag
  *
  * @slot - The select's options in the form of menu items.
- * @slot prefix - Used to prepend an icon or similar element to the select.
- * @slot suffix - Used to append an icon or similar element to the select.
- * @slot clear-icon - An icon to use in lieu of the default clear icon.
+ * @slot prefix - A presentational icon or similar element to prepend to the select's label.
+ * @slot suffix - A presentational icon or similar element to append to the select's label.
+ * @slot clear-icon - An icon to use in lieu of the default clear icon. Works best with `<sl-icon>`.
  * @slot label - The select's label. Alternatively, you can use the `label` attribute.
- * @slot help-text - Help text that describes how to use the select. Alternatively, you can use the `help-text` attribute.
+ * @slot help-text - Text that describes how to use the select. Alternatively, you can use the `help-text` attribute.
  *
  * @event sl-clear - Emitted when the clear button is activated.
  * @event sl-change - Emitted when the control's value changes.
+ * @event sl-input - Emitted when the control receives input.
  * @event sl-focus - Emitted when the control gains focus.
  * @event sl-blur - Emitted when the control loses focus.
  *
- * @csspart form-control - The form control that wraps the label, input, and help-text.
+ * @csspart form-control - The form control that wraps the label, input, and help text.
  * @csspart form-control-label - The label's wrapper.
  * @csspart form-control-input - The select's wrapper.
  * @csspart form-control-help-text - The help text's wrapper.
- * @csspart base - The component's internal wrapper.
+ * @csspart base - The component's base wrapper.
  * @csspart clear-button - The clear button.
  * @csspart control - The container that holds the prefix, label, and suffix.
  * @csspart display-label - The label that displays the current selection. Not available when used with `multiple`.
- * @csspart icon - The select's icon.
- * @csspart prefix - The select's prefix.
- * @csspart suffix - The select's suffix.
- * @csspart menu - The select menu, an `<sl-menu>` element.
- * @csspart tag - The multi select option, an `<sl-tag>` element.
- * @csspart tag__base - The tag's `base` part.
- * @csspart tag__content - The tag's `content` part.
- * @csspart tag__remove-button - The tag's `remove-button` part.
- * @csspart tags - The container in which multi select options are rendered.
+ * @csspart icon - The select's expand/collapse icon.
+ * @csspart prefix - The container that wraps the prefix.
+ * @csspart suffix - The container that wraps the suffix.
+ * @csspart menu - The select's menu, an `<sl-menu>` element.
+ * @csspart tags - The container that wraps tags when using `multiple`.
+ * @csspart tag - Tags that represent selected options when using `multiple`.
+ * @csspart tag__base - The tag's exported `base` part.
+ * @csspart tag__content - The tag's exported `content` part.
+ * @csspart tag__remove-button - The tag's exported `remove-button` part.
  */
 @customElement('sl-select')
-export default class SlSelect extends ShoelaceElement {
+export default class SlSelect extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
   @query('.select') dropdown: SlDropdown;
@@ -82,8 +84,9 @@ export default class SlSelect extends ShoelaceElement {
   @state() private isOpen = false;
   @state() private displayLabel = '';
   @state() private displayTags: TemplateResult[] = [];
+  @state() invalid = false;
 
-  /** Enables multi select. With this enabled, value will be an array. */
+  /** Enables multiselect. With this enabled, value will be an array. */
   @property({ type: Boolean, reflect: true }) multiple = false;
 
   /**
@@ -95,10 +98,13 @@ export default class SlSelect extends ShoelaceElement {
   /** Disables the select control. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /** The select's name. */
+  /** The name of the select, submitted as a name/value pair with form data. */
   @property() name = '';
 
-  /** The select's placeholder text. */
+  /** The current value of the select, submitted as a name/value pair with form data. */
+  @property() value: string | string[] = '';
+
+  /** Placeholder text to show as a hint when the input is empty. */
   @property() placeholder = '';
 
   /** The select's size. */
@@ -106,12 +112,9 @@ export default class SlSelect extends ShoelaceElement {
 
   /**
    * Enable this option to prevent the panel from being clipped when the component is placed inside a container with
-   * `overflow: auto|scroll`.
+   * `overflow: auto|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all, scenarios.
    */
   @property({ type: Boolean }) hoist = false;
-
-  /** The value of the control. This will be a string or an array depending on `multiple`. */
-  @property() value: string | string[] = '';
 
   /** Draws a filled select. */
   @property({ type: Boolean, reflect: true }) filled = false;
@@ -119,7 +122,7 @@ export default class SlSelect extends ShoelaceElement {
   /** Draws a pill-style select with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;
 
-  /** The select's label. If you need to display HTML, you can use the `label` slot instead. */
+  /** The select's label. If you need to display HTML, use the `label` slot instead. */
   @property() label = '';
 
   /**
@@ -128,21 +131,17 @@ export default class SlSelect extends ShoelaceElement {
    */
   @property() placement: 'top' | 'bottom' = 'bottom';
 
-  /** The select's help text. If you need to display HTML, you can use the `help-text` slot instead. */
+  /** The select's help text. If you need to display HTML, use the `help-text` slot instead. */
   @property({ attribute: 'help-text' }) helpText = '';
 
   /** The select's required attribute. */
   @property({ type: Boolean, reflect: true }) required = false;
 
-  /** Adds a clear button when the select is populated. */
+  /** Adds a clear button when the select is not empty. */
   @property({ type: Boolean }) clearable = false;
 
-  /** This will be true when the control is in an invalid state. Validity is determined by the `required` prop. */
-  @property({ type: Boolean, reflect: true }) invalid = false;
-
-  /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
-  @defaultValue()
-  defaultValue = '';
+  /** The default value of the form control. Primarily used for resetting the form control. */
+  @defaultValue() defaultValue = '';
 
   connectedCallback() {
     super.connectedCallback();
@@ -163,6 +162,11 @@ export default class SlSelect extends ShoelaceElement {
     this.resizeObserver.unobserve(this);
   }
 
+  /** Checks for validity but does not show the browser's validation message. */
+  checkValidity() {
+    return this.input.checkValidity();
+  }
+
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
   reportValidity() {
     return this.input.reportValidity();
@@ -175,7 +179,7 @@ export default class SlSelect extends ShoelaceElement {
   }
 
   getValueAsArray() {
-    // Single selects use '' as an empty selection value, so convert this to [] for an empty multi select
+    // Single selects use '' as an empty selection value, so convert this to [] for an empty multiselect
     if (this.multiple && this.value === '') {
       return [];
     }
@@ -202,9 +206,17 @@ export default class SlSelect extends ShoelaceElement {
   }
 
   handleClearClick(event: MouseEvent) {
+    const oldValue = this.value;
+
     event.stopPropagation();
     this.value = this.multiple ? [] : '';
-    this.emit('sl-clear');
+
+    if (this.value !== oldValue) {
+      this.emit('sl-clear');
+      this.emit('sl-input');
+      this.emit('sl-change');
+    }
+
     this.syncItemsFromValue();
   }
 
@@ -287,6 +299,7 @@ export default class SlSelect extends ShoelaceElement {
 
   handleMenuSelect(event: CustomEvent<MenuSelectEventDetail>) {
     const item = event.detail.item;
+    const oldValue = this.value;
 
     if (this.multiple) {
       this.value = this.value.includes(item.value)
@@ -294,6 +307,11 @@ export default class SlSelect extends ShoelaceElement {
         : [...this.value, item.value];
     } else {
       this.value = item.value;
+    }
+
+    if (this.value !== oldValue) {
+      this.emit('sl-change');
+      this.emit('sl-input');
     }
 
     this.syncItemsFromValue();
@@ -365,8 +383,8 @@ export default class SlSelect extends ShoelaceElement {
   async handleValueChange() {
     this.syncItemsFromValue();
     await this.updateComplete;
+
     this.invalid = !this.input.checkValidity();
-    this.emit('sl-change');
   }
 
   resizeMenu() {
@@ -443,11 +461,17 @@ export default class SlSelect extends ShoelaceElement {
   syncValueFromItems() {
     const checkedItems = this.menuItems.filter(item => item.checked);
     const checkedValues = checkedItems.map(item => item.value);
+    const oldValue = this.value;
 
     if (this.multiple) {
       this.value = (this.value as []).filter(val => checkedValues.includes(val));
     } else {
       this.value = checkedValues.length > 0 ? checkedValues[0] : '';
+    }
+
+    if (this.value !== oldValue) {
+      this.emit('sl-change');
+      this.emit('sl-input');
     }
   }
 
@@ -485,7 +509,7 @@ export default class SlSelect extends ShoelaceElement {
           <sl-dropdown
             part="base"
             .hoist=${this.hoist}
-            .placement=${this.placement}
+            .placement=${this.placement === 'bottom' ? 'bottom-start' : 'top-start'}
             .stayOpenOnSelect=${this.multiple}
             .containingElement=${this as HTMLElement}
             ?disabled=${this.disabled}
@@ -526,9 +550,7 @@ export default class SlSelect extends ShoelaceElement {
               @focus=${this.handleFocus}
               @keydown=${this.handleKeyDown}
             >
-              <span part="prefix" class="select__prefix">
-                <slot name="prefix"></slot>
-              </span>
+              <slot name="prefix" part="prefix" class="select__prefix"></slot>
 
               <div part="display-label" class="select__label">
                 ${this.displayTags.length > 0
@@ -554,9 +576,7 @@ export default class SlSelect extends ShoelaceElement {
                   `
                 : ''}
 
-              <span part="suffix" class="select__suffix">
-                <slot name="suffix"></slot>
-              </span>
+              <slot name="suffix" part="suffix" class="select__suffix"></slot>
 
               <span part="icon" class="select__icon" aria-hidden="true">
                 <sl-icon name="chevron-down" library="system"></sl-icon>
@@ -581,14 +601,15 @@ export default class SlSelect extends ShoelaceElement {
           </sl-dropdown>
         </div>
 
-        <div
+        <slot
+          name="help-text"
           part="form-control-help-text"
           id="help-text"
           class="form-control__help-text"
           aria-hidden=${hasHelpText ? 'false' : 'true'}
         >
-          <slot name="help-text">${this.helpText}</slot>
-        </div>
+          ${this.helpText}
+        </slot>
       </div>
     `;
   }

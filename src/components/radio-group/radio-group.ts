@@ -7,6 +7,7 @@ import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import '../button-group/button-group';
 import styles from './radio-group.styles';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type SlRadioButton from '../radio-button/radio-button';
 import type SlRadio from '../radio/radio';
 import type { CSSResultGroup } from 'lit';
@@ -19,12 +20,14 @@ import type { CSSResultGroup } from 'lit';
  *
  * @dependency sl-button-group
  *
- * @slot - The default slot where radio controls are placed.
- * @slot label - The radio group label. Required for proper accessibility. Alternatively, you can use the `label` attribute.
+ * @slot - The default slot where `<sl-radio>` or `<sl-radio-button>` elements are placed.
+ * @slot label - The radio group's label. Required for proper accessibility. Alternatively, you can use the `label`
+ *  attribute.
  *
  * @event sl-change - Emitted when the radio group's selected value changes.
+ * @event sl-input - Emitted when the radio group receives user input.
  *
- * @csspart form-control - The form control that wraps the label, input, and help-text.
+ * @csspart form-control - The form control that wraps the label, input, and help text.
  * @csspart form-control-label - The label's wrapper.
  * @csspart form-control-input - The input's wrapper.
  * @csspart form-control-help-text - The help text's wrapper.
@@ -32,11 +35,11 @@ import type { CSSResultGroup } from 'lit';
  * @csspart button-group__base - The button group's `base` part.
  */
 @customElement('sl-radio-group')
-export default class SlRadioGroup extends ShoelaceElement {
+export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
   protected readonly formSubmitController = new FormSubmitController(this, {
-    defaultValue: (control: SlRadioGroup) => control.defaultValue
+    defaultValue: control => control.defaultValue
   });
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
 
@@ -46,28 +49,23 @@ export default class SlRadioGroup extends ShoelaceElement {
   @state() private hasButtonGroup = false;
   @state() private errorMessage = '';
   @state() private customErrorMessage = '';
-  @state() private defaultValue = '';
+  @state() defaultValue = '';
+  @state() invalid = false;
 
   /**
-   * The radio group label. Required for proper accessibility. If you need to display HTML, you can use the `label` slot
+   * The radio group's label. Required for proper accessibility. If you need to display HTML, use the `label` slot
    * instead.
    */
   @property() label = '';
 
-  /** The input's help text. If you need to display HTML, you can use the `help-text` slot instead. */
+  /** The radio groups's help text. If you need to display HTML, use the `help-text` slot instead. */
   @property({ attribute: 'help-text' }) helpText = '';
 
-  /** The selected value of the control. */
-  @property({ reflect: true }) value = '';
-
-  /** The name assigned to the radio controls. */
+  /** The name of the radio group, submitted as a name/value pair with form data. */
   @property() name = 'option';
 
-  /**
-   * This will be true when the control is in an invalid state. Validity is determined by props such as `type`,
-   * `required`, `minlength`, `maxlength`, and `pattern` using the browser's constraint validation API.
-   */
-  @property({ type: Boolean, reflect: true }) invalid = false;
+  /** The current value of the radio group, submitted as a name/value pair with form data. */
+  @property({ reflect: true }) value = '';
 
   /** Ensures a child radio is checked before allowing the containing form to submit. */
   @property({ type: Boolean, reflect: true }) required = false;
@@ -75,7 +73,6 @@ export default class SlRadioGroup extends ShoelaceElement {
   @watch('value')
   handleValueChange() {
     if (this.hasUpdated) {
-      this.emit('sl-change');
       this.updateCheckedRadio();
     }
   }
@@ -87,6 +84,11 @@ export default class SlRadioGroup extends ShoelaceElement {
 
   firstUpdated() {
     this.invalid = !this.validity.valid;
+  }
+
+  /** Checks for validity but does not show the browser's validation message. */
+  checkValidity() {
+    return this.validity.valid;
   }
 
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
@@ -141,14 +143,20 @@ export default class SlRadioGroup extends ShoelaceElement {
 
   handleRadioClick(event: MouseEvent) {
     const target = event.target as SlRadio | SlRadioButton;
+    const radios = this.getAllRadios();
+    const oldValue = this.value;
 
     if (target.disabled) {
       return;
     }
 
     this.value = target.value;
-    const radios = this.getAllRadios();
     radios.forEach(radio => (radio.checked = radio === target));
+
+    if (this.value !== oldValue) {
+      this.emit('sl-change');
+      this.emit('sl-input');
+    }
   }
 
   handleKeyDown(event: KeyboardEvent) {
@@ -159,10 +167,13 @@ export default class SlRadioGroup extends ShoelaceElement {
     const radios = this.getAllRadios().filter(radio => !radio.disabled);
     const checkedRadio = radios.find(radio => radio.checked) ?? radios[0];
     const incr = event.key === ' ' ? 0 : ['ArrowUp', 'ArrowLeft'].includes(event.key) ? -1 : 1;
+    const oldValue = this.value;
     let index = radios.indexOf(checkedRadio) + incr;
+
     if (index < 0) {
       index = radios.length - 1;
     }
+
     if (index > radios.length - 1) {
       index = 0;
     }
@@ -183,6 +194,11 @@ export default class SlRadioGroup extends ShoelaceElement {
       radios[index].focus();
     } else {
       radios[index].shadowRoot!.querySelector('button')!.focus();
+    }
+
+    if (this.value !== oldValue) {
+      this.emit('sl-change');
+      this.emit('sl-input');
     }
 
     event.preventDefault();
@@ -299,14 +315,15 @@ export default class SlRadioGroup extends ShoelaceElement {
             : defaultSlot}
         </div>
 
-        <div
+        <slot
+          name="help-text"
           part="form-control-help-text"
           id="help-text"
           class="form-control__help-text"
           aria-hidden=${hasHelpText ? 'false' : 'true'}
         >
-          <slot name="help-text">${this.helpText}</slot>
-        </div>
+          ${this.helpText}
+        </slot>
       </fieldset>
     `;
     /* eslint-enable lit-a11y/click-events-have-key-events */

@@ -11,6 +11,7 @@ export default css`
   }
 
   .tab-panel {
+    display: block;
     padding: var(--padding);
   }
 

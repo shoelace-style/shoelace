@@ -52,11 +52,11 @@ export default css`
   }
 
   .rating__symbol {
-    transition: var(--sl-transition-fast) transform;
+    transition: var(--sl-transition-fast) scale;
   }
 
   .rating__symbol--hover {
-    transform: scale(1.2);
+    scale: 1.2;
   }
 
   .rating--disabled .rating__symbols,
@@ -66,7 +66,7 @@ export default css`
 
   .rating--disabled .rating__symbol--hover,
   .rating--readonly .rating__symbol--hover {
-    transform: none;
+    scale: none;
   }
 
   .rating--disabled {

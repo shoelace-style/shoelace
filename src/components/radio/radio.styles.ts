@@ -95,6 +95,7 @@ export default css`
   }
 
   .radio__label {
+    display: inline-block;
     color: var(--sl-input-label-color);
     line-height: var(--sl-toggle-size);
     margin-inline-start: 0.5em;

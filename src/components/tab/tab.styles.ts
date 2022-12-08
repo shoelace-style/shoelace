@@ -54,8 +54,8 @@ export default css`
   }
 
   .tab__close-button {
-    font-size: var(--sl-font-size-large);
-    margin-inline-start: var(--sl-spacing-2x-small);
+    font-size: var(--sl-font-size-small);
+    margin-inline-start: var(--sl-spacing-small);
   }
 
   .tab__close-button::part(base) {

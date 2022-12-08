@@ -25,7 +25,7 @@ export default css`
   .progress-ring__image {
     width: var(--size);
     height: var(--size);
-    transform: rotate(-90deg);
+    rotate: -90deg;
     transform-origin: 50% 50%;
   }
 

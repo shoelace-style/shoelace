@@ -21,25 +21,25 @@ export default class SlFormatNumber extends ShoelaceElement {
   /** Turns off grouping separators. */
   @property({ attribute: 'no-grouping', type: Boolean }) noGrouping = false;
 
-  /** The currency to use when formatting. Must be an ISO 4217 currency code such as `USD` or `EUR`. */
+  /** The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code to use when formatting. */
   @property() currency = 'USD';
 
   /** How to display the currency. */
   @property({ attribute: 'currency-display' }) currencyDisplay: 'symbol' | 'narrowSymbol' | 'code' | 'name' = 'symbol';
 
-  /** The minimum number of integer digits to use. Possible values are 1 - 21. */
+  /** The minimum number of integer digits to use. Possible values are 1-21. */
   @property({ attribute: 'minimum-integer-digits', type: Number }) minimumIntegerDigits: number;
 
-  /** The minimum number of fraction digits to use. Possible values are 0 - 20. */
+  /** The minimum number of fraction digits to use. Possible values are 0-20. */
   @property({ attribute: 'minimum-fraction-digits', type: Number }) minimumFractionDigits: number;
 
-  /** The maximum number of fraction digits to use. Possible values are 0 - 20. */
+  /** The maximum number of fraction digits to use. Possible values are 0-0. */
   @property({ attribute: 'maximum-fraction-digits', type: Number }) maximumFractionDigits: number;
 
-  /** The minimum number of significant digits to use. Possible values are 1 - 21. */
+  /** The minimum number of significant digits to use. Possible values are 1-21. */
   @property({ attribute: 'minimum-significant-digits', type: Number }) minimumSignificantDigits: number;
 
-  /** The maximum number of significant digits to use,. Possible values are 1 - 21. */
+  /** The maximum number of significant digits to use,. Possible values are 1-21. */
   @property({ attribute: 'maximum-significant-digits', type: Number }) maximumSignificantDigits: number;
 
   render() {

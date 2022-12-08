@@ -18,7 +18,7 @@ import type { CSSResultGroup } from 'lit';
  * @event sl-blur - Emitted when the icon button loses focus.
  * @event sl-focus - Emitted when the icon button gains focus.
  *
- * @csspart base - The component's internal wrapper.
+ * @csspart base - The component's base wrapper.
  */
 @customElement('sl-icon-button')
 export default class SlIconButton extends ShoelaceElement {
@@ -28,13 +28,16 @@ export default class SlIconButton extends ShoelaceElement {
 
   @query('.icon-button') button: HTMLButtonElement | HTMLLinkElement;
 
-  /** The name of the icon to draw. */
+  /** The name of the icon to draw. Available names depend on the icon library being used. */
   @property() name?: string;
 
   /** The name of a registered custom icon library. */
   @property() library?: string;
 
-  /** An external URL of an SVG file. */
+  /**
+   * An external URL of an SVG file. Be sure you trust the content you are including, as it will be executed as code and
+   * can result in XSS attacks.
+   */
   @property() src?: string;
 
   /** When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`. */
@@ -47,8 +50,8 @@ export default class SlIconButton extends ShoelaceElement {
   @property() download?: string;
 
   /**
-   * A description that gets read by screen readers and other assistive devices. For optimal accessibility, you should
-   * always include a label that describes what the icon button does.
+   * A description that gets read by assistive devices. For optimal accessibility, you should always include a label
+   * that describes what the icon button does.
    */
   @property() label = '';
 

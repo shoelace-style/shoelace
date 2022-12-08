@@ -23,6 +23,7 @@ describe('<sl-button>', () => {
     it('default values are set correctly', async () => {
       const el = await fixture<SlButton>(html` <sl-button>Button Label</sl-button> `);
 
+      expect(el.title).to.equal('');
       expect(el.variant).to.equal('default');
       expect(el.size).to.equal('medium');
       expect(el.disabled).to.equal(false);
@@ -46,7 +47,7 @@ describe('<sl-button>', () => {
 
     it('should not have a caret present', async () => {
       const el = await fixture<SlButton>(html` <sl-button>Button Label</sl-button> `);
-      expect(el.shadowRoot?.querySelector('[part="caret"]')).not.to.exist;
+      expect(el.shadowRoot?.querySelector('[part~="caret"]')).not.to.exist;
     });
   });
 
@@ -88,6 +89,13 @@ describe('<sl-button>', () => {
     });
   });
 
+  it('should have title if title attribute is set', async () => {
+    const el = await fixture<SlButton>(html` <sl-button title="Test"></sl-button> `);
+    const button = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="base"]')!;
+
+    expect(button.title).to.equal('Test');
+  });
+
   describe('when loading', () => {
     it('should have a spinner present', async () => {
       const el = await fixture<SlButton>(html` <sl-button loading>Button Label</sl-button> `);
@@ -98,7 +106,7 @@ describe('<sl-button>', () => {
   describe('when caret', () => {
     it('should have a caret present', async () => {
       const el = await fixture<SlButton>(html` <sl-button caret>Button Label</sl-button> `);
-      expect(el.shadowRoot!.querySelector('[part="caret"]')).to.exist;
+      expect(el.shadowRoot!.querySelector('[part~="caret"]')).to.exist;
     });
   });
 

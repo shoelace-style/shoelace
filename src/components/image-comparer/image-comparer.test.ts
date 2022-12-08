@@ -11,9 +11,9 @@ describe('<sl-image-comparer>', () => {
       </sl-image-comparer>
     `);
 
-    const afterPart = el.shadowRoot!.querySelector<HTMLElement>('[part="after"]')!;
-    const iconContainer = el.shadowRoot!.querySelector<HTMLSlotElement>('slot[name="handle-icon"]')!;
-    const handle = el.shadowRoot!.querySelector<HTMLElement>('[part="handle"]')!;
+    const afterPart = el.shadowRoot!.querySelector<HTMLElement>('[part~="after"]')!;
+    const iconContainer = el.shadowRoot!.querySelector<HTMLSlotElement>('slot[name="handle"]')!;
+    const handle = el.shadowRoot!.querySelector<HTMLElement>('[part~="handle"]')!;
 
     expect(el.position).to.equal(50);
     expect(afterPart.getAttribute('style')).to.equal('clip-path:inset(0 50% 0 0);');
@@ -49,7 +49,7 @@ describe('<sl-image-comparer>', () => {
       </sl-image-comparer>
     `);
 
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     base.dispatchEvent(
       new KeyboardEvent('keydown', {
@@ -69,7 +69,7 @@ describe('<sl-image-comparer>', () => {
       </sl-image-comparer>
     `);
 
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     base.dispatchEvent(
       new KeyboardEvent('keydown', {
@@ -89,7 +89,7 @@ describe('<sl-image-comparer>', () => {
       </sl-image-comparer>
     `);
 
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     base.dispatchEvent(
       new KeyboardEvent('keydown', {
@@ -109,7 +109,7 @@ describe('<sl-image-comparer>', () => {
       </sl-image-comparer>
     `);
 
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     base.dispatchEvent(
       new KeyboardEvent('keydown', {
@@ -132,7 +132,7 @@ describe('<sl-image-comparer>', () => {
     el.position = 0;
     await el.updateComplete;
 
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     base.dispatchEvent(
       new KeyboardEvent('keydown', {
@@ -155,7 +155,7 @@ describe('<sl-image-comparer>', () => {
     el.position = 100;
     await el.updateComplete;
 
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     base.dispatchEvent(
       new KeyboardEvent('keydown', {
@@ -175,7 +175,7 @@ describe('<sl-image-comparer>', () => {
       </sl-image-comparer>
     `);
 
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     base.dispatchEvent(
       new KeyboardEvent('keydown', {
@@ -196,7 +196,7 @@ describe('<sl-image-comparer>', () => {
       </sl-image-comparer>
     `);
 
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     base.dispatchEvent(
       new KeyboardEvent('keydown', {
@@ -227,8 +227,8 @@ describe('<sl-image-comparer>', () => {
         <div slot="after" style="width: 50px"></div>
       </sl-image-comparer>
     `);
-    const handle = el.shadowRoot!.querySelector<HTMLElement>('[part="handle"]')!;
-    const base = el.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
+    const handle = el.shadowRoot!.querySelector<HTMLElement>('[part~="handle"]')!;
+    const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
     const rect = base.getBoundingClientRect();
     const offsetX = rect.left + window.pageXOffset;
     const offsetY = rect.top + window.pageYOffset;
