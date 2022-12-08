@@ -89,6 +89,7 @@ describe('<sl-select>', () => {
       el.addEventListener('sl-input', inputHandler);
 
       el.focus();
+      await el.updateComplete;
       await sendKeys({ press: ' ' }); // open the dropdown
       await aTimeout(200); // wait for the dropdown to open
       await sendKeys({ press: 'ArrowDown' }); // select the first option
