@@ -8,18 +8,18 @@ const translation: Translation = {
 
   clearEntry: 'پاک کردن ورودی',
   close: 'بستن',
-  copy: 'رونوشت',
+  copy: 'کپی',
   currentValue: 'مقدار فعلی',
   hidePassword: 'پنهان کردن رمز',
   loading: 'بارگذاری',
   progress: 'پیشرفت',
   remove: 'حذف',
   resize: 'تغییر اندازه',
-  scrollToEnd: 'پیمایش به انتها',
-  scrollToStart: 'پیمایش به ابتدا',
+  scrollToEnd: 'اسکرول به انتها',
+  scrollToStart: 'اسکرول به ابتدا',
   selectAColorFromTheScreen: 'انتخاب یک رنگ از صفحه نمایش',
-  showPassword: 'نمایش رمز',
-  toggleColorFormat: 'تغییر قالب رنگ'
+  showPassword: 'نمایش دادن رمز',
+  toggleColorFormat: 'تغییر فرمت رنگ'
 };
 
 registerTranslation(translation);
