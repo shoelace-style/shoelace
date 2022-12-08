@@ -234,6 +234,46 @@ describe('<sl-input>', () => {
     });
   });
 
+  describe('when the value changes', () => {
+    it('should emit sl-change and sl-input when the user types in the input', async () => {
+      const el = await fixture<SlInput>(html` <sl-input></sl-input> `);
+      const inputHandler = sinon.spy();
+      const changeHandler = sinon.spy();
+
+      el.addEventListener('sl-input', inputHandler);
+      el.addEventListener('sl-change', changeHandler);
+      el.focus();
+      await sendKeys({ type: 'abc' });
+      el.blur();
+      await el.updateComplete;
+
+      expect(changeHandler).to.have.been.calledOnce;
+      expect(inputHandler).to.have.been.calledThrice;
+    });
+
+    it('should not emit sl-change or sl-input when the value is set programmatically', async () => {
+      const el = await fixture<SlInput>(html` <sl-input></sl-input> `);
+
+      el.addEventListener('sl-change', () => expect.fail('sl-change should not be emitted'));
+      el.addEventListener('sl-input', () => expect.fail('sl-input should not be emitted'));
+      el.value = 'abc';
+
+      await el.updateComplete;
+    });
+
+    it('should not emit sl-change or sl-input when calling setRangeText()', async () => {
+      const el = await fixture<SlInput>(html` <sl-input value="hi there"></sl-input> `);
+
+      el.addEventListener('sl-change', () => expect.fail('sl-change should not be emitted'));
+      el.addEventListener('sl-input', () => expect.fail('sl-input should not be emitted'));
+      el.focus();
+      el.setSelectionRange(0, 2);
+      el.setRangeText('hello');
+
+      await el.updateComplete;
+    });
+  });
+
   describe('when type="number"', () => {
     it('should be valid when the value is within the boundary of a step', async () => {
       const el = await fixture<SlInput>(html` <sl-input type="number" step=".5" value="1.5"></sl-input> `);
@@ -254,7 +294,7 @@ describe('<sl-input>', () => {
       expect(el.invalid).to.be.true;
     });
 
-    it('should increment by step if stepUp() is called', async () => {
+    it('should increment by step when stepUp() is called', async () => {
       const el = await fixture<SlInput>(html` <sl-input type="number" step="2" value="2"></sl-input> `);
 
       el.stepUp();
@@ -262,7 +302,7 @@ describe('<sl-input>', () => {
       expect(el.value).to.equal('4');
     });
 
-    it('should decrement by step if stepDown() is called', async () => {
+    it('should decrement by step when stepDown() is called', async () => {
       const el = await fixture<SlInput>(html` <sl-input type="number" step="2" value="2"></sl-input> `);
 
       el.stepDown();
@@ -270,35 +310,24 @@ describe('<sl-input>', () => {
       expect(el.value).to.equal('0');
     });
 
-    it('should fire sl-input and sl-change if stepUp() is called', async () => {
+    it('should not emit sl-input or sl-change when stepUp() is called programmatically', async () => {
       const el = await fixture<SlInput>(html` <sl-input type="number" step="2" value="2"></sl-input> `);
 
-      const inputHandler = sinon.spy();
-      const changeHandler = sinon.spy();
-      el.addEventListener('sl-input', inputHandler);
-      el.addEventListener('sl-change', changeHandler);
-
+      el.addEventListener('sl-change', () => expect.fail('sl-change should not be emitted'));
+      el.addEventListener('sl-input', () => expect.fail('sl-input should not be emitted'));
       el.stepUp();
 
-      await waitUntil(() => inputHandler.calledOnce);
-      await waitUntil(() => changeHandler.calledOnce);
-      expect(inputHandler).to.have.been.calledOnce;
-      expect(changeHandler).to.have.been.calledOnce;
+      await el.updateComplete;
     });
 
-    it('should fire sl-input and sl-change if stepDown() is called', async () => {
+    it('should not emit sl-input and sl-change when stepDown() is called programmatically', async () => {
       const el = await fixture<SlInput>(html` <sl-input type="number" step="2" value="2"></sl-input> `);
 
-      const inputHandler = sinon.spy();
-      const changeHandler = sinon.spy();
-      el.addEventListener('sl-input', inputHandler);
-      el.addEventListener('sl-change', changeHandler);
+      el.addEventListener('sl-change', () => expect.fail('sl-change should not be emitted'));
+      el.addEventListener('sl-input', () => expect.fail('sl-input should not be emitted'));
+      el.stepDown();
 
-      el.stepUp();
-
-      await waitUntil(() => inputHandler.calledOnce);
-      await waitUntil(() => changeHandler.calledOnce);
-      expect(changeHandler).to.have.been.calledOnce;
+      await el.updateComplete;
     });
   });
 });

@@ -25,6 +25,7 @@ import type { CSSResultGroup } from 'lit';
  *  attribute.
  *
  * @event sl-change - Emitted when the radio group's selected value changes.
+ * @event sl-input - Emitted when the radio group receives user input.
  *
  * @csspart form-control - The form control that wraps the label, input, and help text.
  * @csspart form-control-label - The label's wrapper.
@@ -72,7 +73,6 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
   @watch('value')
   handleValueChange() {
     if (this.hasUpdated) {
-      this.emit('sl-change');
       this.updateCheckedRadio();
     }
   }
@@ -143,14 +143,20 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
 
   handleRadioClick(event: MouseEvent) {
     const target = event.target as SlRadio | SlRadioButton;
+    const radios = this.getAllRadios();
+    const oldValue = this.value;
 
     if (target.disabled) {
       return;
     }
 
     this.value = target.value;
-    const radios = this.getAllRadios();
     radios.forEach(radio => (radio.checked = radio === target));
+
+    if (this.value !== oldValue) {
+      this.emit('sl-change');
+      this.emit('sl-input');
+    }
   }
 
   handleKeyDown(event: KeyboardEvent) {
@@ -161,10 +167,13 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     const radios = this.getAllRadios().filter(radio => !radio.disabled);
     const checkedRadio = radios.find(radio => radio.checked) ?? radios[0];
     const incr = event.key === ' ' ? 0 : ['ArrowUp', 'ArrowLeft'].includes(event.key) ? -1 : 1;
+    const oldValue = this.value;
     let index = radios.indexOf(checkedRadio) + incr;
+
     if (index < 0) {
       index = radios.length - 1;
     }
+
     if (index > radios.length - 1) {
       index = 0;
     }
@@ -185,6 +194,11 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
       radios[index].focus();
     } else {
       radios[index].shadowRoot!.querySelector('button')!.focus();
+    }
+
+    if (this.value !== oldValue) {
+      this.emit('sl-change');
+      this.emit('sl-input');
     }
 
     event.preventDefault();

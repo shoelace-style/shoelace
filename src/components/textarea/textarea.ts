@@ -21,10 +21,10 @@ import type { CSSResultGroup } from 'lit';
  * @slot label - The textarea's label. Alternatively, you can use the `label` attribute.
  * @slot help-text - Text that describes how to use the input. Alternatively, you can use the `help-text` attribute.
  *
- * @event sl-change - Emitted when an alteration to the control's value is committed by the user.
- * @event sl-input - Emitted when the control receives input and its value changes.
- * @event sl-focus - Emitted when the control gains focus.
  * @event sl-blur - Emitted when the control loses focus.
+ * @event sl-change - Emitted when an alteration to the control's value is committed by the user.
+ * @event sl-focus - Emitted when the control gains focus.
+ * @event sl-input - Emitted when the control receives input.
  *
  * @csspart form-control - The form control that wraps the label, input, and help text.
  * @csspart form-control-label - The label's wrapper.
@@ -180,22 +180,20 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
   /** Replaces a range of text with a new string. */
   setRangeText(
     replacement: string,
-    start: number,
-    end: number,
-    selectMode: 'select' | 'start' | 'end' | 'preserve' = 'preserve'
+    start?: number,
+    end?: number,
+    selectMode?: 'select' | 'start' | 'end' | 'preserve'
   ) {
+    // @ts-expect-error - start, end, and selectMode are optional
     this.input.setRangeText(replacement, start, end, selectMode);
 
     if (this.value !== this.input.value) {
       this.value = this.input.value;
-      this.emit('sl-input');
     }
 
     if (this.value !== this.input.value) {
       this.value = this.input.value;
       this.setTextareaHeight();
-      this.emit('sl-input');
-      this.emit('sl-change');
     }
   }
 

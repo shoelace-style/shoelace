@@ -206,9 +206,17 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   }
 
   handleClearClick(event: MouseEvent) {
+    const oldValue = this.value;
+
     event.stopPropagation();
     this.value = this.multiple ? [] : '';
-    this.emit('sl-clear');
+
+    if (this.value !== oldValue) {
+      this.emit('sl-clear');
+      this.emit('sl-input');
+      this.emit('sl-change');
+    }
+
     this.syncItemsFromValue();
   }
 
@@ -291,6 +299,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
   handleMenuSelect(event: CustomEvent<MenuSelectEventDetail>) {
     const item = event.detail.item;
+    const oldValue = this.value;
 
     if (this.multiple) {
       this.value = this.value.includes(item.value)
@@ -298,6 +307,11 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
         : [...this.value, item.value];
     } else {
       this.value = item.value;
+    }
+
+    if (this.value !== oldValue) {
+      this.emit('sl-change');
+      this.emit('sl-input');
     }
 
     this.syncItemsFromValue();
@@ -371,9 +385,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     await this.updateComplete;
 
     this.invalid = !this.input.checkValidity();
-
-    this.emit('sl-change');
-    this.emit('sl-input');
   }
 
   resizeMenu() {
@@ -450,11 +461,17 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   syncValueFromItems() {
     const checkedItems = this.menuItems.filter(item => item.checked);
     const checkedValues = checkedItems.map(item => item.value);
+    const oldValue = this.value;
 
     if (this.multiple) {
       this.value = (this.value as []).filter(val => checkedValues.includes(val));
     } else {
       this.value = checkedValues.length > 0 ? checkedValues[0] : '';
+    }
+
+    if (this.value !== oldValue) {
+      this.emit('sl-change');
+      this.emit('sl-input');
     }
   }
 

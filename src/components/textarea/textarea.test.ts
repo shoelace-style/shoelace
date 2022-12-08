@@ -1,4 +1,5 @@
 import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
+import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import { serialize } from '../../utilities/form';
 import type SlTextarea from './textarea';
@@ -61,6 +62,46 @@ describe('<sl-textarea>', () => {
     await waitUntil(() => submitHandler.calledOnce);
 
     expect(submitHandler).to.have.been.calledOnce;
+  });
+
+  describe('when the value changes', () => {
+    it('should emit sl-change and sl-input when the user types in the textarea', async () => {
+      const el = await fixture<SlTextarea>(html` <sl-textarea></sl-textarea> `);
+      const inputHandler = sinon.spy();
+      const changeHandler = sinon.spy();
+
+      el.addEventListener('sl-input', inputHandler);
+      el.addEventListener('sl-change', changeHandler);
+      el.focus();
+      await sendKeys({ type: 'abc' });
+      el.blur();
+      await el.updateComplete;
+
+      expect(changeHandler).to.have.been.calledOnce;
+      expect(inputHandler).to.have.been.calledThrice;
+    });
+
+    it('should not emit sl-change or sl-input when the value is set programmatically', async () => {
+      const el = await fixture<SlTextarea>(html` <sl-textarea></sl-textarea> `);
+
+      el.addEventListener('sl-change', () => expect.fail('sl-change should not be emitted'));
+      el.addEventListener('sl-input', () => expect.fail('sl-input should not be emitted'));
+      el.value = 'abc';
+
+      await el.updateComplete;
+    });
+
+    it('should not emit sl-change or sl-input when calling setRangeText()', async () => {
+      const el = await fixture<SlTextarea>(html` <sl-textarea value="hi there"></sl-textarea> `);
+
+      el.addEventListener('sl-change', () => expect.fail('sl-change should not be emitted'));
+      el.addEventListener('sl-input', () => expect.fail('sl-input should not be emitted'));
+      el.focus();
+      el.setSelectionRange(0, 2);
+      el.setRangeText('hello');
+
+      await el.updateComplete;
+    });
   });
 
   describe('when using constraint validation', () => {
