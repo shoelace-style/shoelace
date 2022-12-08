@@ -26,6 +26,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "useUnknownInCatchVariables": true,
+    "useDefineForClassFields": false,
     "baseUrl": ".",
     "types": [
       "mocha",
