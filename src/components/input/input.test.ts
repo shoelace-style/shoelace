@@ -42,7 +42,7 @@ describe('<sl-input>', () => {
     expect(el.autocomplete).to.be.undefined;
     expect(el.autofocus).to.be.undefined;
     expect(el.enterkeyhint).to.be.undefined;
-    expect(el.spellcheck).to.be.undefined;
+    expect(el.spellcheck).to.be.true;
     expect(el.inputmode).to.be.undefined;
     expect(el.valueAsDate).to.be.null;
     expect(isNaN(el.valueAsNumber)).to.be.true;
@@ -328,6 +328,29 @@ describe('<sl-input>', () => {
       el.stepDown();
 
       await el.updateComplete;
+    });
+  });
+
+  describe('when using spellcheck', () => {
+    it('should enable spellcheck when no attribute is present', async () => {
+      const el = await fixture<SlInput>(html` <sl-input></sl-input> `);
+      const input = el.shadowRoot!.querySelector<HTMLInputElement>('input')!;
+      expect(input.getAttribute('spellcheck')).to.equal('true');
+      expect(input.spellcheck).to.be.true;
+    });
+
+    it('should enable spellcheck when set to "true"', async () => {
+      const el = await fixture<SlInput>(html` <sl-input spellcheck="true"></sl-input> `);
+      const input = el.shadowRoot!.querySelector<HTMLInputElement>('input')!;
+      expect(input.getAttribute('spellcheck')).to.equal('true');
+      expect(input.spellcheck).to.be.true;
+    });
+
+    it('should disable spellcheck when set to "false"', async () => {
+      const el = await fixture<SlInput>(html` <sl-input spellcheck="false"></sl-input> `);
+      const input = el.shadowRoot!.querySelector<HTMLInputElement>('input')!;
+      expect(input.getAttribute('spellcheck')).to.equal('false');
+      expect(input.spellcheck).to.be.false;
     });
   });
 });
