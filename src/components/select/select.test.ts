@@ -91,7 +91,7 @@ describe('<sl-select>', () => {
       el.focus();
       await el.updateComplete;
       await sendKeys({ press: ' ' }); // open the dropdown
-      await aTimeout(200); // wait for the dropdown to open
+      await aTimeout(500); // wait for the dropdown to open
       await sendKeys({ press: 'ArrowDown' }); // select the first option
       await el.updateComplete;
       await sendKeys({ press: 'ArrowDown' }); // select the second option
