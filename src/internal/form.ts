@@ -1,4 +1,3 @@
-import './formdata-event-polyfill';
 import type SlButton from '../components/button/button';
 import type { ShoelaceFormControl } from '../internal/shoelace-element';
 import type { ReactiveController, ReactiveControllerHost } from 'lit';

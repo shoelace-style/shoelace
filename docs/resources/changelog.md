@@ -16,6 +16,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-input>` that caused the `sl-change` event to be incorrectly emitted when the value was set programmatically [#917](https://github.com/shoelace-style/shoelace/issues/917)
 - Fixed a bug in `<sl-input>` and `<sl-textarea>` that made it impossible to disable spell checking [#1061](https://github.com/shoelace-style/shoelace/issues/1061)
 - Fixed non-modal behaviors in `<sl-drawer>` when using the `contained` attribute [#1051](https://github.com/shoelace-style/shoelace/issues/1051)
+- Removed the `formdata` event polyfill since it's now available in the last two versions of all major browsers
 
 ## 2.0.0-beta.86
 
