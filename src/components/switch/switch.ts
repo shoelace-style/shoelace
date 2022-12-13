@@ -56,6 +56,9 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
   /** The current value of the switch, submitted as a name/value pair with form data. */
   @property() value: string;
 
+  /** The switch's size. */
+  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
+
   /** Disables the switch. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
@@ -159,7 +162,10 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
           switch: true,
           'switch--checked': this.checked,
           'switch--disabled': this.disabled,
-          'switch--focused': this.hasFocus
+          'switch--focused': this.hasFocus,
+          'switch--small': this.size === 'small',
+          'switch--medium': this.size === 'medium',
+          'switch--large': this.size === 'large'
         })}
       >
         <input

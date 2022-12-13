@@ -78,4 +78,28 @@ const App = () => (
 );
 ```
 
+## Sizes
+
+Use the `size` attribute to change a radio's size.
+
+```html preview
+<sl-radio size="small">Small</sl-radio>
+<sl-radio size="medium">Medium</sl-radio>
+<sl-radio size="large">Large</sl-radio>
+```
+
+```jsx react
+import { SlRadio } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <SlRadio size="small">Small</SlRadio>
+    <br />
+    <SlRadio size="medium">Medium</SlRadio>
+    <br />
+    <SlRadio size="large">Large</SlRadio>
+  </>
+);
+```
+
 [component-metadata:sl-radio]
