@@ -15,12 +15,14 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Added the `--sl-toggle-size-small` and `--sl-toggle-size-large` design tokens
 - Added the `size` attribute to `<sl-checkbox>`, `<sl-radio>`, and `<sl-switch>` [#1071](https://github.com/shoelace-style/shoelace/issues/1071)
 - Added the `sl-input` event to `<sl-checkbox>`, `<sl-color-picker>`, `<sl-radio>`, `<sl-range>`, and `<sl-switch>`
+- Added HSV format to `<sl-color-picker>` [#1072](https://github.com/shoelace-style/shoelace/pull/1072)
 - Fixed a bug in `<sl-color-picker>` that sometimes prevented the color from updating when clicking or tapping on the controls
 - Fixed a bug in `<sl-color-picker>` that prevented text from being entered in the color input
 - Fixed a bug in `<sl-input>` that caused the `sl-change` event to be incorrectly emitted when the value was set programmatically [#917](https://github.com/shoelace-style/shoelace/issues/917)
 - Fixed a bug in `<sl-input>` and `<sl-textarea>` that made it impossible to disable spell checking [#1061](https://github.com/shoelace-style/shoelace/issues/1061)
 - Fixed non-modal behaviors in `<sl-drawer>` when using the `contained` attribute [#1051](https://github.com/shoelace-style/shoelace/issues/1051)
 - Fixed a bug in `<sl-checkbox>` and `<sl-radio>` that caused the checked icons to not scale property when resized
+- Refactored `<sl-color-picker>` to use `@ctrl/tinycolor` instead of `color` saving ~67KB [#1072](https://github.com/shoelace-style/shoelace/pull/1072)
 - Removed the `formdata` event polyfill since it's now available in the last two versions of all major browsers
 
 ## 2.0.0-beta.86
