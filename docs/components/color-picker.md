@@ -32,7 +32,7 @@ const App = () => <SlColorPicker value="#4a90e2" label="Select a color" />;
 
 ### Opacity
 
-Use the `opacity` attribute to enable the opacity slider. When this is enabled, the value will be displayed as HEXA, RGBA, HSLA or HSVA based on `format`.
+Use the `opacity` attribute to enable the opacity slider. When this is enabled, the value will be displayed as HEXA, RGBA, HSLA, or HSVA based on `format`.
 
 ```html preview
 <sl-color-picker value="#f5a623ff" opacity label="Select a color"></sl-color-picker>
@@ -46,7 +46,7 @@ const App = () => <SlColorPicker opacity label="Select a color" />;
 
 ### Formats
 
-Set the color picker's format with the `format` attribute. Valid options include `hex`, `rgb`, `hsl` and `hsv`. Note that the color picker's input will accept any parsable format (including CSS color names) regardless of this option.
+Set the color picker's format with the `format` attribute. Valid options include `hex`, `rgb`, `hsl`, and `hsv`. Note that the color picker's input will accept any parsable format (including CSS color names) regardless of this option.
 
 To prevent users from toggling the format themselves, add the `no-format-toggle` attribute.
 

@@ -125,7 +125,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
   @property() label = '';
 
   /**
-   * The format to use. If opacity is enabled, these will translate to HEXA, RGBA, HSLA and HSVA respectively. The color
+   * The format to use. If opacity is enabled, these will translate to HEXA, RGBA, HSLA, and HSVA respectively. The color
    * picker will accept user input in any format (including CSS color names) and convert it to the desired format.
    */
   @property() format: 'hex' | 'rgb' | 'hsl' | 'hsv' = 'hex';
@@ -159,7 +159,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
 
   /**
    * An array of predefined color swatches to display. Can include any format the color picker can parse, including
-   * HEX(A), RGB(A), HSL(A), HSV(A) and CSS color names.
+   * HEX(A), RGB(A), HSL(A), HSV(A), and CSS color names.
    */
   @property({ attribute: false }) swatches: string[] = [
     '#d0021b',
@@ -518,7 +518,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     }
 
     const hslColor = color.toHsl();
-    // adjust saturation and lightness from 0-1 to 0-100
+    // Adjust saturation and lightness from 0-1 to 0-100
     const hsl = {
       h: hslColor.h,
       s: hslColor.s * 100,
@@ -532,7 +532,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     const hexa = color.toHex8String();
 
     const hsvColor = color.toHsv();
-    // adjust saturation and value from 0-1 to 0-100
+    // Adjust saturation and value from 0-1 to 0-100
     const hsv = {
       h: hsvColor.h,
       s: hsvColor.s * 100,
