@@ -5,18 +5,38 @@ export default css`
   ${componentStyles}
 
   :host {
-    --height: var(--sl-toggle-size);
-    --thumb-size: calc(var(--sl-toggle-size) + 4px);
+    display: inline-block;
+  }
+
+  :host([size='small']) {
+    --height: var(--sl-toggle-size-small);
+    --thumb-size: calc(var(--sl-toggle-size-small) + 4px);
     --width: calc(var(--height) * 2);
 
-    display: inline-block;
+    font-size: var(--sl-input-font-size-small);
+  }
+
+  :host([size='medium']) {
+    --height: var(--sl-toggle-size-medium);
+    --thumb-size: calc(var(--sl-toggle-size-medium) + 4px);
+    --width: calc(var(--height) * 2);
+
+    font-size: var(--sl-input-font-size-medium);
+  }
+
+  :host([size='large']) {
+    --height: var(--sl-toggle-size-large);
+    --thumb-size: calc(var(--sl-toggle-size-large) + 4px);
+    --width: calc(var(--height) * 2);
+
+    font-size: var(--sl-input-font-size-large);
   }
 
   .switch {
     display: inline-flex;
     align-items: center;
     font-family: var(--sl-input-font-family);
-    font-size: var(--sl-input-font-size-medium);
+    font-size: inherit;
     font-weight: var(--sl-input-font-weight);
     color: var(--sl-input-color);
     vertical-align: middle;
