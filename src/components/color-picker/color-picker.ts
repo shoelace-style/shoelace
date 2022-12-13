@@ -1,4 +1,4 @@
-import Color from 'color';
+import { TinyColor } from '@ctrl/tinycolor';
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -557,41 +557,27 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
   }
 
   parseColor(colorString: string) {
-    let parsed: Color;
+    let color: TinyColor;
 
     // The color module has a weak parser, so we normalize certain things to make the user experience better
     colorString = this.normalizeColorString(colorString);
 
     try {
-      parsed = Color(colorString);
+      color = new TinyColor(colorString);
     } catch {
       return null;
     }
 
-    const hslColor = parsed.hsl();
-
+    const hslColor = color.toHsl();
     const hsl = {
-      h: hslColor.hue(),
-      s: hslColor.saturationl(),
-      l: hslColor.lightness(),
-      a: hslColor.alpha()
+      h: hslColor.h * 100,
+      s: hslColor.s * 100,
+      l: hslColor.l * 100,
+      a: hslColor.a
     };
-
-    const rgbColor = parsed.rgb();
-
-    const rgb = {
-      r: rgbColor.red(),
-      g: rgbColor.green(),
-      b: rgbColor.blue(),
-      a: rgbColor.alpha()
-    };
-
-    const hex = {
-      r: toHex(rgb.r),
-      g: toHex(rgb.g),
-      b: toHex(rgb.b),
-      a: toHex(rgb.a * 255)
-    };
+    const rgb = color.toRgb();
+    const hex = color.toHexString();
+    const hexa = color.toHex8String();
 
     return {
       hsl: {
@@ -624,8 +610,8 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
           `rgba(${Math.round(rgb.r)}, ${Math.round(rgb.g)}, ${Math.round(rgb.b)}, ${rgb.a.toFixed(2).toString()})`
         )
       },
-      hex: this.setLetterCase(`#${hex.r}${hex.g}${hex.b}`),
-      hexa: this.setLetterCase(`#${hex.r}${hex.g}${hex.b}${hex.a}`)
+      hex: this.setLetterCase(hex),
+      hexa: this.setLetterCase(hexa)
     };
   }
 
@@ -1003,11 +989,6 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
       </sl-dropdown>
     `;
   }
-}
-
-function toHex(value: number) {
-  const hex = Math.round(value).toString(16);
-  return hex.length === 1 ? `0${hex}` : hex;
 }
 
 declare global {
