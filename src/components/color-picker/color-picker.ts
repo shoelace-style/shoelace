@@ -507,74 +507,25 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     event.preventDefault();
   }
 
-  normalizeColorString(colorString: string) {
-    //
-    // The color module we're using doesn't parse % values for the alpha channel in RGBA and HSLA. It also doesn't parse
-    // hex colors when the # is missing. This pre-parser tries to normalize these edge cases to provide a better
-    // experience for users who type in color values.
-    //
-    if (/rgba?/i.test(colorString)) {
-      const rgba = colorString
-        .replace(/[^\d.%]/g, ' ')
-        .split(' ')
-        .map(val => val.trim())
-        .filter(val => val.length);
-
-      if (rgba.length < 4) {
-        rgba[3] = '1';
-      }
-
-      if (rgba[3].indexOf('%') > -1) {
-        rgba[3] = (parseFloat(rgba[3].replace(/%/g, '')) / 100).toString();
-      }
-
-      return `rgba(${rgba[0]}, ${rgba[1]}, ${rgba[2]}, ${rgba[3]})`;
-    }
-
-    if (/hsla?/i.test(colorString)) {
-      const hsla = colorString
-        .replace(/[^\d.%]/g, ' ')
-        .split(' ')
-        .map(val => val.trim())
-        .filter(val => val.length);
-
-      if (hsla.length < 4) {
-        hsla[3] = '1';
-      }
-
-      if (hsla[3].indexOf('%') > -1) {
-        hsla[3] = (parseFloat(hsla[3].replace(/%/g, '')) / 100).toString();
-      }
-
-      return `hsla(${hsla[0]}, ${hsla[1]}, ${hsla[2]}, ${hsla[3]})`;
-    }
-
-    if (/^[0-9a-f]+$/i.test(colorString)) {
-      return `#${colorString}`;
-    }
-
-    return colorString;
-  }
-
   parseColor(colorString: string) {
     let color: TinyColor;
 
-    // The color module has a weak parser, so we normalize certain things to make the user experience better
-    colorString = this.normalizeColorString(colorString);
+    color = new TinyColor(colorString);
 
-    try {
-      color = new TinyColor(colorString);
-    } catch {
+    if (!color.isValid) {
       return null;
     }
 
     const hslColor = color.toHsl();
+
+    // adjust saturation and lightness from 0-1 to 0-100
     const hsl = {
-      h: hslColor.h * 100,
+      h: hslColor.h,
       s: hslColor.s * 100,
       l: hslColor.l * 100,
       a: hslColor.a
     };
+
     const rgb = color.toRgb();
     const hex = color.toHexString();
     const hexa = color.toHex8String();
