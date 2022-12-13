@@ -512,10 +512,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
   }
 
   parseColor(colorString: string) {
-    let color: TinyColor;
-
-    color = new TinyColor(colorString);
-
+    const color = new TinyColor(colorString);
     if (!color.isValid) {
       return null;
     }
