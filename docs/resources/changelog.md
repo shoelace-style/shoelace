@@ -8,7 +8,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ?> During the beta period, these restrictions may be relaxed in the event of a mission-critical bug. 🐛
 
-## Next
+## 2.0.0-beta.87
 
 - 🚨 BREAKING: changed the default size of medium checkboxes, radios, and switches to 18px instead of 16px
 - 🚨 BREAKING: renamed the `--sl-toggle-size` design token to `--sl-toggle-size-medium`
