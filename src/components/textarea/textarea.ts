@@ -109,7 +109,15 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
   @property() enterkeyhint: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
 
   /** Enables spell checking on the textarea. */
-  @property({ type: Boolean }) spellcheck: boolean;
+  @property({
+    type: Boolean,
+    converter: {
+      // Allow "true|false" attribute values but keep the property boolean
+      fromAttribute: value => (!value || value === 'false' ? false : true),
+      toAttribute: value => (value ? 'true' : 'false')
+    }
+  })
+  spellcheck = true;
 
   /**
    * Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual

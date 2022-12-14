@@ -176,7 +176,15 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   @property() enterkeyhint: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
 
   /** Enables spell checking on the input. */
-  @property({ type: Boolean }) spellcheck: boolean;
+  @property({
+    type: Boolean,
+    converter: {
+      // Allow "true|false" attribute values but keep the property boolean
+      fromAttribute: value => (!value || value === 'false' ? false : true),
+      toAttribute: value => (value ? 'true' : 'false')
+    }
+  })
+  spellcheck = true;
 
   /**
    * Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual
@@ -445,7 +453,7 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
               autocomplete=${ifDefined(this.type === 'password' ? 'off' : this.autocomplete)}
               autocorrect=${ifDefined(this.type === 'password' ? 'off' : this.autocorrect)}
               ?autofocus=${this.autofocus}
-              spellcheck=${ifDefined(this.spellcheck)}
+              spellcheck=${this.spellcheck}
               pattern=${ifDefined(this.pattern)}
               enterkeyhint=${ifDefined(this.enterkeyhint)}
               inputmode=${ifDefined(this.inputmode)}

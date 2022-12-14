@@ -34,7 +34,7 @@ describe('<sl-textarea>', () => {
     expect(el.autocomplete).to.be.undefined;
     expect(el.autofocus).to.be.undefined;
     expect(el.enterkeyhint).to.be.undefined;
-    expect(el.spellcheck).to.be.undefined;
+    expect(el.spellcheck).to.be.true;
     expect(el.inputmode).to.be.undefined;
   });
 
@@ -175,6 +175,29 @@ describe('<sl-textarea>', () => {
       await textarea.updateComplete;
 
       expect(textarea.value).to.equal('');
+    });
+  });
+
+  describe('when using spellcheck', () => {
+    it('should enable spellcheck when no attribute is present', async () => {
+      const el = await fixture<SlTextarea>(html` <sl-textarea></sl-textarea> `);
+      const textarea = el.shadowRoot!.querySelector<HTMLTextAreaElement>('textarea')!;
+      expect(textarea.getAttribute('spellcheck')).to.equal('true');
+      expect(textarea.spellcheck).to.be.true;
+    });
+
+    it('should enable spellcheck when set to "true"', async () => {
+      const el = await fixture<SlTextarea>(html` <sl-textarea spellcheck="true"></sl-textarea> `);
+      const textarea = el.shadowRoot!.querySelector<HTMLTextAreaElement>('textarea')!;
+      expect(textarea.getAttribute('spellcheck')).to.equal('true');
+      expect(textarea.spellcheck).to.be.true;
+    });
+
+    it('should disable spellcheck when set to "false"', async () => {
+      const el = await fixture<SlTextarea>(html` <sl-textarea spellcheck="false"></sl-textarea> `);
+      const textarea = el.shadowRoot!.querySelector<HTMLTextAreaElement>('textarea')!;
+      expect(textarea.getAttribute('spellcheck')).to.equal('false');
+      expect(textarea.spellcheck).to.be.false;
     });
   });
 });

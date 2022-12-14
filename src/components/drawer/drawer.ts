@@ -117,10 +117,13 @@ export default class SlDrawer extends ShoelaceElement {
   firstUpdated() {
     this.drawer.hidden = !this.open;
 
-    if (this.open && !this.contained) {
+    if (this.open) {
       this.addOpenListeners();
-      this.modal.activate();
-      lockBodyScrolling(this);
+
+      if (!this.contained) {
+        this.modal.activate();
+        lockBodyScrolling(this);
+      }
     }
   }
 
@@ -173,7 +176,7 @@ export default class SlDrawer extends ShoelaceElement {
   }
 
   handleDocumentKeyDown(event: KeyboardEvent) {
-    if (this.open && event.key === 'Escape') {
+    if (this.open && !this.contained && event.key === 'Escape') {
       event.stopPropagation();
       this.requestClose('keyboard');
     }
@@ -240,8 +243,11 @@ export default class SlDrawer extends ShoelaceElement {
       // Hide
       this.emit('sl-hide');
       this.removeOpenListeners();
-      this.modal.deactivate();
-      unlockBodyScrolling(this);
+
+      if (!this.contained) {
+        this.modal.deactivate();
+        unlockBodyScrolling(this);
+      }
 
       await Promise.all([stopAnimations(this.drawer), stopAnimations(this.overlay)]);
       const panelAnimation = getAnimation(this, `drawer.hide${uppercaseFirstLetter(this.placement)}`, {
@@ -274,6 +280,19 @@ export default class SlDrawer extends ShoelaceElement {
       }
 
       this.emit('sl-after-hide');
+    }
+  }
+
+  @watch('contained', { waitUntilFirstUpdate: true })
+  handleNoModalChange() {
+    if (this.open && !this.contained) {
+      this.modal.activate();
+      lockBodyScrolling(this);
+    }
+
+    if (this.open && this.contained) {
+      this.modal.deactivate();
+      unlockBodyScrolling(this);
     }
   }
 

@@ -58,6 +58,9 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
   /** The current value of the checkbox, submitted as a name/value pair with form data. */
   @property() value: string;
 
+  /** The checkbox's size. */
+  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
+
   /** Disables the checkbox. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
@@ -158,7 +161,10 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
           'checkbox--checked': this.checked,
           'checkbox--disabled': this.disabled,
           'checkbox--focused': this.hasFocus,
-          'checkbox--indeterminate': this.indeterminate
+          'checkbox--indeterminate': this.indeterminate,
+          'checkbox--small': this.size === 'small',
+          'checkbox--medium': this.size === 'medium',
+          'checkbox--large': this.size === 'large'
         })}
       >
         <input
@@ -179,9 +185,20 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
         />
 
         <span part="control" class="checkbox__control">
-          ${this.checked ? html` <sl-icon part="checked-icon" library="system" name="check"></sl-icon> ` : ''}
+          ${this.checked
+            ? html`
+                <sl-icon part="checked-icon" class="checkbox__checked-icon" library="system" name="check"></sl-icon>
+              `
+            : ''}
           ${!this.checked && this.indeterminate
-            ? html` <sl-icon part="indeterminate-icon" library="system" name="indeterminate"></sl-icon> `
+            ? html`
+                <sl-icon
+                  part="indeterminate-icon"
+                  class="checkbox__indeterminate-icon"
+                  library="system"
+                  name="indeterminate"
+                ></sl-icon>
+              `
             : ''}
         </span>
 

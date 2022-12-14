@@ -180,7 +180,9 @@ const App = () => {
 
 ### Contained to an Element
 
-By default, the drawer slides out of its [containing block](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#Identifying_the_containing_block), which is usually the viewport. To make the drawer slide out of its parent element, add the `contained` attribute and `position: relative` to the parent.
+By default, drawers slide out of their [containing block](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#Identifying_the_containing_block), which is usually the viewport. To make a drawer slide out of a parent element, add the `contained` attribute to the drawer and apply `position: relative` to its parent.
+
+Unlike normal drawers, contained drawers are not modal. This means they do not show an overlay, they do not trap focus, and they are not dismissible with <kbd>Escape</kbd>. This is intentional to allow users to interact with elements outside of the drawer.
 
 ```html preview
 <div
@@ -194,14 +196,14 @@ By default, the drawer slides out of its [containing block](https://developer.mo
   </sl-drawer>
 </div>
 
-<sl-button>Open Drawer</sl-button>
+<sl-button>Toggle Drawer</sl-button>
 
 <script>
   const drawer = document.querySelector('.drawer-contained');
   const openButton = drawer.parentElement.nextElementSibling;
   const closeButton = drawer.querySelector('sl-button[variant="primary"]');
 
-  openButton.addEventListener('click', () => drawer.show());
+  openButton.addEventListener('click', () => (drawer.open = !drawer.open));
   closeButton.addEventListener('click', () => drawer.hide());
 </script>
 ```
@@ -226,7 +228,14 @@ const App = () => {
       >
         The drawer will be contained to this box. This content won't shift or be affected in any way when the drawer
         opens.
-        <SlDrawer label="Drawer" contained open={open} onSlAfterHide={() => setOpen(false)} style={{ '--size': '50%' }}>
+        <SlDrawer
+          label="Drawer"
+          contained
+          no-modal
+          open={open}
+          onSlAfterHide={() => setOpen(false)}
+          style={{ '--size': '50%' }}
+        >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
             Close

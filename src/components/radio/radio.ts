@@ -36,6 +36,9 @@ export default class SlRadio extends ShoelaceElement {
   /** The radio's value. When selected, the radio group will receive this value. */
   @property() value: string;
 
+  /** The radio's size. */
+  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
+
   /** Disables the radio. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
@@ -92,11 +95,16 @@ export default class SlRadio extends ShoelaceElement {
           radio: true,
           'radio--checked': this.checked,
           'radio--disabled': this.disabled,
-          'radio--focused': this.hasFocus
+          'radio--focused': this.hasFocus,
+          'radio--small': this.size === 'small',
+          'radio--medium': this.size === 'medium',
+          'radio--large': this.size === 'large'
         })}
       >
         <span part="${`control${this.checked ? ' control--checked' : ''}`}" class="radio__control">
-          ${this.checked ? html` <sl-icon part="checked-icon" library="system" name="radio"></sl-icon> ` : ''}
+          ${this.checked
+            ? html` <sl-icon part="checked-icon" class="radio__checked-icon" library="system" name="radio"></sl-icon> `
+            : ''}
         </span>
 
         <slot part="label" class="radio__label"></slot>

@@ -44,12 +44,38 @@ import { SlSwitch } from '@shoelace-style/shoelace/dist/react';
 const App = () => <SlSwitch disabled>Disabled</SlSwitch>;
 ```
 
-### Custom Size
+## Sizes
 
-Use the available custom properties to make the switch a different size.
+Use the `size` attribute to change a switch's size.
 
 ```html preview
-<sl-switch style="--width: 80px; --height: 32px; --thumb-size: 26px;">Really big</sl-switch>
+<sl-switch size="small">Small</sl-switch>
+<br />
+<sl-switch size="medium">Medium</sl-switch>
+<br />
+<sl-switch size="large">Large</sl-switch>
+```
+
+```jsx react
+import { SlSwitch } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <SlSwitch size="small">Small</SlSwitch>
+    <br />
+    <SlSwitch size="medium">Medium</SlSwitch>
+    <br />
+    <SlSwitch size="large">Large</SlSwitch>
+  </>
+);
+```
+
+### Custom Styles
+
+Use the available custom properties to change how the switch is styled.
+
+```html preview
+<sl-switch style="--width: 80px; --height: 40px; --thumb-size: 36px;">Really big</sl-switch>
 ```
 
 ```jsx react
