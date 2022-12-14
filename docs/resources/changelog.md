@@ -22,6 +22,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-input>` and `<sl-textarea>` that made it impossible to disable spell checking [#1061](https://github.com/shoelace-style/shoelace/issues/1061)
 - Fixed non-modal behaviors in `<sl-drawer>` when using the `contained` attribute [#1051](https://github.com/shoelace-style/shoelace/issues/1051)
 - Fixed a bug in `<sl-checkbox>` and `<sl-radio>` that caused the checked icons to not scale property when resized
+- Fixed a bug that broke React imports [#1050](https://github.com/shoelace-style/shoelace/pull/1050)
 - Refactored `<sl-color-picker>` to use `@ctrl/tinycolor` instead of `color` saving ~67KB [#1072](https://github.com/shoelace-style/shoelace/pull/1072)
 - Removed the `formdata` event polyfill since it's now available in the last two versions of all major browsers
 
