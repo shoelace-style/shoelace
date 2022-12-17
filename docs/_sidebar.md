@@ -2,16 +2,12 @@
 
   - [Teamshares](/getting-started/teamshares)
   - [Overview](/)
-  - [Installation](/getting-started/installation)
+  <!-- - [Installation](/getting-started/installation) -->
   - [Usage](/getting-started/usage)
   - [Themes](/getting-started/themes)
   - [Customizing](/getting-started/customizing)
   - [Form Controls](/getting-started/form-controls)
   - [Localization](/getting-started/localization)
-
-- Vendor
-
-  - [Data Grid](/vendor/data-grid.md)
 
 - Components
 
@@ -24,7 +20,7 @@
   - [Button Group](/components/button-group)
   - [Card](/components/card)
   - [Checkbox](/components/checkbox)
-  - [Color Picker](/components/color-picker)
+  <!-- - [Color Picker](/components/color-picker) -->
   - [Details](/components/details)
   - [Dialog](/components/dialog)
   - [Divider](/components/divider)
@@ -39,7 +35,7 @@
   - [Menu Label](/components/menu-label)
   - [Progress Bar](/components/progress-bar)
   - [Progress Ring](/components/progress-ring)
-  - [QR Code](/components/qr-code)
+  <!-- - [QR Code](/components/qr-code) -->
   - [Radio](/components/radio)
   - [Radio Button](/components/radio-button)
   - [Radio Group](/components/radio-group)
@@ -59,6 +55,10 @@
   - [Tree](/components/tree)
   - [Tree Item](/components/tree-item)
   <!--plop:component-->
+
+- Vendor
+
+  - [Data Grid](/vendor/data-grid.md)
 
 - Design Tokens
 
@@ -99,6 +99,7 @@
 
 - Tutorials
 
-  - [Integrating with Laravel](/tutorials/integrating-with-laravel)
+  <!-- - [Integrating with Laravel](/tutorials/integrating-with-laravel) -->
+
   - [Integrating with NextJS](/tutorials/integrating-with-nextjs)
   - [Integrating with Rails](/tutorials/integrating-with-rails)

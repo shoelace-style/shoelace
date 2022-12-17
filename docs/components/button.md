@@ -138,15 +138,15 @@ Use the `circle` attribute to create circular icon buttons.
 
 ```html preview
 <sl-button variant="default" size="small" circle>
-  <sl-icon name="gear" label="Settings"></sl-icon>
+  <sl-icon name="cog-6-tooth" label="Settings"></sl-icon>
 </sl-button>
 
 <sl-button variant="default" size="medium" circle>
-  <sl-icon name="gear" label="Settings"></sl-icon>
+  <sl-icon name="cog-6-tooth" label="Settings"></sl-icon>
 </sl-button>
 
 <sl-button variant="default" size="large" circle>
-  <sl-icon name="gear" label="Settings"></sl-icon>
+  <sl-icon name="cog-6-tooth" label="Settings"></sl-icon>
 </sl-button>
 ```
 
@@ -156,13 +156,13 @@ import { SlButton, SlIcon } from '@shoelace-style/shoelace/dist/react';
 const App = () => (
   <>
     <SlButton variant="default" size="small" circle>
-      <SlIcon name="gear" />
+      <SlIcon name="cog-6-tooth" />
     </SlButton>
     <SlButton variant="default" size="medium" circle>
-      <SlIcon name="gear" />
+      <SlIcon name="cog-6-tooth" />
     </SlButton>
     <SlButton variant="default" size="large" circle>
-      <SlIcon name="gear" />
+      <SlIcon name="cog-6-tooth" />
     </SlButton>
   </>
 );
@@ -262,54 +262,54 @@ Use the `prefix` and `suffix` slots to add icons.
 
 ```html preview
 <sl-button variant="default" size="small">
-  <sl-icon slot="prefix" name="gear"></sl-icon>
+  <sl-icon slot="prefix" name="cog-6-tooth"></sl-icon>
   Settings
 </sl-button>
 
 <sl-button variant="default" size="small">
-  <sl-icon slot="suffix" name="arrow-counterclockwise"></sl-icon>
+  <sl-icon slot="suffix" name="arrow-uturn-left"></sl-icon>
   Refresh
 </sl-button>
 
 <sl-button variant="default" size="small">
-  <sl-icon slot="prefix" name="link-45deg"></sl-icon>
-  <sl-icon slot="suffix" name="box-arrow-up-right"></sl-icon>
+  <sl-icon slot="prefix" name="arrows-pointing-out"></sl-icon>
+  <sl-icon slot="suffix" name="arrow-top-right-on-square"></sl-icon>
   Open
 </sl-button>
 
 <br /><br />
 
 <sl-button variant="default">
-  <sl-icon slot="prefix" name="gear"></sl-icon>
+  <sl-icon slot="prefix" name="cog-6-tooth"></sl-icon>
   Settings
 </sl-button>
 
 <sl-button variant="default">
-  <sl-icon slot="suffix" name="arrow-counterclockwise"></sl-icon>
+  <sl-icon slot="suffix" name="arrow-uturn-left"></sl-icon>
   Refresh
 </sl-button>
 
 <sl-button variant="default">
-  <sl-icon slot="prefix" name="link-45deg"></sl-icon>
-  <sl-icon slot="suffix" name="box-arrow-up-right"></sl-icon>
+  <sl-icon slot="prefix" name="arrows-pointing-out"></sl-icon>
+  <sl-icon slot="suffix" name="arrow-top-right-on-square"></sl-icon>
   Open
 </sl-button>
 
 <br /><br />
 
 <sl-button variant="default" size="large">
-  <sl-icon slot="prefix" name="gear"></sl-icon>
+  <sl-icon slot="prefix" name="cog-6-tooth"></sl-icon>
   Settings
 </sl-button>
 
 <sl-button variant="default" size="large">
-  <sl-icon slot="suffix" name="arrow-counterclockwise"></sl-icon>
+  <sl-icon slot="suffix" name="arrow-uturn-left"></sl-icon>
   Refresh
 </sl-button>
 
 <sl-button variant="default" size="large">
-  <sl-icon slot="prefix" name="link-45deg"></sl-icon>
-  <sl-icon slot="suffix" name="box-arrow-up-right"></sl-icon>
+  <sl-icon slot="prefix" name="arrows-pointing-out"></sl-icon>
+  <sl-icon slot="suffix" name="arrow-top-right-on-square"></sl-icon>
   Open
 </sl-button>
 ```
@@ -320,18 +320,18 @@ import { SlButton, SlIcon } from '@shoelace-style/shoelace/dist/react';
 const App = () => (
   <>
     <SlButton variant="default" size="small">
-      <SlIcon slot="prefix" name="gear"></SlIcon>
+      <SlIcon slot="prefix" name="cog-6-tooth"></SlIcon>
       Settings
     </SlButton>
 
     <SlButton variant="default" size="small">
-      <SlIcon slot="suffix" name="arrow-counterclockwise"></SlIcon>
+      <SlIcon slot="suffix" name="arrow-uturn-left"></SlIcon>
       Refresh
     </SlButton>
 
     <SlButton variant="default" size="small">
-      <SlIcon slot="prefix" name="link-45deg"></SlIcon>
-      <SlIcon slot="suffix" name="box-arrow-up-right"></SlIcon>
+      <SlIcon slot="prefix" name="arrows-pointing-out"></SlIcon>
+      <SlIcon slot="suffix" name="arrow-top-right-on-square"></SlIcon>
       Open
     </SlButton>
 
@@ -339,18 +339,18 @@ const App = () => (
     <br />
 
     <SlButton variant="default">
-      <SlIcon slot="prefix" name="gear"></SlIcon>
+      <SlIcon slot="prefix" name="cog-6-tooth"></SlIcon>
       Settings
     </SlButton>
 
     <SlButton variant="default">
-      <SlIcon slot="suffix" name="arrow-counterclockwise"></SlIcon>
+      <SlIcon slot="suffix" name="arrow-uturn-left"></SlIcon>
       Refresh
     </SlButton>
 
     <SlButton variant="default">
-      <SlIcon slot="prefix" name="link-45deg"></SlIcon>
-      <SlIcon slot="suffix" name="box-arrow-up-right"></SlIcon>
+      <SlIcon slot="prefix" name="arrows-pointing-out"></SlIcon>
+      <SlIcon slot="suffix" name="arrow-top-right-on-square"></SlIcon>
       Open
     </SlButton>
 
@@ -358,18 +358,18 @@ const App = () => (
     <br />
 
     <SlButton variant="default" size="large">
-      <SlIcon slot="prefix" name="gear"></SlIcon>
+      <SlIcon slot="prefix" name="cog-6-tooth"></SlIcon>
       Settings
     </SlButton>
 
     <SlButton variant="default" size="large">
-      <SlIcon slot="suffix" name="arrow-counterclockwise"></SlIcon>
+      <SlIcon slot="suffix" name="arrow-uturn-left"></SlIcon>
       Refresh
     </SlButton>
 
     <SlButton variant="default" size="large">
-      <SlIcon slot="prefix" name="link-45deg"></SlIcon>
-      <SlIcon slot="suffix" name="box-arrow-up-right"></SlIcon>
+      <SlIcon slot="prefix" name="arrows-pointing-out"></SlIcon>
+      <SlIcon slot="suffix" name="arrow-top-right-on-square"></SlIcon>
       Open
     </SlButton>
   </>

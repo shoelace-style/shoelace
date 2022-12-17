@@ -68,7 +68,7 @@ Use the `separator` slot to change the separator that goes between breadcrumb it
 
 ```html preview
 <sl-breadcrumb>
-  <sl-icon name="dot" slot="separator"></sl-icon>
+  <sl-icon name="arrow-small-right-mini" slot="separator"></sl-icon>
   <sl-breadcrumb-item>First</sl-breadcrumb-item>
   <sl-breadcrumb-item>Second</sl-breadcrumb-item>
   <sl-breadcrumb-item>Third</sl-breadcrumb-item>
@@ -100,7 +100,7 @@ import { SlBreadcrumb, SlBreadcrumbItem } from '@shoelace-style/shoelace/dist/re
 const App = () => (
   <>
     <SlBreadcrumb>
-      <sl-icon name="dot" slot="separator" />
+      <sl-icon name="arrow-small-right-mini" slot="separator" />
       <SlBreadcrumbItem>First</SlBreadcrumbItem>
       <SlBreadcrumbItem>Second</SlBreadcrumbItem>
       <SlBreadcrumbItem>Third</SlBreadcrumbItem>
@@ -134,7 +134,7 @@ Use the `prefix` slot to add content before any breadcrumb item.
 ```html preview
 <sl-breadcrumb>
   <sl-breadcrumb-item>
-    <sl-icon slot="prefix" name="house"></sl-icon>
+    <sl-icon slot="prefix" name="home-mini"></sl-icon>
     Home
   </sl-breadcrumb-item>
   <sl-breadcrumb-item>Articles</sl-breadcrumb-item>
@@ -148,7 +148,7 @@ import { SlBreadcrumb, SlBreadcrumbItem, SlIcon } from '@shoelace-style/shoelace
 const App = () => (
   <SlBreadcrumb>
     <SlBreadcrumbItem>
-      <SlIcon slot="prefix" name="house" />
+      <SlIcon slot="prefix" name="home-mini" />
       Home
     </SlBreadcrumbItem>
     <SlBreadcrumbItem>Articles</SlBreadcrumbItem>
@@ -167,7 +167,7 @@ Use the `suffix` slot to add content after any breadcrumb item.
   <sl-breadcrumb-item>Policies</sl-breadcrumb-item>
   <sl-breadcrumb-item>
     Security
-    <sl-icon slot="suffix" name="shield-lock"></sl-icon>
+    <sl-icon slot="suffix" name="shield-check"></sl-icon>
   </sl-breadcrumb-item>
 </sl-breadcrumb>
 ```
@@ -181,7 +181,7 @@ const App = () => (
     <SlBreadcrumbItem>Policies</SlBreadcrumbItem>
     <SlBreadcrumbItem>
       Security
-      <SlIcon slot="suffix" name="shield-lock"></SlIcon>
+      <SlIcon slot="suffix" name="shield-check"></SlIcon>
     </SlBreadcrumbItem>
   </SlBreadcrumb>
 );
@@ -200,7 +200,7 @@ Dropdown menus can be placed in a prefix or suffix slot to provide additional op
     Web Design
     <sl-dropdown slot="suffix">
       <sl-button slot="trigger" size="small" circle>
-        <sl-icon label="More options" name="three-dots"></sl-icon>
+        <sl-icon label="More options" name="ellipsis-vertical"></sl-icon>
       </sl-button>
       <sl-menu>
         <sl-menu-item checked>Web Design</sl-menu-item>
@@ -232,7 +232,7 @@ const App = () => (
       Web Design
       <SlDropdown slot="suffix">
         <SlButton slot="trigger" size="small" circle>
-          <SlIcon label="More options" name="three-dots"></SlIcon>
+          <SlIcon label="More options" name="ellipsis-vertical"></SlIcon>
         </SlButton>
         <SlMenu>
           <SlMenuItem checked>Web Design</SlMenuItem>

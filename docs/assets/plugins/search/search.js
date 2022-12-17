@@ -12,7 +12,7 @@
       searchBox.classList.add('search-box');
       searchBox.innerHTML = `
         <sl-input type="search" placeholder="Search" pill>
-          <sl-icon slot="prefix" name="search"></sl-icon>
+          <sl-icon slot="prefix" name="magnifying-glass-solid"></sl-icon>
           <kbd slot="suffix" title="Press / to search">/</kbd>
         </sl-input>
       `;
@@ -65,7 +65,7 @@
             size="large"
             clearable
           >
-            <sl-icon slot="prefix" name="search"></sl-icon>
+            <sl-icon slot="prefix" name="magnifying-glass-solid"></sl-icon>
           </sl-input>
         </header>
         <div class="site-search__body">

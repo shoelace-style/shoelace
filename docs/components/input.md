@@ -222,18 +222,18 @@ Use the `prefix` and `suffix` slots to add icons.
 
 ```html preview
 <sl-input placeholder="Small" size="small">
-  <sl-icon name="house" slot="prefix"></sl-icon>
-  <sl-icon name="chat" slot="suffix"></sl-icon>
+  <sl-icon name="home" slot="prefix"></sl-icon>
+  <sl-icon name="chat-bubble-bottom-center-text" slot="suffix"></sl-icon>
 </sl-input>
 <br />
 <sl-input placeholder="Medium" size="medium">
-  <sl-icon name="house" slot="prefix"></sl-icon>
-  <sl-icon name="chat" slot="suffix"></sl-icon>
+  <sl-icon name="home" slot="prefix"></sl-icon>
+  <sl-icon name="chat-bubble-bottom-center-text" slot="suffix"></sl-icon>
 </sl-input>
 <br />
 <sl-input placeholder="Large" size="large">
-  <sl-icon name="house" slot="prefix"></sl-icon>
-  <sl-icon name="chat" slot="suffix"></sl-icon>
+  <sl-icon name="home" slot="prefix"></sl-icon>
+  <sl-icon name="chat-bubble-bottom-center-text" slot="suffix"></sl-icon>
 </sl-input>
 ```
 
@@ -243,18 +243,18 @@ import { SlIcon, SlInput } from '@shoelace-style/shoelace/dist/react';
 const App = () => (
   <>
     <SlInput placeholder="Small" size="small">
-      <SlIcon name="house" slot="prefix"></SlIcon>
-      <SlIcon name="chat" slot="suffix"></SlIcon>
+      <SlIcon name="home" slot="prefix"></SlIcon>
+      <SlIcon name="chat-bubble-bottom-center-text" slot="suffix"></SlIcon>
     </SlInput>
     <br />
     <SlInput placeholder="Medium" size="medium">
-      <SlIcon name="house" slot="prefix"></SlIcon>
-      <SlIcon name="chat" slot="suffix"></SlIcon>
+      <SlIcon name="home" slot="prefix"></SlIcon>
+      <SlIcon name="chat-bubble-bottom-center-text" slot="suffix"></SlIcon>
     </SlInput>
     <br />
     <SlInput placeholder="Large" size="large">
-      <SlIcon name="house" slot="prefix"></SlIcon>
-      <SlIcon name="chat" slot="suffix"></SlIcon>
+      <SlIcon name="home" slot="prefix"></SlIcon>
+      <SlIcon name="chat-bubble-bottom-center-text" slot="suffix"></SlIcon>
     </SlInput>
   </>
 );

@@ -128,7 +128,7 @@ Headers can be used to display titles and more.
 <sl-card class="card-header">
   <div slot="header">
     Header Title
-    <sl-icon-button name="gear" label="Settings"></sl-icon-button>
+    <sl-icon-button name="cog-6-tooth" label="Settings"></sl-icon-button>
   </div>
 
   This card has a header. You can put all sorts of things in it!
@@ -183,7 +183,7 @@ const App = () => (
     <SlCard className="card-header">
       <div slot="header">
         Header Title
-        <SlIconButton name="gear"></SlIconButton>
+        <SlIconButton name="cog-6-tooth"></SlIconButton>
       </div>
       This card has a header. You can put all sorts of things in it!
     </SlCard>

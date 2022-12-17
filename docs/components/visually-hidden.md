@@ -23,7 +23,7 @@ In this example, the link will open a new window. Screen readers will announce "
 ```html preview
 <a href="https://example.com/" target="_blank">
   Visit External Page
-  <sl-icon name="box-arrow-up-right"></sl-icon>
+  <sl-icon name="arrow-top-right-on-square"></sl-icon>
   <sl-visually-hidden>opens in a new window</sl-visually-hidden>
 </a>
 ```

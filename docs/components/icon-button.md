@@ -5,13 +5,13 @@
 For a full list of icons that come bundled with Shoelace, refer to the [icon component](/components/icon).
 
 ```html preview
-<sl-icon-button name="gear" label="Settings"></sl-icon-button>
+<sl-icon-button name="cog-6-tooth" label="Settings"></sl-icon-button>
 ```
 
 ```jsx react
 import { SlIconButton } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => <SlIconButton name="gear" label="Settings" />;
+const App = () => <SlIconButton name="cog-6-tooth" label="Settings" />;
 ```
 
 ## Examples
@@ -44,9 +44,9 @@ Icon buttons are designed to have a uniform appearance, so their color is not in
 
 ```html preview
 <div class="icon-button-color">
-  <sl-icon-button name="type-bold" label="Bold"></sl-icon-button>
-  <sl-icon-button name="type-italic" label="Italic"></sl-icon-button>
-  <sl-icon-button name="type-underline" label="Underline"></sl-icon-button>
+  <sl-icon-button name="at-symbol" label="Bold"></sl-icon-button>
+  <sl-icon-button name="bolt" label="Italic"></sl-icon-button>
+  <sl-icon-button name="no-symbol" label="Underline"></sl-icon-button>
 </div>
 
 <style>
@@ -86,9 +86,9 @@ const css = `
 const App = () => (
   <>
     <div className="icon-button-color">
-      <SlIconButton name="type-bold" label="Bold" />
-      <SlIconButton name="type-italic" label="Italic" />
-      <SlIconButton name="type-underline" label="Underline" />
+      <SlIconButton name="at-symbol" label="Bold" />
+      <SlIconButton name="bolt" label="Italic" />
+      <SlIconButton name="no-symbol" label="Underline" />
     </div>
 
     <style>{css}</style>
@@ -101,13 +101,13 @@ const App = () => (
 Use the `href` attribute to convert the button to a link.
 
 ```html preview
-<sl-icon-button name="gear" label="Settings" href="https://example.com" target="_blank"></sl-icon-button>
+<sl-icon-button name="cog-6-tooth" label="Settings" href="https://example.com" target="_blank"></sl-icon-button>
 ```
 
 ```jsx react
 import { SlIconButton } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => <SlIconButton name="gear" label="Settings" href="https://example.com" target="_blank" />;
+const App = () => <SlIconButton name="cog-6-tooth" label="Settings" href="https://example.com" target="_blank" />;
 ```
 
 ### Icon Button with Tooltip
@@ -116,7 +116,7 @@ Wrap a tooltip around an icon button to provide contextual information to the us
 
 ```html preview
 <sl-tooltip content="Settings">
-  <sl-icon-button name="gear" label="Settings"></sl-icon-button>
+  <sl-icon-button name="cog-6-tooth" label="Settings"></sl-icon-button>
 </sl-tooltip>
 ```
 
@@ -125,7 +125,7 @@ import { SlIconButton, SlTooltip } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlTooltip content="Settings">
-    <SlIconButton name="gear" label="Settings" />
+    <SlIconButton name="cog-6-tooth" label="Settings" />
   </SlTooltip>
 );
 ```
@@ -135,13 +135,13 @@ const App = () => (
 Use the `disabled` attribute to disable the icon button.
 
 ```html preview
-<sl-icon-button name="gear" label="Settings" disabled></sl-icon-button>
+<sl-icon-button name="cog-6-tooth" label="Settings" disabled></sl-icon-button>
 ```
 
 ```jsx react
 import { SlIconButton } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => <SlIconButton name="gear" label="Settings" disabled />;
+const App = () => <SlIconButton name="cog-6-tooth" label="Settings" disabled />;
 ```
 
 [component-metadata:sl-icon-button]

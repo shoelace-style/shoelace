@@ -69,11 +69,11 @@ When no image or initials are set, an icon will be shown. The default avatar sho
 
 ```html preview
 <sl-avatar label="Avatar with an image icon">
-  <sl-icon slot="icon" name="image"></sl-icon>
+  <sl-icon slot="icon" name="photo"></sl-icon>
 </sl-avatar>
 
 <sl-avatar label="Avatar with an archive icon">
-  <sl-icon slot="icon" name="archive"></sl-icon>
+  <sl-icon slot="icon" name="archive-box"></sl-icon>
 </sl-avatar>
 
 <sl-avatar label="Avatar with a briefcase icon">
@@ -87,11 +87,11 @@ import { SlAvatar, SlIcon } from '@shoelace-style/shoelace/dist/react';
 const App = () => (
   <>
     <SlAvatar label="Avatar with an image icon">
-      <SlIcon slot="icon" name="image" />
+      <SlIcon slot="icon" name="photo" />
     </SlAvatar>
 
     <SlAvatar label="Avatar with an archive icon">
-      <SlIcon slot="icon" name="archive" />
+      <SlIcon slot="icon" name="archive-box" />
     </SlAvatar>
 
     <SlAvatar label="Avatar with a briefcase icon">

@@ -344,7 +344,7 @@ The header shows a functional close button by default. You can use the `header-a
 
 ```html preview
 <sl-drawer label="Drawer" class="drawer-header-actions">
-  <sl-icon-button class="new-window" slot="header-actions" name="box-arrow-up-right"></sl-icon-button>
+  <sl-icon-button class="new-window" slot="header-actions" name="arrow-top-right-on-square"></sl-icon-button>
   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
   <sl-button slot="footer" variant="primary">Close</sl-button>
 </sl-drawer>
@@ -373,7 +373,11 @@ const App = () => {
   return (
     <>
       <SlDrawer label="Drawer" open={open} onSlAfterHide={() => setOpen(false)}>
-        <SlIconButton slot="header-actions" name="box-arrow-up-right" onClick={() => window.open(location.href)} />
+        <SlIconButton
+          slot="header-actions"
+          name="arrow-top-right-on-square"
+          onClick={() => window.open(location.href)}
+        />
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
           Close

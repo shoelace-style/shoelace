@@ -46,7 +46,7 @@ export default class SlCard extends ShoelaceElement {
         })}
       >
         <div part="image" class="card__image">
-          <slot name="image"></slot>
+          <slot name="photo"></slot>
         </div>
 
         <div part="header" class="card__header">

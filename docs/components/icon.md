@@ -2,13 +2,13 @@
 
 [component-header:sl-icon]
 
-Shoelace comes bundled with over 1,500 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. These icons are part of the `default` icon library. If you prefer, you can register [custom icon libraries](#icon-libraries) as well.
+Teamshare's version of Shoelace comes bundled with 292 icons courtesy of [Heroicons](https://heroicons.com/). These icons are part of the `default` icon library. If you prefer, you can register [custom icon libraries](#icon-libraries) as well.
 
 ?> Depending on how you're loading Shoelace, you may need to copy icon assets and/or [set the base path](getting-started/installation#setting-the-base-path) so Shoelace knows where to load them from. Otherwise, icons may not appear and you'll see 404 Not Found errors in the dev console.
 
 ## Default Icons
 
-All available icons in the `default` icon library are shown below. Click or tap on any icon to copy its name, then you can use it in your HTML like this.
+All available icons in the `default` icon library (Heroicons) are shown below. Click or tap on any icon to copy its name, then you can use it in your HTML like this.
 
 ```html
 <sl-icon name="icon-name-here"></sl-icon>
@@ -17,7 +17,7 @@ All available icons in the `default` icon library are shown below. Click or tap 
 <div class="icon-search">
   <div class="icon-search-controls">
     <sl-input placeholder="Search Icons" clearable>
-      <sl-icon slot="prefix" name="search"></sl-icon>
+      <sl-icon slot="prefix" name="magnifying-glass"></sl-icon>
     </sl-input>
     <sl-select value="outline">
       <sl-menu-item value="outline">Outlined</sl-menu-item>
@@ -38,25 +38,25 @@ Icons inherit their color from the current text color. Thus, you can set the `co
 ```html preview
 <div style="color: #4a90e2;">
   <sl-icon name="exclamation-triangle"></sl-icon>
-  <sl-icon name="archive"></sl-icon>
-  <sl-icon name="battery-charging"></sl-icon>
+  <sl-icon name="archive-box"></sl-icon>
+  <sl-icon name="battery-50-solid"></sl-icon>
   <sl-icon name="bell"></sl-icon>
 </div>
 <div style="color: #9013fe;">
   <sl-icon name="clock"></sl-icon>
   <sl-icon name="cloud"></sl-icon>
-  <sl-icon name="download"></sl-icon>
-  <sl-icon name="file-earmark"></sl-icon>
+  <sl-icon name="arrow-down-tray-solid"></sl-icon>
+  <sl-icon name="folder"></sl-icon>
 </div>
 <div style="color: #417505;">
   <sl-icon name="flag"></sl-icon>
   <sl-icon name="heart"></sl-icon>
-  <sl-icon name="image"></sl-icon>
-  <sl-icon name="lightning"></sl-icon>
+  <sl-icon name="photo"></sl-icon>
+  <sl-icon name="bolt"></sl-icon>
 </div>
 <div style="color: #f5a623;">
-  <sl-icon name="mic"></sl-icon>
-  <sl-icon name="search"></sl-icon>
+  <sl-icon name="microphone"></sl-icon>
+  <sl-icon name="magnifying-glass-solid"></sl-icon>
   <sl-icon name="star"></sl-icon>
   <sl-icon name="trash"></sl-icon>
 </div>
@@ -69,25 +69,25 @@ const App = () => (
   <>
     <div style={{ color: '#4a90e2' }}>
       <SlIcon name="exclamation-triangle"></SlIcon>
-      <SlIcon name="archive"></SlIcon>
-      <SlIcon name="battery-charging"></SlIcon>
+      <SlIcon name="archive-box"></SlIcon>
+      <SlIcon name="battery-50-solid"></SlIcon>
       <SlIcon name="bell"></SlIcon>
     </div>
     <div style={{ color: '#9013fe' }}>
       <SlIcon name="clock"></SlIcon>
       <SlIcon name="cloud"></SlIcon>
-      <SlIcon name="download"></SlIcon>
-      <SlIcon name="file-earmark"></SlIcon>
+      <SlIcon name="arrow-down-tray-solid"></SlIcon>
+      <SlIcon name="folder"></SlIcon>
     </div>
     <div style={{ color: '#417505' }}>
       <SlIcon name="flag"></SlIcon>
       <SlIcon name="heart"></SlIcon>
-      <SlIcon name="image"></SlIcon>
-      <SlIcon name="lightning"></SlIcon>
+      <SlIcon name="photo"></SlIcon>
+      <SlIcon name="bolt"></SlIcon>
     </div>
     <div style={{ color: '#f5a623' }}>
-      <SlIcon name="mic"></SlIcon>
-      <SlIcon name="search"></SlIcon>
+      <SlIcon name="microphone"></SlIcon>
+      <SlIcon name="magnifying-glass-solid"></SlIcon>
       <SlIcon name="star"></SlIcon>
       <SlIcon name="trash"></SlIcon>
     </div>
@@ -102,19 +102,19 @@ Icons are sized relative to the current font size. To change their size, set the
 ```html preview
 <div style="font-size: 32px;">
   <sl-icon name="exclamation-triangle"></sl-icon>
-  <sl-icon name="archive"></sl-icon>
-  <sl-icon name="battery-charging"></sl-icon>
+  <sl-icon name="archive-box"></sl-icon>
+  <sl-icon name="battery-50-solid"></sl-icon>
   <sl-icon name="bell"></sl-icon>
   <sl-icon name="clock"></sl-icon>
   <sl-icon name="cloud"></sl-icon>
-  <sl-icon name="download"></sl-icon>
-  <sl-icon name="file-earmark"></sl-icon>
+  <sl-icon name="arrow-down-tray-solid"></sl-icon>
+  <sl-icon name="folder"></sl-icon>
   <sl-icon name="flag"></sl-icon>
   <sl-icon name="heart"></sl-icon>
-  <sl-icon name="image"></sl-icon>
-  <sl-icon name="lightning"></sl-icon>
-  <sl-icon name="mic"></sl-icon>
-  <sl-icon name="search"></sl-icon>
+  <sl-icon name="photo"></sl-icon>
+  <sl-icon name="bolt"></sl-icon>
+  <sl-icon name="microphone"></sl-icon>
+  <sl-icon name="magnifying-glass-solid"></sl-icon>
   <sl-icon name="star"></sl-icon>
   <sl-icon name="trash"></sl-icon>
 </div>
@@ -126,19 +126,19 @@ import { SlIcon } from '@shoelace-style/shoelace/dist/react';
 const App = () => (
   <div style={{ fontSize: '32px' }}>
     <SlIcon name="exclamation-triangle" />
-    <SlIcon name="archive" />
-    <SlIcon name="battery-charging" />
+    <SlIcon name="archive-box" />
+    <SlIcon name="battery-50-solid" />
     <SlIcon name="bell" />
     <SlIcon name="clock" />
     <SlIcon name="cloud" />
-    <SlIcon name="download" />
-    <SlIcon name="file-earmark" />
+    <SlIcon name="arrow-down-tray-solid" />
+    <SlIcon name="folder" />
     <SlIcon name="flag" />
     <SlIcon name="heart" />
-    <SlIcon name="image" />
-    <SlIcon name="lightning" />
-    <SlIcon name="mic" />
-    <SlIcon name="search" />
+    <SlIcon name="photo" />
+    <SlIcon name="bolt" />
+    <SlIcon name="microphone" />
+    <SlIcon name="magnifying-glass-solid" />
     <SlIcon name="star" />
     <SlIcon name="trash" />
   </div>
@@ -150,13 +150,13 @@ const App = () => (
 For non-decorative icons, use the `label` attribute to announce it to assistive devices.
 
 ```html preview
-<sl-icon name="star-fill" label="Add to favorites"></sl-icon>
+<sl-icon name="star-solid" label="Add to favorites"></sl-icon>
 ```
 
 ```jsx react
 import { SlIcon } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => <SlIcon name="star-fill" label="Add to favorites" />;
+const App = () => <SlIcon name="star-solid" label="Add to favorites" />;
 ```
 
 ### Custom Icons
@@ -207,6 +207,7 @@ If an icon is used before registration occurs, it will be empty initially but sh
 
 The following examples demonstrate how to register a number of popular, open source icon libraries via CDN. Feel free to adapt the code as you see fit to use your own origin or naming conventions.
 
+<!--
 ### Boxicons
 
 This will register the [Boxicons](https://boxicons.com/) library using the jsDelivr CDN. This library has three variations: regular (`bx-*`), solid (`bxs-*`), and logos (`bxl-*`). A mutator function is required to set the SVG's `fill` to `currentColor`.
@@ -449,7 +450,7 @@ Icons in this library are licensed under the [MIT License](https://github.com/mi
   <sl-icon library="jam" name="picture-f"></sl-icon>
   <sl-icon library="jam" name="set-square-f"></sl-icon>
 </div>
-```
+``` -->
 
 ### Material Icons
 
@@ -494,6 +495,7 @@ Icons in this library are licensed under the [Apache 2.0 License](https://github
 </div>
 ```
 
+<!--
 ### Remix Icon
 
 This will register the [Remix Icon](https://remixicon.com/) library using the jsDelivr CDN. This library groups icons by categories, so the name must include the category and icon separated by a slash, as well as the `-line` or `-fill` suffix as needed. A mutator function is required to set the SVG's `fill` to `currentColor`.
@@ -599,7 +601,7 @@ Icons in this library are licensed under the [Apache 2.0 License](https://github
   <sl-icon library="unicons" name="rocket-s"></sl-icon>
   <sl-icon library="unicons" name="star-s"></sl-icon>
 </div>
-```
+``` -->
 
 ### Customizing the Default Library
 
@@ -758,17 +760,38 @@ If you want to change the icons Shoelace uses internally, you can register an ic
     transition: var(--sl-transition-medium) all;
   }
 
+  /* REMOVE */
+  /* .icon-list-item svg {
+    fill: none;
+    stroke: currentColor;
+  } */
+
   .icon-list-item:hover {
     background-color: var(--sl-color-primary-50);
     color: var(--sl-color-primary-600);
   }
 
-  .icon-list[data-type="outline"] .icon-list-item[data-name$="-fill"] {
+  .icon-list[data-type="outline"] .icon-list-item:where([data-name$="-solid"], [data-name$="-mini"]) {
     display: none;
   }
 
-  .icon-list[data-type="fill"] .icon-list-item:not([data-name$="-fill"]) {
+  .icon-list[data-type="fill"] .icon-list-item:not([data-name$="-solid"]):not([data-name$="-mini"]) {
     display: none;
+  }
+
+  .icon-list-item:where([data-name$="-solid"], [data-name$="-mini"]) svg {
+    stroke: none;
+    fill: currentColor;
+  }
+
+  .icon-list-item:not([data-name$="-solid"]):not([data-name$="-mini"]) svg {
+    stroke: currentColor;
+    fill: none;
+  }
+
+  .icon-list-item:where([data-name$="-mini"]) svg {
+    width: 1rem;
+    height: 1rem;
   }
 
   .icon-copy-input {

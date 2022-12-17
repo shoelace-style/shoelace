@@ -93,7 +93,7 @@ Use the default slot to show a label inside the progress ring.
 
 <br />
 
-<sl-button circle><sl-icon name="dash" label="Decrease"></sl-icon></sl-button>
+<sl-button circle><sl-icon name="minus" label="Decrease"></sl-icon></sl-button>
 <sl-button circle><sl-icon name="plus" label="Increase"></sl-icon></sl-button>
 
 <script>
@@ -138,7 +138,7 @@ const App = () => {
       <br />
 
       <SlButton circle onClick={() => adjustValue(-10)}>
-        <SlIcon name="dash" label="Decrease" />
+        <SlIcon name="minus" label="Decrease" />
       </SlButton>
 
       <SlButton circle onClick={() => adjustValue(10)}>

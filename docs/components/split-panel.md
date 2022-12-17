@@ -587,7 +587,7 @@ You can target the `divider` part to apply CSS properties to the divider. To add
 
 ```html preview
 <sl-split-panel style="--divider-width: 20px;">
-  <sl-icon slot="handle" name="grip-vertical"></sl-icon>
+  <sl-icon slot="handle" name="grip-vertical" library="bootstrap" library="bootstrap"></sl-icon>
   <div
     slot="start"
     style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
@@ -608,7 +608,7 @@ import { SlSplitPanel, SlIcon } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlSplitPanel style={{ '--divider-width': '20px' }}>
-    <SlIcon slot="handle" name="grip-vertical" />
+    <SlIcon slot="handle" name="grip-vertical" library="bootstrap" library="bootstrap" />
     <div
       slot="start"
       style={{
@@ -642,7 +642,7 @@ Here's a more elaborate example that changes the divider's color and width and a
 ```html preview
 <div class="split-panel-handle">
   <sl-split-panel>
-    <sl-icon slot="handle" name="grip-vertical"></sl-icon>
+    <sl-icon slot="handle" name="grip-vertical" library="bootstrap"></sl-icon>
     <div
       slot="start"
       style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
@@ -720,7 +720,7 @@ const App = () => (
   <>
     <div className="split-panel-handle">
       <SlSplitPanel>
-        <SlIcon slot="handle" name="grip-vertical" />
+        <SlIcon slot="handle" name="grip-vertical" library="bootstrap" />
         <div
           slot="start"
           style={{

@@ -144,7 +144,7 @@ export default class SlImageComparer extends ShoelaceElement {
             tabindex="0"
           >
             <slot name="handle-icon">
-              <sl-icon part="handle-icon" library="system" name="grip-vertical"></sl-icon>
+              <sl-icon part="handle-icon" library="system" name="grip-vertical" library="bootstrap"></sl-icon>
             </slot>
           </div>
         </div>

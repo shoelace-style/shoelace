@@ -103,7 +103,7 @@ Add content to the start and end of menu items using the `prefix` and `suffix` s
 ```html preview
 <sl-menu style="max-width: 200px;">
   <sl-menu-item>
-    <sl-icon slot="prefix" name="house"></sl-icon>
+    <sl-icon slot="prefix" name="home"></sl-icon>
     Home
   </sl-menu-item>
 
@@ -116,7 +116,7 @@ Add content to the start and end of menu items using the `prefix` and `suffix` s
   <sl-divider></sl-divider>
 
   <sl-menu-item>
-    <sl-icon slot="prefix" name="gear"></sl-icon>
+    <sl-icon slot="prefix" name="cog-6-tooth"></sl-icon>
     Settings
   </sl-menu-item>
 </sl-menu>
@@ -128,7 +128,7 @@ import { SlBadge, SlDivider, SlIcon, SlMenu, SlMenuItem } from '@shoelace-style/
 const App = () => (
   <SlMenu style={{ maxWidth: '200px' }}>
     <SlMenuItem>
-      <SlIcon slot="prefix" name="house" />
+      <SlIcon slot="prefix" name="home" />
       Home
     </SlMenuItem>
 
@@ -143,7 +143,7 @@ const App = () => (
     <SlDivider />
 
     <SlMenuItem>
-      <SlIcon slot="prefix" name="gear" />
+      <SlIcon slot="prefix" name="cog-6-tooth" />
       Settings
     </SlMenuItem>
   </SlMenu>

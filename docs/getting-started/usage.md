@@ -77,7 +77,7 @@ Some components also have _named_ slots. A named slot can be populated by adding
 
 ```html
 <sl-button>
-  <sl-icon slot="prefix" name="gear"></sl-icon>
+  <sl-icon slot="prefix" name="cog-6-tooth"></sl-icon>
   Settings
 </sl-button>
 ```

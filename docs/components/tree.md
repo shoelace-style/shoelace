@@ -293,8 +293,8 @@ Use the `expand-icon` and `collapse-icon` slots to change the expand and collaps
 
 ```html preview
 <sl-tree>
-  <sl-icon name="plus-square" slot="expand-icon"></sl-icon>
-  <sl-icon name="dash-square" slot="collapse-icon"></sl-icon>
+  <sl-icon name="plus" slot="expand-icon"></sl-icon>
+  <sl-icon name="minus" slot="collapse-icon"></sl-icon>
 
   <sl-tree-item>
     Deciduous
@@ -330,8 +330,8 @@ import { SlTree, SlTreeItem } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlTree>
-    <SlIcon name="plus-square" slot="expand-icon"></SlIcon>
-    <SlIcon name="dash-square" slot="collapse-icon"></SlIcon>
+    <SlIcon name="plus" slot="expand-icon"></SlIcon>
+    <SlIcon name="minus" slot="collapse-icon"></SlIcon>
 
     <SlTreeItem>
       Deciduous
@@ -376,15 +376,15 @@ Decorative icons can be used before labels to provide hints for each node.
       <sl-icon name="folder"> </sl-icon>
       Photos
       <sl-tree-item>
-        <sl-icon name="image"></sl-icon>
+        <sl-icon name="photo"></sl-icon>
         birds.jpg
       </sl-tree-item>
       <sl-tree-item>
-        <sl-icon name="image"></sl-icon>
+        <sl-icon name="photo"></sl-icon>
         kitten.jpg
       </sl-tree-item>
       <sl-tree-item>
-        <sl-icon name="image"></sl-icon>
+        <sl-icon name="photo"></sl-icon>
         puppy.jpg
       </sl-tree-item>
     </sl-tree-item>
@@ -393,15 +393,15 @@ Decorative icons can be used before labels to provide hints for each node.
       <sl-icon name="folder"></sl-icon>
       Writing
       <sl-tree-item>
-        <sl-icon name="file"></sl-icon>
+        <sl-icon name="document-text"></sl-icon>
         draft.txt
       </sl-tree-item>
       <sl-tree-item>
-        <sl-icon name="file-pdf"></sl-icon>
+        <sl-icon name="document-arrow-down"></sl-icon>
         final.pdg
       </sl-tree-item>
       <sl-tree-item>
-        <sl-icon name="file-bar-graph"></sl-icon>
+        <sl-icon name="document-chart-bar"></sl-icon>
         sales.txt
       </sl-tree-item>
     </sl-tree-item>

@@ -443,27 +443,27 @@ Use the `prefix` and `suffix` slots to add icons.
 
 ```html preview
 <sl-select placeholder="Small" size="small">
-  <sl-icon name="house" slot="prefix"></sl-icon>
+  <sl-icon name="home" slot="prefix"></sl-icon>
   <sl-menu-item value="option-1">Option 1</sl-menu-item>
   <sl-menu-item value="option-2">Option 2</sl-menu-item>
   <sl-menu-item value="option-3">Option 3</sl-menu-item>
-  <sl-icon name="chat" slot="suffix"></sl-icon>
+  <sl-icon name="chat-bubble-bottom-center-text" slot="suffix"></sl-icon>
 </sl-select>
 <br />
 <sl-select placeholder="Medium" size="medium">
-  <sl-icon name="house" slot="prefix"></sl-icon>
+  <sl-icon name="home" slot="prefix"></sl-icon>
   <sl-menu-item value="option-1">Option 1</sl-menu-item>
   <sl-menu-item value="option-2">Option 2</sl-menu-item>
   <sl-menu-item value="option-3">Option 3</sl-menu-item>
-  <sl-icon name="chat" slot="suffix"></sl-icon>
+  <sl-icon name="chat-bubble-bottom-center-text" slot="suffix"></sl-icon>
 </sl-select>
 <br />
 <sl-select placeholder="Large" size="large">
-  <sl-icon name="house" slot="prefix"></sl-icon>
+  <sl-icon name="home" slot="prefix"></sl-icon>
   <sl-menu-item value="option-1">Option 1</sl-menu-item>
   <sl-menu-item value="option-2">Option 2</sl-menu-item>
   <sl-menu-item value="option-3">Option 3</sl-menu-item>
-  <sl-icon name="chat" slot="suffix"></sl-icon>
+  <sl-icon name="chat-bubble-bottom-center-text" slot="suffix"></sl-icon>
 </sl-select>
 ```
 
@@ -473,27 +473,27 @@ import { SlIcon, SlMenuItem, SlSelect } from '@shoelace-style/shoelace/dist/reac
 const App = () => (
   <>
     <SlSelect placeholder="Small" size="small">
-      <SlIcon name="house" slot="prefix"></SlIcon>
+      <SlIcon name="home" slot="prefix"></SlIcon>
       <SlMenuItem value="option-1">Option 1</SlMenuItem>
       <SlMenuItem value="option-2">Option 2</SlMenuItem>
       <SlMenuItem value="option-3">Option 3</SlMenuItem>
-      <SlIcon name="chat" slot="suffix"></SlIcon>
+      <SlIcon name="chat-bubble-bottom-center-text" slot="suffix"></SlIcon>
     </SlSelect>
     <br />
     <SlSelect placeholder="Medium" size="medium">
-      <SlIcon name="house" slot="prefix"></SlIcon>
+      <SlIcon name="home" slot="prefix"></SlIcon>
       <SlMenuItem value="option-1">Option 1</SlMenuItem>
       <SlMenuItem value="option-2">Option 2</SlMenuItem>
       <SlMenuItem value="option-3">Option 3</SlMenuItem>
-      <SlIcon name="chat" slot="suffix"></SlIcon>
+      <SlIcon name="chat-bubble-bottom-center-text" slot="suffix"></SlIcon>
     </SlSelect>
     <br />
     <SlSelect placeholder="Large" size="large">
-      <SlIcon name="house" slot="prefix"></SlIcon>
+      <SlIcon name="home" slot="prefix"></SlIcon>
       <SlMenuItem value="option-1">Option 1</SlMenuItem>
       <SlMenuItem value="option-2">Option 2</SlMenuItem>
       <SlMenuItem value="option-3">Option 3</SlMenuItem>
-      <SlIcon name="chat" slot="suffix"></SlIcon>
+      <SlIcon name="chat-bubble-bottom-center-text" slot="suffix"></SlIcon>
     </SlSelect>
   </>
 );

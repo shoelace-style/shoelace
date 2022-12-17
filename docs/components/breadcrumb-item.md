@@ -5,7 +5,7 @@
 ```html preview
 <sl-breadcrumb>
   <sl-breadcrumb-item>
-    <sl-icon slot="prefix" name="house"></sl-icon>
+    <sl-icon slot="prefix" name="home"></sl-icon>
     Home
   </sl-breadcrumb-item>
   <sl-breadcrumb-item>Clothing</sl-breadcrumb-item>
@@ -19,7 +19,7 @@ import { SlBreadcrumb, SlBreadcrumbItem, SlIcon } from '@shoelace-style/shoelace
 const App = () => (
   <SlBreadcrumb>
     <SlBreadcrumbItem>
-      <SlIcon slot="prefix" name="house"></SlIcon>
+      <SlIcon slot="prefix" name="home"></SlIcon>
       Home
     </SlBreadcrumbItem>
     <SlBreadcrumbItem>Clothing</SlBreadcrumbItem>

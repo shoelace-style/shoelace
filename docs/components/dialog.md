@@ -157,7 +157,7 @@ The header shows a functional close button by default. You can use the `header-a
 
 ```html preview
 <sl-dialog label="Dialog" class="dialog-header-actions">
-  <sl-icon-button class="new-window" slot="header-actions" name="box-arrow-up-right"></sl-icon-button>
+  <sl-icon-button class="new-window" slot="header-actions" name="arrow-top-right-on-square"></sl-icon-button>
   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
   <sl-button slot="footer" variant="primary">Close</sl-button>
 </sl-dialog>
@@ -189,7 +189,7 @@ const App = () => {
         <SlIconButton
           class="new-window"
           slot="header-actions"
-          name="box-arrow-up-right"
+          name="arrow-top-right-on-square"
           onClick={() => window.open(location.href)}
         />
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.

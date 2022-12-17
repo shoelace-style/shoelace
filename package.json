@@ -43,7 +43,7 @@
     "start": "node scripts/build.js --bundle --serve",
     "build": "node scripts/build.js --bundle --types --copydir \"docs/dist\"",
     "verify": "npm run prettier:check && npm run lint && npm run build && npm run test",
-    "prepublishOnly": "npm run verify",
+    "prepublishOnly": "npm run prettier:check && npm run lint && npm run build",
     "prepare": "npm run build",
     "prettier": "prettier --write --loglevel warn .",
     "prettier:check": "prettier --check --loglevel warn .",
@@ -83,7 +83,6 @@
     "@web/test-runner": "^0.15.0",
     "@web/test-runner-commands": "^0.6.5",
     "@web/test-runner-playwright": "^0.9.0",
-    "bootstrap-icons": "^1.10.2",
     "browser-sync": "^2.27.10",
     "cem-plugin-vs-code-custom-data-generator": "^1.2.1",
     "chalk": "^5.1.2",
@@ -104,6 +103,7 @@
     "front-matter": "^4.0.2",
     "get-port": "^6.1.2",
     "globby": "^13.1.2",
+    "heroicons": "^2.0.13",
     "husky": "^8.0.2",
     "jsonata": "^1.8.6",
     "lint-staged": "^13.0.3",
@@ -126,8 +126,5 @@
       "eslint --max-warnings 0 --cache --fix",
       "prettier --write"
     ]
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
   }
 }

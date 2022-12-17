@@ -384,34 +384,34 @@ Create interactive toolbars with button groups.
 <div class="button-group-toolbar">
   <sl-button-group label="History">
     <sl-tooltip content="Undo">
-      <sl-button><sl-icon name="arrow-counterclockwise" label="Undo"></sl-icon></sl-button>
+      <sl-button><sl-icon name="arrow-uturn-left" label="Undo"></sl-icon></sl-button>
     </sl-tooltip>
     <sl-tooltip content="Redo">
-      <sl-button><sl-icon name="arrow-clockwise" label="Redo"></sl-icon></sl-button>
+      <sl-button><sl-icon name="arrow-uturn-right" label="Redo"></sl-icon></sl-button>
     </sl-tooltip>
   </sl-button-group>
 
   <sl-button-group label="Formatting">
     <sl-tooltip content="Bold">
-      <sl-button><sl-icon name="type-bold" label="Bold"></sl-icon></sl-button>
+      <sl-button><sl-icon name="at-symbol" label="Bold"></sl-icon></sl-button>
     </sl-tooltip>
     <sl-tooltip content="Italic">
-      <sl-button><sl-icon name="type-italic" label="Italic"></sl-icon></sl-button>
+      <sl-button><sl-icon name="bolt" label="Italic"></sl-icon></sl-button>
     </sl-tooltip>
     <sl-tooltip content="Underline">
-      <sl-button><sl-icon name="type-underline" label="Underline"></sl-icon></sl-button>
+      <sl-button><sl-icon name="no-symbol" label="Underline"></sl-icon></sl-button>
     </sl-tooltip>
   </sl-button-group>
 
   <sl-button-group label="Alignment">
     <sl-tooltip content="Align Left">
-      <sl-button><sl-icon name="justify-left" label="Align Left"></sl-icon></sl-button>
+      <sl-button><sl-icon name="bars-3-bottom-left" label="Align Left"></sl-icon></sl-button>
     </sl-tooltip>
     <sl-tooltip content="Align Center">
-      <sl-button><sl-icon name="justify" label="Align Center"></sl-icon></sl-button>
+      <sl-button><sl-icon name="bars-3" label="Align Center"></sl-icon></sl-button>
     </sl-tooltip>
     <sl-tooltip content="Align Right">
-      <sl-button><sl-icon name="justify-right" label="Align Right"></sl-icon></sl-button>
+      <sl-button><sl-icon name="bars-3-bottom-right" label="Align Right"></sl-icon></sl-button>
     </sl-tooltip>
   </sl-button-group>
 </div>
@@ -438,12 +438,12 @@ const App = () => (
       <SlButtonGroup label="History">
         <SlTooltip content="Undo">
           <SlButton>
-            <SlIcon name="arrow-counterclockwise"></SlIcon>
+            <SlIcon name="arrow-uturn-left"></SlIcon>
           </SlButton>
         </SlTooltip>
         <SlTooltip content="Redo">
           <SlButton>
-            <SlIcon name="arrow-clockwise"></SlIcon>
+            <SlIcon name="arrow-uturn-right"></SlIcon>
           </SlButton>
         </SlTooltip>
       </SlButtonGroup>
@@ -451,17 +451,17 @@ const App = () => (
       <SlButtonGroup label="Formatting">
         <SlTooltip content="Bold">
           <SlButton>
-            <SlIcon name="type-bold"></SlIcon>
+            <SlIcon name="at-symbol"></SlIcon>
           </SlButton>
         </SlTooltip>
         <SlTooltip content="Italic">
           <SlButton>
-            <SlIcon name="type-italic"></SlIcon>
+            <SlIcon name="bolt"></SlIcon>
           </SlButton>
         </SlTooltip>
         <SlTooltip content="Underline">
           <SlButton>
-            <SlIcon name="type-underline"></SlIcon>
+            <SlIcon name="no-symbol"></SlIcon>
           </SlButton>
         </SlTooltip>
       </SlButtonGroup>
@@ -469,17 +469,17 @@ const App = () => (
       <SlButtonGroup label="Alignment">
         <SlTooltip content="Align Left">
           <SlButton>
-            <SlIcon name="justify-left"></SlIcon>
+            <SlIcon name="bars-3-bottom-left"></SlIcon>
           </SlButton>
         </SlTooltip>
         <SlTooltip content="Align Center">
           <SlButton>
-            <SlIcon name="justify"></SlIcon>
+            <SlIcon name="bars-3"></SlIcon>
           </SlButton>
         </SlTooltip>
         <SlTooltip content="Align Right">
           <SlButton>
-            <SlIcon name="justify-right"></SlIcon>
+            <SlIcon name="bars-3-bottom-right"></SlIcon>
           </SlButton>
         </SlTooltip>
       </SlButtonGroup>

@@ -16,7 +16,7 @@
     const version = sessionStorage.getItem('sl-version');
 
     html = html
-      .replace(/@shoelace-style\/shoelace/g, `https://cdn.skypack.dev/@shoelace-style/shoelace@${version}`)
+      .replace(/@shoelace-style\/shoelace/g, `https://cdn.skypack.dev/@teamshares/shoelace@${version}`)
       .replace(/from 'react'/g, `from 'https://cdn.skypack.dev/react@${reactVersion}'`)
       .replace(/from "react"/g, `from "https://cdn.skypack.dev/react@${reactVersion}"`);
 
@@ -125,7 +125,7 @@
               <div class="code-block__preview">
                 ${code.textContent}
                 <div class="code-block__resizer">
-                  <sl-icon name="grip-vertical"></sl-icon>
+                  <sl-icon name="grip-vertical" library="bootstrap" library="bootstrap"></sl-icon>
                 </div>
               </div>
 
@@ -310,7 +310,7 @@
       // HTML templates
       if (!isReact) {
         htmlTemplate =
-          `<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${version}/dist/shoelace.js"></script>\n` +
+          `<script type="module" src="https://cdn.jsdelivr.net/npm/@teamshares/shoelace@${version}/dist/shoelace.js"></script>\n` +
           `\n${htmlExample}`;
         jsTemplate = '';
       }
@@ -321,10 +321,10 @@
         jsTemplate =
           `import React from 'https://cdn.skypack.dev/react@${reactVersion}';\n` +
           `import ReactDOM from 'https://cdn.skypack.dev/react-dom@${reactVersion}';\n` +
-          `import { setBasePath } from 'https://cdn.skypack.dev/@shoelace-style/shoelace@${version}/dist/utilities/base-path';\n` +
+          `import { setBasePath } from 'https://cdn.skypack.dev/@teamshares/shoelace@${version}/dist/utilities/base-path';\n` +
           `\n` +
           `// Set the base path for Shoelace assets\n` +
-          `setBasePath('https://cdn.skypack.dev/@shoelace-style/shoelace@${version}/dist/')\n` +
+          `setBasePath('https://cdn.skypack.dev/@teamshares/shoelace@${version}/dist/')\n` +
           `\n${convertModuleLinks(reactExample)}\n` +
           `\n` +
           `ReactDOM.render(<App />, document.getElementById('root'));`;
@@ -332,7 +332,7 @@
 
       // CSS templates
       cssTemplate =
-        `@import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${version}/dist/themes/${
+        `@import 'https://cdn.jsdelivr.net/npm/@teamshares/shoelace@${version}/dist/themes/${
           isDark ? 'dark' : 'light'
         }.css';\n` +
         '\n' +

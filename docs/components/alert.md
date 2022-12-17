@@ -4,7 +4,7 @@
 
 ```html preview
 <sl-alert open>
-  <sl-icon slot="icon" name="info-circle"></sl-icon>
+  <sl-icon slot="icon" name="information-circle"></sl-icon>
   This is a standard alert. You can customize its content and even the icon.
 </sl-alert>
 ```
@@ -14,7 +14,7 @@ import { SlAlert, SlIcon } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlAlert open>
-    <SlIcon slot="icon" name="info-circle" />
+    <SlIcon slot="icon" name="information-circle" />
     This is a standard alert. You can customize its content and even the icon.
   </SlAlert>
 );
@@ -30,7 +30,7 @@ Set the `variant` attribute to change the alert's variant.
 
 ```html preview
 <sl-alert variant="primary" open>
-  <sl-icon slot="icon" name="info-circle"></sl-icon>
+  <sl-icon slot="icon" name="information-circle"></sl-icon>
   <strong>This is super informative</strong><br />
   You can tell by how pretty the alert is.
 </sl-alert>
@@ -38,7 +38,7 @@ Set the `variant` attribute to change the alert's variant.
 <br />
 
 <sl-alert variant="success" open>
-  <sl-icon slot="icon" name="check2-circle"></sl-icon>
+  <sl-icon slot="icon" name="check-circle"></sl-icon>
   <strong>Your changes have been saved</strong><br />
   You can safely exit the app now.
 </sl-alert>
@@ -46,7 +46,7 @@ Set the `variant` attribute to change the alert's variant.
 <br />
 
 <sl-alert variant="neutral" open>
-  <sl-icon slot="icon" name="gear"></sl-icon>
+  <sl-icon slot="icon" name="cog-6-tooth"></sl-icon>
   <strong>Your settings have been updated</strong><br />
   Settings will take affect on next login.
 </sl-alert>
@@ -62,7 +62,7 @@ Set the `variant` attribute to change the alert's variant.
 <br />
 
 <sl-alert variant="danger" open>
-  <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
+  <sl-icon slot="icon" name="exclamation-circle-solid"></sl-icon>
   <strong>Your account has been deleted</strong><br />
   We're very sorry to see you go!
 </sl-alert>
@@ -74,7 +74,7 @@ import { SlAlert, SlIcon } from '@shoelace-style/shoelace/dist/react';
 const App = () => (
   <>
     <SlAlert variant="primary" open>
-      <SlIcon slot="icon" name="info-circle" />
+      <SlIcon slot="icon" name="information-circle" />
       <strong>This is super informative</strong>
       <br />
       You can tell by how pretty the alert is.
@@ -83,7 +83,7 @@ const App = () => (
     <br />
 
     <SlAlert variant="success" open>
-      <SlIcon slot="icon" name="check2-circle" />
+      <SlIcon slot="icon" name="check-circle" />
       <strong>Your changes have been saved</strong>
       <br />
       You can safely exit the app now.
@@ -92,7 +92,7 @@ const App = () => (
     <br />
 
     <SlAlert variant="neutral" open>
-      <SlIcon slot="icon" name="gear" />
+      <SlIcon slot="icon" name="cog-6-tooth" />
       <strong>Your settings have been updated</strong>
       <br />
       Settings will take affect on next login.
@@ -110,7 +110,7 @@ const App = () => (
     <br />
 
     <SlAlert variant="danger" open>
-      <SlIcon slot="icon" name="exclamation-octagon" />
+      <SlIcon slot="icon" name="exclamation-circle-solid" />
       <strong>Your account has been deleted</strong>
       <br />
       We're very sorry to see you go!
@@ -125,7 +125,7 @@ Add the `closable` attribute to show a close button that will hide the alert.
 
 ```html preview
 <sl-alert variant="primary" open closable class="alert-closable">
-  <sl-icon slot="icon" name="info-circle"></sl-icon>
+  <sl-icon slot="icon" name="information-circle"></sl-icon>
   You can close this alert any time!
 </sl-alert>
 
@@ -151,7 +151,7 @@ const App = () => {
 
   return (
     <SlAlert open={open} closable onSlAfterHide={handleHide}>
-      <SlIcon slot="icon" name="info-circle" />
+      <SlIcon slot="icon" name="information-circle" />
       You can close this alert any time!
     </SlAlert>
   );
@@ -185,7 +185,7 @@ Set the `duration` attribute to automatically hide an alert after a period of ti
   <sl-button variant="primary">Show Alert</sl-button>
 
   <sl-alert variant="primary" duration="3000" closable>
-    <sl-icon slot="icon" name="info-circle"></sl-icon>
+    <sl-icon slot="icon" name="information-circle"></sl-icon>
     This alert will automatically hide itself after three seconds, unless you interact with it.
   </sl-alert>
 </div>
@@ -226,7 +226,7 @@ const App = () => {
         </SlButton>
 
         <SlAlert variant="primary" duration="3000" open={open} closable onSlAfterHide={() => setOpen(false)}>
-          <SlIcon slot="icon" name="info-circle" />
+          <SlIcon slot="icon" name="information-circle" />
           This alert will automatically hide itself after three seconds, unless you interact with it.
         </SlAlert>
       </div>
@@ -252,19 +252,19 @@ You should always use the `closable` attribute so users can dismiss the notifica
   <sl-button variant="danger">Danger</sl-button>
 
   <sl-alert variant="primary" duration="3000" closable>
-    <sl-icon slot="icon" name="info-circle"></sl-icon>
+    <sl-icon slot="icon" name="information-circle"></sl-icon>
     <strong>This is super informative</strong><br />
     You can tell by how pretty the alert is.
   </sl-alert>
 
   <sl-alert variant="success" duration="3000" closable>
-    <sl-icon slot="icon" name="check2-circle"></sl-icon>
+    <sl-icon slot="icon" name="check-circle"></sl-icon>
     <strong>Your changes have been saved</strong><br />
     You can safely exit the app now.
   </sl-alert>
 
   <sl-alert variant="neutral" duration="3000" closable>
-    <sl-icon slot="icon" name="gear"></sl-icon>
+    <sl-icon slot="icon" name="cog-6-tooth"></sl-icon>
     <strong>Your settings have been updated</strong><br />
     Settings will take affect on next login.
   </sl-alert>
@@ -276,7 +276,7 @@ You should always use the `closable` attribute so users can dismiss the notifica
   </sl-alert>
 
   <sl-alert variant="danger" duration="3000" closable>
-    <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
+    <sl-icon slot="icon" name="exclamation-circle-solid"></sl-icon>
     <strong>Your account has been deleted</strong><br />
     We're very sorry to see you go!
   </sl-alert>
@@ -332,21 +332,21 @@ const App = () => {
       </SlButton>
 
       <SlAlert ref={primary} variant="primary" duration="3000" closable>
-        <SlIcon slot="icon" name="info-circle" />
+        <SlIcon slot="icon" name="information-circle" />
         <strong>This is super informative</strong>
         <br />
         You can tell by how pretty the alert is.
       </SlAlert>
 
       <SlAlert ref={success} variant="success" duration="3000" closable>
-        <SlIcon slot="icon" name="check2-circle" />
+        <SlIcon slot="icon" name="check-circle" />
         <strong>Your changes have been saved</strong>
         <br />
         You can safely exit the app now.
       </SlAlert>
 
       <SlAlert ref={neutral} variant="neutral" duration="3000" closable>
-        <SlIcon slot="icon" name="gear" />
+        <SlIcon slot="icon" name="cog-6-tooth" />
         <strong>Your settings have been updated</strong>
         <br />
         Settings will take affect on next login.
@@ -360,7 +360,7 @@ const App = () => {
       </SlAlert>
 
       <SlAlert ref={danger} variant="danger" duration="3000" closable>
-        <SlIcon slot="icon" name="exclamation-octagon" />
+        <SlIcon slot="icon" name="exclamation-circle-solid" />
         <strong>Your account has been deleted</strong>
         <br />
         We're very sorry to see you go!
@@ -392,7 +392,7 @@ For convenience, you can create a utility that emits toast notifications with a 
   }
 
   // Custom function to emit toast notifications
-  function notify(message, variant = 'primary', icon = 'info-circle', duration = 3000) {
+  function notify(message, variant = 'primary', icon = 'information-circle', duration = 3000) {
     const alert = Object.assign(document.createElement('sl-alert'), {
       variant,
       closable: true,

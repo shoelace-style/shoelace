@@ -7,29 +7,33 @@ import copy from 'recursive-copy';
 import { deleteAsync } from 'del';
 import download from 'download';
 import fm from 'front-matter';
-import { readFileSync, mkdirSync } from 'fs';
+import { readFileSync, readdirSync, rename, mkdirSync, fstat } from 'fs';
 import { stat, readFile, writeFile } from 'fs/promises';
 import { globby } from 'globby';
 import path from 'path';
+import { exit } from 'process';
+
+console.log('Make-icons');
 
 const { outdir } = commandLineArgs({ name: 'outdir', type: String });
 const iconDir = path.join(outdir, '/assets/icons');
 
-const iconPackageData = JSON.parse(readFileSync('./node_modules/bootstrap-icons/package.json', 'utf8'));
+const iconPackageData = JSON.parse(readFileSync('./node_modules/heroicons/package.json', 'utf8'));
+
 let numIcons = 0;
 
 (async () => {
   try {
     const version = iconPackageData.version;
-    const srcPath = `./.cache/icons/icons-${version}`;
-    const url = `https://github.com/twbs/icons/archive/v${version}.zip`;
+    console.log('Version:', version);
+    const srcPath = `./.cache/icons/heroicons-${version}`;
+    const url = `https://github.com/teamshares/heroicons/archive/v${version}.zip`;
 
     try {
-      await stat(`${srcPath}/LICENSE.md`);
+      await stat(`${srcPath}/LICENSE`);
       console.log('Generating icons from cache');
     } catch {
-      // Download the source from GitHub (since not everything is published to NPM)
-      console.log(`Downloading and extracting Bootstrap Icons ${version} 📦`);
+      console.log(`Downloading and extracting Heroicons ${version} from GitHub 📦`);
       await download(url, './.cache/icons', { extract: true });
     }
 
@@ -38,30 +42,43 @@ let numIcons = 0;
     await deleteAsync([iconDir]);
     mkdirSync(iconDir, { recursive: true });
     await Promise.all([
-      copy(`${srcPath}/icons`, iconDir),
-      copy(`${srcPath}/LICENSE.md`, path.join(iconDir, 'LICENSE.md')),
-      copy(`${srcPath}/bootstrap-icons.svg`, './docs/assets/icons/sprite.svg', { overwrite: true })
+      copy(`${srcPath}/flattened`, iconDir),
+      copy(`${srcPath}/LICENSE`, path.join(iconDir, 'LICENSE.md')),
+      copy(`${srcPath}/heroicons-sprite.svg`, './docs/assets/icons/sprite.svg', { overwrite: true }),
+      copy(`${srcPath}/data/tags.js`, './docs/assets/icons/tags.js', { overwrite: true })
     ]);
 
     // Generate metadata
     console.log(`Generating icon metadata`);
-    const files = await globby(`${srcPath}/docs/content/icons/**/*.md`);
-
-    const metadata = await Promise.all(
-      files.map(async file => {
-        const name = path.basename(file, path.extname(file));
-        const data = fm(await readFile(file, 'utf8')).attributes;
-        numIcons++;
-
-        return {
-          name,
-          title: data.title,
-          categories: data.categories,
-          tags: data.tags
-        };
-      })
-    );
-
+    const tagsFile = await import(path.resolve('./docs/assets/icons/tags.js'));
+    const tagsHash = tagsFile.tags;
+    const metadata = [];
+    const files = readdirSync(`${srcPath}/flattened`);
+    numIcons = files.length;
+    files.forEach(fileName => {
+      const key = path.parse(fileName).name;
+      let type = '';
+      let categories = '';
+      const stripped = key.replace('-solid', '').replace('-mini', '');
+      let tags = tagsHash[stripped] || [];
+      if (key.includes('-solid')) {
+        type = 'fill';
+        categories = ['24px'];
+      } else if (key.includes('-mini')) {
+        type = 'fill';
+        categories = ['20px'];
+      } else {
+        type = 'outline';
+        categories = ['24px'];
+      }
+      metadata.push({
+        name: key,
+        title: key.replace('-', ' '),
+        type,
+        categories,
+        tags
+      });
+    });
     await writeFile(path.join(iconDir, 'icons.json'), JSON.stringify(metadata, null, 2), 'utf8');
 
     console.log(chalk.cyan(`Successfully processed ${numIcons} icons ✨\n`));

@@ -195,18 +195,18 @@ Use the `prefix` and `suffix` slots to add icons.
 ```html preview
 <sl-radio-group label="Select an option" name="a" value="1">
   <sl-radio-button value="1">
-    <sl-icon slot="prefix" name="archive"></sl-icon>
+    <sl-icon slot="prefix" name="archive-box"></sl-icon>
     Option 1
   </sl-radio-button>
 
   <sl-radio-button value="2">
-    <sl-icon slot="suffix" name="bag"></sl-icon>
+    <sl-icon slot="suffix" name="shopping-bag"></sl-icon>
     Option 2
   </sl-radio-button>
 
   <sl-radio-button value="3">
     <sl-icon slot="prefix" name="gift"></sl-icon>
-    <sl-icon slot="suffix" name="cart"></sl-icon>
+    <sl-icon slot="suffix" name="shopping-cart"></sl-icon>
     Option 3
   </sl-radio-button>
 </sl-radio-group>
@@ -218,18 +218,18 @@ import { SlIcon, SlRadioButton, SlRadioGroup } from '@shoelace-style/shoelace/di
 const App = () => (
   <SlRadioGroup label="Select an option" name="a" value="1">
     <SlRadioButton value="1">
-      <SlIcon slot="prefix" name="archive" />
+      <SlIcon slot="prefix" name="archive-box" />
       Option 1
     </SlRadioButton>
 
     <SlRadioButton value="2">
-      <SlIcon slot="suffix" name="bag" />
+      <SlIcon slot="suffix" name="shopping-bag" />
       Option 2
     </SlRadioButton>
 
     <SlRadioButton value="3">
       <SlIcon slot="prefix" name="gift" />
-      <SlIcon slot="suffix" name="cart" />
+      <SlIcon slot="suffix" name="shopping-cart" />
       Option 3
     </SlRadioButton>
   </SlRadioGroup>
@@ -243,23 +243,23 @@ You can omit button labels and use icons instead. Make sure to set a `label` att
 ```html preview
 <sl-radio-group label="Select an option" name="a" value="neutral">
   <sl-radio-button value="angry">
-    <sl-icon name="emoji-angry" label="Angry"></sl-icon>
+    <sl-icon name="emoji-angry" label="Angry" library="bootstrap"></sl-icon>
   </sl-radio-button>
 
   <sl-radio-button value="sad">
-    <sl-icon name="emoji-frown" label="Sad"></sl-icon>
+    <sl-icon name="emoji-frown" label="Sad" library="bootstrap"></sl-icon>
   </sl-radio-button>
 
   <sl-radio-button value="neutral">
-    <sl-icon name="emoji-neutral" label="Neutral"></sl-icon>
+    <sl-icon name="emoji-neutral" label="Neutral" library="bootstrap"></sl-icon>
   </sl-radio-button>
 
   <sl-radio-button value="happy">
-    <sl-icon name="emoji-smile" label="Happy"></sl-icon>
+    <sl-icon name="emoji-smile" label="Happy" library="bootstrap"></sl-icon>
   </sl-radio-button>
 
   <sl-radio-button value="laughing">
-    <sl-icon name="emoji-laughing" label="Laughing"></sl-icon>
+    <sl-icon name="emoji-laughing" label="Laughing" library="bootstrap"></sl-icon>
   </sl-radio-button>
 </sl-radio-group>
 ```
@@ -270,23 +270,23 @@ import { SlIcon, SlRadioButton, SlRadioGroup } from '@shoelace-style/shoelace/di
 const App = () => (
   <SlRadioGroup label="Select an option" name="a" value="neutral">
     <SlRadioButton value="angry">
-      <SlIcon name="emoji-angry" label="Angry" />
+      <SlIcon name="emoji-angry" label="Angry" library="bootstrap" />
     </SlRadioButton>
 
     <SlRadioButton value="sad">
-      <SlIcon name="emoji-frown" label="Sad" />
+      <SlIcon name="emoji-frown" label="Sad" library="bootstrap" />
     </SlRadioButton>
 
     <SlRadioButton value="neutral">
-      <SlIcon name="emoji-neutral" label="Neutral" />
+      <SlIcon name="emoji-neutral" label="Neutral" library="bootstrap" />
     </SlRadioButton>
 
     <SlRadioButton value="happy">
-      <SlIcon name="emoji-smile" label="Happy" />
+      <SlIcon name="emoji-smile" label="Happy" library="bootstrap" />
     </SlRadioButton>
 
     <SlRadioButton value="laughing">
-      <SlIcon name="emoji-laughing" label="Laughing" />
+      <SlIcon name="emoji-laughing" label="Laughing" library="bootstrap" />
     </SlRadioButton>
   </SlRadioGroup>
 );

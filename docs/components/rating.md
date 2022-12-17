@@ -107,7 +107,7 @@ You can provide custom icons by passing a function to the `getSymbol` property.
 
 <script>
   const rating = document.querySelector('.rating-hearts');
-  rating.getSymbol = () => '<sl-icon name="heart-fill"></sl-icon>';
+  rating.getSymbol = () => '<sl-icon name="heart-solid"></sl-icon>';
 </script>
 ```
 
@@ -118,7 +118,7 @@ import { SlRating } from '@shoelace-style/shoelace/dist/react';
 const App = () => (
   <SlRating
     label="Rating"
-    getSymbol={() => '<sl-icon name="heart-fill"></sl-icon>'}
+    getSymbol={() => '<sl-icon name="heart-solid"></sl-icon>'}
     style={{ '--symbol-color-active': '#ff4136' }}
   />
 );
@@ -136,7 +136,7 @@ You can also use the `getSymbol` property to render different icons based on val
 
   rating.getSymbol = value => {
     const icons = ['emoji-angry', 'emoji-frown', 'emoji-expressionless', 'emoji-smile', 'emoji-laughing'];
-    return `<sl-icon name="${icons[value - 1]}"></sl-icon>`;
+    return `<sl-icon name="${icons[value - 1]}" library="bootstrap"></sl-icon>`;
   };
 </script>
 ```
@@ -147,7 +147,7 @@ import { SlRating } from '@shoelace-style/shoelace/dist/react';
 
 function getSymbol(value) {
   const icons = ['emoji-angry', 'emoji-frown', 'emoji-expressionless', 'emoji-smile', 'emoji-laughing'];
-  return `<sl-icon name="${icons[value - 1]}"></sl-icon>`;
+  return `<sl-icon name="${icons[value - 1]}" library="bootstrap"></sl-icon>`;
 }
 
 const App = () => <SlRating label="Rating" getSymbol={getSymbol} />;

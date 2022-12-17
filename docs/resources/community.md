@@ -14,7 +14,7 @@ The [discussion forum](https://github.com/shoelace-style/shoelace/discussions) i
 - Learn more about the project, its values, and its roadmap
 
 <sl-button variant="primary" href="https://github.com/shoelace-style/shoelace/discussions" target="_blank">
-  <sl-icon name="github" slot="prefix"></sl-icon>
+  <sl-icon slot="prefix" src="./assets/images/github.svg"></sl-icon>
   Join the Discussion
 </sl-button>
 
