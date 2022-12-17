@@ -8,6 +8,10 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ?> During the beta period, these restrictions may be relaxed in the event of a mission-critical bug. 🐛
 
+## Next
+
+- Fixed a bug in `<sl-tree-item>` where the checked/indeterminate states could get out of sync when using the `multiple` option [#1076](https://github.com/shoelace-style/shoelace/issues/1076)
+
 ## 2.0.0-beta.87
 
 - 🚨 BREAKING: changed the default size of medium checkboxes, radios, and switches to 18px instead of 16px
