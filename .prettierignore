@@ -4,6 +4,7 @@
 cspell.json
 dist
 docs/search.json
+docs/assets/icons/tags.js
 src/components/icon/icons
 src/react/index.ts
 node_modules
