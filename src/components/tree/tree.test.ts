@@ -655,4 +655,98 @@ describe('<sl-tree>', () => {
       });
     });
   });
+
+  describe('Checkboxes synchronization', () => {
+    describe('when the tree gets initialized', () => {
+      describe('and a parent node is selected', () => {
+        it('should select all the nested children', async () => {
+          // Arrange
+          const tree = await fixture<SlTree>(html`
+            <sl-tree selection="multiple">
+              <sl-tree-item selected>
+                Parent Node
+                <sl-tree-item selected>Child Node 1</sl-tree-item>
+                <sl-tree-item>
+                  Child Node 2
+                  <sl-tree-item>Child Node 2 - 1</sl-tree-item>
+                  <sl-tree-item>Child Node 2 - 2</sl-tree-item>
+                </sl-tree-item>
+              </sl-tree-item>
+            </sl-tree>
+          `);
+          const treeItems = Array.from<SlTreeItem>(tree.querySelectorAll('sl-tree-item'));
+
+          // Act
+          await tree.updateComplete;
+
+          // Assert
+          treeItems.forEach(treeItem => {
+            expect(treeItem).to.have.attribute('selected');
+          });
+        });
+      });
+
+      describe('and a parent node is not selected', () => {
+        describe('and all the children are selected', () => {
+          it('should select the parent node', async () => {
+            // Arrange
+            const tree = await fixture<SlTree>(html`
+              <sl-tree selection="multiple">
+                <sl-tree-item>
+                  Parent Node
+                  <sl-tree-item selected>Child Node 1</sl-tree-item>
+                  <sl-tree-item selected>
+                    Child Node 2
+                    <sl-tree-item>Child Node 2 - 1</sl-tree-item>
+                    <sl-tree-item>Child Node 2 - 2</sl-tree-item>
+                  </sl-tree-item>
+                </sl-tree-item>
+              </sl-tree>
+            `);
+            const treeItems = Array.from<SlTreeItem>(tree.querySelectorAll('sl-tree-item'));
+
+            // Act
+            await tree.updateComplete;
+
+            // Assert
+            treeItems.forEach(treeItem => {
+              expect(treeItem).to.have.attribute('selected');
+            });
+            expect(treeItems[0].indeterminate).to.be.false;
+          });
+        });
+
+        describe('and some of the children are selected', () => {
+          it('should set the parent node to indeterminate state', async () => {
+            // Arrange
+            const tree = await fixture<SlTree>(html`
+              <sl-tree selection="multiple">
+                <sl-tree-item>
+                  Parent Node
+                  <sl-tree-item selected>Child Node 1</sl-tree-item>
+                  <sl-tree-item>
+                    Child Node 2
+                    <sl-tree-item>Child Node 2 - 1</sl-tree-item>
+                    <sl-tree-item>Child Node 2 - 2</sl-tree-item>
+                  </sl-tree-item>
+                </sl-tree-item>
+              </sl-tree>
+            `);
+            const treeItems = Array.from<SlTreeItem>(tree.querySelectorAll('sl-tree-item'));
+
+            // Act
+            await tree.updateComplete;
+
+            // Assert
+            expect(treeItems[0]).not.to.have.attribute('selected');
+            expect(treeItems[0].indeterminate).to.be.true;
+            expect(treeItems[1]).to.have.attribute('selected');
+            expect(treeItems[2]).not.to.have.attribute('selected');
+            expect(treeItems[3]).not.to.have.attribute('selected');
+            expect(treeItems[4]).not.to.have.attribute('selected');
+          });
+        });
+      });
+    });
+  });
 });
