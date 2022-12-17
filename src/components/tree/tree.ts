@@ -8,31 +8,44 @@ import SlTreeItem from '../tree-item/tree-item';
 import styles from './tree.styles';
 import type { CSSResultGroup } from 'lit';
 
-function syncCheckboxes(changedTreeItem: SlTreeItem) {
+function syncCheckboxes(changedTreeItem: SlTreeItem, initialSync = false) {
+  function syncParentItem(treeItem: SlTreeItem) {
+    const children = treeItem.getChildrenItems({ includeDisabled: false });
+
+    if (children.length) {
+      const allChecked = children.every(item => item.selected);
+      const allUnchecked = children.every(item => !item.selected && !item.indeterminate);
+
+      treeItem.selected = allChecked;
+      treeItem.indeterminate = !allChecked && !allUnchecked;
+    }
+  }
+
   function syncAncestors(treeItem: SlTreeItem) {
     const parentItem: SlTreeItem | null = treeItem.parentElement as SlTreeItem;
 
     if (SlTreeItem.isTreeItem(parentItem)) {
-      const children = parentItem.getChildrenItems({ includeDisabled: false });
-      const allChecked = !!children.length && children.every(item => item.selected);
-      const allUnchecked = children.every(item => !item.selected && !item.indeterminate);
-
-      parentItem.selected = allChecked;
-      parentItem.indeterminate = !allChecked && !allUnchecked;
-
+      syncParentItem(parentItem);
       syncAncestors(parentItem);
     }
   }
 
   function syncDescendants(treeItem: SlTreeItem) {
     for (const childItem of treeItem.getChildrenItems()) {
-      childItem.selected = !childItem.disabled && treeItem.selected;
+      childItem.selected = initialSync
+        ? treeItem.selected || childItem.selected
+        : !childItem.disabled && treeItem.selected;
+
       syncDescendants(childItem);
+    }
+
+    if (initialSync) {
+      syncParentItem(treeItem);
     }
   }
 
-  syncAncestors(changedTreeItem);
   syncDescendants(changedTreeItem);
+  syncAncestors(changedTreeItem);
 }
 
 /**
@@ -88,6 +101,7 @@ export default class SlTree extends ShoelaceElement {
     this.addEventListener('sl-lazy-change', this.handleSlotChange);
 
     await this.updateComplete;
+
     this.mutationObserver = new MutationObserver(this.handleTreeChanged);
     this.mutationObserver.observe(this, { childList: true, subtree: true });
   }
@@ -155,13 +169,22 @@ export default class SlTree extends ShoelaceElement {
   };
 
   @watch('selection')
-  handleSelectionChange() {
+  async handleSelectionChange() {
+    const isSelectionMultiple = this.selection === 'multiple';
     const items = this.getAllTreeItems();
 
-    this.setAttribute('aria-multiselectable', this.selection === 'multiple' ? 'true' : 'false');
+    this.setAttribute('aria-multiselectable', isSelectionMultiple ? 'true' : 'false');
 
     for (const item of items) {
-      item.selectable = this.selection === 'multiple';
+      item.selectable = isSelectionMultiple;
+    }
+
+    if (isSelectionMultiple) {
+      await this.updateComplete;
+
+      [...this.querySelectorAll(':scope > sl-tree-item')].forEach((treeItem: SlTreeItem) =>
+        syncCheckboxes(treeItem, true)
+      );
     }
   }
 
