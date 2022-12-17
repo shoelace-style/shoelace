@@ -1,117 +1,92 @@
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { scrollIntoView } from 'src/internal/scroll';
+import { animateTo, stopAnimations } from '../../internal/animate';
 import { defaultValue } from '../../internal/default-value';
+import { waitForEvent } from '../../internal/event';
 import { FormSubmitController } from '../../internal/form';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
+import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import { LocalizeController } from '../../utilities/localize';
-import '../dropdown/dropdown';
-import '../icon-button/icon-button';
-import '../icon/icon';
-import '../menu/menu';
-import '../tag/tag';
 import styles from './select.styles';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element';
-import type SlDropdown from '../dropdown/dropdown';
-import type SlIconButton from '../icon-button/icon-button';
-import type SlMenuItem from '../menu-item/menu-item';
-import type { MenuSelectEventDetail } from '../menu/menu';
-import type SlMenu from '../menu/menu';
-import type { TemplateResult, CSSResultGroup } from 'lit';
+import type SlOption from '../option/option';
+import type SlPopup from '../popup/popup';
+import type { CSSResultGroup } from 'lit';
 
 /**
- * @summary Selects allow you to choose one or more items from a dropdown menu.
+ * @summary Selects allow you to choose items from a menu of predefined options.
  *
  * @since 2.0
  * @status stable
  *
- * @dependency sl-dropdown
  * @dependency sl-icon
- * @dependency sl-icon-button
- * @dependency sl-menu
- * @dependency sl-tag
  *
  * @slot - The select's options in the form of menu items.
- * @slot prefix - A presentational icon or similar element to prepend to the select's label.
- * @slot suffix - A presentational icon or similar element to append to the select's label.
- * @slot clear-icon - An icon to use in lieu of the default clear icon. Works best with `<sl-icon>`.
- * @slot label - The select's label. Alternatively, you can use the `label` attribute.
- * @slot help-text - Text that describes how to use the select. Alternatively, you can use the `help-text` attribute.
  *
- * @event sl-clear - Emitted when the clear button is activated.
  * @event sl-change - Emitted when the control's value changes.
+ * @event sl-clear - Emitted when the control's value is cleared.
  * @event sl-input - Emitted when the control receives input.
  * @event sl-focus - Emitted when the control gains focus.
  * @event sl-blur - Emitted when the control loses focus.
+ * @event sl-show - Emitted when the select's menu opens.
+ * @event sl-after-show - Emitted after the select's menu opens and all animations are complete.
+ * @event sl-hide - Emitted when the select's menu closes.
+ * @event sl-after-hide - Emitted after the select's menu closes and all animations are complete.
  *
  * @csspart form-control - The form control that wraps the label, input, and help text.
  * @csspart form-control-label - The label's wrapper.
  * @csspart form-control-input - The select's wrapper.
  * @csspart form-control-help-text - The help text's wrapper.
- * @csspart base - The component's base wrapper.
- * @csspart clear-button - The clear button.
- * @csspart control - The container that holds the prefix, label, and suffix.
- * @csspart display-label - The label that displays the current selection. Not available when used with `multiple`.
- * @csspart icon - The select's expand/collapse icon.
- * @csspart prefix - The container that wraps the prefix.
- * @csspart suffix - The container that wraps the suffix.
- * @csspart menu - The select's menu, an `<sl-menu>` element.
- * @csspart tags - The container that wraps tags when using `multiple`.
- * @csspart tag - Tags that represent selected options when using `multiple`.
- * @csspart tag__base - The tag's exported `base` part.
- * @csspart tag__content - The tag's exported `content` part.
- * @csspart tag__remove-button - The tag's exported `remove-button` part.
  */
 @customElement('sl-select')
 export default class SlSelect extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  @query('.select') dropdown: SlDropdown;
-  @query('.select__control') control: SlDropdown;
-  @query('.select__hidden-select') input: HTMLInputElement;
-  @query('.select__menu') menu: SlMenu;
+  @query('.select') popup: SlPopup;
+  @query('.select__combobox') combobox: HTMLSlotElement;
+  @query('.select__listbox') listbox: HTMLSlotElement;
 
   // @ts-expect-error -- Controller is currently unused
   private readonly formSubmitController = new FormSubmitController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private readonly localize = new LocalizeController(this);
-  private menuItems: SlMenuItem[] = [];
-  private resizeObserver: ResizeObserver;
+  private typeToSelectString = '';
+  private typeToSelectTimeout: number;
 
+  @state() displayLabel = '';
   @state() private hasFocus = false;
-  @state() private isOpen = false;
-  @state() private displayLabel = '';
-  @state() private displayTags: TemplateResult[] = [];
   @state() invalid = false;
-
-  /** Enables multiselect. With this enabled, value will be an array. */
-  @property({ type: Boolean, reflect: true }) multiple = false;
-
-  /**
-   * The maximum number of tags to show when `multiple` is true. After the maximum, "+n" will be shown to indicate the
-   * number of additional items that are selected. Set to -1 to remove the limit.
-   */
-  @property({ attribute: 'max-tags-visible', type: Number }) maxTagsVisible = 3;
-
-  /** Disables the select control. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** The name of the select, submitted as a name/value pair with form data. */
   @property() name = '';
 
   /** The current value of the select, submitted as a name/value pair with form data. */
-  @property() value: string | string[] = '';
+  @property() value = '';
 
-  /** Placeholder text to show as a hint when the input is empty. */
-  @property() placeholder = '';
+  /** The default value of the form control. Primarily used for resetting the form control. */
+  @defaultValue() defaultValue = '';
 
   /** The select's size. */
   @property() size: 'small' | 'medium' | 'large' = 'medium';
 
+  /** Placeholder text to show as a hint when the select is empty. */
+  @property() placeholder = '';
+
+  /** Disables the select control. */
+  @property({ type: Boolean, reflect: true }) disabled = false;
+
   /**
-   * Enable this option to prevent the panel from being clipped when the component is placed inside a container with
+   * Indicates whether or not the select is open. You can toggle this attribute to show and hide the menu, or you can
+   * use the `show()` and `hide()` methods and this attribute will reflect the select's open state.
+   */
+  @property({ type: Boolean, reflect: true }) open = false;
+
+  /**
+   * Enable this option to prevent the listbox from being clipped when the component is placed inside a container with
    * `overflow: auto|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all, scenarios.
    */
   @property({ type: Boolean }) hoist = false;
@@ -126,10 +101,10 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   @property() label = '';
 
   /**
-   * The preferred placement of the select's menu. Note that the actual placement may vary as needed to keep the panel
+   * The preferred placement of the select's menu. Note that the actual placement may vary as needed to keep the listbox
    * inside of the viewport.
    */
-  @property() placement: 'top' | 'bottom' = 'bottom';
+  @property({ reflect: true }) placement: 'top' | 'bottom' = 'bottom';
 
   /** The select's help text. If you need to display HTML, use the `help-text` slot instead. */
   @property({ attribute: 'help-text' }) helpText = '';
@@ -140,348 +115,377 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   /** Adds a clear button when the select is not empty. */
   @property({ type: Boolean }) clearable = false;
 
-  /** The default value of the form control. Primarily used for resetting the form control. */
-  @defaultValue() defaultValue = '';
-
   connectedCallback() {
     super.connectedCallback();
-    this.resizeObserver = new ResizeObserver(() => this.resizeMenu());
+    this.handleDocumentFocusIn = this.handleDocumentFocusIn.bind(this);
+    this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
+    this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
 
-    this.updateComplete.then(() => {
-      this.resizeObserver.observe(this);
-      this.syncItemsFromValue();
-    });
-  }
-
-  firstUpdated() {
-    this.invalid = !this.input.checkValidity();
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.resizeObserver.unobserve(this);
+    // Because this is a form control, it shouldn't be opened initially
+    this.open = false;
   }
 
   /** Checks for validity but does not show the browser's validation message. */
   checkValidity() {
-    return this.input.checkValidity();
+    // return this.input.checkValidity();
   }
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
   reportValidity() {
-    return this.input.reportValidity();
+    // return this.input.reportValidity();
   }
 
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
   setCustomValidity(message: string) {
-    this.input.setCustomValidity(message);
+    // this.input.setCustomValidity(message);
     this.invalid = !this.input.checkValidity();
-  }
-
-  getValueAsArray() {
-    // Single selects use '' as an empty selection value, so convert this to [] for an empty multiselect
-    if (this.multiple && this.value === '') {
-      return [];
-    }
-
-    return Array.isArray(this.value) ? this.value : [this.value];
   }
 
   /** Sets focus on the control. */
   focus(options?: FocusOptions) {
-    this.control.focus(options);
+    // this.control.focus(options);
   }
 
   /** Removes focus from the control. */
   blur() {
-    this.control.blur();
-  }
-
-  handleBlur() {
-    // Don't blur if the control is open. We'll move focus back once it closes.
-    if (!this.isOpen) {
-      this.hasFocus = false;
-      this.emit('sl-blur');
-    }
-  }
-
-  handleClearClick(event: MouseEvent) {
-    const oldValue = this.value;
-
-    event.stopPropagation();
-    this.value = this.multiple ? [] : '';
-
-    if (this.value !== oldValue) {
-      this.emit('sl-clear');
-      this.emit('sl-input');
-      this.emit('sl-change');
-    }
-
-    this.syncItemsFromValue();
-  }
-
-  @watch('disabled', { waitUntilFirstUpdate: true })
-  handleDisabledChange() {
-    if (this.disabled && this.isOpen) {
-      this.dropdown.hide();
-    }
-
-    // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    this.input.disabled = this.disabled;
-    this.invalid = !this.input.checkValidity();
+    // this.control.blur();
   }
 
   handleFocus() {
-    if (!this.hasFocus) {
-      this.hasFocus = true;
-      this.emit('sl-focus');
+    this.hasFocus = true;
+  }
+
+  handleBlur() {
+    this.hasFocus = false;
+  }
+
+  handleDocumentFocusIn(event: KeyboardEvent) {
+    // Close when focusing out of the select
+    const path = event.composedPath();
+    if (this && !path.includes(this)) {
+      this.hide();
     }
   }
 
-  handleKeyDown(event: KeyboardEvent) {
-    const target = event.target as HTMLElement;
-    const firstItem = this.menuItems[0];
-    const lastItem = this.menuItems[this.menuItems.length - 1];
-
-    // Ignore key presses on tags
-    if (target.tagName.toLowerCase() === 'sl-tag') {
-      return;
-    }
-
-    // Tabbing out of the control closes it
-    if (event.key === 'Tab') {
-      if (this.isOpen) {
-        this.dropdown.hide();
-      }
-      return;
-    }
-
-    // Up/down opens the menu
-    if (['ArrowDown', 'ArrowUp'].includes(event.key)) {
+  handleDocumentKeyDown(event: KeyboardEvent) {
+    // Close when pressing escape
+    if (event.key === 'Escape' && this.open) {
       event.preventDefault();
-
-      // Show the menu if it's not already open
-      if (!this.isOpen) {
-        this.dropdown.show();
-      }
-
-      // Focus on a menu item
-      if (event.key === 'ArrowDown') {
-        this.menu.setCurrentItem(firstItem);
-        firstItem.focus();
-        return;
-      }
-
-      if (event.key === 'ArrowUp') {
-        this.menu.setCurrentItem(lastItem);
-        lastItem.focus();
-        return;
-      }
-    }
-
-    // don't open the menu when a CTRL/Command key is pressed
-    if (event.ctrlKey || event.metaKey) {
-      return;
-    }
-
-    // All other "printable" keys open the menu and initiate type to select
-    if (!this.isOpen && event.key.length === 1) {
       event.stopPropagation();
-      event.preventDefault();
-      this.dropdown.show();
-      this.menu.typeToSelect(event);
+      this.hide();
+    }
+  }
+
+  handleDocumentMouseDown(event: MouseEvent) {
+    // Close when clicking outside of the select
+    const path = event.composedPath();
+    if (this && !path.includes(this)) {
+      this.hide();
     }
   }
 
   handleLabelClick() {
-    this.focus();
+    this.combobox.focus();
   }
 
-  handleMenuSelect(event: CustomEvent<MenuSelectEventDetail>) {
-    const item = event.detail.item;
-    const oldValue = this.value;
+  // We use mousedown/mouseup instead of click to allow macOS-style menu behavior
+  handleComboboxMouseDown(event: MouseEvent) {
+    event.preventDefault();
+    this.combobox.focus();
+    this.open = !this.open;
+  }
 
-    if (this.multiple) {
-      this.value = this.value.includes(item.value)
-        ? (this.value as []).filter(v => v !== item.value)
-        : [...this.value, item.value];
-    } else {
-      this.value = item.value;
+  handleComboboxKeyDown(event: KeyboardEvent) {
+    // Handle enter and space. When pressing space, we allow for type to select behaviors so if there's anything in the
+    // buffer we _don't_ close it.
+    if (event.key === 'Enter' || (event.key === ' ' && this.typeToSelectString === '')) {
+      event.preventDefault();
+
+      // If it's not open, open it
+      if (!this.open) {
+        this.show();
+        return;
+      }
+
+      // If it is open, update the value based on the current selection and close it
+      const selectedOption = this.getSelectedOption();
+      if (selectedOption) {
+        this.value = selectedOption.value;
+        this.displayLabel = selectedOption.textContent ?? '';
+      }
+
+      this.hide();
+      this.combobox.focus();
+      return;
     }
 
-    if (this.value !== oldValue) {
-      this.emit('sl-change');
-      this.emit('sl-input');
+    // Navigate options
+    if (['ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
+      const allOptions = this.getAllOptions();
+      const selectedOption = this.getSelectedOption();
+      const selectedIndex = allOptions.indexOf(selectedOption);
+      let newIndex = Math.max(0, selectedIndex);
+
+      // Prevent scrolling
+      event.preventDefault();
+
+      // Open it
+      if (!this.open) {
+        this.show();
+
+        // If an option is already selected, stop here because we want that one to remain highlighted when the listbox
+        // opens for the first time
+        if (selectedOption) {
+          return;
+        }
+      }
+
+      if (event.key === 'ArrowDown') {
+        newIndex = selectedIndex + 1;
+        if (newIndex > allOptions.length - 1) newIndex = 0;
+      } else if (event.key === 'ArrowUp') {
+        newIndex = selectedIndex - 1;
+        if (newIndex < 0) newIndex = allOptions.length - 1;
+      } else if (event.key === 'Home') {
+        newIndex = 0;
+      } else if (event.key === 'End') {
+        newIndex = allOptions.length - 1;
+      }
+
+      this.setSelectedOption(allOptions[newIndex]);
     }
 
-    this.syncItemsFromValue();
-  }
+    // All other "printable" keys trigger type to select
+    if (event.key.length === 1 || event.key === 'Backspace') {
+      const allOptions = this.getAllOptions();
 
-  handleMenuShow() {
-    this.resizeMenu();
-    this.isOpen = true;
-  }
+      // Don't block important key combos like CMD+R
+      if (event.metaKey || event.ctrlKey || event.altKey) {
+        return;
+      }
 
-  handleMenuHide() {
-    this.isOpen = false;
+      // Open, unless the key that triggered is backspace
+      if (!this.open) {
+        if (event.key === 'Backspace') {
+          return;
+        }
 
-    // Restore focus on the box after the menu is hidden
-    this.control.focus();
-  }
+        this.show();
+      }
 
-  handleMenuItemLabelChange() {
-    // Update the display label when checked menu item's label changes
-    if (!this.multiple) {
-      const checkedItem = this.menuItems.find(item => item.value === this.value);
-      this.displayLabel = checkedItem ? checkedItem.getTextLabel() : '';
+      event.stopPropagation();
+      event.preventDefault();
+
+      clearTimeout(this.typeToSelectTimeout);
+      this.typeToSelectTimeout = window.setTimeout(() => (this.typeToSelectString = ''), 1000);
+
+      if (event.key === 'Backspace') {
+        this.typeToSelectString = this.typeToSelectString.slice(0, -1);
+      } else {
+        this.typeToSelectString += event.key.toLowerCase();
+      }
+
+      console.log(this.typeToSelectString);
+
+      for (const option of allOptions) {
+        const label = (option.textContent ?? '').toLowerCase();
+
+        if (label.startsWith(this.typeToSelectString)) {
+          this.setSelectedOption(option);
+          break;
+        }
+      }
     }
   }
 
-  @watch('multiple')
-  handleMultipleChange() {
-    // Cast to array | string based on `this.multiple`
-    const value = this.getValueAsArray();
-    this.value = this.multiple ? value : value[0] ?? '';
-    this.syncItemsFromValue();
+  handleClearClick(event: MouseEvent) {
+    event.stopPropagation();
+
+    if (this.value !== '') {
+      this.value = '';
+      this.displayLabel = '';
+      this.emit('sl-clear');
+    }
   }
 
-  async handleMenuSlotChange() {
-    // Wait for items to render before gathering labels otherwise the slot won't exist
-    this.menuItems = [...this.querySelectorAll<SlMenuItem>('sl-menu-item')];
+  handleClearMouseDown(event: MouseEvent) {
+    event.stopPropagation();
+  }
+
+  // We use mousedown/mouseup instead of click to allow macOS-style menu behavior
+  handleOptionMouseUp(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const option = target.closest('sl-option');
+    if (!option) {
+      return;
+    }
+
+    this.value = option.value;
+    this.hide();
+    this.combobox.focus();
+  }
+
+  handleDefaultSlotChange() {
+    const allOptions = this.getAllOptions();
+    const values: string[] = [];
 
     // Check for duplicate values in menu items
-    const values: string[] = [];
-    this.menuItems.forEach(item => {
-      if (values.includes(item.value)) {
-        console.error(`Duplicate value found in <sl-select> menu item: '${item.value}'`, item);
+    allOptions.forEach(option => {
+      if (values.includes(option.value)) {
+        console.error(`Duplicate value found in <sl-select>`, option);
       }
-
-      values.push(item.value);
+      values.push(option.value);
     });
 
-    await Promise.all(this.menuItems.map(item => item.render));
-    this.syncItemsFromValue();
+    // Update the selected option
+    const option = this.getOptionByValue(this.value);
+    if (option) {
+      this.setSelectedOption(option);
+      this.value = option.value;
+      this.displayLabel = option.textContent ?? '';
+    } else {
+      // Clear selection
+      this.setSelectedOption(null);
+    }
   }
 
-  handleTagInteraction(event: KeyboardEvent | MouseEvent) {
-    // Don't toggle the menu when a tag's clear button is activated
-    const path = event.composedPath();
-    const clearButton = path.find((el: SlIconButton) => {
-      if (el instanceof HTMLElement) {
-        const element = el as HTMLElement;
-        return element.classList.contains('tag__remove');
-      }
-      return false;
-    });
+  // Gets an array of all <sl-option> elements
+  getAllOptions() {
+    return [...this.querySelectorAll<SlOption>('sl-option')];
+  }
 
-    if (clearButton) {
-      event.stopPropagation();
+  // Gets an option based on its value
+  getOptionByValue(value: string) {
+    return this.getAllOptions().filter((el: SlOption) => el.value === value)[0];
+  }
+
+  // Gets the option that currently has aria-selected="true"
+  getSelectedOption() {
+    return this.getAllOptions().filter(el => el.getAttribute('aria-selected') === 'true')[0];
+  }
+
+  // Adds aria-selected to the target option and removes it from all others
+  setSelectedOption(option: SlOption | null) {
+    const allOptions = this.getAllOptions();
+
+    // Clear selection
+    allOptions.forEach(el => el.setAttribute('aria-selected', 'false'));
+
+    // Select the target option
+    if (option) {
+      option.setAttribute('aria-selected', 'true');
+      scrollIntoView(option, this.listbox);
     }
   }
 
   @watch('value', { waitUntilFirstUpdate: true })
-  async handleValueChange() {
-    this.syncItemsFromValue();
-    await this.updateComplete;
+  handleValueChange() {
+    const option = this.getOptionByValue(this.value);
 
-    this.invalid = !this.input.checkValidity();
+    // Update the selection
+    this.setSelectedOption(option);
+
+    if (option) {
+      this.value = option.value;
+      this.displayLabel = option.textContent ?? '';
+    } else {
+      // No option, reset the control
+      this.value = '';
+      this.displayLabel = '';
+    }
   }
 
-  resizeMenu() {
-    this.menu.style.width = `${this.control.clientWidth}px`;
-    requestAnimationFrame(() => this.dropdown.reposition());
+  /** Shows the listbox. */
+  async show() {
+    if (this.open || this.disabled) {
+      this.open = false;
+      return undefined;
+    }
+
+    this.open = true;
+    return waitForEvent(this, 'sl-after-show');
   }
 
-  syncItemsFromValue() {
-    const value = this.getValueAsArray();
+  /** Hides the listbox. */
+  async hide() {
+    if (!this.open || this.disabled) {
+      this.open = false;
+      return undefined;
+    }
 
-    // Sync checked states
-    this.menuItems.forEach(item => (item.checked = value.includes(item.value)));
+    this.open = false;
+    return waitForEvent(this, 'sl-after-hide');
+  }
 
-    // Sync display label and tags
-    if (this.multiple) {
-      const checkedItems = this.menuItems.filter(item => value.includes(item.value));
+  addOpenListeners() {
+    document.addEventListener('focusin', this.handleDocumentFocusIn);
+    document.addEventListener('keydown', this.handleDocumentKeyDown);
+    document.addEventListener('mousedown', this.handleDocumentMouseDown);
+  }
 
-      this.displayLabel = checkedItems.length > 0 ? checkedItems[0].getTextLabel() : '';
-      this.displayTags = checkedItems.map((item: SlMenuItem) => {
-        return html`
-          <sl-tag
-            part="tag"
-            exportparts="
-              base:tag__base,
-              content:tag__content,
-              remove-button:tag__remove-button
-            "
-            variant="neutral"
-            size=${this.size}
-            ?pill=${this.pill}
-            removable
-            @click=${this.handleTagInteraction}
-            @keydown=${this.handleTagInteraction}
-            @sl-remove=${(event: CustomEvent) => {
-              event.stopPropagation();
-              if (!this.disabled) {
-                item.checked = false;
-                this.syncValueFromItems();
-              }
-            }}
-          >
-            ${item.getTextLabel()}
-          </sl-tag>
-        `;
+  removeOpenListeners() {
+    document.removeEventListener('focusin', this.handleDocumentFocusIn);
+    document.removeEventListener('keydown', this.handleDocumentKeyDown);
+    document.removeEventListener('mousedown', this.handleDocumentMouseDown);
+  }
+
+  @watch('open', { waitUntilFirstUpdate: true })
+  async handleOpenChange() {
+    if (this.disabled) {
+      this.hide();
+      return;
+    }
+
+    if (this.open) {
+      // Show
+      this.emit('sl-show');
+      this.addOpenListeners();
+
+      await stopAnimations(this);
+      this.listbox.hidden = false;
+      this.popup.active = true;
+
+      // Make sure the current option is selected
+      this.setSelectedOption(this.getOptionByValue(this.value));
+
+      // Scroll the selected option into view
+      requestAnimationFrame(() => {
+        const selectedOption = this.getSelectedOption();
+        if (selectedOption) {
+          //
+          // TODO - improve this logic so the selected option is centered in the listbox instead of at the top
+          //
+          this.listbox.scrollTop = selectedOption.offsetTop;
+        }
       });
 
-      if (this.maxTagsVisible > 0 && this.displayTags.length > this.maxTagsVisible) {
-        const total = this.displayTags.length;
-        this.displayLabel = '';
-        this.displayTags = this.displayTags.slice(0, this.maxTagsVisible);
-        this.displayTags.push(html`
-          <sl-tag
-            part="tag"
-            exportparts="
-              base:tag__base,
-              content:tag__content,
-              remove-button:tag__remove-button
-            "
-            variant="neutral"
-            size=${this.size}
-          >
-            +${total - this.maxTagsVisible}
-          </sl-tag>
-        `);
-      }
+      const { keyframes, options } = getAnimation(this, 'select.show', { dir: this.localize.dir() });
+      await animateTo(this.popup.popup, keyframes, options);
+
+      this.emit('sl-after-show');
     } else {
-      const checkedItem = this.menuItems.find(item => item.value === value[0]);
+      // Hide
+      this.emit('sl-hide');
+      this.removeOpenListeners();
 
-      this.displayLabel = checkedItem ? checkedItem.getTextLabel() : '';
-      this.displayTags = [];
-    }
-  }
+      await stopAnimations(this);
+      const { keyframes, options } = getAnimation(this, 'select.hide', { dir: this.localize.dir() });
+      await animateTo(this.popup.popup, keyframes, options);
+      this.listbox.hidden = true;
+      this.popup.active = false;
 
-  syncValueFromItems() {
-    const checkedItems = this.menuItems.filter(item => item.checked);
-    const checkedValues = checkedItems.map(item => item.value);
-    const oldValue = this.value;
-
-    if (this.multiple) {
-      this.value = (this.value as []).filter(val => checkedValues.includes(val));
-    } else {
-      this.value = checkedValues.length > 0 ? checkedValues[0] : '';
-    }
-
-    if (this.value !== oldValue) {
-      this.emit('sl-change');
-      this.emit('sl-input');
+      this.emit('sl-after-hide');
     }
   }
 
   render() {
     const hasLabelSlot = this.hasSlotController.test('label');
     const hasHelpTextSlot = this.hasSlotController.test('help-text');
-    const hasSelection = this.multiple ? this.value.length > 0 : this.value !== '';
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
-    const hasClearIcon = this.clearable && !this.disabled && hasSelection;
+    const hasClearIcon = this.clearable && !this.disabled && this.value.length > 0;
+    const isPlaceholderVisible = this.value === '';
+    const isRtl = this.localize.dir() === 'rtl';
 
     return html`
       <div
@@ -496,9 +500,9 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
         })}
       >
         <label
+          id="label"
           part="form-control-label"
           class="form-control__label"
-          for="input"
           aria-hidden=${hasLabel ? 'false' : 'true'}
           @click=${this.handleLabelClick}
         >
@@ -506,58 +510,54 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
         </label>
 
         <div part="form-control-input" class="form-control-input">
-          <sl-dropdown
+          <sl-popup
             part="base"
-            .hoist=${this.hoist}
-            .placement=${this.placement === 'bottom' ? 'bottom-start' : 'top-start'}
-            .stayOpenOnSelect=${this.multiple}
-            .containingElement=${this as HTMLElement}
-            ?disabled=${this.disabled}
             class=${classMap({
               select: true,
-              'select--open': this.isOpen,
-              'select--empty': !this.value,
-              'select--focused': this.hasFocus,
-              'select--clearable': this.clearable,
-              'select--disabled': this.disabled,
-              'select--multiple': this.multiple,
-              'select--standard': !this.filled,
+              'select--standard': true,
               'select--filled': this.filled,
-              'select--has-tags': this.multiple && this.displayTags.length > 0,
-              'select--placeholder-visible': this.displayLabel === '',
+              'select--pill': this.pill,
+              'select--open': this.open,
+              'select--disabled': this.disabled,
+              'select--focused': this.hasFocus,
+              'select--placeholder-visible': isPlaceholderVisible,
+              'select--top': this.placement === 'top',
+              'select--bottom': this.placement === 'bottom',
               'select--small': this.size === 'small',
               'select--medium': this.size === 'medium',
-              'select--large': this.size === 'large',
-              'select--pill': this.pill,
-              'select--invalid': this.invalid
+              'select--large': this.size === 'large'
             })}
-            @sl-show=${this.handleMenuShow}
-            @sl-hide=${this.handleMenuHide}
+            placement=${this.placement}
+            strategy=${this.hoist ? 'fixed' : 'absolute'}
+            flip
+            shift
+            sync="width"
+            auto-size="vertical"
+            auto-size-padding="10"
           >
             <div
-              part="control"
-              slot="trigger"
-              id="input"
-              class="select__control"
-              role="combobox"
-              aria-describedby="help-text"
-              aria-haspopup="true"
-              aria-disabled=${this.disabled ? 'true' : 'false'}
-              aria-expanded=${this.isOpen ? 'true' : 'false'}
-              aria-controls="menu"
-              tabindex=${this.disabled ? '-1' : '0'}
-              @blur=${this.handleBlur}
-              @focus=${this.handleFocus}
-              @keydown=${this.handleKeyDown}
+              slot="anchor"
+              class="select__combobox-wrapper"
+              @keydown=${this.handleComboboxKeyDown}
+              @mousedown=${this.handleComboboxMouseDown}
             >
-              <slot name="prefix" part="prefix" class="select__prefix"></slot>
-
-              <div part="display-label" class="select__label">
-                ${this.displayTags.length > 0
-                  ? html` <span part="tags" class="select__tags"> ${this.displayTags} </span> `
-                  : this.displayLabel.length > 0
-                  ? this.displayLabel
-                  : this.placeholder}
+              <div
+                class="select__combobox"
+                aria-controls="listbox"
+                aria-expanded=${this.open ? 'true' : 'false'}
+                aria-haspopup="listbox"
+                aria-labelledby="label"
+                aria-disabled=${this.disabled ? 'true' : 'false'}
+                aria-describedby="help-text"
+                role="combobox"
+                tabindex="0"
+                @focus=${this.handleFocus}
+                @blur=${this.handleBlur}
+              >
+                <slot name="prefix" class="select__prefix"></slot>
+                <span class="select__display-label"
+                  >${isPlaceholderVisible ? this.placeholder : this.displayLabel}</span
+                >
               </div>
 
               ${hasClearIcon
@@ -565,8 +565,10 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
                     <button
                       part="clear-button"
                       class="select__clear"
-                      @click=${this.handleClearClick}
+                      type="button"
                       aria-label=${this.localize.term('clearEntry')}
+                      @mousedown=${this.handleClearMouseDown}
+                      @click=${this.handleClearClick}
                       tabindex="-1"
                     >
                       <slot name="clear-icon">
@@ -576,44 +578,55 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
                   `
                 : ''}
 
-              <slot name="suffix" part="suffix" class="select__suffix"></slot>
-
-              <span part="icon" class="select__icon" aria-hidden="true">
-                <sl-icon name="chevron-down" library="system"></sl-icon>
+              <span part="expand-icon" class="select__expand-icon">
+                <slot part="expand-icon" name="expand-icon">
+                  <sl-icon library="system" name="chevron-down"></sl-icon>
+                </slot>
               </span>
-
-              <!-- The hidden input tricks the browser's built-in validation so it works as expected. We use an input
-              instead of a select because, otherwise, iOS will show a list of options during validation. The focus
-              handler is used to move focus to the primary control when it's marked invalid.  -->
-              <input
-                class="select__hidden-select"
-                aria-hidden="true"
-                ?required=${this.required}
-                .value=${hasSelection ? '1' : ''}
-                tabindex="-1"
-                @focus=${() => this.control.focus()}
-              />
             </div>
 
-            <sl-menu part="menu" id="menu" class="select__menu" @sl-select=${this.handleMenuSelect}>
-              <slot @slotchange=${this.handleMenuSlotChange} @sl-label-change=${this.handleMenuItemLabelChange}></slot>
-            </sl-menu>
-          </sl-dropdown>
-        </div>
+            <slot
+              id="listbox"
+              aria-expanded=${this.open ? 'true' : 'false'}
+              aria-labelledby="label"
+              part="panel"
+              class="select__listbox"
+              tabindex="-1"
+              @mouseup=${this.handleOptionMouseUp}
+              @slotchange=${this.handleDefaultSlotChange}
+            ></slot>
+          </sl-popup>
 
-        <slot
-          name="help-text"
-          part="form-control-help-text"
-          id="help-text"
-          class="form-control__help-text"
-          aria-hidden=${hasHelpText ? 'false' : 'true'}
-        >
-          ${this.helpText}
-        </slot>
+          <slot
+            name="help-text"
+            part="form-control-help-text"
+            id="help-text"
+            class="form-control__help-text"
+            aria-hidden=${hasHelpText ? 'false' : 'true'}
+          >
+            ${this.helpText}
+          </slot>
+        </div>
       </div>
     `;
   }
 }
+
+setDefaultAnimation('select.show', {
+  keyframes: [
+    { opacity: 0, scale: 0.9 },
+    { opacity: 1, scale: 1 }
+  ],
+  options: { duration: 100, easing: 'ease' }
+});
+
+setDefaultAnimation('select.hide', {
+  keyframes: [
+    { opacity: 1, scale: 1 },
+    { opacity: 0, scale: 0.9 }
+  ],
+  options: { duration: 100, easing: 'ease' }
+});
 
 declare global {
   interface HTMLElementTagNameMap {

@@ -44,7 +44,7 @@ export default class SlMenuItem extends ShoelaceElement {
   /** A unique value to store in the menu item. This can be used as a way to identify menu items when selected. */
   @property() value = '';
 
-  /** Draws the menu item in a disabled state. */
+  /** Draws the menu item in a disabled state, preventing selection. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   firstUpdated() {

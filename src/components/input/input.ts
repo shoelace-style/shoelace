@@ -88,9 +88,6 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
     | 'time'
     | 'url' = 'text';
 
-  /** The input's size. */
-  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
-
   /** The name of the input, submitted as a name/value pair with form data. */
   @property() name = '';
 
@@ -99,6 +96,9 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
 
   /** The default value of the form control. Primarily used for resetting the form control. */
   @defaultValue() defaultValue = '';
+
+  /** The input's size. */
+  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Draws a filled input. */
   @property({ type: Boolean, reflect: true }) filled = false;

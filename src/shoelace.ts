@@ -53,6 +53,7 @@ export { default as SlTooltip } from './components/tooltip/tooltip';
 export { default as SlTree } from './components/tree/tree';
 export { default as SlTreeItem } from './components/tree-item/tree-item';
 export { default as SlVisuallyHidden } from './components/visually-hidden/visually-hidden';
+export { default as SlOption } from './components/option/option';
 /* plop:component */
 
 // Utilities

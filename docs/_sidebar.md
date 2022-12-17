@@ -66,6 +66,7 @@
   - [Tooltip](/components/tooltip)
   - [Tree](/components/tree)
   - [Tree Item](/components/tree-item)
+  - [Option](/components/option)
   <!--plop:component-->
 
 - Utilities

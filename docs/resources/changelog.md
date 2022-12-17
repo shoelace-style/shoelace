@@ -8,6 +8,13 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ?> During the beta period, these restrictions may be relaxed in the event of a mission-critical bug. 🐛
 
+## Next
+
+This release includes a complete rewrite of `<sl-select>` to improve accessibility and improve simplify the internal structure.
+
+- 🚨 BREAKING: removed the `multiple` attribute from `<sl-select>` because it was inaccessible and made the getting/setting the value inconsistent and confusing (see the docs for a suggested multiselect pattern)
+- 🚨 BREAKING: removed the `suffix` slot from `<sl-select>` because it was confusing to users and its position made the clear button inaccessible
+
 ## 2.0.0-beta.87
 
 - 🚨 BREAKING: changed the default size of medium checkboxes, radios, and switches to 18px instead of 16px
