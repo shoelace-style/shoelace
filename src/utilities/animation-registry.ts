@@ -38,24 +38,20 @@ function getLogicalAnimation(animation: ElementAnimation, dir: string) {
   return animation;
 }
 
-//
-// Sets a default animation. Components should use the `name.animation` for primary animations and `name.part.animation`
-// for secondary animations, e.g. `dialog.show` and `dialog.overlay.show`. For modifiers, use `drawer.showTop`.
-//
+/**
+ * Sets a default animation. Components should use the `name.animation` for primary animations and `name.part.animation`
+ * for secondary animations, e.g. `dialog.show` and `dialog.overlay.show`. For modifiers, use `drawer.showTop`.
+ */
 export function setDefaultAnimation(animationName: string, animation: ElementAnimation | null) {
   defaultAnimationRegistry.set(animationName, ensureAnimation(animation));
 }
 
-//
-// Sets a custom animation for the specified element.
-//
+/** Sets a custom animation for the specified element. */
 export function setAnimation(el: Element, animationName: string, animation: ElementAnimation | null) {
   customAnimationRegistry.set(el, { ...customAnimationRegistry.get(el), [animationName]: ensureAnimation(animation) });
 }
 
-//
-// Gets an element's animation. Falls back to the default if no animation is found.
-//
+/** Gets an element's animation. Falls back to the default if no animation is found. */
 export function getAnimation(el: Element, animationName: string, options: GetAnimationOptions) {
   const customAnimation = customAnimationRegistry.get(el);
 

@@ -20,9 +20,8 @@ export default class SlInclude extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   /**
-   * The location of the HTML file to include.
-   *
-   * WARNING: Be sure you trust the content you are including as it will be executed as code and can result in XSS attacks.
+   * The location of the HTML file to include. Be sure you trust the content you are including as it will be executed as
+   * code and can result in XSS attacks.
    */
   @property() src: string;
 
@@ -30,8 +29,8 @@ export default class SlInclude extends ShoelaceElement {
   @property() mode: 'cors' | 'no-cors' | 'same-origin' = 'cors';
 
   /**
-   * Allows included scripts to be executed. You must ensure the content you're including is trusted, otherwise this
-   * option can lead to XSS vulnerabilities in your app!
+   * Allows included scripts to be executed. Be sure you trust the content you are including as it will be executed as
+   * code and can result in XSS attacks.
    */
   @property({ attribute: 'allow-scripts', type: Boolean }) allowScripts = false;
 

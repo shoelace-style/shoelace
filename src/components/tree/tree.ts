@@ -4,16 +4,15 @@ import { clamp } from '../../internal/math';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
-import { isTreeItem } from '../tree-item/tree-item';
+import SlTreeItem from '../tree-item/tree-item';
 import styles from './tree.styles';
-import type SlTreeItem from '../tree-item/tree-item';
 import type { CSSResultGroup } from 'lit';
 
 function syncCheckboxes(changedTreeItem: SlTreeItem) {
   function syncAncestors(treeItem: SlTreeItem) {
     const parentItem: SlTreeItem | null = treeItem.parentElement as SlTreeItem;
 
-    if (isTreeItem(parentItem)) {
+    if (SlTreeItem.isTreeItem(parentItem)) {
       const children = parentItem.getChildrenItems({ includeDisabled: false });
       const allChecked = !!children.length && children.every(item => item.selected);
       const allUnchecked = children.every(item => !item.selected && !item.indeterminate);
@@ -42,17 +41,18 @@ function syncCheckboxes(changedTreeItem: SlTreeItem) {
  * @since 2.0
  * @status experimental
  *
- * @event {{ selection: TreeItem[] }} sl-selection-change - Emitted when an item gets selected or deselected
+ * @event {{ selection: TreeItem[] }} sl-selection-change - Emitted when a tree item is selected or deselected.
  *
  * @slot - The default slot.
- * @slot expand-icon - The icon to show when the tree item is expanded.
- * @slot collapse-icon - The icon to show when the tree item is collapsed.
+ * @slot expand-icon - The icon to show when the tree item is expanded. Works best with `<sl-icon>`.
+ * @slot collapse-icon - The icon to show when the tree item is collapsed. Works best with `<sl-icon>`.
  *
- * @csspart base - The component's internal wrapper.
+ * @csspart base - The component's base wrapper.
  *
  * @cssproperty [--indent-size=var(--sl-spacing-medium)] - The size of the indentation for nested items.
  * @cssproperty [--indent-guide-color=var(--sl-color-neutral-200)] - The color of the indentation line.
- * @cssproperty [--indent-guide-offset=0] - The amount of vertical spacing to leave between the top and bottom of the indentation line's starting position.
+ * @cssproperty [--indent-guide-offset=0] - The amount of vertical spacing to leave between the top and bottom of the
+ *  indentation line's starting position.
  * @cssproperty [--indent-guide-style=solid] - The style of the indentation line, e.g. solid, dotted, dashed.
  * @cssproperty [--indent-guide-width=0] - The width of the indentation line.
  */
@@ -64,7 +64,10 @@ export default class SlTree extends ShoelaceElement {
   @query('slot[name=expand-icon]') expandedIconSlot: HTMLSlotElement;
   @query('slot[name=collapse-icon]') collapsedIconSlot: HTMLSlotElement;
 
-  /** Specifies the selection behavior of the Tree */
+  /**
+   * The selection behavior of the tree. Single selection allows only one node to be selected at a time. Multiple
+   * displays checkboxes and allows more than one node to be selected. Leaf allows only leaf nodes to be selected.
+   */
   @property() selection: 'single' | 'multiple' | 'leaf' = 'single';
 
   //
@@ -139,8 +142,8 @@ export default class SlTree extends ShoelaceElement {
 
   handleTreeChanged = (mutations: MutationRecord[]) => {
     for (const mutation of mutations) {
-      const addedNodes: SlTreeItem[] = [...mutation.addedNodes].filter(isTreeItem) as SlTreeItem[];
-      const removedNodes = [...mutation.removedNodes].filter(isTreeItem) as SlTreeItem[];
+      const addedNodes: SlTreeItem[] = [...mutation.addedNodes].filter(SlTreeItem.isTreeItem) as SlTreeItem[];
+      const removedNodes = [...mutation.removedNodes].filter(SlTreeItem.isTreeItem) as SlTreeItem[];
 
       addedNodes.forEach(this.initTreeItem);
 
@@ -339,7 +342,7 @@ export default class SlTree extends ShoelaceElement {
     }
 
     // If the target is a tree item, update the tabindex
-    if (isTreeItem(target) && !target.disabled) {
+    if (SlTreeItem.isTreeItem(target) && !target.disabled) {
       if (this.lastFocusedItem) {
         this.lastFocusedItem.tabIndex = -1;
       }

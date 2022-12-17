@@ -22,21 +22,19 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
  *
  * @dependency sl-icon-button
  *
- * @slot - The alert's content.
- * @slot icon - An icon to show in the alert.
+ * @slot - The alert's main content.
+ * @slot icon - An icon to show in the alert. Works best with `<sl-icon>`.
  *
  * @event sl-show - Emitted when the alert opens.
  * @event sl-after-show - Emitted after the alert opens and all animations are complete.
  * @event sl-hide - Emitted when the alert closes.
  * @event sl-after-hide - Emitted after the alert closes and all animations are complete.
  *
- * @csspart base - The component's internal wrapper.
- * @csspart icon - The container that wraps the alert icon.
- * @csspart message - The alert message.
- * @csspart close-button - The close button.
- * @csspart close-button__base - The close button's `base` part.
- *
- * @cssproperty --box-shadow - The alert's box shadow.
+ * @csspart base - The component's base wrapper.
+ * @csspart icon - The container that wraps the optional icon.
+ * @csspart message - The container that wraps the alert's main content.
+ * @csspart close-button - The close button, an `<sl-icon-button>`.
+ * @csspart close-button__base - The close button's exported `base` part.
  *
  * @animation alert.show - The animation to use when showing the alert.
  * @animation alert.hide - The animation to use when hiding the alert.
@@ -52,18 +50,22 @@ export default class SlAlert extends ShoelaceElement {
 
   @query('[part~="base"]') base: HTMLElement;
 
-  /** Indicates whether or not the alert is open. You can use this in lieu of the show/hide methods. */
+  /**
+   * Indicates whether or not the alert is open. You can toggle this attribute to show and hide the alert, or you can
+   * use the `show()` and `hide()` methods and this attribute will reflect the alert's open state.
+   */
   @property({ type: Boolean, reflect: true }) open = false;
 
-  /** Makes the alert closable. */
+  /** Enables a close button that allows the user to dismiss the alert. */
   @property({ type: Boolean, reflect: true }) closable = false;
 
-  /** The alert's variant. */
+  /** The alert's theme variant. */
   @property({ reflect: true }) variant: 'primary' | 'success' | 'neutral' | 'warning' | 'danger' = 'primary';
 
   /**
    * The length of time, in milliseconds, the alert will show before closing itself. If the user interacts with
-   * the alert before it closes (e.g. moves the mouse over it), the timer will restart. Defaults to `Infinity`.
+   * the alert before it closes (e.g. moves the mouse over it), the timer will restart. Defaults to `Infinity`, meaning
+   * the alert will not close on its own.
    */
   @property({ type: Number }) duration = Infinity;
 
@@ -197,13 +199,9 @@ export default class SlAlert extends ShoelaceElement {
         aria-hidden=${this.open ? 'false' : 'true'}
         @mousemove=${this.handleMouseMove}
       >
-        <span part="icon" class="alert__icon">
-          <slot name="icon"></slot>
-        </span>
+        <slot name="icon" part="icon" class="alert__icon"></slot>
 
-        <span part="message" class="alert__message" aria-live="polite">
-          <slot></slot>
-        </span>
+        <slot part="message" class="alert__message" aria-live="polite"></slot>
 
         ${this.closable
           ? html`
@@ -225,16 +223,16 @@ export default class SlAlert extends ShoelaceElement {
 
 setDefaultAnimation('alert.show', {
   keyframes: [
-    { opacity: 0, transform: 'scale(0.8)' },
-    { opacity: 1, transform: 'scale(1)' }
+    { opacity: 0, scale: 0.8 },
+    { opacity: 1, scale: 1 }
   ],
   options: { duration: 250, easing: 'ease' }
 });
 
 setDefaultAnimation('alert.hide', {
   keyframes: [
-    { opacity: 1, transform: 'scale(1)' },
-    { opacity: 0, transform: 'scale(0.8)' }
+    { opacity: 1, scale: 1 },
+    { opacity: 0, scale: 0.8 }
   ],
   options: { duration: 250, easing: 'ease' }
 });

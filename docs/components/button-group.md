@@ -3,7 +3,7 @@
 [component-header:sl-button-group]
 
 ```html preview
-<sl-button-group>
+<sl-button-group label="Alignment">
   <sl-button>Left</sl-button>
   <sl-button>Center</sl-button>
   <sl-button>Right</sl-button>
@@ -14,7 +14,7 @@
 import { SlButton, SlButtonGroup } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlButtonGroup>
+  <SlButtonGroup label="Alignment">
     <SlButton>Left</SlButton>
     <SlButton>Center</SlButton>
     <SlButton>Right</SlButton>
@@ -29,7 +29,7 @@ const App = () => (
 All button sizes are supported, but avoid mixing sizes within the same button group.
 
 ```html preview
-<sl-button-group>
+<sl-button-group label="Alignment">
   <sl-button size="small">Left</sl-button>
   <sl-button size="small">Center</sl-button>
   <sl-button size="small">Right</sl-button>
@@ -37,7 +37,7 @@ All button sizes are supported, but avoid mixing sizes within the same button gr
 
 <br /><br />
 
-<sl-button-group>
+<sl-button-group label="Alignment">
   <sl-button size="medium">Left</sl-button>
   <sl-button size="medium">Center</sl-button>
   <sl-button size="medium">Right</sl-button>
@@ -45,7 +45,7 @@ All button sizes are supported, but avoid mixing sizes within the same button gr
 
 <br /><br />
 
-<sl-button-group>
+<sl-button-group label="Alignment">
   <sl-button size="large">Left</sl-button>
   <sl-button size="large">Center</sl-button>
   <sl-button size="large">Right</sl-button>
@@ -57,7 +57,7 @@ import { SlButton, SlButtonGroup } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
-    <SlButtonGroup>
+    <SlButtonGroup label="Alignment">
       <SlButton size="small">Left</SlButton>
       <SlButton size="small">Center</SlButton>
       <SlButton size="small">Right</SlButton>
@@ -66,7 +66,7 @@ const App = () => (
     <br />
     <br />
 
-    <SlButtonGroup>
+    <SlButtonGroup label="Alignment">
       <SlButton size="medium">Left</SlButton>
       <SlButton size="medium">Center</SlButton>
       <SlButton size="medium">Right</SlButton>
@@ -75,7 +75,7 @@ const App = () => (
     <br />
     <br />
 
-    <SlButtonGroup>
+    <SlButtonGroup label="Alignment">
       <SlButton size="large">Left</SlButton>
       <SlButton size="large">Center</SlButton>
       <SlButton size="large">Right</SlButton>
@@ -89,7 +89,7 @@ const App = () => (
 Theme buttons are supported through the button's `variant` attribute.
 
 ```html preview
-<sl-button-group>
+<sl-button-group label="Alignment">
   <sl-button variant="primary">Left</sl-button>
   <sl-button variant="primary">Center</sl-button>
   <sl-button variant="primary">Right</sl-button>
@@ -97,7 +97,7 @@ Theme buttons are supported through the button's `variant` attribute.
 
 <br /><br />
 
-<sl-button-group>
+<sl-button-group label="Alignment">
   <sl-button variant="success">Left</sl-button>
   <sl-button variant="success">Center</sl-button>
   <sl-button variant="success">Right</sl-button>
@@ -105,7 +105,7 @@ Theme buttons are supported through the button's `variant` attribute.
 
 <br /><br />
 
-<sl-button-group>
+<sl-button-group label="Alignment">
   <sl-button variant="neutral">Left</sl-button>
   <sl-button variant="neutral">Center</sl-button>
   <sl-button variant="neutral">Right</sl-button>
@@ -113,7 +113,7 @@ Theme buttons are supported through the button's `variant` attribute.
 
 <br /><br />
 
-<sl-button-group>
+<sl-button-group label="Alignment">
   <sl-button variant="warning">Left</sl-button>
   <sl-button variant="warning">Center</sl-button>
   <sl-button variant="warning">Right</sl-button>
@@ -121,7 +121,7 @@ Theme buttons are supported through the button's `variant` attribute.
 
 <br /><br />
 
-<sl-button-group>
+<sl-button-group label="Alignment">
   <sl-button variant="danger">Left</sl-button>
   <sl-button variant="danger">Center</sl-button>
   <sl-button variant="danger">Right</sl-button>
@@ -133,7 +133,7 @@ import { SlButton, SlButtonGroup } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
-    <SlButtonGroup>
+    <SlButtonGroup label="Alignment">
       <SlButton variant="primary">Left</SlButton>
       <SlButton variant="primary">Center</SlButton>
       <SlButton variant="primary">Right</SlButton>
@@ -142,7 +142,7 @@ const App = () => (
     <br />
     <br />
 
-    <SlButtonGroup>
+    <SlButtonGroup label="Alignment">
       <SlButton variant="success">Left</SlButton>
       <SlButton variant="success">Center</SlButton>
       <SlButton variant="success">Right</SlButton>
@@ -151,7 +151,7 @@ const App = () => (
     <br />
     <br />
 
-    <SlButtonGroup>
+    <SlButtonGroup label="Alignment">
       <SlButton variant="neutral">Left</SlButton>
       <SlButton variant="neutral">Center</SlButton>
       <SlButton variant="neutral">Right</SlButton>
@@ -160,7 +160,7 @@ const App = () => (
     <br />
     <br />
 
-    <SlButtonGroup>
+    <SlButtonGroup label="Alignment">
       <SlButton variant="warning">Left</SlButton>
       <SlButton variant="warning">Center</SlButton>
       <SlButton variant="warning">Right</SlButton>
@@ -169,7 +169,7 @@ const App = () => (
     <br />
     <br />
 
-    <SlButtonGroup>
+    <SlButtonGroup label="Alignment">
       <SlButton variant="danger">Left</SlButton>
       <SlButton variant="danger">Center</SlButton>
       <SlButton variant="danger">Right</SlButton>
@@ -183,7 +183,7 @@ const App = () => (
 Pill buttons are supported through the button's `pill` attribute.
 
 ```html preview
-<sl-button-group>
+<sl-button-group label="Alignment">
   <sl-button size="small" pill>Left</sl-button>
   <sl-button size="small" pill>Center</sl-button>
   <sl-button size="small" pill>Right</sl-button>
@@ -191,7 +191,7 @@ Pill buttons are supported through the button's `pill` attribute.
 
 <br /><br />
 
-<sl-button-group>
+<sl-button-group label="Alignment">
   <sl-button size="medium" pill>Left</sl-button>
   <sl-button size="medium" pill>Center</sl-button>
   <sl-button size="medium" pill>Right</sl-button>
@@ -199,7 +199,7 @@ Pill buttons are supported through the button's `pill` attribute.
 
 <br /><br />
 
-<sl-button-group>
+<sl-button-group label="Alignment">
   <sl-button size="large" pill>Left</sl-button>
   <sl-button size="large" pill>Center</sl-button>
   <sl-button size="large" pill>Right</sl-button>
@@ -211,7 +211,7 @@ import { SlButton, SlButtonGroup } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
-    <SlButtonGroup>
+    <SlButtonGroup label="Alignment">
       <SlButton size="small" pill>
         Left
       </SlButton>
@@ -226,7 +226,7 @@ const App = () => (
     <br />
     <br />
 
-    <SlButtonGroup>
+    <SlButtonGroup label="Alignment">
       <SlButton size="medium" pill>
         Left
       </SlButton>
@@ -241,7 +241,7 @@ const App = () => (
     <br />
     <br />
 
-    <SlButtonGroup>
+    <SlButtonGroup label="Alignment">
       <SlButton size="large" pill>
         Left
       </SlButton>
@@ -261,7 +261,7 @@ const App = () => (
 Dropdowns can be placed inside button groups as long as the trigger is an `<sl-button>` element.
 
 ```html preview
-<sl-button-group>
+<sl-button-group label="Example Button Group">
   <sl-button>Button</sl-button>
   <sl-button>Button</sl-button>
   <sl-dropdown>
@@ -279,7 +279,7 @@ Dropdowns can be placed inside button groups as long as the trigger is an `<sl-b
 import { SlButton, SlButtonGroup, SlDropdown, SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlButtonGroup>
+  <SlButtonGroup label="Example Button Group">
     <SlButton>Button</SlButton>
     <SlButton>Button</SlButton>
     <SlDropdown>
@@ -301,7 +301,7 @@ const App = () => (
 Create a split button using a button and a dropdown. Use a [visually hidden](/components/visually-hidden) label to ensure the dropdown is accessible to users with assistive devices.
 
 ```html preview
-<sl-button-group>
+<sl-button-group label="Example Button Group">
   <sl-button variant="primary">Save</sl-button>
   <sl-dropdown placement="bottom-end">
     <sl-button slot="trigger" variant="primary" caret>
@@ -320,7 +320,7 @@ Create a split button using a button and a dropdown. Use a [visually hidden](/co
 import { SlButton, SlButtonGroup, SlDropdown, SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlButtonGroup>
+  <SlButtonGroup label="Example Button Group">
     <SlButton variant="primary">Save</SlButton>
     <SlDropdown placement="bottom-end">
       <SlButton slot="trigger" variant="primary" caret></SlButton>
@@ -339,7 +339,7 @@ const App = () => (
 Buttons can be wrapped in tooltips to provide more detail when the user interacts with them.
 
 ```html preview
-<sl-button-group>
+<sl-button-group label="Alignment">
   <sl-tooltip content="I'm on the left">
     <sl-button>Left</sl-button>
   </sl-tooltip>
@@ -359,7 +359,7 @@ import { SlButton, SlButtonGroup, SlTooltip } from '@shoelace-style/shoelace/dis
 
 const App = () => (
   <>
-    <SlButtonGroup>
+    <SlButtonGroup label="Alignment">
       <SlTooltip content="I'm on the left">
         <SlButton>Left</SlButton>
       </SlTooltip>

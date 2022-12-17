@@ -8,16 +8,49 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ?> During the beta period, these restrictions may be relaxed in the event of a mission-critical bug. 🐛
 
-## Next
+## 2.0.0-beta.87
 
+- 🚨 BREAKING: changed the default size of medium checkboxes, radios, and switches to 18px instead of 16px
+- 🚨 BREAKING: renamed the `--sl-toggle-size` design token to `--sl-toggle-size-medium`
+- Added the `--sl-toggle-size-small` and `--sl-toggle-size-large` design tokens
+- Added the `size` attribute to `<sl-checkbox>`, `<sl-radio>`, and `<sl-switch>` [#1071](https://github.com/shoelace-style/shoelace/issues/1071)
+- Added the `sl-input` event to `<sl-checkbox>`, `<sl-color-picker>`, `<sl-radio>`, `<sl-range>`, and `<sl-switch>`
+- Added HSV format to `<sl-color-picker>` [#1072](https://github.com/shoelace-style/shoelace/pull/1072)
+- Fixed a bug in `<sl-color-picker>` that sometimes prevented the color from updating when clicking or tapping on the controls
+- Fixed a bug in `<sl-color-picker>` that prevented text from being entered in the color input
+- Fixed a bug in `<sl-input>` that caused the `sl-change` event to be incorrectly emitted when the value was set programmatically [#917](https://github.com/shoelace-style/shoelace/issues/917)
+- Fixed a bug in `<sl-input>` and `<sl-textarea>` that made it impossible to disable spell checking [#1061](https://github.com/shoelace-style/shoelace/issues/1061)
+- Fixed non-modal behaviors in `<sl-drawer>` when using the `contained` attribute [#1051](https://github.com/shoelace-style/shoelace/issues/1051)
+- Fixed a bug in `<sl-checkbox>` and `<sl-radio>` that caused the checked icons to not scale property when resized
+- Fixed a bug that broke React imports [#1050](https://github.com/shoelace-style/shoelace/pull/1050)
+- Refactored `<sl-color-picker>` to use `@ctrl/tinycolor` instead of `color` saving ~67KB [#1072](https://github.com/shoelace-style/shoelace/pull/1072)
+- Removed the `formdata` event polyfill since it's now available in the last two versions of all major browsers
+
+## 2.0.0-beta.86
+
+- 🚨 BREAKING: changed the default value of `date` in `<sl-relative-time>` to the current date instead of the Unix epoch
+- 🚨 BREAKING: removed the `handle-icon` part and slot from `<sl-image-comparer>` (use `handle` instead)
+- 🚨 BREAKING: removed the `handle` slot from `<sl-split-panel>` (use the `divider` slot instead)
+- 🚨 BREAKING: removed the `--box-shadow` custom property from `<sl-alert>` (apply a box shadow to `::part(base)` instead)
+- 🚨 BREAKING: removed the `play-icon` and `pause-icon` parts (use the `play-icon` and `pause-icon` slots instead)
 - Added `header-actions` slot to `<sl-dialog>` and `<sl-drawer>`
+- Added the `expand-icon` and `collapse-icon` slots to `<sl-details>` and refactored the icon animation [#1046](https://github.com/shoelace-style/shoelace/discussions/1046)
+- Added the `play-icon` and `pause-icon` slots to `<sl-animated-image>` so you can customize the default icons
+- Converted `isTreeItem()` export to a static method of `<sl-tree-item>`
 - Fixed a bug in `<sl-tree-item>` where `sl-selection-change` was emitted when the selection didn't change [#1030](https://github.com/shoelace-style/shoelace/pull/1030)
 - Fixed a bug in `<sl-button-group>` that caused the border to render incorrectly when hovering over icons inside buttons [#1035](https://github.com/shoelace-style/shoelace/issues/1035)
 - Fixed an incorrect default for `flip-fallback-strategy` in `<sl-popup>` that caused the fallback strategy to be `initial` instead of `best-fit`, which is inconsistent with Floating UI's default [#1036](https://github.com/shoelace-style/shoelace/issues/1036)
 - Fixed a bug where browser validation tooltips would show up when hovering over form controls [#1037](https://github.com/shoelace-style/shoelace/issues/1037)
 - Fixed a bug in `<sl-tab-group>` that sometimes caused the active tab indicator to not animate
+- Fixed a bug in `<sl-tree-item>` that caused the expand/collapse icon slot to be out of sync when the node is open initially
+- Fixed the mislabeled `handle-icon` slot in `<sl-image-comparer>` (it now points to the `<slot>`, not the slot's fallback content)
+- Fixed the border radius in `<sl-dropdown>` so it matches with nested `<sl-menu>` elements
+- Fixed a bug that caused all button values to appear in submitted form data even if they weren't the submitter
 - Improved IntelliSense in VS Code, courtesy of [Burton's amazing CEM Analyzer plugin](https://github.com/break-stuff/cem-plugin-vs-code-custom-data-generator)
 - Improved accessibility of `<sl-alert>` so the alert is announced and the close button has a label
+- Improved accessibility of `<sl-progress-ring>` so slotted labels are announced along with visually hidden labels
+- Refactored all styles and animations to use `translate`, `rotate`, and `scale` instead of `transform`
+- Removed slot wrappers from many components, allowing better control over user-applied styles
 - Removed unused aria attributes from `<sl-skeleton>`
 - Replaced the `x` icon in the system icon library with `x-lg` to improve icon consistency
 

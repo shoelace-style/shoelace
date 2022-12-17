@@ -487,7 +487,9 @@
   --sl-input-help-text-color: var(--sl-color-neutral-500);
 
   /* Toggles (checkboxes, radios, switches) */
-  --sl-toggle-size: 1rem;
+  --sl-toggle-size-small: 0.875rem; /* 14px @ 16px base  */
+  --sl-toggle-size-medium: 1.125rem; /* 18px @ 16px base */
+  --sl-toggle-size-large: 1.375rem; /* 22px @ 16px base */
 
   /*
    * Overlays

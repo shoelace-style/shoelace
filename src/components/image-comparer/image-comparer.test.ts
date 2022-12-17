@@ -12,7 +12,7 @@ describe('<sl-image-comparer>', () => {
     `);
 
     const afterPart = el.shadowRoot!.querySelector<HTMLElement>('[part~="after"]')!;
-    const iconContainer = el.shadowRoot!.querySelector<HTMLSlotElement>('slot[name="handle-icon"]')!;
+    const iconContainer = el.shadowRoot!.querySelector<HTMLSlotElement>('slot[name="handle"]')!;
     const handle = el.shadowRoot!.querySelector<HTMLElement>('[part~="handle"]')!;
 
     expect(el.position).to.equal(50);

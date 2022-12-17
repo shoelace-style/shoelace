@@ -34,29 +34,29 @@ const isFirefox = isChromium ? false : navigator.userAgent.includes('Firefox');
  * @dependency sl-icon
  *
  * @slot label - The input's label. Alternatively, you can use the `label` attribute.
- * @slot prefix - Used to prepend an icon or similar element to the input.
- * @slot suffix - Used to append an icon or similar element to the input.
+ * @slot prefix - Used to prepend a presentational icon or similar element to the input.
+ * @slot suffix - Used to append a presentational icon or similar element to the input.
  * @slot clear-icon - An icon to use in lieu of the default clear icon.
  * @slot show-password-icon - An icon to use in lieu of the default show password icon.
  * @slot hide-password-icon - An icon to use in lieu of the default hide password icon.
- * @slot help-text - Help text that describes how to use the input. Alternatively, you can use the `help-text` attribute.
+ * @slot help-text - Text that describes how to use the input. Alternatively, you can use the `help-text` attribute.
  *
+ * @event sl-blur - Emitted when the control loses focus.
  * @event sl-change - Emitted when an alteration to the control's value is committed by the user.
  * @event sl-clear - Emitted when the clear button is activated.
- * @event sl-input - Emitted when the control receives input and its value changes.
  * @event sl-focus - Emitted when the control gains focus.
- * @event sl-blur - Emitted when the control loses focus.
+ * @event sl-input - Emitted when the control receives input.
  *
- * @csspart form-control - The form control that wraps the label, input, and help-text.
+ * @csspart form-control - The form control that wraps the label, input, and help text.
  * @csspart form-control-label - The label's wrapper.
  * @csspart form-control-input - The input's wrapper.
  * @csspart form-control-help-text - The help text's wrapper.
- * @csspart base - The component's internal wrapper.
- * @csspart input - The input control.
- * @csspart prefix - The input prefix container.
+ * @csspart base - The component's base wrapper.
+ * @csspart input - The internal `<input>` control.
+ * @csspart prefix - The container that wraps the prefix.
  * @csspart clear-button - The clear button.
  * @csspart password-toggle-button - The password toggle button.
- * @csspart suffix - The input suffix container.
+ * @csspart suffix - The container that wraps the suffix.
  */
 @customElement('sl-input')
 export default class SlInput extends ShoelaceElement implements ShoelaceFormControl {
@@ -70,8 +70,12 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
 
   @state() private hasFocus = false;
   @state() invalid = false;
+  @property() title = ''; // make reactive to pass through
 
-  /** The input's type. */
+  /**
+   * The type of input. Works the same as a native `<input>` element, but only a subset of types are supported. Defaults
+   * to `text`.
+   */
   @property({ reflect: true }) type:
     | 'date'
     | 'datetime-local'
@@ -87,13 +91,13 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   /** The input's size. */
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
-  /** The input's name attribute. */
+  /** The name of the input, submitted as a name/value pair with form data. */
   @property() name = '';
 
-  /** The input's value attribute. */
+  /** The current value of the input, submitted as a name/value pair with form data. */
   @property() value = '';
 
-  /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+  /** The default value of the form control. Primarily used for resetting the form control. */
   @defaultValue() defaultValue = '';
 
   /** Draws a filled input. */
@@ -102,25 +106,25 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   /** Draws a pill-style input with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;
 
-  /** The input's label. If you need to display HTML, you can use the `label` slot instead. */
+  /** The input's label. If you need to display HTML, use the `label` slot instead. */
   @property() label = '';
 
-  /** The input's help text. If you need to display HTML, you can use the `help-text` slot instead. */
+  /** The input's help text. If you need to display HTML, use the `help-text` slot instead. */
   @property({ attribute: 'help-text' }) helpText = '';
 
-  /** Adds a clear button when the input is populated. */
+  /** Adds a clear button when the input is not empty. */
   @property({ type: Boolean }) clearable = false;
 
-  /** Adds a password toggle button to password inputs. */
+  /** Adds a button to toggle the password's visibility. Only applies to password types. */
   @property({ attribute: 'password-toggle', type: Boolean }) passwordToggle = false;
 
-  /** Determines whether or not the password is currently visible. Only applies to password inputs. */
+  /** Determines whether or not the password is currently visible. Only applies to password input types. */
   @property({ attribute: 'password-visible', type: Boolean }) passwordVisible = false;
 
   /** Hides the browser's built-in increment/decrement spin buttons for number inputs. */
   @property({ attribute: 'no-spin-buttons', type: Boolean }) noSpinButtons = false;
 
-  /** The input's placeholder text. */
+  /** Placeholder text to show as a hint when the input is empty. */
   @property() placeholder = '';
 
   /** Disables the input. */
@@ -135,49 +139,60 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   /** The maximum length of input that will be considered valid. */
   @property({ type: Number }) maxlength: number;
 
-  /** The input's minimum value. */
+  /** The input's minimum value. Only applies to date and number input types. */
   @property() min: number;
 
-  /** The input's maximum value. */
+  /** The input's maximum value. Only applies to date and number input types. */
   @property() max: number;
 
   /**
    * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
-   * implied, allowing any numeric value.
+   * implied, allowing any numeric value. Only applies to date and number input types.
    */
   @property() step: number | 'any';
 
-  /** A pattern to validate input against. */
+  /** A regular expression pattern to validate input against. */
   @property() pattern: string;
 
   /** Makes the input a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
-  /** The input's autocapitalize attribute. */
+  /** Controls whether and how text input is automatically capitalized as it is entered by the user. */
   @property() autocapitalize: 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters';
 
-  /** The input's autocorrect attribute. */
-  @property() autocorrect: string;
-
-  /** The input's autocomplete attribute. */
-  @property() autocomplete: string;
-
-  /** The input's autofocus attribute. */
-  @property({ type: Boolean }) autofocus: boolean;
+  /** Indicates whether the browser's autocorrect feature is on or off. */
+  @property() autocorrect: 'off' | 'on';
 
   /**
-   * The input's enterkeyhint attribute. This can be used to customize the label or icon of the Enter key on virtual
-   * keyboards.
+   * Specifies what permission the browser has to provide assistance in filling out form field values. Refer to
+   * [this page on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for available values.
    */
+  @property() autocomplete: string;
+
+  /** Indicates that the input should receive focus on page load. */
+  @property({ type: Boolean }) autofocus: boolean;
+
+  /** Used to customize the label or icon of the Enter key on virtual keyboards. */
   @property() enterkeyhint: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
 
   /** Enables spell checking on the input. */
-  @property({ type: Boolean }) spellcheck: boolean;
+  @property({
+    type: Boolean,
+    converter: {
+      // Allow "true|false" attribute values but keep the property boolean
+      fromAttribute: value => (!value || value === 'false' ? false : true),
+      toAttribute: value => (value ? 'true' : 'false')
+    }
+  })
+  spellcheck = true;
 
-  /** The input's inputmode attribute. */
+  /**
+   * Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual
+   * keyboard on supportive devices.
+   */
   @property() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
-  /** Gets or sets the current value as a `Date` object. Only valid when `type` is `date`. */
+  /** Gets or sets the current value as a `Date` object. Returns `null` if the value can't be converted. */
   get valueAsDate() {
     return this.input?.valueAsDate ?? null;
   }
@@ -190,7 +205,7 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
     this.value = input.value;
   }
 
-  /** Gets or sets the current value as a number. */
+  /** Gets or sets the current value as a number. Returns `NaN` if the value can't be converted. */
   get valueAsNumber() {
     return this.input?.valueAsNumber ?? parseFloat(this.value);
   }
@@ -234,16 +249,15 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   /** Replaces a range of text with a new string. */
   setRangeText(
     replacement: string,
-    start: number,
-    end: number,
-    selectMode: 'select' | 'start' | 'end' | 'preserve' = 'preserve'
+    start?: number,
+    end?: number,
+    selectMode?: 'select' | 'start' | 'end' | 'preserve'
   ) {
+    // @ts-expect-error - start, end, and selectMode are optional
     this.input.setRangeText(replacement, start, end, selectMode);
 
     if (this.value !== this.input.value) {
       this.value = this.input.value;
-      this.emit('sl-input');
-      this.emit('sl-change');
     }
   }
 
@@ -259,8 +273,6 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
     this.input.stepUp();
     if (this.value !== this.input.value) {
       this.value = this.input.value;
-      this.emit('sl-input');
-      this.emit('sl-change');
     }
   }
 
@@ -269,8 +281,6 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
     this.input.stepDown();
     if (this.value !== this.input.value) {
       this.value = this.input.value;
-      this.emit('sl-input');
-      this.emit('sl-change');
     }
   }
 
@@ -421,16 +431,13 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
               'input--is-firefox': isFirefox
             })}
           >
-            <span part="prefix" class="input__prefix">
-              <slot name="prefix"></slot>
-            </span>
-
+            <slot name="prefix" part="prefix" class="input__prefix"></slot>
             <input
               part="input"
               id="input"
               class="input__control"
               type=${this.type === 'password' && this.passwordVisible ? 'text' : this.type}
-              title=${'' /* An empty title prevents browser validation tooltips from appearing on hover */}
+              title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
               name=${ifDefined(this.name)}
               ?disabled=${this.disabled}
               ?readonly=${this.readonly}
@@ -446,7 +453,7 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
               autocomplete=${ifDefined(this.type === 'password' ? 'off' : this.autocomplete)}
               autocorrect=${ifDefined(this.type === 'password' ? 'off' : this.autocorrect)}
               ?autofocus=${this.autofocus}
-              spellcheck=${ifDefined(this.spellcheck)}
+              spellcheck=${this.spellcheck}
               pattern=${ifDefined(this.pattern)}
               enterkeyhint=${ifDefined(this.enterkeyhint)}
               inputmode=${ifDefined(this.inputmode)}
@@ -460,60 +467,64 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
               @blur=${this.handleBlur}
             />
 
-            ${hasClearIcon
-              ? html`
-                  <button
-                    part="clear-button"
-                    class="input__clear"
-                    type="button"
-                    aria-label=${this.localize.term('clearEntry')}
-                    @click=${this.handleClearClick}
-                    tabindex="-1"
-                  >
-                    <slot name="clear-icon">
-                      <sl-icon name="x-circle-fill" library="system"></sl-icon>
-                    </slot>
-                  </button>
-                `
-              : ''}
-            ${this.passwordToggle && !this.disabled
-              ? html`
-                  <button
-                    part="password-toggle-button"
-                    class="input__password-toggle"
-                    type="button"
-                    aria-label=${this.localize.term(this.passwordVisible ? 'hidePassword' : 'showPassword')}
-                    @click=${this.handlePasswordToggle}
-                    tabindex="-1"
-                  >
-                    ${this.passwordVisible
-                      ? html`
-                          <slot name="show-password-icon">
-                            <sl-icon name="eye-slash" library="system"></sl-icon>
-                          </slot>
-                        `
-                      : html`
-                          <slot name="hide-password-icon">
-                            <sl-icon name="eye" library="system"></sl-icon>
-                          </slot>
-                        `}
-                  </button>
-                `
-              : ''}
+            ${
+              hasClearIcon
+                ? html`
+                    <button
+                      part="clear-button"
+                      class="input__clear"
+                      type="button"
+                      aria-label=${this.localize.term('clearEntry')}
+                      @click=${this.handleClearClick}
+                      tabindex="-1"
+                    >
+                      <slot name="clear-icon">
+                        <sl-icon name="x-circle-fill" library="system"></sl-icon>
+                      </slot>
+                    </button>
+                  `
+                : ''
+            }
+            ${
+              this.passwordToggle && !this.disabled
+                ? html`
+                    <button
+                      part="password-toggle-button"
+                      class="input__password-toggle"
+                      type="button"
+                      aria-label=${this.localize.term(this.passwordVisible ? 'hidePassword' : 'showPassword')}
+                      @click=${this.handlePasswordToggle}
+                      tabindex="-1"
+                    >
+                      ${this.passwordVisible
+                        ? html`
+                            <slot name="show-password-icon">
+                              <sl-icon name="eye-slash" library="system"></sl-icon>
+                            </slot>
+                          `
+                        : html`
+                            <slot name="hide-password-icon">
+                              <sl-icon name="eye" library="system"></sl-icon>
+                            </slot>
+                          `}
+                    </button>
+                  `
+                : ''
+            }
 
-            <span part="suffix" class="input__suffix">
-              <slot name="suffix"></slot>
-            </span>
+            <slot name="suffix" part="suffix" class="input__suffix"></slot>
           </div>
         </div>
 
-        <div
+        <slot
+          name="help-text"
           part="form-control-help-text"
           id="help-text"
           class="form-control__help-text"
           aria-hidden=${hasHelpText ? 'false' : 'true'}
         >
-          <slot name="help-text">${this.helpText}</slot>
+          ${this.helpText}
+        </slot>
         </div>
       </div>
     `;

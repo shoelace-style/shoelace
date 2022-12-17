@@ -18,6 +18,7 @@ describe('<sl-input>', () => {
     expect(el.name).to.equal('');
     expect(el.value).to.equal('');
     expect(el.defaultValue).to.equal('');
+    expect(el.title).to.equal('');
     expect(el.filled).to.be.false;
     expect(el.pill).to.be.false;
     expect(el.label).to.equal('');
@@ -41,10 +42,17 @@ describe('<sl-input>', () => {
     expect(el.autocomplete).to.be.undefined;
     expect(el.autofocus).to.be.undefined;
     expect(el.enterkeyhint).to.be.undefined;
-    expect(el.spellcheck).to.be.undefined;
+    expect(el.spellcheck).to.be.true;
     expect(el.inputmode).to.be.undefined;
     expect(el.valueAsDate).to.be.null;
     expect(isNaN(el.valueAsNumber)).to.be.true;
+  });
+
+  it('should have title if title attribute is set', async () => {
+    const el = await fixture<SlInput>(html` <sl-input title="Test"></sl-input> `);
+    const input = el.shadowRoot!.querySelector<HTMLInputElement>('[part~="input"]')!;
+
+    expect(input.title).to.equal('Test');
   });
 
   it('should be disabled with the disabled attribute', async () => {
@@ -226,6 +234,46 @@ describe('<sl-input>', () => {
     });
   });
 
+  describe('when the value changes', () => {
+    it('should emit sl-change and sl-input when the user types in the input', async () => {
+      const el = await fixture<SlInput>(html` <sl-input></sl-input> `);
+      const inputHandler = sinon.spy();
+      const changeHandler = sinon.spy();
+
+      el.addEventListener('sl-input', inputHandler);
+      el.addEventListener('sl-change', changeHandler);
+      el.focus();
+      await sendKeys({ type: 'abc' });
+      el.blur();
+      await el.updateComplete;
+
+      expect(changeHandler).to.have.been.calledOnce;
+      expect(inputHandler).to.have.been.calledThrice;
+    });
+
+    it('should not emit sl-change or sl-input when the value is set programmatically', async () => {
+      const el = await fixture<SlInput>(html` <sl-input></sl-input> `);
+
+      el.addEventListener('sl-change', () => expect.fail('sl-change should not be emitted'));
+      el.addEventListener('sl-input', () => expect.fail('sl-input should not be emitted'));
+      el.value = 'abc';
+
+      await el.updateComplete;
+    });
+
+    it('should not emit sl-change or sl-input when calling setRangeText()', async () => {
+      const el = await fixture<SlInput>(html` <sl-input value="hi there"></sl-input> `);
+
+      el.addEventListener('sl-change', () => expect.fail('sl-change should not be emitted'));
+      el.addEventListener('sl-input', () => expect.fail('sl-input should not be emitted'));
+      el.focus();
+      el.setSelectionRange(0, 2);
+      el.setRangeText('hello');
+
+      await el.updateComplete;
+    });
+  });
+
   describe('when type="number"', () => {
     it('should be valid when the value is within the boundary of a step', async () => {
       const el = await fixture<SlInput>(html` <sl-input type="number" step=".5" value="1.5"></sl-input> `);
@@ -246,7 +294,7 @@ describe('<sl-input>', () => {
       expect(el.invalid).to.be.true;
     });
 
-    it('should increment by step if stepUp() is called', async () => {
+    it('should increment by step when stepUp() is called', async () => {
       const el = await fixture<SlInput>(html` <sl-input type="number" step="2" value="2"></sl-input> `);
 
       el.stepUp();
@@ -254,7 +302,7 @@ describe('<sl-input>', () => {
       expect(el.value).to.equal('4');
     });
 
-    it('should decrement by step if stepDown() is called', async () => {
+    it('should decrement by step when stepDown() is called', async () => {
       const el = await fixture<SlInput>(html` <sl-input type="number" step="2" value="2"></sl-input> `);
 
       el.stepDown();
@@ -262,35 +310,47 @@ describe('<sl-input>', () => {
       expect(el.value).to.equal('0');
     });
 
-    it('should fire sl-input and sl-change if stepUp() is called', async () => {
+    it('should not emit sl-input or sl-change when stepUp() is called programmatically', async () => {
       const el = await fixture<SlInput>(html` <sl-input type="number" step="2" value="2"></sl-input> `);
 
-      const inputHandler = sinon.spy();
-      const changeHandler = sinon.spy();
-      el.addEventListener('sl-input', inputHandler);
-      el.addEventListener('sl-change', changeHandler);
-
+      el.addEventListener('sl-change', () => expect.fail('sl-change should not be emitted'));
+      el.addEventListener('sl-input', () => expect.fail('sl-input should not be emitted'));
       el.stepUp();
 
-      await waitUntil(() => inputHandler.calledOnce);
-      await waitUntil(() => changeHandler.calledOnce);
-      expect(inputHandler).to.have.been.calledOnce;
-      expect(changeHandler).to.have.been.calledOnce;
+      await el.updateComplete;
     });
 
-    it('should fire sl-input and sl-change if stepDown() is called', async () => {
+    it('should not emit sl-input and sl-change when stepDown() is called programmatically', async () => {
       const el = await fixture<SlInput>(html` <sl-input type="number" step="2" value="2"></sl-input> `);
 
-      const inputHandler = sinon.spy();
-      const changeHandler = sinon.spy();
-      el.addEventListener('sl-input', inputHandler);
-      el.addEventListener('sl-change', changeHandler);
+      el.addEventListener('sl-change', () => expect.fail('sl-change should not be emitted'));
+      el.addEventListener('sl-input', () => expect.fail('sl-input should not be emitted'));
+      el.stepDown();
 
-      el.stepUp();
+      await el.updateComplete;
+    });
+  });
 
-      await waitUntil(() => inputHandler.calledOnce);
-      await waitUntil(() => changeHandler.calledOnce);
-      expect(changeHandler).to.have.been.calledOnce;
+  describe('when using spellcheck', () => {
+    it('should enable spellcheck when no attribute is present', async () => {
+      const el = await fixture<SlInput>(html` <sl-input></sl-input> `);
+      const input = el.shadowRoot!.querySelector<HTMLInputElement>('input')!;
+      expect(input.getAttribute('spellcheck')).to.equal('true');
+      expect(input.spellcheck).to.be.true;
+    });
+
+    it('should enable spellcheck when set to "true"', async () => {
+      const el = await fixture<SlInput>(html` <sl-input spellcheck="true"></sl-input> `);
+      const input = el.shadowRoot!.querySelector<HTMLInputElement>('input')!;
+      expect(input.getAttribute('spellcheck')).to.equal('true');
+      expect(input.spellcheck).to.be.true;
+    });
+
+    it('should disable spellcheck when set to "false"', async () => {
+      const el = await fixture<SlInput>(html` <sl-input spellcheck="false"></sl-input> `);
+      const input = el.shadowRoot!.querySelector<HTMLInputElement>('input')!;
+      expect(input.getAttribute('spellcheck')).to.equal('false');
+      expect(input.spellcheck).to.be.false;
     });
   });
 });

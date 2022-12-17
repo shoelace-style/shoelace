@@ -20,13 +20,14 @@ export default css`
 
   .image-comparer__before,
   .image-comparer__after {
+    display: block;
     pointer-events: none;
   }
 
-  .image-comparer__before ::slotted(img),
-  .image-comparer__after ::slotted(img),
-  .image-comparer__before ::slotted(svg),
-  .image-comparer__after ::slotted(svg) {
+  .image-comparer__before::slotted(img),
+  .image-comparer__after::slotted(img),
+  .image-comparer__before::slotted(svg),
+  .image-comparer__after::slotted(svg) {
     display: block;
     max-width: 100% !important;
     height: auto;
@@ -49,7 +50,7 @@ export default css`
     width: var(--divider-width);
     height: 100%;
     background-color: var(--sl-color-neutral-0);
-    transform: translateX(calc(var(--divider-width) / -2));
+    translate: calc(var(--divider-width) / -2);
     cursor: ew-resize;
   }
 

@@ -41,7 +41,6 @@ export default css`
     max-height: 100%;
     background-color: var(--sl-panel-background-color);
     box-shadow: var(--sl-shadow-x-large);
-    transition: var(--sl-transition-medium) transform;
     overflow: auto;
     pointer-events: all;
   }
@@ -118,6 +117,7 @@ export default css`
 
   .drawer__body {
     flex: 1 1 auto;
+    display: block;
     padding: var(--body-spacing);
     overflow: auto;
     -webkit-overflow-scrolling: touch;
@@ -148,7 +148,7 @@ export default css`
   }
 
   .drawer--contained .drawer__overlay {
-    position: absolute;
+    display: none;
   }
 
   @media (forced-colors: active) {

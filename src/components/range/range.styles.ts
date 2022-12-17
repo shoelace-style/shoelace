@@ -72,8 +72,6 @@ export default css`
     border: solid var(--sl-input-border-width) var(--sl-color-primary-600);
     -webkit-appearance: none;
     margin-top: calc(var(--thumb-size) / -2 + var(--track-height) / 2);
-    transition: var(--sl-transition-fast) border-color, var(--sl-transition-fast) background-color,
-      var(--sl-transition-fast) color, var(--sl-transition-fast) box-shadow, var(--sl-transition-fast) transform;
     cursor: pointer;
   }
 
@@ -120,7 +118,7 @@ export default css`
     background-color: var(--sl-color-primary-600);
     border-color: var(--sl-color-primary-600);
     transition: var(--sl-transition-fast) border-color, var(--sl-transition-fast) background-color,
-      var(--sl-transition-fast) color, var(--sl-transition-fast) box-shadow, var(--sl-transition-fast) transform;
+      var(--sl-transition-fast) color, var(--sl-transition-fast) box-shadow;
     cursor: pointer;
   }
 
@@ -181,7 +179,7 @@ export default css`
     width: 0;
     height: 0;
     left: 50%;
-    transform: translateX(calc(-1 * var(--sl-tooltip-arrow-size)));
+    translate: calc(-1 * var(--sl-tooltip-arrow-size));
   }
 
   .range--tooltip-visible .range__tooltip {

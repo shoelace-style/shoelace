@@ -110,7 +110,7 @@
           .map(
             method => `
               <tr>
-                <td class="nowrap"><code>${escapeHtml(method.name)}</code></td>
+                <td class="nowrap"><code>${escapeHtml(method.name)}()</code></td>
                 <td>${escapeHtml(method.description)}</td>
                 <td>
                   ${
@@ -283,6 +283,7 @@
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&apos;')
+      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" rel="noopener noreferrer" target="_blank">$1</a>')
       .replace(/`(.*?)`/g, '<code>$1</code>');
   }
 
@@ -484,12 +485,21 @@
           `;
         }
 
+        if (component.slots?.length) {
+          result += `
+            ## Slots
+            ${createSlotsTable(component.slots)}
+
+            _Learn more about [using slots](/getting-started/usage#slots)._
+          `;
+        }
+
         if (props?.length) {
           result += `
-            ## Properties
+            ## Attributes & Properties
             ${createPropsTable(props)}
 
-            _Learn more about [properties and attributes](/getting-started/usage#properties)._
+            _Learn more about [attributes and properties](/getting-started/usage#properties)._
           `;
         }
 
@@ -509,15 +519,6 @@
             ${createMethodsTable(methods)}
 
             _Learn more about [calling methods](/getting-started/usage#methods)._
-          `;
-        }
-
-        if (component.slots?.length) {
-          result += `
-            ## Slots
-            ${createSlotsTable(component.slots)}
-
-            _Learn more about [using slots](/getting-started/usage#slots)._
           `;
         }
 

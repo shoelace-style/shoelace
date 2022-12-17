@@ -51,7 +51,6 @@ export default css`
   .dialog--open .dialog__panel {
     display: flex;
     opacity: 1;
-    transform: none;
   }
 
   .dialog__header {
@@ -87,6 +86,7 @@ export default css`
 
   .dialog__body {
     flex: 1 1 auto;
+    display: block;
     padding: var(--body-spacing);
     overflow: auto;
     -webkit-overflow-scrolling: touch;

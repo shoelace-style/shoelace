@@ -19,17 +19,17 @@ import type { CSSResultGroup } from 'lit';
  *
  * @event sl-remove - Emitted when the remove button is activated.
  *
- * @csspart base - The component's internal wrapper.
- * @csspart content - The tag content.
- * @csspart remove-button - The remove button.
- * @csspart remove-button__base - The remove button's `base` part.
+ * @csspart base - The component's base wrapper.
+ * @csspart content - The tag's content.
+ * @csspart remove-button - The tag's remove button, an `<sl-icon-button>`.
+ * @csspart remove-button__base - The remove button's exported `base` part.
  */
 @customElement('sl-tag')
 export default class SlTag extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
   private readonly localize = new LocalizeController(this);
 
-  /** The tag's variant. */
+  /** The tag's theme variant. */
   @property({ reflect: true }) variant: 'primary' | 'success' | 'neutral' | 'warning' | 'danger' | 'text' = 'neutral';
 
   /** The tag's size. */
@@ -38,7 +38,7 @@ export default class SlTag extends ShoelaceElement {
   /** Draws a pill-style tag with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;
 
-  /** Makes the tag removable. */
+  /** Makes the tag removable and shows a remove button. */
   @property({ type: Boolean }) removable = false;
 
   handleRemoveClick() {
@@ -70,9 +70,7 @@ export default class SlTag extends ShoelaceElement {
           'tag--removable': this.removable
         })}
       >
-        <span part="content" class="tag__content">
-          <slot></slot>
-        </span>
+        <slot part="content" class="tag__content"></slot>
 
         ${this.removable
           ? html`

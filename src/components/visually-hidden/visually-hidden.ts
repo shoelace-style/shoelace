@@ -10,7 +10,7 @@ import type { CSSResultGroup } from 'lit';
  * @since 2.0
  * @status stable
  *
- * @slot - The content you'd like to be visually hidden.
+ * @slot - The content to be visually hidden.
  */
 @customElement('sl-visually-hidden')
 export default class SlVisuallyHidden extends ShoelaceElement {

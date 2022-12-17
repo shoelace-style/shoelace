@@ -583,11 +583,11 @@ const App = () => (
 
 ### Customizing the Divider
 
-You can target the `divider` part to apply CSS properties to the divider. To add a handle, slot an icon or another element into the `handle` slot. When customizing the divider, make sure to think about focus styles for keyboard users.
+You can target the `divider` part to apply CSS properties to the divider. To add a custom handle, slot an icon into the `divider` slot. When customizing the divider, make sure to think about focus styles for keyboard users.
 
 ```html preview
 <sl-split-panel style="--divider-width: 20px;">
-  <sl-icon slot="handle" name="grip-vertical" library="bootstrap" library="bootstrap"></sl-icon>
+  <sl-icon slot="divider" name="grip-vertical" library="bootstrap"></sl-icon>
   <div
     slot="start"
     style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
@@ -608,7 +608,7 @@ import { SlSplitPanel, SlIcon } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlSplitPanel style={{ '--divider-width': '20px' }}>
-    <SlIcon slot="handle" name="grip-vertical" library="bootstrap" library="bootstrap" />
+    <SlIcon slot="divider" name="grip-vertical" library="bootstrap" />
     <div
       slot="start"
       style={{
@@ -640,9 +640,9 @@ const App = () => (
 Here's a more elaborate example that changes the divider's color and width and adds a styled handle.
 
 ```html preview
-<div class="split-panel-handle">
+<div class="split-panel-divider">
   <sl-split-panel>
-    <sl-icon slot="handle" name="grip-vertical" library="bootstrap"></sl-icon>
+    <sl-icon slot="divider" name="grip-vertical" library="bootstrap"></sl-icon>
     <div
       slot="start"
       style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
@@ -659,15 +659,15 @@ Here's a more elaborate example that changes the divider's color and width and a
 </div>
 
 <style>
-  .split-panel-handle sl-split-panel {
+  .split-panel-divider sl-split-panel {
     --divider-width: 2px;
   }
 
-  .split-panel-handle sl-split-panel::part(divider) {
+  .split-panel-divider sl-split-panel::part(divider) {
     background-color: var(--sl-color-pink-600);
   }
 
-  .split-panel-handle sl-icon {
+  .split-panel-divider sl-icon {
     position: absolute;
     border-radius: var(--sl-border-radius-small);
     background: var(--sl-color-pink-600);
@@ -675,11 +675,11 @@ Here's a more elaborate example that changes the divider's color and width and a
     padding: 0.5rem 0.125rem;
   }
 
-  .split-panel-handle sl-split-panel::part(divider):focus-visible {
+  .split-panel-divider sl-split-panel::part(divider):focus-visible {
     background-color: var(--sl-color-primary-600);
   }
 
-  .split-panel-handle sl-split-panel:focus-within sl-icon {
+  .split-panel-divider sl-split-panel:focus-within sl-icon {
     background-color: var(--sl-color-primary-600);
     color: var(--sl-color-neutral-0);
   }
@@ -690,15 +690,15 @@ Here's a more elaborate example that changes the divider's color and width and a
 import { SlSplitPanel, SlIcon } from '@shoelace-style/shoelace/dist/react';
 
 const css = `
-  .split-panel-handle sl-split-panel {
+  .split-panel-divider sl-split-panel {
     --divider-width: 2px;
   }
 
-  .split-panel-handle sl-split-panel::part(divider) {
+  .split-panel-divider sl-split-panel::part(divider) {
     background-color: var(--sl-color-pink-600);
   }
 
-  .split-panel-handle sl-icon {
+  .split-panel-divider sl-icon {
     position: absolute;
     border-radius: var(--sl-border-radius-small);
     background: var(--sl-color-pink-600);
@@ -706,11 +706,11 @@ const css = `
     padding: .5rem .125rem;
   }
 
-  .split-panel-handle sl-split-panel::part(divider):focus-visible {
+  .split-panel-divider sl-split-panel::part(divider):focus-visible {
     background-color: var(--sl-color-primary-600);
   }
 
-  .split-panel-handle sl-split-panel:focus-within sl-icon {
+  .split-panel-divider sl-split-panel:focus-within sl-icon {
     background-color: var(--sl-color-primary-600);
     color: var(--sl-color-neutral-0);
   }
@@ -718,9 +718,9 @@ const css = `
 
 const App = () => (
   <>
-    <div className="split-panel-handle">
+    <div className="split-panel-divider">
       <SlSplitPanel>
-        <SlIcon slot="handle" name="grip-vertical" library="bootstrap" />
+        <SlIcon slot="divider" name="grip-vertical" library="bootstrap" />
         <div
           slot="start"
           style={{

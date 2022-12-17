@@ -19,24 +19,24 @@ import type { CSSResultGroup } from 'lit';
  *
  * @dependency sl-icon-button
  *
- * @slot - Used for grouping tab panels in the tab group.
- * @slot nav - Used for grouping tabs in the tab group.
+ * @slot - Used for grouping tab panels in the tab group. Must be `<sl-tab-panel>` elements.
+ * @slot nav - Used for grouping tabs in the tab group. Must be `<sl-tab>` elements.
  *
  * @event {{ name: String }} sl-tab-show - Emitted when a tab is shown.
  * @event {{ name: String }} sl-tab-hide - Emitted when a tab is hidden.
  *
- * @csspart base - The component's internal wrapper.
- * @csspart nav - The tab group navigation container.
- * @csspart tabs - The container that wraps the slotted tabs.
- * @csspart active-tab-indicator - An element that displays the currently selected tab. This is a child of the tabs container.
- * @csspart body - The tab group body where tab panels are slotted in.
- * @csspart scroll-button - The previous and next scroll buttons that appear when tabs are scrollable.
- * @csspart scroll-button--start - Targets the starting scroll button.
- * @csspart scroll-button--end - Targets the ending scroll button.
- * @csspart scroll-button__base - The scroll button's `base` part.
+ * @csspart base - The component's base wrapper.
+ * @csspart nav - The tab group's navigation container where tabs are slotted in.
+ * @csspart tabs - The container that wraps the tabs.
+ * @csspart active-tab-indicator - The line that highlights the currently selected tab.
+ * @csspart body - The tab group's body where tab panels are slotted in.
+ * @csspart scroll-button - The previous/next scroll buttons that show when tabs are scrollable, an `<sl-icon-button>`.
+ * @csspart scroll-button--start - The starting scroll button.
+ * @csspart scroll-button--end - The ending scroll button.
+ * @csspart scroll-button__base - The scroll button's exported `base` part.
  *
  * @cssproperty --indicator-color - The color of the active tab indicator.
- * @cssproperty --track-color - The color of the indicator's track (i.e. the line that separates tabs from panels).
+ * @cssproperty --track-color - The color of the indicator's track (the line that separates tabs from panels).
  * @cssproperty --track-width - The width of the indicator's track (the line that separates tabs from panels).
  */
 @customElement('sl-tab-group')
@@ -45,7 +45,7 @@ export default class SlTabGroup extends ShoelaceElement {
   private readonly localize = new LocalizeController(this);
 
   @query('.tab-group') tabGroup: HTMLElement;
-  @query('.tab-group__body') body: HTMLElement;
+  @query('.tab-group__body') body: HTMLSlotElement;
   @query('.tab-group__nav') nav: HTMLElement;
   @query('.tab-group__indicator') indicator: HTMLElement;
 
@@ -131,8 +131,7 @@ export default class SlTabGroup extends ShoelaceElement {
   }
 
   getAllPanels() {
-    const slot = this.body.querySelector('slot')!;
-    return [...slot.assignedElements()].filter(el => el.tagName.toLowerCase() === 'sl-tab-panel') as [SlTabPanel];
+    return [...this.body.assignedElements()].filter(el => el.tagName.toLowerCase() === 'sl-tab-panel') as [SlTabPanel];
   }
 
   getActiveTab() {
@@ -331,14 +330,14 @@ export default class SlTabGroup extends ShoelaceElement {
       case 'bottom':
         this.indicator.style.width = `${width}px`;
         this.indicator.style.height = 'auto';
-        this.indicator.style.transform = isRtl ? `translateX(${-1 * offset.left}px)` : `translateX(${offset.left}px)`;
+        this.indicator.style.translate = isRtl ? `${-1 * offset.left}px` : `${offset.left}px`;
         break;
 
       case 'start':
       case 'end':
         this.indicator.style.width = 'auto';
         this.indicator.style.height = `${height}px`;
-        this.indicator.style.transform = `translateY(${offset.top}px)`;
+        this.indicator.style.translate = `0 ${offset.top}px`;
         break;
     }
   }
@@ -405,9 +404,7 @@ export default class SlTabGroup extends ShoelaceElement {
             : ''}
         </div>
 
-        <div part="body" class="tab-group__body">
-          <slot @slotchange=${this.syncTabsAndPanels}></slot>
-        </div>
+        <slot part="body" class="tab-group__body" @slotchange=${this.syncTabsAndPanels}></slot>
       </div>
     `;
   }

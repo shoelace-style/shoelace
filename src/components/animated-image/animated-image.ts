@@ -17,9 +17,10 @@ import type { CSSResultGroup } from 'lit';
  * @event sl-load - Emitted when the image loads successfully.
  * @event sl-error - Emitted when the image fails to load.
  *
+ * @slot play-icon - Optional play icon to use instead of the default. Works best with `<sl-icon>`.
+ * @slot pause-icon - Optional pause icon to use instead of the default. Works best with `<sl-icon>`.
+ *
  * @part - control-box - The container that surrounds the pause/play icons and provides their background.
- * @part - play-icon - The icon to use for the play button.
- * @part - pause-icon - The icon to use for the pause button.
  *
  * @cssproperty --control-box-size - The size of the icon box.
  * @cssproperty --icon-size - The size of the play/pause icons.
@@ -33,13 +34,13 @@ export default class SlAnimatedImage extends ShoelaceElement {
 
   @query('.animated-image__animated') animatedImage: HTMLImageElement;
 
-  /** The image's src attribute. */
+  /** The path to the image to load. */
   @property() src: string;
 
-  /** The image's alt attribute. */
+  /** A description of the image used by assistive devices. */
   @property() alt: string;
 
-  /** When set, the image will animate. Otherwise, it will be paused. */
+  /** Plays the animation. When this attribute is remove, the animation will pause. */
   @property({ type: Boolean, reflect: true }) play: boolean;
 
   handleClick() {
@@ -104,9 +105,8 @@ export default class SlAnimatedImage extends ShoelaceElement {
               />
 
               <div part="control-box" class="animated-image__control-box">
-                ${this.play
-                  ? html`<sl-icon part="pause-icon" name="pause-fill" library="system"></sl-icon>`
-                  : html`<sl-icon part="play-icon" name="play-fill" library="system"></sl-icon>`}
+                <slot name="play-icon"><sl-icon name="play-fill" library="system"></sl-icon></slot>
+                <slot name="pause-icon"><sl-icon name="pause-fill" library="system"></sl-icon></slot>
               </div>
             `
           : ''}

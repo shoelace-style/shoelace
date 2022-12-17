@@ -1,8 +1,6 @@
 let basePath = '';
 
-/**
- * Sets the library's base path to the specified directory.
- */
+/** Sets the library's base path to the specified directory. */
 export function setBasePath(path: string) {
   basePath = path;
 }
@@ -16,7 +14,7 @@ export function setBasePath(path: string) {
  * (it probably makes the most sense to attach it to the Shoelace script, but it could also be on a bundle). The value
  * can be a local folder or it can point to a CORS-enabled endpoint such as a CDN.
  *
- *  <script src="bundle.js" data-shoelace="/custom/base/path"></script>
+ *   <script src="bundle.js" data-shoelace="/custom/base/path"></script>
  *
  * Alternatively, you can set the base path manually using the exported setBasePath() function.
  */

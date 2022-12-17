@@ -16,8 +16,8 @@ import type { CSSResultGroup } from 'lit';
  * @event sl-finish - Emitted when the animation finishes.
  * @event sl-start - Emitted when the animation starts or restarts.
  *
- * @slot - The element to animate. If multiple elements are to be animated, wrap them in a single container or use
- * multiple animation elements.
+ * @slot - The element to animate. Avoid slotting in more than one element, as subsequent ones will be ignored. To
+ *  animate multiple elements, either wrap them in a single container or use multiple `<sl-animation>` elements.
  */
 @customElement('sl-animation')
 export default class SlAnimation extends ShoelaceElement {
@@ -40,7 +40,10 @@ export default class SlAnimation extends ShoelaceElement {
   /** The number of milliseconds to delay the start of the animation. */
   @property({ type: Number }) delay = 0;
 
-  /** Determines the direction of playback as well as the behavior when reaching the end of an iteration. */
+  /**
+   * Determines the direction of playback as well as the behavior when reaching the end of an iteration.
+   * [Learn more](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction)
+   */
   @property() direction: PlaybackDirection = 'normal';
 
   /** The number of milliseconds each iteration of the animation takes to complete. */
@@ -202,7 +205,7 @@ export default class SlAnimation extends ShoelaceElement {
     }
   }
 
-  /** Clears all KeyframeEffects caused by this animation and aborts its playback. */
+  /** Clears all keyframe effects caused by this animation and aborts its playback. */
   cancel() {
     this.animation?.cancel();
   }

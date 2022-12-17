@@ -26,7 +26,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @dependency sl-popup
  *
- * @slot - The dropdown's content.
+ * @slot - The dropdown's main content.
  * @slot trigger - The dropdown's trigger, usually a `<sl-button>` element.
  *
  * @event sl-show - Emitted when the dropdown opens.
@@ -34,7 +34,7 @@ import type { CSSResultGroup } from 'lit';
  * @event sl-hide - Emitted when the dropdown closes.
  * @event sl-after-hide - Emitted after the dropdown closes and all animations are complete.
  *
- * @csspart base - The component's internal wrapper.
+ * @csspart base - The component's base wrapper.
  * @csspart trigger - The container that wraps the trigger.
  * @csspart panel - The panel that gets shown when the dropdown is open.
  *
@@ -46,12 +46,15 @@ export default class SlDropdown extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   @query('.dropdown') popup: SlPopup;
-  @query('.dropdown__trigger') trigger: HTMLElement;
-  @query('.dropdown__panel') panel: HTMLElement;
+  @query('.dropdown__trigger') trigger: HTMLSlotElement;
+  @query('.dropdown__panel') panel: HTMLSlotElement;
 
   private readonly localize = new LocalizeController(this);
 
-  /** Indicates whether or not the dropdown is open. You can use this in lieu of the show/hide methods. */
+  /**
+   * Indicates whether or not the dropdown is open. You can toggle this attribute to show and hide the dropdown, or you
+   * can use the `show()` and `hide()` methods and this attribute will reflect the dropdown's open state.
+   */
   @property({ type: Boolean, reflect: true }) open = false;
 
   /**
@@ -77,11 +80,14 @@ export default class SlDropdown extends ShoelaceElement {
 
   /**
    * By default, the dropdown is closed when an item is selected. This attribute will keep it open instead. Useful for
-   * controls that allow multiple selections.
+   * dropdowns that allow for multiple interactions.
    */
   @property({ attribute: 'stay-open-on-select', type: Boolean, reflect: true }) stayOpenOnSelect = false;
 
-  /** The dropdown will close when the user interacts outside of this element (e.g. clicking). */
+  /**
+   * The dropdown will close when the user interacts outside of this element (e.g. clicking). Useful for composing other
+   * components that use a dropdown internally.
+   */
   @property({ attribute: false }) containingElement?: HTMLElement;
 
   /** The distance in pixels from which to offset the panel away from its trigger. */
@@ -92,7 +98,7 @@ export default class SlDropdown extends ShoelaceElement {
 
   /**
    * Enable this option to prevent the panel from being clipped when the component is placed inside a container with
-   * `overflow: auto|scroll`.
+   * `overflow: auto|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all, scenarios.
    */
   @property({ type: Boolean }) hoist = false;
 
@@ -126,16 +132,14 @@ export default class SlDropdown extends ShoelaceElement {
   }
 
   focusOnTrigger() {
-    const slot = this.trigger.querySelector('slot')!;
-    const trigger = slot.assignedElements({ flatten: true })[0] as HTMLElement | undefined;
+    const trigger = this.trigger.assignedElements({ flatten: true })[0] as HTMLElement | undefined;
     if (typeof trigger?.focus === 'function') {
       trigger.focus();
     }
   }
 
   getMenu() {
-    const slot = this.panel.querySelector('slot')!;
-    return slot.assignedElements({ flatten: true }).find(el => el.tagName.toLowerCase() === 'sl-menu') as
+    return this.panel.assignedElements({ flatten: true }).find(el => el.tagName.toLowerCase() === 'sl-menu') as
       | SlMenu
       | undefined;
   }
@@ -293,8 +297,7 @@ export default class SlDropdown extends ShoelaceElement {
   // To determine this, we assume the first tabbable element in the trigger slot is the "accessible trigger."
   //
   updateAccessibleTrigger() {
-    const slot = this.trigger.querySelector('slot')!;
-    const assignedElements = slot.assignedElements({ flatten: true }) as HTMLElement[];
+    const assignedElements = this.trigger.assignedElements({ flatten: true }) as HTMLElement[];
     const accessibleTrigger = assignedElements.find(el => getTabbableBoundary(el).start);
     let target: HTMLElement;
 
@@ -415,25 +418,23 @@ export default class SlDropdown extends ShoelaceElement {
           'dropdown--open': this.open
         })}
       >
-        <span
+        <slot
+          name="trigger"
           slot="anchor"
           part="trigger"
           class="dropdown__trigger"
           @click=${this.handleTriggerClick}
           @keydown=${this.handleTriggerKeyDown}
           @keyup=${this.handleTriggerKeyUp}
-        >
-          <slot name="trigger" @slotchange=${this.handleTriggerSlotChange}></slot>
-        </span>
+          @slotchange=${this.handleTriggerSlotChange}
+        ></slot>
 
-        <div
+        <slot
           part="panel"
           class="dropdown__panel"
           aria-hidden=${this.open ? 'false' : 'true'}
           aria-labelledby="dropdown"
-        >
-          <slot></slot>
-        </div>
+        ></slot>
       </sl-popup>
     `;
   }
@@ -441,16 +442,16 @@ export default class SlDropdown extends ShoelaceElement {
 
 setDefaultAnimation('dropdown.show', {
   keyframes: [
-    { opacity: 0, transform: 'scale(0.9)' },
-    { opacity: 1, transform: 'scale(1)' }
+    { opacity: 0, scale: 0.9 },
+    { opacity: 1, scale: 1 }
   ],
   options: { duration: 100, easing: 'ease' }
 });
 
 setDefaultAnimation('dropdown.hide', {
   keyframes: [
-    { opacity: 1, transform: 'scale(1)' },
-    { opacity: 0, transform: 'scale(0.9)' }
+    { opacity: 1, scale: 1 },
+    { opacity: 0, scale: 0.9 }
   ],
   options: { duration: 100, easing: 'ease' }
 });

@@ -12,21 +12,21 @@ import type { CSSResultGroup } from 'lit';
  * @since 2.0
  * @status stable
  *
- * @slot - The card's body.
- * @slot header - The card's header.
- * @slot footer - The card's footer.
- * @slot image - The card's image.
+ * @slot - The card's main content.
+ * @slot header - An optional header for the card.
+ * @slot footer - An optional footer for the card.
+ * @slot image - An optional image to render at the start of the card.
  *
- * @csspart base - The component's internal wrapper.
- * @csspart image - The card's image, if present.
- * @csspart header - The card's header, if present.
- * @csspart body - The card's body.
- * @csspart footer - The card's footer, if present.
+ * @csspart base - The component's base wrapper.
+ * @csspart image - The container that wraps the card's image.
+ * @csspart header - The container that wraps the card's header.
+ * @csspart body - The container that wraps the card's main content.
+ * @csspart footer - The container that wraps the card's footer.
  *
  * @cssproperty --border-color - The card's border color, including borders that occur inside the card.
- * @cssproperty --border-radius - The border radius for card edges.
- * @cssproperty --border-width - The width of card borders.
- * @cssproperty --padding - The padding to use for card sections.*
+ * @cssproperty --border-radius - The border radius for the card's edges.
+ * @cssproperty --border-width - The width of the card's borders.
+ * @cssproperty --padding - The padding to use for the card's sections.
  */
 @customElement('sl-card')
 export default class SlCard extends ShoelaceElement {
@@ -45,21 +45,10 @@ export default class SlCard extends ShoelaceElement {
           'card--has-header': this.hasSlotController.test('header')
         })}
       >
-        <div part="image" class="card__image">
-          <slot name="photo"></slot>
-        </div>
-
-        <div part="header" class="card__header">
-          <slot name="header"></slot>
-        </div>
-
-        <div part="body" class="card__body">
-          <slot></slot>
-        </div>
-
-        <div part="footer" class="card__footer">
-          <slot name="footer"></slot>
-        </div>
+        <slot name="image" part="image" class="card__image"></slot>
+        <slot name="header" part="header" class="card__header"></slot>
+        <slot part="body" class="card__body"></slot>
+        <slot name="footer" part="footer" class="card__footer"></slot>
       </div>
     `;
   }

@@ -21,12 +21,13 @@ import type { CSSResultGroup } from 'lit';
  *
  * @event sl-blur - Emitted when the control loses focus.
  * @event sl-change - Emitted when the control's checked state changes.
+ * @event sl-input - Emitted when the control receives input.
  * @event sl-focus - Emitted when the control gains focus.
  *
- * @csspart base - The component's internal wrapper.
- * @csspart control - The switch control.
- * @csspart thumb - The switch position indicator.
- * @csspart label - The switch label.
+ * @csspart base - The component's base wrapper.
+ * @csspart control - The control that houses the switch's thumb.
+ * @csspart thumb - The switch's thumb.
+ * @csspart label - The switch's label.
  *
  * @cssproperty --width - The width of the switch.
  * @cssproperty --height - The height of the switch.
@@ -47,12 +48,16 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
 
   @state() private hasFocus = false;
   @state() invalid = false;
+  @property() title = ''; // make reactive to pass through
 
-  /** The switch's name attribute. */
-  @property() name: string;
+  /** The name of the switch, submitted as a name/value pair with form data. */
+  @property() name = '';
 
-  /** The switch's value attribute. */
+  /** The current value of the switch, submitted as a name/value pair with form data. */
   @property() value: string;
+
+  /** The switch's size. */
+  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Disables the switch. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -63,7 +68,7 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
   /** Draws the switch in a checked state. */
   @property({ type: Boolean, reflect: true }) checked = false;
 
-  /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+  /** The default value of the form control. Primarily used for resetting the form control. */
   @defaultValue('checked') defaultChecked = false;
 
   firstUpdated() {
@@ -106,6 +111,10 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
     this.emit('sl-blur');
   }
 
+  handleInput() {
+    this.emit('sl-input');
+  }
+
   @watch('checked', { waitUntilFirstUpdate: true })
   handleCheckedChange() {
     this.input.checked = this.checked; // force a sync update
@@ -134,12 +143,14 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
       event.preventDefault();
       this.checked = false;
       this.emit('sl-change');
+      this.emit('sl-input');
     }
 
     if (event.key === 'ArrowRight') {
       event.preventDefault();
       this.checked = true;
       this.emit('sl-change');
+      this.emit('sl-input');
     }
   }
 
@@ -151,14 +162,17 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
           switch: true,
           'switch--checked': this.checked,
           'switch--disabled': this.disabled,
-          'switch--focused': this.hasFocus
+          'switch--focused': this.hasFocus,
+          'switch--small': this.size === 'small',
+          'switch--medium': this.size === 'medium',
+          'switch--large': this.size === 'large'
         })}
       >
         <input
           class="switch__input"
           type="checkbox"
-          title=${'' /* An empty title prevents browser validation tooltips from appearing on hover */}
-          name=${ifDefined(this.name)}
+          title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
+          name=${this.name}
           value=${ifDefined(this.value)}
           .checked=${live(this.checked)}
           .disabled=${this.disabled}
@@ -166,6 +180,7 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
           role="switch"
           aria-checked=${this.checked ? 'true' : 'false'}
           @click=${this.handleClick}
+          @input=${this.handleInput}
           @blur=${this.handleBlur}
           @focus=${this.handleFocus}
           @keydown=${this.handleKeyDown}
@@ -175,9 +190,7 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
           <span part="thumb" class="switch__thumb"></span>
         </span>
 
-        <span part="label" class="switch__label">
-          <slot></slot>
-        </span>
+        <slot part="label" class="switch__label"></slot>
       </label>
     `;
   }

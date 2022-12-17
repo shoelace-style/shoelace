@@ -20,8 +20,8 @@ import type { CSSResultGroup } from 'lit';
  *
  * @dependency sl-popup
  *
- * @slot - The tooltip's target element. Only the first element will be used as the target.
- * @slot content - The tooltip's content. Alternatively, you can use the `content` attribute.
+ * @slot - The tooltip's target element. Avoid slotting in more than one element, as subsequent ones will be ignored.
+ * @slot content - The content to render in the tooltip. Alternatively, you can use the `content` attribute.
  *
  * @event sl-show - Emitted when the tooltip begins to show.
  * @event sl-after-show - Emitted after the tooltip has shown and all animations are complete.
@@ -29,9 +29,9 @@ import type { CSSResultGroup } from 'lit';
  * @event sl-after-hide - Emitted after the tooltip has hidden and all animations are complete.
  *
  * @csspart base - The component's base wrapper, an `<sl-popup>` element.
- * @csspart base__popup - The popup's `popup` part. Use this to target the tooltip's popup container.
- * @csspart base__arrow - The popup's `arrow` part. Use this to target the tooltip's arrow.
- * @csspart body - The tooltip's body.
+ * @csspart base__popup - The popup's exported `popup` part. Use this to target the tooltip's popup container.
+ * @csspart base__arrow - The popup's exported `arrow` part. Use this to target the tooltip's arrow.
+ * @csspart body - The tooltip's body where its content is rendered.
  *
  * @cssproperty --max-width - The maximum width of the tooltip before its content will wrap.
  * @cssproperty --hide-delay - The amount of time to wait before hiding the tooltip when hovering.
@@ -51,7 +51,7 @@ export default class SlTooltip extends ShoelaceElement {
   private hoverTimeout: number;
   private readonly localize = new LocalizeController(this);
 
-  /** The tooltip's content. If you need to display HTML, you can use the `content` slot instead. */
+  /** The tooltip's content. If you need to display HTML, use the `content` slot instead. */
   @property() content = '';
 
   /**
@@ -93,7 +93,8 @@ export default class SlTooltip extends ShoelaceElement {
 
   /**
    * Enable this option to prevent the tooltip from being clipped when the component is placed inside a container with
-   * `overflow: auto|hidden|scroll`.
+   * `overflow: auto|hidden|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all,
+   * scenarios.
    */
   @property({ type: Boolean }) hoist = false;
 
@@ -292,9 +293,16 @@ export default class SlTooltip extends ShoelaceElement {
       >
         <slot slot="anchor" aria-describedby="tooltip"></slot>
 
-        <div part="body" id="tooltip" class="tooltip__body" role="tooltip" aria-hidden=${this.open ? 'false' : 'true'}>
-          <slot name="content" aria-live=${this.open ? 'polite' : 'off'}> ${this.content} </slot>
-        </div>
+        <slot
+          name="content"
+          part="body"
+          id="tooltip"
+          class="tooltip__body"
+          role="tooltip"
+          aria-live=${this.open ? 'polite' : 'off'}
+        >
+          ${this.content}
+        </slot>
       </sl-popup>
     `;
   }
@@ -302,16 +310,16 @@ export default class SlTooltip extends ShoelaceElement {
 
 setDefaultAnimation('tooltip.show', {
   keyframes: [
-    { opacity: 0, transform: 'scale(0.8)' },
-    { opacity: 1, transform: 'scale(1)' }
+    { opacity: 0, scale: 0.8 },
+    { opacity: 1, scale: 1 }
   ],
   options: { duration: 150, easing: 'ease' }
 });
 
 setDefaultAnimation('tooltip.hide', {
   keyframes: [
-    { opacity: 1, transform: 'scale(1)' },
-    { opacity: 0, transform: 'scale(0.8)' }
+    { opacity: 1, scale: 1 },
+    { opacity: 0, scale: 0.8 }
   ],
   options: { duration: 150, easing: 'ease' }
 });

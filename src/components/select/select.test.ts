@@ -1,6 +1,8 @@
-import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
+import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
+import { clickOnElement } from '../../internal/test';
+import type SlMenuItem from '../menu-item/menu-item';
 import type SlSelect from './select';
 
 describe('<sl-select>', () => {
@@ -45,21 +47,78 @@ describe('<sl-select>', () => {
     expect(submitHandler).to.have.been.calledOnce;
   });
 
-  it('should emit sl-change when the value changes', async () => {
-    const el = await fixture<SlSelect>(html`
-      <sl-select>
-        <sl-menu-item value="option-1">Option 1</sl-menu-item>
-        <sl-menu-item value="option-2">Option 2</sl-menu-item>
-        <sl-menu-item value="option-3">Option 3</sl-menu-item>
-      </sl-select>
-    `);
-    const changeHandler = sinon.spy();
+  describe('when the value changes', () => {
+    it('should emit sl-change when the value is changed with the mouse', async () => {
+      const el = await fixture<SlSelect>(html`
+        <sl-select value="option-1">
+          <sl-menu-item value="option-1">Option 1</sl-menu-item>
+          <sl-menu-item value="option-2">Option 2</sl-menu-item>
+          <sl-menu-item value="option-3">Option 3</sl-menu-item>
+        </sl-select>
+      `);
+      const trigger = el.shadowRoot!.querySelector<HTMLElement>('[part~="control"]')!;
+      const secondOption = el.querySelectorAll<SlMenuItem>('sl-menu-item')[1];
+      const changeHandler = sinon.spy();
+      const inputHandler = sinon.spy();
 
-    el.addEventListener('sl-change', changeHandler);
-    el.value = 'option-2';
-    await waitUntil(() => changeHandler.calledOnce);
+      el.addEventListener('sl-change', changeHandler);
+      el.addEventListener('sl-input', inputHandler);
 
-    expect(changeHandler).to.have.been.calledOnce;
+      await clickOnElement(trigger);
+      await el.updateComplete;
+      await clickOnElement(secondOption);
+      await el.updateComplete;
+
+      expect(changeHandler).to.have.been.calledOnce;
+      expect(inputHandler).to.have.been.calledOnce;
+      expect(el.value).to.equal('option-2');
+    });
+
+    it('should emit sl-change and sl-input when the value is changed with the keyboard', async () => {
+      const el = await fixture<SlSelect>(html`
+        <sl-select value="option-1">
+          <sl-menu-item value="option-1">Option 1</sl-menu-item>
+          <sl-menu-item value="option-2">Option 2</sl-menu-item>
+          <sl-menu-item value="option-3">Option 3</sl-menu-item>
+        </sl-select>
+      `);
+      const changeHandler = sinon.spy();
+      const inputHandler = sinon.spy();
+
+      el.addEventListener('sl-change', changeHandler);
+      el.addEventListener('sl-input', inputHandler);
+
+      el.focus();
+      await el.updateComplete;
+      await sendKeys({ press: ' ' }); // open the dropdown
+      await aTimeout(500); // wait for the dropdown to open
+      await sendKeys({ press: 'ArrowDown' }); // select the first option
+      await el.updateComplete;
+      await sendKeys({ press: 'ArrowDown' }); // select the second option
+      await el.updateComplete;
+      await sendKeys({ press: 'Enter' }); // commit the selection
+      await el.updateComplete;
+
+      expect(changeHandler).to.have.been.calledOnce;
+      expect(inputHandler).to.have.been.calledOnce;
+      expect(el.value).to.equal('option-2');
+    });
+
+    it('should not emit sl-change or sl-input when the value is changed programmatically', async () => {
+      const el = await fixture<SlSelect>(html`
+        <sl-select value="option-1">
+          <sl-menu-item value="option-1">Option 1</sl-menu-item>
+          <sl-menu-item value="option-2">Option 2</sl-menu-item>
+          <sl-menu-item value="option-3">Option 3</sl-menu-item>
+        </sl-select>
+      `);
+
+      el.addEventListener('sl-change', () => expect.fail('sl-change should not be emitted'));
+      el.addEventListener('sl-input', () => expect.fail('sl-input should not be emitted'));
+      el.value = 'option-2';
+
+      await el.updateComplete;
+    });
   });
 
   it('should open the menu when any letter key is pressed with sl-select is on focus', async () => {

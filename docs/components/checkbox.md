@@ -58,6 +58,32 @@ import { SlCheckbox } from '@shoelace-style/shoelace/dist/react';
 const App = () => <SlCheckbox disabled>Disabled</SlCheckbox>;
 ```
 
+## Sizes
+
+Use the `size` attribute to change a checkbox's size.
+
+```html preview
+<sl-checkbox size="small">Small</sl-checkbox>
+<br />
+<sl-checkbox size="medium">Medium</sl-checkbox>
+<br />
+<sl-checkbox size="large">Large</sl-checkbox>
+```
+
+```jsx react
+import { SlCheckbox } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <SlCheckbox size="small">Small</SlCheckbox>
+    <br />
+    <SlCheckbox size="medium">Medium</SlCheckbox>
+    <br />
+    <SlCheckbox size="large">Large</SlCheckbox>
+  </>
+);
+```
+
 ### Custom Validity
 
 Use the `setCustomValidity()` method to set a custom validation message. This will prevent the form from submitting and make the browser display the error message you provide. To clear the error, call this function with an empty string.
