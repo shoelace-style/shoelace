@@ -473,20 +473,17 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
       this.listbox.hidden = false;
       this.popup.active = true;
 
-      // Select the correct option
-      const currentOption = this.getOptionByValue(this.value);
-      this.setCurrentOption(currentOption);
-      this.setSelectedOption(currentOption);
-
-      // Scroll the selected option into view
       requestAnimationFrame(() => {
-        const selectedOption = this.getSelectedOption();
+        // Select the appropriate option based on value after the listbox opens
+        const option = this.getOptionByValue(this.value);
+        this.setCurrentOption(option);
+        this.setSelectedOption(option);
 
-        if (selectedOption) {
+        if (option) {
           //
           // TODO - improve this logic so the selected option is centered in the listbox instead of at the top
           //
-          this.listbox.scrollTop = selectedOption.offsetTop;
+          this.listbox.scrollTop = option.offsetTop;
         }
       });
 
