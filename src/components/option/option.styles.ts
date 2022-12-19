@@ -9,6 +9,10 @@ export default css`
     user-select: none;
   }
 
+  :host(:focus) {
+    outline: none;
+  }
+
   .option {
     position: relative;
     display: flex;
@@ -22,21 +26,20 @@ export default css`
     padding: var(--sl-spacing-2x-small) var(--sl-spacing-2x-small);
     transition: var(--sl-transition-fast) fill;
     user-select: none;
-    white-space: nowrap;
     cursor: pointer;
   }
 
-  :host(:hover) .option {
+  :host(:hover) .option:not(.option--current) {
     background-color: var(--sl-color-neutral-100);
     color: var(--sl-color-neutral-1000);
   }
 
-  :host([aria-selected='true']) .option {
+  .option--current {
     background-color: var(--sl-color-primary-600);
     color: var(--sl-color-neutral-0);
   }
 
-  .option.option--disabled {
+  .option--disabled {
     outline: none;
     opacity: 0.5;
     cursor: not-allowed;
@@ -45,7 +48,20 @@ export default css`
   .option__label {
     flex: 1 1 auto;
     display: inline-block;
-    padding: 0 var(--sl-spacing-large);
+    padding: 0 var(--sl-spacing-2x-small);
+  }
+
+  .option .option__check {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5em;
+    visibility: hidden;
+  }
+
+  .option--selected .option__check {
+    visibility: visible;
   }
 
   .option__prefix {

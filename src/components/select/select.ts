@@ -174,28 +174,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
       event.stopPropagation();
       this.hide();
     }
-  }
 
-  handleDocumentMouseDown(event: MouseEvent) {
-    // Close when clicking outside of the select
-    const path = event.composedPath();
-    if (this && !path.includes(this)) {
-      this.hide();
-    }
-  }
-
-  handleLabelClick() {
-    this.combobox.focus();
-  }
-
-  // We use mousedown/mouseup instead of click to allow macOS-style menu behavior
-  handleComboboxMouseDown(event: MouseEvent) {
-    event.preventDefault();
-    this.combobox.focus();
-    this.open = !this.open;
-  }
-
-  handleComboboxKeyDown(event: KeyboardEvent) {
     // Handle enter and space. When pressing space, we allow for type to select behaviors so if there's anything in the
     // buffer we _don't_ close it.
     if (event.key === 'Enter' || (event.key === ' ' && this.typeToSelectString === '')) {
@@ -208,10 +187,11 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
       }
 
       // If it is open, update the value based on the current selection and close it
-      const selectedOption = this.getSelectedOption();
-      if (selectedOption) {
-        this.value = selectedOption.value;
-        this.displayLabel = selectedOption.textContent ?? '';
+      const currentOption = this.getCurrentOption();
+      if (currentOption) {
+        this.setSelectedOption(currentOption);
+        this.value = currentOption.value;
+        this.displayLabel = currentOption.textContent ?? '';
       }
 
       this.hide();
@@ -222,9 +202,9 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     // Navigate options
     if (['ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
       const allOptions = this.getAllOptions();
-      const selectedOption = this.getSelectedOption();
-      const selectedIndex = allOptions.indexOf(selectedOption);
-      let newIndex = Math.max(0, selectedIndex);
+      const currentOption = this.getCurrentOption();
+      const currentIndex = allOptions.indexOf(currentOption);
+      let newIndex = Math.max(0, currentIndex);
 
       // Prevent scrolling
       event.preventDefault();
@@ -235,16 +215,16 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
         // If an option is already selected, stop here because we want that one to remain highlighted when the listbox
         // opens for the first time
-        if (selectedOption) {
+        if (currentOption) {
           return;
         }
       }
 
       if (event.key === 'ArrowDown') {
-        newIndex = selectedIndex + 1;
+        newIndex = currentIndex + 1;
         if (newIndex > allOptions.length - 1) newIndex = 0;
       } else if (event.key === 'ArrowUp') {
-        newIndex = selectedIndex - 1;
+        newIndex = currentIndex - 1;
         if (newIndex < 0) newIndex = allOptions.length - 1;
       } else if (event.key === 'Home') {
         newIndex = 0;
@@ -252,7 +232,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
         newIndex = allOptions.length - 1;
       }
 
-      this.setSelectedOption(allOptions[newIndex]);
+      this.setCurrentOption(allOptions[newIndex]);
     }
 
     // All other "printable" keys trigger type to select
@@ -291,11 +271,35 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
         const label = (option.textContent ?? '').toLowerCase();
 
         if (label.startsWith(this.typeToSelectString)) {
-          this.setSelectedOption(option);
+          this.setCurrentOption(option);
           break;
         }
       }
     }
+  }
+
+  handleDocumentMouseDown(event: MouseEvent) {
+    // Close when clicking outside of the select
+    const path = event.composedPath();
+    if (this && !path.includes(this)) {
+      this.hide();
+    }
+  }
+
+  handleLabelClick() {
+    this.combobox.focus();
+  }
+
+  // We use mousedown/mouseup instead of click to allow macOS-style menu behavior
+  handleComboboxMouseDown(event: MouseEvent) {
+    event.preventDefault();
+    this.combobox.focus();
+    this.open = !this.open;
+  }
+
+  handleComboboxKeyDown(event: KeyboardEvent) {
+    event.stopPropagation();
+    this.handleDocumentKeyDown(event);
   }
 
   handleClearClick(event: MouseEvent) {
@@ -359,21 +363,45 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     return this.getAllOptions().filter((el: SlOption) => el.value === value)[0];
   }
 
-  // Gets the option that currently has aria-selected="true"
-  getSelectedOption() {
-    return this.getAllOptions().filter(el => el.getAttribute('aria-selected') === 'true')[0];
+  // Gets the current option
+  getCurrentOption() {
+    return this.getAllOptions().filter(el => el.current)[0];
   }
 
-  // Adds aria-selected to the target option and removes it from all others
+  // Sets the current option
+  setCurrentOption(option: SlOption | null) {
+    const allOptions = this.getAllOptions();
+
+    // Clear selection
+    allOptions.forEach(el => {
+      el.current = false;
+      el.tabIndex = -1;
+    });
+
+    // Select the target option
+    if (option) {
+      option.current = true;
+      option.tabIndex = 0;
+      option.focus();
+      scrollIntoView(option, this.listbox);
+    }
+  }
+
+  // Gets the selected option
+  getSelectedOption() {
+    return this.getAllOptions().filter(el => el.selected)[0];
+  }
+
+  // Sets the selected option
   setSelectedOption(option: SlOption | null) {
     const allOptions = this.getAllOptions();
 
     // Clear selection
-    allOptions.forEach(el => el.setAttribute('aria-selected', 'false'));
+    allOptions.forEach(el => (el.selected = false));
 
     // Select the target option
     if (option) {
-      option.setAttribute('aria-selected', 'true');
+      option.selected = true;
       scrollIntoView(option, this.listbox);
     }
   }
@@ -445,12 +473,15 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
       this.listbox.hidden = false;
       this.popup.active = true;
 
-      // Make sure the current option is selected
-      this.setSelectedOption(this.getOptionByValue(this.value));
+      // Select the correct option
+      const currentOption = this.getOptionByValue(this.value);
+      this.setCurrentOption(currentOption);
+      this.setSelectedOption(currentOption);
 
       // Scroll the selected option into view
       requestAnimationFrame(() => {
         const selectedOption = this.getSelectedOption();
+
         if (selectedOption) {
           //
           // TODO - improve this logic so the selected option is centered in the listbox instead of at the top
@@ -555,9 +586,11 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
                 @blur=${this.handleBlur}
               >
                 <slot name="prefix" class="select__prefix"></slot>
-                <span class="select__display-label"
-                  >${isPlaceholderVisible ? this.placeholder : this.displayLabel}</span
-                >
+                <span class="select__display-label-wrapper">
+                  <span class="select__display-label">
+                    ${isPlaceholderVisible ? this.placeholder : this.displayLabel}
+                  </span>
+                </span>
               </div>
 
               ${hasClearIcon
@@ -587,7 +620,9 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
             <slot
               id="listbox"
+              role="listbox"
               aria-expanded=${this.open ? 'true' : 'false'}
+              aria-multiselectable="false"
               aria-labelledby="label"
               part="panel"
               class="select__listbox"

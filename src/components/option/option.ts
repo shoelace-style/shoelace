@@ -1,7 +1,10 @@
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import ShoelaceElement from '../../internal/shoelace-element';
+import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
+import '../icon/icon';
 import styles from './option.styles';
 import type { CSSResultGroup } from 'lit';
 
@@ -31,6 +34,12 @@ export default class SlOption extends ShoelaceElement {
   /** The option's value. When selected, the containing form control will receive this value. */
   @property() value = '';
 
+  /** Draws the option in a current state, meaning the user has keyed into it but hasn't selected it yet. */
+  @property({ type: Boolean, reflect: true }) current = false;
+
+  /** Draws the option in a selected state. */
+  @property({ type: Boolean, reflect: true }) selected = false;
+
   /** Draws the option in a disabled state, preventing selection. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
@@ -40,9 +49,28 @@ export default class SlOption extends ShoelaceElement {
     this.setAttribute('aria-selected', 'false');
   }
 
+  @watch('disabled')
+  handleDisabledChange() {
+    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
+  }
+
+  @watch('selected')
+  handleSelectedChange() {
+    this.setAttribute('aria-selected', this.selected ? 'true' : 'false');
+  }
+
   render() {
     return html`
-      <div class="option">
+      <div
+        class=${classMap({
+          option: true,
+          'option--current': this.current,
+          'option--selected': this.selected
+        })}
+      >
+        <span part="checked-icon" class="option__check">
+          <sl-icon name="check" library="system" aria-hidden="true"></sl-icon>
+        </span>
         <slot name="prefix" class="option__prefix"></slot>
         <slot class="option__label"></slot>
         <slot name="suffix" class="option__suffix"></slot>

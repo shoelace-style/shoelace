@@ -34,6 +34,7 @@ export default css`
     flex: 1 0 auto;
     display: flex;
     width: 100%;
+    min-width: 0;
     font-family: var(--sl-input-font-family);
     font-weight: var(--sl-input-font-weight);
     letter-spacing: var(--sl-input-letter-spacing);
@@ -45,10 +46,11 @@ export default css`
   }
 
   .select__combobox {
-    flex: 1 0 auto;
+    flex: 1;
     display: flex;
     align-items: stretch;
     justify-content: start;
+    overflow: hidden;
   }
 
   .select__combobox:focus {
@@ -159,12 +161,18 @@ export default css`
     border-radius: var(--sl-input-height-large);
   }
 
-  /* Display label */
-  .select__display-label {
-    flex: 1 1 auto;
+  /* Display label (uses a wrapper to allow vertical centering with flex + text truncation on the label) */
+  .select__display-label-wrapper {
+    flex: 1 0 auto;
     display: flex;
     align-items: center;
-    user-select: none;
+    width: 100%;
+  }
+
+  .select__display-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .select--placeholder-visible .select__display-label {
