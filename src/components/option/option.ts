@@ -10,28 +10,33 @@ import styles from './option.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
- * @summary Short summary of the component's intended use.
+ * @summary Options define the selectable items within various form controls such as [select](/components/select).
  *
  * @since 2.0
- * @status experimental
+ * @status stable
  *
  * @dependency sl-icon
  *
  * @event sl-label-change - Emitted when the option's label changes. For performance reasons, this event is only emitted
- *  when the default slot's `slotchange` event is triggered. It will not fire when the label is first set.
+ *  when the default slot's `slotchange` event is triggered. It will not fire when the label is first set. Useful for
+ *  parent controls that want to observe label changes without attaching an expensive mutation observer.
  *
- * @slot - The default slot.
- * @slot example - An example slot.
+ * @slot - The option's label.
+ * @slot prefix - Used to prepend an icon or similar element to the menu item.
+ * @slot suffix - Used to append an icon or similar element to the menu item.
  *
+ * @csspart checked-icon - The checked icon, an `<sl-icon>` element.
  * @csspart base - The component's base wrapper.
- *
- * @cssproperty --example - An example CSS custom property.
+ * @csspart label - The option's label.
+ * @csspart prefix - The container that wraps the prefix.
+ * @csspart suffix - The container that wraps the suffix.
  */
 @customElement('sl-option')
 export default class SlOption extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   private cachedTextLabel: string;
+  // @ts-expect-error -- Controller is currently unused
   private readonly localize = new LocalizeController(this);
 
   @query('.option__label') defaultSlot: HTMLSlotElement;
@@ -82,18 +87,18 @@ export default class SlOption extends ShoelaceElement {
   render() {
     return html`
       <div
+        part="base"
         class=${classMap({
           option: true,
           'option--current': this.current,
+          'option--disabled': this.disabled,
           'option--selected': this.selected
         })}
       >
-        <span part="checked-icon" class="option__check">
-          <sl-icon name="check" library="system" aria-hidden="true"></sl-icon>
-        </span>
-        <slot name="prefix" class="option__prefix"></slot>
-        <slot class="option__label" @slotchange=${this.handleDefaultSlotChange}></slot>
-        <slot name="suffix" class="option__suffix"></slot>
+        <sl-icon part="checked-icon" class="option__check" name="check" library="system" aria-hidden="true"></sl-icon>
+        <slot part="prefix" name="prefix" class="option__prefix"></slot>
+        <slot part="label" class="option__label" @slotchange=${this.handleDefaultSlotChange}></slot>
+        <slot part="suffix" name="suffix" class="option__suffix"></slot>
       </div>
     `;
   }

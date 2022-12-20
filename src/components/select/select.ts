@@ -199,7 +199,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
       const currentOption = this.getCurrentOption();
       if (currentOption && !currentOption.disabled) {
         this.setSelectedOption(currentOption);
-        this.displayLabel = currentOption.textContent ?? '';
+        this.displayLabel = (currentOption.textContent ?? '').trim();
         this.value = currentOption.value;
         this.valueInput.value = currentOption.value; // synchronous update for validation
         this.invalid = !this.checkValidity();
@@ -372,7 +372,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     if (option) {
       this.setSelectedOption(option);
       this.value = option.value;
-      this.displayLabel = option.textContent ?? '';
+      this.displayLabel = (option.textContent ?? '').trim();
     } else {
       // Clear selection
       this.setSelectedOption(null);
@@ -446,7 +446,9 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
     if (option) {
       this.value = option.value;
-      this.displayLabel = option.textContent ?? '';
+      this.valueInput.value = option.value; // synchronous update for validation
+      this.invalid = !this.checkValidity();
+      this.displayLabel = (option.textContent ?? '').trim();
     } else {
       // No option, reset the control
       this.value = '';

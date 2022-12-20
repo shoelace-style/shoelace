@@ -29,6 +29,23 @@ describe('<sl-select>', () => {
     expect(el.displayInput.disabled).to.be.true;
   });
 
+  it('should not allow selection when the option is disabled', async () => {
+    const el = await fixture<SlSelect>(html`
+      <sl-select value="option-1">
+        <sl-option value="option-1">Option 1</sl-option>
+        <sl-option value="option-2" disabled>Option 2</sl-option>
+      </sl-select>
+    `);
+    const disabledOption = el.querySelector('sl-option[disabled]')!;
+
+    await clickOnElement(el);
+    await waitForEvent(el, 'sl-after-show');
+    await clickOnElement(disabledOption);
+    await el.updateComplete;
+
+    expect(el.value).to.equal('option-1');
+  });
+
   it('should focus the select when clicking on the label', async () => {
     const el = await fixture<SlSelect>(html`
       <sl-select label="Select One">

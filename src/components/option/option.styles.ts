@@ -16,27 +16,29 @@ export default css`
   .option {
     position: relative;
     display: flex;
-    align-items: stretch;
+    align-items: center;
     font-family: var(--sl-font-sans);
     font-size: var(--sl-font-size-medium);
     font-weight: var(--sl-font-weight-normal);
     line-height: var(--sl-line-height-normal);
     letter-spacing: var(--sl-letter-spacing-normal);
     color: var(--sl-color-neutral-700);
-    padding: var(--sl-spacing-2x-small) var(--sl-spacing-2x-small);
+    padding: var(--sl-spacing-x-small) var(--sl-spacing-medium) var(--sl-spacing-x-small) var(--sl-spacing-x-small);
     transition: var(--sl-transition-fast) fill;
     user-select: none;
     cursor: pointer;
   }
 
-  :host(:hover) .option:not(.option--current) {
+  :host(:hover) .option:not(.option--current):not(.option--disabled) {
     background-color: var(--sl-color-neutral-100);
     color: var(--sl-color-neutral-1000);
   }
 
-  .option--current {
+  .option--current,
+  .option--current.option--disabled {
     background-color: var(--sl-color-primary-600);
     color: var(--sl-color-neutral-0);
+    opacity: 1;
   }
 
   .option--disabled {
@@ -48,7 +50,7 @@ export default css`
   .option__label {
     flex: 1 1 auto;
     display: inline-block;
-    padding: 0 var(--sl-spacing-2x-small);
+    line-height: var(--sl-line-height-dense);
   }
 
   .option .option__check {
@@ -56,15 +58,16 @@ export default css`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 1.5em;
     visibility: hidden;
+    padding-inline-end: var(--sl-spacing-2x-small);
   }
 
   .option--selected .option__check {
     visibility: visible;
   }
 
-  .option__prefix {
+  .option__prefix,
+  .option__suffix {
     flex: 0 0 auto;
     display: flex;
     align-items: center;
@@ -72,12 +75,6 @@ export default css`
 
   .option__prefix::slotted(*) {
     margin-inline-end: var(--sl-spacing-x-small);
-  }
-
-  .option__suffix {
-    flex: 0 0 auto;
-    display: flex;
-    align-items: center;
   }
 
   .option__suffix::slotted(*) {
