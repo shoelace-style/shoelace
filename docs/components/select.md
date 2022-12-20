@@ -3,62 +3,14 @@
 [component-header:sl-select]
 
 ```html preview
-<form id="select-form" method="GET">
-  <sl-select name="my-select" value="option-1" clearable required>
-    <sl-option value="option-1">Option 1</sl-option>
-    <sl-option value="option-2">Option 2</sl-option>
-    <sl-option value="option-3">Option 3</sl-option>
-    <sl-divider></sl-divider>
-    <sl-option value="option-4">Option 4</sl-option>
-    <sl-option disabled value="option-5">Option 5</sl-option>
-    <sl-option value="option-6">Option 6</sl-option>
-    <sl-option value="option-7">Option 7</sl-option>
-    <sl-option value="option-8">Option 8</sl-option>
-    <sl-option value="option-9">Option 9</sl-option>
-    <sl-option value="option-10">Option 10</sl-option>
-    <sl-option value="option-11">Option 11</sl-option>
-    <sl-option value="option-12">Option 12</sl-option>
-    <sl-option value="option-13">Option 13</sl-option>
-    <sl-option value="option-14">Option 14</sl-option>
-    <sl-option value="option-15">Option 15</sl-option>
-    <sl-option value="option-16">Option 16</sl-option>
-    <sl-option value="option-17">Option 17</sl-option>
-    <sl-option value="option-18">Option 18</sl-option>
-    <sl-option value="option-19">Option 19</sl-option>
-    <sl-option value="option-20">Option 20</sl-option>
-  </sl-select>
-
-  <br />
-
-  <sl-button variant="primary" type="submit">Submit</sl-button>
-  <sl-button variant="default" type="reset">Reset</sl-button>
-</form>
-
-<script>
-  const form = document.querySelector('#select-form');
-
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-
-    const formData = new FormData(form);
-
-    for (let [key, value] of formData) {
-      console.log(`${key}: ${value}`);
-    }
-  });
-</script>
-
-<style>
-  sl-select[data-valid] {
-    outline: dashed 2px green;
-    outline-offset: 8px;
-  }
-
-  sl-select[data-invalid] {
-    outline: dashed 2px red;
-    outline-offset: 8px;
-  }
-</style>
+<sl-select>
+  <sl-option value="option-1">Option 1</sl-option>
+  <sl-option value="option-2">Option 2</sl-option>
+  <sl-option value="option-3">Option 3</sl-option>
+  <sl-option value="option-4">Option 4</sl-option>
+  <sl-option value="option-5">Option 5</sl-option>
+  <sl-option value="option-6">Option 6</sl-option>
+</sl-select>
 ```
 
 ```jsx react
