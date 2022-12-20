@@ -324,9 +324,11 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
       return;
     }
 
+    // Update the value and focus after updating so the value is read by screen readers
     this.value = option.value;
+    this.updateComplete.then(() => this.combobox.focus());
+
     this.hide();
-    this.combobox.focus();
   }
 
   handleDefaultSlotChange() {
@@ -356,6 +358,11 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   // Gets an array of all <sl-option> elements
   getAllOptions() {
     return [...this.querySelectorAll<SlOption>('sl-option')];
+  }
+
+  // Gets the first <sl-option> element
+  getFirstOption() {
+    return this.querySelector<SlOption>('sl-option');
   }
 
   // Gets an option based on its value
@@ -475,15 +482,17 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
       requestAnimationFrame(() => {
         // Select the appropriate option based on value after the listbox opens
-        const option = this.getOptionByValue(this.value);
-        this.setCurrentOption(option);
-        this.setSelectedOption(option);
+        const selectedOption = this.getOptionByValue(this.value);
+        const currentOption = selectedOption || this.getFirstOption();
+        this.setSelectedOption(selectedOption);
+        this.setCurrentOption(currentOption);
 
-        if (option) {
+        // Scroll to the selected option
+        if (currentOption) {
           //
           // TODO - improve this logic so the selected option is centered in the listbox instead of at the top
           //
-          this.listbox.scrollTop = option.offsetTop;
+          this.listbox.scrollTop = currentOption.offsetTop;
         }
       });
 
