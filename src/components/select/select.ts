@@ -199,10 +199,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
       const currentOption = this.getCurrentOption();
       if (currentOption && !currentOption.disabled) {
         this.setSelectedOption(currentOption);
-        this.displayLabel = (currentOption.textContent ?? '').trim();
-        this.value = currentOption.value;
-        this.valueInput.value = currentOption.value; // synchronous update for validation
-        this.invalid = !this.checkValidity();
+        this.setValueFromOption(currentOption);
         this.emit('sl-input');
         this.emit('sl-change');
         this.hide();
@@ -319,10 +316,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     event.stopPropagation();
 
     if (this.value !== '') {
-      this.displayLabel = '';
-      this.value = '';
-      this.valueInput.value = ''; // synchronous update for validation
-      this.invalid = !this.checkValidity();
+      this.setValueFromOption(null);
       this.emit('sl-clear');
       this.emit('sl-input');
       this.emit('sl-change');
@@ -341,9 +335,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
     if (option && !option.disabled) {
       // Update the value and focus after updating so the value is read by screen readers
-      this.value = option.value;
-      this.valueInput.value = option.value; // synchronous update for validation
-      this.invalid = !this.checkValidity();
+      this.setValueFromOption(option);
       this.updateComplete.then(() => this.displayInput.focus());
 
       if (this.value !== oldValue) {
@@ -371,8 +363,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     const option = this.getOptionByValue(this.value);
     if (option) {
       this.setSelectedOption(option);
-      this.value = option.value;
-      this.displayLabel = (option.textContent ?? '').trim();
+      this.setValueFromOption(option);
     } else {
       // Clear selection
       this.setSelectedOption(null);
@@ -437,6 +428,17 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     }
   }
 
+  // Sets the value, display label, and syncs validity
+  setValueFromOption(option: SlOption | null) {
+    const displayLabel = option ? (option.textContent ?? '').trim() : '';
+    const value = option ? option.value : '';
+
+    this.displayLabel = displayLabel;
+    this.value = value;
+    this.valueInput.value = value; // synchronous update for validation
+    this.invalid = !this.checkValidity();
+  }
+
   @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
     const option = this.getOptionByValue(this.value);
@@ -445,14 +447,10 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     this.setSelectedOption(option);
 
     if (option) {
-      this.value = option.value;
-      this.valueInput.value = option.value; // synchronous update for validation
-      this.invalid = !this.checkValidity();
-      this.displayLabel = (option.textContent ?? '').trim();
+      this.setValueFromOption(option);
     } else {
       // No option, reset the control
-      this.value = '';
-      this.displayLabel = '';
+      this.setValueFromOption(null);
     }
   }
 
@@ -545,7 +543,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
     const hasClearIcon = this.clearable && !this.disabled && this.value.length > 0;
-    const isPlaceholderVisible = this.value === '';
 
     return html`
       <div
@@ -580,7 +577,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
               'select--open': this.open,
               'select--disabled': this.disabled,
               'select--focused': this.hasFocus,
-              'select--placeholder-visible': isPlaceholderVisible,
               'select--top': this.placement === 'top',
               'select--bottom': this.placement === 'bottom',
               'select--small': this.size === 'small',
