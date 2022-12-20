@@ -28,8 +28,12 @@ import type { CSSResultGroup } from 'lit';
  * @dependency sl-icon
  * @dependency sl-popup
  *
- * @slot - The select's options in the form of menu items.
+ * @slot - The listbox options. Must be `<sl-option>` elements. You can use `<sl-divider>` to group items visually.
+ * @slot label - The input's label. Alternatively, you can use the `label` attribute.
+ * @slot prefix - Used to prepend a presentational icon or similar element to the combobox.
+ * @slot clear-icon - An icon to use in lieu of the default clear icon.
  * @slot expand-icon - The icon to show when the control is expanded and collapsed. Rotates on open and close.
+ * @slot help-text - Text that describes how to use the input. Alternatively, you can use the `help-text` attribute.
  *
  * @event sl-change - Emitted when the control's value changes.
  * @event sl-clear - Emitted when the control's value is cleared.
