@@ -290,7 +290,7 @@ TODO
 
 ### Sizes
 
-Use the `size` attribute to change a select's size.
+Use the `size` attribute to change a select's size. Note that size does not apply to listbox options.
 
 ```html preview
 <sl-select placeholder="Small" size="small">
