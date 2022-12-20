@@ -1,7 +1,8 @@
 import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import ShoelaceElement from '../../internal/shoelace-element';
+import { getTextContent } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
 import '../icon/icon';
@@ -16,7 +17,8 @@ import type { CSSResultGroup } from 'lit';
  *
  * @dependency sl-icon
  *
- * @event sl-event-name - Emitted as an example.
+ * @event sl-label-change - Emitted when the option's label changes. For performance reasons, this event is only emitted
+ *  when the default slot's `slotchange` event is triggered. It will not fire when the label is first set.
  *
  * @slot - The default slot.
  * @slot example - An example slot.
@@ -29,7 +31,10 @@ import type { CSSResultGroup } from 'lit';
 export default class SlOption extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
+  private cachedTextLabel: string;
   private readonly localize = new LocalizeController(this);
+
+  @query('.option__label') defaultSlot: HTMLSlotElement;
 
   /** The option's value. When selected, the containing form control will receive this value. */
   @property() value = '';
@@ -59,6 +64,21 @@ export default class SlOption extends ShoelaceElement {
     this.setAttribute('aria-selected', this.selected ? 'true' : 'false');
   }
 
+  handleDefaultSlotChange() {
+    const textLabel = getTextContent(this.defaultSlot);
+
+    // Ignore the first time the label is set
+    if (typeof this.cachedTextLabel === 'undefined') {
+      this.cachedTextLabel = textLabel;
+      return;
+    }
+
+    if (textLabel !== this.cachedTextLabel) {
+      this.cachedTextLabel = textLabel;
+      this.emit('sl-label-change');
+    }
+  }
+
   render() {
     return html`
       <div
@@ -72,7 +92,7 @@ export default class SlOption extends ShoelaceElement {
           <sl-icon name="check" library="system" aria-hidden="true"></sl-icon>
         </span>
         <slot name="prefix" class="option__prefix"></slot>
-        <slot class="option__label"></slot>
+        <slot class="option__label" @slotchange=${this.handleDefaultSlotChange}></slot>
         <slot name="suffix" class="option__suffix"></slot>
       </div>
     `;

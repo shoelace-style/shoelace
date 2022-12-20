@@ -609,6 +609,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
                   class="select__display-input"
                   type="text"
                   placeholder=${this.placeholder}
+                  .disabled=${this.disabled}
                   .value=${this.displayLabel}
                   autocomplete="off"
                   spellcheck="false"
@@ -674,6 +675,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
               tabindex="-1"
               @mouseup=${this.handleOptionMouseUp}
               @slotchange=${this.handleDefaultSlotChange}
+              @sl-label-change=${this.handleDefaultSlotChange}
             ></slot>
           </sl-popup>
 
