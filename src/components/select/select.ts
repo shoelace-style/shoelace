@@ -48,6 +48,8 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
   @query('.select') popup: SlPopup;
   @query('.select__combobox') combobox: HTMLSlotElement;
+  @query('.select__display-input') displayInput: HTMLInputElement;
+  @query('.select__value-input') valueInput: HTMLInputElement;
   @query('.select__listbox') listbox: HTMLSlotElement;
 
   // @ts-expect-error -- Controller is currently unused
@@ -125,38 +127,45 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     this.open = false;
   }
 
+  firstUpdated() {
+    this.invalid = !this.checkValidity();
+  }
+
   /** Checks for validity but does not show the browser's validation message. */
   checkValidity() {
-    // return this.input.checkValidity();
+    return this.valueInput.checkValidity();
   }
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
   reportValidity() {
-    // return this.input.reportValidity();
+    return this.valueInput.reportValidity();
   }
 
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
   setCustomValidity(message: string) {
-    // this.input.setCustomValidity(message);
-    this.invalid = !this.input.checkValidity();
+    this.valueInput.setCustomValidity(message);
+    this.invalid = !this.valueInput.checkValidity();
   }
 
   /** Sets focus on the control. */
   focus(options?: FocusOptions) {
-    // this.control.focus(options);
+    this.displayInput.focus(options);
   }
 
   /** Removes focus from the control. */
   blur() {
-    // this.control.blur();
+    this.displayInput.blur();
   }
 
   handleFocus() {
     this.hasFocus = true;
+    this.displayInput.setSelectionRange(0, 0);
+    this.emit('sl-focus');
   }
 
   handleBlur() {
     this.hasFocus = false;
+    this.emit('sl-blur');
   }
 
   handleDocumentFocusIn(event: KeyboardEvent) {
@@ -190,12 +199,16 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
       const currentOption = this.getCurrentOption();
       if (currentOption) {
         this.setSelectedOption(currentOption);
-        this.value = currentOption.value;
         this.displayLabel = currentOption.textContent ?? '';
+        this.value = currentOption.value;
+        this.valueInput.value = currentOption.value; // synchronous update for validation
+        this.invalid = !this.checkValidity();
+        this.emit('sl-input');
+        this.emit('sl-change');
       }
 
       this.hide();
-      this.combobox.focus();
+      this.displayInput.focus();
       return;
     }
 
@@ -287,13 +300,13 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   }
 
   handleLabelClick() {
-    this.combobox.focus();
+    this.displayInput.focus();
   }
 
   // We use mousedown/mouseup instead of click to allow macOS-style menu behavior
   handleComboboxMouseDown(event: MouseEvent) {
     event.preventDefault();
-    this.combobox.focus();
+    this.displayInput.focus();
     this.open = !this.open;
   }
 
@@ -306,9 +319,13 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     event.stopPropagation();
 
     if (this.value !== '') {
-      this.value = '';
       this.displayLabel = '';
+      this.value = '';
+      this.valueInput.value = ''; // synchronous update for validation
+      this.invalid = !this.checkValidity();
       this.emit('sl-clear');
+      this.emit('sl-input');
+      this.emit('sl-change');
     }
   }
 
@@ -320,13 +337,22 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   handleOptionMouseUp(event: MouseEvent) {
     const target = event.target as HTMLElement;
     const option = target.closest('sl-option');
+    const oldValue = this.value;
+
     if (!option) {
       return;
     }
 
     // Update the value and focus after updating so the value is read by screen readers
     this.value = option.value;
-    this.updateComplete.then(() => this.combobox.focus());
+    this.valueInput.value = option.value; // synchronous update for validation
+    this.invalid = !this.checkValidity();
+    this.updateComplete.then(() => this.displayInput.focus());
+
+    if (this.value !== oldValue) {
+      this.emit('sl-input');
+      this.emit('sl-change');
+    }
 
     this.hide();
   }
@@ -576,25 +602,40 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
               @keydown=${this.handleComboboxKeyDown}
               @mousedown=${this.handleComboboxMouseDown}
             >
-              <div
-                class="select__combobox"
-                aria-controls="listbox"
-                aria-expanded=${this.open ? 'true' : 'false'}
-                aria-haspopup="listbox"
-                aria-labelledby="label"
-                aria-disabled=${this.disabled ? 'true' : 'false'}
-                aria-describedby="help-text"
-                role="combobox"
-                tabindex="0"
-                @focus=${this.handleFocus}
-                @blur=${this.handleBlur}
-              >
+              <div class="select__combobox">
                 <slot name="prefix" class="select__prefix"></slot>
-                <span class="select__display-label-wrapper">
-                  <span class="select__display-label">
-                    ${isPlaceholderVisible ? this.placeholder : this.displayLabel}
-                  </span>
-                </span>
+
+                <input
+                  class="select__display-input"
+                  type="text"
+                  placeholder=${this.placeholder}
+                  .value=${this.displayLabel}
+                  autocomplete="off"
+                  spellcheck="false"
+                  autocapitalize="off"
+                  readonly
+                  aria-controls="listbox"
+                  aria-expanded=${this.open ? 'true' : 'false'}
+                  aria-haspopup="listbox"
+                  aria-labelledby="label"
+                  aria-disabled=${this.disabled ? 'true' : 'false'}
+                  aria-describedby="help-text"
+                  role="combobox"
+                  tabindex="0"
+                  @focus=${this.handleFocus}
+                  @blur=${this.handleBlur}
+                />
+
+                <input
+                  class="select__value-input"
+                  type="text"
+                  ?disabled=${this.disabled}
+                  ?required=${this.required}
+                  .value=${this.value}
+                  tabindex="-1"
+                  aria-hidden="true"
+                  @focus=${() => this.focus()}
+                />
               </div>
 
               ${hasClearIcon

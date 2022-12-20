@@ -3,40 +3,24 @@
 [component-header:sl-select]
 
 ```html preview
-<sl-select value="option-1">
+<sl-select>
   <sl-option value="option-1">Option 1</sl-option>
   <sl-option value="option-2">Option 2</sl-option>
   <sl-option value="option-3">Option 3</sl-option>
-  <sl-divider></sl-divider>
   <sl-option value="option-4">Option 4</sl-option>
   <sl-option value="option-5">Option 5</sl-option>
   <sl-option value="option-6">Option 6</sl-option>
-  <sl-option value="option-7">Option 7</sl-option>
-  <sl-option value="option-8">Option 8</sl-option>
-  <sl-option value="option-9">Option 9</sl-option>
-  <sl-option value="option-10">Option 10</sl-option>
-  <sl-option value="option-11">Option 11</sl-option>
-  <sl-option value="option-12">Option 12</sl-option>
-  <sl-option value="option-13">Option 13</sl-option>
-  <sl-option value="option-14">Option 14</sl-option>
-  <sl-option value="option-15">Option 15</sl-option>
-  <sl-option value="option-16">Option 16</sl-option>
-  <sl-option value="option-17">Option 17</sl-option>
-  <sl-option value="option-18">Option 18</sl-option>
-  <sl-option value="option-19">Option 19</sl-option>
-  <sl-option value="option-20">Option 20</sl-option>
 </sl-select>
 ```
 
 ```jsx react
-import { SlDivider, SlOption, SlSelect } from '@shoelace-style/shoelace/dist/react';
+import { SlOption, SlSelect } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <SlSelect>
     <SlOption value="option-1">Option 1</SlOption>
     <SlOption value="option-2">Option 2</SlOption>
     <SlOption value="option-3">Option 3</SlOption>
-    <SlDivider />
     <SlOption value="option-4">Option 4</SlOption>
     <SlOption value="option-5">Option 5</SlOption>
     <SlOption value="option-6">Option 6</SlOption>

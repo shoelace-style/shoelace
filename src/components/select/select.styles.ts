@@ -21,11 +21,11 @@ export default css`
     z-index: var(--sl-z-index-dropdown);
   }
 
-  .select--top::part(popup) {
+  .select[data-current-placement^='top']::part(popup) {
     transform-origin: bottom;
   }
 
-  .select--bottom::part(popup) {
+  .select[data-current-placement^='bottom']::part(popup) {
     transform-origin: top;
   }
 
@@ -48,13 +48,33 @@ export default css`
   .select__combobox {
     flex: 1;
     display: flex;
+    position: relative;
     align-items: stretch;
     justify-content: start;
     overflow: hidden;
   }
 
-  .select__combobox:focus {
+  .select__display-input {
+    width: 100%;
+    font: inherit;
+    border: none;
+    background: none;
+    cursor: inherit;
+    -webkit-appearance: none;
+  }
+
+  .select__display-input:focus {
     outline: none;
+  }
+
+  .select__value-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    z-index: -1;
   }
 
   /* Standard selects */
@@ -159,24 +179,6 @@ export default css`
 
   .select--pill.select--large .select__combobox-wrapper {
     border-radius: var(--sl-input-height-large);
-  }
-
-  /* Display label (uses a wrapper to allow vertical centering with flex + text truncation on the label) */
-  .select__display-label-wrapper {
-    flex: 1 0 auto;
-    display: flex;
-    align-items: center;
-    width: 100%;
-  }
-
-  .select__display-label {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .select--placeholder-visible .select__display-label {
-    color: var(--sl-input-placeholder-color);
   }
 
   /* Prefix */
