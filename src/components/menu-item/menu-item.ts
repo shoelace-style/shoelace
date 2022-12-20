@@ -58,7 +58,10 @@ export default class SlMenuItem extends ShoelaceElement {
 
   @watch('checked')
   handleCheckedChange() {
-    this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
+    //
+    // TODO - fix a11y bug
+    //
+    // this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
   }
 
   @watch('disabled')

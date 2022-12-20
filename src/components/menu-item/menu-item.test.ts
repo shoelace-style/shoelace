@@ -5,9 +5,11 @@ import type SlMenuItem from './menu-item';
 describe('<sl-menu-item>', () => {
   it('passes accessibility test', async () => {
     const el = await fixture<SlMenuItem>(html`
-      <sl-select>
-        <sl-menu-item>Test</sl-menu-item>
-      </sl-select>
+      <sl-menu>
+        <sl-menu-item>Item 1</sl-menu-item>
+        <sl-menu-item>Item 2</sl-menu-item>
+        <sl-menu-item>Item 3</sl-menu-item>
+      </sl-menu>
     `);
     await expect(el).to.be.accessible();
   });
@@ -15,8 +17,6 @@ describe('<sl-menu-item>', () => {
   it('default properties', async () => {
     const el = await fixture<SlMenuItem>(html` <sl-menu-item>Test</sl-menu-item> `);
 
-    expect(el.checked).to.be.false;
-    expect(el.getAttribute('aria-checked')).to.equal('false');
     expect(el.value).to.equal('');
     expect(el.disabled).to.be.false;
     expect(el.getAttribute('aria-disabled')).to.equal('false');
@@ -25,9 +25,6 @@ describe('<sl-menu-item>', () => {
   it('changes aria attributes', async () => {
     const el = await fixture<SlMenuItem>(html` <sl-menu-item>Test</sl-menu-item> `);
 
-    el.checked = true;
-    await aTimeout(100);
-    expect(el.getAttribute('aria-checked')).to.equal('true');
     el.disabled = true;
     await aTimeout(100);
     expect(el.getAttribute('aria-disabled')).to.equal('true');
