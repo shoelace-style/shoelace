@@ -53,10 +53,10 @@ The form will not be submitted if a required field is incomplete.
   <sl-input name="name" label="Name" required></sl-input>
   <br />
   <sl-select label="Favorite Animal" clearable required>
-    <sl-menu-item value="birds">Birds</sl-menu-item>
-    <sl-menu-item value="cats">Cats</sl-menu-item>
-    <sl-menu-item value="dogs">Dogs</sl-menu-item>
-    <sl-menu-item value="other">Other</sl-menu-item>
+    <sl-option value="birds">Birds</sl-option>
+    <sl-option value="cats">Cats</sl-option>
+    <sl-option value="dogs">Dogs</sl-option>
+    <sl-option value="other">Other</sl-option>
   </sl-select>
   <br />
   <sl-textarea name="comment" label="Comment" required></sl-textarea>
@@ -296,10 +296,10 @@ This example demonstrates custom validation styles using `data-user-invalid` and
   ></sl-input>
 
   <sl-select label="Favorite Animal" help-text="Select the best option." clearable required>
-    <sl-menu-item value="birds">Birds</sl-menu-item>
-    <sl-menu-item value="cats">Cats</sl-menu-item>
-    <sl-menu-item value="dogs">Dogs</sl-menu-item>
-    <sl-menu-item value="other">Other</sl-menu-item>
+    <sl-option value="birds">Birds</sl-option>
+    <sl-option value="cats">Cats</sl-option>
+    <sl-option value="dogs">Dogs</sl-option>
+    <sl-option value="other">Other</sl-option>
   </sl-select>
 
   <sl-button type="submit" variant="primary">Submit</sl-button>
