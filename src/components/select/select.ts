@@ -472,6 +472,9 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     }
 
     if (this.open) {
+      const selectedOption = this.getOptionByValue(this.value);
+      const currentOption = selectedOption || this.getFirstOption();
+
       // Show
       this.emit('sl-show');
       this.addOpenListeners();
@@ -480,24 +483,19 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
       this.listbox.hidden = false;
       this.popup.active = true;
 
+      // Select the appropriate option based on value after the listbox opens
       requestAnimationFrame(() => {
-        // Select the appropriate option based on value after the listbox opens
-        const selectedOption = this.getOptionByValue(this.value);
-        const currentOption = selectedOption || this.getFirstOption();
         this.setSelectedOption(selectedOption);
         this.setCurrentOption(currentOption);
-
-        // Scroll to the selected option
-        if (currentOption) {
-          //
-          // TODO - improve this logic so the selected option is centered in the listbox instead of at the top
-          //
-          this.listbox.scrollTop = currentOption.offsetTop;
-        }
       });
 
       const { keyframes, options } = getAnimation(this, 'select.show', { dir: this.localize.dir() });
       await animateTo(this.popup.popup, keyframes, options);
+
+      // Make sure the current option is scrolled into view (required for Safari)
+      if (currentOption) {
+        scrollIntoView(currentOption, this.listbox, 'vertical', 'auto');
+      }
 
       this.emit('sl-after-show');
     } else {
