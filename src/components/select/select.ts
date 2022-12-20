@@ -11,6 +11,8 @@ import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import { LocalizeController } from '../../utilities/localize';
+import '../icon/icon';
+import '../popup/popup';
 import styles from './select.styles';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type SlOption from '../option/option';
@@ -24,8 +26,10 @@ import type { CSSResultGroup } from 'lit';
  * @status stable
  *
  * @dependency sl-icon
+ * @dependency sl-popup
  *
  * @slot - The select's options in the form of menu items.
+ * @slot expand-icon - The icon to show when the control is expanded and collapsed. Rotates on open and close.
  *
  * @event sl-change - Emitted when the control's value changes.
  * @event sl-clear - Emitted when the control's value is cleared.
@@ -41,6 +45,12 @@ import type { CSSResultGroup } from 'lit';
  * @csspart form-control-label - The label's wrapper.
  * @csspart form-control-input - The select's wrapper.
  * @csspart form-control-help-text - The help text's wrapper.
+ * @csspart combobox - The container the wraps the prefix, combobox, clear icon, and expand button.
+ * @csspart prefix - The container that wraps the prefix slot.
+ * @csspart display-input - The element that displays the selected option's label, an `<input>` element.
+ * @csspart listbox - The listbox container where options are slotted.
+ * @csspart clear-button - The clear button.
+ * @csspart expand-icon - The container that wraps the expand icon.
  */
 @customElement('sl-select')
 export default class SlSelect extends ShoelaceElement implements ShoelaceFormControl {
@@ -81,6 +91,9 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   /** Disables the select control. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
+  /** Adds a clear button when the select is not empty. */
+  @property({ type: Boolean }) clearable = false;
+
   /**
    * Indicates whether or not the select is open. You can toggle this attribute to show and hide the menu, or you can
    * use the `show()` and `hide()` methods and this attribute will reflect the select's open state.
@@ -113,9 +126,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
   /** The select's required attribute. */
   @property({ type: Boolean, reflect: true }) required = false;
-
-  /** Adds a clear button when the select is not empty. */
-  @property({ type: Boolean }) clearable = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -568,7 +578,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
         <div part="form-control-input" class="form-control-input">
           <sl-popup
-            part="base"
             class=${classMap({
               select: true,
               'select--standard': true,
@@ -592,47 +601,47 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
             auto-size-padding="10"
           >
             <div
+              part="combobox"
+              class="select__combobox"
               slot="anchor"
-              class="select__combobox-wrapper"
               @keydown=${this.handleComboboxKeyDown}
               @mousedown=${this.handleComboboxMouseDown}
             >
-              <div class="select__combobox">
-                <slot name="prefix" class="select__prefix"></slot>
+              <slot part="prefix" name="prefix" class="select__prefix"></slot>
 
-                <input
-                  class="select__display-input"
-                  type="text"
-                  placeholder=${this.placeholder}
-                  .disabled=${this.disabled}
-                  .value=${this.displayLabel}
-                  autocomplete="off"
-                  spellcheck="false"
-                  autocapitalize="off"
-                  readonly
-                  aria-controls="listbox"
-                  aria-expanded=${this.open ? 'true' : 'false'}
-                  aria-haspopup="listbox"
-                  aria-labelledby="label"
-                  aria-disabled=${this.disabled ? 'true' : 'false'}
-                  aria-describedby="help-text"
-                  role="combobox"
-                  tabindex="0"
-                  @focus=${this.handleFocus}
-                  @blur=${this.handleBlur}
-                />
+              <input
+                part="display-input"
+                class="select__display-input"
+                type="text"
+                placeholder=${this.placeholder}
+                .disabled=${this.disabled}
+                .value=${this.displayLabel}
+                autocomplete="off"
+                spellcheck="false"
+                autocapitalize="off"
+                readonly
+                aria-controls="listbox"
+                aria-expanded=${this.open ? 'true' : 'false'}
+                aria-haspopup="listbox"
+                aria-labelledby="label"
+                aria-disabled=${this.disabled ? 'true' : 'false'}
+                aria-describedby="help-text"
+                role="combobox"
+                tabindex="0"
+                @focus=${this.handleFocus}
+                @blur=${this.handleBlur}
+              />
 
-                <input
-                  class="select__value-input"
-                  type="text"
-                  ?disabled=${this.disabled}
-                  ?required=${this.required}
-                  .value=${this.value}
-                  tabindex="-1"
-                  aria-hidden="true"
-                  @focus=${() => this.focus()}
-                />
-              </div>
+              <input
+                class="select__value-input"
+                type="text"
+                ?disabled=${this.disabled}
+                ?required=${this.required}
+                .value=${this.value}
+                tabindex="-1"
+                aria-hidden="true"
+                @focus=${() => this.focus()}
+              />
 
               ${hasClearIcon
                 ? html`
@@ -652,11 +661,9 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
                   `
                 : ''}
 
-              <span part="expand-icon" class="select__expand-icon">
-                <slot part="expand-icon" name="expand-icon">
-                  <sl-icon library="system" name="chevron-down"></sl-icon>
-                </slot>
-              </span>
+              <slot name="expand-icon" part="expand-icon" class="select__expand-icon">
+                <sl-icon library="system" name="chevron-down"></sl-icon>
+              </slot>
             </div>
 
             <slot
@@ -665,7 +672,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
               aria-expanded=${this.open ? 'true' : 'false'}
               aria-multiselectable="false"
               aria-labelledby="label"
-              part="panel"
+              part="listbox"
               class="select__listbox"
               tabindex="-1"
               @mouseup=${this.handleOptionMouseUp}

@@ -32,28 +32,22 @@ export default css`
   }
 
   /* Combobox */
-  .select__combobox-wrapper {
-    flex: 1 0 auto;
+  .select__combobox {
+    flex: 1;
     display: flex;
     width: 100%;
     min-width: 0;
+    position: relative;
+    align-items: stretch;
+    justify-content: start;
     font-family: var(--sl-input-font-family);
     font-weight: var(--sl-input-font-weight);
     letter-spacing: var(--sl-input-letter-spacing);
     vertical-align: middle;
-    cursor: text;
+    overflow: hidden;
+    cursor: pointer;
     transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow,
       var(--sl-transition-fast) background-color;
-    cursor: pointer;
-  }
-
-  .select__combobox {
-    flex: 1;
-    display: flex;
-    position: relative;
-    align-items: stretch;
-    justify-content: start;
-    overflow: hidden;
   }
 
   .select__display-input {
@@ -83,12 +77,12 @@ export default css`
   }
 
   /* Standard selects */
-  .select--standard .select__combobox-wrapper {
+  .select--standard .select__combobox {
     background-color: var(--sl-input-background-color);
     border: solid var(--sl-input-border-width) var(--sl-input-border-color);
   }
 
-  .select--standard.select--disabled .select__combobox-wrapper {
+  .select--standard.select--disabled .select__combobox {
     background-color: var(--sl-input-background-color-disabled);
     border-color: var(--sl-input-border-color-disabled);
     color: var(--sl-input-color-disabled);
@@ -97,38 +91,38 @@ export default css`
     outline: none;
   }
 
-  .select--standard:not(.select--disabled).select--open .select__combobox-wrapper,
-  .select--standard:not(.select--disabled).select--focused .select__combobox-wrapper {
+  .select--standard:not(.select--disabled).select--open .select__combobox,
+  .select--standard:not(.select--disabled).select--focused .select__combobox {
     background-color: var(--sl-input-background-color-focus);
     border-color: var(--sl-input-border-color-focus);
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-input-focus-ring-color);
   }
 
   /* Filled selects */
-  .select--filled .select__combobox-wrapper {
+  .select--filled .select__combobox {
     border: none;
     background-color: var(--sl-input-filled-background-color);
     color: var(--sl-input-color);
   }
 
-  .select--filled:hover:not(.select--disabled) .select__combobox-wrapper {
+  .select--filled:hover:not(.select--disabled) .select__combobox {
     background-color: var(--sl-input-filled-background-color-hover);
   }
 
-  .select--filled.select--disabled .select__combobox-wrapper {
+  .select--filled.select--disabled .select__combobox {
     background-color: var(--sl-input-filled-background-color-disabled);
     opacity: 0.5;
     cursor: not-allowed;
   }
 
-  .select--filled:not(.select--disabled).select--open .select__combobox-wrapper,
-  .select--filled:not(.select--disabled).select--focused .select__combobox-wrapper {
+  .select--filled:not(.select--disabled).select--open .select__combobox,
+  .select--filled:not(.select--disabled).select--focused .select__combobox {
     background-color: var(--sl-input-filled-background-color-focus);
     outline: var(--sl-focus-ring);
   }
 
   /* Sizes */
-  .select--small .select__combobox-wrapper {
+  .select--small .select__combobox {
     border-radius: var(--sl-input-border-radius-small);
     font-size: var(--sl-input-font-size-small);
     min-height: var(--sl-input-height-small);
@@ -143,7 +137,7 @@ export default css`
     margin-inline-end: var(--sl-input-spacing-small);
   }
 
-  .select--medium .select__combobox-wrapper {
+  .select--medium .select__combobox {
     border-radius: var(--sl-input-border-radius-medium);
     font-size: var(--sl-input-font-size-medium);
     height: var(--sl-input-height-medium);
@@ -158,7 +152,7 @@ export default css`
     margin-inline-end: var(--sl-input-spacing-medium);
   }
 
-  .select--large .select__combobox-wrapper {
+  .select--large .select__combobox {
     border-radius: var(--sl-input-border-radius-large);
     font-size: var(--sl-input-font-size-large);
     min-height: var(--sl-input-height-large);
@@ -174,15 +168,15 @@ export default css`
   }
 
   /* Pills */
-  .select--pill.select--small .select__combobox-wrapper {
+  .select--pill.select--small .select__combobox {
     border-radius: var(--sl-input-height-small);
   }
 
-  .select--pill.select--medium .select__combobox-wrapper {
+  .select--pill.select--medium .select__combobox {
     border-radius: var(--sl-input-height-medium);
   }
 
-  .select--pill.select--large .select__combobox-wrapper {
+  .select--pill.select--large .select__combobox {
     border-radius: var(--sl-input-height-large);
   }
 
