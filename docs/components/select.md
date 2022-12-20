@@ -286,7 +286,36 @@ TODO
 
 ### Grouping Options
 
-TODO
+Use `<sl-divider>` to group listbox items visually. You can also use `<small>` to provide labels, but they won't be announced by most assistive devices.
+
+```html preview
+<sl-select>
+  <small>Section 1</small>
+  <sl-option value="option-1">Option 1</sl-option>
+  <sl-option value="option-2">Option 2</sl-option>
+  <sl-option value="option-3">Option 3</sl-option>
+  <sl-divider></sl-divider>
+  <small>Section 2</small>
+  <sl-option value="option-4">Option 4</sl-option>
+  <sl-option value="option-5">Option 5</sl-option>
+  <sl-option value="option-6">Option 6</sl-option>
+</sl-select>
+```
+
+```jsx react
+import { SlOption, SlSelect } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlSelect>
+    <SlOption value="option-1">Option 1</SlOption>
+    <SlOption value="option-2">Option 2</SlOption>
+    <SlOption value="option-3">Option 3</SlOption>
+    <SlOption value="option-4">Option 4</SlOption>
+    <SlOption value="option-5">Option 5</SlOption>
+    <SlOption value="option-6">Option 6</SlOption>
+  </SlSelect>
+);
+```
 
 ### Sizes
 

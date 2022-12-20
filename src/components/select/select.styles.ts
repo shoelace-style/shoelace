@@ -244,7 +244,15 @@ export default css`
     max-height: var(--auto-size-available-height);
   }
 
+  /* Slotted content */
   .select__listbox::slotted(sl-divider) {
     --spacing: var(--sl-spacing-x-small);
+  }
+
+  .select__listbox::slotted(small) {
+    font-size: var(--sl-font-size-small);
+    font-weight: var(--sl-font-weight-semibold);
+    color: var(--sl-color-neutral-500);
+    padding: var(--sl-spacing-x-small) var(--sl-spacing-x-large);
   }
 `;
