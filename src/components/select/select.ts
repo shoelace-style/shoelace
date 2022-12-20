@@ -197,7 +197,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
       // If it is open, update the value based on the current selection and close it
       const currentOption = this.getCurrentOption();
-      if (currentOption) {
+      if (currentOption && !currentOption.disabled) {
         this.setSelectedOption(currentOption);
         this.displayLabel = currentOption.textContent ?? '';
         this.value = currentOption.value;
@@ -205,10 +205,10 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
         this.invalid = !this.checkValidity();
         this.emit('sl-input');
         this.emit('sl-change');
+        this.hide();
+        this.displayInput.focus();
       }
 
-      this.hide();
-      this.displayInput.focus();
       return;
     }
 
@@ -339,22 +339,20 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     const option = target.closest('sl-option');
     const oldValue = this.value;
 
-    if (!option) {
-      return;
+    if (option && !option.disabled) {
+      // Update the value and focus after updating so the value is read by screen readers
+      this.value = option.value;
+      this.valueInput.value = option.value; // synchronous update for validation
+      this.invalid = !this.checkValidity();
+      this.updateComplete.then(() => this.displayInput.focus());
+
+      if (this.value !== oldValue) {
+        this.emit('sl-input');
+        this.emit('sl-change');
+      }
+
+      this.hide();
     }
-
-    // Update the value and focus after updating so the value is read by screen readers
-    this.value = option.value;
-    this.valueInput.value = option.value; // synchronous update for validation
-    this.invalid = !this.checkValidity();
-    this.updateComplete.then(() => this.displayInput.focus());
-
-    if (this.value !== oldValue) {
-      this.emit('sl-input');
-      this.emit('sl-change');
-    }
-
-    this.hide();
   }
 
   handleDefaultSlotChange() {
@@ -364,7 +362,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     // Check for duplicate values in menu items
     allOptions.forEach(option => {
       if (values.includes(option.value)) {
-        console.error(`Duplicate value found in <sl-select>`, option);
+        console.error(`A duplicate value has been found in <sl-select>. All options must have unique values.`, option);
       }
       values.push(option.value);
     });
