@@ -13,8 +13,10 @@ export default css`
   /** The popup */
   .select {
     flex: 1 1 auto;
-    display: flex;
+    display: inline-flex;
+    width: 100%;
     position: relative;
+    vertical-align: middle;
   }
 
   .select::part(popup) {
@@ -60,6 +62,9 @@ export default css`
     border: none;
     background: none;
     cursor: inherit;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
     -webkit-appearance: none;
   }
 
