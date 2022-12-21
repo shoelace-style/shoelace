@@ -99,14 +99,6 @@ export default class SlTooltip extends ShoelaceElement {
   @property({ type: Boolean }) hoist = false;
 
   connectedCallback() {
-    super.connectedCallback();
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleMouseOver = this.handleMouseOver.bind(this);
-    this.handleMouseOut = this.handleMouseOut.bind(this);
-
     this.updateComplete.then(() => {
       this.addEventListener('blur', this.handleBlur, true);
       this.addEventListener('focus', this.handleFocus, true);
@@ -170,13 +162,13 @@ export default class SlTooltip extends ShoelaceElement {
     return target as HTMLElement;
   }
 
-  handleBlur() {
+  private handleBlur = () => {
     if (this.hasTrigger('focus')) {
       this.hide();
     }
-  }
+  };
 
-  handleClick() {
+  private handleClick = () => {
     if (this.hasTrigger('click')) {
       if (this.open) {
         this.hide();
@@ -184,37 +176,37 @@ export default class SlTooltip extends ShoelaceElement {
         this.show();
       }
     }
-  }
+  };
 
-  handleFocus() {
+  private handleFocus = () => {
     if (this.hasTrigger('focus')) {
       this.show();
     }
-  }
+  };
 
-  handleKeyDown(event: KeyboardEvent) {
+  private handleKeyDown = (event: KeyboardEvent) => {
     // Pressing escape when the target element has focus should dismiss the tooltip
     if (this.open && event.key === 'Escape') {
       event.stopPropagation();
       this.hide();
     }
-  }
+  };
 
-  handleMouseOver() {
+  private handleMouseOver = () => {
     if (this.hasTrigger('hover')) {
       const delay = parseDuration(getComputedStyle(this).getPropertyValue('--show-delay'));
       clearTimeout(this.hoverTimeout);
       this.hoverTimeout = window.setTimeout(() => this.show(), delay);
     }
-  }
+  };
 
-  handleMouseOut() {
+  private handleMouseOut = () => {
     if (this.hasTrigger('hover')) {
       const delay = parseDuration(getComputedStyle(this).getPropertyValue('--hide-delay'));
       clearTimeout(this.hoverTimeout);
       this.hoverTimeout = window.setTimeout(() => this.hide(), delay);
     }
-  }
+  };
 
   @watch('open', { waitUntilFirstUpdate: true })
   async handleOpenChange() {

@@ -93,7 +93,6 @@ export default class SlDialog extends ShoelaceElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
     this.modal = new Modal(this);
   }
 
@@ -155,12 +154,12 @@ export default class SlDialog extends ShoelaceElement {
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
-  handleDocumentKeyDown(event: KeyboardEvent) {
+  private handleDocumentKeyDown = (event: KeyboardEvent) => {
     if (this.open && event.key === 'Escape') {
       event.stopPropagation();
       this.requestClose('keyboard');
     }
-  }
+  };
 
   @watch('open', { waitUntilFirstUpdate: true })
   async handleOpenChange() {
