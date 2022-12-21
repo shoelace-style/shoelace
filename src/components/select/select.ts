@@ -191,6 +191,14 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   }
 
   handleDocumentKeyDown(event: KeyboardEvent) {
+    const target = event.target as HTMLElement;
+    const isClearButton = target.closest('.select__clear') !== null;
+
+    // Ignore presses when the target is the clear button
+    if (isClearButton) {
+      return;
+    }
+
     // Close when pressing escape
     if (event.key === 'Escape' && this.open) {
       event.preventDefault();
@@ -289,8 +297,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
         this.typeToSelectString += event.key.toLowerCase();
       }
 
-      console.log(this.typeToSelectString);
-
       for (const option of allOptions) {
         const label = (option.textContent ?? '').toLowerCase();
 
@@ -331,6 +337,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
     if (this.value !== '') {
       this.setValueFromOption(null);
+      this.displayInput.focus();
       this.emit('sl-clear');
       this.emit('sl-input');
       this.emit('sl-change');
@@ -338,7 +345,9 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   }
 
   handleClearMouseDown(event: MouseEvent) {
+    // Don't lose focus or propagate events when clicking the clear button
     event.stopPropagation();
+    event.preventDefault();
   }
 
   // We use mousedown/mouseup instead of click to allow macOS-style menu behavior
