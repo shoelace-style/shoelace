@@ -55,12 +55,12 @@ export default css`
     border: solid 2px white;
     margin-top: calc(var(--grid-handle-size) / -2);
     margin-left: calc(var(--grid-handle-size) / -2);
-    transition: var(--sl-transition-fast) transform;
+    transition: var(--sl-transition-fast) scale;
   }
 
   .color-picker__grid-handle--dragging {
     cursor: none;
-    transform: scale(1.5);
+    scale: 1.5;
   }
 
   .color-picker__grid-handle:focus-visible {

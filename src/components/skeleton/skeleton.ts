@@ -11,7 +11,7 @@ import type { CSSResultGroup } from 'lit';
  * @since 2.0
  * @status stable
  *
- * @csspart base - The component's internal wrapper.
+ * @csspart base - The component's base wrapper.
  * @csspart indicator - The skeleton's indicator which is responsible for its color and animation.
  *
  * @cssproperty --border-radius - The skeleton's border radius.
@@ -34,8 +34,6 @@ export default class SlSkeleton extends ShoelaceElement {
           'skeleton--pulse': this.effect === 'pulse',
           'skeleton--sheen': this.effect === 'sheen'
         })}
-        aria-busy="true"
-        aria-live="polite"
       >
         <div part="indicator" class="skeleton__indicator"></div>
       </div>

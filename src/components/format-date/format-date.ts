@@ -13,7 +13,11 @@ import { LocalizeController } from '../../utilities/localize';
 export default class SlFormatDate extends ShoelaceElement {
   private readonly localize = new LocalizeController(this);
 
-  /** The date/time to format. If not set, the current date and time will be used. */
+  /**
+   * The date/time to format. If not set, the current date and time will be used. When passing a string, it's strongly
+   * recommended to use the ISO 8601 format to ensure timezones are handled correctly. To convert a date to this format
+   * in JavaScript, use [`date.toISOString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString).
+   */
   @property() date: Date | string = new Date();
 
   /** The format for displaying the weekday. */
@@ -46,7 +50,7 @@ export default class SlFormatDate extends ShoelaceElement {
   /** The time zone to express the time in. */
   @property({ attribute: 'time-zone' }) timeZone: string;
 
-  /** When set, 24 hour time will always be used. */
+  /** The format for displaying the hour. */
   @property({ attribute: 'hour-format' }) hourFormat: 'auto' | '12' | '24' = 'auto';
 
   render() {

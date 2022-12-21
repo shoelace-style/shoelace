@@ -61,7 +61,11 @@ export default css`
     pointer-events: none;
   }
 
-  .button__label ::slotted(sl-icon) {
+  .button__label {
+    display: inline-block;
+  }
+
+  .button__label::slotted(sl-icon) {
     vertical-align: -2px;
   }
 
@@ -451,14 +455,14 @@ export default css`
     position: absolute;
     top: 0;
     right: 0;
-    transform: translateY(-50%) translateX(50%);
+    translate: 50% -50%;
     pointer-events: none;
   }
 
   .button--rtl ::slotted(sl-badge) {
     right: auto;
     left: 0;
-    transform: translateY(-50%) translateX(-50%);
+    translate: -50% -50%;
   }
 
   /*
@@ -574,6 +578,8 @@ export default css`
     z-index: 1;
   }
 
+  /* Focus and checked are always on top */
+  :host(.sl-button-group__button--focus),
   :host(.sl-button-group__button[checked]) {
     z-index: 2;
   }

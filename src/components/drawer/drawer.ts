@@ -24,7 +24,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @dependency sl-icon-button
  *
- * @slot - The drawer's content.
+ * @slot - The drawer's main content.
  * @slot label - The drawer's label. Alternatively, you can use the `label` attribute.
  * @slot footer - The drawer's footer, usually one or more buttons representing various options.
  *
@@ -39,15 +39,16 @@ import type { CSSResultGroup } from 'lit';
  *   `event.preventDefault()` will keep the drawer open. Avoid using this unless closing the drawer will result in
  *   destructive behavior such as data loss.
  *
- * @csspart base - The component's internal wrapper.
- * @csspart overlay - The overlay.
- * @csspart panel - The drawer panel (where the drawer and its content is rendered).
- * @csspart header - The drawer header.
- * @csspart title - The drawer title.
- * @csspart close-button - The close button.
- * @csspart close-button__base - The close button's `base` part.
- * @csspart body - The drawer body.
- * @csspart footer - The drawer footer.
+ * @csspart base - The component's base wrapper.
+ * @csspart overlay - The overlay that covers the screen behind the drawer.
+ * @csspart panel - The drawer's panel (where the drawer and its content are rendered).
+ * @csspart header - The drawer's header. This element wraps the title and header actions.
+ * @csspart header-actions - Optional actions to add to the header. Works best with `<sl-icon-button>`.
+ * @csspart title - The drawer's title.
+ * @csspart close-button - The close button, an `<sl-icon-button>`.
+ * @csspart close-button__base - The close button's exported `base` part.
+ * @csspart body - The drawer's body.
+ * @csspart footer - The drawer's footer.
  *
  * @cssproperty --size - The preferred size of the drawer. This will be applied to the drawer's width or height
  *   depending on its `placement`. Note that the drawer will shrink to accommodate smaller screens.
@@ -80,13 +81,15 @@ export default class SlDrawer extends ShoelaceElement {
   private modal: Modal;
   private originalTrigger: HTMLElement | null;
 
-  /** Indicates whether or not the drawer is open. You can use this in lieu of the show/hide methods. */
+  /**
+   * Indicates whether or not the drawer is open. You can toggle this attribute to show and hide the drawer, or you can
+   * use the `show()` and `hide()` methods and this attribute will reflect the drawer's open state.
+   */
   @property({ type: Boolean, reflect: true }) open = false;
 
   /**
    * The drawer's label as displayed in the header. You should always include a relevant label even when using
-   * `no-header`, as it is required for proper accessibility. If you need to display HTML, you can use the `label` slot
-   * instead.
+   * `no-header`, as it is required for proper accessibility. If you need to display HTML, use the `label` slot instead.
    */
   @property({ reflect: true }) label = '';
 
@@ -95,7 +98,7 @@ export default class SlDrawer extends ShoelaceElement {
 
   /**
    * By default, the drawer slides out of its containing block (usually the viewport). To make the drawer slide out of
-   * its parent element, set this prop and add `position: relative` to the parent.
+   * its parent element, set this attribute and add `position: relative` to the parent.
    */
   @property({ type: Boolean, reflect: true }) contained = false;
 
@@ -114,10 +117,13 @@ export default class SlDrawer extends ShoelaceElement {
   firstUpdated() {
     this.drawer.hidden = !this.open;
 
-    if (this.open && !this.contained) {
+    if (this.open) {
       this.addOpenListeners();
-      this.modal.activate();
-      lockBodyScrolling(this);
+
+      if (!this.contained) {
+        this.modal.activate();
+        lockBodyScrolling(this);
+      }
     }
   }
 
@@ -170,7 +176,7 @@ export default class SlDrawer extends ShoelaceElement {
   }
 
   handleDocumentKeyDown(event: KeyboardEvent) {
-    if (this.open && event.key === 'Escape') {
+    if (this.open && !this.contained && event.key === 'Escape') {
       event.stopPropagation();
       this.requestClose('keyboard');
     }
@@ -237,8 +243,11 @@ export default class SlDrawer extends ShoelaceElement {
       // Hide
       this.emit('sl-hide');
       this.removeOpenListeners();
-      this.modal.deactivate();
-      unlockBodyScrolling(this);
+
+      if (!this.contained) {
+        this.modal.deactivate();
+        unlockBodyScrolling(this);
+      }
 
       await Promise.all([stopAnimations(this.drawer), stopAnimations(this.overlay)]);
       const panelAnimation = getAnimation(this, `drawer.hide${uppercaseFirstLetter(this.placement)}`, {
@@ -271,6 +280,19 @@ export default class SlDrawer extends ShoelaceElement {
       }
 
       this.emit('sl-after-hide');
+    }
+  }
+
+  @watch('contained', { waitUntilFirstUpdate: true })
+  handleNoModalChange() {
+    if (this.open && !this.contained) {
+      this.modal.activate();
+      lockBodyScrolling(this);
+    }
+
+    if (this.open && this.contained) {
+      this.modal.deactivate();
+      unlockBodyScrolling(this);
     }
   }
 
@@ -310,22 +332,23 @@ export default class SlDrawer extends ShoelaceElement {
                     <!-- If there's no label, use an invisible character to prevent the header from collapsing -->
                     <slot name="label"> ${this.label.length > 0 ? this.label : String.fromCharCode(65279)} </slot>
                   </h2>
-                  <sl-icon-button
-                    part="close-button"
-                    exportparts="base:close-button__base"
-                    class="drawer__close"
-                    name="x"
-                    label=${this.localize.term('close')}
-                    library="system"
-                    @click=${() => this.requestClose('close-button')}
-                  ></sl-icon-button>
+                  <div part="header-actions" class="drawer__header-actions">
+                    <slot name="header-actions"></slot>
+                    <sl-icon-button
+                      part="close-button"
+                      exportparts="base:close-button__base"
+                      class="drawer__close"
+                      name="x-lg"
+                      label=${this.localize.term('close')}
+                      library="system"
+                      @click=${() => this.requestClose('close-button')}
+                    ></sl-icon-button>
+                  </div>
                 </header>
               `
             : ''}
 
-          <div part="body" class="drawer__body">
-            <slot></slot>
-          </div>
+          <slot part="body" class="drawer__body"></slot>
 
           <footer part="footer" class="drawer__footer">
             <slot name="footer"></slot>
@@ -339,16 +362,16 @@ export default class SlDrawer extends ShoelaceElement {
 // Top
 setDefaultAnimation('drawer.showTop', {
   keyframes: [
-    { opacity: 0, transform: 'translateY(-100%)' },
-    { opacity: 1, transform: 'translateY(0)' }
+    { opacity: 0, translate: '0 -100%' },
+    { opacity: 1, translate: '0 0' }
   ],
   options: { duration: 250, easing: 'ease' }
 });
 
 setDefaultAnimation('drawer.hideTop', {
   keyframes: [
-    { opacity: 1, transform: 'translateY(0)' },
-    { opacity: 0, transform: 'translateY(-100%)' }
+    { opacity: 1, translate: '0 0' },
+    { opacity: 0, translate: '0 -100%' }
   ],
   options: { duration: 250, easing: 'ease' }
 });
@@ -356,24 +379,24 @@ setDefaultAnimation('drawer.hideTop', {
 // End
 setDefaultAnimation('drawer.showEnd', {
   keyframes: [
-    { opacity: 0, transform: 'translateX(100%)' },
-    { opacity: 1, transform: 'translateX(0)' }
+    { opacity: 0, translate: '100%' },
+    { opacity: 1, translate: '0' }
   ],
   rtlKeyframes: [
-    { opacity: 0, transform: 'translateX(-100%)' },
-    { opacity: 1, transform: 'translateX(0)' }
+    { opacity: 0, translate: '-100%' },
+    { opacity: 1, translate: '0' }
   ],
   options: { duration: 250, easing: 'ease' }
 });
 
 setDefaultAnimation('drawer.hideEnd', {
   keyframes: [
-    { opacity: 1, transform: 'translateX(0)' },
-    { opacity: 0, transform: 'translateX(100%)' }
+    { opacity: 1, translate: '0' },
+    { opacity: 0, translate: '100%' }
   ],
   rtlKeyframes: [
-    { opacity: 1, transform: 'translateX(0)' },
-    { opacity: 0, transform: 'translateX(-100%)' }
+    { opacity: 1, translate: '0' },
+    { opacity: 0, translate: '-100%' }
   ],
   options: { duration: 250, easing: 'ease' }
 });
@@ -381,16 +404,16 @@ setDefaultAnimation('drawer.hideEnd', {
 // Bottom
 setDefaultAnimation('drawer.showBottom', {
   keyframes: [
-    { opacity: 0, transform: 'translateY(100%)' },
-    { opacity: 1, transform: 'translateY(0)' }
+    { opacity: 0, translate: '0 100%' },
+    { opacity: 1, translate: '0 0' }
   ],
   options: { duration: 250, easing: 'ease' }
 });
 
 setDefaultAnimation('drawer.hideBottom', {
   keyframes: [
-    { opacity: 1, transform: 'translateY(0)' },
-    { opacity: 0, transform: 'translateY(100%)' }
+    { opacity: 1, translate: '0 0' },
+    { opacity: 0, translate: '0 100%' }
   ],
   options: { duration: 250, easing: 'ease' }
 });
@@ -398,31 +421,31 @@ setDefaultAnimation('drawer.hideBottom', {
 // Start
 setDefaultAnimation('drawer.showStart', {
   keyframes: [
-    { opacity: 0, transform: 'translateX(-100%)' },
-    { opacity: 1, transform: 'translateX(0)' }
+    { opacity: 0, translate: '-100%' },
+    { opacity: 1, translate: '0' }
   ],
   rtlKeyframes: [
-    { opacity: 0, transform: 'translateX(100%)' },
-    { opacity: 1, transform: 'translateX(0)' }
+    { opacity: 0, translate: '100%' },
+    { opacity: 1, translate: '0' }
   ],
   options: { duration: 250, easing: 'ease' }
 });
 
 setDefaultAnimation('drawer.hideStart', {
   keyframes: [
-    { opacity: 1, transform: 'translateX(0)' },
-    { opacity: 0, transform: 'translateX(-100%)' }
+    { opacity: 1, translate: '0' },
+    { opacity: 0, translate: '-100%' }
   ],
   rtlKeyframes: [
-    { opacity: 1, transform: 'translateX(0)' },
-    { opacity: 0, transform: 'translateX(100%)' }
+    { opacity: 1, translate: '0' },
+    { opacity: 0, translate: '100%' }
   ],
   options: { duration: 250, easing: 'ease' }
 });
 
 // Deny close
 setDefaultAnimation('drawer.denyClose', {
-  keyframes: [{ transform: 'scale(1)' }, { transform: 'scale(1.01)' }, { transform: 'scale(1)' }],
+  keyframes: [{ scale: 1 }, { scale: 1.01 }, { scale: 1 }],
   options: { duration: 250 }
 });
 

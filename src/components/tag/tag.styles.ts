@@ -69,11 +69,6 @@ export default css`
     padding: 0 var(--sl-spacing-x-small);
   }
 
-  .tag--small .tag__remove {
-    margin-inline-start: var(--sl-spacing-2x-small);
-    margin-right: calc(-1 * var(--sl-spacing-3x-small));
-  }
-
   .tag--medium {
     font-size: var(--sl-button-font-size-medium);
     height: calc(var(--sl-input-height-medium) * 0.8);
@@ -91,9 +86,7 @@ export default css`
   }
 
   .tag__remove {
-    font-size: 1.4em;
-    margin-inline-start: var(--sl-spacing-2x-small);
-    margin-inline-end: calc(-1 * var(--sl-spacing-x-small));
+    margin-inline-start: var(--sl-spacing-x-small);
   }
 
   /*

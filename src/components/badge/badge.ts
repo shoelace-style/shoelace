@@ -13,13 +13,13 @@ import type { CSSResultGroup } from 'lit';
  *
  * @slot - The badge's content.
  *
- * @csspart base - The component's internal wrapper.
+ * @csspart base - The component's base wrapper.
  */
 @customElement('sl-badge')
 export default class SlBadge extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
-  /** The badge's variant. */
+  /** The badge's theme variant. */
   @property({ reflect: true }) variant: 'primary' | 'success' | 'neutral' | 'warning' | 'danger' = 'primary';
 
   /** Draws a pill-style badge with rounded edges. */
@@ -30,7 +30,7 @@ export default class SlBadge extends ShoelaceElement {
 
   render() {
     return html`
-      <span
+      <slot
         part="base"
         class=${classMap({
           badge: true,
@@ -43,9 +43,7 @@ export default class SlBadge extends ShoelaceElement {
           'badge--pulse': this.pulse
         })}
         role="status"
-      >
-        <slot></slot>
-      </span>
+      ></slot>
     `;
   }
 }

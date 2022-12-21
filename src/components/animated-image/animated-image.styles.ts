@@ -7,6 +7,7 @@ export default css`
   :host {
     --control-box-size: 3rem;
     --icon-size: calc(var(--control-box-size) * 0.625);
+
     display: inline-flex;
     position: relative;
     cursor: pointer;
@@ -43,10 +44,14 @@ export default css`
 
   :host([play]:hover) .animated-image__control-box {
     opacity: 1;
-    transform: scale(1);
   }
 
   :host([play]:not(:hover)) .animated-image__control-box {
     opacity: 0;
+  }
+
+  :host([play]) slot[name='pause-icon'],
+  :host(:not([play])) slot[name='play-icon'] {
+    display: none;
   }
 `;

@@ -25,17 +25,19 @@ export default class SlIcon extends ShoelaceElement {
 
   @state() private svg = '';
 
-  /** The name of the icon to draw. */
+  /** The name of the icon to draw. Available names depend on the icon library being used. */
   @property({ reflect: true }) name?: string;
 
   /**
-   * An external URL of an SVG file.
-   *
-   * WARNING: Be sure you trust the content you are including as it will be executed as code and can result in XSS attacks.
+   * An external URL of an SVG file. Be sure you trust the content you are including, as it will be executed as code and
+   * can result in XSS attacks.
    */
   @property() src?: string;
 
-  /** An alternate description to use for accessibility. If omitted, the icon will be ignored by assistive devices. */
+  /**
+   * An alternate description to use for assistive devices. If omitted, the icon will be considered presentational and
+   * ignored by assistive devices.
+   */
   @property() label = '';
 
   /** The name of a registered custom icon library. */
@@ -63,7 +65,7 @@ export default class SlIcon extends ShoelaceElement {
     return this.src;
   }
 
-  /** @internal Fetches the icon and redraws it. Used to handle library registrations. */
+  // Fetches the icon and redraws it. Used to handle library registrations.
   redraw() {
     this.setIcon();
   }

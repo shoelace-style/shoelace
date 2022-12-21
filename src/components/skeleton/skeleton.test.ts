@@ -11,8 +11,6 @@ describe('<sl-skeleton>', () => {
     const indicator = el.shadowRoot!.querySelector<HTMLElement>('[part~="indicator"]')!;
 
     expect(base.getAttribute('class')).to.equal(' skeleton ');
-    expect(base.getAttribute('aria-busy')).to.equal('true');
-    expect(base.getAttribute('aria-live')).to.equal('polite');
     expect(indicator.getAttribute('class')).to.equal('skeleton__indicator');
   });
 

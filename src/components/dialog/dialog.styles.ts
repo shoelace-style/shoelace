@@ -51,7 +51,6 @@ export default css`
   .dialog--open .dialog__panel {
     display: flex;
     opacity: 1;
-    transform: none;
   }
 
   .dialog__header {
@@ -68,16 +67,26 @@ export default css`
     margin: 0;
   }
 
-  .dialog__close {
+  .dialog__header-actions {
+    flex-shrink: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+    gap: var(--sl-spacing-2x-small);
+    padding: 0 var(--header-spacing);
+  }
+
+  .dialog__header-actions sl-icon-button,
+  .dialog__header-actions ::slotted(sl-icon-button) {
     flex: 0 0 auto;
     display: flex;
     align-items: center;
-    font-size: var(--sl-font-size-x-large);
-    padding: 0 var(--header-spacing);
+    font-size: var(--sl-font-size-medium);
   }
 
   .dialog__body {
     flex: 1 1 auto;
+    display: block;
     padding: var(--body-spacing);
     overflow: auto;
     -webkit-overflow-scrolling: touch;

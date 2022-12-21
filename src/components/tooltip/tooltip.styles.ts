@@ -39,6 +39,7 @@ export default css`
   }
 
   .tooltip__body {
+    display: block;
     width: max-content;
     max-width: var(--max-width);
     border-radius: var(--sl-tooltip-border-radius);

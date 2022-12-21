@@ -28,7 +28,6 @@ fs.mkdirSync(outdir, { recursive: true });
     execSync(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-search.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-react.js --outdir "${outdir}"`, { stdio: 'inherit' });
-    execSync(`node scripts/make-vscode-data.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-web-types.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-themes.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-icons.js --outdir "${outdir}"`, { stdio: 'inherit' });
@@ -47,6 +46,9 @@ fs.mkdirSync(outdir, { recursive: true });
       format: 'esm',
       target: 'es2017',
       entryPoints: [
+        //
+        // NOTE: Entry points must be mapped in package.json > exports, otherwise users won't be able to import them!
+        //
         // The whole shebang
         './src/shoelace.ts',
         // Components
@@ -118,36 +120,14 @@ fs.mkdirSync(outdir, { recursive: true });
         routes: {
           '/dist': './dist'
         }
-      },
-      socket: {
-        socketIoClientConfig: {
-          // Configure socketIO to retry forever when disconnected to enable the auto-reattach timeout below to work
-          reconnectionAttempts: Infinity,
-          reconnectionDelay: 500,
-          reconnectionDelayMax: 500,
-          timeout: 1000
-        }
       }
     };
 
     // Launch browser sync
     bs.init(browserSyncConfig, () => {
-      // This init callback gets executed after the server has started
-      const socketIoConfig = browserSyncConfig.socket.socketIoClientConfig;
-
-      // Wait enough time for any open, detached clients to have a chance to reconnect. This will be used to determine
-      // if we reload an existing tab or open a new one.
-      const tabReattachDelay = socketIoConfig.reconnectionDelayMax * 2 + socketIoConfig.timeout;
-
-      setTimeout(() => {
-        const url = `http://localhost:${port}`;
-        console.log(chalk.cyan(`Launched the Shoelace dev server at ${url} 🥾\n`));
-        if (Object.keys(bs.sockets.sockets).length === 0) {
-          open(url);
-        } else {
-          bs.reload();
-        }
-      }, tabReattachDelay);
+      const url = `http://localhost:${port}`;
+      console.log(chalk.cyan(`Launched the Shoelace dev server at ${url} 🥾\n`));
+      open(url);
     });
 
     // Rebuild and reload when source files change

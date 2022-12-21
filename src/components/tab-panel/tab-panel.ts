@@ -1,11 +1,12 @@
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { autoIncrement } from '../../internal/auto-increment';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import styles from './tab-panel.styles';
 import type { CSSResultGroup } from 'lit';
+
+let id = 0;
 
 /**
  * @summary Tab panels are used inside [tab groups](/components/tab-group) to display tabbed content.
@@ -15,7 +16,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @slot - The tab panel's content.
  *
- * @csspart base - The component's internal wrapper.
+ * @csspart base - The component's base wrapper.
  *
  * @cssproperty --padding - The tab panel's padding.
  */
@@ -23,7 +24,7 @@ import type { CSSResultGroup } from 'lit';
 export default class SlTabPanel extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
-  private readonly attrId = autoIncrement();
+  private readonly attrId = ++id;
   private readonly componentId = `sl-tab-panel-${this.attrId}`;
 
   /** The tab panel's name. */
@@ -45,15 +46,13 @@ export default class SlTabPanel extends ShoelaceElement {
 
   render() {
     return html`
-      <div
+      <slot
         part="base"
         class=${classMap({
           'tab-panel': true,
           'tab-panel--active': this.active
         })}
-      >
-        <slot></slot>
-      </div>
+      ></slot>
     `;
   }
 }

@@ -1,3 +1,4 @@
+/** Gets an array of components from a CEM object. */
 export function getAllComponents(metadata) {
   const allComponents = [];
 

@@ -41,7 +41,6 @@ export default css`
     max-height: 100%;
     background-color: var(--sl-panel-background-color);
     box-shadow: var(--sl-shadow-x-large);
-    transition: var(--sl-transition-medium) transform;
     overflow: auto;
     pointer-events: all;
   }
@@ -99,16 +98,26 @@ export default css`
     margin: 0;
   }
 
-  .drawer__close {
+  .drawer__header-actions {
+    flex-shrink: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+    gap: var(--sl-spacing-2x-small);
+    padding: 0 var(--header-spacing);
+  }
+
+  .drawer__header-actions sl-icon-button,
+  .drawer__header-actions ::slotted(sl-icon-button) {
     flex: 0 0 auto;
     display: flex;
     align-items: center;
-    font-size: var(--sl-font-size-x-large);
-    padding: 0 var(--header-spacing);
+    font-size: var(--sl-font-size-medium);
   }
 
   .drawer__body {
     flex: 1 1 auto;
+    display: block;
     padding: var(--body-spacing);
     overflow: auto;
     -webkit-overflow-scrolling: touch;
@@ -139,7 +148,7 @@ export default css`
   }
 
   .drawer--contained .drawer__overlay {
-    position: absolute;
+    display: none;
   }
 
   @media (forced-colors: active) {

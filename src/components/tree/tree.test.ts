@@ -12,7 +12,7 @@ describe('<sl-tree>', () => {
       <sl-tree>
         <sl-tree-item>Node 1</sl-tree-item>
         <sl-tree-item>Node 2</sl-tree-item>
-        <sl-tree-item>
+        <sl-tree-item id="expandable">
           Parent Node
           <sl-tree-item>Child Node 1</sl-tree-item>
           <sl-tree-item>
@@ -558,25 +558,195 @@ describe('<sl-tree>', () => {
         });
       });
     });
+
+    describe('when selection is "single"', () => {
+      describe('and user clicks on same item twice', () => {
+        it('should emit `sl-selection-change` event once', async () => {
+          // Arrange
+          el.selection = 'single';
+          await el.updateComplete;
+
+          const selectedChangeSpy = sinon.spy();
+          el.addEventListener('sl-selection-change', selectedChangeSpy);
+
+          const node = el.children[0] as SlTreeItem;
+
+          // Act
+          node.click();
+          await el.updateComplete;
+          node.click();
+          await el.updateComplete;
+
+          // Assert
+          expect(selectedChangeSpy).to.have.been.calledOnce;
+          expect(selectedChangeSpy.args[0][0]).to.deep.include({ detail: { selection: [node] } });
+        });
+      });
+    });
   });
 
-  describe('when an tree item gets selected or deselected', () => {
-    it('should emit a `sl-selection-change` event', async () => {
-      // Arrange
-      el.selection = 'single';
-      await el.updateComplete;
+  describe('when selection is "leaf"', () => {
+    describe('and user clicks on same leaf item twice', () => {
+      it('should emit `sl-selection-change` event once', async () => {
+        // Arrange
+        el.selection = 'leaf';
+        await el.updateComplete;
 
-      const selectedChangeSpy = sinon.spy();
-      el.addEventListener('sl-selection-change', selectedChangeSpy);
+        const selectedChangeSpy = sinon.spy();
+        el.addEventListener('sl-selection-change', selectedChangeSpy);
 
-      const node = el.children[0] as SlTreeItem;
+        const node = el.children[0] as SlTreeItem;
 
-      // Act
-      node.click();
-      await el.updateComplete;
+        // Act
+        node.click();
+        await el.updateComplete;
+        node.click();
+        await el.updateComplete;
 
-      // Assert
-      expect(selectedChangeSpy).to.have.been.called;
+        // Assert
+        expect(selectedChangeSpy).to.have.been.calledOnce;
+        expect(selectedChangeSpy.args[0][0]).to.deep.include({ detail: { selection: [node] } });
+      });
+    });
+
+    describe('and user clicks on expandable item', () => {
+      it('should not emit `sl-selection-change` event', async () => {
+        // Arrange
+        el.selection = 'leaf';
+        await el.updateComplete;
+
+        const selectedChangeSpy = sinon.spy();
+        el.addEventListener('sl-selection-change', selectedChangeSpy);
+
+        const node = el.querySelector<SlTreeItem>('#expandable')!;
+
+        // Act
+        node.click();
+        await el.updateComplete;
+
+        // Assert
+        expect(selectedChangeSpy).to.not.have.been.called;
+      });
+    });
+  });
+
+  describe('when selection is "multiple"', () => {
+    describe('and user clicks on same item twice', () => {
+      it('should emit `sl-selection-change` event twice', async () => {
+        // Arrange
+        el.selection = 'multiple';
+        await el.updateComplete;
+
+        const selectedChangeSpy = sinon.spy();
+        el.addEventListener('sl-selection-change', selectedChangeSpy);
+
+        const node = el.children[0] as SlTreeItem;
+
+        // Act
+        node.click();
+        await el.updateComplete;
+        node.click();
+        await el.updateComplete;
+
+        // Assert
+        expect(selectedChangeSpy).to.have.been.calledTwice;
+        expect(selectedChangeSpy.args[0][0]).to.deep.include({ detail: { selection: [node] } });
+        expect(selectedChangeSpy.args[1][0]).to.deep.include({ detail: { selection: [] } });
+      });
+    });
+  });
+
+  describe('Checkboxes synchronization', () => {
+    describe('when the tree gets initialized', () => {
+      describe('and a parent node is selected', () => {
+        it('should select all the nested children', async () => {
+          // Arrange
+          const tree = await fixture<SlTree>(html`
+            <sl-tree selection="multiple">
+              <sl-tree-item selected>
+                Parent Node
+                <sl-tree-item selected>Child Node 1</sl-tree-item>
+                <sl-tree-item>
+                  Child Node 2
+                  <sl-tree-item>Child Node 2 - 1</sl-tree-item>
+                  <sl-tree-item>Child Node 2 - 2</sl-tree-item>
+                </sl-tree-item>
+              </sl-tree-item>
+            </sl-tree>
+          `);
+          const treeItems = Array.from<SlTreeItem>(tree.querySelectorAll('sl-tree-item'));
+
+          // Act
+          await tree.updateComplete;
+
+          // Assert
+          treeItems.forEach(treeItem => {
+            expect(treeItem).to.have.attribute('selected');
+          });
+        });
+      });
+
+      describe('and a parent node is not selected', () => {
+        describe('and all the children are selected', () => {
+          it('should select the parent node', async () => {
+            // Arrange
+            const tree = await fixture<SlTree>(html`
+              <sl-tree selection="multiple">
+                <sl-tree-item>
+                  Parent Node
+                  <sl-tree-item selected>Child Node 1</sl-tree-item>
+                  <sl-tree-item selected>
+                    Child Node 2
+                    <sl-tree-item>Child Node 2 - 1</sl-tree-item>
+                    <sl-tree-item>Child Node 2 - 2</sl-tree-item>
+                  </sl-tree-item>
+                </sl-tree-item>
+              </sl-tree>
+            `);
+            const treeItems = Array.from<SlTreeItem>(tree.querySelectorAll('sl-tree-item'));
+
+            // Act
+            await tree.updateComplete;
+
+            // Assert
+            treeItems.forEach(treeItem => {
+              expect(treeItem).to.have.attribute('selected');
+            });
+            expect(treeItems[0].indeterminate).to.be.false;
+          });
+        });
+
+        describe('and some of the children are selected', () => {
+          it('should set the parent node to indeterminate state', async () => {
+            // Arrange
+            const tree = await fixture<SlTree>(html`
+              <sl-tree selection="multiple">
+                <sl-tree-item>
+                  Parent Node
+                  <sl-tree-item selected>Child Node 1</sl-tree-item>
+                  <sl-tree-item>
+                    Child Node 2
+                    <sl-tree-item>Child Node 2 - 1</sl-tree-item>
+                    <sl-tree-item>Child Node 2 - 2</sl-tree-item>
+                  </sl-tree-item>
+                </sl-tree-item>
+              </sl-tree>
+            `);
+            const treeItems = Array.from<SlTreeItem>(tree.querySelectorAll('sl-tree-item'));
+
+            // Act
+            await tree.updateComplete;
+
+            // Assert
+            expect(treeItems[0]).not.to.have.attribute('selected');
+            expect(treeItems[0].indeterminate).to.be.true;
+            expect(treeItems[1]).to.have.attribute('selected');
+            expect(treeItems[2]).not.to.have.attribute('selected');
+            expect(treeItems[3]).not.to.have.attribute('selected');
+            expect(treeItems[4]).not.to.have.attribute('selected');
+          });
+        });
+      });
     });
   });
 });

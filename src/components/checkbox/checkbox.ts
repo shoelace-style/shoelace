@@ -22,15 +22,18 @@ import type { CSSResultGroup } from 'lit';
  *
  * @slot - The checkbox's label.
  *
- * @event sl-blur - Emitted when the control loses focus.
- * @event sl-change - Emitted when the control's checked state changes.
- * @event sl-focus - Emitted when the control gains focus.
+ * @event sl-blur - Emitted when the checkbox loses focus.
+ * @event sl-change - Emitted when the checked state changes.
+ * @event sl-focus - Emitted when the checkbox gains focus.
+ * @event sl-input - Emitted when the checkbox receives input.
  *
- * @csspart base - The component's internal wrapper.
- * @csspart control - The checkbox control.
- * @csspart checked-icon - The checked icon.
- * @csspart indeterminate-icon - The indeterminate icon.
- * @csspart label - The checkbox label.
+ * @csspart base - The component's base wrapper.
+ * @csspart control - The square container that wraps the checkbox's checked state.
+ * @csspart control--checked - Matches the control part when the checkbox is checked.
+ * @csspart control--indeterminate - Matches the control part when the checkbox is indeterminate.
+ * @csspart checked-icon - The checked icon, an `<sl-icon>` element.
+ * @csspart indeterminate-icon - The indeterminate icon, an `<sl-icon>` element.
+ * @csspart label - The container that wraps the checkbox's label.
  */
 @customElement('sl-checkbox')
 export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormControl {
@@ -47,14 +50,18 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
 
   @state() private hasFocus = false;
   @state() invalid = false;
+  @property() title = ''; // make reactive to pass through
 
-  /** Name of the HTML form control. Submitted with the form as part of a name/value pair. */
-  @property() name: string;
+  /** The name of the checkbox, submitted as a name/value pair with form data. */
+  @property() name = '';
 
-  /** Value of the HTML form control. Primarily used to differentiate a list of related checkboxes that have the same name. */
+  /** The current value of the checkbox, submitted as a name/value pair with form data. */
   @property() value: string;
 
-  /** Disables the checkbox (so the user can't check / uncheck it). */
+  /** The checkbox's size. */
+  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
+
+  /** Disables the checkbox. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Makes the checkbox a required field. */
@@ -63,10 +70,13 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
   /** Draws the checkbox in a checked state. */
   @property({ type: Boolean, reflect: true }) checked = false;
 
-  /** Draws the checkbox in an indeterminate state. Usually applies to a checkbox that represents "select all" or "select none" when the items to which it applies are a mix of selected and unselected. */
+  /**
+   * Draws the checkbox in an indeterminate state. This is usually applied to checkboxes that represents a "select
+   * all/none" behavior when associated checkboxes have a mix of checked and unchecked states.
+   */
   @property({ type: Boolean, reflect: true }) indeterminate = false;
 
-  /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+  /** The default value of the form control. Primarily used for resetting the form control. */
   @defaultValue('checked') defaultChecked = false;
 
   firstUpdated() {
@@ -88,17 +98,20 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
     this.input.blur();
   }
 
-  /** Checks for validity but does not show the browser's validation message. */
+  /** Checks for validity but does not show a validation message. Returns true when valid and false when invalid. */
   checkValidity() {
     return this.input.checkValidity();
   }
 
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  /** Checks for validity and shows a validation message if the control is invalid. */
   reportValidity() {
     return this.input.reportValidity();
   }
 
-  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  /**
+   * Sets a custom validation message. The value provided will be shown to the user when the form is submitted. To clear
+   * the custom validation message, call this method with an empty string.
+   */
   setCustomValidity(message: string) {
     this.input.setCustomValidity(message);
     this.invalid = !this.input.checkValidity();
@@ -113,6 +126,10 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
   handleBlur() {
     this.hasFocus = false;
     this.emit('sl-blur');
+  }
+
+  handleInput() {
+    this.emit('sl-input');
   }
 
   @watch('disabled', { waitUntilFirstUpdate: true })
@@ -144,13 +161,17 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
           'checkbox--checked': this.checked,
           'checkbox--disabled': this.disabled,
           'checkbox--focused': this.hasFocus,
-          'checkbox--indeterminate': this.indeterminate
+          'checkbox--indeterminate': this.indeterminate,
+          'checkbox--small': this.size === 'small',
+          'checkbox--medium': this.size === 'medium',
+          'checkbox--large': this.size === 'large'
         })}
       >
         <input
           class="checkbox__input"
           type="checkbox"
-          name=${ifDefined(this.name)}
+          title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
+          name=${this.name}
           value=${ifDefined(this.value)}
           .indeterminate=${live(this.indeterminate)}
           .checked=${live(this.checked)}
@@ -158,20 +179,30 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
           .required=${this.required}
           aria-checked=${this.checked ? 'true' : 'false'}
           @click=${this.handleClick}
+          @input=${this.handleInput}
           @blur=${this.handleBlur}
           @focus=${this.handleFocus}
         />
 
         <span part="control" class="checkbox__control">
-          ${this.checked ? html` <sl-icon part="checked-icon" library="system" name="check"></sl-icon> ` : ''}
+          ${this.checked
+            ? html`
+                <sl-icon part="checked-icon" class="checkbox__checked-icon" library="system" name="check"></sl-icon>
+              `
+            : ''}
           ${!this.checked && this.indeterminate
-            ? html` <sl-icon part="indeterminate-icon" library="system" name="indeterminate"></sl-icon> `
+            ? html`
+                <sl-icon
+                  part="indeterminate-icon"
+                  class="checkbox__indeterminate-icon"
+                  library="system"
+                  name="indeterminate"
+                ></sl-icon>
+              `
             : ''}
         </span>
 
-        <span part="label" class="checkbox__label">
-          <slot></slot>
-        </span>
+        <slot part="label" class="checkbox__label"></slot>
       </label>
     `;
   }

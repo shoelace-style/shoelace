@@ -56,11 +56,20 @@ export default css`
     flex: 0 0 auto;
     display: flex;
     align-items: center;
-    transition: var(--sl-transition-medium) transform ease;
+    transition: var(--sl-transition-medium) rotate ease;
   }
 
   .details--open .details__summary-icon {
-    transform: rotate(90deg);
+    rotate: 90deg;
+  }
+
+  .details--open.details--rtl .details__summary-icon {
+    rotate: -90deg;
+  }
+
+  .details--open slot[name='expand-icon'],
+  .details:not(.details--open) slot[name='collapse-icon'] {
+    display: none;
   }
 
   .details__body {
@@ -68,6 +77,7 @@ export default css`
   }
 
   .details__content {
+    display: block;
     padding: var(--sl-spacing-medium);
   }
 `;

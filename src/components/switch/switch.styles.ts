@@ -5,18 +5,38 @@ export default css`
   ${componentStyles}
 
   :host {
-    --height: var(--sl-toggle-size);
-    --thumb-size: calc(var(--sl-toggle-size) + 4px);
+    display: inline-block;
+  }
+
+  :host([size='small']) {
+    --height: var(--sl-toggle-size-small);
+    --thumb-size: calc(var(--sl-toggle-size-small) + 4px);
     --width: calc(var(--height) * 2);
 
-    display: inline-block;
+    font-size: var(--sl-input-font-size-small);
+  }
+
+  :host([size='medium']) {
+    --height: var(--sl-toggle-size-medium);
+    --thumb-size: calc(var(--sl-toggle-size-medium) + 4px);
+    --width: calc(var(--height) * 2);
+
+    font-size: var(--sl-input-font-size-medium);
+  }
+
+  :host([size='large']) {
+    --height: var(--sl-toggle-size-large);
+    --thumb-size: calc(var(--sl-toggle-size-large) + 4px);
+    --width: calc(var(--height) * 2);
+
+    font-size: var(--sl-input-font-size-large);
   }
 
   .switch {
     display: inline-flex;
     align-items: center;
     font-family: var(--sl-input-font-family);
-    font-size: var(--sl-input-font-size-medium);
+    font-size: inherit;
     font-weight: var(--sl-input-font-weight);
     color: var(--sl-input-color);
     vertical-align: middle;
@@ -43,8 +63,8 @@ export default css`
     background-color: var(--sl-color-neutral-0);
     border-radius: 50%;
     border: solid var(--sl-input-border-width) var(--sl-color-neutral-400);
-    transform: translateX(calc((var(--width) - var(--height)) / -2));
-    transition: var(--sl-transition-fast) transform ease, var(--sl-transition-fast) background-color,
+    translate: calc((var(--width) - var(--height)) / -2);
+    transition: var(--sl-transition-fast) translate ease, var(--sl-transition-fast) background-color,
       var(--sl-transition-fast) border-color, var(--sl-transition-fast) box-shadow;
   }
 
@@ -89,7 +109,7 @@ export default css`
   .switch--checked .switch__control .switch__thumb {
     background-color: var(--sl-color-neutral-0);
     border-color: var(--sl-color-primary-600);
-    transform: translateX(calc((var(--width) - var(--height)) / 2));
+    translate: calc((var(--width) - var(--height)) / 2);
   }
 
   /* Checked + hover */
@@ -123,6 +143,7 @@ export default css`
   }
 
   .switch__label {
+    display: inline-block;
     line-height: var(--height);
     margin-inline-start: 0.5em;
     user-select: none;

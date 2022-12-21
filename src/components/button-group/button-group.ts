@@ -12,7 +12,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @slot - One or more `<sl-button>` elements to display in the button group.
  *
- * @csspart base - The component's internal wrapper.
+ * @csspart base - The component's base wrapper.
  */
 @customElement('sl-button-group')
 export default class SlButtonGroup extends ShoelaceElement {
@@ -22,7 +22,10 @@ export default class SlButtonGroup extends ShoelaceElement {
 
   @state() disableRole = false;
 
-  /** A label to use for the button group's `aria-label` attribute. */
+  /**
+   * A label to use for the button group. This won't be displayed on the screen, but it will be announced by assistive
+   * devices when interacting with the control and is strongly recommended.
+   */
   @property() label = '';
 
   handleFocus(event: CustomEvent) {
@@ -63,9 +66,9 @@ export default class SlButtonGroup extends ShoelaceElement {
   }
 
   render() {
-    // eslint-disable-next-line lit-a11y/mouse-events-have-key-events -- focusout & focusin support bubbling whereas focus & blur do not which is necessary here
+    // eslint-disable-next-line lit-a11y/mouse-events-have-key-events
     return html`
-      <div
+      <slot
         part="base"
         class="button-group"
         role="${this.disableRole ? 'presentation' : 'group'}"
@@ -74,16 +77,17 @@ export default class SlButtonGroup extends ShoelaceElement {
         @focusin=${this.handleFocus}
         @mouseover=${this.handleMouseOver}
         @mouseout=${this.handleMouseOut}
-      >
-        <slot @slotchange=${this.handleSlotChange} role="none"></slot>
-      </div>
+        @slotchange=${this.handleSlotChange}
+      ></slot>
     `;
   }
 }
 
 function findButton(el: HTMLElement) {
-  const children = ['sl-button', 'sl-radio-button'];
-  return children.includes(el.tagName.toLowerCase()) ? el : el.querySelector(children.join(','));
+  const selector = 'sl-button, sl-radio-button';
+
+  // The button could be the target element or a child of it (e.g. a dropdown or tooltip anchor)
+  return el.closest(selector) ?? el.querySelector(selector);
 }
 
 declare global {

@@ -8,7 +8,7 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Short summary of the component's intended use.
- * 
+ *
  * @since 2.0
  * @status experimental
  *
@@ -19,7 +19,7 @@ import type { CSSResultGroup } from 'lit';
  * @slot - The default slot.
  * @slot example - An example slot.
  *
- * @csspart base - The component's internal wrapper.
+ * @csspart base - The component's base wrapper.
  *
  * @cssproperty --example - An example CSS custom property.
  */
@@ -29,10 +29,10 @@ export default class {{ properCase tag }} extends ShoelaceElement {
 
   private readonly localize = new LocalizeController(this);
 
-  /** An example property. */
-  @property() prop = 'example';
+  /** An example attribute. */
+  @property() attr = 'example';
 
-  @watch('someProp')
+  @watch('someProperty')
   doSomething() {
     // Example event
     this.emit('sl-event-name');

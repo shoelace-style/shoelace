@@ -26,14 +26,14 @@ import type { CSSResultGroup } from 'lit';
  * @event sl-focus - Emitted when the button gains focus.
  *
  * @slot - The button's label.
- * @slot prefix - Used to prepend an icon or similar element to the button.
- * @slot suffix - Used to append an icon or similar element to the button.
+ * @slot prefix - A presentational prefix icon or similar element.
+ * @slot suffix - A presentational suffix icon or similar element.
  *
- * @csspart base - The component's internal wrapper.
- * @csspart prefix - The prefix slot's container.
+ * @csspart base - The component's base wrapper.
+ * @csspart prefix - The container that wraps the prefix.
  * @csspart label - The button's label.
- * @csspart suffix - The suffix slot's container.
- * @csspart caret - The button's caret icon.
+ * @csspart suffix - The container that wraps the suffix.
+ * @csspart caret - The button's caret icon, an `<sl-icon>` element.
  */
 @customElement('sl-button')
 export default class SlButton extends ShoelaceElement implements ShoelaceFormControl {
@@ -60,15 +60,16 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
 
   @state() private hasFocus = false;
   @state() invalid = false;
+  @property() title = ''; // make reactive to pass through
 
-  /** The button's variant. */
+  /** The button's theme variant. */
   @property({ reflect: true }) variant: 'default' | 'primary' | 'success' | 'neutral' | 'warning' | 'danger' | 'text' =
     'default';
 
   /** The button's size. */
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
-  /** Draws the button with a caret for use with dropdowns, popovers, etc. */
+  /** Draws the button with a caret. Used to indicate that the button triggers a dropdown menu or similar behavior. */
   @property({ type: Boolean, reflect: true }) caret = false;
 
   /** Disables the button. */
@@ -83,28 +84,37 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
   /** Draws a pill-style button with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;
 
-  /** Draws a circle button. */
+  /**
+   * Draws a circular icon button. When this attribute is present, the button expects a single `<sl-icon>` in the
+   * default slot.
+   */
   @property({ type: Boolean, reflect: true }) circle = false;
 
   /**
-   * The type of button. When the type is `submit`, the button will submit the surrounding form. Note that the default
-   * value is `button` instead of `submit`, which is opposite of how native `<button>` elements behave.
+   * The type of button. Note that the default value is `button` instead of `submit`, which is opposite of how native
+   * `<button>` elements behave. When the type is `submit`, the button will submit the surrounding form.
    */
   @property() type: 'button' | 'submit' | 'reset' = 'button';
 
-  /** An optional name for the button. Ignored when `href` is set. */
+  /**
+   * The name of the button, submitted as a name/value pair with form data, but only when this button is the submitter.
+   * This attribute is ignored when `href` is present.
+   */
   @property() name = '';
 
-  /** An optional value for the button. Ignored when `href` is set. */
+  /**
+   * The value of the button, submitted as a pair with the button's name as part of the form data, but only when this
+   * button is the submitter. This attribute is ignored when `href` is present.
+   */
   @property() value = '';
 
   /** When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`. */
   @property() href = '';
 
-  /** Tells the browser where to open the link. Only used when `href` is set. */
+  /** Tells the browser where to open the link. Only used when `href` is present. */
   @property() target: '_blank' | '_parent' | '_self' | '_top';
 
-  /** Tells the browser to download the linked file as this filename. Only used when `href` is set. */
+  /** Tells the browser to download the linked file as this filename. Only used when `href` is present. */
   @property() download?: string;
 
   /**
@@ -115,6 +125,10 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
 
   /** Used to override the form owner's `action` attribute. */
   @property({ attribute: 'formaction' }) formAction: string;
+
+  /** Used to override the form owner's `enctype` attribute.  */
+  @property({ attribute: 'formenctype' })
+  formEnctype: 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text/plain';
 
   /** Used to override the form owner's `method` attribute.  */
   @property({ attribute: 'formmethod' }) formMethod: 'post' | 'get';
@@ -251,6 +265,7 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
         })}
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         type=${ifDefined(isLink ? undefined : this.type)}
+        title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
         name=${ifDefined(isLink ? undefined : this.name)}
         value=${ifDefined(isLink ? undefined : this.value)}
         href=${ifDefined(isLink ? this.href : undefined)}
@@ -264,15 +279,9 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
         @focus=${this.handleFocus}
         @click=${this.handleClick}
       >
-        <span part="prefix" class="button__prefix">
-          <slot name="prefix"></slot>
-        </span>
-        <span part="label" class="button__label">
-          <slot></slot>
-        </span>
-        <span part="suffix" class="button__suffix">
-          <slot name="suffix"></slot>
-        </span>
+        <slot name="prefix" part="prefix" class="button__prefix"></slot>
+        <slot part="label" class="button__label"></slot>
+        <slot name="suffix" part="suffix" class="button__suffix"></slot>
         ${
           this.caret ? html` <sl-icon part="caret" class="button__caret" library="system" name="caret"></sl-icon> ` : ''
         }

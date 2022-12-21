@@ -224,11 +224,33 @@ When a component relies on the presence of slotted content to do something, don'
 
 See the source of card, dialog, or drawer for examples.
 
+### Dynamic Slot Names and Expand/Collapse Icons
+
+A pattern has been established in `<sl-details>` and `<sl-tree-item>` for expand/collapse icons that animate on open/close. In short, create two slots called `expand-icon` and `collapse-icon` and render them both in the DOM, using CSS to show/hide only one based on the current open state. Avoid conditionally rendering them. Also avoid using dynamic slot names, such as `<slot name=${open ? 'open' : 'closed'}>`, because Firefox will not animate them.
+
+There should be a container element immediately surrounding both slots. The container should be animated with CSS by default and it should have a part so the user can override the animation or disable it. Please refer to the source and documentation for `<sl-details>` and/or `<sl-tree-item>` for details.
+
+### Fallback Content in Slots
+
+When providing fallback content inside of `<slot>` elements, avoid adding parts, e.g.:
+
+```html
+<slot name="icon">
+  <sl-icon part="close-icon"></sl-icon>
+</slot>
+```
+
+This creates confusion because the part will be documented, but it won't work when the user slots in their own content. The recommended way to customize this example is for the user to slot in their own content and target its styles with CSS as needed.
+
 ### Custom Events
 
 Components must only emit custom events, and all custom events must start with `sl-` as a namespace. For compatibility with frameworks that utilize DOM templates, custom events must have lowercase, kebab-style names. For example, use `sl-change` instead of `slChange`.
 
 This convention avoids the problem of browsers lowercasing attributes, causing some frameworks to be unable to listen to them. This problem isn't specific to one framework, but [Vue's documentation](https://vuejs.org/v2/guide/components-custom-events.html#Event-Names) provides a good explanation of the problem.
+
+### Change Events
+
+When change events are emitted by Shoelace components, they should be named `sl-change` and they should only be emitted as a result of user input. Programmatic changes, such as setting `el.value = '…'` _should not_ result in a change event being emitted. This is consistent with how native form controls work.
 
 ### CSS Custom Properties
 
@@ -276,7 +298,7 @@ This convention can be relaxed when the developer experience is greatly improved
 
 ### Naming CSS Parts
 
-While CSS parts can be named [virtually anything](https://www.abeautifulsite.net/posts/valid-names-for-css-parts/), within Shoelace they must use the kebab-case convention and lowercase letters. Modifiers must be delimited by `--` like in BEM. This is useful for allowing users to target parts with various states, such as `my-part--focus`.
+While CSS parts can be named [virtually anything](https://www.abeautifulsite.net/posts/valid-names-for-css-parts/), within Shoelace they must use the kebab-case convention and lowercase letters. Additionally, [a BEM-inspired naming convention](https://www.abeautifulsite.net/posts/css-parts-inspired-by-bem/) is used to distinguish parts, subparts, and states.
 
 When composing elements, use `part` to export the host element and `exportparts` to export its parts.
 

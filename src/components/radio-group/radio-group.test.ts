@@ -162,24 +162,30 @@ describe('when submitting a form', () => {
   });
 });
 
-describe('when emitting "sl-change" event', () => {
-  it('should fire sl-change when toggled via keyboard - arrow key', async () => {
+describe('when the value changes', () => {
+  it('should emit sl-change when toggled with the arrow keys', async () => {
     const radioGroup = await fixture<SlRadioGroup>(html`
       <sl-radio-group>
         <sl-radio id="radio-1" value="1"></sl-radio>
         <sl-radio id="radio-2" value="2"></sl-radio>
       </sl-radio-group>
     `);
-    const radio1 = radioGroup.querySelector<SlRadio>('#radio-1')!;
+    const firstRadio = radioGroup.querySelector<SlRadio>('#radio-1')!;
+    const changeHandler = sinon.spy();
+    const inputHandler = sinon.spy();
 
-    radio1.focus();
-    setTimeout(() => sendKeys({ press: 'ArrowRight' }));
-    await oneEvent(radioGroup, 'sl-change');
+    radioGroup.addEventListener('sl-change', changeHandler);
+    radioGroup.addEventListener('sl-input', inputHandler);
+    firstRadio.focus();
+    await sendKeys({ press: 'ArrowRight' });
+    await radioGroup.updateComplete;
 
+    expect(changeHandler).to.have.been.calledOnce;
+    expect(inputHandler).to.have.been.calledOnce;
     expect(radioGroup.value).to.equal('2');
   });
 
-  it('should fire sl-change when clicked', async () => {
+  it('should emit sl-change and sl-input when clicked', async () => {
     const radioGroup = await fixture<SlRadioGroup>(html`
       <sl-radio-group>
         <sl-radio id="radio-1" value="1"></sl-radio>
@@ -193,7 +199,7 @@ describe('when emitting "sl-change" event', () => {
     expect(radioGroup.value).to.equal('1');
   });
 
-  it('should fire sl-change when toggled via keyboard - space', async () => {
+  it('should emit sl-change and sl-input when toggled with spacebar', async () => {
     const radioGroup = await fixture<SlRadioGroup>(html`
       <sl-radio-group>
         <sl-radio id="radio-1" value="1"></sl-radio>
@@ -206,5 +212,19 @@ describe('when emitting "sl-change" event', () => {
     const event = (await oneEvent(radioGroup, 'sl-change')) as CustomEvent;
     expect(event.target).to.equal(radioGroup);
     expect(radioGroup.value).to.equal('1');
+  });
+
+  it('should not emit sl-change or sl-input when the value is changed programmatically', async () => {
+    const radioGroup = await fixture<SlRadioGroup>(html`
+      <sl-radio-group value="1">
+        <sl-radio id="radio-1" value="1"></sl-radio>
+        <sl-radio id="radio-2" value="2"></sl-radio>
+      </sl-radio-group>
+    `);
+
+    radioGroup.addEventListener('sl-change', () => expect.fail('sl-change should not be emitted'));
+    radioGroup.addEventListener('sl-input', () => expect.fail('sl-input should not be emitted'));
+    radioGroup.value = '2';
+    await radioGroup.updateComplete;
   });
 });

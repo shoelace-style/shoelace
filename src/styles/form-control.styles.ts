@@ -38,9 +38,6 @@ export default css`
   .form-control--has-help-text .form-control__help-text {
     display: block;
     color: var(--sl-input-help-text-color);
-  }
-
-  .form-control--has-help-text .form-control__help-text ::slotted(*) {
     margin-top: var(--sl-spacing-3x-small);
   }
 
