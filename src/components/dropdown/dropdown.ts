@@ -195,7 +195,7 @@ export default class SlDropdown extends ShoelaceElement {
 
   private handlePanelSelect = (event: CustomEvent) => {
     const target = event.target as HTMLElement;
-    console.log('handle!');
+
     // Hide the dropdown when a menu item is selected
     if (!this.stayOpenOnSelect && target.tagName.toLowerCase() === 'sl-menu') {
       this.hide();
