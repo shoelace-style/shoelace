@@ -29,8 +29,6 @@ import type { CSSResultGroup } from 'lit';
  *
  * @csspart base - The component's base wrapper.
  * @csspart control - The square container that wraps the checkbox's checked state.
- * @csspart control--checked - Matches the control part when the checkbox is checked.
- * @csspart control--indeterminate - Matches the control part when the checkbox is indeterminate.
  * @csspart checked-icon - The checked icon, an `<sl-icon>` element.
  * @csspart indeterminate-icon - The indeterminate icon, an `<sl-icon>` element.
  * @csspart label - The container that wraps the checkbox's label.
