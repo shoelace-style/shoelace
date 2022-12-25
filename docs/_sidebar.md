@@ -91,6 +91,7 @@
   - [Border Radius](/tokens/border-radius)
   - [Transition](/tokens/transition)
   - [Z-index](/tokens/z-index)
+  - [Button](/tokens/button)
 
 - Tutorials
 
