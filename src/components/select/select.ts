@@ -358,7 +358,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     this.displayInput.focus();
   }
 
-  // We use mousedown/mouseup instead of click to allow macOS-style menu behavior
   private handleComboboxMouseDown(event: MouseEvent) {
     const path = event.composedPath();
     const isIconButton = path.some(el => el instanceof Element && el.tagName.toLowerCase() === 'sl-icon-button');
@@ -396,8 +395,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     event.preventDefault();
   }
 
-  // We use mousedown/mouseup instead of click to allow macOS-style menu behavior
-  private handleOptionMouseUp(event: MouseEvent) {
+  private handleOptionClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     const option = target.closest('sl-option');
     const oldValue = this.value;
@@ -433,7 +431,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     allOptions.forEach(option => {
       if (values.includes(option.value)) {
         console.error(
-          `An option with duplicate values has been found in <sl-select>. All options must be unique.`,
+          `An option with duplicate values has been found in <sl-select>. All options must have unique values.`,
           option
         );
       }
@@ -766,7 +764,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
               part="listbox"
               class="select__listbox"
               tabindex="-1"
-              @mouseup=${this.handleOptionMouseUp}
+              @mouseup=${this.handleOptionClick}
               @slotchange=${this.handleDefaultSlotChange}
             ></slot>
           </sl-popup>

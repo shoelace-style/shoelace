@@ -39,8 +39,7 @@ describe('<sl-select>', () => {
     `);
     const disabledOption = el.querySelector('sl-option[disabled]')!;
 
-    await clickOnElement(el);
-    await waitForEvent(el, 'sl-after-show');
+    await el.show();
     await clickOnElement(disabledOption);
     await el.updateComplete;
 
@@ -81,8 +80,7 @@ describe('<sl-select>', () => {
       el.addEventListener('sl-change', changeHandler);
       el.addEventListener('sl-input', inputHandler);
 
-      await clickOnElement(el);
-      await waitForEvent(el, 'sl-after-show');
+      await el.show();
       await clickOnElement(secondOption);
       await el.updateComplete;
 
@@ -293,9 +291,7 @@ describe('<sl-select>', () => {
       const select = form.querySelector('sl-select')!;
       const option2 = form.querySelectorAll('sl-option')![1];
 
-      await clickOnElement(select);
-      await waitForEvent(select, 'sl-after-show');
-
+      await select.show();
       await clickOnElement(option2);
       await select.updateComplete;
       expect(select.value).to.equal('option-2');
@@ -325,5 +321,74 @@ describe('<sl-select>', () => {
     await el.updateComplete;
 
     expect(displayInput.value).to.equal('updated');
+  });
+
+  it('should emit sl-focus and sl-blur when receiving and losing focus', async () => {
+    const el = await fixture<SlSelect>(html`
+      <sl-select value="option-1">
+        <sl-option value="option-1">Option 1</sl-option>
+        <sl-option value="option-2">Option 2</sl-option>
+        <sl-option value="option-3">Option 3</sl-option>
+      </sl-select>
+    `);
+    const focusHandler = sinon.spy();
+    const blurHandler = sinon.spy();
+
+    el.addEventListener('sl-focus', focusHandler);
+    el.addEventListener('sl-blur', blurHandler);
+
+    el.focus();
+    await el.updateComplete;
+    el.blur();
+    await el.updateComplete;
+
+    expect(focusHandler).to.have.been.calledOnce;
+    expect(blurHandler).to.have.been.calledOnce;
+  });
+
+  it('should emit sl-clear when the clear button is clicked', async () => {
+    const el = await fixture<SlSelect>(html`
+      <sl-select value="option-1" clearable>
+        <sl-option value="option-1">Option 1</sl-option>
+        <sl-option value="option-2">Option 2</sl-option>
+        <sl-option value="option-3">Option 3</sl-option>
+      </sl-select>
+    `);
+    const clearHandler = sinon.spy();
+    const clearButton = el.shadowRoot!.querySelector('[part~="clear-button"]')!;
+
+    el.addEventListener('sl-clear', clearHandler);
+    await el.show();
+    await clickOnElement(clearButton);
+    await el.updateComplete;
+
+    expect(clearHandler).to.have.been.calledOnce;
+  });
+
+  it('should emit sl-show, sl-after-show, sl-hide, and sl-after-hide events when the listbox opens and closes', async () => {
+    const el = await fixture<SlSelect>(html`
+      <sl-select value="option-1">
+        <sl-option value="option-1">Option 1</sl-option>
+        <sl-option value="option-2">Option 2</sl-option>
+        <sl-option value="option-3">Option 3</sl-option>
+      </sl-select>
+    `);
+    const showHandler = sinon.spy();
+    const afterShowHandler = sinon.spy();
+    const hideHandler = sinon.spy();
+    const afterHideHandler = sinon.spy();
+
+    el.addEventListener('sl-show', showHandler);
+    el.addEventListener('sl-after-show', afterShowHandler);
+    el.addEventListener('sl-hide', hideHandler);
+    el.addEventListener('sl-after-hide', afterHideHandler);
+
+    await el.show();
+    expect(showHandler).to.have.been.calledOnce;
+    expect(afterShowHandler).to.have.been.calledOnce;
+
+    await el.hide();
+    expect(hideHandler).to.have.been.calledOnce;
+    expect(afterHideHandler).to.have.been.calledOnce;
   });
 });

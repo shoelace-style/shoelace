@@ -36,6 +36,7 @@ export default class SlOption extends ShoelaceElement {
 
   @state() current = false; // the user has keyed into the option, but hasn't selected it yet (shows a highlight)
   @state() selected = false; // the option is selected and has aria-selected="true"
+  @state() hasHover = false; // we need this because Safari doesn't honor :hover styles while dragging
 
   @query('.option__label') defaultSlot: HTMLSlotElement;
 
@@ -94,6 +95,14 @@ export default class SlOption extends ShoelaceElement {
     }
   }
 
+  handleMouseEnter() {
+    this.hasHover = true;
+  }
+
+  handleMouseLeave() {
+    this.hasHover = false;
+  }
+
   render() {
     return html`
       <div
@@ -102,8 +111,11 @@ export default class SlOption extends ShoelaceElement {
           option: true,
           'option--current': this.current,
           'option--disabled': this.disabled,
-          'option--selected': this.selected
+          'option--selected': this.selected,
+          'option--hover': this.hasHover
         })}
+        @mouseenter=${this.handleMouseEnter}
+        @mouseleave=${this.handleMouseLeave}
       >
         <sl-icon part="checked-icon" class="option__check" name="check" library="system" aria-hidden="true"></sl-icon>
         <slot part="prefix" name="prefix" class="option__prefix"></slot>

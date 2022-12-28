@@ -25,11 +25,10 @@ export default css`
     color: var(--sl-color-neutral-700);
     padding: var(--sl-spacing-x-small) var(--sl-spacing-medium) var(--sl-spacing-x-small) var(--sl-spacing-x-small);
     transition: var(--sl-transition-fast) fill;
-    user-select: none;
     cursor: pointer;
   }
 
-  :host(:hover) .option:not(.option--current):not(.option--disabled) {
+  .option--hover:not(.option--current):not(.option--disabled) {
     background-color: var(--sl-color-neutral-100);
     color: var(--sl-color-neutral-1000);
   }
@@ -79,5 +78,12 @@ export default css`
 
   .option__suffix::slotted(*) {
     margin-inline-start: var(--sl-spacing-x-small);
+  }
+
+  @media (forced-colors: active) {
+    :host(:hover:not([aria-disabled='true'])) .option {
+      outline: dashed 1px SelectedItem;
+      outline-offset: -1px;
+    }
   }
 `;

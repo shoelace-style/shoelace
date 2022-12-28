@@ -6,10 +6,10 @@ describe('<sl-option>', () => {
   it('passes accessibility test', async () => {
     const el = await fixture<SlOption>(html`
       <sl-select label="Select one">
-        <sl-option>Option 1</sl-option>
-        <sl-option>Option 2</sl-option>
-        <sl-option>Option 3</sl-option>
-        <sl-option disabled>Disabled</sl-option>
+        <sl-option value="1">Option 1</sl-option>
+        <sl-option value="2">Option 2</sl-option>
+        <sl-option value="3">Option 3</sl-option>
+        <sl-option value="4" disabled>Disabled</sl-option>
       </sl-select>
     `);
     await expect(el).to.be.accessible();
