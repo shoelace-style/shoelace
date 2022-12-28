@@ -3,7 +3,7 @@
 [component-header:sl-select]
 
 ```html preview
-<sl-select clearable>
+<sl-select>
   <sl-option value="option-1">Option 1</sl-option>
   <sl-option value="option-2">Option 2</sl-option>
   <sl-option value="option-3">Option 3</sl-option>
