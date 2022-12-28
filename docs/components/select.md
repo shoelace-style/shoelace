@@ -377,7 +377,7 @@ const App = () => (
 
 ### Prefix Icons
 
-Use the `prefix` slot to add an icon.
+Use the `prefix` slot to prepend an icon to the control.
 
 ```html preview
 <sl-select placeholder="Small" size="small" clearable>
