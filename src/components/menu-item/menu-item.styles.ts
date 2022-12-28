@@ -61,6 +61,11 @@ export default css`
   }
 
   :host(:hover:not([aria-disabled='true'])) .menu-item {
+    background-color: var(--sl-color-neutral-100);
+    color: var(--sl-color-neutral-1000);
+  }
+
+  :host(:focus-visible:not([aria-disabled='true'])) .menu-item {
     outline: none;
     background-color: var(--sl-color-primary-600);
     color: var(--sl-color-neutral-0);
@@ -82,7 +87,8 @@ export default css`
   }
 
   @media (forced-colors: active) {
-    :host(:hover:not([aria-disabled='true'])) .menu-item {
+    :host(:hover:not([aria-disabled='true'])) .menu-item,
+    :host(:focus-visible:not([aria-disabled='true'])) .menu-item {
       outline: dashed 1px SelectedItem;
       outline-offset: -1px;
     }
