@@ -38,7 +38,7 @@ export default css`
     width: 100%;
     min-width: 0;
     position: relative;
-    align-items: stretch;
+    align-items: center;
     justify-content: start;
     font-family: var(--sl-input-font-family);
     font-weight: var(--sl-input-font-weight);
@@ -51,6 +51,7 @@ export default css`
   }
 
   .select__display-input {
+    position: relative;
     width: 100%;
     font: inherit;
     border: none;
@@ -66,6 +67,17 @@ export default css`
     outline: none;
   }
 
+  /* Visually hide the display input when multiple is enabled */
+  .select--multiple .select__display-input {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+
   .select__value-input {
     position: absolute;
     width: 100%;
@@ -74,6 +86,23 @@ export default css`
     margin: 0;
     opacity: 0;
     z-index: -1;
+  }
+
+  .select__tags {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-inline-start: var(--sl-spacing-2x-small);
+  }
+
+  .select__tags::slotted(sl-tag) {
+    cursor: pointer !important;
+  }
+
+  .select--disabled .select__tags,
+  .select--disabled .select__tags::slotted(sl-tag) {
+    cursor: not-allowed !important;
   }
 
   /* Standard selects */
@@ -137,10 +166,19 @@ export default css`
     margin-inline-end: var(--sl-input-spacing-small);
   }
 
+  .select--small.select--multiple .select__combobox {
+    padding-inline-start: 0;
+    padding-block: 2px;
+  }
+
+  .select--small .select__tags {
+    gap: 2px;
+  }
+
   .select--medium .select__combobox {
     border-radius: var(--sl-input-border-radius-medium);
     font-size: var(--sl-input-font-size-medium);
-    height: var(--sl-input-height-medium);
+    min-height: var(--sl-input-height-medium);
     padding: 0 var(--sl-input-spacing-medium);
   }
 
@@ -150,6 +188,15 @@ export default css`
 
   .select--medium .select__prefix::slotted(*) {
     margin-inline-end: var(--sl-input-spacing-medium);
+  }
+
+  .select--medium.select--multiple .select__combobox {
+    padding-inline-start: 0;
+    padding-block: 3px;
+  }
+
+  .select--medium .select__tags {
+    gap: 3px;
   }
 
   .select--large .select__combobox {
@@ -165,6 +212,15 @@ export default css`
 
   .select--large .select__prefix::slotted(*) {
     margin-inline-end: var(--sl-input-spacing-large);
+  }
+
+  .select--large.select--multiple .select__combobox {
+    padding-inline-start: 0;
+    padding-block: 4px;
+  }
+
+  .select--large .select__tags {
+    gap: 4px;
   }
 
   /* Pills */

@@ -151,7 +151,7 @@ module.exports = {
     'prefer-rest-params': 'warn',
     'prefer-spread': 'warn',
     'prefer-template': 'off',
-    'no-else-return': 'warn',
+    'no-else-return': 'off',
     'func-names': ['warn', 'never'],
     'one-var': ['warn', 'never'],
     'operator-assignment': 'warn',

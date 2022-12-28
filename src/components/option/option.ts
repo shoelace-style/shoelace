@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { getTextContent } from '../../internal/slot';
@@ -39,16 +39,13 @@ export default class SlOption extends ShoelaceElement {
   // @ts-expect-error -- Controller is currently unused
   private readonly localize = new LocalizeController(this);
 
+  @state() current = false; // the user has keyed into the option, but hasn't selected it yet (shows a highlight)
+  @state() selected = false; // the option is selected and has aria-selected="true"
+
   @query('.option__label') defaultSlot: HTMLSlotElement;
 
   /** The option's value. When selected, the containing form control will receive this value. */
   @property() value = '';
-
-  /** Draws the option in a current state, meaning the user has keyed into it but hasn't selected it yet. */
-  @property({ type: Boolean, reflect: true }) current = false;
-
-  /** Draws the option in a selected state. */
-  @property({ type: Boolean, reflect: true }) selected = false;
 
   /** Draws the option in a disabled state, preventing selection. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -57,6 +54,11 @@ export default class SlOption extends ShoelaceElement {
     super.connectedCallback();
     this.setAttribute('role', 'option');
     this.setAttribute('aria-selected', 'false');
+  }
+
+  /** Returns a plain text label based on the option's content. */
+  getTextLabel() {
+    return this.textContent ?? '';
   }
 
   @watch('disabled')

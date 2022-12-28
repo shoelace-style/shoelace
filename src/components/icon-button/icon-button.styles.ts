@@ -20,7 +20,7 @@ export default css`
     color: inherit;
     padding: var(--sl-spacing-x-small);
     cursor: pointer;
-    transition: var(--sl-transition-medium) color;
+    transition: var(--sl-transition-x-fast) color;
     -webkit-appearance: none;
   }
 

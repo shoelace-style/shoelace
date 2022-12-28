@@ -13,6 +13,7 @@ import { getAnimation, setDefaultAnimation } from '../../utilities/animation-reg
 import { LocalizeController } from '../../utilities/localize';
 import '../icon/icon';
 import '../popup/popup';
+import '../tag/tag';
 import styles from './select.styles';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type SlOption from '../option/option';
@@ -27,6 +28,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @dependency sl-icon
  * @dependency sl-popup
+ * @dependency sl-tag
  *
  * @slot - The listbox options. Must be `<sl-option>` elements. You can use `<sl-divider>` to group items visually.
  * @slot label - The input's label. Alternatively, you can use the `label` attribute.
@@ -73,24 +75,38 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   private typeToSelectString = '';
   private typeToSelectTimeout: number;
 
-  @state() displayLabel = '';
   @state() private hasFocus = false;
+  @state() displayLabel = '';
+  @state() currentOption: SlOption;
+  @state() selectedOptions: SlOption[] = [];
   @state() invalid = false;
 
   /** The name of the select, submitted as a name/value pair with form data. */
   @property() name = '';
 
-  /** The current value of the select, submitted as a name/value pair with form data. */
-  @property() value = '';
+  /**
+   * The current value of the select, submitted as a name/value pair with form data. If `multiple` is enabled, this
+   * property will be an array. Otherwise, it will be a string.
+   */
+  @property() value: string | string[] = '';
 
   /** The default value of the form control. Primarily used for resetting the form control. */
-  @defaultValue() defaultValue = '';
+  @defaultValue() defaultValue: string | string[] = '';
 
   /** The select's size. */
   @property() size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Placeholder text to show as a hint when the select is empty. */
   @property() placeholder = '';
+
+  /** Allows more than one option to be selected. */
+  @property({ type: Boolean, reflect: true }) multiple = false;
+
+  /**
+   * The maximum number of selected options to show when `multiple` is true. After the maximum, "+n" will be shown to
+   * indicate the number of additional items that are selected. Set to 0 to remove the limit.
+   */
+  @property({ attribute: 'max-options-visible', type: Number }) maxOptionsVisible = 3;
 
   /** Disables the select control. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -171,18 +187,30 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     this.displayInput.blur();
   }
 
-  handleFocus() {
+  private addOpenListeners() {
+    document.addEventListener('focusin', this.handleDocumentFocusIn);
+    document.addEventListener('keydown', this.handleDocumentKeyDown);
+    document.addEventListener('mousedown', this.handleDocumentMouseDown);
+  }
+
+  private removeOpenListeners() {
+    document.removeEventListener('focusin', this.handleDocumentFocusIn);
+    document.removeEventListener('keydown', this.handleDocumentKeyDown);
+    document.removeEventListener('mousedown', this.handleDocumentMouseDown);
+  }
+
+  private handleFocus() {
     this.hasFocus = true;
     this.displayInput.setSelectionRange(0, 0);
     this.emit('sl-focus');
   }
 
-  handleBlur() {
+  private handleBlur() {
     this.hasFocus = false;
     this.emit('sl-blur');
   }
 
-  handleDocumentFocusIn(event: KeyboardEvent) {
+  private handleDocumentFocusIn(event: KeyboardEvent) {
     // Close when focusing out of the select
     const path = event.composedPath();
     if (this && !path.includes(this)) {
@@ -190,12 +218,13 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     }
   }
 
-  handleDocumentKeyDown(event: KeyboardEvent) {
+  private handleDocumentKeyDown(event: KeyboardEvent) {
     const target = event.target as HTMLElement;
     const isClearButton = target.closest('.select__clear') !== null;
+    const isIconButton = target.closest('sl-icon-button') !== null;
 
-    // Ignore presses when the target is the clear button
-    if (isClearButton) {
+    // Ignore presses when the target is an icon button (e.g. the remove button in <sl-tag>)
+    if (isClearButton || isIconButton) {
       return;
     }
 
@@ -204,12 +233,14 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
       event.preventDefault();
       event.stopPropagation();
       this.hide();
+      this.displayInput.focus();
     }
 
     // Handle enter and space. When pressing space, we allow for type to select behaviors so if there's anything in the
     // buffer we _don't_ close it.
     if (event.key === 'Enter' || (event.key === ' ' && this.typeToSelectString === '')) {
       event.preventDefault();
+      event.stopImmediatePropagation();
 
       // If it's not open, open it
       if (!this.open) {
@@ -218,14 +249,20 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
       }
 
       // If it is open, update the value based on the current selection and close it
-      const currentOption = this.getCurrentOption();
-      if (currentOption && !currentOption.disabled) {
-        this.setSelectedOption(currentOption);
-        this.setValueFromOption(currentOption);
+      if (this.currentOption && !this.currentOption.disabled) {
+        if (this.multiple) {
+          this.toggleOptionSelection(this.currentOption);
+        } else {
+          this.setSelectedOptions(this.currentOption);
+        }
+
         this.emit('sl-input');
         this.emit('sl-change');
-        this.hide();
-        this.displayInput.focus();
+
+        if (!this.multiple) {
+          this.hide();
+          this.displayInput.focus();
+        }
       }
 
       return;
@@ -234,8 +271,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     // Navigate options
     if (['ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
       const allOptions = this.getAllOptions();
-      const currentOption = this.getCurrentOption();
-      const currentIndex = allOptions.indexOf(currentOption);
+      const currentIndex = allOptions.indexOf(this.currentOption);
       let newIndex = Math.max(0, currentIndex);
 
       // Prevent scrolling
@@ -247,7 +283,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
         // If an option is already selected, stop here because we want that one to remain highlighted when the listbox
         // opens for the first time
-        if (currentOption) {
+        if (this.currentOption) {
           return;
         }
       }
@@ -298,7 +334,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
       }
 
       for (const option of allOptions) {
-        const label = (option.textContent ?? '').toLowerCase();
+        const label = option.getTextLabel().toLowerCase();
 
         if (label.startsWith(this.typeToSelectString)) {
           this.setCurrentOption(option);
@@ -308,7 +344,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     }
   }
 
-  handleDocumentMouseDown(event: MouseEvent) {
+  private handleDocumentMouseDown(event: MouseEvent) {
     // Close when clicking outside of the select
     const path = event.composedPath();
     if (this && !path.includes(this)) {
@@ -316,27 +352,35 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     }
   }
 
-  handleLabelClick() {
+  private handleLabelClick() {
     this.displayInput.focus();
   }
 
   // We use mousedown/mouseup instead of click to allow macOS-style menu behavior
-  handleComboboxMouseDown(event: MouseEvent) {
+  private handleComboboxMouseDown(event: MouseEvent) {
+    const path = event.composedPath();
+    const isIconButton = path.some(el => el instanceof Element && el.tagName.toLowerCase() === 'sl-icon-button');
+
+    // Ignore clicks on tags (remove buttons)
+    if (isIconButton) {
+      return;
+    }
+
     event.preventDefault();
     this.displayInput.focus();
     this.open = !this.open;
   }
 
-  handleComboboxKeyDown(event: KeyboardEvent) {
+  private handleComboboxKeyDown(event: KeyboardEvent) {
     event.stopPropagation();
     this.handleDocumentKeyDown(event);
   }
 
-  handleClearClick(event: MouseEvent) {
+  private handleClearClick(event: MouseEvent) {
     event.stopPropagation();
 
     if (this.value !== '') {
-      this.setValueFromOption(null);
+      this.setSelectedOptions([]);
       this.displayInput.focus();
       this.emit('sl-clear');
       this.emit('sl-input');
@@ -344,21 +388,26 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     }
   }
 
-  handleClearMouseDown(event: MouseEvent) {
+  private handleClearMouseDown(event: MouseEvent) {
     // Don't lose focus or propagate events when clicking the clear button
     event.stopPropagation();
     event.preventDefault();
   }
 
   // We use mousedown/mouseup instead of click to allow macOS-style menu behavior
-  handleOptionMouseUp(event: MouseEvent) {
+  private handleOptionMouseUp(event: MouseEvent) {
     const target = event.target as HTMLElement;
     const option = target.closest('sl-option');
     const oldValue = this.value;
 
     if (option && !option.disabled) {
-      // Update the value and focus after updating so the value is read by screen readers
-      this.setValueFromOption(option);
+      if (this.multiple) {
+        this.toggleOptionSelection(option);
+      } else {
+        this.setSelectedOptions(option);
+      }
+
+      // Set focus after updating so the value is announced by screen readers
       this.updateComplete.then(() => this.displayInput.focus());
 
       if (this.value !== oldValue) {
@@ -366,11 +415,14 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
         this.emit('sl-change');
       }
 
-      this.hide();
+      if (!this.multiple) {
+        this.hide();
+        this.displayInput.focus();
+      }
     }
   }
 
-  handleDefaultSlotChange() {
+  private handleDefaultSlotChange() {
     const allOptions = this.getAllOptions();
     const values: string[] = [];
 
@@ -382,39 +434,23 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
       values.push(option.value);
     });
 
-    // Update the selected option
-    const option = this.getOptionByValue(this.value);
-    if (option) {
-      this.setSelectedOption(option);
-      this.setValueFromOption(option);
-    } else {
-      // Clear selection
-      this.setSelectedOption(null);
-    }
+    // Update the selection since it probably changed
+    this.selectionChanged();
   }
 
   // Gets an array of all <sl-option> elements
-  getAllOptions() {
+  private getAllOptions() {
     return [...this.querySelectorAll<SlOption>('sl-option')];
   }
 
   // Gets the first <sl-option> element
-  getFirstOption() {
+  private getFirstOption() {
     return this.querySelector<SlOption>('sl-option');
   }
 
-  // Gets an option based on its value
-  getOptionByValue(value: string) {
-    return this.getAllOptions().filter((el: SlOption) => el.value === value)[0];
-  }
-
-  // Gets the current option
-  getCurrentOption() {
-    return this.getAllOptions().filter(el => el.current)[0];
-  }
-
-  // Sets the current option
-  setCurrentOption(option: SlOption | null) {
+  // Sets the current option, which is the option the user is currently interacting with (e.g. via keyboard). Only one
+  // option may be "current" at a time.
+  private setCurrentOption(option: SlOption | null) {
     const allOptions = this.getAllOptions();
 
     // Clear selection
@@ -425,6 +461,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
     // Select the target option
     if (option) {
+      this.currentOption = option;
       option.current = true;
       option.tabIndex = 0;
       option.focus();
@@ -432,49 +469,64 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     }
   }
 
-  // Gets the selected option
-  getSelectedOption() {
-    return this.getAllOptions().filter(el => el.selected)[0];
-  }
-
-  // Sets the selected option
-  setSelectedOption(option: SlOption | null) {
+  // Sets the selected option(s)
+  private setSelectedOptions(option: SlOption | SlOption[]) {
     const allOptions = this.getAllOptions();
+    const newSelectedOptions = Array.isArray(option) ? option : [option];
 
-    // Clear selection
+    // Clear existing selection
     allOptions.forEach(el => (el.selected = false));
 
-    // Select the target option
-    if (option) {
-      option.selected = true;
-      scrollIntoView(option, this.listbox);
+    // Set the new selection
+    if (newSelectedOptions.length) {
+      newSelectedOptions.forEach(el => (el.selected = true));
+
+      // Scroll the first selected option into view
+      scrollIntoView(newSelectedOptions[0]!, this.listbox);
     }
+
+    // Update selection, value, and display label
+    this.selectionChanged();
   }
 
-  // Sets the value, display label, and syncs validity
-  setValueFromOption(option: SlOption | null) {
-    const displayLabel = option ? (option.textContent ?? '').trim() : '';
-    const value = option ? option.value : '';
+  // Toggles an option's selected state
+  private toggleOptionSelection(option: SlOption, force?: boolean) {
+    if (force === true || force === false) {
+      option.selected = force;
+    } else {
+      option.selected = !option.selected;
+    }
 
-    this.displayLabel = displayLabel;
-    this.value = value;
-    this.valueInput.value = value; // synchronous update for validation
+    this.selectionChanged();
+  }
+
+  // This method must be called whenever the selection changes. It will sync the selected options cache, update the
+  // current value, and update the display value.
+  private selectionChanged() {
+    console.log('selectionChanged');
+    // Update selection options cache
+    this.selectedOptions = this.getAllOptions().filter(el => el.selected);
+
+    // Update the value and display label
+    if (this.multiple) {
+      this.value = this.selectedOptions.map(el => el.value);
+      this.displayLabel = this.localize.term('numOptionsSelected', this.selectedOptions.length);
+    } else {
+      this.value = this.selectedOptions[0]?.value ?? '';
+      this.displayLabel = this.selectedOptions[0]?.getTextLabel() ?? '';
+    }
+
+    // Update validity
     this.invalid = !this.checkValidity();
   }
 
   @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
-    const option = this.getOptionByValue(this.value);
+    const allOptions = this.getAllOptions();
+    const value = Array.isArray(this.value) ? this.value : [this.value];
 
-    // Update the selection
-    this.setSelectedOption(option);
-
-    if (option) {
-      this.setValueFromOption(option);
-    } else {
-      // No option, reset the control
-      this.setValueFromOption(null);
-    }
+    // Select only the options that match the new value
+    this.setSelectedOptions(allOptions.filter(el => value.includes(el.value)));
   }
 
   /** Shows the listbox. */
@@ -499,18 +551,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     return waitForEvent(this, 'sl-after-hide');
   }
 
-  addOpenListeners() {
-    document.addEventListener('focusin', this.handleDocumentFocusIn);
-    document.addEventListener('keydown', this.handleDocumentKeyDown);
-    document.addEventListener('mousedown', this.handleDocumentMouseDown);
-  }
-
-  removeOpenListeners() {
-    document.removeEventListener('focusin', this.handleDocumentFocusIn);
-    document.removeEventListener('keydown', this.handleDocumentKeyDown);
-    document.removeEventListener('mousedown', this.handleDocumentMouseDown);
-  }
-
   @watch('open', { waitUntilFirstUpdate: true })
   async handleOpenChange() {
     if (this.disabled) {
@@ -519,8 +559,8 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     }
 
     if (this.open) {
-      const selectedOption = this.getOptionByValue(this.value);
-      const currentOption = selectedOption || this.getFirstOption();
+      // Reset the current option
+      this.setCurrentOption(this.selectedOptions[0] || this.getFirstOption());
 
       // Show
       this.emit('sl-show');
@@ -532,16 +572,15 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
       // Select the appropriate option based on value after the listbox opens
       requestAnimationFrame(() => {
-        this.setSelectedOption(selectedOption);
-        this.setCurrentOption(currentOption);
+        this.setCurrentOption(this.currentOption);
       });
 
       const { keyframes, options } = getAnimation(this, 'select.show', { dir: this.localize.dir() });
       await animateTo(this.popup.popup, keyframes, options);
 
       // Make sure the current option is scrolled into view (required for Safari)
-      if (currentOption) {
-        scrollIntoView(currentOption, this.listbox, 'vertical', 'auto');
+      if (this.currentOption) {
+        scrollIntoView(this.currentOption, this.listbox, 'vertical', 'auto');
       }
 
       this.emit('sl-after-show');
@@ -589,6 +628,8 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
           <slot name="label">${this.label}</slot>
         </label>
 
+        / Value: ${Array.isArray(this.value) ? this.value.join(' + ') : this.value}
+
         <div part="form-control-input" class="form-control-input">
           <sl-popup
             class=${classMap({
@@ -598,6 +639,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
               'select--pill': this.pill,
               'select--open': this.open,
               'select--disabled': this.disabled,
+              'select--multiple': this.multiple,
               'select--focused': this.hasFocus,
               'select--top': this.placement === 'top',
               'select--bottom': this.placement === 'bottom',
@@ -645,12 +687,41 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
                 @blur=${this.handleBlur}
               />
 
+              ${this.multiple
+                ? html`
+                    <div part="tags" class="select__tags">
+                      ${this.selectedOptions.map((option, index) => {
+                        if (index < this.maxOptionsVisible || this.maxOptionsVisible <= 0) {
+                          return html`
+                            <sl-tag
+                              size=${this.size}
+                              removable
+                              @sl-remove=${(event: CustomEvent) => {
+                                event.stopPropagation();
+                                if (!this.disabled) {
+                                  this.toggleOptionSelection(option, false);
+                                }
+                              }}
+                            >
+                              ${option.getTextLabel()}
+                            </sl-tag>
+                          `;
+                        } else if (index === this.maxOptionsVisible) {
+                          return html` <sl-tag size=${this.size}> +${this.selectedOptions.length - index} </sl-tag> `;
+                        } else {
+                          return null;
+                        }
+                      })}
+                    </div>
+                  `
+                : ''}
+
               <input
                 class="select__value-input"
                 type="text"
                 ?disabled=${this.disabled}
                 ?required=${this.required}
-                .value=${this.value}
+                .value=${Array.isArray(this.value) ? this.value.join(', ') : this.value}
                 tabindex="-1"
                 aria-hidden="true"
                 @focus=${() => this.focus()}
@@ -683,7 +754,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
               id="listbox"
               role="listbox"
               aria-expanded=${this.open ? 'true' : 'false'}
-              aria-multiselectable="false"
+              aria-multiselectable=${this.multiple ? 'true' : 'false'}
               aria-labelledby="label"
               part="listbox"
               class="select__listbox"
