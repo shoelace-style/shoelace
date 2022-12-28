@@ -35,13 +35,14 @@ describe('<sl-menu-item>', () => {
     expect(el.getTextLabel()).to.equal('Test');
   });
 
-  it('emit sl-label-change event on label change', async () => {
-    const el = await fixture<SlMenuItem>(html` <sl-menu-item>Test</sl-menu-item> `);
+  it('emits the slotchange event when the label changes', async () => {
+    const el = await fixture<SlMenuItem>(html` <sl-menu-item>Text</sl-menu-item> `);
+    const slotChangeHandler = sinon.spy();
 
-    const labelChangeHandler = sinon.spy();
+    el.addEventListener('slotchange', slotChangeHandler);
     el.textContent = 'New Text';
-    el.addEventListener('sl-label-change', labelChangeHandler);
-    await waitUntil(() => labelChangeHandler.calledOnce);
-    expect(labelChangeHandler).to.have.been.calledOnce;
+    await waitUntil(() => slotChangeHandler.calledOnce);
+
+    expect(slotChangeHandler).to.have.been.calledOnce;
   });
 });

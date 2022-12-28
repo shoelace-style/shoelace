@@ -85,10 +85,16 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   @property() name = '';
 
   /**
-   * The current value of the select, submitted as a name/value pair with form data. If `multiple` is enabled, this
-   * property will be an array. Otherwise, it will be a string.
+   * The current value of the select, submitted as a name/value pair with form data. When `multiple` is enabled, the
+   * value will be a space-delimited list of values based on the options selected.
    */
-  @property() value: string | string[] = '';
+  @property({
+    converter: {
+      fromAttribute: (value: string) => value.split(' '),
+      toAttribute: (value: string[]) => value.join(' ')
+    }
+  })
+  value: string | string[] = '';
 
   /** The default value of the form control. Primarily used for resetting the form control. */
   @defaultValue() defaultValue: string | string[] = '';
@@ -155,10 +161,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
     // Because this is a form control, it shouldn't be opened initially
     this.open = false;
-  }
-
-  firstUpdated() {
-    this.invalid = !this.checkValidity();
   }
 
   /** Checks for validity but does not show the browser's validation message. */
@@ -424,18 +426,22 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
   private handleDefaultSlotChange() {
     const allOptions = this.getAllOptions();
+    const value = Array.isArray(this.value) ? this.value : [this.value];
     const values: string[] = [];
 
     // Check for duplicate values in menu items
     allOptions.forEach(option => {
       if (values.includes(option.value)) {
-        console.error(`A duplicate value has been found in <sl-select>. All options must have unique values.`, option);
+        console.error(
+          `An option with duplicate values has been found in <sl-select>. All options must be unique.`,
+          option
+        );
       }
       values.push(option.value);
     });
 
-    // Update the selection since it probably changed
-    this.selectionChanged();
+    // Select only the options that match the new value
+    this.setSelectedOptions(allOptions.filter(el => value.includes(el.value)));
   }
 
   // Gets an array of all <sl-option> elements
@@ -500,11 +506,10 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     this.selectionChanged();
   }
 
-  // This method must be called whenever the selection changes. It will sync the selected options cache, update the
-  // current value, and update the display value.
+  // This method must be called whenever the selection changes. It will update the selected options cache, the current
+  // value, and the display value
   private selectionChanged() {
-    console.log('selectionChanged');
-    // Update selection options cache
+    // Update selected options cache
     this.selectedOptions = this.getAllOptions().filter(el => el.selected);
 
     // Update the value and display label
@@ -517,7 +522,16 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     }
 
     // Update validity
-    this.invalid = !this.checkValidity();
+    this.updateComplete.then(() => (this.invalid = !this.checkValidity()));
+  }
+
+  @watch('disabled', { waitUntilFirstUpdate: true })
+  handleDisabledChange() {
+    // Close the listbox when the control is disabled
+    if (this.disabled) {
+      this.open = false;
+      this.handleOpenChange();
+    }
   }
 
   @watch('value', { waitUntilFirstUpdate: true })
@@ -553,12 +567,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
   @watch('open', { waitUntilFirstUpdate: true })
   async handleOpenChange() {
-    if (this.disabled) {
-      this.hide();
-      return;
-    }
-
-    if (this.open) {
+    if (this.open && !this.disabled) {
       // Reset the current option
       this.setCurrentOption(this.selectedOptions[0] || this.getFirstOption());
 
@@ -627,8 +636,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
         >
           <slot name="label">${this.label}</slot>
         </label>
-
-        / Value: ${Array.isArray(this.value) ? this.value.join(' + ') : this.value}
 
         <div part="form-control-input" class="form-control-input">
           <sl-popup
@@ -761,7 +768,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
               tabindex="-1"
               @mouseup=${this.handleOptionMouseUp}
               @slotchange=${this.handleDefaultSlotChange}
-              @sl-label-change=${this.handleDefaultSlotChange}
             ></slot>
           </sl-popup>
 

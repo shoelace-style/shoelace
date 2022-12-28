@@ -2,7 +2,6 @@ import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import ShoelaceElement from '../../internal/shoelace-element';
-import { getTextContent } from '../../internal/slot';
 import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
 import '../icon/icon';
@@ -16,10 +15,6 @@ import type { CSSResultGroup } from 'lit';
  * @status stable
  *
  * @dependency sl-icon
- *
- * @event sl-label-change - Emitted when the option's label changes. For performance reasons, this event is only emitted
- *  when the default slot's `slotchange` event is triggered. It will not fire when the label is first set. Useful for
- *  parent controls that want to observe label changes without attaching an expensive mutation observer.
  *
  * @slot - The option's label.
  * @slot prefix - Used to prepend an icon or similar element to the menu item.
@@ -44,8 +39,12 @@ export default class SlOption extends ShoelaceElement {
 
   @query('.option__label') defaultSlot: HTMLSlotElement;
 
-  /** The option's value. When selected, the containing form control will receive this value. */
-  @property() value = '';
+  /**
+   * The option's value. When selected, the containing form control will receive this value. The value must be unique
+   * from other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing
+   * multiple values.
+   */
+  @property({ reflect: true }) value = '';
 
   /** Draws the option in a disabled state, preventing selection. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -58,7 +57,7 @@ export default class SlOption extends ShoelaceElement {
 
   /** Returns a plain text label based on the option's content. */
   getTextLabel() {
-    return this.textContent ?? '';
+    return (this.textContent ?? '').trim();
   }
 
   @watch('disabled')
@@ -71,8 +70,16 @@ export default class SlOption extends ShoelaceElement {
     this.setAttribute('aria-selected', this.selected ? 'true' : 'false');
   }
 
+  @watch('value')
+  handleValueChange() {
+    if (this.value.includes(' ')) {
+      console.error(`Option values cannot include a space. All spaces have been replaced with underscores.`, this);
+      this.value = this.value.replace(/ /g, '_');
+    }
+  }
+
   handleDefaultSlotChange() {
-    const textLabel = getTextContent(this.defaultSlot);
+    const textLabel = this.getTextLabel();
 
     // Ignore the first time the label is set
     if (typeof this.cachedTextLabel === 'undefined') {
@@ -80,9 +87,10 @@ export default class SlOption extends ShoelaceElement {
       return;
     }
 
+    // When the label changes, emit a slotchange event so parent controls see it
     if (textLabel !== this.cachedTextLabel) {
       this.cachedTextLabel = textLabel;
-      this.emit('sl-label-change');
+      this.emit('slotchange', { bubbles: true, composed: false, cancelable: false });
     }
   }
 

@@ -3,6 +3,7 @@ import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import { waitForEvent } from '../../internal/event';
 import { clickOnElement } from '../../internal/test';
+import { serialize } from '../../utilities/form';
 import type SlOption from '../option/option';
 import type SlSelect from './select';
 
@@ -172,40 +173,108 @@ describe('<sl-select>', () => {
     expect(displayInput.getAttribute('aria-expanded')).to.equal('false');
   });
 
-  it('should focus on the displayInput when constraint validation occurs', async () => {
-    const el = await fixture<HTMLFormElement>(html`
-      <form>
-        <sl-select required>
-          <sl-option value="option-1">Option 1</sl-option>
-          <sl-option value="option-2">Option 2</sl-option>
-          <sl-option value="option-3">Option 3</sl-option>
-        </sl-select>
-      </form>
-    `);
-    const select = el.querySelector('sl-select')!;
-    el.requestSubmit();
+  describe('when using constraint validation', () => {
+    it('should be valid by default', async () => {
+      const el = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-select>
+            <sl-option value="option-1">Option 1</sl-option>
+            <sl-option value="option-2">Option 2</sl-option>
+            <sl-option value="option-3">Option 3</sl-option>
+          </sl-select>
+        </form>
+      `);
+      const select = el.querySelector<SlSelect>('sl-select')!;
+      expect(select.checkValidity()).to.be.true;
+    });
 
-    expect(select.shadowRoot!.activeElement).to.equal(select.displayInput);
+    it('should be invalid when required and empty', async () => {
+      const el = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-select required>
+            <sl-option value="option-1">Option 1</sl-option>
+            <sl-option value="option-2">Option 2</sl-option>
+            <sl-option value="option-3">Option 3</sl-option>
+          </sl-select>
+        </form>
+      `);
+      const select = el.querySelector<SlSelect>('sl-select')!;
+      expect(select.checkValidity()).to.be.false;
+    });
+
+    it('should focus on the displayInput when constraint validation occurs', async () => {
+      const el = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-select required>
+            <sl-option value="option-1">Option 1</sl-option>
+            <sl-option value="option-2">Option 2</sl-option>
+            <sl-option value="option-3">Option 3</sl-option>
+          </sl-select>
+        </form>
+      `);
+      const select = el.querySelector<SlSelect>('sl-select')!;
+      el.requestSubmit();
+      expect(select.shadowRoot!.activeElement).to.equal(select.displayInput);
+    });
   });
 
-  it('should update the display label when an option changes', async () => {
-    const el = await fixture<SlSelect>(html`
-      <sl-select value="option-1">
-        <sl-option value="option-1">Option 1</sl-option>
-        <sl-option value="option-2">Option 2</sl-option>
-        <sl-option value="option-3">Option 3</sl-option>
-      </sl-select>
-    `);
-    const displayInput = el.shadowRoot!.querySelector<HTMLSelectElement>('.select__display-input')!;
-    const option = el.querySelector('sl-option')!;
+  describe('when serializing', () => {
+    it('should serialize its name and value with FormData', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-select name="a" value="option-1">
+            <sl-option value="option-1">Option 1</sl-option>
+            <sl-option value="option-2">Option 2</sl-option>
+            <sl-option value="option-3">Option 3</sl-option>
+          </sl-select>
+        </form>
+      `);
+      const formData = new FormData(form);
+      expect(formData.get('a')).to.equal('option-1');
+    });
 
-    expect(displayInput.value).to.equal('Option 1');
+    it('should serialize its name and value in FormData when multiple options are selected', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-select name="a" value="option-2 option-3" multiple>
+            <sl-option value="option-1">Option 1</sl-option>
+            <sl-option value="option-2">Option 2</sl-option>
+            <sl-option value="option-3">Option 3</sl-option>
+          </sl-select>
+        </form>
+      `);
+      const formData = new FormData(form);
+      expect(formData.getAll('a')).to.include('option-2');
+      expect(formData.getAll('a')).to.include('option-3');
+    });
 
-    option.textContent = 'updated';
-    await oneEvent(option, 'sl-label-change');
-    await el.updateComplete;
+    it('should serialize its name and value in JSON', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-select name="a" value="option-1">
+            <sl-option value="option-1">Option 1</sl-option>
+            <sl-option value="option-2">Option 2</sl-option>
+            <sl-option value="option-3">Option 3</sl-option>
+          </sl-select>
+        </form>
+      `);
+      const json = serialize(form);
+      expect(json.a).to.equal('option-1');
+    });
 
-    expect(displayInput.value).to.equal('updated');
+    it('should serialize its name and value in JSON when multiple options are selected', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-select name="a" value="option-2 option-3" multiple>
+            <sl-option value="option-1">Option 1</sl-option>
+            <sl-option value="option-2">Option 2</sl-option>
+            <sl-option value="option-3">Option 3</sl-option>
+          </sl-select>
+        </form>
+      `);
+      const json = serialize(form);
+      expect(JSON.stringify(json)).to.equal(JSON.stringify({ a: ['option-2', 'option-3'] }));
+    });
   });
 
   describe('when resetting a form', () => {
@@ -236,5 +305,25 @@ describe('<sl-select>', () => {
       await select.updateComplete;
       expect(select.value).to.equal('option-1');
     });
+  });
+
+  it('should update the display label when an option changes', async () => {
+    const el = await fixture<SlSelect>(html`
+      <sl-select value="option-1">
+        <sl-option value="option-1">Option 1</sl-option>
+        <sl-option value="option-2">Option 2</sl-option>
+        <sl-option value="option-3">Option 3</sl-option>
+      </sl-select>
+    `);
+    const displayInput = el.shadowRoot!.querySelector<HTMLSelectElement>('.select__display-input')!;
+    const option = el.querySelector('sl-option')!;
+
+    expect(displayInput.value).to.equal('Option 1');
+
+    option.textContent = 'updated';
+    await oneEvent(option, 'slotchange');
+    await el.updateComplete;
+
+    expect(displayInput.value).to.equal('updated');
   });
 });

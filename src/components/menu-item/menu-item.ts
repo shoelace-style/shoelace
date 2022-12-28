@@ -16,9 +16,6 @@ import type { CSSResultGroup } from 'lit';
  *
  * @dependency sl-icon
  *
- * @event sl-label-change - Emitted when the menu item's text label changes. For performance reasons, this event is only
- *   emitted if the default slot's `slotchange` event is triggered. It will not fire when the label is first set.
- *
  * @slot - The menu item's label.
  * @slot prefix - Used to prepend an icon or similar element to the menu item.
  * @slot suffix - Used to append an icon or similar element to the menu item.
@@ -78,9 +75,10 @@ export default class SlMenuItem extends ShoelaceElement {
       return;
     }
 
+    // When the label changes, emit a slotchange event so parent controls see it
     if (textLabel !== this.cachedTextLabel) {
       this.cachedTextLabel = textLabel;
-      this.emit('sl-label-change');
+      this.emit('slotchange', { bubbles: true, composed: false, cancelable: false });
     }
   }
 

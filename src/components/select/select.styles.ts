@@ -155,7 +155,8 @@ export default css`
     border-radius: var(--sl-input-border-radius-small);
     font-size: var(--sl-input-font-size-small);
     min-height: var(--sl-input-height-small);
-    padding: 0 var(--sl-input-spacing-small);
+    padding-block: 0;
+    padding-inline: var(--sl-input-spacing-small);
   }
 
   .select--small .select__clear {
@@ -167,8 +168,8 @@ export default css`
   }
 
   .select--small.select--multiple .select__combobox {
-    padding-inline-start: 0;
     padding-block: 2px;
+    padding-inline-start: 0;
   }
 
   .select--small .select__tags {
@@ -179,7 +180,8 @@ export default css`
     border-radius: var(--sl-input-border-radius-medium);
     font-size: var(--sl-input-font-size-medium);
     min-height: var(--sl-input-height-medium);
-    padding: 0 var(--sl-input-spacing-medium);
+    padding-block: 0;
+    padding-inline: var(--sl-input-spacing-medium);
   }
 
   .select--medium .select__clear {
@@ -203,7 +205,8 @@ export default css`
     border-radius: var(--sl-input-border-radius-large);
     font-size: var(--sl-input-font-size-large);
     min-height: var(--sl-input-height-large);
-    padding: 0 var(--sl-input-spacing-large);
+    padding-block: 0;
+    padding-inline: var(--sl-input-spacing-large);
   }
 
   .select--large .select__clear {
@@ -291,7 +294,8 @@ export default css`
     background: var(--sl-panel-background-color);
     border: solid var(--sl-panel-border-width) var(--sl-panel-border-color);
     border-radius: var(--sl-border-radius-medium);
-    padding: var(--sl-spacing-x-small) 0;
+    padding-block: var(--sl-spacing-x-small);
+    padding-inline: 0;
     overflow: auto;
     overscroll-behavior: none;
 
@@ -309,6 +313,7 @@ export default css`
     font-size: var(--sl-font-size-small);
     font-weight: var(--sl-font-weight-semibold);
     color: var(--sl-color-neutral-500);
-    padding: var(--sl-spacing-x-small) var(--sl-spacing-x-large);
+    padding-block: var(--sl-spacing-x-small);
+    padding-inline: var(--sl-spacing-x-large);
   }
 `;

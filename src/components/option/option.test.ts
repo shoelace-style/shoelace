@@ -31,13 +31,14 @@ describe('<sl-option>', () => {
     expect(el.getAttribute('aria-disabled')).to.equal('true');
   });
 
-  it('emit sl-label-change when the label changes', async () => {
-    const el = await fixture<SlOption>(html` <sl-option>Test</sl-option> `);
+  it('emits the slotchange event when the label changes', async () => {
+    const el = await fixture<SlOption>(html` <sl-option>Text</sl-option> `);
+    const slotChangeHandler = sinon.spy();
 
-    const labelChangeHandler = sinon.spy();
+    el.addEventListener('slotchange', slotChangeHandler);
     el.textContent = 'New Text';
-    el.addEventListener('sl-label-change', labelChangeHandler);
-    await waitUntil(() => labelChangeHandler.calledOnce);
-    expect(labelChangeHandler).to.have.been.calledOnce;
+    await waitUntil(() => slotChangeHandler.calledOnce);
+
+    expect(slotChangeHandler).to.have.been.calledOnce;
   });
 });
