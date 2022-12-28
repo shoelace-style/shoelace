@@ -362,8 +362,8 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     const path = event.composedPath();
     const isIconButton = path.some(el => el instanceof Element && el.tagName.toLowerCase() === 'sl-icon-button');
 
-    // Ignore clicks on tags (remove buttons)
-    if (isIconButton) {
+    // Ignore disabled controls and clicks on tags (remove buttons)
+    if (this.disabled || isIconButton) {
       return;
     }
 
