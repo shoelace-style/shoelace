@@ -52,7 +52,7 @@ const App = () => (
 
 ### Prefix & Suffix
 
-Add content to the start and end of menu items using the `prefix` and `suffix` slots.
+Add icons to the start and end of menu items using the `prefix` and `suffix` slots.
 
 ```html preview
 <sl-select label="Select one">
