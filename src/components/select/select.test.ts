@@ -1,7 +1,6 @@
 import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-import { waitForEvent } from '../../internal/event';
 import { clickOnElement } from '../../internal/test';
 import { serialize } from '../../utilities/form';
 import type SlOption from '../option/option';
