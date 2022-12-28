@@ -23,6 +23,7 @@ This release includes a complete rewrite of `<sl-select>` to improve accessibili
 - Fixed a bug in `<sl-tree-item>` where the checked/indeterminate states could get out of sync when using the `multiple` option [#1076](https://github.com/shoelace-style/shoelace/issues/1076)
 - Updated the hover style of `<sl-menu-item>` to be consistent with `<sl-option>`
 - Updated the status of `<sl-tree>` and `<sl-tree-item>` from experimental to stable
+- Updated Bootstrap Icons to 1.10.3
 
 ## 2.0.0-beta.87
 
