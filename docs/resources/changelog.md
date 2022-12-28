@@ -13,7 +13,6 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 This release includes a complete rewrite of `<sl-select>` to improve accessibility and improve simplify the internal structure.
 
 - 🚨 BREAKING: removed the `suffix` slot from `<sl-select>` because it was confusing to users and its position made the clear button inaccessible
-- 🚨 BREAKING: removed the `multiple` attribute from `<sl-select>` because it was inaccessible and made the getting/setting the value inconsistent and confusing (see the docs for a suggested multiselect pattern)
 - Fixed a bug in `<sl-tree-item>` where the checked/indeterminate states could get out of sync when using the `multiple` option [#1076](https://github.com/shoelace-style/shoelace/issues/1076)
 - Updated the status of `<sl-tree>` and `<sl-tree-item>` from experimental to stable
 
