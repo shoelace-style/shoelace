@@ -235,7 +235,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
       event.preventDefault();
       event.stopPropagation();
       this.hide();
-      this.displayInput.focus();
+      this.displayInput.focus({ preventScroll: true });
     }
 
     // Handle enter and space. When pressing space, we allow for type to select behaviors so if there's anything in the
@@ -263,7 +263,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
         if (!this.multiple) {
           this.hide();
-          this.displayInput.focus();
+          this.displayInput.focus({ preventScroll: true });
         }
       }
 
@@ -368,7 +368,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     }
 
     event.preventDefault();
-    this.displayInput.focus();
+    this.displayInput.focus({ preventScroll: true });
     this.open = !this.open;
   }
 
@@ -382,7 +382,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
     if (this.value !== '') {
       this.setSelectedOptions([]);
-      this.displayInput.focus();
+      this.displayInput.focus({ preventScroll: true });
       this.emit('sl-clear');
       this.emit('sl-input');
       this.emit('sl-change');
@@ -408,7 +408,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
       }
 
       // Set focus after updating so the value is announced by screen readers
-      this.updateComplete.then(() => this.displayInput.focus());
+      this.updateComplete.then(() => this.displayInput.focus({ preventScroll: true }));
 
       if (this.value !== oldValue) {
         this.emit('sl-input');
@@ -417,7 +417,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
       if (!this.multiple) {
         this.hide();
-        this.displayInput.focus();
+        this.displayInput.focus({ preventScroll: true });
       }
     }
   }
