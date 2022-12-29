@@ -40,14 +40,14 @@ components.map(component => {
       import { createComponent } from '@lit-labs/react';
       import Component from '../../${importPath}';
 
-      export default createComponent(
-        React,
-        '${component.tagName}',
-        Component,
-        {
+      export default createComponent({
+        tagName: '${component.tagName}',
+        elementClass: Component,
+        react: React,
+        events: {
           ${events}
         }
-      );
+      });
     `,
     Object.assign(prettierConfig, {
       parser: 'babel-ts'
