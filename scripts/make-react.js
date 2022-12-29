@@ -3,7 +3,6 @@ import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
 import { deleteSync } from 'del';
-import { pascalCase } from 'pascal-case';
 import prettier from 'prettier';
 import prettierConfig from '../prettier.config.cjs';
 import { getAllComponents } from './shared.js';
