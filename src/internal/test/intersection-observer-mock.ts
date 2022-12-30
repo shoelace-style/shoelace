@@ -4,20 +4,7 @@ class MockIntersectionObserver extends IntersectionObserver {
     this.callback = callback;
     mocks.push(this);
   }
-  prototype: IntersectionObserver;
   callback: IntersectionObserverCallback | undefined = undefined;
-  root: Element | Document | null;
-  rootMargin: string;
-  thresholds: readonly number[];
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  disconnect(): void {}
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
-  observe(_: Element): void {}
-  takeRecords(): IntersectionObserverEntry[] {
-    return [];
-  }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
-  unobserve(_: Element): void {}
 
   executeCallback(entries: IntersectionObserverEntry[]) {
     if (this.callback) {
