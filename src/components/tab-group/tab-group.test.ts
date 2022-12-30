@@ -1,5 +1,7 @@
 import { elementUpdated, expect, fixture } from '@open-wc/testing';
 import { html } from 'lit';
+import { queryByTestId } from '../../internal/test/data-testid-helpers';
+import { IntersectionObserverMock } from '../../internal/test/intersection-observer-mock';
 import type SlTabPanel from '../tab-panel/tab-panel';
 import type SlTab from '../tab/tab';
 import type SlTabGroup from './tab-group';
@@ -8,14 +10,6 @@ interface ClientRectangles {
   body?: DOMRect;
   navigation?: DOMRect;
 }
-
-const queryByTestId = <T>(container: HTMLElement, testId: string): T | null => {
-  const selectedElement = container.querySelector(`[data-testid=${testId}]`);
-  if (selectedElement) {
-    return selectedElement as T;
-  }
-  return null;
-};
 
 const getClientRectangles = (tabGroup: SlTabGroup): ClientRectangles => {
   const shadowRoot = tabGroup.shadowRoot;
@@ -45,43 +39,12 @@ const expectOnlyOneTabPanelToBeActive = (container: HTMLElement, dataTestIdOfAct
 };
 
 describe('<sl-tab-group>', () => {
-  let mocks: MockIntersectionObserver[] = [];
-  class MockIntersectionObserver extends IntersectionObserver {
-    constructor(callback: IntersectionObserverCallback) {
-      super(callback, {});
-      this.callback = callback;
-      mocks.push(this);
-    }
-    prototype: IntersectionObserver;
-    callback: IntersectionObserverCallback | undefined = undefined;
-    root: Element | Document | null;
-    rootMargin: string;
-    thresholds: readonly number[];
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    disconnect(): void {}
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
-    observe(_: Element): void {}
-    takeRecords(): IntersectionObserverEntry[] {
-      return [];
-    }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
-    unobserve(_: Element): void {}
-
-    executeCallback(entries: IntersectionObserverEntry[]) {
-      if (this.callback) {
-        this.callback(entries, this);
-      }
-    }
-  }
+  const intersectionObserverMock = new IntersectionObserverMock();
 
   const triggerIntersectionObserverToShowTabPanels = (tabGroup: SlTabGroup) => {
+    const mocks = intersectionObserverMock.mocks;
     expect(mocks.length).to.be.equal(1);
-    if (mocks[0]?.callback) {
-      mocks[0].callback(
-        [{ intersectionRatio: 1.0, target: tabGroup } as unknown as IntersectionObserverEntry],
-        mocks[0]
-      );
-    }
+    mocks[0].executeCallback([{ intersectionRatio: 1.0, target: tabGroup } as unknown as IntersectionObserverEntry]);
   };
 
   const showTabGroup = (tabGroup: SlTabGroup): Promise<SlTabGroup> => {
@@ -90,16 +53,12 @@ describe('<sl-tab-group>', () => {
     return elementUpdated(tabGroup);
   };
 
-  let originalIntersectionObserver: typeof window.IntersectionObserver | undefined;
   beforeEach(() => {
-    originalIntersectionObserver = window.IntersectionObserver;
-    window.IntersectionObserver = MockIntersectionObserver;
-    mocks = [];
+    intersectionObserverMock.install();
   });
 
   afterEach(() => {
-    window.IntersectionObserver = originalIntersectionObserver || window.IntersectionObserver;
-    mocks = [];
+    intersectionObserverMock.uninstall();
   });
 
   it('renders', async () => {
