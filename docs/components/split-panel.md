@@ -379,9 +379,9 @@ Try resizing the example below with each option and notice how the panels respon
   </sl-split-panel>
 
   <sl-select label="Primary Panel" value="" style="max-width: 200px; margin-top: 1rem;">
-    <sl-menu-item value="">None</sl-menu-item>
-    <sl-menu-item value="start">Start</sl-menu-item>
-    <sl-menu-item value="end">End</sl-menu-item>
+    <sl-option value="">None</sl-option>
+    <sl-option value="start">Start</sl-option>
+    <sl-option value="end">End</sl-option>
   </sl-select>
 </div>
 

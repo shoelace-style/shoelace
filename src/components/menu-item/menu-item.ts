@@ -16,9 +16,6 @@ import type { CSSResultGroup } from 'lit';
  *
  * @dependency sl-icon
  *
- * @event sl-label-change - Emitted when the menu item's text label changes. For performance reasons, this event is only
- *   emitted if the default slot's `slotchange` event is triggered. It will not fire when the label is first set.
- *
  * @slot - The menu item's label.
  * @slot prefix - Used to prepend an icon or similar element to the menu item.
  * @slot suffix - Used to append an icon or similar element to the menu item.
@@ -44,7 +41,7 @@ export default class SlMenuItem extends ShoelaceElement {
   /** A unique value to store in the menu item. This can be used as a way to identify menu items when selected. */
   @property() value = '';
 
-  /** Draws the menu item in a disabled state. */
+  /** Draws the menu item in a disabled state, preventing selection. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   firstUpdated() {
@@ -58,7 +55,10 @@ export default class SlMenuItem extends ShoelaceElement {
 
   @watch('checked')
   handleCheckedChange() {
-    this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
+    //
+    // TODO - fix a11y bug
+    //
+    // this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
   }
 
   @watch('disabled')
@@ -75,9 +75,10 @@ export default class SlMenuItem extends ShoelaceElement {
       return;
     }
 
+    // When the label changes, emit a slotchange event so parent controls see it
     if (textLabel !== this.cachedTextLabel) {
       this.cachedTextLabel = textLabel;
-      this.emit('sl-label-change');
+      this.emit('slotchange', { bubbles: true, composed: false, cancelable: false });
     }
   }
 

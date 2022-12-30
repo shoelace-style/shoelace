@@ -81,14 +81,14 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
   /** Makes the textarea readonly. */
   @property({ type: Boolean, reflect: true }) readonly = false;
 
+  /** Makes the textarea a required field. */
+  @property({ type: Boolean, reflect: true }) required = false;
+
   /** The minimum length of input that will be considered valid. */
   @property({ type: Number }) minlength: number;
 
   /** The maximum length of input that will be considered valid. */
   @property({ type: Number }) maxlength: number;
-
-  /** Makes the textarea a required field. */
-  @property({ type: Boolean, reflect: true }) required = false;
 
   /** Controls whether and how text input is automatically capitalized as it is entered by the user. */
   @property() autocapitalize: 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters';
