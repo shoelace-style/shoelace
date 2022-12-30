@@ -2,9 +2,11 @@ import { elementUpdated, expect, fixture } from '@open-wc/testing';
 import { html } from 'lit';
 import { queryByTestId } from '../../internal/test/data-testid-helpers';
 import { IntersectionObserverMock } from '../../internal/test/intersection-observer-mock';
+import { ResizeObserverMock } from '../../internal/test/resize-observer-mock';
 import type SlTabPanel from '../tab-panel/tab-panel';
 import type SlTab from '../tab/tab';
 import type SlTabGroup from './tab-group';
+import type { HTMLTemplateResult } from 'lit';
 
 interface ClientRectangles {
   body?: DOMRect;
@@ -170,6 +172,39 @@ describe('<sl-tab-group>', () => {
 
       const clientRectangles = getClientRectangles(tabGroup);
       expect(clientRectangles.body?.right).to.be.lessThanOrEqual(clientRectangles.navigation?.left || -Infinity);
+    });
+  });
+
+  describe('scrolling behavior', () => {
+    const resizeObserverMock = new ResizeObserverMock();
+
+    beforeEach(() => {
+      resizeObserverMock.install();
+    });
+
+    afterEach(() => {
+      resizeObserverMock.uninstall();
+    });
+
+    const generateTabs = (n: number): HTMLTemplateResult[] => {
+      const result: HTMLTemplateResult[] = [];
+      for (let i = 0; i < n; i++) {
+        result.push(html`<sl-tab slot="nav" panel="tab-${i}">Tab ${i}</sl-tab>
+          <sl-tab-panel name="tab-${i}">Content of tab ${i}0</sl-tab-panel> `);
+      }
+      return result;
+    };
+
+    it('shows scroll buttons on too many tabs', async () => {
+      const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(20)} </sl-tab-group>`);
+
+      expect(resizeObserverMock.mocks).to.have.length(1);
+      resizeObserverMock.mocks[0].executeCallback();
+
+      await elementUpdated(tabGroup);
+
+      const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
+      expect(scrollButtons).to.have.length(2);
     });
   });
 });
