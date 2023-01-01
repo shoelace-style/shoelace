@@ -9,6 +9,11 @@ const translation: Translation = {
   clearEntry: '清空',
   close: '關閉',
   copy: '複製',
+  numOptionsSelected: (num: number) => {
+    if (num === 0) return '未選擇任何項目';
+    if (num === 1) return '已選擇 1 個項目';
+    return `${num} 選擇項目`;
+  },
   currentValue: '當前值',
   hidePassword: '隱藏密碼',
   loading: '載入中',
