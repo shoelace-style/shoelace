@@ -20,9 +20,9 @@ All available icons in the `default` icon library are shown below. Click or tap 
       <sl-icon slot="prefix" name="search"></sl-icon>
     </sl-input>
     <sl-select value="outline">
-      <sl-menu-item value="outline">Outlined</sl-menu-item>
-      <sl-menu-item value="fill">Filled</sl-menu-item>
-      <sl-menu-item value="all">All icons</sl-menu-item>
+      <sl-option value="outline">Outlined</sl-option>
+      <sl-option value="fill">Filled</sl-option>
+      <sl-option value="all">All icons</sl-option>
     </sl-select>
   </div>
   <div class="icon-list"></div>

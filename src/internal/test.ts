@@ -3,7 +3,7 @@ import { sendMouse } from '@web/test-runner-commands';
 /** A testing utility that measures an element's position and clicks on it. */
 export async function clickOnElement(
   /** The element to click */
-  el: HTMLElement,
+  el: Element,
   /** The location of the element to click */
   position: 'top' | 'right' | 'bottom' | 'left' | 'center' = 'center',
   /** The horizontal offset to apply to the position when clicking */

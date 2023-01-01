@@ -22,9 +22,7 @@ export function unlockBodyScrolling(lockingEl: HTMLElement) {
   }
 }
 
-/**
- * Scrolls an element into view of its container. If the element is already in view, nothing will happen.
- */
+/** Scrolls an element into view of its container. If the element is already in view, nothing will happen. */
 export function scrollIntoView(
   element: HTMLElement,
   container: HTMLElement,

@@ -88,9 +88,6 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
     | 'time'
     | 'url' = 'text';
 
-  /** The input's size. */
-  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
-
   /** The name of the input, submitted as a name/value pair with form data. */
   @property() name = '';
 
@@ -99,6 +96,9 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
 
   /** The default value of the form control. Primarily used for resetting the form control. */
   @defaultValue() defaultValue = '';
+
+  /** The input's size. */
+  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Draws a filled input. */
   @property({ type: Boolean, reflect: true }) filled = false;
@@ -115,6 +115,15 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   /** Adds a clear button when the input is not empty. */
   @property({ type: Boolean }) clearable = false;
 
+  /** Disables the input. */
+  @property({ type: Boolean, reflect: true }) disabled = false;
+
+  /** Placeholder text to show as a hint when the input is empty. */
+  @property() placeholder = '';
+
+  /** Makes the input readonly. */
+  @property({ type: Boolean, reflect: true }) readonly = false;
+
   /** Adds a button to toggle the password's visibility. Only applies to password types. */
   @property({ attribute: 'password-toggle', type: Boolean }) passwordToggle = false;
 
@@ -124,14 +133,11 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   /** Hides the browser's built-in increment/decrement spin buttons for number inputs. */
   @property({ attribute: 'no-spin-buttons', type: Boolean }) noSpinButtons = false;
 
-  /** Placeholder text to show as a hint when the input is empty. */
-  @property() placeholder = '';
+  /** Makes the input a required field. */
+  @property({ type: Boolean, reflect: true }) required = false;
 
-  /** Disables the input. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
-
-  /** Makes the input readonly. */
-  @property({ type: Boolean, reflect: true }) readonly = false;
+  /** A regular expression pattern to validate input against. */
+  @property() pattern: string;
 
   /** The minimum length of input that will be considered valid. */
   @property({ type: Number }) minlength: number;
@@ -150,12 +156,6 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
    * implied, allowing any numeric value. Only applies to date and number input types.
    */
   @property() step: number | 'any';
-
-  /** A regular expression pattern to validate input against. */
-  @property() pattern: string;
-
-  /** Makes the input a required field. */
-  @property({ type: Boolean, reflect: true }) required = false;
 
   /** Controls whether and how text input is automatically capitalized as it is entered by the user. */
   @property() autocapitalize: 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters';

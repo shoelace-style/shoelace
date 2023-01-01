@@ -184,7 +184,10 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
           @focus=${this.handleFocus}
         />
 
-        <span part="control" class="checkbox__control">
+        <span
+          part="control${this.checked ? ' control--checked' : ''}${this.indeterminate ? ' control--indeterminate' : ''}"
+          class="checkbox__control"
+        >
           ${this.checked
             ? html`
                 <sl-icon part="checked-icon" class="checkbox__checked-icon" library="system" name="check"></sl-icon>

@@ -17,18 +17,18 @@ Popup doesn't provide any styles — just positioning! The popup's preferred pla
 
   <div class="popup-overview-options">
     <sl-select label="Placement" name="placement" value="top" class="popup-overview-select">
-      <sl-menu-item value="top">top</sl-menu-item>
-      <sl-menu-item value="top-start">top-start</sl-menu-item>
-      <sl-menu-item value="top-end">top-end</sl-menu-item>
-      <sl-menu-item value="bottom">bottom</sl-menu-item>
-      <sl-menu-item value="bottom-start">bottom-start</sl-menu-item>
-      <sl-menu-item value="bottom-end">bottom-end</sl-menu-item>
-      <sl-menu-item value="right">right</sl-menu-item>
-      <sl-menu-item value="right-start">right-start</sl-menu-item>
-      <sl-menu-item value="right-end">right-end</sl-menu-item>
-      <sl-menu-item value="left">left</sl-menu-item>
-      <sl-menu-item value="left-start">left-start</sl-menu-item>
-      <sl-menu-item value="left-end">left-end</sl-menu-item>
+      <sl-option value="top">top</sl-option>
+      <sl-option value="top-start">top-start</sl-option>
+      <sl-option value="top-end">top-end</sl-option>
+      <sl-option value="bottom">bottom</sl-option>
+      <sl-option value="bottom-start">bottom-start</sl-option>
+      <sl-option value="bottom-end">bottom-end</sl-option>
+      <sl-option value="right">right</sl-option>
+      <sl-option value="right-start">right-start</sl-option>
+      <sl-option value="right-end">right-end</sl-option>
+      <sl-option value="left">left</sl-option>
+      <sl-option value="left-start">left-start</sl-option>
+      <sl-option value="left-end">left-end</sl-option>
     </sl-select>
     <sl-input type="number" name="distance" label="distance" value="0"></sl-input>
     <sl-input type="number" name="skidding" label="Skidding" value="0"></sl-input>
@@ -382,18 +382,18 @@ Since placement is preferred when using `flip`, you can observe the popup's curr
   </sl-popup>
 
   <sl-select label="Placement" value="top">
-    <sl-menu-item value="top">top</sl-menu-item>
-    <sl-menu-item value="top-start">top-start</sl-menu-item>
-    <sl-menu-item value="top-end">top-end</sl-menu-item>
-    <sl-menu-item value="bottom">bottom</sl-menu-item>
-    <sl-menu-item value="bottom-start">bottom-start</sl-menu-item>
-    <sl-menu-item value="bottom-end">bottom-end</sl-menu-item>
-    <sl-menu-item value="right">right</sl-menu-item>
-    <sl-menu-item value="right-start">right-start</sl-menu-item>
-    <sl-menu-item value="right-end">right-end</sl-menu-item>
-    <sl-menu-item value="left">left</sl-menu-item>
-    <sl-menu-item value="left-start">left-start</sl-menu-item>
-    <sl-menu-item value="left-end">left-end</sl-menu-item>
+    <sl-option value="top">top</sl-option>
+    <sl-option value="top-start">top-start</sl-option>
+    <sl-option value="top-end">top-end</sl-option>
+    <sl-option value="bottom">bottom</sl-option>
+    <sl-option value="bottom-start">bottom-start</sl-option>
+    <sl-option value="bottom-end">bottom-end</sl-option>
+    <sl-option value="right">right</sl-option>
+    <sl-option value="right-start">right-start</sl-option>
+    <sl-option value="right-end">right-end</sl-option>
+    <sl-option value="left">left</sl-option>
+    <sl-option value="left-start">left-start</sl-option>
+    <sl-option value="left-end">left-end</sl-option>
   </sl-select>
 </div>
 
@@ -525,7 +525,7 @@ Use the `distance` attribute to change the distance between the popup and its an
   const popup = container.querySelector('sl-popup');
   const distance = container.querySelector('sl-range');
 
-  distance.addEventListener('sl-change', () => (popup.distance = distance.value));
+  distance.addEventListener('sl-input', () => (popup.distance = distance.value));
 </script>
 ```
 
@@ -621,7 +621,7 @@ The `skidding` attribute is similar to `distance`, but instead allows you to off
   const popup = container.querySelector('sl-popup');
   const skidding = container.querySelector('sl-range');
 
-  skidding.addEventListener('sl-change', () => (popup.skidding = skidding.value));
+  skidding.addEventListener('sl-input', () => (popup.skidding = skidding.value));
 </script>
 ```
 
@@ -692,25 +692,25 @@ By default, the arrow will be aligned as close to the center of the _anchor_ as 
 
   <div class="popup-arrow-options">
     <sl-select label="Placement" name="placement" value="top" class="popup-overview-select">
-      <sl-menu-item value="top">top</sl-menu-item>
-      <sl-menu-item value="top-start">top-start</sl-menu-item>
-      <sl-menu-item value="top-end">top-end</sl-menu-item>
-      <sl-menu-item value="bottom">bottom</sl-menu-item>
-      <sl-menu-item value="bottom-start">bottom-start</sl-menu-item>
-      <sl-menu-item value="bottom-end">bottom-end</sl-menu-item>
-      <sl-menu-item value="right">right</sl-menu-item>
-      <sl-menu-item value="right-start">right-start</sl-menu-item>
-      <sl-menu-item value="right-end">right-end</sl-menu-item>
-      <sl-menu-item value="left">left</sl-menu-item>
-      <sl-menu-item value="left-start">left-start</sl-menu-item>
-      <sl-menu-item value="left-end">left-end</sl-menu-item>
+      <sl-option value="top">top</sl-option>
+      <sl-option value="top-start">top-start</sl-option>
+      <sl-option value="top-end">top-end</sl-option>
+      <sl-option value="bottom">bottom</sl-option>
+      <sl-option value="bottom-start">bottom-start</sl-option>
+      <sl-option value="bottom-end">bottom-end</sl-option>
+      <sl-option value="right">right</sl-option>
+      <sl-option value="right-start">right-start</sl-option>
+      <sl-option value="right-end">right-end</sl-option>
+      <sl-option value="left">left</sl-option>
+      <sl-option value="left-start">left-start</sl-option>
+      <sl-option value="left-end">left-end</sl-option>
     </sl-select>
 
     <sl-select label="Arrow Placement" name="arrow-placement" value="anchor">
-      <sl-menu-item value="anchor">anchor</sl-menu-item>
-      <sl-menu-item value="start">start</sl-menu-item>
-      <sl-menu-item value="end">end</sl-menu-item>
-      <sl-menu-item value="center">center</sl-menu-item>
+      <sl-option value="anchor">anchor</sl-option>
+      <sl-option value="start">start</sl-option>
+      <sl-option value="end">end</sl-option>
+      <sl-option value="center">center</sl-option>
     </sl-select>
   </div>
 
@@ -881,10 +881,10 @@ Use the `sync` attribute to make the popup the same width or height as the ancho
   </sl-popup>
 
   <sl-select value="width" label="Sync">
-    <sl-menu-item value="width">Width</sl-menu-item>
-    <sl-menu-item value="height">Height</sl-menu-item>
-    <sl-menu-item value="both">Both</sl-menu-item>
-    <sl-menu-item value="">None</sl-menu-item>
+    <sl-option value="width">Width</sl-option>
+    <sl-option value="height">Height</sl-option>
+    <sl-option value="both">Both</sl-option>
+    <sl-option value="">None</sl-option>
   </sl-select>
 </div>
 

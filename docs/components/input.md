@@ -77,25 +77,13 @@ const App = () => <SlInput placeholder="Clearable" clearable />;
 Add the `password-toggle` attribute to add a toggle button that will show the password when activated.
 
 ```html preview
-<sl-input type="password" placeholder="Password Toggle" size="small" password-toggle></sl-input>
-<br />
-<sl-input type="password" placeholder="Password Toggle" size="medium" password-toggle></sl-input>
-<br />
-<sl-input type="password" placeholder="Password Toggle" size="large" password-toggle></sl-input>
+<sl-input type="password" placeholder="Password Toggle" password-toggle></sl-input>
 ```
 
 ```jsx react
 import { SlInput } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => (
-  <>
-    <SlInput type="password" placeholder="Password Toggle" size="small" password-toggle />
-    <br />
-    <SlInput type="password" placeholder="Password Toggle" size="medium" password-toggle />
-    <br />
-    <SlInput type="password" placeholder="Password Toggle" size="large" password-toggle />
-  </>
-);
+const App = () => <SlInput type="password" placeholder="Password Toggle" size="medium" password-toggle />;
 ```
 
 ### Filled Inputs
@@ -110,6 +98,46 @@ Add the `filled` attribute to draw a filled input.
 import { SlInput } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => <SlInput placeholder="Type something" filled />;
+```
+
+### Disabled
+
+Use the `disabled` attribute to disable an input.
+
+```html preview
+<sl-input placeholder="Disabled" disabled></sl-input>
+```
+
+```jsx react
+import { SlInput } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => <SlInput placeholder="Disabled" disabled />;
+```
+
+### Sizes
+
+Use the `size` attribute to change an input's size.
+
+```html preview
+<sl-input placeholder="Small" size="small"></sl-input>
+<br />
+<sl-input placeholder="Medium" size="medium"></sl-input>
+<br />
+<sl-input placeholder="Large" size="large"></sl-input>
+```
+
+```jsx react
+import { SlInput } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <SlInput placeholder="Small" size="small" />
+    <br />
+    <SlInput placeholder="Medium" size="medium" />
+    <br />
+    <SlInput placeholder="Large" size="large" />
+  </>
+);
 ```
 
 ### Pill
@@ -160,58 +188,6 @@ const App = () => (
     <SlInput type="number" placeholder="Number" />
     <br />
     <SlInput type="date" placeholder="Date" />
-  </>
-);
-```
-
-### Disabled
-
-Use the `disabled` attribute to disable an input.
-
-```html preview
-<sl-input placeholder="Disabled" size="small" disabled></sl-input>
-<br />
-<sl-input placeholder="Disabled" size="medium" disabled></sl-input>
-<br />
-<sl-input placeholder="Disabled" size="large" disabled></sl-input>
-```
-
-```jsx react
-import { SlInput } from '@shoelace-style/shoelace/dist/react';
-
-const App = () => (
-  <>
-    <SlInput placeholder="Disabled" size="small" disabled />
-    <br />
-    <SlInput placeholder="Disabled" size="medium" disabled />
-    <br />
-    <SlInput placeholder="Disabled" size="large" disabled />
-  </>
-);
-```
-
-### Sizes
-
-Use the `size` attribute to change an input's size.
-
-```html preview
-<sl-input placeholder="Small" size="small"></sl-input>
-<br />
-<sl-input placeholder="Medium" size="medium"></sl-input>
-<br />
-<sl-input placeholder="Large" size="large"></sl-input>
-```
-
-```jsx react
-import { SlInput } from '@shoelace-style/shoelace/dist/react';
-
-const App = () => (
-  <>
-    <SlInput placeholder="Small" size="small" />
-    <br />
-    <SlInput placeholder="Medium" size="medium" />
-    <br />
-    <SlInput placeholder="Large" size="large" />
   </>
 );
 ```

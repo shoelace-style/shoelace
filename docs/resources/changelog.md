@@ -10,7 +10,20 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+This release includes a complete rewrite of `<sl-select>` to improve accessibility and simplify its internals.
+
+- 🚨 BREAKING: rewrote `<sl-select>`
+  - Accessibility has been significantly improved, especially in screen readers
+  - You must use `<sl-option>` instead of `<sl-menu-item>` for options now
+  - The `suffix` slot was removed because it was confusing to users and its position made the clear button inaccessible
+  - The `max-tags-visible` attribute has been renamed to `max-options-visible`
+  - Many parts have been removed or renamed (please see the docs for more details)
+- 🚨 BREAKING: removed the `sl-label-change` event from `<sl-menu-item>` (listen for `slotchange` instead)
+- Added the `<sl-option>` component
 - Fixed a bug in `<sl-tree-item>` where the checked/indeterminate states could get out of sync when using the `multiple` option [#1076](https://github.com/shoelace-style/shoelace/issues/1076)
+- Updated the hover style of `<sl-menu-item>` to be consistent with `<sl-option>`
+- Updated the status of `<sl-tree>` and `<sl-tree-item>` from experimental to stable
+- Updated Bootstrap Icons to 1.10.3
 
 ## 2.0.0-beta.87
 
