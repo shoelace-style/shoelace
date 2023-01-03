@@ -44,7 +44,6 @@ export default class SlMutationObserver extends ShoelaceElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.handleMutation = this.handleMutation.bind(this);
 
     this.mutationObserver = new MutationObserver(this.handleMutation);
 
@@ -76,11 +75,11 @@ export default class SlMutationObserver extends ShoelaceElement {
     this.startObserver();
   }
 
-  handleMutation(mutationList: MutationRecord[]) {
+  private handleMutation = (mutationList: MutationRecord[]) => {
     this.emit('sl-mutation', {
       detail: { mutationList }
     });
-  }
+  };
 
   startObserver() {
     const observeAttributes = typeof this.attr === 'string' && this.attr.length > 0;

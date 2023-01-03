@@ -142,7 +142,7 @@ export class FormSubmitController implements ReactiveController {
     }
   }
 
-  handleFormData(event: FormDataEvent) {
+  private handleFormData = (event: FormDataEvent) => {
     const disabled = this.options.disabled(this.host);
     const name = this.options.name(this.host);
     const value = this.options.value(this.host);
@@ -160,9 +160,9 @@ export class FormSubmitController implements ReactiveController {
         event.formData.append(name, (value as string | number | boolean).toString());
       }
     }
-  }
+  };
 
-  handleFormSubmit(event: Event) {
+  private handleFormSubmit = (event: Event) => {
     const disabled = this.options.disabled(this.host);
     const reportValidity = this.options.reportValidity;
 
@@ -177,17 +177,17 @@ export class FormSubmitController implements ReactiveController {
       event.preventDefault();
       event.stopImmediatePropagation();
     }
-  }
+  };
 
-  handleFormReset() {
+  private handleFormReset = () => {
     this.options.setValue(this.host, this.options.defaultValue(this.host));
     this.setUserInteracted(this.host, false);
-  }
+  };
 
-  async handleUserInput() {
+  private handleUserInput = async () => {
     await this.host.updateComplete;
     this.setUserInteracted(this.host, true);
-  }
+  };
 
   reportFormValidity() {
     //
