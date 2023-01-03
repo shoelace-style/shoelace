@@ -52,7 +52,7 @@ export default class SlRadioButton extends ShoelaceElement {
   /** Draws a pill-style radio button with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;
 
-  connectedCallback(): void {
+  connectedCallback() {
     super.connectedCallback();
     this.setAttribute('role', 'presentation');
   }

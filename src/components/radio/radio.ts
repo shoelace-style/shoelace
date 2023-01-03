@@ -42,7 +42,7 @@ export default class SlRadio extends ShoelaceElement {
   /** Disables the radio. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  connectedCallback(): void {
+  connectedCallback() {
     super.connectedCallback();
     this.setInitialAttributes();
     this.addEventListeners();

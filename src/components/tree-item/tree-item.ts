@@ -81,7 +81,7 @@ export default class SlTreeItem extends ShoelaceElement {
   @query('.tree-item__children') childrenContainer: HTMLDivElement;
   @query('.tree-item__expand-button slot') expandButtonSlot: HTMLSlotElement;
 
-  connectedCallback(): void {
+  connectedCallback() {
     super.connectedCallback();
 
     this.setAttribute('role', 'treeitem');
@@ -201,7 +201,7 @@ export default class SlTreeItem extends ShoelaceElement {
     this.isLeaf = !this.lazy && this.getChildrenItems().length === 0;
   }
 
-  protected willUpdate(changedProperties: PropertyValueMap<SlTreeItem> | Map<PropertyKey, unknown>): void {
+  protected willUpdate(changedProperties: PropertyValueMap<SlTreeItem> | Map<PropertyKey, unknown>) {
     if (changedProperties.has('selected') && !changedProperties.has('indeterminate')) {
       this.indeterminate = false;
     }
