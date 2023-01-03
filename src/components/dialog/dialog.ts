@@ -64,14 +64,14 @@ import type { CSSResultGroup } from 'lit';
 export default class SlDialog extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
-  @query('.dialog') dialog: HTMLElement;
-  @query('.dialog__panel') panel: HTMLElement;
-  @query('.dialog__overlay') overlay: HTMLElement;
-
   private readonly hasSlotController = new HasSlotController(this, 'footer');
   private readonly localize = new LocalizeController(this);
   private modal: Modal;
   private originalTrigger: HTMLElement | null;
+
+  @query('.dialog') dialog: HTMLElement;
+  @query('.dialog__panel') panel: HTMLElement;
+  @query('.dialog__overlay') overlay: HTMLElement;
 
   /**
    * Indicates whether or not the dialog is open. You can toggle this attribute to show and hide the dialog, or you can
@@ -112,26 +112,6 @@ export default class SlDialog extends ShoelaceElement {
     unlockBodyScrolling(this);
   }
 
-  /** Shows the dialog. */
-  async show() {
-    if (this.open) {
-      return undefined;
-    }
-
-    this.open = true;
-    return waitForEvent(this, 'sl-after-show');
-  }
-
-  /** Hides the dialog */
-  async hide() {
-    if (!this.open) {
-      return undefined;
-    }
-
-    this.open = false;
-    return waitForEvent(this, 'sl-after-hide');
-  }
-
   private requestClose(source: 'close-button' | 'keyboard' | 'overlay') {
     const slRequestClose = this.emit('sl-request-close', {
       cancelable: true,
@@ -147,15 +127,15 @@ export default class SlDialog extends ShoelaceElement {
     this.hide();
   }
 
-  addOpenListeners() {
+  private addOpenListeners() {
     document.addEventListener('keydown', this.handleDocumentKeyDown);
   }
 
-  removeOpenListeners() {
+  private removeOpenListeners() {
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
-  handleDocumentKeyDown(event: KeyboardEvent) {
+  private handleDocumentKeyDown(event: KeyboardEvent) {
     if (this.open && event.key === 'Escape') {
       event.stopPropagation();
       this.requestClose('keyboard');
@@ -252,6 +232,26 @@ export default class SlDialog extends ShoelaceElement {
 
       this.emit('sl-after-hide');
     }
+  }
+
+  /** Shows the dialog. */
+  async show() {
+    if (this.open) {
+      return undefined;
+    }
+
+    this.open = true;
+    return waitForEvent(this, 'sl-after-show');
+  }
+
+  /** Hides the dialog */
+  async hide() {
+    if (!this.open) {
+      return undefined;
+    }
+
+    this.open = false;
+    return waitForEvent(this, 'sl-after-hide');
   }
 
   render() {

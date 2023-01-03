@@ -31,9 +31,9 @@ import type { CSSResultGroup } from 'lit';
 export default class SlRating extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
-  @query('.rating') rating: HTMLElement;
-
   private readonly localize = new LocalizeController(this);
+
+  @query('.rating') rating: HTMLElement;
 
   @state() private hoverValue = 0;
   @state() private isHovering = false;
@@ -66,25 +66,15 @@ export default class SlRating extends ShoelaceElement {
    */
   @property() getSymbol: (value: number) => string = () => '<sl-icon name="star-fill" library="system"></sl-icon>';
 
-  /** Sets focus on the rating. */
-  focus(options?: FocusOptions) {
-    this.rating.focus(options);
-  }
-
-  /** Removes focus from the rating. */
-  blur() {
-    this.rating.blur();
-  }
-
-  getValueFromMousePosition(event: MouseEvent) {
+  private getValueFromMousePosition(event: MouseEvent) {
     return this.getValueFromXCoordinate(event.clientX);
   }
 
-  getValueFromTouchPosition(event: TouchEvent) {
+  private getValueFromTouchPosition(event: TouchEvent) {
     return this.getValueFromXCoordinate(event.touches[0].clientX);
   }
 
-  getValueFromXCoordinate(coordinate: number) {
+  private getValueFromXCoordinate(coordinate: number) {
     const isRtl = this.localize.dir() === 'rtl';
     const { left, right, width } = this.rating.getBoundingClientRect();
     const value = isRtl
@@ -94,12 +84,12 @@ export default class SlRating extends ShoelaceElement {
     return clamp(value, 0, this.max);
   }
 
-  handleClick(event: MouseEvent) {
+  private handleClick(event: MouseEvent) {
     this.setValue(this.getValueFromMousePosition(event));
     this.emit('sl-change');
   }
 
-  setValue(newValue: number) {
+  private setValue(newValue: number) {
     if (this.disabled || this.readonly) {
       return;
     }
@@ -108,7 +98,7 @@ export default class SlRating extends ShoelaceElement {
     this.isHovering = false;
   }
 
-  handleKeyDown(event: KeyboardEvent) {
+  private handleKeyDown(event: KeyboardEvent) {
     const isLtr = this.localize.dir() === 'ltr';
     const isRtl = this.localize.dir() === 'rtl';
     const oldValue = this.value;
@@ -144,31 +134,31 @@ export default class SlRating extends ShoelaceElement {
     }
   }
 
-  handleMouseEnter() {
+  private handleMouseEnter() {
     this.isHovering = true;
   }
 
-  handleMouseMove(event: MouseEvent) {
+  private handleMouseMove(event: MouseEvent) {
     this.hoverValue = this.getValueFromMousePosition(event);
   }
 
-  handleMouseLeave() {
+  private handleMouseLeave() {
     this.isHovering = false;
   }
 
-  handleTouchStart(event: TouchEvent) {
+  private handleTouchStart(event: TouchEvent) {
     this.hoverValue = this.getValueFromTouchPosition(event);
 
     // Prevent scrolling when touch is initiated
     event.preventDefault();
   }
 
-  handleTouchMove(event: TouchEvent) {
+  private handleTouchMove(event: TouchEvent) {
     this.isHovering = true;
     this.hoverValue = this.getValueFromTouchPosition(event);
   }
 
-  handleTouchEnd(event: TouchEvent) {
+  private handleTouchEnd(event: TouchEvent) {
     this.isHovering = false;
     this.setValue(this.hoverValue);
     this.emit('sl-change');
@@ -177,9 +167,19 @@ export default class SlRating extends ShoelaceElement {
     event.preventDefault();
   }
 
-  roundToPrecision(numberToRound: number, precision = 0.5) {
+  private roundToPrecision(numberToRound: number, precision = 0.5) {
     const multiplier = 1 / precision;
     return Math.ceil(numberToRound * multiplier) / multiplier;
+  }
+
+  /** Sets focus on the rating. */
+  focus(options?: FocusOptions) {
+    this.rating.focus(options);
+  }
+
+  /** Removes focus from the rating. */
+  blur() {
+    this.rating.blur();
   }
 
   render() {

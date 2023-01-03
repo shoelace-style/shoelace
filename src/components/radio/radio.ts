@@ -44,19 +44,28 @@ export default class SlRadio extends ShoelaceElement {
 
   connectedCallback() {
     super.connectedCallback();
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+
     this.setInitialAttributes();
     this.addEventListeners();
   }
 
-  @watch('checked')
-  handleCheckedChange() {
-    this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
-    this.setAttribute('tabindex', this.checked ? '0' : '-1');
+  disconnectedCallback() {
+    this.removeEventListeners();
   }
 
-  @watch('disabled', { waitUntilFirstUpdate: true })
-  handleDisabledChange() {
-    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
+  private addEventListeners() {
+    this.addEventListener('blur', this.handleBlur);
+    this.addEventListener('click', this.handleClick);
+    this.addEventListener('focus', this.handleFocus);
+  }
+
+  private removeEventListeners() {
+    this.removeEventListener('blur', this.handleBlur);
+    this.removeEventListener('click', this.handleClick);
+    this.removeEventListener('focus', this.handleFocus);
   }
 
   private handleBlur() {
@@ -75,15 +84,20 @@ export default class SlRadio extends ShoelaceElement {
     this.emit('sl-focus');
   }
 
-  private addEventListeners() {
-    this.addEventListener('blur', () => this.handleBlur());
-    this.addEventListener('click', () => this.handleClick());
-    this.addEventListener('focus', () => this.handleFocus());
-  }
-
   private setInitialAttributes() {
     this.setAttribute('role', 'radio');
     this.setAttribute('tabindex', '-1');
+    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
+  }
+
+  @watch('checked')
+  handleCheckedChange() {
+    this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
+    this.setAttribute('tabindex', this.checked ? '0' : '-1');
+  }
+
+  @watch('disabled', { waitUntilFirstUpdate: true })
+  handleDisabledChange() {
     this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
   }
 

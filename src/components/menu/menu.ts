@@ -23,17 +23,17 @@ export interface MenuSelectEventDetail {
 export default class SlMenu extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
-  @query('slot') defaultSlot: HTMLSlotElement;
-
   private typeToSelectString = '';
   private typeToSelectTimeout: number;
+
+  @query('slot') defaultSlot: HTMLSlotElement;
 
   connectedCallback() {
     super.connectedCallback();
     this.setAttribute('role', 'menu');
   }
 
-  getAllItems(options: { includeDisabled: boolean } = { includeDisabled: true }) {
+  private getAllItems(options: { includeDisabled: boolean } = { includeDisabled: true }) {
     return [...this.defaultSlot.assignedElements({ flatten: true })].filter((el: HTMLElement) => {
       if (el.getAttribute('role') !== 'menuitem') {
         return false;
@@ -47,19 +47,15 @@ export default class SlMenu extends ShoelaceElement {
     }) as SlMenuItem[];
   }
 
-  /**
-   * @internal Gets the current menu item, which is the menu item that has `tabindex="0"` within the roving tab index.
-   * The menu item may or may not have focus, but for keyboard interaction purposes it's considered the "active" item.
-   */
-  getCurrentItem() {
+  // Gets the current menu item, which is the menu item that has `tabindex="0"` within the roving tab index. The menu
+  // item may or may not have focus, but for keyboard interaction purposes it's considered the "active" item.
+  private getCurrentItem() {
     return this.getAllItems({ includeDisabled: false }).find(i => i.getAttribute('tabindex') === '0');
   }
 
-  /**
-   * @internal Sets the current menu item to the specified element. This sets `tabindex="0"` on the target element and
-   * `tabindex="-1"` to all other items. This method must be called prior to setting focus on a menu item.
-   */
-  setCurrentItem(item: SlMenuItem) {
+  // Sets the current menu item to the specified element. This sets `tabindex="0"` on the target element and
+  // `tabindex="-1"` to all other items. This method must be called prior to setting focus on a menu item.
+  private setCurrentItem(item: SlMenuItem) {
     const items = this.getAllItems({ includeDisabled: false });
     const activeItem = item.disabled ? items[0] : item;
 
@@ -69,41 +65,7 @@ export default class SlMenu extends ShoelaceElement {
     });
   }
 
-  /**
-   * Initiates type-to-select logic, which automatically selects an option based on what the user is currently typing.
-   * The event passed will be used to append the appropriate characters to the internal query and the selection will be
-   * updated. After a brief period, the internal query is cleared automatically. This is useful for enabling
-   * type-to-select behavior when the menu doesn't have focus.
-   */
-  typeToSelect(event: KeyboardEvent) {
-    const items = this.getAllItems({ includeDisabled: false });
-    clearTimeout(this.typeToSelectTimeout);
-    this.typeToSelectTimeout = window.setTimeout(() => (this.typeToSelectString = ''), 1000);
-
-    if (event.key === 'Backspace') {
-      if (event.metaKey || event.ctrlKey) {
-        this.typeToSelectString = '';
-      } else {
-        this.typeToSelectString = this.typeToSelectString.slice(0, -1);
-      }
-    } else {
-      this.typeToSelectString += event.key.toLowerCase();
-    }
-
-    for (const item of items) {
-      const slot = item.shadowRoot?.querySelector<HTMLSlotElement>('slot:not([name])');
-      const label = getTextContent(slot).toLowerCase().trim();
-      if (label.startsWith(this.typeToSelectString)) {
-        this.setCurrentItem(item);
-
-        // Set focus here to force the browser to show :focus-visible styles
-        item.focus();
-        break;
-      }
-    }
-  }
-
-  handleClick(event: MouseEvent) {
+  private handleClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     const item = target.closest('sl-menu-item');
 
@@ -112,7 +74,7 @@ export default class SlMenu extends ShoelaceElement {
     }
   }
 
-  handleKeyDown(event: KeyboardEvent) {
+  private handleKeyDown(event: KeyboardEvent) {
     // Make a selection when pressing enter
     if (event.key === 'Enter') {
       const item = this.getCurrentItem();
@@ -163,7 +125,7 @@ export default class SlMenu extends ShoelaceElement {
     this.typeToSelect(event);
   }
 
-  handleMouseDown(event: MouseEvent) {
+  private handleMouseDown(event: MouseEvent) {
     const target = event.target as HTMLElement;
 
     if (target.getAttribute('role') === 'menuitem') {
@@ -171,12 +133,46 @@ export default class SlMenu extends ShoelaceElement {
     }
   }
 
-  handleSlotChange() {
+  private handleSlotChange() {
     const items = this.getAllItems({ includeDisabled: false });
 
     // Reset the roving tab index when the slotted items change
     if (items.length > 0) {
       this.setCurrentItem(items[0]);
+    }
+  }
+
+  /**
+   * Initiates type-to-select logic, which automatically selects an option based on what the user is currently typing.
+   * The event passed will be used to append the appropriate characters to the internal query and the selection will be
+   * updated. After a brief period, the internal query is cleared automatically. This is useful for enabling
+   * type-to-select behavior when the menu doesn't have focus.
+   */
+  typeToSelect(event: KeyboardEvent) {
+    const items = this.getAllItems({ includeDisabled: false });
+    clearTimeout(this.typeToSelectTimeout);
+    this.typeToSelectTimeout = window.setTimeout(() => (this.typeToSelectString = ''), 1000);
+
+    if (event.key === 'Backspace') {
+      if (event.metaKey || event.ctrlKey) {
+        this.typeToSelectString = '';
+      } else {
+        this.typeToSelectString = this.typeToSelectString.slice(0, -1);
+      }
+    } else {
+      this.typeToSelectString += event.key.toLowerCase();
+    }
+
+    for (const item of items) {
+      const slot = item.shadowRoot?.querySelector<HTMLSlotElement>('slot:not([name])');
+      const label = getTextContent(slot).toLowerCase().trim();
+      if (label.startsWith(this.typeToSelectString)) {
+        this.setCurrentItem(item);
+
+        // Set focus here to force the browser to show :focus-visible styles
+        item.focus();
+        break;
+      }
     }
   }
 

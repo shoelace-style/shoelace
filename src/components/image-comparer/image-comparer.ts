@@ -38,15 +38,15 @@ import type { CSSResultGroup } from 'lit';
 export default class SlImageComparer extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
+  private readonly localize = new LocalizeController(this);
+
   @query('.image-comparer') base: HTMLElement;
   @query('.image-comparer__handle') handle: HTMLElement;
-
-  private readonly localize = new LocalizeController(this);
 
   /** The position of the divider as a percentage. */
   @property({ type: Number, reflect: true }) position = 50;
 
-  handleDrag(event: PointerEvent) {
+  private handleDrag(event: PointerEvent) {
     const { width } = this.base.getBoundingClientRect();
     const isRtl = this.localize.dir() === 'rtl';
 
@@ -61,7 +61,7 @@ export default class SlImageComparer extends ShoelaceElement {
     });
   }
 
-  handleKeyDown(event: KeyboardEvent) {
+  private handleKeyDown(event: KeyboardEvent) {
     const isLtr = this.localize.dir() === 'ltr';
     const isRtl = this.localize.dir() === 'rtl';
 

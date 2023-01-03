@@ -62,18 +62,18 @@ import type { CSSResultGroup } from 'lit';
 export default class SlSelect extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  @query('.select') popup: SlPopup;
-  @query('.select__combobox') combobox: HTMLSlotElement;
-  @query('.select__display-input') displayInput: HTMLInputElement;
-  @query('.select__value-input') valueInput: HTMLInputElement;
-  @query('.select__listbox') listbox: HTMLSlotElement;
-
   // @ts-expect-error -- Controller is currently unused
   private readonly formSubmitController = new FormSubmitController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private readonly localize = new LocalizeController(this);
   private typeToSelectString = '';
   private typeToSelectTimeout: number;
+
+  @query('.select') popup: SlPopup;
+  @query('.select__combobox') combobox: HTMLSlotElement;
+  @query('.select__display-input') displayInput: HTMLInputElement;
+  @query('.select__value-input') valueInput: HTMLInputElement;
+  @query('.select__listbox') listbox: HTMLSlotElement;
 
   @state() private hasFocus = false;
   @state() displayLabel = '';
@@ -161,32 +161,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
     // Because this is a form control, it shouldn't be opened initially
     this.open = false;
-  }
-
-  /** Checks for validity but does not show the browser's validation message. */
-  checkValidity() {
-    return this.valueInput.checkValidity();
-  }
-
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
-  reportValidity() {
-    return this.valueInput.reportValidity();
-  }
-
-  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
-  setCustomValidity(message: string) {
-    this.valueInput.setCustomValidity(message);
-    this.invalid = !this.valueInput.checkValidity();
-  }
-
-  /** Sets focus on the control. */
-  focus(options?: FocusOptions) {
-    this.displayInput.focus(options);
-  }
-
-  /** Removes focus from the control. */
-  blur() {
-    this.displayInput.blur();
   }
 
   private addOpenListeners() {
@@ -541,28 +515,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     this.setSelectedOptions(allOptions.filter(el => value.includes(el.value)));
   }
 
-  /** Shows the listbox. */
-  async show() {
-    if (this.open || this.disabled) {
-      this.open = false;
-      return undefined;
-    }
-
-    this.open = true;
-    return waitForEvent(this, 'sl-after-show');
-  }
-
-  /** Hides the listbox. */
-  async hide() {
-    if (!this.open || this.disabled) {
-      this.open = false;
-      return undefined;
-    }
-
-    this.open = false;
-    return waitForEvent(this, 'sl-after-hide');
-  }
-
   @watch('open', { waitUntilFirstUpdate: true })
   async handleOpenChange() {
     if (this.open && !this.disabled) {
@@ -604,6 +556,54 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
       this.emit('sl-after-hide');
     }
+  }
+
+  /** Shows the listbox. */
+  async show() {
+    if (this.open || this.disabled) {
+      this.open = false;
+      return undefined;
+    }
+
+    this.open = true;
+    return waitForEvent(this, 'sl-after-show');
+  }
+
+  /** Hides the listbox. */
+  async hide() {
+    if (!this.open || this.disabled) {
+      this.open = false;
+      return undefined;
+    }
+
+    this.open = false;
+    return waitForEvent(this, 'sl-after-hide');
+  }
+
+  /** Checks for validity but does not show the browser's validation message. */
+  checkValidity() {
+    return this.valueInput.checkValidity();
+  }
+
+  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  reportValidity() {
+    return this.valueInput.reportValidity();
+  }
+
+  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  setCustomValidity(message: string) {
+    this.valueInput.setCustomValidity(message);
+    this.invalid = !this.valueInput.checkValidity();
+  }
+
+  /** Sets focus on the control. */
+  focus(options?: FocusOptions) {
+    this.displayInput.focus(options);
+  }
+
+  /** Removes focus from the control. */
+  blur() {
+    this.displayInput.blur();
   }
 
   render() {

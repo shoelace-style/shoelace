@@ -200,6 +200,23 @@ All components have a host element, which is a reference to the `<sl-*>` element
 
 Aside from `display`, avoid setting styles on the host element when possible. The reason for this is that styles applied to the host element are not encapsulated. Instead, create a base element that wraps the component's internals and style that instead. This convention also makes it easier to use BEM in components, as the base element can serve as the "block" entity.
 
+When authoring components, please try to follow the same structure and conventions found in other components. Classes, for example, generally follow this structure:
+
+- Static properties/methods
+- Private/public properties (that are _not_ reactive)
+- `@query` decorators
+- `@state` decorators
+- `@property` decorators
+- Lifecycle methods (`connectedCallback()`, `disconnectedCallback()`, `firstUpdated()`, etc.)
+- Private methods
+- `@watch` decorators
+- Public methods
+- The `render()` method
+
+Please avoid using the `public` keyword for class fields. It's simply too verbose when combined with decorators, property names, and arguments. However, _please do_ add `private` in front of any property or method that is intended to be private.
+
+?> This might seem like a lot, but it's fairly intuitive once you start working with the library. However, don't let this structure prevent you from submitting a PR. [Code can change](https://www.abeautifulsite.net/posts/code-can-change/) and nobody will chastise you for "getting it wrong." At the same time, encouraging consistency helps keep the library maintainable and easy for others to understand. (A lint rule that helps with things like this would be a very welcome PR!)
+
 ### Class Names
 
 All components use a [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM), so styles are completely encapsulated from the rest of the document. As a result, class names used _inside_ a component won't conflict with class names _outside_ the component, so we're free to name them anything we want.

@@ -37,14 +37,14 @@ import type { CSSResultGroup } from 'lit';
 export default class SlSwitch extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  @query('input[type="checkbox"]') input: HTMLInputElement;
-
   // @ts-expect-error -- Controller is currently unused
   private readonly formSubmitController = new FormSubmitController(this, {
     value: (control: SlSwitch) => (control.checked ? control.value : undefined),
     defaultValue: (control: SlSwitch) => control.defaultChecked,
     setValue: (control: SlSwitch, checked: boolean) => (control.checked = checked)
   });
+
+  @query('input[type="checkbox"]') input: HTMLInputElement;
 
   @state() private hasFocus = false;
   @state() invalid = false;
@@ -72,6 +72,54 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
   @defaultValue('checked') defaultChecked = false;
 
   firstUpdated() {
+    this.invalid = !this.input.checkValidity();
+  }
+
+  private handleBlur() {
+    this.hasFocus = false;
+    this.emit('sl-blur');
+  }
+
+  private handleInput() {
+    this.emit('sl-input');
+  }
+
+  private handleClick() {
+    this.checked = !this.checked;
+    this.emit('sl-change');
+  }
+
+  private handleFocus() {
+    this.hasFocus = true;
+    this.emit('sl-focus');
+  }
+
+  private handleKeyDown(event: KeyboardEvent) {
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      this.checked = false;
+      this.emit('sl-change');
+      this.emit('sl-input');
+    }
+
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      this.checked = true;
+      this.emit('sl-change');
+      this.emit('sl-input');
+    }
+  }
+
+  @watch('checked', { waitUntilFirstUpdate: true })
+  handleCheckedChange() {
+    this.input.checked = this.checked; // force a sync update
+    this.invalid = !this.input.checkValidity();
+  }
+
+  @watch('disabled', { waitUntilFirstUpdate: true })
+  handleDisabledChange() {
+    // Disabled form controls are always valid, so we need to recheck validity when the state changes
+    this.input.disabled = this.disabled;
     this.invalid = !this.input.checkValidity();
   }
 
@@ -104,54 +152,6 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
   setCustomValidity(message: string) {
     this.input.setCustomValidity(message);
     this.invalid = !this.input.checkValidity();
-  }
-
-  handleBlur() {
-    this.hasFocus = false;
-    this.emit('sl-blur');
-  }
-
-  handleInput() {
-    this.emit('sl-input');
-  }
-
-  @watch('checked', { waitUntilFirstUpdate: true })
-  handleCheckedChange() {
-    this.input.checked = this.checked; // force a sync update
-    this.invalid = !this.input.checkValidity();
-  }
-
-  handleClick() {
-    this.checked = !this.checked;
-    this.emit('sl-change');
-  }
-
-  @watch('disabled', { waitUntilFirstUpdate: true })
-  handleDisabledChange() {
-    // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    this.input.disabled = this.disabled;
-    this.invalid = !this.input.checkValidity();
-  }
-
-  handleFocus() {
-    this.hasFocus = true;
-    this.emit('sl-focus');
-  }
-
-  handleKeyDown(event: KeyboardEvent) {
-    if (event.key === 'ArrowLeft') {
-      event.preventDefault();
-      this.checked = false;
-      this.emit('sl-change');
-      this.emit('sl-input');
-    }
-
-    if (event.key === 'ArrowRight') {
-      event.preventDefault();
-      this.checked = true;
-      this.emit('sl-change');
-      this.emit('sl-input');
-    }
   }
 
   render() {

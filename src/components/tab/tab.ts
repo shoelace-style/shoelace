@@ -31,10 +31,10 @@ export default class SlTab extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
   private readonly localize = new LocalizeController(this);
 
-  @query('.tab') tab: HTMLElement;
-
   private readonly attrId = ++id;
   private readonly componentId = `sl-tab-${this.attrId}`;
+
+  @query('.tab') tab: HTMLElement;
 
   /** The name of the tab panel this tab is associated with. The panel must be located in the same tab group. */
   @property({ reflect: true }) panel = '';
@@ -53,17 +53,7 @@ export default class SlTab extends ShoelaceElement {
     this.setAttribute('role', 'tab');
   }
 
-  /** Sets focus to the tab. */
-  focus(options?: FocusOptions) {
-    this.tab.focus(options);
-  }
-
-  /** Removes focus from the tab. */
-  blur() {
-    this.tab.blur();
-  }
-
-  handleCloseClick() {
+  private handleCloseClick() {
     this.emit('sl-close');
   }
 
@@ -75,6 +65,16 @@ export default class SlTab extends ShoelaceElement {
   @watch('disabled')
   handleDisabledChange() {
     this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
+  }
+
+  /** Sets focus to the tab. */
+  focus(options?: FocusOptions) {
+    this.tab.focus(options);
+  }
+
+  /** Removes focus from the tab. */
+  blur() {
+    this.tab.blur();
   }
 
   render() {

@@ -48,9 +48,20 @@ export default class SlMenuItem extends ShoelaceElement {
     this.setAttribute('role', 'menuitem');
   }
 
-  /** Returns a text label based on the contents of the menu item's default slot. */
-  getTextLabel() {
-    return getTextContent(this.defaultSlot);
+  private handleDefaultSlotChange() {
+    const textLabel = this.getTextLabel();
+
+    // Ignore the first time the label is set
+    if (typeof this.cachedTextLabel === 'undefined') {
+      this.cachedTextLabel = textLabel;
+      return;
+    }
+
+    // When the label changes, emit a slotchange event so parent controls see it
+    if (textLabel !== this.cachedTextLabel) {
+      this.cachedTextLabel = textLabel;
+      this.emit('slotchange', { bubbles: true, composed: false, cancelable: false });
+    }
   }
 
   @watch('checked')
@@ -66,20 +77,9 @@ export default class SlMenuItem extends ShoelaceElement {
     this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
   }
 
-  handleDefaultSlotChange() {
-    const textLabel = this.getTextLabel();
-
-    // Ignore the first time the label is set
-    if (typeof this.cachedTextLabel === 'undefined') {
-      this.cachedTextLabel = textLabel;
-      return;
-    }
-
-    // When the label changes, emit a slotchange event so parent controls see it
-    if (textLabel !== this.cachedTextLabel) {
-      this.cachedTextLabel = textLabel;
-      this.emit('slotchange', { bubbles: true, composed: false, cancelable: false });
-    }
+  /** Returns a text label based on the contents of the menu item's default slot. */
+  getTextLabel() {
+    return getTextContent(this.defaultSlot);
   }
 
   render() {
