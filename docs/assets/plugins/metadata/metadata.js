@@ -4,6 +4,115 @@
   const customElements = fetch('/dist/custom-elements.json')
     .then(res => res.json())
     .catch(err => console.error(err));
+  const themeTokens = fetch('/dist/themes/light.css')
+    .then(res => res.text())
+    .then(lightTheme => {
+      const pattern = `(--sl[-\\w+]*): ([^;]+);`;
+      const regex = new RegExp(pattern, 'g');
+      // array of matches: `[['--sl-token: value;', '--sl-token', 'value']]`
+      const lightMatches = [...lightTheme.matchAll(regex)];
+
+      /**
+       * Token data grouped by category, used to generate tables
+       * @type {Record<string, [name: string, value?: string, example?: string]>}
+       */
+      let tokens = {
+        'font-family': [],
+        'font-size': [],
+        'font-weight': [],
+        'letter-spacing': [],
+        'line-height': [],
+        spacing: [],
+        elevation: [],
+        'border-radius': [],
+        transition: [],
+        'z-index': []
+      };
+
+      function formatValue(value) {
+        if (value.endsWith('rem')) {
+          value = `${value} (${parseFloat(value) * 16}px)`;
+        }
+        return value;
+      }
+
+      lightMatches.forEach(match => {
+        const name = match[1];
+        let value = formatValue(match[2]);
+        let example = '';
+
+        if (['--sl-font-sans', '--sl-font-serif', '--sl-font-mono'].includes(name)) {
+          example = `<span style="font-family: var(${name})">The quick brown fox jumped over the lazy dog.</span>`;
+          tokens['font-family'].push({ name, value, example });
+          return;
+        }
+
+        if (name.startsWith('--sl-font-size')) {
+          example = `<span style="font-size: var(${name})">Aa</span>`;
+          tokens['font-size'].push({ name, value, example });
+          return;
+        }
+
+        if (name.startsWith('--sl-font-weight')) {
+          example = `<span style="font-weight: var(${name});">The quick brown fox jumped over the lazy dog.</span>`;
+          tokens['font-weight'].push({ name, value, example });
+          return;
+        }
+
+        if (name.startsWith('--sl-letter-spacing')) {
+          example = `<span style="letter-spacing: var(${name});">The quick brown fox jumped over the lazy dog.</span>`;
+          tokens['letter-spacing'].push({ name, value, example });
+          return;
+        }
+
+        if (name.startsWith('--sl-line-height')) {
+          example = `<div style="line-height: var(${name});">The quick brown fox jumped over the lazy dog.<br>The quick brown fox jumped over the lazy dog.<br>The quick brown fox jumped over the lazy dog.</div>`;
+          tokens['line-height'].push({ name, value, example });
+          return;
+        }
+
+        if (name.startsWith('--sl-spacing')) {
+          example = `<div class="spacing-demo" style="width: var(${name}); height: var(${name});"></div>`;
+          tokens.spacing.push({ name, value, example });
+          return;
+        }
+
+        if (name.startsWith('--sl-shadow')) {
+          // omit value as it differs depending on theme
+          value = undefined;
+          example = `<div class="elevation-demo" style="box-shadow: var(${name});"></div>`;
+          tokens.elevation.push({ name, value, example });
+          return;
+        }
+
+        if (name.startsWith('--sl-border-radius')) {
+          let style = `border-radius: var(${name});`;
+          // add extra width to pill
+          if (name === '--sl-border-radius-pill') {
+            style += ' width: 6rem;';
+          }
+          example = `<div class="border-radius-demo" style="${style}"></div>`;
+          tokens['border-radius'].push({ name, value, example });
+          return;
+        }
+
+        if (name.startsWith('--sl-transition')) {
+          example = `<div class="transition-demo" style="transition-duration: var(${name});"></div>`;
+          tokens.transition.push({ name, value, example });
+          return;
+        }
+
+        if (name.startsWith('--sl-z-index')) {
+          // omit example
+          example = undefined;
+          tokens['z-index'].push({ name, value, example });
+          return;
+        }
+      });
+
+      return tokens;
+    })
+    .catch(err => console.error(err));
 
   function createPropsTable(props) {
     const table = document.createElement('table');
@@ -272,6 +381,36 @@
     return ul.outerHTML;
   }
 
+  function createTokenTable(tokens) {
+    const table = document.createElement('table');
+    const hasValues = tokens.some(token => !!token.value);
+    const hasExamples = tokens.some(token => !!token.example);
+    table.innerHTML = `
+      <thead>
+        <tr>
+          <th>Token</th>
+          ${hasValues ? `<th>Value</th>` : ``}
+          ${hasExamples ? `<th>Example</th>` : ``}
+        </tr>
+      </thead>
+      <tbody>
+        ${tokens
+          .map(
+            token => `
+              <tr>
+                <td class="nowrap"><code>${escapeHtml(token.name)}</code></td>
+                ${hasValues ? `<td>${escapeHtml(token.value)}</td>` : ``}
+                ${hasExamples ? `<td>${token.example}</td>` : ``}
+              </tr>
+            `
+          )
+          .join('')}
+      </tbody>
+    `;
+
+    return table.outerHTML;
+  }
+
   function escapeHtml(html) {
     if (!html) {
       return '';
@@ -344,6 +483,7 @@
 
     hook.beforeEach(async (content, next) => {
       const metadata = await customElements;
+      const tokens = await themeTokens;
 
       // Replace %VERSION% placeholders
       content = content.replace(/%VERSION%/g, metadata.package.version);
@@ -394,6 +534,21 @@
           </div>
         `;
 
+        return result.replace(/^ +| +$/gm, '');
+      });
+
+      // Handle [token-metadata] tags
+      content = content.replace(/\[token-metadata:([a-z-]+)\]/g, (match, token) => {
+        let tokenData = tokens[token];
+
+        if (!tokenData) {
+          console.error(`Token not found in metadata: ${token}`);
+          return next(content);
+        }
+
+        result = createTokenTable(tokenData);
+
+        // Strip whitespace so markdown doesn't process things as code blocks
         return result.replace(/^ +| +$/gm, '');
       });
 
