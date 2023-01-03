@@ -19,7 +19,8 @@
     "./dist/utilities/*": "./dist/utilities/*",
     "./dist/react": "./dist/react/index.js",
     "./dist/react/*": "./dist/react/*",
-    "./dist/translations/*": "./dist/translations/*"
+    "./dist/translations/*": "./dist/translations/*",
+    "./dist/assets/icons/*": "./dist/assets/icons/*"
   },
   "files": [
     "dist"
