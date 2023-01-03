@@ -226,7 +226,10 @@ export default class SlTree extends ShoelaceElement {
       previousSelection.length !== nextSelection.length ||
       nextSelection.some(item => !previousSelection.includes(item))
     ) {
-      this.emit('sl-selection-change', { detail: { selection: nextSelection } });
+      // Wait for the tree items' DOM to update before emitting
+      Promise.all(nextSelection.map(el => el.updateComplete)).then(() => {
+        this.emit('sl-selection-change', { detail: { selection: nextSelection } });
+      });
     }
   }
 
