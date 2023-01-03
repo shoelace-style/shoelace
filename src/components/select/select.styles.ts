@@ -304,7 +304,6 @@ export default css`
     max-height: var(--auto-size-available-height);
   }
 
-  /* Slotted content */
   .select__listbox::slotted(sl-divider) {
     --spacing: var(--sl-spacing-x-small);
   }
