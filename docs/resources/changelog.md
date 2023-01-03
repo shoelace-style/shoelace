@@ -20,6 +20,7 @@ This release includes a complete rewrite of `<sl-select>` to improve accessibili
   - Many parts have been removed or renamed (please see the docs for more details)
 - 🚨 BREAKING: removed the `sl-label-change` event from `<sl-menu-item>` (listen for `slotchange` instead)
 - Added the `<sl-option>` component
+- Added Traditional Chinese translation [#1086](https://github.com/shoelace-style/shoelace/pull/1086)
 - Fixed a bug in `<sl-tree-item>` where the checked/indeterminate states could get out of sync when using the `multiple` option [#1076](https://github.com/shoelace-style/shoelace/issues/1076)
 - Updated the hover style of `<sl-menu-item>` to be consistent with `<sl-option>`
 - Updated the status of `<sl-tree>` and `<sl-tree-item>` from experimental to stable
