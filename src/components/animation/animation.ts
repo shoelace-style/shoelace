@@ -91,6 +91,8 @@ export default class SlAnimation extends ShoelaceElement {
   connectedCallback() {
     super.connectedCallback();
     this.createAnimation();
+    this.handleAnimationCancel = this.handleAnimationCancel.bind(this);
+    this.handleAnimationFinish = this.handleAnimationFinish.bind(this);
   }
 
   disconnectedCallback() {
@@ -116,17 +118,17 @@ export default class SlAnimation extends ShoelaceElement {
     this.createAnimation();
   }
 
-  private handleAnimationFinish = () => {
+  handleAnimationFinish() {
     this.play = false;
     this.hasStarted = false;
     this.emit('sl-finish');
-  };
+  }
 
-  private handleAnimationCancel = () => {
+  handleAnimationCancel() {
     this.play = false;
     this.hasStarted = false;
     this.emit('sl-cancel');
-  };
+  }
 
   @watch('play')
   handlePlayChange() {
