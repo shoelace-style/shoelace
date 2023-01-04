@@ -20,8 +20,10 @@ This release includes a complete rewrite of `<sl-select>` to improve accessibili
   - Many parts have been removed or renamed (please see the docs for more details)
 - 🚨 BREAKING: removed the `sl-label-change` event from `<sl-menu-item>` (listen for `slotchange` instead)
 - 🚨 BREAKING: removed type to select logic from `<sl-menu>` (this was added specifically for `<sl-select>` which no longer uses `<sl-menu>`)
+- 🚨 BREAKING: swatches in `<sl-color-picker>` are no longer present by default (but you can set them using the `swatches` attribute now)
 - Added the `<sl-option>` component
 - Added Traditional Chinese translation [#1086](https://github.com/shoelace-style/shoelace/pull/1086)
+- Added support for `swatches` to be an attribute of `<sl-color-picker>` so swatches can be defined declaratively (it was previously a property; use a `;` to separate color values)
 - Fixed a bug in `<sl-tree-item>` where the checked/indeterminate states could get out of sync when using the `multiple` option [#1076](https://github.com/shoelace-style/shoelace/issues/1076)
 - Fixed a bug in `<sl-tree>` that caused `sl-selection-change` to emit before the DOM updated [#1096](https://github.com/shoelace-style/shoelace/issues/1096)
 - Fixed a bug that prevented `<sl-switch>` from submitting a default value of `on` when no value was provided [#1103](https://github.com/shoelace-style/shoelace/discussions/1103)

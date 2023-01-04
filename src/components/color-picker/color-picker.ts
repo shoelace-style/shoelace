@@ -158,27 +158,11 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
   @property({ type: Boolean }) uppercase = false;
 
   /**
-   * An array of predefined color swatches to display. Can include any format the color picker can parse, including
-   * HEX(A), RGB(A), HSL(A), HSV(A), and CSS color names.
+   * One or more predefined color swatches to display as presets in the color picker. Can include any format the color
+   * picker can parse, including HEX(A), RGB(A), HSL(A), HSV(A), and CSS color names. Each color must be separated by a
+   * semicolon (`;`). Alternatively, you can pass an array of color values to this property using JavaScript.
    */
-  @property({ attribute: false }) swatches: string[] = [
-    '#d0021b',
-    '#f5a623',
-    '#f8e71c',
-    '#8b572a',
-    '#7ed321',
-    '#417505',
-    '#bd10e0',
-    '#9013fe',
-    '#4a90e2',
-    '#50e3c2',
-    '#b8e986',
-    '#000',
-    '#444',
-    '#888',
-    '#ccc',
-    '#fff'
-  ];
+  @property() swatches: string | string[] = '';
 
   connectedCallback() {
     super.connectedCallback();
@@ -721,6 +705,9 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
   render() {
     const gridHandleX = this.saturation;
     const gridHandleY = 100 - this.brightness;
+    const swatches = Array.isArray(this.swatches)
+      ? this.swatches // allow arrays for legacy purposes
+      : this.swatches.split(';').filter(color => color !== '');
 
     const colorPicker = html`
       <div
@@ -902,10 +889,18 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
           </sl-button-group>
         </div>
 
-        ${this.swatches.length > 0
+        ${swatches.length > 0
           ? html`
               <div part="swatches" class="color-picker__swatches">
-                ${this.swatches.map(swatch => {
+                ${swatches.map(swatch => {
+                  const parsedColor = this.parseColor(swatch);
+
+                  // If we can't parse it, skip it
+                  if (!parsedColor) {
+                    console.error(`Unable to parse swatch color: "${swatch}"`, this);
+                    return '';
+                  }
+
                   return html`
                     <div
                       part="swatch"
@@ -915,9 +910,12 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
                       aria-label=${swatch}
                       @click=${() => this.selectSwatch(swatch)}
                       @keydown=${(event: KeyboardEvent) =>
-                        !this.disabled && event.key === 'Enter' && this.setColor(swatch)}
+                        !this.disabled && event.key === 'Enter' && this.setColor(parsedColor.hexa)}
                     >
-                      <div class="color-picker__swatch-color" style=${styleMap({ backgroundColor: swatch })}></div>
+                      <div
+                        class="color-picker__swatch-color"
+                        style=${styleMap({ backgroundColor: parsedColor.hexa })}
+                      ></div>
                     </div>
                   `;
                 })}
