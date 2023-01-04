@@ -210,7 +210,7 @@ export default class SlPopup extends ShoelaceElement {
     // If the anchor is a <slot>, we'll use the first assigned element as the target since slots use `display: contents`
     // and positioning can't be calculated on them
     if (this.anchorEl instanceof HTMLSlotElement) {
-      this.anchorEl = this.anchorEl.assignedElements({ flatten: true })[0] as HTMLElement;
+      this.anchorEl = (this.anchorEl.assignedElements({ flatten: true })[0] as HTMLElement) ?? this.anchorEl;
     }
 
     if (!this.anchorEl) {

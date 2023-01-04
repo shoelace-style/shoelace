@@ -53,7 +53,7 @@ export default class SlTreeItem extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   static isTreeItem(node: Node) {
-    return node instanceof Element && node.getAttribute('role') === 'treeitem';
+    return node instanceof Element && node.getAttribute && node.getAttribute('role') === 'treeitem';
   }
 
   private readonly localize = new LocalizeController(this);

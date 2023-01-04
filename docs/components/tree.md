@@ -404,11 +404,11 @@ Decorative icons can be used before labels to provide hints for each node.
         draft.txt
       </sl-tree-item>
       <sl-tree-item>
-        <sl-icon name="file-pdf"></sl-icon>
+        <sl-icon name="document-arrow-down"></sl-icon>
         final.pdf
       </sl-tree-item>
       <sl-tree-item>
-        <sl-icon name="file-bar-graph"></sl-icon>
+        <sl-icon name="document-chart-bar"></sl-icon>
         sales.xls
       </sl-tree-item>
     </sl-tree-item>
