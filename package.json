@@ -51,9 +51,9 @@
     "lint:fix": "eslint src --max-warnings 0 --fix",
     "ts-check": "tsc --noEmit --project ./tsconfig.json",
     "create": "plop --plopfile scripts/plop/plopfile.js",
-    "test": "web-test-runner",
-    "test:component": "npm run test -- --watch --group",
-    "test:watch": "web-test-runner --watch",
+    "test": "web-test-runner --group default",
+    "test:component": "web-test-runner -- --watch --group",
+    "test:watch": "web-test-runner --watch --group default",
     "spellcheck": "cspell \"**/*.{js,ts,json,html,css,md}\" --no-progress",
     "list-outdated-dependencies": "npm-check-updates --format repo --peer",
     "update-dependencies": "npm-check-updates --peer -u && npm install && npm run lint:fix && npm run prettier && npm run verify"
