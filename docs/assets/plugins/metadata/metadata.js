@@ -57,7 +57,18 @@
             `;
           })
           .join('')}
-      </tbody>
+
+          <tr>
+            <td class="nowrap"><code>updateComplete</code></td>
+            <td>
+              A promise that resolves when the component has
+              <a href="/getting-started/usage?id=component-rendering-and-updating">finished updating</a>.
+            </td>
+            <td></td>
+            <td><code>Promise&lt;Boolean&gt;</td>
+            <td></td>
+          </tr>
+        </tbody>
     `;
 
     return table.outerHTML;
