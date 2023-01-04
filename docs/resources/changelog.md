@@ -24,6 +24,7 @@ This release includes a complete rewrite of `<sl-select>` to improve accessibili
 - Added Traditional Chinese translation [#1086](https://github.com/shoelace-style/shoelace/pull/1086)
 - Fixed a bug in `<sl-tree-item>` where the checked/indeterminate states could get out of sync when using the `multiple` option [#1076](https://github.com/shoelace-style/shoelace/issues/1076)
 - Fixed a bug in `<sl-tree>` that caused `sl-selection-change` to emit before the DOM updated [#1096](https://github.com/shoelace-style/shoelace/issues/1096)
+- Fixed a bug that prevented `<sl-switch>` from submitting a default value of `on` when no value was provided [#1103](https://github.com/shoelace-style/shoelace/discussions/1103)
 - Reorganized all components to make class structures more consistent
 - Updated non-public fields to use the `private` keyword (these were previously private only by convention, but now TypeScript will warn you)
 - Updated the hover style of `<sl-menu-item>` to be consistent with `<sl-option>`

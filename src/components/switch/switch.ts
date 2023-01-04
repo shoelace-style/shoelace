@@ -39,7 +39,7 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
 
   // @ts-expect-error -- Controller is currently unused
   private readonly formSubmitController = new FormSubmitController(this, {
-    value: (control: SlSwitch) => (control.checked ? control.value : undefined),
+    value: (control: SlSwitch) => (control.checked ? control.value || 'on' : undefined),
     defaultValue: (control: SlSwitch) => control.defaultChecked,
     setValue: (control: SlSwitch, checked: boolean) => (control.checked = checked)
   });
