@@ -4,7 +4,6 @@ import { globbySync } from 'globby';
 
 export default {
   rootDir: '.',
-  files: 'src/**/*.test.ts',
   concurrentBrowsers: 3,
   nodeResolve: true,
   plugins: [
