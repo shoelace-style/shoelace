@@ -329,6 +329,16 @@ render() {
 
 This results in a consistent, easy to understand structure for parts. In this example, the `icon` part will target the host element and the `icon__base` part will target the icon's `base` part.
 
+### Dependencies
+
+Many Shoelace components use other Shoelace components internally. For example, `<sl-button>` uses both `<sl-icon>` and `<sl-spinner>` for its caret icon and loading state, respectively. Since these components appear in the button's shadow root, they are considered dependencies of button. Since dependencies are automatically loaded, users only need to import the button and everything will work as expected.
+
+Contrast this to `<sl-select>` and `<sl-option>`. At first, one might assume that Option is a dependency of Select. After all, you can't really use `<sl-select>` without at least one `<sl-option>`. However, Option _is not_ a dependency of Select! The reason is because no Option is rendered in the Select's shadow root. Since the user provides the Options, it's up to them to import both `<sl-select>` and `<sl-option>`.
+
+It is often deemed convenient to auto-load Select + Option, Menu + Menu Item, etc. Although some components are designed to work together, they're technically not dependencies so eagerly loading them may not be desirable. For example, what if someone wants to roll their own `<sl-option>` element with a superset of features? They wouldn't be able to if Shoelace automatically imported it. The user should decide what gets registered, in this case, because the "parent" element doesn't technically require it to render.
+
+TL;DR – a component is a dependency if and only if it's rendered inside another component's shadow root.
+
 ### Form Controls
 
 Form controls should support submission and validation through the following conventions:
