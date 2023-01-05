@@ -250,6 +250,7 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
 
   private handleInput() {
     this.value = this.input.value;
+    this.invalid = !this.checkValidity();
     this.emit('sl-input');
   }
 
@@ -297,8 +298,8 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   }
 
   @watch('value', { waitUntilFirstUpdate: true })
-  handleValueChange() {
-    this.input.value = this.value; // force a sync update
+  async handleValueChange() {
+    await this.updateComplete;
     this.invalid = !this.checkValidity();
   }
 

@@ -28,6 +28,7 @@ This release includes a complete rewrite of `<sl-select>` to improve accessibili
 - Fixed a bug in `<sl-tree>` that caused `sl-selection-change` to emit before the DOM updated [#1096](https://github.com/shoelace-style/shoelace/issues/1096)
 - Fixed a bug that prevented `<sl-switch>` from submitting a default value of `on` when no value was provided [#1103](https://github.com/shoelace-style/shoelace/discussions/1103)
 - Fixed a bug in `<sl-textarea>` that caused the scrollbar to show sometimes when using `resize="auto"`
+- Fixed a bug in `<sl-input>` and `<sl-textarea>` that caused its validation states to be out of sync in some cases [#1063](https://github.com/shoelace-style/shoelace/issues/1063)
 - Reorganized all components to make class structures more consistent
 - Updated some incorrect default values for design tokens in the docs [#1097](https://github.com/shoelace-style/shoelace/issues/1097)
 - Updated non-public fields to use the `private` keyword (these were previously private only by convention, but now TypeScript will warn you)

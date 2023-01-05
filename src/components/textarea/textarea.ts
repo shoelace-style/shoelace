@@ -190,10 +190,10 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
   }
 
   @watch('value', { waitUntilFirstUpdate: true })
-  handleValueChange() {
-    this.input.value = this.value; // force a sync update
+  async handleValueChange() {
+    await this.updateComplete;
     this.invalid = !this.checkValidity();
-    this.updateComplete.then(() => this.setTextareaHeight());
+    this.setTextareaHeight();
   }
 
   /** Sets focus on the textarea. */
