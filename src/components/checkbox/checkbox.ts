@@ -81,7 +81,7 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
   @defaultValue('checked') defaultChecked = false;
 
   firstUpdated() {
-    this.invalid = !this.input.checkValidity();
+    this.invalid = !this.checkValidity();
   }
 
   private handleClick() {
@@ -108,7 +108,7 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
   handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
     this.input.disabled = this.disabled;
-    this.invalid = !this.input.checkValidity();
+    this.invalid = !this.checkValidity();
   }
 
   @watch('checked', { waitUntilFirstUpdate: true })
@@ -116,7 +116,7 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
   handleStateChange() {
     this.input.checked = this.checked; // force a sync update
     this.input.indeterminate = this.indeterminate; // force a sync update
-    this.invalid = !this.input.checkValidity();
+    this.invalid = !this.checkValidity();
   }
 
   /** Simulates a click on the checkbox. */
@@ -150,7 +150,7 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
    */
   setCustomValidity(message: string) {
     this.input.setCustomValidity(message);
-    this.invalid = !this.input.checkValidity();
+    this.invalid = !this.checkValidity();
   }
 
   render() {

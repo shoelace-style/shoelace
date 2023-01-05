@@ -175,7 +175,7 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
 
   @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
-    this.invalid = !this.input.checkValidity();
+    this.invalid = !this.checkValidity();
 
     // The value may have constraints, so we set the native control's value and sync it back to ensure it adhere's to
     // min, max, and step properly
@@ -189,7 +189,7 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
   handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
     this.input.disabled = this.disabled;
-    this.invalid = !this.input.checkValidity();
+    this.invalid = !this.checkValidity();
   }
 
   @watch('hasTooltip', { waitUntilFirstUpdate: true })
@@ -242,7 +242,7 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
   setCustomValidity(message: string) {
     this.input.setCustomValidity(message);
-    this.invalid = !this.input.checkValidity();
+    this.invalid = !this.checkValidity();
   }
 
   render() {

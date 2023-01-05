@@ -139,7 +139,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
   }
 
   firstUpdated() {
-    this.invalid = !this.input.checkValidity();
+    this.invalid = !this.checkValidity();
   }
 
   disconnectedCallback() {
@@ -181,7 +181,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
   handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
     this.input.disabled = this.disabled;
-    this.invalid = !this.input.checkValidity();
+    this.invalid = !this.checkValidity();
   }
 
   @watch('rows', { waitUntilFirstUpdate: true })
@@ -192,7 +192,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
   @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
     this.input.value = this.value; // force a sync update
-    this.invalid = !this.input.checkValidity();
+    this.invalid = !this.checkValidity();
     this.updateComplete.then(() => this.setTextareaHeight());
   }
 
@@ -267,7 +267,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
   setCustomValidity(message: string) {
     this.input.setCustomValidity(message);
-    this.invalid = !this.input.checkValidity();
+    this.invalid = !this.checkValidity();
   }
 
   render() {

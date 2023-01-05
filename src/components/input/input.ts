@@ -220,7 +220,7 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   }
 
   firstUpdated() {
-    this.invalid = !this.input.checkValidity();
+    this.invalid = !this.checkValidity();
   }
 
   private handleBlur() {
@@ -285,7 +285,7 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   handleDisabledChange() {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
     this.input.disabled = this.disabled;
-    this.invalid = !this.input.checkValidity();
+    this.invalid = !this.checkValidity();
   }
 
   @watch('step', { waitUntilFirstUpdate: true })
@@ -293,13 +293,13 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
     // If step changes, the value may become invalid so we need to recheck after the update. We set the new step
     // imperatively so we don't have to wait for the next render to report the updated validity.
     this.input.step = String(this.step);
-    this.invalid = !this.input.checkValidity();
+    this.invalid = !this.checkValidity();
   }
 
   @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
     this.input.value = this.value; // force a sync update
-    this.invalid = !this.input.checkValidity();
+    this.invalid = !this.checkValidity();
   }
 
   /** Sets focus on the input. */
@@ -377,7 +377,7 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
   setCustomValidity(message: string) {
     this.input.setCustomValidity(message);
-    this.invalid = !this.input.checkValidity();
+    this.invalid = !this.checkValidity();
   }
 
   render() {
