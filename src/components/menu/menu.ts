@@ -31,7 +31,7 @@ export default class SlMenu extends ShoelaceElement {
 
   private getAllItems(options: { includeDisabled: boolean } = { includeDisabled: true }) {
     return [...this.defaultSlot.assignedElements({ flatten: true })].filter((el: HTMLElement) => {
-      if (el.getAttribute('role') !== 'menuitem') {
+      if (!this.isMenuItem(el)) {
         return false;
       }
 
@@ -48,6 +48,10 @@ export default class SlMenu extends ShoelaceElement {
     const item = target.closest('sl-menu-item');
 
     if (item?.disabled === false) {
+      if (item.type === 'checkbox') {
+        item.checked = !item.checked;
+      }
+
       this.emit('sl-select', { detail: { item } });
     }
   }
@@ -102,7 +106,7 @@ export default class SlMenu extends ShoelaceElement {
   private handleMouseDown(event: MouseEvent) {
     const target = event.target as HTMLElement;
 
-    if (target.getAttribute('role') === 'menuitem') {
+    if (this.isMenuItem(target)) {
       this.setCurrentItem(target as SlMenuItem);
     }
   }
@@ -114,6 +118,13 @@ export default class SlMenu extends ShoelaceElement {
     if (items.length > 0) {
       this.setCurrentItem(items[0]);
     }
+  }
+
+  private isMenuItem(item: HTMLElement) {
+    return (
+      item.tagName.toLowerCase() === 'sl-menu-item' ||
+      ['menuitem', 'menuitemcheckbox', 'menuitemradio'].includes(item.getAttribute('role') ?? '')
+    );
   }
 
   /**

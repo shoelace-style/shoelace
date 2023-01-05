@@ -21,6 +21,9 @@ This release includes a complete rewrite of `<sl-select>` to improve accessibili
 - 🚨 BREAKING: removed the `sl-label-change` event from `<sl-menu-item>` (listen for `slotchange` instead)
 - 🚨 BREAKING: removed type to select logic from `<sl-menu>` (this was added specifically for `<sl-select>` which no longer uses `<sl-menu>`)
 - 🚨 BREAKING: swatches in `<sl-color-picker>` are no longer present by default (but you can set them using the `swatches` attribute now)
+- 🚨 BREAKING: improved the accessibility of `<sl-menu-item>` so checked items are announced as such
+  - Checkbox menu items must now have `type="checkbox"` before applying the `checked` attribute
+  - Checkbox menu items will now toggle their `checked` state on their own when selected
 - Added the `<sl-option>` component
 - Added Traditional Chinese translation [#1086](https://github.com/shoelace-style/shoelace/pull/1086)
 - Added support for `swatches` to be an attribute of `<sl-color-picker>` so swatches can be defined declaratively (it was previously a property; use a `;` to separate color values)

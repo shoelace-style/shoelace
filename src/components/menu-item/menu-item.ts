@@ -35,6 +35,9 @@ export default class SlMenuItem extends ShoelaceElement {
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
   @query('.menu-item') menuItem: HTMLElement;
 
+  /** The type of menu item to render. To use `checked`, this value must be set to `checkbox`. */
+  @property() type: 'normal' | 'checkbox' = 'normal';
+
   /** Draws the item in a checked state. */
   @property({ type: Boolean, reflect: true }) checked = false;
 
@@ -43,10 +46,6 @@ export default class SlMenuItem extends ShoelaceElement {
 
   /** Draws the menu item in a disabled state, preventing selection. */
   @property({ type: Boolean, reflect: true }) disabled = false;
-
-  firstUpdated() {
-    this.setAttribute('role', 'menuitem');
-  }
 
   private handleDefaultSlotChange() {
     const textLabel = this.getTextLabel();
@@ -66,15 +65,22 @@ export default class SlMenuItem extends ShoelaceElement {
 
   @watch('checked')
   handleCheckedChange() {
-    //
-    // TODO - fix a11y bug
-    //
-    // this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
+    this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
+
+    if (this.checked && this.type !== 'checkbox') {
+      this.checked = false;
+      console.error('The checked attribute can only be used on menu items with type="checkbox"', this);
+    }
   }
 
   @watch('disabled')
   handleDisabledChange() {
     this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
+  }
+
+  @watch('type')
+  handleTypeChange() {
+    this.setAttribute('role', this.type === 'checkbox' ? 'menuitemcheckbox' : 'menuitem');
   }
 
   /** Returns a text label based on the contents of the menu item's default slot. */
