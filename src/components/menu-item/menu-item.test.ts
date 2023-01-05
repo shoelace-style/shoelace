@@ -9,6 +9,9 @@ describe('<sl-menu-item>', () => {
         <sl-menu-item>Item 1</sl-menu-item>
         <sl-menu-item>Item 2</sl-menu-item>
         <sl-menu-item>Item 3</sl-menu-item>
+        <sl-divider></sl-divider>
+        <sl-menu-item type="checkbox" checked>Checked</sl-menu-item>
+        <sl-menu-item type="checkbox">Unchecked</sl-menu-item>
       </sl-menu>
     `);
     await expect(el).to.be.accessible();

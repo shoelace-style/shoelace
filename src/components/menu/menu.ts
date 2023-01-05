@@ -29,13 +29,9 @@ export default class SlMenu extends ShoelaceElement {
     this.setAttribute('role', 'menu');
   }
 
-  private getAllItems(options: { includeDisabled: boolean } = { includeDisabled: true }) {
+  private getAllItems() {
     return [...this.defaultSlot.assignedElements({ flatten: true })].filter((el: HTMLElement) => {
       if (!this.isMenuItem(el)) {
-        return false;
-      }
-
-      if (!options.includeDisabled && (el as SlMenuItem).disabled) {
         return false;
       }
 
@@ -73,7 +69,7 @@ export default class SlMenu extends ShoelaceElement {
 
     // Move the selection when pressing down or up
     if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
-      const items = this.getAllItems({ includeDisabled: false });
+      const items = this.getAllItems();
       const activeItem = this.getCurrentItem();
       let index = activeItem ? items.indexOf(activeItem) : 0;
 
@@ -112,7 +108,7 @@ export default class SlMenu extends ShoelaceElement {
   }
 
   private handleSlotChange() {
-    const items = this.getAllItems({ includeDisabled: false });
+    const items = this.getAllItems();
 
     // Reset the roving tab index when the slotted items change
     if (items.length > 0) {
@@ -132,7 +128,7 @@ export default class SlMenu extends ShoelaceElement {
    * The menu item may or may not have focus, but for keyboard interaction purposes it's considered the "active" item.
    */
   getCurrentItem() {
-    return this.getAllItems({ includeDisabled: false }).find(i => i.getAttribute('tabindex') === '0');
+    return this.getAllItems().find(i => i.getAttribute('tabindex') === '0');
   }
 
   /**
@@ -140,12 +136,11 @@ export default class SlMenu extends ShoelaceElement {
    * `tabindex="-1"` to all other items. This method must be called prior to setting focus on a menu item.
    */
   setCurrentItem(item: SlMenuItem) {
-    const items = this.getAllItems({ includeDisabled: false });
-    const activeItem = item.disabled ? items[0] : item;
+    const items = this.getAllItems();
 
     // Update tab indexes
     items.forEach(i => {
-      i.setAttribute('tabindex', i === activeItem ? '0' : '-1');
+      i.setAttribute('tabindex', i === item ? '0' : '-1');
     });
   }
 

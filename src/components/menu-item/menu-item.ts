@@ -65,11 +65,18 @@ export default class SlMenuItem extends ShoelaceElement {
 
   @watch('checked')
   handleCheckedChange() {
-    this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
-
+    // For proper accessibility, users have to use type="checkbox" to use the checked attribute
     if (this.checked && this.type !== 'checkbox') {
       this.checked = false;
       console.error('The checked attribute can only be used on menu items with type="checkbox"', this);
+      return;
+    }
+
+    // Only checkbox types can receive the aria-checked attribute
+    if (this.type === 'checkbox') {
+      this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
+    } else {
+      this.removeAttribute('aria-checked');
     }
   }
 
@@ -80,7 +87,13 @@ export default class SlMenuItem extends ShoelaceElement {
 
   @watch('type')
   handleTypeChange() {
-    this.setAttribute('role', this.type === 'checkbox' ? 'menuitemcheckbox' : 'menuitem');
+    if (this.type === 'checkbox') {
+      this.setAttribute('role', 'menuitemcheckbox');
+      this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
+    } else {
+      this.setAttribute('role', 'menuitem');
+      this.removeAttribute('aria-checked');
+    }
   }
 
   /** Returns a text label based on the contents of the menu item's default slot. */
