@@ -18,7 +18,7 @@ import type { CSSResultGroup, PropertyValueMap } from 'lit';
  * @summary A tree item serves as a hierarchical node that lives inside a [tree](/components/tree).
  *
  * @since 2.0
- * @status experimental
+ * @status stable
  *
  * @dependency sl-checkbox
  * @dependency sl-icon
@@ -81,7 +81,7 @@ export default class SlTreeItem extends ShoelaceElement {
   @query('.tree-item__children') childrenContainer: HTMLDivElement;
   @query('.tree-item__expand-button slot') expandButtonSlot: HTMLSlotElement;
 
-  connectedCallback(): void {
+  connectedCallback() {
     super.connectedCallback();
 
     this.setAttribute('role', 'treeitem');
@@ -98,6 +98,56 @@ export default class SlTreeItem extends ShoelaceElement {
 
     this.isLeaf = !this.lazy && this.getChildrenItems().length === 0;
     this.handleExpandedChange();
+  }
+
+  private async animateCollapse() {
+    this.emit('sl-collapse');
+
+    await stopAnimations(this.childrenContainer);
+
+    const { keyframes, options } = getAnimation(this, 'tree-item.collapse', { dir: this.localize.dir() });
+    await animateTo(
+      this.childrenContainer,
+      shimKeyframesHeightAuto(keyframes, this.childrenContainer.scrollHeight),
+      options
+    );
+    this.childrenContainer.hidden = true;
+
+    this.emit('sl-after-collapse');
+  }
+
+  // Checks whether the item is nested into an item
+  private isNestedItem(): boolean {
+    const parent = this.parentElement;
+    return !!parent && SlTreeItem.isTreeItem(parent);
+  }
+
+  private handleChildrenSlotChange() {
+    this.loading = false;
+    this.isLeaf = !this.lazy && this.getChildrenItems().length === 0;
+  }
+
+  protected willUpdate(changedProperties: PropertyValueMap<SlTreeItem> | Map<PropertyKey, unknown>) {
+    if (changedProperties.has('selected') && !changedProperties.has('indeterminate')) {
+      this.indeterminate = false;
+    }
+  }
+
+  private async animateExpand() {
+    this.emit('sl-expand');
+
+    await stopAnimations(this.childrenContainer);
+    this.childrenContainer.hidden = false;
+
+    const { keyframes, options } = getAnimation(this, 'tree-item.expand', { dir: this.localize.dir() });
+    await animateTo(
+      this.childrenContainer,
+      shimKeyframesHeightAuto(keyframes, this.childrenContainer.scrollHeight),
+      options
+    );
+    this.childrenContainer.style.height = 'auto';
+
+    this.emit('sl-after-expand');
   }
 
   @watch('loading', { waitUntilFirstUpdate: true })
@@ -148,63 +198,13 @@ export default class SlTreeItem extends ShoelaceElement {
     this.emit('sl-lazy-change');
   }
 
-  private async animateExpand() {
-    this.emit('sl-expand');
-
-    await stopAnimations(this.childrenContainer);
-    this.childrenContainer.hidden = false;
-
-    const { keyframes, options } = getAnimation(this, 'tree-item.expand', { dir: this.localize.dir() });
-    await animateTo(
-      this.childrenContainer,
-      shimKeyframesHeightAuto(keyframes, this.childrenContainer.scrollHeight),
-      options
-    );
-    this.childrenContainer.style.height = 'auto';
-
-    this.emit('sl-after-expand');
-  }
-
-  private async animateCollapse() {
-    this.emit('sl-collapse');
-
-    await stopAnimations(this.childrenContainer);
-
-    const { keyframes, options } = getAnimation(this, 'tree-item.collapse', { dir: this.localize.dir() });
-    await animateTo(
-      this.childrenContainer,
-      shimKeyframesHeightAuto(keyframes, this.childrenContainer.scrollHeight),
-      options
-    );
-    this.childrenContainer.hidden = true;
-
-    this.emit('sl-after-collapse');
-  }
-
-  // Gets all the nested tree items
+  /** Gets all the nested tree items in this node. */
   getChildrenItems({ includeDisabled = true }: { includeDisabled?: boolean } = {}): SlTreeItem[] {
     return this.childrenSlot
       ? ([...this.childrenSlot.assignedElements({ flatten: true })].filter(
           (item: SlTreeItem) => SlTreeItem.isTreeItem(item) && (includeDisabled || !item.disabled)
         ) as SlTreeItem[])
       : [];
-  }
-
-  // Checks whether the item is nested into an item
-  private isNestedItem(): boolean {
-    const parent = this.parentElement;
-    return !!parent && SlTreeItem.isTreeItem(parent);
-  }
-
-  handleChildrenSlotChange() {
-    this.loading = false;
-    this.isLeaf = !this.lazy && this.getChildrenItems().length === 0;
-  }
-
-  protected willUpdate(changedProperties: PropertyValueMap<SlTreeItem> | Map<PropertyKey, unknown>): void {
-    if (changedProperties.has('selected') && !changedProperties.has('indeterminate')) {
-      this.indeterminate = false;
-    }
   }
 
   render() {

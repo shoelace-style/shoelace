@@ -1,24 +1,22 @@
 import { expect, fixture, html, waitUntil, aTimeout } from '@open-wc/testing';
 import sinon from 'sinon';
-import type SlMenuItem from './menu-item';
+import type SlOption from './option';
 
-describe('<sl-menu-item>', () => {
+describe('<sl-option>', () => {
   it('passes accessibility test', async () => {
-    const el = await fixture<SlMenuItem>(html`
-      <sl-menu>
-        <sl-menu-item>Item 1</sl-menu-item>
-        <sl-menu-item>Item 2</sl-menu-item>
-        <sl-menu-item>Item 3</sl-menu-item>
-        <sl-divider></sl-divider>
-        <sl-menu-item type="checkbox" checked>Checked</sl-menu-item>
-        <sl-menu-item type="checkbox">Unchecked</sl-menu-item>
-      </sl-menu>
+    const el = await fixture<SlOption>(html`
+      <sl-select label="Select one">
+        <sl-option value="1">Option 1</sl-option>
+        <sl-option value="2">Option 2</sl-option>
+        <sl-option value="3">Option 3</sl-option>
+        <sl-option value="4" disabled>Disabled</sl-option>
+      </sl-select>
     `);
     await expect(el).to.be.accessible();
   });
 
   it('default properties', async () => {
-    const el = await fixture<SlMenuItem>(html` <sl-menu-item>Test</sl-menu-item> `);
+    const el = await fixture<SlOption>(html` <sl-option>Test</sl-option> `);
 
     expect(el.value).to.equal('');
     expect(el.disabled).to.be.false;
@@ -26,20 +24,15 @@ describe('<sl-menu-item>', () => {
   });
 
   it('changes aria attributes', async () => {
-    const el = await fixture<SlMenuItem>(html` <sl-menu-item>Test</sl-menu-item> `);
+    const el = await fixture<SlOption>(html` <sl-option>Test</sl-option> `);
 
     el.disabled = true;
     await aTimeout(100);
     expect(el.getAttribute('aria-disabled')).to.equal('true');
   });
 
-  it('get text label', async () => {
-    const el = await fixture<SlMenuItem>(html` <sl-menu-item>Test</sl-menu-item> `);
-    expect(el.getTextLabel()).to.equal('Test');
-  });
-
   it('emits the slotchange event when the label changes', async () => {
-    const el = await fixture<SlMenuItem>(html` <sl-menu-item>Text</sl-menu-item> `);
+    const el = await fixture<SlOption>(html` <sl-option>Text</sl-option> `);
     const slotChangeHandler = sinon.spy();
 
     el.addEventListener('slotchange', slotChangeHandler);

@@ -45,6 +45,7 @@
   - [Menu](/components/menu)
   - [Menu Item](/components/menu-item)
   - [Menu Label](/components/menu-label)
+  - [Option](/components/option)
   - [Progress Bar](/components/progress-bar)
   - [Progress Ring](/components/progress-ring)
   - [QR Code](/components/qr-code)

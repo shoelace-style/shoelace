@@ -34,7 +34,7 @@ export default class SlInclude extends ShoelaceElement {
    */
   @property({ attribute: 'allow-scripts', type: Boolean }) allowScripts = false;
 
-  executeScript(script: HTMLScriptElement) {
+  private executeScript(script: HTMLScriptElement) {
     // Create a copy of the script and swap it out so the browser executes it
     const newScript = document.createElement('script');
     [...script.attributes].forEach(attr => newScript.setAttribute(attr.name, attr.value));

@@ -44,12 +44,12 @@ import type { CSSResultGroup } from 'lit';
 export default class SlTooltip extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
+  private hoverTimeout: number;
+  private readonly localize = new LocalizeController(this);
+
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
   @query('.tooltip__body') body: HTMLElement;
   @query('sl-popup') popup: SlPopup;
-
-  private hoverTimeout: number;
-  private readonly localize = new LocalizeController(this);
 
   /** The tooltip's content. If you need to display HTML, use the `content` slot instead. */
   @property() content = '';
@@ -137,46 +137,13 @@ export default class SlTooltip extends ShoelaceElement {
     this.removeEventListener('mouseout', this.handleMouseOut);
   }
 
-  /** Shows the tooltip. */
-  async show() {
-    if (this.open) {
-      return undefined;
-    }
-
-    this.open = true;
-    return waitForEvent(this, 'sl-after-show');
-  }
-
-  /** Hides the tooltip */
-  async hide() {
-    if (!this.open) {
-      return undefined;
-    }
-
-    this.open = false;
-    return waitForEvent(this, 'sl-after-hide');
-  }
-
-  getTarget() {
-    // Get the first child that isn't a <style> or content slot
-    const target = [...this.children].find(
-      el => el.tagName.toLowerCase() !== 'style' && el.getAttribute('slot') !== 'content'
-    );
-
-    if (!target) {
-      throw new Error('Invalid tooltip target: no child element was found.');
-    }
-
-    return target as HTMLElement;
-  }
-
-  handleBlur() {
+  private handleBlur() {
     if (this.hasTrigger('focus')) {
       this.hide();
     }
   }
 
-  handleClick() {
+  private handleClick() {
     if (this.hasTrigger('click')) {
       if (this.open) {
         this.hide();
@@ -186,13 +153,13 @@ export default class SlTooltip extends ShoelaceElement {
     }
   }
 
-  handleFocus() {
+  private handleFocus() {
     if (this.hasTrigger('focus')) {
       this.show();
     }
   }
 
-  handleKeyDown(event: KeyboardEvent) {
+  private handleKeyDown(event: KeyboardEvent) {
     // Pressing escape when the target element has focus should dismiss the tooltip
     if (this.open && event.key === 'Escape') {
       event.stopPropagation();
@@ -200,7 +167,7 @@ export default class SlTooltip extends ShoelaceElement {
     }
   }
 
-  handleMouseOver() {
+  private handleMouseOver() {
     if (this.hasTrigger('hover')) {
       const delay = parseDuration(getComputedStyle(this).getPropertyValue('--show-delay'));
       clearTimeout(this.hoverTimeout);
@@ -208,12 +175,17 @@ export default class SlTooltip extends ShoelaceElement {
     }
   }
 
-  handleMouseOut() {
+  private handleMouseOut() {
     if (this.hasTrigger('hover')) {
       const delay = parseDuration(getComputedStyle(this).getPropertyValue('--hide-delay'));
       clearTimeout(this.hoverTimeout);
       this.hoverTimeout = window.setTimeout(() => this.hide(), delay);
     }
+  }
+
+  private hasTrigger(triggerType: string) {
+    const triggers = this.trigger.split(' ');
+    return triggers.includes(triggerType);
   }
 
   @watch('open', { waitUntilFirstUpdate: true })
@@ -266,9 +238,24 @@ export default class SlTooltip extends ShoelaceElement {
     }
   }
 
-  hasTrigger(triggerType: string) {
-    const triggers = this.trigger.split(' ');
-    return triggers.includes(triggerType);
+  /** Shows the tooltip. */
+  async show() {
+    if (this.open) {
+      return undefined;
+    }
+
+    this.open = true;
+    return waitForEvent(this, 'sl-after-show');
+  }
+
+  /** Hides the tooltip */
+  async hide() {
+    if (!this.open) {
+      return undefined;
+    }
+
+    this.open = false;
+    return waitForEvent(this, 'sl-after-hide');
   }
 
   render() {

@@ -149,6 +149,36 @@ A clever way to use this method is to hide the `<body>` with `opacity: 0` and ad
 </script>
 ```
 
+## Component Rendering and Updating
+
+Shoelace components are built with [Lit](https://lit.dev/), a tiny library that makes authoring custom elements easier, more maintainable, and a lot of fun! As a Shoelace user, here is some helpful information about rendering and updating you should probably be aware of.
+
+To optimize performance and reduce re-renders, Lit batches component updates. This means changing multiple attributes or properties at the same time will result in just a single re-render. In most cases, this isn't an issue, but there may be times you'll need to wait for the component to update before continuing.
+
+Consider this example. We're going to change the `checked` property of the checkbox and observe its corresponding `checked` attribute, which happens to reflect.
+
+```js
+const checkbox = document.querySelector('sl-checkbox');
+checkbox.checked = true;
+
+console.log(checkbox.hasAttribute('checked')); // false
+```
+
+Most devs will expect this to be `true` instead of `false`, but the component hasn't had a chance to re-render yet so the attribute doesn't exist when `hasAttribute()` is called. Since changes are batched, we need to wait for the update before proceeding. This can be done using the `updateComplete` property, which is available on all Lit-based components.
+
+```js
+const checkbox = document.querySelector('sl-checkbox');
+checkbox.checked = true;
+
+checkbox.updateComplete.then(() => {
+  console.log(checkbox.hasAttribute('checked')); // true
+});
+```
+
+This time we see an empty string, which means the boolean attribute is now present!
+
+?> Avoid using `setTimeout()` or `requestAnimationFrame()` in situations like this. They might work, but it's far more reliable to use `updateComplete` instead.
+
 ## Code Completion
 
 ### VS Code

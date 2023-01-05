@@ -8,38 +8,51 @@ import SlTreeItem from '../tree-item/tree-item';
 import styles from './tree.styles';
 import type { CSSResultGroup } from 'lit';
 
-function syncCheckboxes(changedTreeItem: SlTreeItem) {
+function syncCheckboxes(changedTreeItem: SlTreeItem, initialSync = false) {
+  function syncParentItem(treeItem: SlTreeItem) {
+    const children = treeItem.getChildrenItems({ includeDisabled: false });
+
+    if (children.length) {
+      const allChecked = children.every(item => item.selected);
+      const allUnchecked = children.every(item => !item.selected && !item.indeterminate);
+
+      treeItem.selected = allChecked;
+      treeItem.indeterminate = !allChecked && !allUnchecked;
+    }
+  }
+
   function syncAncestors(treeItem: SlTreeItem) {
     const parentItem: SlTreeItem | null = treeItem.parentElement as SlTreeItem;
 
     if (SlTreeItem.isTreeItem(parentItem)) {
-      const children = parentItem.getChildrenItems({ includeDisabled: false });
-      const allChecked = !!children.length && children.every(item => item.selected);
-      const allUnchecked = children.every(item => !item.selected && !item.indeterminate);
-
-      parentItem.selected = allChecked;
-      parentItem.indeterminate = !allChecked && !allUnchecked;
-
+      syncParentItem(parentItem);
       syncAncestors(parentItem);
     }
   }
 
   function syncDescendants(treeItem: SlTreeItem) {
     for (const childItem of treeItem.getChildrenItems()) {
-      childItem.selected = !childItem.disabled && treeItem.selected;
+      childItem.selected = initialSync
+        ? treeItem.selected || childItem.selected
+        : !childItem.disabled && treeItem.selected;
+
       syncDescendants(childItem);
+    }
+
+    if (initialSync) {
+      syncParentItem(treeItem);
     }
   }
 
-  syncAncestors(changedTreeItem);
   syncDescendants(changedTreeItem);
+  syncAncestors(changedTreeItem);
 }
 
 /**
  * @summary Trees allow you to display a hierarchical list of selectable [tree items](/components/tree-item). Items with children can be expanded and collapsed as desired by the user.
  *
  * @since 2.0
- * @status experimental
+ * @status stable
  *
  * @event {{ selection: TreeItem[] }} sl-selection-change - Emitted when a tree item is selected or deselected.
  *
@@ -80,6 +93,10 @@ export default class SlTree extends ShoelaceElement {
 
   async connectedCallback() {
     super.connectedCallback();
+    this.handleTreeChanged = this.handleTreeChanged.bind(this);
+    this.handleFocusIn = this.handleFocusIn.bind(this);
+    this.handleFocusOut = this.handleFocusOut.bind(this);
+
     this.setAttribute('role', 'tree');
     this.setAttribute('tabindex', '0');
 
@@ -88,6 +105,7 @@ export default class SlTree extends ShoelaceElement {
     this.addEventListener('sl-lazy-change', this.handleSlotChange);
 
     await this.updateComplete;
+
     this.mutationObserver = new MutationObserver(this.handleTreeChanged);
     this.mutationObserver.observe(this, { childList: true, subtree: true });
   }
@@ -96,6 +114,7 @@ export default class SlTree extends ShoelaceElement {
     super.disconnectedCallback();
 
     this.mutationObserver.disconnect();
+
     this.removeEventListener('focusin', this.handleFocusIn);
     this.removeEventListener('focusout', this.handleFocusOut);
     this.removeEventListener('sl-lazy-change', this.handleSlotChange);
@@ -140,7 +159,7 @@ export default class SlTree extends ShoelaceElement {
       });
   };
 
-  handleTreeChanged = (mutations: MutationRecord[]) => {
+  private handleTreeChanged(mutations: MutationRecord[]) {
     for (const mutation of mutations) {
       const addedNodes: SlTreeItem[] = [...mutation.addedNodes].filter(SlTreeItem.isTreeItem) as SlTreeItem[];
       const removedNodes = [...mutation.removedNodes].filter(SlTreeItem.isTreeItem) as SlTreeItem[];
@@ -152,20 +171,9 @@ export default class SlTree extends ShoelaceElement {
         this.focusItem(this.getFocusableItems()[0]);
       }
     }
-  };
-
-  @watch('selection')
-  handleSelectionChange() {
-    const items = this.getAllTreeItems();
-
-    this.setAttribute('aria-multiselectable', this.selection === 'multiple' ? 'true' : 'false');
-
-    for (const item of items) {
-      item.selectable = this.selection === 'multiple';
-    }
   }
 
-  syncTreeItems(selectedItem: SlTreeItem) {
+  private syncTreeItems(selectedItem: SlTreeItem) {
     const items = this.getAllTreeItems();
 
     if (this.selection === 'multiple') {
@@ -179,7 +187,7 @@ export default class SlTree extends ShoelaceElement {
     }
   }
 
-  selectItem(selectedItem: SlTreeItem) {
+  private selectItem(selectedItem: SlTreeItem) {
     const previousSelection = [...this.selectedItems];
 
     if (this.selection === 'multiple') {
@@ -203,23 +211,26 @@ export default class SlTree extends ShoelaceElement {
       previousSelection.length !== nextSelection.length ||
       nextSelection.some(item => !previousSelection.includes(item))
     ) {
-      this.emit('sl-selection-change', { detail: { selection: nextSelection } });
+      // Wait for the tree items' DOM to update before emitting
+      Promise.all(nextSelection.map(el => el.updateComplete)).then(() => {
+        this.emit('sl-selection-change', { detail: { selection: nextSelection } });
+      });
     }
   }
 
   // Returns the list of tree items that are selected in the tree.
-  get selectedItems(): SlTreeItem[] {
+  private get selectedItems(): SlTreeItem[] {
     const items = this.getAllTreeItems();
     const isSelected = (item: SlTreeItem) => item.selected;
 
     return items.filter(isSelected);
   }
 
-  getAllTreeItems() {
+  private getAllTreeItems() {
     return [...this.querySelectorAll<SlTreeItem>('sl-tree-item')];
   }
 
-  getFocusableItems() {
+  private getFocusableItems() {
     const items = this.getAllTreeItems();
     const collapsedItems = new Set();
 
@@ -237,11 +248,11 @@ export default class SlTree extends ShoelaceElement {
     });
   }
 
-  focusItem(item?: SlTreeItem | null) {
+  private focusItem(item?: SlTreeItem | null) {
     item?.focus();
   }
 
-  handleKeyDown(event: KeyboardEvent) {
+  private handleKeyDown(event: KeyboardEvent) {
     if (!['ArrowDown', 'ArrowUp', 'ArrowRight', 'ArrowLeft', 'Home', 'End', 'Enter', ' '].includes(event.key)) {
       return;
     }
@@ -306,7 +317,7 @@ export default class SlTree extends ShoelaceElement {
     }
   }
 
-  handleClick(event: Event) {
+  private handleClick(event: Event) {
     const target = event.target as HTMLElement;
     const treeItem = target.closest('sl-tree-item')!;
     const isExpandButton = event
@@ -324,16 +335,16 @@ export default class SlTree extends ShoelaceElement {
     }
   }
 
-  handleFocusOut = (event: FocusEvent) => {
+  private handleFocusOut(event: FocusEvent) {
     const relatedTarget = event.relatedTarget as HTMLElement;
 
     // If the element that got the focus is not in the tree
     if (!relatedTarget || !this.contains(relatedTarget)) {
       this.tabIndex = 0;
     }
-  };
+  }
 
-  handleFocusIn = (event: FocusEvent) => {
+  private handleFocusIn(event: FocusEvent) {
     const target = event.target as SlTreeItem;
 
     // If the tree has been focused, move the focus to the last focused item
@@ -351,11 +362,31 @@ export default class SlTree extends ShoelaceElement {
 
       target.tabIndex = 0;
     }
-  };
+  }
 
-  handleSlotChange() {
+  private handleSlotChange() {
     const items = this.getAllTreeItems();
     items.forEach(this.initTreeItem);
+  }
+
+  @watch('selection')
+  async handleSelectionChange() {
+    const isSelectionMultiple = this.selection === 'multiple';
+    const items = this.getAllTreeItems();
+
+    this.setAttribute('aria-multiselectable', isSelectionMultiple ? 'true' : 'false');
+
+    for (const item of items) {
+      item.selectable = isSelectionMultiple;
+    }
+
+    if (isSelectionMultiple) {
+      await this.updateComplete;
+
+      [...this.querySelectorAll(':scope > sl-tree-item')].forEach((treeItem: SlTreeItem) =>
+        syncCheckboxes(treeItem, true)
+      );
+    }
   }
 
   render() {

@@ -29,10 +29,10 @@ import type { CSSResultGroup } from 'lit';
 export default class SlAnimatedImage extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
+  @query('.animated-image__animated') animatedImage: HTMLImageElement;
+
   @state() frozenFrame: string;
   @state() isLoaded = false;
-
-  @query('.animated-image__animated') animatedImage: HTMLImageElement;
 
   /** The path to the image to load. */
   @property() src: string;
@@ -43,11 +43,11 @@ export default class SlAnimatedImage extends ShoelaceElement {
   /** Plays the animation. When this attribute is remove, the animation will pause. */
   @property({ type: Boolean, reflect: true }) play: boolean;
 
-  handleClick() {
+  private handleClick() {
     this.play = !this.play;
   }
 
-  handleLoad() {
+  private handleLoad() {
     const canvas = document.createElement('canvas');
     const { width, height } = this.animatedImage;
     canvas.width = width;
@@ -61,7 +61,7 @@ export default class SlAnimatedImage extends ShoelaceElement {
     }
   }
 
-  handleError() {
+  private handleError() {
     this.emit('sl-error');
   }
 

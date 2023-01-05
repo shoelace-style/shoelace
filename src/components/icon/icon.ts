@@ -65,11 +65,6 @@ export default class SlIcon extends ShoelaceElement {
     return this.src;
   }
 
-  // Fetches the icon and redraws it. Used to handle library registrations.
-  redraw() {
-    this.setIcon();
-  }
-
   @watch('label')
   handleLabelChange() {
     const hasLabel = typeof this.label === 'string' && this.label.length > 0;
@@ -127,10 +122,6 @@ export default class SlIcon extends ShoelaceElement {
       // If we can't resolve a URL and an icon was previously set, remove it
       this.svg = '';
     }
-  }
-
-  handleChange() {
-    this.setIcon();
   }
 
   render() {

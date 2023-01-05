@@ -24,9 +24,9 @@ import type { CSSResultGroup } from 'lit';
 export default class SlIconButton extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
-  @state() private hasFocus = false;
-
   @query('.icon-button') button: HTMLButtonElement | HTMLLinkElement;
+
+  @state() private hasFocus = false;
 
   /** The name of the icon to draw. Available names depend on the icon library being used. */
   @property() name?: string;
@@ -58,6 +58,23 @@ export default class SlIconButton extends ShoelaceElement {
   /** Disables the button. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
+  private handleBlur() {
+    this.hasFocus = false;
+    this.emit('sl-blur');
+  }
+
+  private handleFocus() {
+    this.hasFocus = true;
+    this.emit('sl-focus');
+  }
+
+  private handleClick(event: MouseEvent) {
+    if (this.disabled) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }
+
   /** Simulates a click on the icon button. */
   click() {
     this.button.click();
@@ -71,23 +88,6 @@ export default class SlIconButton extends ShoelaceElement {
   /** Removes focus from the icon button. */
   blur() {
     this.button.blur();
-  }
-
-  handleBlur() {
-    this.hasFocus = false;
-    this.emit('sl-blur');
-  }
-
-  handleFocus() {
-    this.hasFocus = true;
-    this.emit('sl-focus');
-  }
-
-  handleClick(event: MouseEvent) {
-    if (this.disabled) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
   }
 
   render() {
