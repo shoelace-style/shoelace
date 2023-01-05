@@ -564,7 +564,7 @@
           result += `
             ## Dependencies
 
-            This component imports the following dependencies.
+            This component automatically imports the following dependencies.
 
             ${createDependenciesList(component.tagName, getAllComponents(metadata))}
           `;
