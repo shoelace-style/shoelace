@@ -1,24 +1,29 @@
 import fs from 'fs';
+import commandLineArgs from 'command-line-args';
 
-let source = fs.readFileSync('default.json', 'utf8');
-let tokens = JSON.parse(source);
+const { theme } = commandLineArgs({ name: 'theme', type: String, defaultValue: 'light' });
 
-let currentTheme = 'light';
-let rootSelectors = [':root', ':host', `.sl-theme-${currentTheme}`];
-let outputLines = [];
+const source = fs.readFileSync('src/themes/default.json', 'utf8');
+const tokens = JSON.parse(source);
 
-let processThemeValues = entries => {
+const rootSelectors = [':root'];
+if (theme == 'light') rootSelectors.push(':host');
+rootSelectors.push(`.sl-theme-${theme}`);
+
+const outputLines = [];
+
+const processThemeValues = entries => {
   entries.forEach(([key, value]) => {
     let suffixComment = '';
 
     if (value.newline) outputLines.push('');
     if (value.comment) suffixComment = ` /* ${value.comment} */`;
-    outputLines.push(`  --sl-${key}: ${value.themes[currentTheme] || value.themes['light']};${suffixComment}`);
+    outputLines.push(`  --sl-${key}: ${value.themes[theme] || value.themes['light']};${suffixComment}`);
   });
 };
 
 outputLines.push(`${rootSelectors.join(',\n')} {`);
-outputLines.push(`  color-scheme: ${currentTheme};`);
+outputLines.push(`  color-scheme: ${theme};`);
 
 Object.entries(tokens).forEach(([key, value]) => {
   outputLines.push(`\n  /*\n   * ${key}\n   */`);
