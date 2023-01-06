@@ -29,6 +29,34 @@ describe('<sl-select>', () => {
     expect(el.displayInput.disabled).to.be.true;
   });
 
+  it('should show a placeholder when no options are selected', async () => {
+    const el = await fixture<SlSelect>(html`
+      <sl-select placeholder="Select one">
+        <sl-option value="option-1">Option 1</sl-option>
+        <sl-option value="option-2">Option 2</sl-option>
+        <sl-option value="option-3">Option 3</sl-option>
+      </sl-select>
+    `);
+    const displayInput = el.shadowRoot!.querySelector<HTMLInputElement>('[part~="display-input"]')!;
+
+    expect(getComputedStyle(displayInput).opacity).to.not.equal('0');
+    expect(displayInput.placeholder).to.equal('Select one');
+  });
+
+  it('should show a placeholder when no options are selected and multiple is set', async () => {
+    const el = await fixture<SlSelect>(html`
+      <sl-select placeholder="Select a few" multiple>
+        <sl-option value="option-1">Option 1</sl-option>
+        <sl-option value="option-2">Option 2</sl-option>
+        <sl-option value="option-3">Option 3</sl-option>
+      </sl-select>
+    `);
+    const displayInput = el.shadowRoot!.querySelector<HTMLInputElement>('[part~="display-input"]')!;
+
+    expect(getComputedStyle(displayInput).opacity).to.not.equal('0');
+    expect(displayInput.placeholder).to.equal('Select a few');
+  });
+
   it('should not allow selection when the option is disabled', async () => {
     const el = await fixture<SlSelect>(html`
       <sl-select value="option-1">

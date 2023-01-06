@@ -487,7 +487,13 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     // Update the value and display label
     if (this.multiple) {
       this.value = this.selectedOptions.map(el => el.value);
-      this.displayLabel = this.localize.term('numOptionsSelected', this.selectedOptions.length);
+
+      if (this.placeholder && this.value.length === 0) {
+        // When no items are selected, keep the value empty so the placeholder shows
+        this.displayLabel = '';
+      } else {
+        this.displayLabel = this.localize.term('numOptionsSelected', this.selectedOptions.length);
+      }
     } else {
       this.value = this.selectedOptions[0]?.value ?? '';
       this.displayLabel = this.selectedOptions[0]?.getTextLabel() ?? '';
@@ -612,6 +618,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
     const hasClearIcon = this.clearable && !this.disabled && this.value.length > 0;
+    const isPlaceholderVisible = this.placeholder && this.value.length === 0;
 
     return html`
       <div
@@ -646,6 +653,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
               'select--disabled': this.disabled,
               'select--multiple': this.multiple,
               'select--focused': this.hasFocus,
+              'select--placeholder-visible': isPlaceholderVisible,
               'select--top': this.placement === 'top',
               'select--bottom': this.placement === 'bottom',
               'select--small': this.size === 'small',

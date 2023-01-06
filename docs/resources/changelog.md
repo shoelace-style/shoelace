@@ -8,6 +8,10 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ?> During the beta period, these restrictions may be relaxed in the event of a mission-critical bug. 🐛
 
+## Next
+
+- Fixed a bug that prevented placeholders from showing in `<sl-select>` when `multiple` was used [#1109](https://github.com/shoelace-style/shoelace/issues/1109)
+
 ## 2.0.0-beta.88
 
 This release includes a complete rewrite of `<sl-select>` to improve accessibility and simplify its internals.
