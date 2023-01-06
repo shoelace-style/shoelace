@@ -315,12 +315,12 @@ describe('<sl-color-picker>', () => {
 
   it('should display a color with opacity when an initial value with opacity is provided', async () => {
     const el = await fixture<SlColorPicker>(html` <sl-color-picker opacity value="#ff000050"></sl-color-picker> `);
-    const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]');
+    const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
     const previewButton = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="preview"]');
     const previewColor = getComputedStyle(previewButton!).getPropertyValue('--preview-color');
 
-    expect(trigger!.style.color).to.equal('rgba(255, 0, 0, 0.314)');
-    expect(previewColor.startsWith('hsla(0deg, 100%, 50%, 0.31')).to.be.true;
+    expect(trigger.style.color).to.equal('rgba(255, 0, 0, 0.314)');
+    expect(previewColor).to.equal('#ff000050');
   });
 
   describe('when resetting a form', () => {
