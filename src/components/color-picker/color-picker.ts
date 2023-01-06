@@ -425,6 +425,8 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
           this.emit('sl-input');
         }
 
+        // console.log(this.hue, this.saturation, this.lightness);
+
         setTimeout(() => this.input.select());
       } else {
         this.hue = 0;
@@ -707,7 +709,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     const gridHandleY = 100 - this.brightness;
     const swatches = Array.isArray(this.swatches)
       ? this.swatches // allow arrays for legacy purposes
-      : this.swatches.split(';').filter(color => color !== '');
+      : this.swatches.split(';').filter(color => color.trim() !== '');
 
     const colorPicker = html`
       <div

@@ -10,7 +10,8 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
-- Fixed a bug that prevented placeholders from showing in `<sl-select>` when `multiple` was used [#1109](https://github.com/shoelace-style/shoelace/issues/1109)
+- Fixed a bug in `<sl-select>` that prevented placeholders from showing when `multiple` was used [#1109](https://github.com/shoelace-style/shoelace/issues/1109)
+- Fixed a bug in `<sl-color-picker>` that logged a console error when parsing swatches with whitespace
 
 ## 2.0.0-beta.88
 
