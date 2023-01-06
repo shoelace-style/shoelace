@@ -1,0 +1,68 @@
+{
+  "Color Primitives": {
+    "Gray": {
+      "color-gray-50": {
+        "themes": {
+          "light": "hsl(0 0% 97.5%)",
+          "dark": "hsl(240 5.1% 15%)"
+        }
+      },
+      "color-gray-100": {
+        "themes": {
+          "light": "hsl(240 4.8% 95.9%)",
+          "dark": "hsl(240 5.7% 18.2%)"
+        }
+      }
+    }
+  },
+  "Theme Tokens": {
+    "Primary": {
+      "color-primary-50": {
+        "themes": {
+          "light": "var(--sl-color-sky-50)",
+          "dark": "var(--sl-color-sky-50)"
+        }
+      },
+      "color-primary-100": {
+        "themes": {
+          "light": "var(--sl-color-sky-100)",
+          "dark": "var(--sl-color-sky-100)"
+        }
+      }
+    },
+    "Warning": {
+      "color-warning-50": {
+        "themes": {
+          "light": "var(--sl-color-amber-50)",
+          "dark": "var(--sl-color-amber-50)"
+        }
+      },
+      "color-warning-100": {
+        "themes": {
+          "light": "var(--sl-color-amber-100)",
+          "dark": "var(--sl-color-amber-100)"
+        }
+      }
+    }
+  },
+  "Border Radii": {
+    "border-radius-small": {
+      "themes": {
+        "light": "0.1875rem"
+      },
+      "comment": "3px"
+    },
+    "border-radius-medium": {
+      "themes": {
+        "light": "0.25rem"
+      },
+      "comment": "4px"
+    },
+    "border-radius-circle": {
+      "newline": true,
+      "themes": {
+        "light": "50%"
+      }
+    }
+  }
+}
