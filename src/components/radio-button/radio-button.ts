@@ -38,7 +38,10 @@ export default class SlRadioButton extends ShoelaceElement {
   @query('.hidden-input') hiddenInput: HTMLInputElement;
 
   @state() protected hasFocus = false;
-  @state() checked = false;
+
+  // The radio button's checked state. This is exposed as a "read-only" attribute so we can reflect it, making it easier
+  // to style in button groups. JSDoc is intentionally not used on this property to prevent it from showing in the docs.
+  @property({ type: Boolean, reflect: true }) checked = false;
 
   /** The radio's value. When selected, the radio group will receive this value. */
   @property() value: string;
