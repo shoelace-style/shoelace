@@ -425,8 +425,6 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
           this.emit('sl-input');
         }
 
-        // console.log(this.hue, this.saturation, this.lightness);
-
         setTimeout(() => this.input.select());
       } else {
         this.hue = 0;
