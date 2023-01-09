@@ -37,7 +37,7 @@ import type { CSSResultGroup } from 'lit';
 export default class SlSwitch extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  // @ts-expect-error -- Controller is currently unused
+  // @ts-expect-error - Controller is currently unused
   private readonly formSubmitController = new FormSubmitController(this, {
     value: (control: SlSwitch) => (control.checked ? control.value || 'on' : undefined),
     defaultValue: (control: SlSwitch) => control.defaultChecked,

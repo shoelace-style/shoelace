@@ -80,9 +80,7 @@ export default class SlIcon extends ShoelaceElement {
     }
   }
 
-  @watch('name')
-  @watch('src')
-  @watch('library')
+  @watch(['name', 'src', 'library'])
   async setIcon() {
     const library = getIconLibrary(this.library);
     const url = this.getUrl();

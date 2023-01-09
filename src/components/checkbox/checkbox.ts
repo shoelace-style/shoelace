@@ -39,7 +39,7 @@ import type { CSSResultGroup } from 'lit';
 export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  // @ts-expect-error -- Controller is currently unused
+  // @ts-expect-error - Controller is currently unused
   private readonly formSubmitController = new FormSubmitController(this, {
     value: (control: SlCheckbox) => (control.checked ? control.value || 'on' : undefined),
     defaultValue: (control: SlCheckbox) => control.defaultChecked,
@@ -111,8 +111,7 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
     this.invalid = !this.checkValidity();
   }
 
-  @watch('checked', { waitUntilFirstUpdate: true })
-  @watch('indeterminate', { waitUntilFirstUpdate: true })
+  @watch(['checked', 'indeterminate'], { waitUntilFirstUpdate: true })
   handleStateChange() {
     this.input.checked = this.checked; // force a sync update
     this.input.indeterminate = this.indeterminate; // force a sync update

@@ -31,7 +31,7 @@ export default class SlOption extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   private cachedTextLabel: string;
-  // @ts-expect-error -- Controller is currently unused
+  // @ts-expect-error - Controller is currently unused
   private readonly localize = new LocalizeController(this);
 
   @query('.option__label') defaultSlot: HTMLSlotElement;

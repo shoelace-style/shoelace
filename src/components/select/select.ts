@@ -64,7 +64,7 @@ import type { CSSResultGroup } from 'lit';
 export default class SlSelect extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  // @ts-expect-error -- Controller is currently unused
+  // @ts-expect-error - Controller is currently unused
   private readonly formSubmitController = new FormSubmitController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private readonly localize = new LocalizeController(this);
