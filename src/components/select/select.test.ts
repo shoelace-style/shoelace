@@ -316,12 +316,10 @@ describe('<sl-select>', () => {
       `);
       const resetButton = form.querySelector('sl-button')!;
       const select = form.querySelector('sl-select')!;
-      const option2 = form.querySelectorAll('sl-option')![1];
 
-      await select.show();
-      await clickOnElement(option2);
+      select.value = 'option-3';
       await select.updateComplete;
-      expect(select.value).to.equal('option-2');
+      expect(select.value).to.equal('option-3');
 
       setTimeout(() => clickOnElement(resetButton));
       await oneEvent(form, 'reset');
