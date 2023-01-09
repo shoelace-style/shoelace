@@ -418,6 +418,16 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     this.setSelectedOptions(allOptions.filter(el => value.includes(el.value)));
   }
 
+  private handleTagRemove(event: CustomEvent, option: SlOption) {
+    event.stopPropagation();
+
+    if (!this.disabled) {
+      this.toggleOptionSelection(option, false);
+      this.emit('sl-input');
+      this.emit('sl-change');
+    }
+  }
+
   // Gets an array of all <sl-option> elements
   private getAllOptions() {
     return [...this.querySelectorAll<SlOption>('sl-option')];
@@ -713,12 +723,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
                               ?pill=${this.pill}
                               size=${this.size}
                               removable
-                              @sl-remove=${(event: CustomEvent) => {
-                                event.stopPropagation();
-                                if (!this.disabled) {
-                                  this.toggleOptionSelection(option, false);
-                                }
-                              }}
+                              @sl-remove=${(event: CustomEvent) => this.handleTagRemove(event, option)}
                             >
                               ${option.getTextLabel()}
                             </sl-tag>

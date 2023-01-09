@@ -390,6 +390,29 @@ describe('<sl-select>', () => {
     expect(clearHandler).to.have.been.calledOnce;
   });
 
+  it('should emit sl-change and sl-input when a tag is removed', async () => {
+    const el = await fixture<SlSelect>(html`
+      <sl-select value="option-1 option-2 option-3" multiple>
+        <sl-option value="option-1">Option 1</sl-option>
+        <sl-option value="option-2">Option 2</sl-option>
+        <sl-option value="option-3">Option 3</sl-option>
+      </sl-select>
+    `);
+    const changeHandler = sinon.spy();
+    const inputHandler = sinon.spy();
+    const tag = el.shadowRoot!.querySelector('[part~="tag"]')!;
+    const removeButton = tag.shadowRoot!.querySelector('[part~="remove-button"]')!;
+
+    el.addEventListener('sl-change', changeHandler);
+    el.addEventListener('sl-input', inputHandler);
+
+    await clickOnElement(removeButton);
+    await el.updateComplete;
+
+    expect(changeHandler).to.have.been.calledOnce;
+    expect(inputHandler).to.have.been.calledOnce;
+  });
+
   it('should emit sl-show, sl-after-show, sl-hide, and sl-after-hide events when the listbox opens and closes', async () => {
     const el = await fixture<SlSelect>(html`
       <sl-select value="option-1">
