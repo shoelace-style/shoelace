@@ -707,6 +707,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
                         if (index < this.maxOptionsVisible || this.maxOptionsVisible <= 0) {
                           return html`
                             <sl-tag
+                              ?pill=${this.pill}
                               size=${this.size}
                               removable
                               @sl-remove=${(event: CustomEvent) => {
