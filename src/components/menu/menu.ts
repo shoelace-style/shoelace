@@ -31,7 +31,7 @@ export default class SlMenu extends ShoelaceElement {
 
   private getAllItems() {
     return [...this.defaultSlot.assignedElements({ flatten: true })].filter((el: HTMLElement) => {
-      if (!this.isMenuItem(el)) {
+      if (el.inert || !this.isMenuItem(el)) {
         return false;
       }
 
@@ -43,13 +43,15 @@ export default class SlMenu extends ShoelaceElement {
     const target = event.target as HTMLElement;
     const item = target.closest('sl-menu-item');
 
-    if (item?.disabled === false) {
-      if (item.type === 'checkbox') {
-        item.checked = !item.checked;
-      }
-
-      this.emit('sl-select', { detail: { item } });
+    if (!item || item.disabled || item.inert) {
+      return;
     }
+
+    if (item.type === 'checkbox') {
+      item.checked = !item.checked;
+    }
+
+    this.emit('sl-select', { detail: { item } });
   }
 
   private handleKeyDown(event: KeyboardEvent) {
