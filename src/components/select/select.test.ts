@@ -416,4 +416,17 @@ describe('<sl-select>', () => {
     expect(hideHandler).to.have.been.calledOnce;
     expect(afterHideHandler).to.have.been.calledOnce;
   });
+
+  it('should have rounded tags when using the pill attribute', async () => {
+    const el = await fixture<SlSelect>(html`
+      <sl-select value="option-1 option-2" multiple pill>
+        <sl-option value="option-1">Option 1</sl-option>
+        <sl-option value="option-2">Option 2</sl-option>
+        <sl-option value="option-3">Option 3</sl-option>
+      </sl-select>
+    `);
+    const tag = el.shadowRoot!.querySelector('[part~="tag"]')!;
+
+    expect(tag.hasAttribute('pill')).to.be.true;
+  });
 });
