@@ -55,6 +55,8 @@ import type { CSSResultGroup } from 'lit';
  * @csspart prefix - The container that wraps the prefix slot.
  * @csspart display-input - The element that displays the selected option's label, an `<input>` element.
  * @csspart listbox - The listbox container where options are slotted.
+ * @csspart tags - The container that houses option tags when `multiselect` is used.
+ * @csspart tag - The individual tags that represent each multiselect option.
  * @csspart clear-button - The clear button.
  * @csspart expand-icon - The container that wraps the expand icon.
  */
@@ -707,6 +709,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
                         if (index < this.maxOptionsVisible || this.maxOptionsVisible <= 0) {
                           return html`
                             <sl-tag
+                              part="tag"
                               ?pill=${this.pill}
                               size=${this.size}
                               removable
