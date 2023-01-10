@@ -352,4 +352,62 @@ describe('<sl-color-picker>', () => {
       expect(colorPicker.value).to.equal('');
     });
   });
+
+  describe('when using constraint validation', () => {
+    it('should be valid by default', async () => {
+      const el = await fixture<SlColorPicker>(html` <sl-color-picker></sl-color-picker> `);
+      expect(el.checkValidity()).to.be.true;
+    });
+
+    it('should be invalid when required and empty', async () => {
+      const el = await fixture<SlColorPicker>(html` <sl-input required></sl-input> `);
+      expect(el.checkValidity()).to.be.false;
+    });
+
+    it('should be invalid when required and disabled is removed', async () => {
+      const el = await fixture<SlColorPicker>(html` <sl-input disabled required></sl-input> `);
+      el.disabled = false;
+      await el.updateComplete;
+      expect(el.checkValidity()).to.be.false;
+    });
+
+    it('should receive the correct validation attributes ("states") when valid', async () => {
+      const el = await fixture<SlColorPicker>(html` <sl-input required value="a"></sl-input> `);
+
+      expect(el.checkValidity()).to.be.true;
+      expect(el.hasAttribute('data-required')).to.be.true;
+      expect(el.hasAttribute('data-optional')).to.be.false;
+      expect(el.hasAttribute('data-invalid')).to.be.false;
+      expect(el.hasAttribute('data-valid')).to.be.true;
+      expect(el.hasAttribute('data-user-invalid')).to.be.false;
+      expect(el.hasAttribute('data-user-valid')).to.be.false;
+
+      el.focus();
+      await sendKeys({ press: 'b' });
+      await el.updateComplete;
+
+      expect(el.checkValidity()).to.be.true;
+      expect(el.hasAttribute('data-user-invalid')).to.be.false;
+      expect(el.hasAttribute('data-user-valid')).to.be.true;
+    });
+
+    it('should receive the correct validation attributes ("states") when invalid', async () => {
+      const el = await fixture<SlColorPicker>(html` <sl-input required></sl-input> `);
+
+      expect(el.hasAttribute('data-required')).to.be.true;
+      expect(el.hasAttribute('data-optional')).to.be.false;
+      expect(el.hasAttribute('data-invalid')).to.be.true;
+      expect(el.hasAttribute('data-valid')).to.be.false;
+      expect(el.hasAttribute('data-user-invalid')).to.be.false;
+      expect(el.hasAttribute('data-user-valid')).to.be.false;
+
+      el.focus();
+      await sendKeys({ press: 'a' });
+      await sendKeys({ press: 'Backspace' });
+      await el.updateComplete;
+
+      expect(el.hasAttribute('data-user-invalid')).to.be.true;
+      expect(el.hasAttribute('data-user-valid')).to.be.false;
+    });
+  });
 });

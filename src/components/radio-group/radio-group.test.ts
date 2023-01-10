@@ -1,6 +1,7 @@
 import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
+import { clickOnElement } from '../../internal/test';
 import type SlRadio from '../radio/radio';
 import type SlRadioGroup from './radio-group';
 
@@ -14,7 +15,7 @@ describe('<sl-radio-group>', () => {
         </sl-radio-group>
       `);
 
-      expect(radioGroup.invalid).to.be.true;
+      expect(radioGroup.checkValidity()).to.be.false;
     });
 
     it('should become valid when an option is checked', async () => {
@@ -28,7 +29,7 @@ describe('<sl-radio-group>', () => {
       radioGroup.value = '1';
       await radioGroup.updateComplete;
 
-      expect(radioGroup.invalid).to.be.false;
+      expect(radioGroup.checkValidity()).to.be.true;
     });
 
     it(`should be valid when required and one radio is checked`, async () => {
@@ -40,7 +41,7 @@ describe('<sl-radio-group>', () => {
         </sl-radio-group>
       `);
 
-      expect(el.reportValidity()).to.be.true;
+      expect(el.checkValidity()).to.be.true;
     });
 
     it(`should be invalid when required and no radios are checked`, async () => {
@@ -52,7 +53,7 @@ describe('<sl-radio-group>', () => {
         </sl-radio-group>
       `);
 
-      expect(el.reportValidity()).to.be.false;
+      expect(el.checkValidity()).to.be.false;
     });
 
     it(`should be valid when required and a different radio is checked`, async () => {
@@ -64,7 +65,7 @@ describe('<sl-radio-group>', () => {
         </sl-radio-group>
       `);
 
-      expect(el.reportValidity()).to.be.true;
+      expect(el.checkValidity()).to.be.true;
     });
 
     it(`should be invalid when custom validity is set`, async () => {
@@ -78,15 +79,64 @@ describe('<sl-radio-group>', () => {
 
       el.setCustomValidity('Error');
 
-      expect(el.reportValidity()).to.be.false;
+      expect(el.checkValidity()).to.be.false;
+    });
+
+    it('should receive the correct validation attributes ("states") when valid', async () => {
+      const radioGroup = await fixture<SlRadioGroup>(html`
+        <sl-radio-group value="1" required>
+          <sl-radio value="1"></sl-radio>
+          <sl-radio value="2"></sl-radio>
+        </sl-radio-group>
+      `);
+      const secondRadio = radioGroup.querySelectorAll('sl-radio')[1];
+
+      expect(radioGroup.checkValidity()).to.be.true;
+      expect(radioGroup.hasAttribute('data-required')).to.be.true;
+      expect(radioGroup.hasAttribute('data-optional')).to.be.false;
+      expect(radioGroup.hasAttribute('data-invalid')).to.be.false;
+      expect(radioGroup.hasAttribute('data-valid')).to.be.true;
+      expect(radioGroup.hasAttribute('data-user-invalid')).to.be.false;
+      expect(radioGroup.hasAttribute('data-user-valid')).to.be.false;
+
+      await clickOnElement(secondRadio);
+      await secondRadio.updateComplete;
+
+      expect(radioGroup.checkValidity()).to.be.true;
+      expect(radioGroup.hasAttribute('data-user-invalid')).to.be.false;
+      expect(radioGroup.hasAttribute('data-user-valid')).to.be.true;
+    });
+
+    it('should receive the correct validation attributes ("states") when invalid', async () => {
+      const radioGroup = await fixture<SlRadioGroup>(html`
+        <sl-radio-group required>
+          <sl-radio value="1"></sl-radio>
+          <sl-radio value="2"></sl-radio>
+        </sl-radio-group>
+      `);
+      const secondRadio = radioGroup.querySelectorAll('sl-radio')[1];
+
+      expect(radioGroup.hasAttribute('data-required')).to.be.true;
+      expect(radioGroup.hasAttribute('data-optional')).to.be.false;
+      expect(radioGroup.hasAttribute('data-invalid')).to.be.true;
+      expect(radioGroup.hasAttribute('data-valid')).to.be.false;
+      expect(radioGroup.hasAttribute('data-user-invalid')).to.be.false;
+      expect(radioGroup.hasAttribute('data-user-valid')).to.be.false;
+
+      await clickOnElement(secondRadio);
+      radioGroup.value = '';
+      await radioGroup.updateComplete;
+
+      expect(radioGroup.hasAttribute('data-user-invalid')).to.be.true;
+      expect(radioGroup.hasAttribute('data-user-valid')).to.be.false;
     });
   });
 
   it('should show a constraint validation error when setCustomValidity() is called', async () => {
     const form = await fixture<HTMLFormElement>(html`
       <form>
-        <sl-radio-group>
-          <sl-radio id="radio-1" name="a" value="1" checked></sl-radio>
+        <sl-radio-group value="1">
+          <sl-radio id="radio-1" name="a" value="1"></sl-radio>
           <sl-radio id="radio-2" name="a" value="2"></sl-radio>
         </sl-radio-group>
         <sl-button type="submit">Submit</sl-button>
