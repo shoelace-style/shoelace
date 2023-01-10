@@ -161,16 +161,18 @@ export default class SlAnimation extends ShoelaceElement {
     }
   }
 
-  @watch('name')
-  @watch('delay')
-  @watch('direction')
-  @watch('duration')
-  @watch('easing')
-  @watch('endDelay')
-  @watch('fill')
-  @watch('iterations')
-  @watch('iterationsStart')
-  @watch('keyframes')
+  @watch([
+    'name',
+    'delay',
+    'direction',
+    'duration',
+    'easing',
+    'endDelay',
+    'fill',
+    'iterations',
+    'iterationsStart',
+    'keyframes'
+  ])
   handleAnimationChange() {
     if (!this.hasUpdated) {
       return;

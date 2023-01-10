@@ -219,11 +219,7 @@ export default class SlTooltip extends ShoelaceElement {
     }
   }
 
-  @watch('content')
-  @watch('distance')
-  @watch('hoist')
-  @watch('placement')
-  @watch('skidding')
+  @watch(['content', 'distance', 'hoist', 'placement', 'skidding'])
   async handleOptionsChange() {
     if (this.hasUpdated) {
       await this.updateComplete;

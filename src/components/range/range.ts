@@ -4,7 +4,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { defaultValue } from '../../internal/default-value';
-import { FormSubmitController } from '../../internal/form';
+import { FormControlController } from '../../internal/form';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
@@ -46,8 +46,7 @@ import type { CSSResultGroup } from 'lit';
 export default class SlRange extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  // @ts-expect-error -- Controller is currently unused
-  private readonly formSubmitController = new FormSubmitController(this);
+  private readonly formControlController = new FormControlController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private readonly localize = new LocalizeController(this);
   private resizeObserver: ResizeObserver;
@@ -57,7 +56,6 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
 
   @state() private hasFocus = false;
   @state() private hasTooltip = false;
-  @state() invalid = false;
   @property() title = ''; // make reactive to pass through
 
   /** The name of the range, submitted as a name/value pair with form data. */
@@ -175,7 +173,7 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
 
   @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
-    this.invalid = !this.checkValidity();
+    this.formControlController.updateValidity();
 
     // The value may have constraints, so we set the native control's value and sync it back to ensure it adhere's to
     // min, max, and step properly
@@ -187,9 +185,8 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
 
   @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
-    // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    this.input.disabled = this.disabled;
-    this.invalid = !this.checkValidity();
+    // Disabled form controls are always valid
+    this.formControlController.setValidity(this.disabled);
   }
 
   @watch('hasTooltip', { waitUntilFirstUpdate: true })
@@ -239,10 +236,10 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
     return this.input.reportValidity();
   }
 
-  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  /** Sets a custom validation message. Pass an empty string to restore validity. */
   setCustomValidity(message: string) {
     this.input.setCustomValidity(message);
-    this.invalid = !this.checkValidity();
+    this.formControlController.updateValidity();
   }
 
   render() {

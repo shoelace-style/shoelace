@@ -5,7 +5,7 @@ import { scrollIntoView } from 'src/internal/scroll';
 import { animateTo, stopAnimations } from '../../internal/animate';
 import { defaultValue } from '../../internal/default-value';
 import { waitForEvent } from '../../internal/event';
-import { FormSubmitController } from '../../internal/form';
+import { FormControlController } from '../../internal/form';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
@@ -64,8 +64,7 @@ import type { CSSResultGroup } from 'lit';
 export default class SlSelect extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  // @ts-expect-error -- Controller is currently unused
-  private readonly formSubmitController = new FormSubmitController(this);
+  private readonly formControlController = new FormControlController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private readonly localize = new LocalizeController(this);
   private typeToSelectString = '';
@@ -81,7 +80,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   @state() displayLabel = '';
   @state() currentOption: SlOption;
   @state() selectedOptions: SlOption[] = [];
-  @state() invalid = false;
 
   /** The name of the select, submitted as a name/value pair with form data. */
   @property() name = '';
@@ -512,7 +510,9 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     }
 
     // Update validity
-    this.updateComplete.then(() => (this.invalid = !this.checkValidity()));
+    this.updateComplete.then(() => {
+      this.formControlController.updateValidity();
+    });
   }
 
   @watch('disabled', { waitUntilFirstUpdate: true })
@@ -608,10 +608,10 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     return this.valueInput.reportValidity();
   }
 
-  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  /** Sets a custom validation message. Pass an empty string to restore validity. */
   setCustomValidity(message: string) {
     this.valueInput.setCustomValidity(message);
-    this.invalid = !this.valueInput.checkValidity();
+    this.formControlController.updateValidity();
   }
 
   /** Sets focus on the control. */

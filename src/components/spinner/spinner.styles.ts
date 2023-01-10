@@ -46,17 +46,17 @@ export default css`
 
   @keyframes spin {
     0% {
-      rotate: 0deg;
+      transform: rotate(0deg);
       stroke-dasharray: 0.01em, 2.75em;
     }
 
     50% {
-      rotate: 450deg;
+      transform: rotate(450deg);
       stroke-dasharray: 1.375em, 1.375em;
     }
 
     100% {
-      rotate: 1080deg;
+      transform: rotate(1080deg);
       stroke-dasharray: 0.01em, 2.75em;
     }
   }

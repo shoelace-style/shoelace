@@ -11,13 +11,17 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 ## Next
 
 - Added support for the `inert` attribute on `<sl-menu-item>` to allow hidden menu items to not accept focus [#1107](https://github.com/shoelace-style/shoelace/issues/1107)
-- Added `tags` and `tag` parts to `<sl-select>`
+- Added the `tag` part to `<sl-select>`
+- Added `sl-hover` event to `<sl-rating>` [#1125](https://github.com/shoelace-style/shoelace/issues/1125)
 - Fixed a bug in `<sl-select>` that prevented placeholders from showing when `multiple` was used [#1109](https://github.com/shoelace-style/shoelace/issues/1109)
 - Fixed a bug in `<sl-select>` that caused tags to not be rounded when using the `pill` attribute [#1117](https://github.com/shoelace-style/shoelace/issues/1117)
 - Fixed a bug in `<sl-select>` where the `sl-change` and `sl-input` events didn't weren't emitted when removing tags [#1119](https://github.com/shoelace-style/shoelace/issues/1119)
 - Fixed a bug in `<sl-color-picker>` that logged a console error when parsing swatches with whitespace
 - Fixed a bug in `<sl-color-picker>` that caused selected colors to be wrong due to incorrect HSV calculations
 - Fixed a bug in `<sl-radio-button>` that caused the checked button's right border to be incorrect [#1110](https://github.com/shoelace-style/shoelace/issues/1110)
+- Fixed a bug in `<sl-spinner>` that caused the animation to stop working correctly in Safari [#1121](https://github.com/shoelace-style/shoelace/issues/1121)
+- Refactored the `ShoelaceFormControl` interface to remove the `invalid` property, allowing a more intuitive API for controlling validation internally
+- Renamed the internal `FormSubmitController` to `FormControlController` to better reflect what it's used for
 
 ## 2.0.0-beta.88
 

@@ -9,17 +9,17 @@ const translation: Translation = {
   clearEntry: 'Ryd indtastning',
   close: 'Luk',
   copy: 'Kopier',
-  numOptionsSelected: num => {
-    if (num === 0) return 'Geen opties geselecteerd';
-    if (num === 1) return '1 optie geselecteerd';
-    return `${num} opties geselecteerd`;
+  numOptionsSelected: (num: number) => {
+    if (num === 0) return 'Ingen valgt';
+    if (num === 1) return '1 valgt';
+    return `${num} valgt`;
   },
-  currentValue: 'Nuværende regerer',
+  currentValue: 'Nuværende værdi',
   hidePassword: 'Skjul adgangskode',
   loading: 'Indlæser',
   progress: 'Status',
-  remove: 'Fjerne',
-  resize: 'Tipas størrelse',
+  remove: 'Fjern',
+  resize: 'Tilpas størrelse',
   scrollToEnd: 'Scroll til slut',
   scrollToStart: 'Scroll til start',
   selectAColorFromTheScreen: 'Vælg en farve fra skærmen',

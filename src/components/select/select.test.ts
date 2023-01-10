@@ -241,6 +241,59 @@ describe('<sl-select>', () => {
       el.requestSubmit();
       expect(select.shadowRoot!.activeElement).to.equal(select.displayInput);
     });
+
+    it('should receive the correct validation attributes ("states") when valid', async () => {
+      const el = await fixture<SlSelect>(html`
+        <sl-select label="Select one" required value="option-1">
+          <sl-option value="option-1">Option 1</sl-option>
+          <sl-option value="option-2">Option 2</sl-option>
+          <sl-option value="option-3">Option 3</sl-option>
+        </sl-select>
+      `);
+      const secondOption = el.querySelectorAll('sl-option')[1]!;
+
+      expect(el.checkValidity()).to.be.true;
+      expect(el.hasAttribute('data-required')).to.be.true;
+      expect(el.hasAttribute('data-optional')).to.be.false;
+      expect(el.hasAttribute('data-invalid')).to.be.false;
+      expect(el.hasAttribute('data-valid')).to.be.true;
+      expect(el.hasAttribute('data-user-invalid')).to.be.false;
+      expect(el.hasAttribute('data-user-valid')).to.be.false;
+
+      await el.show();
+      await clickOnElement(secondOption);
+      await el.updateComplete;
+
+      expect(el.checkValidity()).to.be.true;
+      expect(el.hasAttribute('data-user-invalid')).to.be.false;
+      expect(el.hasAttribute('data-user-valid')).to.be.true;
+    });
+
+    it('should receive the correct validation attributes ("states") when invalid', async () => {
+      const el = await fixture<SlSelect>(html`
+        <sl-select label="Select one" required>
+          <sl-option value="option-1">Option 1</sl-option>
+          <sl-option value="option-2">Option 2</sl-option>
+          <sl-option value="option-3">Option 3</sl-option>
+        </sl-select>
+      `);
+      const secondOption = el.querySelectorAll('sl-option')[1]!;
+
+      expect(el.hasAttribute('data-required')).to.be.true;
+      expect(el.hasAttribute('data-optional')).to.be.false;
+      expect(el.hasAttribute('data-invalid')).to.be.true;
+      expect(el.hasAttribute('data-valid')).to.be.false;
+      expect(el.hasAttribute('data-user-invalid')).to.be.false;
+      expect(el.hasAttribute('data-user-valid')).to.be.false;
+
+      await el.show();
+      await clickOnElement(secondOption);
+      el.value = '';
+      await el.updateComplete;
+
+      expect(el.hasAttribute('data-user-invalid')).to.be.true;
+      expect(el.hasAttribute('data-user-valid')).to.be.false;
+    });
   });
 
   describe('when serializing', () => {

@@ -20,7 +20,7 @@ describe('<sl-range>', () => {
     expect(el.label).to.equal('');
     expect(el.helpText).to.equal('');
     expect(el.disabled).to.be.false;
-    expect(el.invalid).to.be.false;
+    expect(el.checkValidity()).to.be.true;
     expect(el.min).to.equal(0);
     expect(el.max).to.equal(100);
     expect(el.step).to.equal(1);
@@ -134,6 +134,27 @@ describe('<sl-range>', () => {
       el.stepDown();
       await el.updateComplete;
       expect(el.value).to.equal(0);
+    });
+  });
+
+  describe('when submitting a form', () => {
+    it('should be invalid when setCustomValidity() is called with a non-empty value', async () => {
+      const range = await fixture<HTMLFormElement>(html` <sl-range></sl-range> `);
+
+      range.setCustomValidity('Invalid selection');
+      await range.updateComplete;
+
+      expect(range.checkValidity()).to.be.false;
+      expect(range.hasAttribute('data-invalid')).to.be.true;
+      expect(range.hasAttribute('data-valid')).to.be.false;
+      expect(range.hasAttribute('data-user-invalid')).to.be.false;
+      expect(range.hasAttribute('data-user-valid')).to.be.false;
+
+      await clickOnElement(range);
+      await range.updateComplete;
+
+      expect(range.hasAttribute('data-user-invalid')).to.be.true;
+      expect(range.hasAttribute('data-user-valid')).to.be.false;
     });
   });
 
