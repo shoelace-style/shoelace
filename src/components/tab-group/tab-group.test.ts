@@ -1,5 +1,6 @@
 import { elementUpdated, expect, fixture } from '@open-wc/testing';
 import { html } from 'lit';
+import { clickOnElement } from '../../internal/test';
 import { queryByTestId } from '../../internal/test/data-testid-helpers';
 import { IntersectionObserverMock } from '../../internal/test/intersection-observer-mock';
 import { ResizeObserverMock } from '../../internal/test/resize-observer-mock';
@@ -24,6 +25,43 @@ const getClientRectangles = (tabGroup: SlTabGroup): ClientRectangles => {
     };
   }
   return {};
+};
+
+const waitForScrollingToEnd = (element: Element, timeoutInMs = 500): Promise<void> => {
+  let lastLeft = element.scrollLeft;
+  let lastTop = element.scrollTop;
+  let framesWithoutChange = 0;
+  return new Promise((resolve, reject) => {
+    const timeout = window.setTimeout(() => {
+      reject(new Error('Waiting for scroll end timed out'));
+    }, timeoutInMs);
+    function checkScrollingChanged() {
+      if (element.scrollLeft !== lastLeft || element.scrollTop !== lastTop) {
+        framesWithoutChange = 0;
+        lastLeft = window.scrollX;
+        lastTop = window.scrollY;
+      } else {
+        framesWithoutChange++;
+        if (framesWithoutChange >= 20) {
+          clearTimeout(timeout);
+          resolve();
+        }
+      }
+      window.requestAnimationFrame(checkScrollingChanged);
+    }
+    checkScrollingChanged();
+  });
+};
+
+const isElementVisibleFromScrolling = (outerElement: Element, innerElement: Element): boolean => {
+  const outerRect = outerElement.getBoundingClientRect();
+  const innerRect = innerElement.getBoundingClientRect();
+  return (
+    outerRect.top <= innerRect.bottom &&
+    innerRect.top <= outerRect.bottom &&
+    outerRect.left <= innerRect.right &&
+    innerRect.left <= outerRect.right
+  );
 };
 
 const expectHeaderToBeVisible = (container: HTMLElement, dataTestid: string): void => {
@@ -205,6 +243,86 @@ describe('<sl-tab-group>', () => {
 
       const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
       expect(scrollButtons).to.have.length(2);
+    });
+
+    it('does not show scroll buttons on too many tabs if deactivated', async () => {
+      const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(20)} </sl-tab-group>`);
+      tabGroup.noScrollControls = true;
+
+      expect(resizeObserverMock.mocks).to.have.length(1);
+      resizeObserverMock.mocks[0].executeCallback();
+
+      await elementUpdated(tabGroup);
+
+      const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
+      expect(scrollButtons).to.have.length(0);
+    });
+
+    it('does not show scroll buttons if all tabs fit on the screen', async () => {
+      const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(2)} </sl-tab-group>`);
+
+      expect(resizeObserverMock.mocks).to.have.length(1);
+      resizeObserverMock.mocks[0].executeCallback();
+
+      await elementUpdated(tabGroup);
+
+      const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
+      expect(scrollButtons).to.have.length(0);
+    });
+
+    it('does not show scroll buttons if placement is start', async () => {
+      const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(50)} </sl-tab-group>`);
+      tabGroup.placement = 'start';
+
+      expect(resizeObserverMock.mocks).to.have.length(1);
+      resizeObserverMock.mocks[0].executeCallback();
+
+      await elementUpdated(tabGroup);
+
+      const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
+      expect(scrollButtons).to.have.length(0);
+    });
+
+    it('does not show scroll buttons if placement is end', async () => {
+      const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(50)} </sl-tab-group>`);
+      tabGroup.placement = 'end';
+
+      expect(resizeObserverMock.mocks).to.have.length(1);
+      resizeObserverMock.mocks[0].executeCallback();
+
+      await elementUpdated(tabGroup);
+
+      const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
+      expect(scrollButtons).to.have.length(0);
+    });
+
+    it('does scroll on scroll button click', async () => {
+      const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(21)} </sl-tab-group>`);
+
+      expect(resizeObserverMock.mocks).to.have.length(1);
+      resizeObserverMock.mocks[0].executeCallback();
+
+      await elementUpdated(tabGroup);
+
+      const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
+      expect(scrollButtons).to.have.length(2);
+
+      const firstTab = tabGroup.querySelector('[panel="tab-0"]');
+      expect(firstTab).not.to.be.null;
+      const lastTab = tabGroup.querySelector('[panel="tab-20"]');
+      expect(lastTab).not.to.be.null;
+      expect(isElementVisibleFromScrolling(tabGroup, firstTab!)).to.be.true;
+      expect(isElementVisibleFromScrolling(tabGroup, lastTab!)).to.be.false;
+
+      const scrollToRightButton = tabGroup.shadowRoot?.querySelector('sl-icon-button[part*="scroll-button--end"]');
+      expect(scrollToRightButton).not.to.be.null;
+      await clickOnElement(scrollToRightButton!);
+
+      await elementUpdated(tabGroup);
+      await waitForScrollingToEnd(firstTab!);
+
+      expect(isElementVisibleFromScrolling(tabGroup, firstTab!)).to.be.false;
+      expect(isElementVisibleFromScrolling(tabGroup, lastTab!)).to.be.true;
     });
   });
 });
