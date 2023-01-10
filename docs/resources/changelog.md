@@ -12,6 +12,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 - Added support for the `inert` attribute on `<sl-menu-item>` to allow hidden menu items to not accept focus [#1107](https://github.com/shoelace-style/shoelace/issues/1107)
 - Added the `tag` part to `<sl-select>`
+- Added `sl-hover` event to `<sl-rating>` [#1125](https://github.com/shoelace-style/shoelace/issues/1125)
 - Fixed a bug in `<sl-select>` that prevented placeholders from showing when `multiple` was used [#1109](https://github.com/shoelace-style/shoelace/issues/1109)
 - Fixed a bug in `<sl-select>` that caused tags to not be rounded when using the `pill` attribute [#1117](https://github.com/shoelace-style/shoelace/issues/1117)
 - Fixed a bug in `<sl-select>` where the `sl-change` and `sl-input` events didn't weren't emitted when removing tags [#1119](https://github.com/shoelace-style/shoelace/issues/1119)
