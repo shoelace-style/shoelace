@@ -9,7 +9,7 @@ const translation: Translation = {
   clearEntry: 'Girişi sil',
   close: 'Kapat',
   copy: 'Kopya',
-  numOptionsSelected: (num: number) => {
+  numOptionsSelected: num => {
     if (num === 0) return 'Hiçbir seçenek seçilmedi';
     if (num === 1) return '1 seçenek seçildi';
     return `${num} seçenek seçildi`;

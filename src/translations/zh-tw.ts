@@ -9,7 +9,7 @@ const translation: Translation = {
   clearEntry: '清空',
   close: '關閉',
   copy: '複製',
-  numOptionsSelected: (num: number) => {
+  numOptionsSelected: num => {
     if (num === 0) return '未選擇任何項目';
     if (num === 1) return '已選擇 1 個項目';
     return `${num} 選擇項目`;
