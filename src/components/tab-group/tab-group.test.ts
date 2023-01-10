@@ -3,7 +3,6 @@ import { html } from 'lit';
 import { clickOnElement } from '../../internal/test';
 import { queryByTestId } from '../../internal/test/data-testid-helpers';
 import { IntersectionObserverMock } from '../../internal/test/intersection-observer-mock';
-import { ResizeObserverMock } from '../../internal/test/resize-observer-mock';
 import type SlTabPanel from '../tab-panel/tab-panel';
 import type SlTab from '../tab/tab';
 import type SlTabGroup from './tab-group';
@@ -13,6 +12,12 @@ interface ClientRectangles {
   body?: DOMRect;
   navigation?: DOMRect;
 }
+
+const wait = async (delayInMs = 0): Promise<void> => {
+  return new Promise(resolve => {
+    window.setTimeout(() => resolve(), delayInMs);
+  });
+};
 
 const getClientRectangles = (tabGroup: SlTabGroup): ClientRectangles => {
   const shadowRoot = tabGroup.shadowRoot;
@@ -87,10 +92,12 @@ describe('<sl-tab-group>', () => {
     mocks[0].executeCallback([{ intersectionRatio: 1.0, target: tabGroup } as unknown as IntersectionObserverEntry]);
   };
 
-  const showTabGroup = (tabGroup: SlTabGroup): Promise<SlTabGroup> => {
+  const showTabGroup = async (tabGroup: SlTabGroup): Promise<SlTabGroup> => {
     triggerIntersectionObserverToShowTabPanels(tabGroup);
 
-    return elementUpdated(tabGroup);
+    await wait();
+
+    return tabGroup;
   };
 
   beforeEach(() => {
@@ -214,16 +221,6 @@ describe('<sl-tab-group>', () => {
   });
 
   describe('scrolling behavior', () => {
-    const resizeObserverMock = new ResizeObserverMock();
-
-    beforeEach(() => {
-      resizeObserverMock.install();
-    });
-
-    afterEach(() => {
-      resizeObserverMock.uninstall();
-    });
-
     const generateTabs = (n: number): HTMLTemplateResult[] => {
       const result: HTMLTemplateResult[] = [];
       for (let i = 0; i < n; i++) {
@@ -234,25 +231,19 @@ describe('<sl-tab-group>', () => {
     };
 
     it('shows scroll buttons on too many tabs', async () => {
-      const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(20)} </sl-tab-group>`);
+      const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(30)} </sl-tab-group>`);
 
-      expect(resizeObserverMock.mocks).to.have.length(1);
-      resizeObserverMock.mocks[0].executeCallback();
-
-      await elementUpdated(tabGroup);
+      await wait();
 
       const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
-      expect(scrollButtons).to.have.length(2);
+      expect(scrollButtons, 'Both scroll buttons should be shown').to.have.length(2);
     });
 
     it('does not show scroll buttons on too many tabs if deactivated', async () => {
-      const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(20)} </sl-tab-group>`);
+      const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(30)} </sl-tab-group>`);
       tabGroup.noScrollControls = true;
 
-      expect(resizeObserverMock.mocks).to.have.length(1);
-      resizeObserverMock.mocks[0].executeCallback();
-
-      await elementUpdated(tabGroup);
+      await wait();
 
       const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
       expect(scrollButtons).to.have.length(0);
@@ -261,10 +252,7 @@ describe('<sl-tab-group>', () => {
     it('does not show scroll buttons if all tabs fit on the screen', async () => {
       const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(2)} </sl-tab-group>`);
 
-      expect(resizeObserverMock.mocks).to.have.length(1);
-      resizeObserverMock.mocks[0].executeCallback();
-
-      await elementUpdated(tabGroup);
+      await wait();
 
       const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
       expect(scrollButtons).to.have.length(0);
@@ -274,10 +262,7 @@ describe('<sl-tab-group>', () => {
       const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(50)} </sl-tab-group>`);
       tabGroup.placement = 'start';
 
-      expect(resizeObserverMock.mocks).to.have.length(1);
-      resizeObserverMock.mocks[0].executeCallback();
-
-      await elementUpdated(tabGroup);
+      await wait();
 
       const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
       expect(scrollButtons).to.have.length(0);
@@ -287,29 +272,23 @@ describe('<sl-tab-group>', () => {
       const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(50)} </sl-tab-group>`);
       tabGroup.placement = 'end';
 
-      expect(resizeObserverMock.mocks).to.have.length(1);
-      resizeObserverMock.mocks[0].executeCallback();
-
-      await elementUpdated(tabGroup);
+      await wait();
 
       const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
       expect(scrollButtons).to.have.length(0);
     });
 
     it('does scroll on scroll button click', async () => {
-      const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(21)} </sl-tab-group>`);
+      const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(30)} </sl-tab-group>`);
 
-      expect(resizeObserverMock.mocks).to.have.length(1);
-      resizeObserverMock.mocks[0].executeCallback();
-
-      await elementUpdated(tabGroup);
+      await wait();
 
       const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
       expect(scrollButtons).to.have.length(2);
 
       const firstTab = tabGroup.querySelector('[panel="tab-0"]');
       expect(firstTab).not.to.be.null;
-      const lastTab = tabGroup.querySelector('[panel="tab-20"]');
+      const lastTab = tabGroup.querySelector('[panel="tab-29"]');
       expect(lastTab).not.to.be.null;
       expect(isElementVisibleFromScrolling(tabGroup, firstTab!)).to.be.true;
       expect(isElementVisibleFromScrolling(tabGroup, lastTab!)).to.be.false;
