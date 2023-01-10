@@ -687,7 +687,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     return this.input.reportValidity();
   }
 
-  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  /** Sets a custom validation message. Pass an empty string to restore validity. */
   setCustomValidity(message: string) {
     this.input.setCustomValidity(message);
     this.formControlController.updateValidity();
