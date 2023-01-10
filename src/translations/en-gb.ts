@@ -1,4 +1,3 @@
-// cSpell:language en-GB
 import { registerTranslation } from '../utilities/localize';
 import baseTranslation from './en';
 import type { Translation } from '../utilities/localize';
