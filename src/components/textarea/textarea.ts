@@ -4,7 +4,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { defaultValue } from '../../internal/default-value';
-import { FormSubmitController } from '../../internal/form';
+import { FormControlController } from '../../internal/form';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
@@ -37,15 +37,13 @@ import type { CSSResultGroup } from 'lit';
 export default class SlTextarea extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  // @ts-expect-error - Controller is currently unused
-  private readonly formSubmitController = new FormSubmitController(this);
+  private readonly formControlController = new FormControlController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private resizeObserver: ResizeObserver;
 
   @query('.textarea__control') input: HTMLTextAreaElement;
 
   @state() private hasFocus = false;
-  @state() invalid = false;
   @property() title = ''; // make reactive to pass through
 
   /** The name of the textarea, submitted as a name/value pair with form data. */
@@ -139,7 +137,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
   }
 
   firstUpdated() {
-    this.invalid = !this.checkValidity();
+    this.formControlController.updateValidity();
   }
 
   disconnectedCallback() {
@@ -179,9 +177,8 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
 
   @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
-    // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    this.input.disabled = this.disabled;
-    this.invalid = !this.checkValidity();
+    // Disabled form controls are always valid
+    this.formControlController.setValidity(this.disabled);
   }
 
   @watch('rows', { waitUntilFirstUpdate: true })
@@ -192,7 +189,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
   @watch('value', { waitUntilFirstUpdate: true })
   async handleValueChange() {
     await this.updateComplete;
-    this.invalid = !this.checkValidity();
+    this.formControlController.updateValidity();
     this.setTextareaHeight();
   }
 
@@ -267,7 +264,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
   setCustomValidity(message: string) {
     this.input.setCustomValidity(message);
-    this.invalid = !this.checkValidity();
+    this.formControlController.updateValidity();
   }
 
   render() {

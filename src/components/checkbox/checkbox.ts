@@ -4,7 +4,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { defaultValue } from '../../internal/default-value';
-import { FormSubmitController } from '../../internal/form';
+import { FormControlController } from '../../internal/form';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import '../icon/icon';
@@ -39,8 +39,7 @@ import type { CSSResultGroup } from 'lit';
 export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  // @ts-expect-error - Controller is currently unused
-  private readonly formSubmitController = new FormSubmitController(this, {
+  private readonly formControlController = new FormControlController(this, {
     value: (control: SlCheckbox) => (control.checked ? control.value || 'on' : undefined),
     defaultValue: (control: SlCheckbox) => control.defaultChecked,
     setValue: (control: SlCheckbox, checked: boolean) => (control.checked = checked)
@@ -49,7 +48,6 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
   @query('input[type="checkbox"]') input: HTMLInputElement;
 
   @state() private hasFocus = false;
-  @state() invalid = false;
 
   @property() title = ''; // make reactive to pass through
 
@@ -81,7 +79,7 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
   @defaultValue('checked') defaultChecked = false;
 
   firstUpdated() {
-    this.invalid = !this.checkValidity();
+    this.formControlController.updateValidity();
   }
 
   private handleClick() {
@@ -106,16 +104,15 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
 
   @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
-    // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    this.input.disabled = this.disabled;
-    this.invalid = !this.checkValidity();
+    // Disabled form controls are always valid
+    this.formControlController.setValidity(this.disabled);
   }
 
   @watch(['checked', 'indeterminate'], { waitUntilFirstUpdate: true })
   handleStateChange() {
     this.input.checked = this.checked; // force a sync update
     this.input.indeterminate = this.indeterminate; // force a sync update
-    this.invalid = !this.checkValidity();
+    this.formControlController.updateValidity();
   }
 
   /** Simulates a click on the checkbox. */
@@ -149,7 +146,7 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
    */
   setCustomValidity(message: string) {
     this.input.setCustomValidity(message);
-    this.invalid = !this.checkValidity();
+    this.formControlController.updateValidity();
   }
 
   render() {

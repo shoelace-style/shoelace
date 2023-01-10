@@ -4,7 +4,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { defaultValue } from '../../internal/default-value';
-import { FormSubmitController } from '../../internal/form';
+import { FormControlController } from '../../internal/form';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
 import styles from './switch.styles';
@@ -37,8 +37,7 @@ import type { CSSResultGroup } from 'lit';
 export default class SlSwitch extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  // @ts-expect-error - Controller is currently unused
-  private readonly formSubmitController = new FormSubmitController(this, {
+  private readonly formControlController = new FormControlController(this, {
     value: (control: SlSwitch) => (control.checked ? control.value || 'on' : undefined),
     defaultValue: (control: SlSwitch) => control.defaultChecked,
     setValue: (control: SlSwitch, checked: boolean) => (control.checked = checked)
@@ -47,7 +46,6 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
   @query('input[type="checkbox"]') input: HTMLInputElement;
 
   @state() private hasFocus = false;
-  @state() invalid = false;
   @property() title = ''; // make reactive to pass through
 
   /** The name of the switch, submitted as a name/value pair with form data. */
@@ -72,7 +70,7 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
   @defaultValue('checked') defaultChecked = false;
 
   firstUpdated() {
-    this.invalid = !this.checkValidity();
+    this.formControlController.updateValidity();
   }
 
   private handleBlur() {
@@ -113,14 +111,13 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
   @watch('checked', { waitUntilFirstUpdate: true })
   handleCheckedChange() {
     this.input.checked = this.checked; // force a sync update
-    this.invalid = !this.checkValidity();
+    this.formControlController.updateValidity();
   }
 
   @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
-    // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    this.input.disabled = this.disabled;
-    this.invalid = !this.checkValidity();
+    // Disabled form controls are always valid
+    this.formControlController.setValidity(true);
   }
 
   /** Simulates a click on the switch. */
@@ -151,7 +148,7 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
   setCustomValidity(message: string) {
     this.input.setCustomValidity(message);
-    this.invalid = !this.checkValidity();
+    this.formControlController.updateValidity();
   }
 
   render() {

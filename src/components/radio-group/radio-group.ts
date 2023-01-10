@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { FormSubmitController } from '../../internal/form';
+import { FormControlController } from '../../internal/form';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
@@ -38,7 +38,7 @@ import type { CSSResultGroup } from 'lit';
 export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  protected readonly formSubmitController = new FormSubmitController(this, {
+  protected readonly formControlController = new FormControlController(this, {
     defaultValue: control => control.defaultValue
   });
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
@@ -50,7 +50,6 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
   @state() private errorMessage = '';
   @state() private customErrorMessage = '';
   @state() defaultValue = '';
-  @state() invalid = false;
 
   /**
    * The radio group's label. Required for proper accessibility. If you need to display HTML, use the `label` slot
@@ -76,7 +75,7 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
   }
 
   firstUpdated() {
-    this.invalid = !this.validity.valid;
+    this.formControlController.updateValidity();
   }
 
   private getAllRadios() {
@@ -191,7 +190,7 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
   private updateCheckedRadio() {
     const radios = this.getAllRadios();
     radios.forEach(radio => (radio.checked = radio.value === this.value));
-    this.invalid = !this.validity.valid;
+    this.formControlController.setValidity(this.validity.valid);
   }
 
   @watch('value')
@@ -212,9 +211,9 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     this.errorMessage = message;
 
     if (!message) {
-      this.invalid = false;
+      this.formControlController.setValidity(true);
     } else {
-      this.invalid = true;
+      this.formControlController.setValidity(false);
       this.input.setCustomValidity(message);
     }
   }
@@ -243,13 +242,13 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     const validity = this.validity;
 
     this.errorMessage = this.customErrorMessage || validity.valid ? '' : this.input.validationMessage;
-    this.invalid = !validity.valid;
+    this.formControlController.setValidity(validity.valid);
 
     if (!validity.valid) {
       this.showNativeErrorMessage();
     }
 
-    return !this.invalid;
+    return validity.valid;
   }
 
   render() {

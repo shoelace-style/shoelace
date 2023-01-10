@@ -6,7 +6,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { defaultValue } from '../../internal/default-value';
 import { drag } from '../../internal/drag';
-import { FormSubmitController } from '../../internal/form';
+import { FormControlController } from '../../internal/form';
 import { clamp } from '../../internal/math';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
@@ -88,8 +88,7 @@ declare const EyeDropper: EyeDropperConstructor;
 export default class SlColorPicker extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  // @ts-expect-error - Controller is currently unused
-  private readonly formSubmitController = new FormSubmitController(this);
+  private readonly formControlController = new FormControlController(this);
   private isSafeValue = false;
   private lastValueEmitted: string;
   private readonly localize = new LocalizeController(this);
@@ -105,7 +104,6 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
   @state() private saturation = 100;
   @state() private brightness = 100;
   @state() private alpha = 100;
-  @state() invalid = false;
 
   /**
    * The current value of the color picker. The value's format will vary based the `format` attribute. To get the value
@@ -679,7 +677,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
   reportValidity() {
-    if (!this.inline && this.input.invalid) {
+    if (!this.inline && !this.checkValidity()) {
       // If the input is inline and invalid, show the dropdown so the browser can focus on it
       this.dropdown.show();
       this.addEventListener('sl-after-show', () => this.input.reportValidity(), { once: true });
@@ -692,7 +690,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
   /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
   setCustomValidity(message: string) {
     this.input.setCustomValidity(message);
-    this.invalid = this.input.invalid;
+    this.formControlController.updateValidity();
   }
 
   render() {
