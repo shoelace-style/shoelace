@@ -310,7 +310,6 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
               'textarea--disabled': this.disabled,
               'textarea--focused': this.hasFocus,
               'textarea--empty': !this.value,
-              'textarea--invalid': this.invalid,
               'textarea--resize-none': this.resize === 'none',
               'textarea--resize-vertical': this.resize === 'vertical',
               'textarea--resize-auto': this.resize === 'auto'

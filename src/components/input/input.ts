@@ -428,7 +428,6 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
               'input--disabled': this.disabled,
               'input--focused': this.hasFocus,
               'input--empty': !this.value,
-              'input--invalid': this.invalid,
               'input--no-spin-buttons': this.noSpinButtons,
               'input--is-firefox': isFirefox
             })}
