@@ -18,6 +18,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-color-picker>` that logged a console error when parsing swatches with whitespace
 - Fixed a bug in `<sl-color-picker>` that caused selected colors to be wrong due to incorrect HSV calculations
 - Fixed a bug in `<sl-radio-button>` that caused the checked button's right border to be incorrect [#1110](https://github.com/shoelace-style/shoelace/issues/1110)
+- Fixed a bug in `<sl-spinner>` that caused the animation to stop working correctly in Safari [#1121](https://github.com/shoelace-style/shoelace/issues/1121)
 
 ## 2.0.0-beta.88
 
