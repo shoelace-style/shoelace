@@ -1,8 +1,7 @@
-import { elementUpdated, expect, fixture } from '@open-wc/testing';
+import { elementUpdated, expect, fixture, waitUntil } from '@open-wc/testing';
 import { html } from 'lit';
 import { clickOnElement } from '../../internal/test';
 import { queryByTestId } from '../../internal/test/data-testid-helpers';
-import { IntersectionObserverMock } from '../../internal/test/intersection-observer-mock';
 import type SlTabPanel from '../tab-panel/tab-panel';
 import type SlTab from '../tab/tab';
 import type SlTabGroup from './tab-group';
@@ -16,6 +15,14 @@ interface ClientRectangles {
 const wait = async (delayInMs = 0): Promise<void> => {
   return new Promise(resolve => {
     window.setTimeout(() => resolve(), delayInMs);
+  });
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const waitForScrollButtonsToBeRendered = (tabGroup: SlTabGroup): Promise<any> => {
+  return waitUntil(() => {
+    const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
+    return scrollButtons?.length === 2;
   });
 };
 
@@ -75,39 +82,19 @@ const expectHeaderToBeVisible = (container: HTMLElement, dataTestid: string): vo
   expect(generalHeader).to.be.visible;
 };
 
-const expectOnlyOneTabPanelToBeActive = (container: HTMLElement, dataTestIdOfActiveTab: string) => {
+const expectOnlyOneTabPanelToBeActive = async (container: HTMLElement, dataTestIdOfActiveTab: string) => {
+  await waitUntil(() => {
+    const tabPanels = Array.from(container.getElementsByTagName('sl-tab-panel'));
+    const activeTabPanels = tabPanels.filter((element: SlTabPanel) => element.hasAttribute('active'));
+    return activeTabPanels.length === 1;
+  });
   const tabPanels = Array.from(container.getElementsByTagName('sl-tab-panel'));
-
   const activeTabPanels = tabPanels.filter((element: SlTabPanel) => element.hasAttribute('active'));
-  expect(activeTabPanels).to.have.length(1, `Expect to have exactly one active tab panel`);
+  expect(activeTabPanels).to.have.lengthOf(1);
   expect(activeTabPanels[0]).to.have.attribute('data-testid', dataTestIdOfActiveTab);
 };
 
 describe('<sl-tab-group>', () => {
-  const intersectionObserverMock = new IntersectionObserverMock();
-
-  const triggerIntersectionObserverToShowTabPanels = (tabGroup: SlTabGroup) => {
-    const mocks = intersectionObserverMock.mocks;
-    expect(mocks.length).to.be.equal(1);
-    mocks[0].executeCallback([{ intersectionRatio: 1.0, target: tabGroup } as unknown as IntersectionObserverEntry]);
-  };
-
-  const showTabGroup = async (tabGroup: SlTabGroup): Promise<SlTabGroup> => {
-    triggerIntersectionObserverToShowTabPanels(tabGroup);
-
-    await wait();
-
-    return tabGroup;
-  };
-
-  beforeEach(() => {
-    intersectionObserverMock.install();
-  });
-
-  afterEach(() => {
-    intersectionObserverMock.uninstall();
-  });
-
   it('renders', async () => {
     const tabGroup = await fixture<SlTabGroup>(html`
       <sl-tab-group>
@@ -154,9 +141,7 @@ describe('<sl-tab-group>', () => {
       </sl-tab-group>
     `);
 
-    await showTabGroup(tabGroup);
-
-    expectOnlyOneTabPanelToBeActive(tabGroup, 'general-tab-content');
+    await expectOnlyOneTabPanelToBeActive(tabGroup, 'general-tab-content');
   });
 
   describe('proper positioning', () => {
@@ -168,7 +153,7 @@ describe('<sl-tab-group>', () => {
         </sl-tab-group>
       `);
 
-      await showTabGroup(tabGroup);
+      await wait();
 
       const clientRectangles = getClientRectangles(tabGroup);
       expect(clientRectangles.body?.top).to.be.greaterThanOrEqual(clientRectangles.navigation?.bottom || -Infinity);
@@ -183,7 +168,7 @@ describe('<sl-tab-group>', () => {
       `);
       tabGroup.placement = 'bottom';
 
-      await showTabGroup(tabGroup);
+      await wait();
 
       const clientRectangles = getClientRectangles(tabGroup);
       expect(clientRectangles.body?.bottom).to.be.lessThanOrEqual(clientRectangles.navigation?.top || +Infinity);
@@ -198,7 +183,7 @@ describe('<sl-tab-group>', () => {
       `);
       tabGroup.placement = 'start';
 
-      await showTabGroup(tabGroup);
+      await wait();
 
       const clientRectangles = getClientRectangles(tabGroup);
       expect(clientRectangles.body?.left).to.be.greaterThanOrEqual(clientRectangles.navigation?.right || -Infinity);
@@ -213,7 +198,7 @@ describe('<sl-tab-group>', () => {
       `);
       tabGroup.placement = 'end';
 
-      await showTabGroup(tabGroup);
+      await wait();
 
       const clientRectangles = getClientRectangles(tabGroup);
       expect(clientRectangles.body?.right).to.be.lessThanOrEqual(clientRectangles.navigation?.left || -Infinity);
@@ -233,7 +218,7 @@ describe('<sl-tab-group>', () => {
     it('shows scroll buttons on too many tabs', async () => {
       const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(30)} </sl-tab-group>`);
 
-      await wait();
+      await waitForScrollButtonsToBeRendered(tabGroup);
 
       const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
       expect(scrollButtons, 'Both scroll buttons should be shown').to.have.length(2);
@@ -281,8 +266,7 @@ describe('<sl-tab-group>', () => {
     it('does scroll on scroll button click', async () => {
       const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(30)} </sl-tab-group>`);
 
-      await wait();
-
+      await waitForScrollButtonsToBeRendered(tabGroup);
       const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
       expect(scrollButtons).to.have.length(2);
 
