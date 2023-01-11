@@ -1,67 +1,58 @@
 {
   "Color Primitives": {
+    "$description": "Example description of colors",
     "Gray": {
+      "$description": "Gray colors",
       "color-gray-50": {
-        "themes": {
-          "light": "hsl(0 0% 97.5%)",
-          "dark": "hsl(240 5.1% 15%)"
+        "$value": "hsl(0 0% 97.5%)",
+        "$extensions": {
+          "style.shoelace.theme-dark": "hsl(240 5.1% 15%)"
         }
       },
       "color-gray-100": {
-        "themes": {
-          "light": "hsl(240 4.8% 95.9%)",
-          "dark": "hsl(240 5.7% 18.2%)"
+        "$value": "hsl(240 4.8% 95.9%)",
+        "$extensions": {
+          "style.shoelace.theme-dark": "hsl(240 5.7% 18.2%)"
         }
       }
     }
   },
   "Theme Tokens": {
+    "$description": "These are semantic colors",
     "Primary": {
       "color-primary-50": {
-        "themes": {
-          "light": "var(--sl-color-sky-50)",
-          "dark": "var(--sl-color-sky-50)"
-        }
+        "$value": "var(--sl-color-sky-50)"
       },
       "color-primary-100": {
-        "themes": {
-          "light": "var(--sl-color-sky-100)",
-          "dark": "var(--sl-color-sky-100)"
-        }
+        "$value": "var(--sl-color-sky-100)"
       }
     },
     "Warning": {
       "color-warning-50": {
-        "themes": {
-          "light": "var(--sl-color-amber-50)",
-          "dark": "var(--sl-color-amber-50)"
-        }
+        "$value": "var(--sl-color-amber-50)"
       },
       "color-warning-100": {
-        "themes": {
-          "light": "var(--sl-color-amber-100)",
-          "dark": "var(--sl-color-amber-100)"
-        }
+        "$value": "var(--sl-color-amber-100)"
       }
     }
   },
   "Border Radii": {
     "border-radius-small": {
-      "themes": {
-        "light": "0.1875rem"
-      },
-      "comment": "3px"
+      "$value": "0.1875rem",
+      "$extensions": {
+        "style.shoelace.comment": "3px"
+      }
     },
     "border-radius-medium": {
-      "themes": {
-        "light": "0.25rem"
-      },
-      "comment": "4px"
+      "$value": "0.25rem",
+      "$extensions": {
+        "style.shoelace.comment": "4px"
+      }
     },
     "border-radius-circle": {
-      "newline": true,
-      "themes": {
-        "light": "50%"
+      "$value": "50%",
+      "$extensions": {
+        "style.shoelace.newline": true
       }
     }
   }
