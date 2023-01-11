@@ -4,7 +4,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { defaultValue } from '../../internal/default-value';
-import { FormSubmitController } from '../../internal/form';
+import { FormControlController } from '../../internal/form';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
@@ -37,15 +37,13 @@ import type { CSSResultGroup } from 'lit';
 export default class SlTextarea extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  @query('.textarea__control') input: HTMLTextAreaElement;
-
-  // @ts-expect-error -- Controller is currently unused
-  private readonly formSubmitController = new FormSubmitController(this);
+  private readonly formControlController = new FormControlController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private resizeObserver: ResizeObserver;
 
+  @query('.textarea__control') input: HTMLTextAreaElement;
+
   @state() private hasFocus = false;
-  @state() invalid = false;
   @property() title = ''; // make reactive to pass through
 
   /** The name of the textarea, submitted as a name/value pair with form data. */
@@ -139,12 +137,60 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
   }
 
   firstUpdated() {
-    this.invalid = !this.input.checkValidity();
+    this.formControlController.updateValidity();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.resizeObserver.unobserve(this.input);
+  }
+
+  private handleBlur() {
+    this.hasFocus = false;
+    this.emit('sl-blur');
+  }
+
+  private handleChange() {
+    this.value = this.input.value;
+    this.setTextareaHeight();
+    this.emit('sl-change');
+  }
+
+  private handleFocus() {
+    this.hasFocus = true;
+    this.emit('sl-focus');
+  }
+
+  private handleInput() {
+    this.value = this.input.value;
+    this.emit('sl-input');
+  }
+
+  private setTextareaHeight() {
+    if (this.resize === 'auto') {
+      this.input.style.height = 'auto';
+      this.input.style.height = `${this.input.scrollHeight}px`;
+    } else {
+      (this.input.style.height as string | undefined) = undefined;
+    }
+  }
+
+  @watch('disabled', { waitUntilFirstUpdate: true })
+  handleDisabledChange() {
+    // Disabled form controls are always valid
+    this.formControlController.setValidity(this.disabled);
+  }
+
+  @watch('rows', { waitUntilFirstUpdate: true })
+  handleRowsChange() {
+    this.setTextareaHeight();
+  }
+
+  @watch('value', { waitUntilFirstUpdate: true })
+  async handleValueChange() {
+    await this.updateComplete;
+    this.formControlController.updateValidity();
+    this.setTextareaHeight();
   }
 
   /** Sets focus on the textarea. */
@@ -215,59 +261,10 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
     return this.input.reportValidity();
   }
 
-  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  /** Sets a custom validation message. Pass an empty string to restore validity. */
   setCustomValidity(message: string) {
     this.input.setCustomValidity(message);
-    this.invalid = !this.input.checkValidity();
-  }
-
-  handleBlur() {
-    this.hasFocus = false;
-    this.emit('sl-blur');
-  }
-
-  handleChange() {
-    this.value = this.input.value;
-    this.setTextareaHeight();
-    this.emit('sl-change');
-  }
-
-  @watch('disabled', { waitUntilFirstUpdate: true })
-  handleDisabledChange() {
-    // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    this.input.disabled = this.disabled;
-    this.invalid = !this.input.checkValidity();
-  }
-
-  handleFocus() {
-    this.hasFocus = true;
-    this.emit('sl-focus');
-  }
-
-  handleInput() {
-    this.value = this.input.value;
-    this.emit('sl-input');
-  }
-
-  @watch('rows', { waitUntilFirstUpdate: true })
-  handleRowsChange() {
-    this.setTextareaHeight();
-  }
-
-  @watch('value', { waitUntilFirstUpdate: true })
-  handleValueChange() {
-    this.input.value = this.value; // force a sync update
-    this.invalid = !this.input.checkValidity();
-    this.updateComplete.then(() => this.setTextareaHeight());
-  }
-
-  setTextareaHeight() {
-    if (this.resize === 'auto') {
-      this.input.style.height = 'auto';
-      this.input.style.height = `${this.input.scrollHeight}px`;
-    } else {
-      (this.input.style.height as string | undefined) = undefined;
-    }
+    this.formControlController.updateValidity();
   }
 
   render() {
@@ -310,7 +307,6 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
               'textarea--disabled': this.disabled,
               'textarea--focused': this.hasFocus,
               'textarea--empty': !this.value,
-              'textarea--invalid': this.invalid,
               'textarea--resize-none': this.resize === 'none',
               'textarea--resize-vertical': this.resize === 'vertical',
               'textarea--resize-auto': this.resize === 'auto'

@@ -32,13 +32,18 @@ import type { CSSResultGroup } from 'lit';
 export default class SlRadioButton extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
+  private readonly hasSlotController = new HasSlotController(this, '[default]', 'prefix', 'suffix');
+
   @query('.button') input: HTMLInputElement;
   @query('.hidden-input') hiddenInput: HTMLInputElement;
 
-  private readonly hasSlotController = new HasSlotController(this, '[default]', 'prefix', 'suffix');
-
   @state() protected hasFocus = false;
-  @state() checked = false;
+
+  /**
+   * @internal The radio button's checked state. This is exposed as an "internal" attribute so we can reflect it, making
+   * it easier to style in button groups.
+   */
+  @property({ type: Boolean, reflect: true }) checked = false;
 
   /** The radio's value. When selected, the radio group will receive this value. */
   @property() value: string;
@@ -52,9 +57,34 @@ export default class SlRadioButton extends ShoelaceElement {
   /** Draws a pill-style radio button with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;
 
-  connectedCallback(): void {
+  connectedCallback() {
     super.connectedCallback();
     this.setAttribute('role', 'presentation');
+  }
+
+  private handleBlur() {
+    this.hasFocus = false;
+    this.emit('sl-blur');
+  }
+
+  private handleClick(e: MouseEvent) {
+    if (this.disabled) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+
+    this.checked = true;
+  }
+
+  private handleFocus() {
+    this.hasFocus = true;
+    this.emit('sl-focus');
+  }
+
+  @watch('disabled', { waitUntilFirstUpdate: true })
+  handleDisabledChange() {
+    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
   }
 
   /** Sets focus on the radio button. */
@@ -65,31 +95,6 @@ export default class SlRadioButton extends ShoelaceElement {
   /** Removes focus from the radio button. */
   blur() {
     this.input.blur();
-  }
-
-  handleBlur() {
-    this.hasFocus = false;
-    this.emit('sl-blur');
-  }
-
-  handleClick(e: MouseEvent) {
-    if (this.disabled) {
-      e.preventDefault();
-      e.stopPropagation();
-      return;
-    }
-
-    this.checked = true;
-  }
-
-  @watch('disabled', { waitUntilFirstUpdate: true })
-  handleDisabledChange() {
-    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
-  }
-
-  handleFocus() {
-    this.hasFocus = true;
-    this.emit('sl-focus');
   }
 
   render() {

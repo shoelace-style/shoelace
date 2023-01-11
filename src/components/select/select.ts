@@ -5,7 +5,7 @@ import { scrollIntoView } from 'src/internal/scroll';
 import { animateTo, stopAnimations } from '../../internal/animate';
 import { defaultValue } from '../../internal/default-value';
 import { waitForEvent } from '../../internal/event';
-import { FormSubmitController } from '../../internal/form';
+import { FormControlController } from '../../internal/form';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
@@ -55,6 +55,8 @@ import type { CSSResultGroup } from 'lit';
  * @csspart prefix - The container that wraps the prefix slot.
  * @csspart display-input - The element that displays the selected option's label, an `<input>` element.
  * @csspart listbox - The listbox container where options are slotted.
+ * @csspart tags - The container that houses option tags when `multiselect` is used.
+ * @csspart tag - The individual tags that represent each multiselect option.
  * @csspart clear-button - The clear button.
  * @csspart expand-icon - The container that wraps the expand icon.
  */
@@ -62,24 +64,22 @@ import type { CSSResultGroup } from 'lit';
 export default class SlSelect extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
+  private readonly formControlController = new FormControlController(this);
+  private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
+  private readonly localize = new LocalizeController(this);
+  private typeToSelectString = '';
+  private typeToSelectTimeout: number;
+
   @query('.select') popup: SlPopup;
   @query('.select__combobox') combobox: HTMLSlotElement;
   @query('.select__display-input') displayInput: HTMLInputElement;
   @query('.select__value-input') valueInput: HTMLInputElement;
   @query('.select__listbox') listbox: HTMLSlotElement;
 
-  // @ts-expect-error -- Controller is currently unused
-  private readonly formSubmitController = new FormSubmitController(this);
-  private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
-  private readonly localize = new LocalizeController(this);
-  private typeToSelectString = '';
-  private typeToSelectTimeout: number;
-
   @state() private hasFocus = false;
   @state() displayLabel = '';
   @state() currentOption: SlOption;
   @state() selectedOptions: SlOption[] = [];
-  @state() invalid = false;
 
   /** The name of the select, submitted as a name/value pair with form data. */
   @property() name = '';
@@ -161,32 +161,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
     // Because this is a form control, it shouldn't be opened initially
     this.open = false;
-  }
-
-  /** Checks for validity but does not show the browser's validation message. */
-  checkValidity() {
-    return this.valueInput.checkValidity();
-  }
-
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
-  reportValidity() {
-    return this.valueInput.reportValidity();
-  }
-
-  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
-  setCustomValidity(message: string) {
-    this.valueInput.setCustomValidity(message);
-    this.invalid = !this.valueInput.checkValidity();
-  }
-
-  /** Sets focus on the control. */
-  focus(options?: FocusOptions) {
-    this.displayInput.focus(options);
-  }
-
-  /** Removes focus from the control. */
-  blur() {
-    this.displayInput.blur();
   }
 
   private addOpenListeners() {
@@ -442,6 +416,16 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     this.setSelectedOptions(allOptions.filter(el => value.includes(el.value)));
   }
 
+  private handleTagRemove(event: CustomEvent, option: SlOption) {
+    event.stopPropagation();
+
+    if (!this.disabled) {
+      this.toggleOptionSelection(option, false);
+      this.emit('sl-input');
+      this.emit('sl-change');
+    }
+  }
+
   // Gets an array of all <sl-option> elements
   private getAllOptions() {
     return [...this.querySelectorAll<SlOption>('sl-option')];
@@ -513,14 +497,22 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     // Update the value and display label
     if (this.multiple) {
       this.value = this.selectedOptions.map(el => el.value);
-      this.displayLabel = this.localize.term('numOptionsSelected', this.selectedOptions.length);
+
+      if (this.placeholder && this.value.length === 0) {
+        // When no items are selected, keep the value empty so the placeholder shows
+        this.displayLabel = '';
+      } else {
+        this.displayLabel = this.localize.term('numOptionsSelected', this.selectedOptions.length);
+      }
     } else {
       this.value = this.selectedOptions[0]?.value ?? '';
       this.displayLabel = this.selectedOptions[0]?.getTextLabel() ?? '';
     }
 
     // Update validity
-    this.updateComplete.then(() => (this.invalid = !this.checkValidity()));
+    this.updateComplete.then(() => {
+      this.formControlController.updateValidity();
+    });
   }
 
   @watch('disabled', { waitUntilFirstUpdate: true })
@@ -539,28 +531,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
     // Select only the options that match the new value
     this.setSelectedOptions(allOptions.filter(el => value.includes(el.value)));
-  }
-
-  /** Shows the listbox. */
-  async show() {
-    if (this.open || this.disabled) {
-      this.open = false;
-      return undefined;
-    }
-
-    this.open = true;
-    return waitForEvent(this, 'sl-after-show');
-  }
-
-  /** Hides the listbox. */
-  async hide() {
-    if (!this.open || this.disabled) {
-      this.open = false;
-      return undefined;
-    }
-
-    this.open = false;
-    return waitForEvent(this, 'sl-after-hide');
   }
 
   @watch('open', { waitUntilFirstUpdate: true })
@@ -606,12 +576,61 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     }
   }
 
+  /** Shows the listbox. */
+  async show() {
+    if (this.open || this.disabled) {
+      this.open = false;
+      return undefined;
+    }
+
+    this.open = true;
+    return waitForEvent(this, 'sl-after-show');
+  }
+
+  /** Hides the listbox. */
+  async hide() {
+    if (!this.open || this.disabled) {
+      this.open = false;
+      return undefined;
+    }
+
+    this.open = false;
+    return waitForEvent(this, 'sl-after-hide');
+  }
+
+  /** Checks for validity but does not show the browser's validation message. */
+  checkValidity() {
+    return this.valueInput.checkValidity();
+  }
+
+  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  reportValidity() {
+    return this.valueInput.reportValidity();
+  }
+
+  /** Sets a custom validation message. Pass an empty string to restore validity. */
+  setCustomValidity(message: string) {
+    this.valueInput.setCustomValidity(message);
+    this.formControlController.updateValidity();
+  }
+
+  /** Sets focus on the control. */
+  focus(options?: FocusOptions) {
+    this.displayInput.focus(options);
+  }
+
+  /** Removes focus from the control. */
+  blur() {
+    this.displayInput.blur();
+  }
+
   render() {
     const hasLabelSlot = this.hasSlotController.test('label');
     const hasHelpTextSlot = this.hasSlotController.test('help-text');
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
     const hasClearIcon = this.clearable && !this.disabled && this.value.length > 0;
+    const isPlaceholderVisible = this.placeholder && this.value.length === 0;
 
     return html`
       <div
@@ -646,6 +665,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
               'select--disabled': this.disabled,
               'select--multiple': this.multiple,
               'select--focused': this.hasFocus,
+              'select--placeholder-visible': isPlaceholderVisible,
               'select--top': this.placement === 'top',
               'select--bottom': this.placement === 'bottom',
               'select--small': this.size === 'small',
@@ -699,14 +719,11 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
                         if (index < this.maxOptionsVisible || this.maxOptionsVisible <= 0) {
                           return html`
                             <sl-tag
+                              part="tag"
+                              ?pill=${this.pill}
                               size=${this.size}
                               removable
-                              @sl-remove=${(event: CustomEvent) => {
-                                event.stopPropagation();
-                                if (!this.disabled) {
-                                  this.toggleOptionSelection(option, false);
-                                }
-                              }}
+                              @sl-remove=${(event: CustomEvent) => this.handleTagRemove(event, option)}
                             >
                               ${option.getTextLabel()}
                             </sl-tag>

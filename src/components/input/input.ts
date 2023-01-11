@@ -4,7 +4,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { defaultValue } from '../../internal/default-value';
-import { FormSubmitController } from '../../internal/form';
+import { FormControlController } from '../../internal/form';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
@@ -14,8 +14,9 @@ import styles from './input.styles';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type { CSSResultGroup } from 'lit';
 
+//
 // It's currently impossible to hide Firefox's built-in clear icon when using <input type="date|time">, so we need this
-// check to apply a clip-path to hide it. I know, I know...user agent sniffing is nasty but, if it fails, we only see a
+// check to apply a clip-path to hide it. I know, I know…user agent sniffing is nasty but, if it fails, we only see a
 // redundant clear icon so nothing important is breaking. The benefits outweigh the costs for this one. See the
 // discussion at: https://github.com/shoelace-style/shoelace/pull/794
 //
@@ -62,14 +63,13 @@ const isFirefox = isChromium ? false : navigator.userAgent.includes('Firefox');
 export default class SlInput extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  @query('.input__control') input: HTMLInputElement;
-
-  private readonly formSubmitController = new FormSubmitController(this);
+  private readonly formControlController = new FormControlController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private readonly localize = new LocalizeController(this);
 
+  @query('.input__control') input: HTMLInputElement;
+
   @state() private hasFocus = false;
-  @state() invalid = false;
   @property() title = ''; // make reactive to pass through
 
   /**
@@ -146,10 +146,10 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   @property({ type: Number }) maxlength: number;
 
   /** The input's minimum value. Only applies to date and number input types. */
-  @property() min: number;
+  @property({ type: Number }) min: number;
 
   /** The input's maximum value. Only applies to date and number input types. */
-  @property() max: number;
+  @property({ type: Number }) max: number;
 
   /**
    * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
@@ -219,7 +219,86 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   }
 
   firstUpdated() {
-    this.invalid = !this.input.checkValidity();
+    this.formControlController.updateValidity();
+  }
+
+  private handleBlur() {
+    this.hasFocus = false;
+    this.emit('sl-blur');
+  }
+
+  private handleChange() {
+    this.value = this.input.value;
+    this.emit('sl-change');
+  }
+
+  private handleClearClick(event: MouseEvent) {
+    this.value = '';
+    this.emit('sl-clear');
+    this.emit('sl-input');
+    this.emit('sl-change');
+    this.input.focus();
+
+    event.stopPropagation();
+  }
+
+  private handleFocus() {
+    this.hasFocus = true;
+    this.emit('sl-focus');
+  }
+
+  private handleInput() {
+    this.value = this.input.value;
+    this.formControlController.updateValidity();
+    this.emit('sl-input');
+  }
+
+  private handleInvalid() {
+    this.formControlController.setValidity(false);
+  }
+
+  private handleKeyDown(event: KeyboardEvent) {
+    const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+
+    // Pressing enter when focused on an input should submit the form like a native input, but we wait a tick before
+    // submitting to allow users to cancel the keydown event if they need to
+    if (event.key === 'Enter' && !hasModifier) {
+      setTimeout(() => {
+        //
+        // When using an Input Method Editor (IME), pressing enter will cause the form to submit unexpectedly. One way
+        // to check for this is to look at event.isComposing, which will be true when the IME is open.
+        //
+        // See https://github.com/shoelace-style/shoelace/pull/988
+        //
+        if (!event.defaultPrevented && !event.isComposing) {
+          this.formControlController.submit();
+        }
+      });
+    }
+  }
+
+  private handlePasswordToggle() {
+    this.passwordVisible = !this.passwordVisible;
+  }
+
+  @watch('disabled', { waitUntilFirstUpdate: true })
+  handleDisabledChange() {
+    // Disabled form controls are always valid
+    this.formControlController.setValidity(this.disabled);
+  }
+
+  @watch('step', { waitUntilFirstUpdate: true })
+  handleStepChange() {
+    // If step changes, the value may become invalid so we need to recheck after the update. We set the new step
+    // imperatively so we don't have to wait for the next render to report the updated validity.
+    this.input.step = String(this.step);
+    this.formControlController.updateValidity();
+  }
+
+  @watch('value', { waitUntilFirstUpdate: true })
+  async handleValueChange() {
+    await this.updateComplete;
+    this.formControlController.updateValidity();
   }
 
   /** Sets focus on the input. */
@@ -294,89 +373,10 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
     return this.input.reportValidity();
   }
 
-  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  /** Sets a custom validation message. Pass an empty string to restore validity. */
   setCustomValidity(message: string) {
     this.input.setCustomValidity(message);
-    this.invalid = !this.input.checkValidity();
-  }
-
-  handleBlur() {
-    this.hasFocus = false;
-    this.emit('sl-blur');
-  }
-
-  handleChange() {
-    this.value = this.input.value;
-    this.emit('sl-change');
-  }
-
-  handleClearClick(event: MouseEvent) {
-    this.value = '';
-    this.emit('sl-clear');
-    this.emit('sl-input');
-    this.emit('sl-change');
-    this.input.focus();
-
-    event.stopPropagation();
-  }
-
-  @watch('disabled', { waitUntilFirstUpdate: true })
-  handleDisabledChange() {
-    // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    this.input.disabled = this.disabled;
-    this.invalid = !this.input.checkValidity();
-  }
-
-  @watch('step', { waitUntilFirstUpdate: true })
-  handleStepChange() {
-    // If step changes, the value may become invalid so we need to recheck after the update. We set the new step
-    // imperatively so we don't have to wait for the next render to report the updated validity.
-    this.input.step = String(this.step);
-    this.invalid = !this.input.checkValidity();
-  }
-
-  handleFocus() {
-    this.hasFocus = true;
-    this.emit('sl-focus');
-  }
-
-  handleInput() {
-    this.value = this.input.value;
-    this.emit('sl-input');
-  }
-
-  handleInvalid() {
-    this.invalid = true;
-  }
-
-  handleKeyDown(event: KeyboardEvent) {
-    const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
-
-    // Pressing enter when focused on an input should submit the form like a native input, but we wait a tick before
-    // submitting to allow users to cancel the keydown event if they need to
-    if (event.key === 'Enter' && !hasModifier) {
-      setTimeout(() => {
-        //
-        // When using an Input Method Editor (IME), pressing enter will cause the form to submit unexpectedly. One way
-        // to check for this is to look at event.isComposing, which will be true when the IME is open.
-        //
-        // See https://github.com/shoelace-style/shoelace/pull/988
-        //
-        if (!event.defaultPrevented && !event.isComposing) {
-          this.formSubmitController.submit();
-        }
-      });
-    }
-  }
-
-  handlePasswordToggle() {
-    this.passwordVisible = !this.passwordVisible;
-  }
-
-  @watch('value', { waitUntilFirstUpdate: true })
-  handleValueChange() {
-    this.input.value = this.value; // force a sync update
-    this.invalid = !this.input.checkValidity();
+    this.formControlController.updateValidity();
   }
 
   render() {
@@ -426,7 +426,6 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
               'input--disabled': this.disabled,
               'input--focused': this.hasFocus,
               'input--empty': !this.value,
-              'input--invalid': this.invalid,
               'input--no-spin-buttons': this.noSpinButtons,
               'input--is-firefox': isFirefox
             })}
@@ -458,7 +457,6 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
               enterkeyhint=${ifDefined(this.enterkeyhint)}
               inputmode=${ifDefined(this.inputmode)}
               aria-describedby="help-text"
-              aria-invalid=${this.invalid ? 'true' : 'false'}
               @change=${this.handleChange}
               @input=${this.handleInput}
               @invalid=${this.handleInvalid}

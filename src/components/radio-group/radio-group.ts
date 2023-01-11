@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { FormSubmitController } from '../../internal/form';
+import { FormControlController } from '../../internal/form';
 import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
 import { watch } from '../../internal/watch';
@@ -38,19 +38,17 @@ import type { CSSResultGroup } from 'lit';
 export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  protected readonly formSubmitController = new FormSubmitController(this, {
-    defaultValue: control => control.defaultValue
-  });
+  protected readonly formControlController = new FormControlController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
+  private customValidityMessage = '';
+  private validationTimeout: number;
 
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
-  @query('.radio-group__validation-input') input: HTMLInputElement;
+  @query('.radio-group__validation-input') validationInput: HTMLInputElement;
 
   @state() private hasButtonGroup = false;
   @state() private errorMessage = '';
-  @state() private customErrorMessage = '';
   @state() defaultValue = '';
-  @state() invalid = false;
 
   /**
    * The radio group's label. Required for proper accessibility. If you need to display HTML, use the `label` slot
@@ -70,78 +68,20 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
   /** Ensures a child radio is checked before allowing the containing form to submit. */
   @property({ type: Boolean, reflect: true }) required = false;
 
-  @watch('value')
-  handleValueChange() {
-    if (this.hasUpdated) {
-      this.updateCheckedRadio();
-    }
-  }
-
   connectedCallback() {
     super.connectedCallback();
     this.defaultValue = this.value;
   }
 
   firstUpdated() {
-    this.invalid = !this.validity.valid;
+    this.formControlController.updateValidity();
   }
 
-  /** Checks for validity but does not show the browser's validation message. */
-  checkValidity() {
-    return this.validity.valid;
-  }
-
-  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
-  setCustomValidity(message = '') {
-    this.customErrorMessage = message;
-    this.errorMessage = message;
-
-    if (!message) {
-      this.invalid = false;
-    } else {
-      this.invalid = true;
-      this.input.setCustomValidity(message);
-    }
-  }
-
-  get validity(): ValidityState {
-    const hasMissingData = !((this.value && this.required) || !this.required);
-    const hasCustomError = this.customErrorMessage !== '';
-
-    return {
-      badInput: false,
-      customError: hasCustomError,
-      patternMismatch: false,
-      rangeOverflow: false,
-      rangeUnderflow: false,
-      stepMismatch: false,
-      tooLong: false,
-      tooShort: false,
-      typeMismatch: false,
-      valid: hasMissingData || hasCustomError ? false : true,
-      valueMissing: !hasMissingData
-    };
-  }
-
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
-  reportValidity(): boolean {
-    const validity = this.validity;
-
-    this.errorMessage = this.customErrorMessage || validity.valid ? '' : this.input.validationMessage;
-    this.invalid = !validity.valid;
-
-    if (!validity.valid) {
-      this.showNativeErrorMessage();
-    }
-
-    return !this.invalid;
-  }
-
-  getAllRadios() {
+  private getAllRadios() {
     return [...this.querySelectorAll<SlRadio | SlRadioButton>('sl-radio, sl-radio-button')];
   }
 
-  handleRadioClick(event: MouseEvent) {
+  private handleRadioClick(event: MouseEvent) {
     const target = event.target as SlRadio | SlRadioButton;
     const radios = this.getAllRadios();
     const oldValue = this.value;
@@ -159,7 +99,7 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     }
   }
 
-  handleKeyDown(event: KeyboardEvent) {
+  private handleKeyDown(event: KeyboardEvent) {
     if (!['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(event.key)) {
       return;
     }
@@ -204,7 +144,7 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     event.preventDefault();
   }
 
-  handleLabelClick() {
+  private handleLabelClick() {
     const radios = this.getAllRadios();
     const checked = radios.find(radio => radio.checked);
     const radioToFocus = checked || radios[0];
@@ -215,7 +155,7 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     }
   }
 
-  handleSlotChange() {
+  private handleSlotChange() {
     const radios = this.getAllRadios();
 
     radios.forEach(radio => (radio.checked = radio.value === this.value));
@@ -240,16 +180,56 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     }
   }
 
-  showNativeErrorMessage() {
-    this.input.hidden = false;
-    this.input.reportValidity();
-    setTimeout(() => (this.input.hidden = true), 10000);
-  }
-
-  updateCheckedRadio() {
+  private updateCheckedRadio() {
     const radios = this.getAllRadios();
     radios.forEach(radio => (radio.checked = radio.value === this.value));
-    this.invalid = !this.validity.valid;
+    this.formControlController.setValidity(this.checkValidity());
+  }
+
+  @watch('value')
+  handleValueChange() {
+    if (this.hasUpdated) {
+      this.updateCheckedRadio();
+    }
+  }
+
+  /** Checks for validity but does not show the browser's validation message. */
+  checkValidity() {
+    const isRequiredAndEmpty = this.required && !this.value;
+    const hasCustomValidityMessage = this.customValidityMessage !== '';
+
+    if (isRequiredAndEmpty || hasCustomValidityMessage) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /** Sets a custom validation message. Pass an empty string to restore validity. */
+  setCustomValidity(message = '') {
+    this.customValidityMessage = message;
+    this.errorMessage = message;
+    this.validationInput.setCustomValidity(message);
+    this.formControlController.updateValidity();
+  }
+
+  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  reportValidity(): boolean {
+    const isValid = this.checkValidity();
+
+    this.errorMessage = this.customValidityMessage || isValid ? '' : this.validationInput.validationMessage;
+    this.formControlController.setValidity(isValid);
+    this.validationInput.hidden = true;
+    clearTimeout(this.validationTimeout);
+
+    if (!isValid) {
+      // Show the browser's constraint validation message
+      this.validationInput.hidden = false;
+      this.validationInput.reportValidity();
+      this.validationTimeout = setTimeout(() => (this.validationInput.hidden = true), 10000) as unknown as number;
+    }
+
+    return isValid;
   }
 
   render() {

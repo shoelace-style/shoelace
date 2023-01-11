@@ -100,68 +100,24 @@ export default class SlAnimation extends ShoelaceElement {
     this.destroyAnimation();
   }
 
-  @watch('name')
-  @watch('delay')
-  @watch('direction')
-  @watch('duration')
-  @watch('easing')
-  @watch('endDelay')
-  @watch('fill')
-  @watch('iterations')
-  @watch('iterationsStart')
-  @watch('keyframes')
-  handleAnimationChange() {
-    if (!this.hasUpdated) {
-      return;
-    }
-
-    this.createAnimation();
-  }
-
-  handleAnimationFinish() {
+  private handleAnimationFinish() {
     this.play = false;
     this.hasStarted = false;
     this.emit('sl-finish');
   }
 
-  handleAnimationCancel() {
+  private handleAnimationCancel() {
     this.play = false;
     this.hasStarted = false;
     this.emit('sl-cancel');
   }
 
-  @watch('play')
-  handlePlayChange() {
-    if (this.animation) {
-      if (this.play && !this.hasStarted) {
-        this.hasStarted = true;
-        this.emit('sl-start');
-      }
-
-      if (this.play) {
-        this.animation.play();
-      } else {
-        this.animation.pause();
-      }
-
-      return true;
-    }
-    return false;
-  }
-
-  @watch('playbackRate')
-  handlePlaybackRateChange() {
-    if (this.animation) {
-      this.animation.playbackRate = this.playbackRate;
-    }
-  }
-
-  handleSlotChange() {
+  private handleSlotChange() {
     this.destroyAnimation();
     this.createAnimation();
   }
 
-  async createAnimation() {
+  private async createAnimation() {
     const easing = animations.easings[this.easing] ?? this.easing;
     const keyframes = this.keyframes ?? (animations as unknown as Partial<Record<string, Keyframe[]>>)[this.name];
     const slot = await this.defaultSlot;
@@ -196,12 +152,58 @@ export default class SlAnimation extends ShoelaceElement {
     return true;
   }
 
-  destroyAnimation() {
+  private destroyAnimation() {
     if (this.animation) {
       this.animation.cancel();
       this.animation.removeEventListener('cancel', this.handleAnimationCancel);
       this.animation.removeEventListener('finish', this.handleAnimationFinish);
       this.hasStarted = false;
+    }
+  }
+
+  @watch([
+    'name',
+    'delay',
+    'direction',
+    'duration',
+    'easing',
+    'endDelay',
+    'fill',
+    'iterations',
+    'iterationsStart',
+    'keyframes'
+  ])
+  handleAnimationChange() {
+    if (!this.hasUpdated) {
+      return;
+    }
+
+    this.createAnimation();
+  }
+
+  @watch('play')
+  handlePlayChange() {
+    if (this.animation) {
+      if (this.play && !this.hasStarted) {
+        this.hasStarted = true;
+        this.emit('sl-start');
+      }
+
+      if (this.play) {
+        this.animation.play();
+      } else {
+        this.animation.pause();
+      }
+
+      return true;
+    }
+    return false;
+  }
+
+  @watch('playbackRate')
+  handlePlaybackRateChange() {
+    if (this.animation) {
+      this.animation.playbackRate = this.playbackRate;
     }
   }
 

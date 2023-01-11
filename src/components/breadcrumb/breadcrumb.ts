@@ -24,11 +24,11 @@ import type { CSSResultGroup } from 'lit';
 export default class SlBreadcrumb extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
-  @query('slot') defaultSlot: HTMLSlotElement;
-  @query('slot[name="separator"]') separatorSlot: HTMLSlotElement;
-
   private readonly localize = new LocalizeController(this);
   private separatorDir = this.localize.dir();
+
+  @query('slot') defaultSlot: HTMLSlotElement;
+  @query('slot[name="separator"]') separatorSlot: HTMLSlotElement;
 
   /**
    * The label to use for the breadcrumb control. This will not be shown on the screen, but it will be announced by
@@ -49,7 +49,7 @@ export default class SlBreadcrumb extends ShoelaceElement {
     return clone;
   }
 
-  handleSlotChange() {
+  private handleSlotChange() {
     const items = [...this.defaultSlot.assignedElements({ flatten: true })].filter(
       item => item.tagName.toLowerCase() === 'sl-breadcrumb-item'
     ) as SlBreadcrumbItem[];

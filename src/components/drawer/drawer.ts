@@ -72,14 +72,14 @@ import type { CSSResultGroup } from 'lit';
 export default class SlDrawer extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
-  @query('.drawer') drawer: HTMLElement;
-  @query('.drawer__panel') panel: HTMLElement;
-  @query('.drawer__overlay') overlay: HTMLElement;
-
   private readonly hasSlotController = new HasSlotController(this, 'footer');
   private readonly localize = new LocalizeController(this);
   private modal: Modal;
   private originalTrigger: HTMLElement | null;
+
+  @query('.drawer') drawer: HTMLElement;
+  @query('.drawer__panel') panel: HTMLElement;
+  @query('.drawer__overlay') overlay: HTMLElement;
 
   /**
    * Indicates whether or not the drawer is open. You can toggle this attribute to show and hide the drawer, or you can
@@ -132,26 +132,6 @@ export default class SlDrawer extends ShoelaceElement {
     unlockBodyScrolling(this);
   }
 
-  /** Shows the drawer. */
-  async show() {
-    if (this.open) {
-      return undefined;
-    }
-
-    this.open = true;
-    return waitForEvent(this, 'sl-after-show');
-  }
-
-  /** Hides the drawer */
-  async hide() {
-    if (!this.open) {
-      return undefined;
-    }
-
-    this.open = false;
-    return waitForEvent(this, 'sl-after-hide');
-  }
-
   private requestClose(source: 'close-button' | 'keyboard' | 'overlay') {
     const slRequestClose = this.emit('sl-request-close', {
       cancelable: true,
@@ -167,15 +147,15 @@ export default class SlDrawer extends ShoelaceElement {
     this.hide();
   }
 
-  addOpenListeners() {
+  private addOpenListeners() {
     document.addEventListener('keydown', this.handleDocumentKeyDown);
   }
 
-  removeOpenListeners() {
+  private removeOpenListeners() {
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
-  handleDocumentKeyDown(event: KeyboardEvent) {
+  private handleDocumentKeyDown(event: KeyboardEvent) {
     if (this.open && !this.contained && event.key === 'Escape') {
       event.stopPropagation();
       this.requestClose('keyboard');
@@ -294,6 +274,26 @@ export default class SlDrawer extends ShoelaceElement {
       this.modal.deactivate();
       unlockBodyScrolling(this);
     }
+  }
+
+  /** Shows the drawer. */
+  async show() {
+    if (this.open) {
+      return undefined;
+    }
+
+    this.open = true;
+    return waitForEvent(this, 'sl-after-show');
+  }
+
+  /** Hides the drawer */
+  async hide() {
+    if (!this.open) {
+      return undefined;
+    }
+
+    this.open = false;
+    return waitForEvent(this, 'sl-after-hide');
   }
 
   render() {

@@ -101,7 +101,7 @@ export default class SlSplitPanel extends ShoelaceElement {
     return (value / this.size) * 100;
   }
 
-  handleDrag(event: PointerEvent) {
+  private handleDrag(event: PointerEvent) {
     const isRtl = this.localize.dir() === 'rtl';
 
     if (this.disabled) {
@@ -154,7 +154,7 @@ export default class SlSplitPanel extends ShoelaceElement {
     });
   }
 
-  handleKeyDown(event: KeyboardEvent) {
+  private handleKeyDown(event: KeyboardEvent) {
     if (this.disabled) {
       return;
     }
@@ -185,6 +185,16 @@ export default class SlSplitPanel extends ShoelaceElement {
     }
   }
 
+  private handleResize(entries: ResizeObserverEntry[]) {
+    const { width, height } = entries[0].contentRect;
+    this.size = this.vertical ? height : width;
+
+    // Resize when a primary panel is set
+    if (this.primary) {
+      this.position = this.pixelsToPercentage(this.cachedPositionInPixels);
+    }
+  }
+
   @watch('position')
   handlePositionChange() {
     this.cachedPositionInPixels = this.percentageToPixels(this.position);
@@ -200,16 +210,6 @@ export default class SlSplitPanel extends ShoelaceElement {
   @watch('vertical')
   handleVerticalChange() {
     this.detectSize();
-  }
-
-  handleResize(entries: ResizeObserverEntry[]) {
-    const { width, height } = entries[0].contentRect;
-    this.size = this.vertical ? height : width;
-
-    // Resize when a primary panel is set
-    if (this.primary) {
-      this.position = this.pixelsToPercentage(this.cachedPositionInPixels);
-    }
   }
 
   render() {

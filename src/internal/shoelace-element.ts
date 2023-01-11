@@ -39,9 +39,6 @@ export interface ShoelaceFormControl extends ShoelaceElement {
   minlength?: number;
   maxlength?: number;
 
-  // Proprietary validation properties (non-attributes)
-  invalid: boolean;
-
   // Validation methods
   checkValidity: () => boolean;
   reportValidity: () => boolean;

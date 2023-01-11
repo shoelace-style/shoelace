@@ -93,8 +93,33 @@ describe('<sl-color-picker>', () => {
       expect(inputHandler).to.have.been.calledOnce;
     });
 
-    it('should emit sl-change and sl-input when clicking on a swatch', async () => {
+    it('should render the correct swatches when passing a string of color values', async () => {
+      const el = await fixture<SlColorPicker>(
+        html` <sl-color-picker swatches="red; #008000; rgb(0,0,255);"></sl-color-picker> `
+      );
+      const swatches = [...el.shadowRoot!.querySelectorAll('[part~="swatch"] > div')];
+
+      expect(swatches.length).to.equal(3);
+      expect(getComputedStyle(swatches[0]).backgroundColor).to.equal('rgb(255, 0, 0)');
+      expect(getComputedStyle(swatches[1]).backgroundColor).to.equal('rgb(0, 128, 0)');
+      expect(getComputedStyle(swatches[2]).backgroundColor).to.equal('rgb(0, 0, 255)');
+    });
+
+    it('should render the correct swatches when passing an array of color values', async () => {
       const el = await fixture<SlColorPicker>(html` <sl-color-picker></sl-color-picker> `);
+      el.swatches = ['red', '#008000', 'rgb(0,0,255)'];
+      await el.updateComplete;
+
+      const swatches = [...el.shadowRoot!.querySelectorAll('[part~="swatch"] > div')];
+
+      expect(swatches.length).to.equal(3);
+      expect(getComputedStyle(swatches[0]).backgroundColor).to.equal('rgb(255, 0, 0)');
+      expect(getComputedStyle(swatches[1]).backgroundColor).to.equal('rgb(0, 128, 0)');
+      expect(getComputedStyle(swatches[2]).backgroundColor).to.equal('rgb(0, 0, 255)');
+    });
+
+    it('should emit sl-change and sl-input when clicking on a swatch', async () => {
+      const el = await fixture<SlColorPicker>(html` <sl-color-picker swatches="red; green; blue;"></sl-color-picker> `);
       const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
       const swatch = el.shadowRoot!.querySelector<HTMLElement>('[part~="swatch"]')!;
       const changeHandler = sinon.spy();
@@ -290,12 +315,12 @@ describe('<sl-color-picker>', () => {
 
   it('should display a color with opacity when an initial value with opacity is provided', async () => {
     const el = await fixture<SlColorPicker>(html` <sl-color-picker opacity value="#ff000050"></sl-color-picker> `);
-    const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]');
+    const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
     const previewButton = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="preview"]');
     const previewColor = getComputedStyle(previewButton!).getPropertyValue('--preview-color');
 
-    expect(trigger!.style.color).to.equal('rgba(255, 0, 0, 0.314)');
-    expect(previewColor.startsWith('hsla(0deg, 100%, 50%, 0.31')).to.be.true;
+    expect(trigger.style.color).to.equal('rgba(255, 0, 0, 0.314)');
+    expect(previewColor).to.equal('#ff000050');
   });
 
   describe('when resetting a form', () => {
@@ -325,6 +350,64 @@ describe('<sl-color-picker>', () => {
       await colorPicker.updateComplete;
 
       expect(colorPicker.value).to.equal('');
+    });
+  });
+
+  describe('when using constraint validation', () => {
+    it('should be valid by default', async () => {
+      const el = await fixture<SlColorPicker>(html` <sl-color-picker></sl-color-picker> `);
+      expect(el.checkValidity()).to.be.true;
+    });
+
+    it('should be invalid when required and empty', async () => {
+      const el = await fixture<SlColorPicker>(html` <sl-input required></sl-input> `);
+      expect(el.checkValidity()).to.be.false;
+    });
+
+    it('should be invalid when required and disabled is removed', async () => {
+      const el = await fixture<SlColorPicker>(html` <sl-input disabled required></sl-input> `);
+      el.disabled = false;
+      await el.updateComplete;
+      expect(el.checkValidity()).to.be.false;
+    });
+
+    it('should receive the correct validation attributes ("states") when valid', async () => {
+      const el = await fixture<SlColorPicker>(html` <sl-input required value="a"></sl-input> `);
+
+      expect(el.checkValidity()).to.be.true;
+      expect(el.hasAttribute('data-required')).to.be.true;
+      expect(el.hasAttribute('data-optional')).to.be.false;
+      expect(el.hasAttribute('data-invalid')).to.be.false;
+      expect(el.hasAttribute('data-valid')).to.be.true;
+      expect(el.hasAttribute('data-user-invalid')).to.be.false;
+      expect(el.hasAttribute('data-user-valid')).to.be.false;
+
+      el.focus();
+      await sendKeys({ press: 'b' });
+      await el.updateComplete;
+
+      expect(el.checkValidity()).to.be.true;
+      expect(el.hasAttribute('data-user-invalid')).to.be.false;
+      expect(el.hasAttribute('data-user-valid')).to.be.true;
+    });
+
+    it('should receive the correct validation attributes ("states") when invalid', async () => {
+      const el = await fixture<SlColorPicker>(html` <sl-input required></sl-input> `);
+
+      expect(el.hasAttribute('data-required')).to.be.true;
+      expect(el.hasAttribute('data-optional')).to.be.false;
+      expect(el.hasAttribute('data-invalid')).to.be.true;
+      expect(el.hasAttribute('data-valid')).to.be.false;
+      expect(el.hasAttribute('data-user-invalid')).to.be.false;
+      expect(el.hasAttribute('data-user-valid')).to.be.false;
+
+      el.focus();
+      await sendKeys({ press: 'a' });
+      await sendKeys({ press: 'Backspace' });
+      await el.updateComplete;
+
+      expect(el.hasAttribute('data-user-invalid')).to.be.true;
+      expect(el.hasAttribute('data-user-valid')).to.be.false;
     });
   });
 });

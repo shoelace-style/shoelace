@@ -31,14 +31,14 @@ export default class SlOption extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
   private cachedTextLabel: string;
-  // @ts-expect-error -- Controller is currently unused
+  // @ts-expect-error - Controller is currently unused
   private readonly localize = new LocalizeController(this);
+
+  @query('.option__label') defaultSlot: HTMLSlotElement;
 
   @state() current = false; // the user has keyed into the option, but hasn't selected it yet (shows a highlight)
   @state() selected = false; // the option is selected and has aria-selected="true"
   @state() hasHover = false; // we need this because Safari doesn't honor :hover styles while dragging
-
-  @query('.option__label') defaultSlot: HTMLSlotElement;
 
   /**
    * The option's value. When selected, the containing form control will receive this value. The value must be unique
@@ -56,9 +56,28 @@ export default class SlOption extends ShoelaceElement {
     this.setAttribute('aria-selected', 'false');
   }
 
-  /** Returns a plain text label based on the option's content. */
-  getTextLabel() {
-    return (this.textContent ?? '').trim();
+  private handleDefaultSlotChange() {
+    const textLabel = this.getTextLabel();
+
+    // Ignore the first time the label is set
+    if (typeof this.cachedTextLabel === 'undefined') {
+      this.cachedTextLabel = textLabel;
+      return;
+    }
+
+    // When the label changes, emit a slotchange event so parent controls see it
+    if (textLabel !== this.cachedTextLabel) {
+      this.cachedTextLabel = textLabel;
+      this.emit('slotchange', { bubbles: true, composed: false, cancelable: false });
+    }
+  }
+
+  private handleMouseEnter() {
+    this.hasHover = true;
+  }
+
+  private handleMouseLeave() {
+    this.hasHover = false;
   }
 
   @watch('disabled')
@@ -79,28 +98,9 @@ export default class SlOption extends ShoelaceElement {
     }
   }
 
-  handleDefaultSlotChange() {
-    const textLabel = this.getTextLabel();
-
-    // Ignore the first time the label is set
-    if (typeof this.cachedTextLabel === 'undefined') {
-      this.cachedTextLabel = textLabel;
-      return;
-    }
-
-    // When the label changes, emit a slotchange event so parent controls see it
-    if (textLabel !== this.cachedTextLabel) {
-      this.cachedTextLabel = textLabel;
-      this.emit('slotchange', { bubbles: true, composed: false, cancelable: false });
-    }
-  }
-
-  handleMouseEnter() {
-    this.hasHover = true;
-  }
-
-  handleMouseLeave() {
-    this.hasHover = false;
+  /** Returns a plain text label based on the option's content. */
+  getTextLabel() {
+    return (this.textContent ?? '').trim();
   }
 
   render() {

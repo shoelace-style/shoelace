@@ -108,13 +108,13 @@ describe('<sl-textarea>', () => {
     it('should be valid by default', async () => {
       const el = await fixture<SlTextarea>(html` <sl-textarea></sl-textarea> `);
 
-      expect(el.invalid).to.be.false;
+      expect(el.checkValidity()).to.be.true;
     });
 
     it('should be invalid when required and empty', async () => {
       const el = await fixture<SlTextarea>(html` <sl-textarea required></sl-textarea> `);
 
-      expect(el.invalid).to.be.true;
+      expect(el.checkValidity()).to.be.false;
     });
 
     it('should be invalid when required and after removing disabled ', async () => {
@@ -123,14 +123,53 @@ describe('<sl-textarea>', () => {
       el.disabled = false;
       await el.updateComplete;
 
-      expect(el.invalid).to.be.true;
+      expect(el.checkValidity()).to.be.false;
     });
 
     it('should be invalid when required and disabled is removed', async () => {
       const el = await fixture<SlTextarea>(html` <sl-textarea disabled required></sl-textarea> `);
       el.disabled = false;
       await el.updateComplete;
-      expect(el.invalid).to.be.true;
+      expect(el.checkValidity()).to.be.false;
+    });
+
+    it('should receive the correct validation attributes ("states") when valid', async () => {
+      const el = await fixture<SlTextarea>(html` <sl-textarea required value="a"></sl-textarea> `);
+
+      expect(el.checkValidity()).to.be.true;
+      expect(el.hasAttribute('data-required')).to.be.true;
+      expect(el.hasAttribute('data-optional')).to.be.false;
+      expect(el.hasAttribute('data-invalid')).to.be.false;
+      expect(el.hasAttribute('data-valid')).to.be.true;
+      expect(el.hasAttribute('data-user-invalid')).to.be.false;
+      expect(el.hasAttribute('data-user-valid')).to.be.false;
+
+      el.focus();
+      await sendKeys({ press: 'b' });
+      await el.updateComplete;
+
+      expect(el.checkValidity()).to.be.true;
+      expect(el.hasAttribute('data-user-invalid')).to.be.false;
+      expect(el.hasAttribute('data-user-valid')).to.be.true;
+    });
+
+    it('should receive the correct validation attributes ("states") when invalid', async () => {
+      const el = await fixture<SlTextarea>(html` <sl-textarea required></sl-textarea> `);
+
+      expect(el.hasAttribute('data-required')).to.be.true;
+      expect(el.hasAttribute('data-optional')).to.be.false;
+      expect(el.hasAttribute('data-invalid')).to.be.true;
+      expect(el.hasAttribute('data-valid')).to.be.false;
+      expect(el.hasAttribute('data-user-invalid')).to.be.false;
+      expect(el.hasAttribute('data-user-valid')).to.be.false;
+
+      el.focus();
+      await sendKeys({ press: 'a' });
+      await sendKeys({ press: 'Backspace' });
+      await el.updateComplete;
+
+      expect(el.hasAttribute('data-user-invalid')).to.be.true;
+      expect(el.hasAttribute('data-user-valid')).to.be.false;
     });
   });
 

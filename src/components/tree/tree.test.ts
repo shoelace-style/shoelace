@@ -575,7 +575,7 @@ describe('<sl-tree>', () => {
           node.click();
           await el.updateComplete;
           node.click();
-          await el.updateComplete;
+          await Promise.all([node.updateComplete, el.updateComplete]);
 
           // Assert
           expect(selectedChangeSpy).to.have.been.calledOnce;
@@ -601,7 +601,7 @@ describe('<sl-tree>', () => {
         node.click();
         await el.updateComplete;
         node.click();
-        await el.updateComplete;
+        await Promise.all([node.updateComplete, el.updateComplete]);
 
         // Assert
         expect(selectedChangeSpy).to.have.been.calledOnce;
@@ -622,7 +622,7 @@ describe('<sl-tree>', () => {
 
         // Act
         node.click();
-        await el.updateComplete;
+        await Promise.all([node.updateComplete, el.updateComplete]);
 
         // Assert
         expect(selectedChangeSpy).to.not.have.been.called;
@@ -644,9 +644,9 @@ describe('<sl-tree>', () => {
 
         // Act
         node.click();
-        await el.updateComplete;
+        await Promise.all([node.updateComplete, el.updateComplete]);
         node.click();
-        await el.updateComplete;
+        await Promise.all([node.updateComplete, el.updateComplete]);
 
         // Assert
         expect(selectedChangeSpy).to.have.been.calledTwice;

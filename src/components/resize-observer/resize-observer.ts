@@ -41,13 +41,13 @@ export default class SlResizeObserver extends ShoelaceElement {
     this.stopObserver();
   }
 
-  handleSlotChange() {
+  private handleSlotChange() {
     if (!this.disabled) {
       this.startObserver();
     }
   }
 
-  startObserver() {
+  private startObserver() {
     const slot = this.shadowRoot!.querySelector('slot');
 
     if (slot !== null) {
@@ -65,7 +65,7 @@ export default class SlResizeObserver extends ShoelaceElement {
     }
   }
 
-  stopObserver() {
+  private stopObserver() {
     this.resizeObserver.disconnect();
   }
 

@@ -41,7 +41,7 @@ export default class SlTag extends ShoelaceElement {
   /** Makes the tag removable and shows a remove button. */
   @property({ type: Boolean }) removable = false;
 
-  handleRemoveClick() {
+  private handleRemoveClick() {
     this.emit('sl-remove');
   }
 

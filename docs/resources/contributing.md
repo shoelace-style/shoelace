@@ -200,6 +200,23 @@ All components have a host element, which is a reference to the `<sl-*>` element
 
 Aside from `display`, avoid setting styles on the host element when possible. The reason for this is that styles applied to the host element are not encapsulated. Instead, create a base element that wraps the component's internals and style that instead. This convention also makes it easier to use BEM in components, as the base element can serve as the "block" entity.
 
+When authoring components, please try to follow the same structure and conventions found in other components. Classes, for example, generally follow this structure:
+
+- Static properties/methods
+- Private/public properties (that are _not_ reactive)
+- `@query` decorators
+- `@state` decorators
+- `@property` decorators
+- Lifecycle methods (`connectedCallback()`, `disconnectedCallback()`, `firstUpdated()`, etc.)
+- Private methods
+- `@watch` decorators
+- Public methods
+- The `render()` method
+
+Please avoid using the `public` keyword for class fields. It's simply too verbose when combined with decorators, property names, and arguments. However, _please do_ add `private` in front of any property or method that is intended to be private.
+
+?> This might seem like a lot, but it's fairly intuitive once you start working with the library. However, don't let this structure prevent you from submitting a PR. [Code can change](https://www.abeautifulsite.net/posts/code-can-change/) and nobody will chastise you for "getting it wrong." At the same time, encouraging consistency helps keep the library maintainable and easy for others to understand. (A lint rule that helps with things like this would be a very welcome PR!)
+
 ### Class Names
 
 All components use a [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM), so styles are completely encapsulated from the rest of the document. As a result, class names used _inside_ a component won't conflict with class names _outside_ the component, so we're free to name them anything we want.
@@ -311,6 +328,20 @@ render() {
 ```
 
 This results in a consistent, easy to understand structure for parts. In this example, the `icon` part will target the host element and the `icon__base` part will target the icon's `base` part.
+
+### Dependencies
+
+TL;DR – a component is a dependency if and only if it's rendered inside another component's shadow root.
+
+Many Shoelace components use other Shoelace components internally. For example, `<sl-button>` uses both `<sl-icon>` and `<sl-spinner>` for its caret icon and loading state, respectively. Since these components appear in the button's shadow root, they are considered dependencies of Button. Since dependencies are automatically loaded, users only need to import the button and everything will work as expected.
+
+Contrast this to `<sl-select>` and `<sl-option>`. At first, one might assume that Option is a dependency of Select. After all, you can't really use Select without slotting in at least one Option. However, Option _is not_ a dependency of Select! The reason is because no Option is rendered in the Select's shadow root. Since the options are provided by the user, it's up to them to import both components independently.
+
+People often suggest that Shoelace should auto-load Select + Option, Menu + Menu Item, Breadcrumb + Breadcrumb Item, etc. Although some components are designed to work together, they're technically not dependencies so eagerly loading them may not be desirable. What if someone wants to roll their own component with a superset of features? They wouldn't be able to if Shoelace automatically imported it!
+
+Similarly, in the case of `<sl-radio-group>` there was originally only `<sl-radio>`, but now you can use either `<sl-radio>` or `<sl-radio-button>` as child elements. Which component(s) should be auto-loaded dependencies in this case? Had Radio been a dependency of Radio Group, users that only wanted Radio Buttons would be forced to register both with no way to opt out and no way to provide their own customized version.
+
+For non-dependencies, _the user_ should decide what gets registered, even if it comes with a minor inconvenience.
 
 ### Form Controls
 

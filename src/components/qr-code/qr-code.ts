@@ -44,12 +44,7 @@ export default class SlQrCode extends ShoelaceElement {
     this.generate();
   }
 
-  @watch('background')
-  @watch('errorCorrection')
-  @watch('fill')
-  @watch('radius')
-  @watch('size')
-  @watch('value')
+  @watch(['background', 'errorCorrection', 'fill', 'radius', 'size', 'value'])
   generate() {
     if (!this.hasUpdated) {
       return;

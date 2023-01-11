@@ -10,6 +10,21 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- Added support for the `inert` attribute on `<sl-menu-item>` to allow hidden menu items to not accept focus [#1107](https://github.com/shoelace-style/shoelace/issues/1107)
+- Added the `tag` part to `<sl-select>`
+- Added `sl-hover` event to `<sl-rating>` [#1125](https://github.com/shoelace-style/shoelace/issues/1125)
+- Fixed a bug in `<sl-select>` that prevented placeholders from showing when `multiple` was used [#1109](https://github.com/shoelace-style/shoelace/issues/1109)
+- Fixed a bug in `<sl-select>` that caused tags to not be rounded when using the `pill` attribute [#1117](https://github.com/shoelace-style/shoelace/issues/1117)
+- Fixed a bug in `<sl-select>` where the `sl-change` and `sl-input` events didn't weren't emitted when removing tags [#1119](https://github.com/shoelace-style/shoelace/issues/1119)
+- Fixed a bug in `<sl-color-picker>` that logged a console error when parsing swatches with whitespace
+- Fixed a bug in `<sl-color-picker>` that caused selected colors to be wrong due to incorrect HSV calculations
+- Fixed a bug in `<sl-radio-button>` that caused the checked button's right border to be incorrect [#1110](https://github.com/shoelace-style/shoelace/issues/1110)
+- Fixed a bug in `<sl-spinner>` that caused the animation to stop working correctly in Safari [#1121](https://github.com/shoelace-style/shoelace/issues/1121)
+- Refactored the `ShoelaceFormControl` interface to remove the `invalid` property, allowing a more intuitive API for controlling validation internally
+- Renamed the internal `FormSubmitController` to `FormControlController` to better reflect what it's used for
+
+## 2.0.0-beta.88
+
 This release includes a complete rewrite of `<sl-select>` to improve accessibility and simplify its internals.
 
 - 🚨 BREAKING: rewrote `<sl-select>`
@@ -19,10 +34,26 @@ This release includes a complete rewrite of `<sl-select>` to improve accessibili
   - The `max-tags-visible` attribute has been renamed to `max-options-visible`
   - Many parts have been removed or renamed (please see the docs for more details)
 - 🚨 BREAKING: removed the `sl-label-change` event from `<sl-menu-item>` (listen for `slotchange` instead)
+- 🚨 BREAKING: removed type to select logic from `<sl-menu>` (this was added specifically for `<sl-select>` which no longer uses `<sl-menu>`)
+- 🚨 BREAKING: swatches in `<sl-color-picker>` are no longer present by default (but you can set them using the `swatches` attribute now)
+- 🚨 BREAKING: improved the accessibility of `<sl-menu-item>` so checked items are announced as such
+  - Checkbox menu items must now have `type="checkbox"` before applying the `checked` attribute
+  - Checkbox menu items will now toggle their `checked` state on their own when selected
+  - Disabled menu items will now receive focus, but are still not selectable
 - Added the `<sl-option>` component
+- Added Traditional Chinese translation [#1086](https://github.com/shoelace-style/shoelace/pull/1086)
+- Added support for `swatches` to be an attribute of `<sl-color-picker>` so swatches can be defined declaratively (it was previously a property; use a `;` to separate color values)
 - Fixed a bug in `<sl-tree-item>` where the checked/indeterminate states could get out of sync when using the `multiple` option [#1076](https://github.com/shoelace-style/shoelace/issues/1076)
+- Fixed a bug in `<sl-tree>` that caused `sl-selection-change` to emit before the DOM updated [#1096](https://github.com/shoelace-style/shoelace/issues/1096)
+- Fixed a bug that prevented `<sl-switch>` from submitting a default value of `on` when no value was provided [#1103](https://github.com/shoelace-style/shoelace/discussions/1103)
+- Fixed a bug in `<sl-textarea>` that caused the scrollbar to show sometimes when using `resize="auto"`
+- Fixed a bug in `<sl-input>` and `<sl-textarea>` that caused its validation states to be out of sync in some cases [#1063](https://github.com/shoelace-style/shoelace/issues/1063)
+- Reorganized all components to make class structures more consistent
+- Updated some incorrect default values for design tokens in the docs [#1097](https://github.com/shoelace-style/shoelace/issues/1097)
+- Updated non-public fields to use the `private` keyword (these were previously private only by convention, but now TypeScript will warn you)
 - Updated the hover style of `<sl-menu-item>` to be consistent with `<sl-option>`
 - Updated the status of `<sl-tree>` and `<sl-tree-item>` from experimental to stable
+- Updated React wrappers to use the latest API from `@lit-labs/react` [#1090](https://github.com/shoelace-style/shoelace/pull/1090)
 - Updated Bootstrap Icons to 1.10.3
 
 ## 2.0.0-beta.87

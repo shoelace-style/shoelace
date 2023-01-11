@@ -9,7 +9,7 @@ const translation: Translation = {
   clearEntry: `Effacer l'entrée`,
   close: 'Fermer',
   copy: 'Copier',
-  numOptionsSelected: (num: number) => {
+  numOptionsSelected: num => {
     if (num === 0) return 'Aucune option sélectionnée';
     if (num === 1) return '1 option sélectionnée';
     return `${num} options sélectionnées`;
