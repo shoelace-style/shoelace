@@ -331,13 +331,17 @@ This results in a consistent, easy to understand structure for parts. In this ex
 
 ### Dependencies
 
-Many Shoelace components use other Shoelace components internally. For example, `<sl-button>` uses both `<sl-icon>` and `<sl-spinner>` for its caret icon and loading state, respectively. Since these components appear in the button's shadow root, they are considered dependencies of button. Since dependencies are automatically loaded, users only need to import the button and everything will work as expected.
-
-Contrast this to `<sl-select>` and `<sl-option>`. At first, one might assume that Option is a dependency of Select. After all, you can't really use `<sl-select>` without at least one `<sl-option>`. However, Option _is not_ a dependency of Select! The reason is because no Option is rendered in the Select's shadow root. Since the user provides the Options, it's up to them to import both `<sl-select>` and `<sl-option>`.
-
-It is often deemed convenient to auto-load Select + Option, Menu + Menu Item, etc. Although some components are designed to work together, they're technically not dependencies so eagerly loading them may not be desirable. For example, what if someone wants to roll their own `<sl-option>` element with a superset of features? They wouldn't be able to if Shoelace automatically imported it. The user should decide what gets registered, in this case, because the "parent" element doesn't technically require it to render.
-
 TL;DR – a component is a dependency if and only if it's rendered inside another component's shadow root.
+
+Many Shoelace components use other Shoelace components internally. For example, `<sl-button>` uses both `<sl-icon>` and `<sl-spinner>` for its caret icon and loading state, respectively. Since these components appear in the button's shadow root, they are considered dependencies of Button. Since dependencies are automatically loaded, users only need to import the button and everything will work as expected.
+
+Contrast this to `<sl-select>` and `<sl-option>`. At first, one might assume that Option is a dependency of Select. After all, you can't really use Select without slotting in at least one Option. However, Option _is not_ a dependency of Select! The reason is because no Option is rendered in the Select's shadow root. Since the options are provided by the user, it's up to them to import both components independently.
+
+People often suggest that Shoelace should auto-load Select + Option, Menu + Menu Item, Breadcrumb + Breadcrumb Item, etc. Although some components are designed to work together, they're technically not dependencies so eagerly loading them may not be desirable. What if someone wants to roll their own component with a superset of features? They wouldn't be able to if Shoelace automatically imported it!
+
+Similarly, in the case of `<sl-radio-group>` there was originally only `<sl-radio>`, but now you can use either `<sl-radio>` or `<sl-radio-button>` as child elements. Which component(s) should be auto-loaded dependencies in this case? Had Radio been a dependency of Radio Group, users that only wanted Radio Buttons would be forced to register both with no way to opt out and no way to provide their own customized version.
+
+For non-dependencies, _the user_ should decide what gets registered, even if it comes with a minor inconvenience.
 
 ### Form Controls
 
