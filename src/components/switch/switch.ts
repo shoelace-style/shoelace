@@ -13,9 +13,9 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Switches allow the user to toggle an option on or off.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/switch
  * @status stable
+ * @since 2.0
  *
  * @slot - The switch's label.
  *

@@ -14,9 +14,9 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Tooltips display additional information based on a specific action.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/tooltip
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-popup
  *

@@ -4,9 +4,9 @@ import { LocalizeController } from '../../utilities/localize';
 
 /**
  * @summary Formats a number as a human readable bytes value.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/format-bytes
  * @status stable
+ * @since 2.0
  */
 @customElement('sl-format-bytes')
 export default class SlFormatBytes extends ShoelaceElement {

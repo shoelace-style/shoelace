@@ -7,9 +7,9 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary The Resize Observer component offers a thin, declarative interface to the [`ResizeObserver API`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver).
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/resize-observer
  * @status stable
+ * @since 2.0
  *
  * @slot - One or more elements to watch for resizing.
  *

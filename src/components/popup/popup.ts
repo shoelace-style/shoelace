@@ -8,9 +8,9 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Popup is a utility that lets you declaratively anchor "popup" containers to another element.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/popup
  * @status stable
+ * @since 2.0
  *
  * @event sl-reposition - Emitted when the popup is repositioned. This event can fire a lot, so avoid putting expensive
  *  operations in your listener or consider debouncing it.

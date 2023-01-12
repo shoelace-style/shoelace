@@ -8,9 +8,9 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Includes give you the power to embed external HTML files into the page.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/include
  * @status stable
+ * @since 2.0
  *
  * @event sl-load - Emitted when the included file is loaded.
  * @event {{ status: number }} sl-error - Emitted when the included file fails to load due to an error.

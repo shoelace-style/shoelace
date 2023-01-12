@@ -10,9 +10,9 @@ let id = 0;
 
 /**
  * @summary Tab panels are used inside [tab groups](/components/tab-group) to display tabbed content.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/tab-panel
  * @status stable
+ * @since 2.0
  *
  * @slot - The tab panel's content.
  *

@@ -13,9 +13,9 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Compare visual differences between similar photos with a sliding panel.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/image-comparer
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  *

@@ -37,9 +37,9 @@ declare const EyeDropper: EyeDropperConstructor;
 
 /**
  * @summary Color pickers allow the user to select a color.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/color-picker
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-button
  * @dependency sl-button-group

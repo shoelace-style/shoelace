@@ -8,9 +8,9 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary A component for displaying animated GIFs and WEBPs that play and pause on interaction.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/animated-image
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  *

@@ -9,9 +9,9 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Avatars are used to represent a person or object.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/avatar
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  *

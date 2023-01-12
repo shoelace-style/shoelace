@@ -17,9 +17,9 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Dialogs, sometimes called "modals", appear above the page and require the user's immediate attention.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/dialog
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon-button
  *

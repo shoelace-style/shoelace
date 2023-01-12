@@ -12,9 +12,9 @@ let id = 0;
 
 /**
  * @summary Tabs are used inside [tab groups](/components/tab-group) to represent and activate [tab panels](/components/tab-panel).
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/tab
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon-button
  *

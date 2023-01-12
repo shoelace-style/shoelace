@@ -16,9 +16,9 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
 
 /**
  * @summary Alerts are used to display important messages inline or as toast notifications.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/alert
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon-button
  *

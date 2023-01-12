@@ -10,9 +10,9 @@ export interface MenuSelectEventDetail {
 
 /**
  * @summary Menus provide a list of options for the user to choose from.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/menu
  * @status stable
+ * @since 2.0
  *
  * @slot - The menu's content, including menu items, menu labels, and dividers.
  *

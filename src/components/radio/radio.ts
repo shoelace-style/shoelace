@@ -9,9 +9,9 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Radios allow the user to select a single option from a group.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/radio
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  *

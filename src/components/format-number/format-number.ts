@@ -4,9 +4,9 @@ import { LocalizeController } from '../../utilities/localize';
 
 /**
  * @summary Formats a number using the specified locale and options.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/format-number
  * @status stable
+ * @since 2.0
  */
 @customElement('sl-format-number')
 export default class SlFormatNumber extends ShoelaceElement {

@@ -28,9 +28,9 @@ const isFirefox = isChromium ? false : navigator.userAgent.includes('Firefox');
 
 /**
  * @summary Inputs collect data from the user.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/input
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  *

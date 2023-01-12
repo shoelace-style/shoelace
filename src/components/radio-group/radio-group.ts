@@ -14,9 +14,9 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Radio groups are used to group multiple [radios](/components/radio) or [radio buttons](/components/radio-button) so they function as a single form control.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/radio-group
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-button-group
  *

@@ -15,9 +15,9 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Ranges allow the user to select a single value within a given range using a slider.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/range
  * @status stable
+ * @since 2.0
  *
  * @slot label - The range's label. Alternatively, you can use the `label` attribute.
  * @slot help-text - Text that describes how to use the input. Alternatively, you can use the `help-text` attribute.

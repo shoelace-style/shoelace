@@ -12,9 +12,9 @@ let parser: DOMParser;
 
 /**
  * @summary Icons are symbols that can be used to represent various options within an application.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/icon
  * @status stable
+ * @since 2.0
  *
  * @event sl-load - Emitted when the icon has loaded.
  * @event sl-error - Emitted when the icon fails to load due to an error.

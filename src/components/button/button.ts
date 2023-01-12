@@ -15,9 +15,9 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Buttons represent actions that are available to the user.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/button
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  * @dependency sl-spinner

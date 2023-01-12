@@ -14,9 +14,9 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Textareas collect data from the user and allow multiple lines of text.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/textarea
  * @status stable
+ * @since 2.0
  *
  * @slot label - The textarea's label. Alternatively, you can use the `label` attribute.
  * @slot help-text - Text that describes how to use the input. Alternatively, you can use the `help-text` attribute.

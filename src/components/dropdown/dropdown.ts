@@ -20,9 +20,9 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Dropdowns expose additional content that "drops down" in a panel.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/dropdown
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-popup
  *

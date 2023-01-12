@@ -22,9 +22,9 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Selects allow you to choose items from a menu of predefined options.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/select
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  * @dependency sl-popup

@@ -8,9 +8,9 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Cards can be used to group related subjects in a container.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/card
  * @status stable
+ * @since 2.0
  *
  * @slot - The card's main content.
  * @slot header - An optional header for the card.
