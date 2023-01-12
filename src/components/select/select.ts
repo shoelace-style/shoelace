@@ -405,7 +405,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     allOptions.forEach(option => {
       if (values.includes(option.value)) {
         console.error(
-          `An option with duplicate values has been found in <sl-select>. All options must have unique values.`,
+          `An option with a duplicate value of "${option.value}" has been found in <sl-select>. All options must have unique values.`,
           option
         );
       }
