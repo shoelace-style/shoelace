@@ -476,7 +476,6 @@ describe('<sl-input>', () => {
       const formControls = getFormControls(form); // eslint-disable-line
       expect(formControls.length).to.equal(10); // eslint-disable-line
       expect(formControls.map((fc: HTMLInputElement) => fc.value).join('')).to.equal('12345678910'); // eslint-disable-line
-      /* eslint-enable */
     });
   });
 });
