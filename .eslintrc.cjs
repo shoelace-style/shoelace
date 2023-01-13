@@ -13,7 +13,6 @@ module.exports = {
     es2021: true,
     browser: true
   },
-  reportUnusedDisableDirectives: true,
   parserOptions: {
     sourceType: 'module'
   },

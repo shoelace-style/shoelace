@@ -472,10 +472,11 @@ describe('<sl-input>', () => {
         </div>
       `);
       const form = el.querySelector<HTMLFormElement>('form')!;
-      const formControls = getFormControls(form);
 
-      expect(formControls.length).to.equal(10);
-      expect(formControls.map((fc: HTMLInputElement) => fc.value).join('')).to.equal('12345678910');
+      const formControls = getFormControls(form); // eslint-disable-line
+      expect(formControls.length).to.equal(10); // eslint-disable-line
+      expect(formControls.map((fc: HTMLInputElement) => fc.value).join('')).to.equal('12345678910'); // eslint-disable-line
+      /* eslint-enable */
     });
   });
 });
