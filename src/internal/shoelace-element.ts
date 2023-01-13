@@ -29,6 +29,7 @@ export interface ShoelaceFormControl extends ShoelaceElement {
   disabled?: boolean;
   defaultValue?: unknown;
   defaultChecked?: boolean;
+  form?: string;
 
   // Standard validation attributes
   pattern?: string;

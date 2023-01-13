@@ -1,17 +1,17 @@
-import { customElement, property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { html, literal } from 'lit/static-html.js';
-import ShoelaceElement from '../../internal/shoelace-element';
 import '../icon/icon';
+import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { html, literal } from 'lit/static-html.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './icon-button.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Icons buttons are simple, icon-only buttons that can be used for actions and in toolbars.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/icon-button
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  *

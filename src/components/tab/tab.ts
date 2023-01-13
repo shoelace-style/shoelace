@@ -1,10 +1,10 @@
-import { html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { watch } from '../../internal/watch';
-import { LocalizeController } from '../../utilities/localize';
 import '../icon-button/icon-button';
+import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query } from 'lit/decorators.js';
+import { html } from 'lit';
+import { LocalizeController } from '../../utilities/localize';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './tab.styles';
 import type { CSSResultGroup } from 'lit';
 
@@ -12,9 +12,9 @@ let id = 0;
 
 /**
  * @summary Tabs are used inside [tab groups](/components/tab-group) to represent and activate [tab panels](/components/tab-panel).
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/tab
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon-button
  *

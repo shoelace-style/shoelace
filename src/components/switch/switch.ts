@@ -1,21 +1,21 @@
-import { html } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { live } from 'lit/directives/live.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { defaultValue } from '../../internal/default-value';
 import { FormControlController } from '../../internal/form';
-import ShoelaceElement from '../../internal/shoelace-element';
+import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { live } from 'lit/directives/live.js';
 import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './switch.styles';
-import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type { CSSResultGroup } from 'lit';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 
 /**
  * @summary Switches allow the user to toggle an option on or off.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/switch
  * @status stable
+ * @since 2.0
  *
  * @slot - The switch's label.
  *
@@ -60,14 +60,21 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
   /** Disables the switch. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /** Makes the switch a required field. */
-  @property({ type: Boolean, reflect: true }) required = false;
-
   /** Draws the switch in a checked state. */
   @property({ type: Boolean, reflect: true }) checked = false;
 
   /** The default value of the form control. Primarily used for resetting the form control. */
   @defaultValue('checked') defaultChecked = false;
+
+  /**
+   * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
+   * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
+   * the same document or shadow root for this to work.
+   */
+  @property({ reflect: true }) form = '';
+
+  /** Makes the switch a required field. */
+  @property({ type: Boolean, reflect: true }) required = false;
 
   firstUpdated() {
     this.formControlController.updateValidity();

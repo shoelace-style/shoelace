@@ -1,7 +1,9 @@
+// eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
 import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
+import { getFormControls } from '../../../dist/utilities/form.js';
 import { sendKeys } from '@web/test-runner-commands';
+import { serialize } from '../../utilities/form'; // must come from the same module
 import sinon from 'sinon';
-import { serialize } from '../../utilities/form';
 import type SlInput from './input';
 
 describe('<sl-input>', () => {
@@ -155,7 +157,7 @@ describe('<sl-input>', () => {
     });
   });
 
-  describe('when serializing', () => {
+  describe('when submitting a form', () => {
     it('should serialize its name and value with FormData', async () => {
       const form = await fixture<HTMLFormElement>(html` <form><sl-input name="a" value="1"></sl-input></form> `);
       const formData = new FormData(form);
@@ -167,9 +169,7 @@ describe('<sl-input>', () => {
       const json = serialize(form);
       expect(json.a).to.equal('1');
     });
-  });
 
-  describe('when submitting a form', () => {
     it('should submit the form when pressing enter in a form without a submit button', async () => {
       const form = await fixture<HTMLFormElement>(html` <form><sl-input></sl-input></form> `);
       const input = form.querySelector('sl-input')!;
@@ -221,6 +221,21 @@ describe('<sl-input>', () => {
 
       expect(input.hasAttribute('data-user-invalid')).to.be.true;
       expect(input.hasAttribute('data-user-valid')).to.be.false;
+    });
+
+    it('should be present in form data when using the form attribute and located outside of a <form>', async () => {
+      const el = await fixture<HTMLFormElement>(html`
+        <div>
+          <form id="f">
+            <sl-button type="submit">Submit</sl-button>
+          </form>
+          <sl-input form="f" name="a" value="1"></sl-input>
+        </div>
+      `);
+      const form = el.querySelector('form')!;
+      const formData = new FormData(form);
+
+      expect(formData.get('a')).to.equal('1');
     });
   });
 
@@ -406,6 +421,61 @@ describe('<sl-input>', () => {
       const input = el.shadowRoot!.querySelector<HTMLInputElement>('input')!;
       expect(input.getAttribute('spellcheck')).to.equal('false');
       expect(input.spellcheck).to.be.false;
+    });
+  });
+
+  describe('when using FormControlController', () => {
+    it('should submit with the correct form when the form attribute changes', async () => {
+      const el = await fixture<HTMLFormElement>(html`
+        <div>
+          <form id="f1">
+            <input type="hidden" name="b" value="2" />
+            <sl-button type="submit">Submit</sl-button>
+          </form>
+          <form id="f2">
+            <input type="hidden" name="c" value="3" />
+            <sl-button type="submit">Submit</sl-button>
+          </form>
+          <sl-input form="f1" name="a" value="1"></sl-input>
+        </div>
+      `);
+      const form = el.querySelector<HTMLFormElement>('#f2')!;
+      const input = document.querySelector('sl-input')!;
+
+      input.form = 'f2';
+      await input.updateComplete;
+
+      const formData = new FormData(form);
+
+      expect(formData.get('a')).to.equal('1');
+      expect(formData.get('b')).to.be.null;
+      expect(formData.get('c')).to.equal('3');
+    });
+  });
+
+  describe('when using the getFormControls() function', () => {
+    it('should return both native and Shoelace form controls in the correct DOM order', async () => {
+      const el = await fixture<HTMLFormElement>(html`
+        <div>
+          <input type="text" name="a" value="1" form="f1" />
+          <sl-input type="text" name="b" value="2" form="f1"></sl-input>
+          <form id="f1">
+            <input type="hidden" name="c" value="3" />
+            <input type="text" name="d" value="4" />
+            <sl-input name="e" value="5"></sl-input>
+            <textarea name="f">6</textarea>
+            <sl-textarea name="g" value="7"></sl-textarea>
+            <sl-checkbox name="h" value="8"></sl-checkbox>
+          </form>
+          <input type="text" name="i" value="9" form="f1" />
+          <sl-input type="text" name="j" value="10" form="f1"></sl-input>
+        </div>
+      `);
+      const form = el.querySelector<HTMLFormElement>('form')!;
+
+      const formControls = getFormControls(form); // eslint-disable-line
+      expect(formControls.length).to.equal(10); // eslint-disable-line
+      expect(formControls.map((fc: HTMLInputElement) => fc.value).join('')).to.equal('12345678910'); // eslint-disable-line
     });
   });
 });

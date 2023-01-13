@@ -1,18 +1,18 @@
-import { html } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import '../icon/icon';
 import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { live } from 'lit/directives/live.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { defaultValue } from '../../internal/default-value';
 import { FormControlController } from '../../internal/form';
-import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
-import { watch } from '../../internal/watch';
+import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { live } from 'lit/directives/live.js';
 import { LocalizeController } from '../../utilities/localize';
-import '../icon/icon';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './input.styles';
-import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type { CSSResultGroup } from 'lit';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 
 //
 // It's currently impossible to hide Firefox's built-in clear icon when using <input type="date|time">, so we need this
@@ -28,9 +28,9 @@ const isFirefox = isChromium ? false : navigator.userAgent.includes('Firefox');
 
 /**
  * @summary Inputs collect data from the user.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/input
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  *
@@ -132,6 +132,13 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
 
   /** Hides the browser's built-in increment/decrement spin buttons for number inputs. */
   @property({ attribute: 'no-spin-buttons', type: Boolean }) noSpinButtons = false;
+
+  /**
+   * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
+   * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
+   * the same document or shadow root for this to work.
+   */
+  @property({ reflect: true }) form = '';
 
   /** Makes the input a required field. */
   @property({ type: Boolean, reflect: true }) required = false;

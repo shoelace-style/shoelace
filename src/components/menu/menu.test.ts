@@ -1,10 +1,10 @@
-import { expect, fixture } from '@open-wc/testing';
-import { sendKeys } from '@web/test-runner-commands';
-import { html } from 'lit';
-import sinon from 'sinon';
 import { clickOnElement } from '../../internal/test';
-import type SlMenuItem from '../menu-item/menu-item';
+import { expect, fixture } from '@open-wc/testing';
+import { html } from 'lit';
+import { sendKeys } from '@web/test-runner-commands';
+import sinon from 'sinon';
 import type SlMenu from './menu';
+import type SlMenuItem from '../menu-item/menu-item';
 
 describe('<sl-menu>', () => {
   it('emits sl-select with the correct event detail when clicking an item', async () => {

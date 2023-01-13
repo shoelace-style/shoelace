@@ -1,18 +1,18 @@
-import { html } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
+import { html } from 'lit';
 import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './menu.styles';
-import type SlMenuItem from '../menu-item/menu-item';
 import type { CSSResultGroup } from 'lit';
+import type SlMenuItem from '../menu-item/menu-item';
 export interface MenuSelectEventDetail {
   item: SlMenuItem;
 }
 
 /**
  * @summary Menus provide a list of options for the user to choose from.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/menu
  * @status stable
+ * @since 2.0
  *
  * @slot - The menu's content, including menu items, menu labels, and dividers.
  *

@@ -1,23 +1,23 @@
-import { customElement, property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { html, literal } from 'lit/static-html.js';
-import { FormControlController } from '../../internal/form';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { HasSlotController } from '../../internal/slot';
-import { watch } from '../../internal/watch';
-import { LocalizeController } from '../../utilities/localize';
 import '../icon/icon';
 import '../spinner/spinner';
+import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { FormControlController } from '../../internal/form';
+import { HasSlotController } from '../../internal/slot';
+import { html, literal } from 'lit/static-html.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { LocalizeController } from '../../utilities/localize';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './button.styles';
-import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type { CSSResultGroup } from 'lit';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 
 /**
  * @summary Buttons represent actions that are available to the user.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/button
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  * @dependency sl-spinner

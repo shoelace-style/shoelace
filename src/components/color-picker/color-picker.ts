@@ -1,27 +1,27 @@
-import { TinyColor } from '@ctrl/tinycolor';
-import { html } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { styleMap } from 'lit/directives/style-map.js';
-import { defaultValue } from '../../internal/default-value';
-import { drag } from '../../internal/drag';
-import { FormControlController } from '../../internal/form';
-import { clamp } from '../../internal/math';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { watch } from '../../internal/watch';
-import { LocalizeController } from '../../utilities/localize';
 import '../button-group/button-group';
 import '../button/button';
 import '../dropdown/dropdown';
 import '../icon/icon';
 import '../input/input';
 import '../visually-hidden/visually-hidden';
+import { clamp } from '../../internal/math';
+import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { defaultValue } from '../../internal/default-value';
+import { drag } from '../../internal/drag';
+import { FormControlController } from '../../internal/form';
+import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { LocalizeController } from '../../utilities/localize';
+import { styleMap } from 'lit/directives/style-map.js';
+import { TinyColor } from '@ctrl/tinycolor';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './color-picker.styles';
+import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type SlDropdown from '../dropdown/dropdown';
 import type SlInput from '../input/input';
-import type { CSSResultGroup } from 'lit';
 
 const hasEyeDropper = 'EyeDropper' in window;
 
@@ -37,9 +37,9 @@ declare const EyeDropper: EyeDropperConstructor;
 
 /**
  * @summary Color pickers allow the user to select a color.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/color-picker
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-button
  * @dependency sl-button-group
@@ -160,6 +160,13 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
    * semicolon (`;`). Alternatively, you can pass an array of color values to this property using JavaScript.
    */
   @property() swatches: string | string[] = '';
+
+  /**
+   * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
+   * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
+   * the same document or shadow root for this to work.
+   */
+  @property({ reflect: true }) form = '';
 
   connectedCallback() {
     super.connectedCallback();

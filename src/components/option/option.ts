@@ -1,18 +1,18 @@
-import { html } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { watch } from '../../internal/watch';
-import { LocalizeController } from '../../utilities/localize';
 import '../icon/icon';
+import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { html } from 'lit';
+import { LocalizeController } from '../../utilities/localize';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './option.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Options define the selectable items within various form controls such as [select](/components/select).
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/option
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  *

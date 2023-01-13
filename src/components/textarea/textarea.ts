@@ -1,22 +1,22 @@
-import { html } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { live } from 'lit/directives/live.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { defaultValue } from '../../internal/default-value';
 import { FormControlController } from '../../internal/form';
-import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
+import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { live } from 'lit/directives/live.js';
 import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './textarea.styles';
-import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type { CSSResultGroup } from 'lit';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 
 /**
  * @summary Textareas collect data from the user and allow multiple lines of text.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/textarea
  * @status stable
+ * @since 2.0
  *
  * @slot label - The textarea's label. Alternatively, you can use the `label` attribute.
  * @slot help-text - Text that describes how to use the input. Alternatively, you can use the `help-text` attribute.
@@ -78,6 +78,13 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
 
   /** Makes the textarea readonly. */
   @property({ type: Boolean, reflect: true }) readonly = false;
+
+  /**
+   * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
+   * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
+   * the same document or shadow root for this to work.
+   */
+  @property({ reflect: true }) form = '';
 
   /** Makes the textarea a required field. */
   @property({ type: Boolean, reflect: true }) required = false;

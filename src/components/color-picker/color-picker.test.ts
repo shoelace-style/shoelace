@@ -1,7 +1,8 @@
 import { aTimeout, expect, fixture, html, oneEvent } from '@open-wc/testing';
-import { sendKeys } from '@web/test-runner-commands';
-import sinon from 'sinon';
 import { clickOnElement } from '../../internal/test';
+import { sendKeys } from '@web/test-runner-commands';
+import { serialize } from '../../utilities/form';
+import sinon from 'sinon';
 import type SlColorPicker from './color-picker';
 
 describe('<sl-color-picker>', () => {
@@ -321,6 +322,43 @@ describe('<sl-color-picker>', () => {
 
     expect(trigger.style.color).to.equal('rgba(255, 0, 0, 0.314)');
     expect(previewColor).to.equal('#ff000050');
+  });
+
+  describe('when submitting a form', () => {
+    it('should serialize its name and value with FormData', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-color-picker name="a" value="#ffcc00"></sl-color-picker>
+        </form>
+      `);
+      const formData = new FormData(form);
+      expect(formData.get('a')).to.equal('#ffcc00');
+    });
+
+    it('should serialize its name and value with JSON', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-color-picker name="a" value="#ffcc00"></sl-color-picker>
+        </form>
+      `);
+      const json = serialize(form);
+      expect(json.a).to.equal('#ffcc00');
+    });
+
+    it('should be present in form data when using the form attribute and located outside of a <form>', async () => {
+      const el = await fixture<HTMLFormElement>(html`
+        <div>
+          <form id="f">
+            <sl-button type="submit">Submit</sl-button>
+          </form>
+          <sl-color-picker form="f" name="a" value="#ffcc00"></sl-color-picker>
+        </div>
+      `);
+      const form = el.querySelector('form')!;
+      const formData = new FormData(form);
+
+      expect(formData.get('a')).to.equal('#ffcc00');
+    });
   });
 
   describe('when resetting a form', () => {

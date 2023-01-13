@@ -1,7 +1,7 @@
 import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
+import { clickOnElement } from '../../internal/test';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-import { clickOnElement } from '../../internal/test';
 import type SlRadio from '../radio/radio';
 import type SlRadioGroup from './radio-group';
 
@@ -209,6 +209,25 @@ describe('when submitting a form', () => {
     await waitUntil(() => submitHandler.calledOnce);
 
     expect(formData!.get('a')).to.equal('2');
+  });
+
+  it('should be present in form data when using the form attribute and located outside of a <form>', async () => {
+    const el = await fixture<HTMLFormElement>(html`
+      <div>
+        <form id="f">
+          <sl-button type="submit">Submit</sl-button>
+        </form>
+        <sl-radio-group form="f" name="a" value="1">
+          <sl-radio id="radio-1" value="1"></sl-radio>
+          <sl-radio id="radio-2" value="2"></sl-radio>
+          <sl-radio id="radio-3" value="3"></sl-radio>
+        </sl-radio-group>
+      </div>
+    `);
+    const form = el.querySelector('form')!;
+    const formData = new FormData(form);
+
+    expect(formData.get('a')).to.equal('1');
   });
 });
 

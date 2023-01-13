@@ -1,8 +1,8 @@
 import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
-import { sendKeys } from '@web/test-runner-commands';
-import sinon from 'sinon';
 import { clickOnElement } from '../../internal/test';
+import { sendKeys } from '@web/test-runner-commands';
 import { serialize } from '../../utilities/form';
+import sinon from 'sinon';
 import type SlOption from '../option/option';
 import type SlSelect from './select';
 
@@ -296,7 +296,7 @@ describe('<sl-select>', () => {
     });
   });
 
-  describe('when serializing', () => {
+  describe('when submitting a form', () => {
     it('should serialize its name and value with FormData', async () => {
       const form = await fixture<HTMLFormElement>(html`
         <form>
@@ -352,6 +352,25 @@ describe('<sl-select>', () => {
       `);
       const json = serialize(form);
       expect(JSON.stringify(json)).to.equal(JSON.stringify({ a: ['option-2', 'option-3'] }));
+    });
+
+    it('should be present in form data when using the form attribute and located outside of a <form>', async () => {
+      const el = await fixture<HTMLFormElement>(html`
+        <div>
+          <form id="f">
+            <sl-button type="submit">Submit</sl-button>
+          </form>
+          <sl-select form="f" name="a" value="option-1">
+            <sl-option value="option-1">Option 1</sl-option>
+            <sl-option value="option-2">Option 2</sl-option>
+            <sl-option value="option-3">Option 3</sl-option>
+          </sl-select>
+        </div>
+      `);
+      const form = el.querySelector('form')!;
+      const formData = new FormData(form);
+
+      expect(formData.get('a')).to.equal('option-1');
     });
   });
 

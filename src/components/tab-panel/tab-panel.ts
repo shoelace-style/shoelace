@@ -1,8 +1,8 @@
-import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import ShoelaceElement from '../../internal/shoelace-element';
+import { customElement, property } from 'lit/decorators.js';
+import { html } from 'lit';
 import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './tab-panel.styles';
 import type { CSSResultGroup } from 'lit';
 
@@ -10,9 +10,9 @@ let id = 0;
 
 /**
  * @summary Tab panels are used inside [tab groups](/components/tab-group) to display tabbed content.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/tab-panel
  * @status stable
+ * @since 2.0
  *
  * @slot - The tab panel's content.
  *

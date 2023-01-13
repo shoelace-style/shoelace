@@ -1,8 +1,8 @@
+import { clickOnElement } from '../../internal/test';
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
-import sinon from 'sinon';
-import { clickOnElement } from '../../internal/test';
 import { serialize } from '../../utilities/form';
+import sinon from 'sinon';
 import type SlRange from './range';
 
 describe('<sl-range>', () => {
@@ -138,6 +138,18 @@ describe('<sl-range>', () => {
   });
 
   describe('when submitting a form', () => {
+    it('should serialize its name and value with FormData', async () => {
+      const form = await fixture<HTMLFormElement>(html` <form><sl-range name="a" value="1"></sl-range></form> `);
+      const formData = new FormData(form);
+      expect(formData.get('a')).to.equal('1');
+    });
+
+    it('should serialize its name and value with JSON', async () => {
+      const form = await fixture<HTMLFormElement>(html` <form><sl-range name="a" value="1"></sl-range></form> `);
+      const json = serialize(form);
+      expect(json.a).to.equal('1');
+    });
+
     it('should be invalid when setCustomValidity() is called with a non-empty value', async () => {
       const range = await fixture<HTMLFormElement>(html` <sl-range></sl-range> `);
 
@@ -156,19 +168,20 @@ describe('<sl-range>', () => {
       expect(range.hasAttribute('data-user-invalid')).to.be.true;
       expect(range.hasAttribute('data-user-valid')).to.be.false;
     });
-  });
 
-  describe('when serializing', () => {
-    it('should serialize its name and value with FormData', async () => {
-      const form = await fixture<HTMLFormElement>(html` <form><sl-range name="a" value="1"></sl-range></form> `);
+    it('should be present in form data when using the form attribute and located outside of a <form>', async () => {
+      const el = await fixture<HTMLFormElement>(html`
+        <div>
+          <form id="f">
+            <sl-button type="submit">Submit</sl-button>
+          </form>
+          <sl-range form="f" name="a" value="50"></sl-range>
+        </div>
+      `);
+      const form = el.querySelector('form')!;
       const formData = new FormData(form);
-      expect(formData.get('a')).to.equal('1');
-    });
 
-    it('should serialize its name and value with JSON', async () => {
-      const form = await fixture<HTMLFormElement>(html` <form><sl-range name="a" value="1"></sl-range></form> `);
-      const json = serialize(form);
-      expect(json.a).to.equal('1');
+      expect(formData.get('a')).to.equal('50');
     });
   });
 

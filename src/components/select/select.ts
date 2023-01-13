@@ -1,30 +1,30 @@
-import { html } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { scrollIntoView } from 'src/internal/scroll';
-import { animateTo, stopAnimations } from '../../internal/animate';
-import { defaultValue } from '../../internal/default-value';
-import { waitForEvent } from '../../internal/event';
-import { FormControlController } from '../../internal/form';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { HasSlotController } from '../../internal/slot';
-import { watch } from '../../internal/watch';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
-import { LocalizeController } from '../../utilities/localize';
 import '../icon/icon';
 import '../popup/popup';
 import '../tag/tag';
+import { animateTo, stopAnimations } from '../../internal/animate';
+import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { defaultValue } from '../../internal/default-value';
+import { FormControlController } from '../../internal/form';
+import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
+import { HasSlotController } from '../../internal/slot';
+import { html } from 'lit';
+import { LocalizeController } from '../../utilities/localize';
+import { scrollIntoView } from 'src/internal/scroll';
+import { waitForEvent } from '../../internal/event';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './select.styles';
+import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type SlOption from '../option/option';
 import type SlPopup from '../popup/popup';
-import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Selects allow you to choose items from a menu of predefined options.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/select
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  * @dependency sl-popup
@@ -149,6 +149,13 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
   /** The select's help text. If you need to display HTML, use the `help-text` slot instead. */
   @property({ attribute: 'help-text' }) helpText = '';
+
+  /**
+   * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
+   * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
+   * the same document or shadow root for this to work.
+   */
+  @property({ reflect: true }) form = '';
 
   /** The select's required attribute. */
   @property({ type: Boolean, reflect: true }) required = false;
@@ -405,7 +412,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     allOptions.forEach(option => {
       if (values.includes(option.value)) {
         console.error(
-          `An option with duplicate values has been found in <sl-select>. All options must have unique values.`,
+          `An option with a duplicate value of "${option.value}" has been found in <sl-select>. All options must have unique values.`,
           option
         );
       }
