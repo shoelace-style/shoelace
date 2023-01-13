@@ -1,11 +1,11 @@
-import { html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { LocalizeController } from '../../utilities/localize';
 import '../icon/icon';
+import { customElement, property, query } from 'lit/decorators.js';
+import { html } from 'lit';
+import { LocalizeController } from '../../utilities/localize';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './breadcrumb.styles';
-import type SlBreadcrumbItem from '../breadcrumb-item/breadcrumb-item';
 import type { CSSResultGroup } from 'lit';
+import type SlBreadcrumbItem from '../breadcrumb-item/breadcrumb-item';
 
 /**
  * @summary Breadcrumbs provide a group of links so users can easily navigate a website's hierarchy.

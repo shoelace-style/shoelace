@@ -1,16 +1,16 @@
-import { html } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { live } from 'lit/directives/live.js';
-import { when } from 'lit/directives/when.js';
-import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '../../internal/animate';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { watch } from '../../internal/watch';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
-import { LocalizeController } from '../../utilities/localize';
 import '../checkbox/checkbox';
 import '../icon/icon';
 import '../spinner/spinner';
+import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '../../internal/animate';
+import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
+import { html } from 'lit';
+import { live } from 'lit/directives/live.js';
+import { LocalizeController } from '../../utilities/localize';
+import { watch } from '../../internal/watch';
+import { when } from 'lit/directives/when.js';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './tree-item.styles';
 import type { CSSResultGroup, PropertyValueMap } from 'lit';
 

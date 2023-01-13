@@ -1,11 +1,11 @@
-import { html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { watch } from '../../internal/watch';
-import styles from './icon.styles';
 import { getIconLibrary, unwatchIcon, watchIcon } from './library';
+import { html } from 'lit';
 import { requestIcon } from './request';
+import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
+import styles from './icon.styles';
 import type { CSSResultGroup } from 'lit';
 
 let parser: DOMParser;

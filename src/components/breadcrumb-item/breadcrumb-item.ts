@@ -1,9 +1,9 @@
-import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property } from 'lit/decorators.js';
+import { HasSlotController } from '../../internal/slot';
+import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import ShoelaceElement from '../../internal/shoelace-element';
-import { HasSlotController } from '../../internal/slot';
 import styles from './breadcrumb-item.styles';
 import type { CSSResultGroup } from 'lit';
 

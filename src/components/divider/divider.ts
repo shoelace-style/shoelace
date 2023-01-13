@@ -1,6 +1,6 @@
 import { customElement, property } from 'lit/decorators.js';
-import ShoelaceElement from '../../internal/shoelace-element';
 import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './divider.styles';
 import type { CSSResultGroup } from 'lit';
 

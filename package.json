@@ -98,6 +98,7 @@
     "eslint-plugin-lit": "^1.8.2",
     "eslint-plugin-lit-a11y": "^2.3.0",
     "eslint-plugin-markdown": "^3.0.0",
+    "eslint-plugin-sort-imports-es6-autofix": "^0.6.0",
     "eslint-plugin-wc": "^1.4.0",
     "front-matter": "^4.0.2",
     "get-port": "^6.1.2",

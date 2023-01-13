@@ -1,9 +1,9 @@
-import { customElement, property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { html, literal } from 'lit/static-html.js';
-import ShoelaceElement from '../../internal/shoelace-element';
 import '../icon/icon';
+import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { html, literal } from 'lit/static-html.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './icon-button.styles';
 import type { CSSResultGroup } from 'lit';
 

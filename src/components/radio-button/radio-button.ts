@@ -1,10 +1,10 @@
-import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { html } from 'lit/static-html.js';
-import ShoelaceElement from '../../internal/shoelace-element';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { HasSlotController } from '../../internal/slot';
+import { html } from 'lit/static-html.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './radio-button.styles';
 import type { CSSResultGroup } from 'lit';
 

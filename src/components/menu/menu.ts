@@ -1,9 +1,9 @@
-import { html } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
+import { html } from 'lit';
 import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './menu.styles';
-import type SlMenuItem from '../menu-item/menu-item';
 import type { CSSResultGroup } from 'lit';
+import type SlMenuItem from '../menu-item/menu-item';
 export interface MenuSelectEventDetail {
   item: SlMenuItem;
 }

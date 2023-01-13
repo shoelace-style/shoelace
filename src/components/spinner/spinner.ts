@@ -1,7 +1,7 @@
-import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import ShoelaceElement from '../../internal/shoelace-element';
+import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './spinner.styles';
 import type { CSSResultGroup } from 'lit';
 

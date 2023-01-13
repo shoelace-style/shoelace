@@ -1,8 +1,8 @@
+import { clickOnElement } from '../../internal/test';
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
-import sinon from 'sinon';
-import { clickOnElement } from '../../internal/test';
 import { serialize } from '../../utilities/form';
+import sinon from 'sinon';
 import type SlRange from './range';
 
 describe('<sl-range>', () => {

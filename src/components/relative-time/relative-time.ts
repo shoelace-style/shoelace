@@ -1,7 +1,7 @@
-import { html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import ShoelaceElement from '../../internal/shoelace-element';
+import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize';
+import ShoelaceElement from '../../internal/shoelace-element';
 
 interface UnitConfig {
   max: number;

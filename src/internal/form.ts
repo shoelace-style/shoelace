@@ -1,6 +1,6 @@
-import type SlButton from '../components/button/button';
-import type { ShoelaceFormControl } from '../internal/shoelace-element';
 import type { ReactiveController, ReactiveControllerHost } from 'lit';
+import type { ShoelaceFormControl } from '../internal/shoelace-element';
+import type SlButton from '../components/button/button';
 
 //
 // We store a WeakMap of forms + controls so we can keep references to all Shoelace controls within a given form. As

@@ -1,5 +1,5 @@
-import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
+import { html } from 'lit';
 import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './visually-hidden.styles';
 import type { CSSResultGroup } from 'lit';

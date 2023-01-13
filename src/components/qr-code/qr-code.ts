@@ -1,9 +1,9 @@
-import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
+import { html } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
+import { watch } from '../../internal/watch';
 import QrCreator from 'qr-creator';
 import ShoelaceElement from '../../internal/shoelace-element';
-import { watch } from '../../internal/watch';
 import styles from './qr-code.styles';
 import type { CSSResultGroup } from 'lit';
 

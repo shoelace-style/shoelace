@@ -1,9 +1,9 @@
 // eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
 import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
+import { getFormControls } from '../../../dist/utilities/form.js';
 import { sendKeys } from '@web/test-runner-commands';
+import { serialize } from '../../utilities/form'; // must come from the same module
 import sinon from 'sinon';
-import { getFormControls } from '../../../dist/utilities/form.js'; // must come from the same module
-import { serialize } from '../../utilities/form';
 import type SlInput from './input';
 
 describe('<sl-input>', () => {

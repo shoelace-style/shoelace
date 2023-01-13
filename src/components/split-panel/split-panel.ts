@@ -1,11 +1,11 @@
-import { html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { drag } from '../../internal/drag';
 import { clamp } from '../../internal/math';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { watch } from '../../internal/watch';
+import { customElement, property, query } from 'lit/decorators.js';
+import { drag } from '../../internal/drag';
+import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { LocalizeController } from '../../utilities/localize';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './split-panel.styles';
 import type { CSSResultGroup } from 'lit';
 

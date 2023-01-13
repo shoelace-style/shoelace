@@ -1,7 +1,7 @@
-import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import ShoelaceElement from '../../internal/shoelace-element';
+import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './progress-ring.styles';
 import type { CSSResultGroup } from 'lit';
 

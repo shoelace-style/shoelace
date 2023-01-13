@@ -1,7 +1,16 @@
 /* eslint-env node */
 
 module.exports = {
-  plugins: ['@typescript-eslint', 'wc', 'lit', 'lit-a11y', 'chai-expect', 'chai-friendly', 'import'],
+  plugins: [
+    '@typescript-eslint',
+    'wc',
+    'lit',
+    'lit-a11y',
+    'chai-expect',
+    'chai-friendly',
+    'import',
+    'sort-imports-es6-autofix'
+  ],
   extends: [
     'eslint:recommended',
     'plugin:wc/recommended',
@@ -171,22 +180,12 @@ module.exports = {
       }
     ],
     'import/no-duplicates': 'warn',
-    'import/order': [
-      'warn',
+    'sort-imports-es6-autofix/sort-imports-es6': [
+      2,
       {
-        groups: ['builtin', 'external', 'internal', 'unknown', 'parent', 'sibling', 'index', 'object', 'type'],
-        pathGroups: [
-          {
-            pattern: 'dist/**',
-            group: 'external'
-          }
-        ],
-        alphabetize: {
-          order: 'asc',
-          caseInsensitive: true
-        },
-        'newlines-between': 'never',
-        warnOnUnassignedImports: true
+        ignoreCase: true,
+        ignoreMemberSort: false,
+        memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single']
       }
     ],
     'wc/guard-super-call': 'off'
