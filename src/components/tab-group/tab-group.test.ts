@@ -1,13 +1,13 @@
 import { aTimeout, elementUpdated, expect, fixture, waitUntil } from '@open-wc/testing';
-import { html } from 'lit';
 import { clickOnElement } from '../../internal/test';
+import { html } from 'lit';
+import { isElementVisibleFromOverflow } from '../../internal/test/element-visible-overflow';
 import { queryByTestId } from '../../internal/test/data-testid-helpers';
-import type SlTabPanel from '../tab-panel/tab-panel';
+import { waitForScrollingToEnd } from '../../internal/test/wait-for-scrolling';
+import type { HTMLTemplateResult } from 'lit';
 import type SlTab from '../tab/tab';
 import type SlTabGroup from './tab-group';
-import type { HTMLTemplateResult } from 'lit';
-import { waitForScrollingToEnd } from '../../internal/test/wait-for-scrolling';
-import { isElementVisibleFromOverflow } from '../../internal/test/element-visible-overflow';
+import type SlTabPanel from '../tab-panel/tab-panel';
 
 interface ClientRectangles {
   body?: DOMRect;
