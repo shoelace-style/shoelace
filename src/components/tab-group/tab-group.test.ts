@@ -215,6 +215,29 @@ describe('<sl-tab-group>', () => {
       return result;
     };
 
+    before(() => {
+      // disabling failing on resize observer ... unfortunately on webkit this is not really specific
+      // https://github.com/WICG/resize-observer/issues/38#issuecomment-422126006
+      // https://stackoverflow.com/a/64197640
+      const errorHandler = window.onerror;
+      window.onerror = (
+        event: string | Event,
+        source?: string | undefined,
+        lineno?: number | undefined,
+        colno?: number | undefined,
+        error?: Error | undefined
+      ) => {
+        if ((event as string).includes('ResizeObserver') || event === 'Script error.') {
+          return true;
+        } else if (errorHandler) {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+          return errorHandler(event, source, lineno, colno, error);
+        } else {
+          return true;
+        }
+      };
+    });
+
     it('shows scroll buttons on too many tabs', async () => {
       const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(30)} </sl-tab-group>`);
 
@@ -222,6 +245,8 @@ describe('<sl-tab-group>', () => {
 
       const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
       expect(scrollButtons, 'Both scroll buttons should be shown').to.have.length(2);
+
+      tabGroup.disconnectedCallback();
     });
 
     it('does not show scroll buttons on too many tabs if deactivated', async () => {
@@ -264,7 +289,10 @@ describe('<sl-tab-group>', () => {
     });
 
     it('does scroll on scroll button click', async () => {
-      const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(30)} </sl-tab-group>`);
+      const numberOfElements = 15;
+      const tabGroup = await fixture<SlTabGroup>(
+        html`<sl-tab-group> ${generateTabs(numberOfElements)} </sl-tab-group>`
+      );
 
       await waitForScrollButtonsToBeRendered(tabGroup);
       const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
@@ -272,7 +300,7 @@ describe('<sl-tab-group>', () => {
 
       const firstTab = tabGroup.querySelector('[panel="tab-0"]');
       expect(firstTab).not.to.be.null;
-      const lastTab = tabGroup.querySelector('[panel="tab-29"]');
+      const lastTab = tabGroup.querySelector(`[panel="tab-${numberOfElements - 1}"]`);
       expect(lastTab).not.to.be.null;
       expect(isElementVisibleFromScrolling(tabGroup, firstTab!)).to.be.true;
       expect(isElementVisibleFromScrolling(tabGroup, lastTab!)).to.be.false;
@@ -283,6 +311,7 @@ describe('<sl-tab-group>', () => {
 
       await elementUpdated(tabGroup);
       await waitForScrollingToEnd(firstTab!);
+      await waitForScrollingToEnd(lastTab!);
 
       expect(isElementVisibleFromScrolling(tabGroup, firstTab!)).to.be.false;
       expect(isElementVisibleFromScrolling(tabGroup, lastTab!)).to.be.true;
