@@ -218,34 +218,8 @@ export default class SlTree extends ShoelaceElement {
     }
   }
 
-  // Returns the list of tree items that are selected in the tree.
-  private get selectedItems(): SlTreeItem[] {
-    const items = this.getAllTreeItems();
-    const isSelected = (item: SlTreeItem) => item.selected;
-
-    return items.filter(isSelected);
-  }
-
   private getAllTreeItems() {
     return [...this.querySelectorAll<SlTreeItem>('sl-tree-item')];
-  }
-
-  private getFocusableItems() {
-    const items = this.getAllTreeItems();
-    const collapsedItems = new Set();
-
-    return items.filter(item => {
-      // Exclude disabled elements
-      if (item.disabled) return false;
-
-      // Exclude those whose parent is collapsed or loading
-      const parent: SlTreeItem | null | undefined = item.parentElement?.closest('[role=treeitem]');
-      if (parent && (!parent.expanded || parent.loading || collapsedItems.has(parent))) {
-        collapsedItems.add(item);
-      }
-
-      return !collapsedItems.has(item);
-    });
   }
 
   private focusItem(item?: SlTreeItem | null) {
@@ -387,6 +361,33 @@ export default class SlTree extends ShoelaceElement {
         syncCheckboxes(treeItem, true)
       );
     }
+  }
+
+  /** @internal Returns the list of tree items that are selected in the tree. */
+  get selectedItems(): SlTreeItem[] {
+    const items = this.getAllTreeItems();
+    const isSelected = (item: SlTreeItem) => item.selected;
+
+    return items.filter(isSelected);
+  }
+
+  /** @internal Gets focusable tree items in the tree. */
+  getFocusableItems() {
+    const items = this.getAllTreeItems();
+    const collapsedItems = new Set();
+
+    return items.filter(item => {
+      // Exclude disabled elements
+      if (item.disabled) return false;
+
+      // Exclude those whose parent is collapsed or loading
+      const parent: SlTreeItem | null | undefined = item.parentElement?.closest('[role=treeitem]');
+      if (parent && (!parent.expanded || parent.loading || collapsedItems.has(parent))) {
+        collapsedItems.add(item);
+      }
+
+      return !collapsedItems.has(item);
+    });
   }
 
   render() {
