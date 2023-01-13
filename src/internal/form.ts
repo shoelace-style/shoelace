@@ -49,7 +49,19 @@ export class FormControlController implements ReactiveController {
   constructor(host: ReactiveControllerHost & ShoelaceFormControl, options?: Partial<FormControlControllerOptions>) {
     (this.host = host).addController(this);
     this.options = {
-      form: input => input.closest('form'),
+      form: input => {
+        // If there's a form attribute, use it to find the target form by id
+        if (input.hasAttribute('form') && input.getAttribute('form') !== '') {
+          const root = input.getRootNode() as Document | ShadowRoot;
+          const formId = input.getAttribute('form');
+
+          if (formId) {
+            return root.getElementById(formId) as HTMLFormElement;
+          }
+        }
+
+        return input.closest('form');
+      },
       name: input => input.name,
       value: input => input.value,
       defaultValue: input => input.defaultValue,
@@ -66,9 +78,43 @@ export class FormControlController implements ReactiveController {
   }
 
   hostConnected() {
-    this.form = this.options.form(this.host);
+    const form = this.options.form(this.host);
 
-    if (this.form) {
+    if (form) {
+      this.attachForm(form);
+    }
+
+    this.host.addEventListener('sl-input', this.handleUserInput);
+  }
+
+  hostDisconnected() {
+    this.detachForm();
+    this.host.removeEventListener('sl-input', this.handleUserInput);
+  }
+
+  hostUpdated() {
+    const form = this.options.form(this.host);
+
+    // Detach if the form no longer exists
+    if (!form) {
+      this.detachForm();
+    }
+
+    // If the form has changed, reattach it
+    if (form && this.form !== form) {
+      this.detachForm();
+      this.attachForm(form);
+    }
+
+    if (this.host.hasUpdated) {
+      this.setValidity(this.host.checkValidity());
+    }
+  }
+
+  private attachForm(form?: HTMLFormElement) {
+    if (form) {
+      this.form = form;
+
       // Add this element to the form's collection
       if (formCollections.has(this.form)) {
         formCollections.get(this.form)!.add(this.host);
@@ -85,12 +131,12 @@ export class FormControlController implements ReactiveController {
         reportValidityOverloads.set(this.form, this.form.reportValidity);
         this.form.reportValidity = () => this.reportFormValidity();
       }
+    } else {
+      this.form = undefined;
     }
-
-    this.host.addEventListener('sl-input', this.handleUserInput);
   }
 
-  hostDisconnected() {
+  private detachForm() {
     if (this.form) {
       // Remove this element from the form's collection
       formCollections.get(this.form)?.delete(this.host);
@@ -104,17 +150,9 @@ export class FormControlController implements ReactiveController {
         this.form.reportValidity = reportValidityOverloads.get(this.form)!;
         reportValidityOverloads.delete(this.form);
       }
-
-      this.form = undefined;
     }
 
-    this.host.removeEventListener('sl-input', this.handleUserInput);
-  }
-
-  hostUpdated() {
-    if (this.host.hasUpdated) {
-      this.setValidity(this.host.checkValidity());
-    }
+    this.form = undefined;
   }
 
   private handleFormData(event: FormDataEvent) {

@@ -63,9 +63,6 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
   /** Disables the checkbox. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /** Makes the checkbox a required field. */
-  @property({ type: Boolean, reflect: true }) required = false;
-
   /** Draws the checkbox in a checked state. */
   @property({ type: Boolean, reflect: true }) checked = false;
 
@@ -77,6 +74,16 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
 
   /** The default value of the form control. Primarily used for resetting the form control. */
   @defaultValue('checked') defaultChecked = false;
+
+  /**
+   * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
+   * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
+   * the same document or shadow root for this to work.
+   */
+  @property({ reflect: true }) form = '';
+
+  /** Makes the checkbox a required field. */
+  @property({ type: Boolean, reflect: true }) required = false;
 
   firstUpdated() {
     this.formControlController.updateValidity();

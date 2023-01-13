@@ -173,7 +173,7 @@ describe('<sl-textarea>', () => {
     });
   });
 
-  describe('when serializing', () => {
+  describe('when submitting a form', () => {
     it('should serialize its name and value with FormData', async () => {
       const form = await fixture<HTMLFormElement>(html` <form><sl-textarea name="a" value="1"></sl-textarea></form> `);
       const formData = new FormData(form);
@@ -184,6 +184,41 @@ describe('<sl-textarea>', () => {
       const form = await fixture<HTMLFormElement>(html` <form><sl-textarea name="a" value="1"></sl-textarea></form> `);
       const json = serialize(form);
       expect(json.a).to.equal('1');
+    });
+
+    it('should be invalid when setCustomValidity() is called with a non-empty value', async () => {
+      const textarea = await fixture<HTMLFormElement>(html` <sl-textarea></sl-textarea> `);
+
+      textarea.setCustomValidity('Invalid selection');
+      await textarea.updateComplete;
+
+      expect(textarea.checkValidity()).to.be.false;
+      expect(textarea.hasAttribute('data-invalid')).to.be.true;
+      expect(textarea.hasAttribute('data-valid')).to.be.false;
+      expect(textarea.hasAttribute('data-user-invalid')).to.be.false;
+      expect(textarea.hasAttribute('data-user-valid')).to.be.false;
+
+      textarea.focus();
+      await sendKeys({ type: 'test' });
+      await textarea.updateComplete;
+
+      expect(textarea.hasAttribute('data-user-invalid')).to.be.true;
+      expect(textarea.hasAttribute('data-user-valid')).to.be.false;
+    });
+
+    it('should be present in form data when using the form attribute and located outside of a <form>', async () => {
+      const el = await fixture<HTMLFormElement>(html`
+        <div>
+          <form id="f">
+            <sl-button type="submit">Submit</sl-button>
+          </form>
+          <sl-textarea form="f" name="a" value="1"></sl-textarea>
+        </div>
+      `);
+      const form = el.querySelector('form')!;
+      const formData = new FormData(form);
+
+      expect(formData.get('a')).to.equal('1');
     });
   });
 

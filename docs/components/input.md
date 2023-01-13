@@ -4,6 +4,25 @@
 
 ```html preview
 <sl-input></sl-input>
+
+F1
+<form id="f1" action="" method="GET" target="_blank">
+  <input type="hidden" name="b" value="2" />
+  <sl-button type="submit">Submit 1</sl-button>
+</form>
+
+<br />
+
+F2
+<form id="f2" action="" method="GET" target="_blank">
+  <input type="hidden" name="c" value="3" />
+  <sl-button type="submit">Submit 2</sl-button>
+</form>
+
+<br />
+
+Custom
+<sl-input id="mine" name="a" form="f1" value="123"></sl-input>
 ```
 
 ```jsx react

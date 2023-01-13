@@ -155,7 +155,7 @@ describe('<sl-input>', () => {
     });
   });
 
-  describe('when serializing', () => {
+  describe('when submitting a form', () => {
     it('should serialize its name and value with FormData', async () => {
       const form = await fixture<HTMLFormElement>(html` <form><sl-input name="a" value="1"></sl-input></form> `);
       const formData = new FormData(form);
@@ -167,9 +167,7 @@ describe('<sl-input>', () => {
       const json = serialize(form);
       expect(json.a).to.equal('1');
     });
-  });
 
-  describe('when submitting a form', () => {
     it('should submit the form when pressing enter in a form without a submit button', async () => {
       const form = await fixture<HTMLFormElement>(html` <form><sl-input></sl-input></form> `);
       const input = form.querySelector('sl-input')!;
@@ -221,6 +219,48 @@ describe('<sl-input>', () => {
 
       expect(input.hasAttribute('data-user-invalid')).to.be.true;
       expect(input.hasAttribute('data-user-valid')).to.be.false;
+    });
+
+    it('should be present in form data when using the form attribute and located outside of a <form>', async () => {
+      const el = await fixture<HTMLFormElement>(html`
+        <div>
+          <form id="f">
+            <sl-button type="submit">Submit</sl-button>
+          </form>
+          <sl-input form="f" name="a" value="1"></sl-input>
+        </div>
+      `);
+      const form = el.querySelector('form')!;
+      const formData = new FormData(form);
+
+      expect(formData.get('a')).to.equal('1');
+    });
+
+    it('should submit with the correct form when the form attribute changes (FormControlController)', async () => {
+      const el = await fixture<HTMLFormElement>(html`
+        <div>
+          <form id="f1">
+            <input type="hidden" name="b" value="2" />
+            <sl-button type="submit">Submit</sl-button>
+          </form>
+          <form id="f2">
+            <input type="hidden" name="c" value="3" />
+            <sl-button type="submit">Submit</sl-button>
+          </form>
+          <sl-input form="f1" name="a" value="1"></sl-input>
+        </div>
+      `);
+      const form = el.querySelector<HTMLFormElement>('#f2')!;
+      const input = document.querySelector('sl-input')!;
+
+      input.form = 'f2';
+      await input.updateComplete;
+
+      const formData = new FormData(form);
+
+      expect(formData.get('a')).to.equal('1');
+      expect(formData.get('b')).to.be.null;
+      expect(formData.get('c')).to.equal('3');
     });
   });
 

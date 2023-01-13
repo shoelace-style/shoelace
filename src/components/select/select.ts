@@ -150,6 +150,13 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   /** The select's help text. If you need to display HTML, use the `help-text` slot instead. */
   @property({ attribute: 'help-text' }) helpText = '';
 
+  /**
+   * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
+   * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
+   * the same document or shadow root for this to work.
+   */
+  @property({ reflect: true }) form = '';
+
   /** The select's required attribute. */
   @property({ type: Boolean, reflect: true }) required = false;
 

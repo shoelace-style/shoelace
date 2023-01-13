@@ -169,6 +169,21 @@ describe('<sl-checkbox>', () => {
       const checkbox = await fixture<HTMLFormElement>(html` <sl-checkbox required checked></sl-checkbox> `);
       expect(checkbox.checkValidity()).to.be.true;
     });
+
+    it('should be present in form data when using the form attribute and located outside of a <form>', async () => {
+      const el = await fixture<HTMLFormElement>(html`
+        <div>
+          <form id="f">
+            <sl-button type="submit">Submit</sl-button>
+          </form>
+          <sl-checkbox form="f" name="a" value="1" checked></sl-checkbox>
+        </div>
+      `);
+      const form = el.querySelector('form')!;
+      const formData = new FormData(form);
+
+      expect(formData.get('a')).to.equal('1');
+    });
   });
 
   describe('when resetting a form', () => {

@@ -133,6 +133,13 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   /** Hides the browser's built-in increment/decrement spin buttons for number inputs. */
   @property({ attribute: 'no-spin-buttons', type: Boolean }) noSpinButtons = false;
 
+  /**
+   * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
+   * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
+   * the same document or shadow root for this to work.
+   */
+  @property({ reflect: true }) form = '';
+
   /** Makes the input a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
