@@ -2,7 +2,6 @@
 import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-// @ts-expect-error - The getFormControls() function must come from the same dist
 import { getFormControls, serialize } from '../../../dist/utilities/form.js';
 import type SlInput from './input';
 
