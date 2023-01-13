@@ -25,6 +25,9 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-spinner>` that caused the animation to stop working correctly in Safari [#1121](https://github.com/shoelace-style/shoelace/issues/1121)
 - Refactored the `ShoelaceFormControl` interface to remove the `invalid` property, allowing a more intuitive API for controlling validation internally
 - Renamed the internal `FormSubmitController` to `FormControlController` to better reflect what it's used for
+- Updated Lit to 2.6.1
+- Updated Floating UI to 1.1.0
+- Updated all other dependencies to latest versions
 
 ## 2.0.0-beta.88
 
