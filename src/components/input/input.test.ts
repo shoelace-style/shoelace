@@ -1,7 +1,8 @@
 import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-import { serialize } from '../../utilities/form';
+// @ts-expect-error - The getFormControls() function must come from the same dist
+import { getFormControls, serialize } from '../../../dist/utilities/form.js';
 import type SlInput from './input';
 
 describe('<sl-input>', () => {
@@ -235,33 +236,6 @@ describe('<sl-input>', () => {
 
       expect(formData.get('a')).to.equal('1');
     });
-
-    it('should submit with the correct form when the form attribute changes (FormControlController)', async () => {
-      const el = await fixture<HTMLFormElement>(html`
-        <div>
-          <form id="f1">
-            <input type="hidden" name="b" value="2" />
-            <sl-button type="submit">Submit</sl-button>
-          </form>
-          <form id="f2">
-            <input type="hidden" name="c" value="3" />
-            <sl-button type="submit">Submit</sl-button>
-          </form>
-          <sl-input form="f1" name="a" value="1"></sl-input>
-        </div>
-      `);
-      const form = el.querySelector<HTMLFormElement>('#f2')!;
-      const input = document.querySelector('sl-input')!;
-
-      input.form = 'f2';
-      await input.updateComplete;
-
-      const formData = new FormData(form);
-
-      expect(formData.get('a')).to.equal('1');
-      expect(formData.get('b')).to.be.null;
-      expect(formData.get('c')).to.equal('3');
-    });
   });
 
   describe('when resetting a form', () => {
@@ -446,6 +420,61 @@ describe('<sl-input>', () => {
       const input = el.shadowRoot!.querySelector<HTMLInputElement>('input')!;
       expect(input.getAttribute('spellcheck')).to.equal('false');
       expect(input.spellcheck).to.be.false;
+    });
+  });
+
+  describe('when using FormControlController', () => {
+    it('should submit with the correct form when the form attribute changes', async () => {
+      const el = await fixture<HTMLFormElement>(html`
+        <div>
+          <form id="f1">
+            <input type="hidden" name="b" value="2" />
+            <sl-button type="submit">Submit</sl-button>
+          </form>
+          <form id="f2">
+            <input type="hidden" name="c" value="3" />
+            <sl-button type="submit">Submit</sl-button>
+          </form>
+          <sl-input form="f1" name="a" value="1"></sl-input>
+        </div>
+      `);
+      const form = el.querySelector<HTMLFormElement>('#f2')!;
+      const input = document.querySelector('sl-input')!;
+
+      input.form = 'f2';
+      await input.updateComplete;
+
+      const formData = new FormData(form);
+
+      expect(formData.get('a')).to.equal('1');
+      expect(formData.get('b')).to.be.null;
+      expect(formData.get('c')).to.equal('3');
+    });
+  });
+
+  describe('when using the getFormControls() function', () => {
+    it('should return both native and Shoelace form controls in the correct DOM order', async () => {
+      const el = await fixture<HTMLFormElement>(html`
+        <div>
+          <input type="text" name="a" value="1" form="f1" />
+          <sl-input type="text" name="b" value="2" form="f1"></sl-input>
+          <form id="f1">
+            <input type="hidden" name="c" value="3" />
+            <input type="text" name="d" value="4" />
+            <sl-input name="e" value="5"></sl-input>
+            <textarea name="f">6</textarea>
+            <sl-textarea name="g" value="7"></sl-textarea>
+            <sl-checkbox name="h" value="8"></sl-checkbox>
+          </form>
+          <input type="text" name="i" value="9" form="f1" />
+          <sl-input type="text" name="j" value="10" form="f1"></sl-input>
+        </div>
+      `);
+      const form = el.querySelector<HTMLFormElement>('form')!;
+      const formControls = getFormControls(form);
+
+      expect(formControls.length).to.equal(10);
+      expect(formControls.map((fc: HTMLInputElement) => fc.value).join('')).to.equal('12345678910');
     });
   });
 });

@@ -15,6 +15,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Added `sl-hover` event to `<sl-rating>` [#1125](https://github.com/shoelace-style/shoelace/issues/1125)
 - Added the `@documentation` tag with a link to the docs for each component
 - Added the `form` attribute to all form controls to allow placing them outside of a `<form>` element [#1130](https://github.com/shoelace-style/shoelace/issues/1130)
+- Added the `getFormControls()` function as an alternative to `HTMLFormElement.elements`
 - Fixed a bug in `<sl-select>` that prevented placeholders from showing when `multiple` was used [#1109](https://github.com/shoelace-style/shoelace/issues/1109)
 - Fixed a bug in `<sl-select>` that caused tags to not be rounded when using the `pill` attribute [#1117](https://github.com/shoelace-style/shoelace/issues/1117)
 - Fixed a bug in `<sl-select>` where the `sl-change` and `sl-input` events didn't weren't emitted when removing tags [#1119](https://github.com/shoelace-style/shoelace/issues/1119)

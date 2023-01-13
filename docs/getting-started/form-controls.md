@@ -355,3 +355,18 @@ This example demonstrates custom validation styles using `data-user-invalid` and
   }
 </style>
 ```
+
+## Getting Associated Form Controls
+
+At this time, using [`HTMLFormElement.elements`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/elements) will not return Shoelace form controls because the browser is unaware of their status as custom element form controls. Fortunately, Shoelace provides an `elements()` function that does something very similar. However, instead of returning an [`HTMLFormControlsCollection`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormControlsCollection), it returns an array of HTML and Shoelace form controls in the order they appear in the DOM.
+
+```js
+import { getFormControls } from '@shoelace-style/shoelace/dist/utilities/form.js';
+
+const form = document.querySelector('#my-form');
+const formControls = getFormControls(form);
+
+console.log(formControls); // e.g. [input, sl-input, ...]
+```
+
+?> You probably don't need this function! If you're gathering form data for submission, you probably want to look at the [Data Serialization](#data-serializing) instead.

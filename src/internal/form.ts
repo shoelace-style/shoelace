@@ -7,7 +7,7 @@ import type { ReactiveController, ReactiveControllerHost } from 'lit';
 // elements connect and disconnect to/from the DOM, their containing form is used as the key and the form control is
 // added and removed from the form's set, respectively.
 //
-const formCollections: WeakMap<HTMLFormElement, Set<ShoelaceFormControl>> = new WeakMap();
+export const formCollections: WeakMap<HTMLFormElement, Set<ShoelaceFormControl>> = new WeakMap();
 
 //
 // We store a WeakMap of controls that users have interacted with. This allows us to determine the interaction state
