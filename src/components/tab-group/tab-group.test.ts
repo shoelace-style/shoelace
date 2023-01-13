@@ -1,4 +1,4 @@
-import { elementUpdated, expect, fixture, waitUntil } from '@open-wc/testing';
+import { aTimeout, elementUpdated, expect, fixture, waitUntil } from '@open-wc/testing';
 import { html } from 'lit';
 import { clickOnElement } from '../../internal/test';
 import { queryByTestId } from '../../internal/test/data-testid-helpers';
@@ -6,17 +6,13 @@ import type SlTabPanel from '../tab-panel/tab-panel';
 import type SlTab from '../tab/tab';
 import type SlTabGroup from './tab-group';
 import type { HTMLTemplateResult } from 'lit';
+import { waitForScrollingToEnd } from '../../internal/test/wait-for-scrolling';
+import { isElementVisibleFromOverflow } from '../../internal/test/element-visible-overflow';
 
 interface ClientRectangles {
   body?: DOMRect;
   navigation?: DOMRect;
 }
-
-const wait = async (delayInMs = 0): Promise<void> => {
-  return new Promise(resolve => {
-    window.setTimeout(() => resolve(), delayInMs);
-  });
-};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const waitForScrollButtonsToBeRendered = (tabGroup: SlTabGroup): Promise<any> => {
@@ -39,45 +35,8 @@ const getClientRectangles = (tabGroup: SlTabGroup): ClientRectangles => {
   return {};
 };
 
-const waitForScrollingToEnd = (element: Element, timeoutInMs = 500): Promise<void> => {
-  let lastLeft = element.scrollLeft;
-  let lastTop = element.scrollTop;
-  let framesWithoutChange = 0;
-  return new Promise((resolve, reject) => {
-    const timeout = window.setTimeout(() => {
-      reject(new Error('Waiting for scroll end timed out'));
-    }, timeoutInMs);
-    function checkScrollingChanged() {
-      if (element.scrollLeft !== lastLeft || element.scrollTop !== lastTop) {
-        framesWithoutChange = 0;
-        lastLeft = window.scrollX;
-        lastTop = window.scrollY;
-      } else {
-        framesWithoutChange++;
-        if (framesWithoutChange >= 20) {
-          clearTimeout(timeout);
-          resolve();
-        }
-      }
-      window.requestAnimationFrame(checkScrollingChanged);
-    }
-    checkScrollingChanged();
-  });
-};
-
-const isElementVisibleFromScrolling = (outerElement: Element, innerElement: Element): boolean => {
-  const outerRect = outerElement.getBoundingClientRect();
-  const innerRect = innerElement.getBoundingClientRect();
-  return (
-    outerRect.top <= innerRect.bottom &&
-    innerRect.top <= outerRect.bottom &&
-    outerRect.left <= innerRect.right &&
-    innerRect.left <= outerRect.right
-  );
-};
-
-const expectHeaderToBeVisible = (container: HTMLElement, dataTestid: string): void => {
-  const generalHeader = queryByTestId<SlTab>(container, dataTestid);
+const expectHeaderToBeVisible = (container: HTMLElement, dataTestId: string): void => {
+  const generalHeader = queryByTestId<SlTab>(container, dataTestId);
   expect(generalHeader).not.to.be.null;
   expect(generalHeader).to.be.visible;
 };
@@ -117,7 +76,7 @@ describe('<sl-tab-group>', () => {
     await expect(tabGroup).to.be.accessible();
   });
 
-  it('displays all tabs', async () => {
+  it.only('displays all tabs', async () => {
     const tabGroup = await fixture<SlTabGroup>(html`
       <sl-tab-group>
         <sl-tab slot="nav" panel="general" data-testid="general-tab-header">General</sl-tab>
@@ -153,7 +112,7 @@ describe('<sl-tab-group>', () => {
         </sl-tab-group>
       `);
 
-      await wait();
+      await aTimeout(0);
 
       const clientRectangles = getClientRectangles(tabGroup);
       expect(clientRectangles.body?.top).to.be.greaterThanOrEqual(clientRectangles.navigation?.bottom || -Infinity);
@@ -168,7 +127,7 @@ describe('<sl-tab-group>', () => {
       `);
       tabGroup.placement = 'bottom';
 
-      await wait();
+      await aTimeout(0);
 
       const clientRectangles = getClientRectangles(tabGroup);
       expect(clientRectangles.body?.bottom).to.be.lessThanOrEqual(clientRectangles.navigation?.top || +Infinity);
@@ -183,7 +142,7 @@ describe('<sl-tab-group>', () => {
       `);
       tabGroup.placement = 'start';
 
-      await wait();
+      await aTimeout(0);
 
       const clientRectangles = getClientRectangles(tabGroup);
       expect(clientRectangles.body?.left).to.be.greaterThanOrEqual(clientRectangles.navigation?.right || -Infinity);
@@ -198,7 +157,7 @@ describe('<sl-tab-group>', () => {
       `);
       tabGroup.placement = 'end';
 
-      await wait();
+      await aTimeout(0);
 
       const clientRectangles = getClientRectangles(tabGroup);
       expect(clientRectangles.body?.right).to.be.lessThanOrEqual(clientRectangles.navigation?.left || -Infinity);
@@ -253,7 +212,7 @@ describe('<sl-tab-group>', () => {
       const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(30)} </sl-tab-group>`);
       tabGroup.noScrollControls = true;
 
-      await wait();
+      await aTimeout(0);
 
       const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
       expect(scrollButtons).to.have.length(0);
@@ -262,7 +221,7 @@ describe('<sl-tab-group>', () => {
     it('does not show scroll buttons if all tabs fit on the screen', async () => {
       const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(2)} </sl-tab-group>`);
 
-      await wait();
+      await aTimeout(0);
 
       const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
       expect(scrollButtons).to.have.length(0);
@@ -272,7 +231,7 @@ describe('<sl-tab-group>', () => {
       const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(50)} </sl-tab-group>`);
       tabGroup.placement = 'start';
 
-      await wait();
+      await aTimeout(0);
 
       const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
       expect(scrollButtons).to.have.length(0);
@@ -282,7 +241,7 @@ describe('<sl-tab-group>', () => {
       const tabGroup = await fixture<SlTabGroup>(html`<sl-tab-group> ${generateTabs(50)} </sl-tab-group>`);
       tabGroup.placement = 'end';
 
-      await wait();
+      await aTimeout(0);
 
       const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
       expect(scrollButtons).to.have.length(0);
@@ -302,8 +261,8 @@ describe('<sl-tab-group>', () => {
       expect(firstTab).not.to.be.null;
       const lastTab = tabGroup.querySelector(`[panel="tab-${numberOfElements - 1}"]`);
       expect(lastTab).not.to.be.null;
-      expect(isElementVisibleFromScrolling(tabGroup, firstTab!)).to.be.true;
-      expect(isElementVisibleFromScrolling(tabGroup, lastTab!)).to.be.false;
+      expect(isElementVisibleFromOverflow(tabGroup, firstTab!)).to.be.true;
+      expect(isElementVisibleFromOverflow(tabGroup, lastTab!)).to.be.false;
 
       const scrollToRightButton = tabGroup.shadowRoot?.querySelector('sl-icon-button[part*="scroll-button--end"]');
       expect(scrollToRightButton).not.to.be.null;
@@ -313,8 +272,8 @@ describe('<sl-tab-group>', () => {
       await waitForScrollingToEnd(firstTab!);
       await waitForScrollingToEnd(lastTab!);
 
-      expect(isElementVisibleFromScrolling(tabGroup, firstTab!)).to.be.false;
-      expect(isElementVisibleFromScrolling(tabGroup, lastTab!)).to.be.true;
+      expect(isElementVisibleFromOverflow(tabGroup, firstTab!)).to.be.false;
+      expect(isElementVisibleFromOverflow(tabGroup, lastTab!)).to.be.true;
     });
   });
 });
