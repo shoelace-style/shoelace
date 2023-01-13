@@ -369,4 +369,4 @@ const formControls = getFormControls(form);
 console.log(formControls); // e.g. [input, sl-input, ...]
 ```
 
-?> You probably don't need this function! If you're gathering form data for submission, you probably want to look at the [Data Serialization](#data-serializing) instead.
+?> You probably don't need this function! If you're gathering form data for submission, you probably want to use [Data Serialization](#data-serializing) instead.
