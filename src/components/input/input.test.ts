@@ -2,7 +2,8 @@
 import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-import { getFormControls, serialize } from '../../../dist/utilities/form.js';
+import { getFormControls } from '../../../dist/utilities/form.js'; // must come from the same module
+import { serialize } from '../../utilities/form';
 import type SlInput from './input';
 
 describe('<sl-input>', () => {
