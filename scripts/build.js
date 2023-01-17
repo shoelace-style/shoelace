@@ -25,6 +25,8 @@ fs.mkdirSync(outdir, { recursive: true });
 
 (async () => {
   try {
+    execSync(`node scripts/tokens-to-css.js --theme light --outdir "${outdir}"`, { stdio: 'inherit' });
+    execSync(`node scripts/tokens-to-css.js --theme dark --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-search.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-react.js --outdir "${outdir}"`, { stdio: 'inherit' });
