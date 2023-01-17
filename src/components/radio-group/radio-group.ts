@@ -89,7 +89,7 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
   }
 
   private handleRadioClick(event: MouseEvent) {
-    const target = event.target as SlRadio | SlRadioButton;
+    const target = (event.target as HTMLElement).closest<SlRadio | SlRadioButton>('sl-radio, sl-radio-button')!;
     const radios = this.getAllRadios();
     const oldValue = this.value;
 

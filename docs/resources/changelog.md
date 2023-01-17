@@ -25,6 +25,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-radio-button>` that caused the checked button's right border to be incorrect [#1110](https://github.com/shoelace-style/shoelace/issues/1110)
 - Fixed a bug in `<sl-spinner>` that caused the animation to stop working correctly in Safari [#1121](https://github.com/shoelace-style/shoelace/issues/1121)
 - Fixed a bug that prevented the entire `<sl-tab-panel>` to be hidden when inactive
+- Fixed a bug that caused the value of `<sl-radio-group>` to be `undefined` depending on where the radio was activated [#1134](https://github.com/shoelace-style/shoelace/issues/1134)
 - Refactored the `ShoelaceFormControl` interface to remove the `invalid` property, allowing a more intuitive API for controlling validation internally
 - Renamed the internal `FormSubmitController` to `FormControlController` to better reflect what it's used for
 - Updated Lit to 2.6.1
