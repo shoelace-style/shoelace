@@ -25,6 +25,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @slot - The dialog's main content.
  * @slot label - The dialog's label. Alternatively, you can use the `label` attribute.
+ * @slot header-actions - Optional actions to add to the header. Works best with `<sl-icon-button>`.
  * @slot footer - The dialog's footer, usually one or more buttons representing various options.
  *
  * @event sl-show - Emitted when the dialog opens.
