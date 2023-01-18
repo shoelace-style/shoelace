@@ -7,6 +7,12 @@ export default {
   files: 'src/**/*.test.ts', // "default" group
   concurrentBrowsers: 3,
   nodeResolve: true,
+  testFramework: {
+    config: {
+      timeout: 3000,
+      retries: 1
+    }
+  },
   plugins: [
     esbuildPlugin({
       ts: true,
