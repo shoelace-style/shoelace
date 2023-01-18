@@ -1,4 +1,4 @@
-import { expect, fixture, html, oneEvent } from '@open-wc/testing';
+import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlSwitch from './switch';
@@ -111,6 +111,28 @@ describe('<sl-switch>', () => {
     await el.updateComplete;
     el.checked = false;
     await el.updateComplete;
+  });
+
+  it('should submit "on" when no value is provided', async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sl-switch name="a" checked></sl-switch>
+        <sl-button type="submit">Submit</sl-button>
+      </form>
+    `);
+    const button = form.querySelector('sl-button')!;
+    const submitHandler = sinon.spy((event: SubmitEvent) => {
+      formData = new FormData(form);
+      event.preventDefault();
+    });
+    let formData: FormData;
+
+    form.addEventListener('submit', submitHandler);
+    button.click();
+
+    await waitUntil(() => submitHandler.calledOnce);
+
+    expect(formData!.get('a')).to.equal('on');
   });
 
   describe('when resetting a form', () => {

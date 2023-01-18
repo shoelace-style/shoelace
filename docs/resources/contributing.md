@@ -188,8 +188,6 @@ Please do not make any changes to `prettier.config.cjs` without consulting the m
 
 Components should be composable, meaning you can easily reuse them with and within other components. This reduces the overall size of the library, expedites feature development, and maintains a consistent user experience.
 
-The `<sl-select>` component, for example, makes use of the dropdown, input, menu, and menu item components. Because it's offloading most of its functionality and styles to lower-level components, the select component remains lightweight and its appearance is consistent with other form controls and menus.
-
 ### Component Structure
 
 All components have a host element, which is a reference to the `<sl-*>` element itself. Make sure to always set the host element's `display` property to the appropriate value depending on your needs, as the default is `inline` per the custom element spec.
@@ -201,6 +199,23 @@ All components have a host element, which is a reference to the `<sl-*>` element
 ```
 
 Aside from `display`, avoid setting styles on the host element when possible. The reason for this is that styles applied to the host element are not encapsulated. Instead, create a base element that wraps the component's internals and style that instead. This convention also makes it easier to use BEM in components, as the base element can serve as the "block" entity.
+
+When authoring components, please try to follow the same structure and conventions found in other components. Classes, for example, generally follow this structure:
+
+- Static properties/methods
+- Private/public properties (that are _not_ reactive)
+- `@query` decorators
+- `@state` decorators
+- `@property` decorators
+- Lifecycle methods (`connectedCallback()`, `disconnectedCallback()`, `firstUpdated()`, etc.)
+- Private methods
+- `@watch` decorators
+- Public methods
+- The `render()` method
+
+Please avoid using the `public` keyword for class fields. It's simply too verbose when combined with decorators, property names, and arguments. However, _please do_ add `private` in front of any property or method that is intended to be private.
+
+?> This might seem like a lot, but it's fairly intuitive once you start working with the library. However, don't let this structure prevent you from submitting a PR. [Code can change](https://www.abeautifulsite.net/posts/code-can-change/) and nobody will chastise you for "getting it wrong." At the same time, encouraging consistency helps keep the library maintainable and easy for others to understand. (A lint rule that helps with things like this would be a very welcome PR!)
 
 ### Class Names
 
@@ -313,6 +328,16 @@ render() {
 ```
 
 This results in a consistent, easy to understand structure for parts. In this example, the `icon` part will target the host element and the `icon__base` part will target the icon's `base` part.
+
+### Dependencies
+
+Many Shoelace components use other Shoelace components internally. For example, `<sl-button>` uses both `<sl-icon>` and `<sl-spinner>` for its caret icon and loading state, respectively. Since these components appear in the button's shadow root, they are considered dependencies of button. Since dependencies are automatically loaded, users only need to import the button and everything will work as expected.
+
+Contrast this to `<sl-select>` and `<sl-option>`. At first, one might assume that Option is a dependency of Select. After all, you can't really use `<sl-select>` without at least one `<sl-option>`. However, Option _is not_ a dependency of Select! The reason is because no Option is rendered in the Select's shadow root. Since the user provides the Options, it's up to them to import both `<sl-select>` and `<sl-option>`.
+
+It is often deemed convenient to auto-load Select + Option, Menu + Menu Item, etc. Although some components are designed to work together, they're technically not dependencies so eagerly loading them may not be desirable. For example, what if someone wants to roll their own `<sl-option>` element with a superset of features? They wouldn't be able to if Shoelace automatically imported it. The user should decide what gets registered, in this case, because the "parent" element doesn't technically require it to render.
+
+TL;DR – a component is a dependency if and only if it's rendered inside another component's shadow root.
 
 ### Form Controls
 

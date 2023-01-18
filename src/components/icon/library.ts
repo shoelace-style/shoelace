@@ -43,7 +43,7 @@ export function registerIconLibrary(
   // Redraw watched icons
   watchedIcons.forEach(icon => {
     if (icon.library === name) {
-      icon.redraw();
+      icon.setIcon();
     }
   });
 }

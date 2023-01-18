@@ -26,6 +26,7 @@ import type { CSSResultGroup } from 'lit';
 @customElement('sl-progress-ring')
 export default class SlProgressRing extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
+
   private readonly localize = new LocalizeController(this);
 
   @query('.progress-ring__indicator') indicator: SVGCircleElement;

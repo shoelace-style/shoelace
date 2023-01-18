@@ -93,8 +93,33 @@ describe('<sl-color-picker>', () => {
       expect(inputHandler).to.have.been.calledOnce;
     });
 
-    it('should emit sl-change and sl-input when clicking on a swatch', async () => {
+    it('should render the correct swatches when passing a string of color values', async () => {
+      const el = await fixture<SlColorPicker>(
+        html` <sl-color-picker swatches="red; #008000; rgb(0,0,255);"></sl-color-picker> `
+      );
+      const swatches = [...el.shadowRoot!.querySelectorAll('[part~="swatch"] > div')];
+
+      expect(swatches.length).to.equal(3);
+      expect(getComputedStyle(swatches[0]).backgroundColor).to.equal('rgb(255, 0, 0)');
+      expect(getComputedStyle(swatches[1]).backgroundColor).to.equal('rgb(0, 128, 0)');
+      expect(getComputedStyle(swatches[2]).backgroundColor).to.equal('rgb(0, 0, 255)');
+    });
+
+    it('should render the correct swatches when passing an array of color values', async () => {
       const el = await fixture<SlColorPicker>(html` <sl-color-picker></sl-color-picker> `);
+      el.swatches = ['red', '#008000', 'rgb(0,0,255)'];
+      await el.updateComplete;
+
+      const swatches = [...el.shadowRoot!.querySelectorAll('[part~="swatch"] > div')];
+
+      expect(swatches.length).to.equal(3);
+      expect(getComputedStyle(swatches[0]).backgroundColor).to.equal('rgb(255, 0, 0)');
+      expect(getComputedStyle(swatches[1]).backgroundColor).to.equal('rgb(0, 128, 0)');
+      expect(getComputedStyle(swatches[2]).backgroundColor).to.equal('rgb(0, 0, 255)');
+    });
+
+    it('should emit sl-change and sl-input when clicking on a swatch', async () => {
+      const el = await fixture<SlColorPicker>(html` <sl-color-picker swatches="red; green; blue;"></sl-color-picker> `);
       const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
       const swatch = el.shadowRoot!.querySelector<HTMLElement>('[part~="swatch"]')!;
       const changeHandler = sinon.spy();

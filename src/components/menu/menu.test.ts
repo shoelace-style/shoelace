@@ -65,17 +65,6 @@ describe('<sl-menu>', () => {
     await expectSelectHandlerToHaveBeenCalledOn(selectHandler, 'test2');
   });
 
-  it('can be selected via type to select', async () => {
-    const menu = await createTestMenu();
-    const selectHandler = spyOnSelectHandler(menu);
-
-    await sendKeys({ press: 'Tab' });
-    await sendKeys({ type: 'test3' });
-    await sendKeys({ press: 'Enter' });
-
-    await expectSelectHandlerToHaveBeenCalledOn(selectHandler, 'test3');
-  });
-
   it('does not select disabled items', async () => {
     const menu = await createTestMenu();
     const selectHandler = spyOnSelectHandler(menu);

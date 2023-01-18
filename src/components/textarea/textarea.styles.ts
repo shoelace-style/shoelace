@@ -164,5 +164,6 @@ export default css`
   .textarea--resize-auto .textarea__control {
     height: auto;
     resize: none;
+    overflow-y: hidden;
   }
 `;

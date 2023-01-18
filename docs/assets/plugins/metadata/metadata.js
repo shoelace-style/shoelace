@@ -57,7 +57,18 @@
             `;
           })
           .join('')}
-      </tbody>
+
+          <tr>
+            <td class="nowrap"><code>updateComplete</code></td>
+            <td>
+              A read-only promise that resolves when the component has
+              <a href="/getting-started/usage?id=component-rendering-and-updating">finished updating</a>.
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
     `;
 
     return table.outerHTML;
@@ -553,7 +564,7 @@
           result += `
             ## Dependencies
 
-            This component imports the following dependencies.
+            This component automatically imports the following dependencies.
 
             ${createDependenciesList(component.tagName, getAllComponents(metadata))}
           `;

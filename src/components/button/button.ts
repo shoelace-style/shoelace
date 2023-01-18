@@ -39,8 +39,6 @@ import type { CSSResultGroup } from 'lit';
 export default class SlButton extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  @query('.button') button: HTMLButtonElement | HTMLLinkElement;
-
   private readonly formSubmitController = new FormSubmitController(this, {
     form: input => {
       // Buttons support a form attribute that points to an arbitrary form, so if this attribute it set we need to query
@@ -57,6 +55,8 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
   });
   private readonly hasSlotController = new HasSlotController(this, '[default]', 'prefix', 'suffix');
   private readonly localize = new LocalizeController(this);
+
+  @query('.button') button: HTMLButtonElement | HTMLLinkElement;
 
   @state() private hasFocus = false;
   @state() invalid = false;
@@ -145,6 +145,49 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
     }
   }
 
+  private handleBlur() {
+    this.hasFocus = false;
+    this.emit('sl-blur');
+  }
+
+  private handleFocus() {
+    this.hasFocus = true;
+    this.emit('sl-focus');
+  }
+
+  private handleClick(event: MouseEvent) {
+    if (this.disabled || this.loading) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+
+    if (this.type === 'submit') {
+      this.formSubmitController.submit(this);
+    }
+
+    if (this.type === 'reset') {
+      this.formSubmitController.reset(this);
+    }
+  }
+
+  private isButton() {
+    return this.href ? false : true;
+  }
+
+  private isLink() {
+    return this.href ? true : false;
+  }
+
+  @watch('disabled', { waitUntilFirstUpdate: true })
+  handleDisabledChange() {
+    // Disabled form controls are always valid, so we need to recheck validity when the state changes
+    if (this.isButton()) {
+      this.button.disabled = this.disabled;
+      this.invalid = !(this.button as HTMLButtonElement).checkValidity();
+    }
+  }
+
   /** Simulates a click on the button. */
   click() {
     this.button.click();
@@ -184,49 +227,6 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
       (this.button as HTMLButtonElement).setCustomValidity(message);
       this.invalid = !(this.button as HTMLButtonElement).checkValidity();
     }
-  }
-
-  handleBlur() {
-    this.hasFocus = false;
-    this.emit('sl-blur');
-  }
-
-  handleFocus() {
-    this.hasFocus = true;
-    this.emit('sl-focus');
-  }
-
-  handleClick(event: MouseEvent) {
-    if (this.disabled || this.loading) {
-      event.preventDefault();
-      event.stopPropagation();
-      return;
-    }
-
-    if (this.type === 'submit') {
-      this.formSubmitController.submit(this);
-    }
-
-    if (this.type === 'reset') {
-      this.formSubmitController.reset(this);
-    }
-  }
-
-  @watch('disabled', { waitUntilFirstUpdate: true })
-  handleDisabledChange() {
-    // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    if (this.isButton()) {
-      this.button.disabled = this.disabled;
-      this.invalid = !(this.button as HTMLButtonElement).checkValidity();
-    }
-  }
-
-  private isButton() {
-    return this.href ? false : true;
-  }
-
-  private isLink() {
-    return this.href ? true : false;
   }
 
   render() {

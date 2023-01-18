@@ -32,10 +32,7 @@ export function watch(propName: string, options?: WatchOptions) {
     waitUntilFirstUpdate: false,
     ...options
   };
-  return <ElemClass extends LitElement>(
-    proto: ElemClass,
-    decoratedFnName: UpdateHandlerFunctionKeys<ElemClass>
-  ): void => {
+  return <ElemClass extends LitElement>(proto: ElemClass, decoratedFnName: UpdateHandlerFunctionKeys<ElemClass>) => {
     // @ts-expect-error -- update is a protected property
     const { update } = proto;
     if (propName in proto) {

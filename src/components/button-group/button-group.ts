@@ -28,27 +28,27 @@ export default class SlButtonGroup extends ShoelaceElement {
    */
   @property() label = '';
 
-  handleFocus(event: CustomEvent) {
+  private handleFocus(event: CustomEvent) {
     const button = findButton(event.target as HTMLElement);
     button?.classList.add('sl-button-group__button--focus');
   }
 
-  handleBlur(event: CustomEvent) {
+  private handleBlur(event: CustomEvent) {
     const button = findButton(event.target as HTMLElement);
     button?.classList.remove('sl-button-group__button--focus');
   }
 
-  handleMouseOver(event: CustomEvent) {
+  private handleMouseOver(event: CustomEvent) {
     const button = findButton(event.target as HTMLElement);
     button?.classList.add('sl-button-group__button--hover');
   }
 
-  handleMouseOut(event: CustomEvent) {
+  private handleMouseOut(event: CustomEvent) {
     const button = findButton(event.target as HTMLElement);
     button?.classList.remove('sl-button-group__button--hover');
   }
 
-  handleSlotChange() {
+  private handleSlotChange() {
     const slottedElements = [...this.defaultSlot.assignedElements({ flatten: true })] as HTMLElement[];
 
     slottedElements.forEach(el => {

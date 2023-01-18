@@ -79,9 +79,9 @@ The `selection` attribute lets you change the selection behavior of the tree.
 
 ```html preview
 <sl-select id="selection-mode" value="single" label="Selection">
-  <sl-menu-item value="single">Single</sl-menu-item>
-  <sl-menu-item value="multiple">Multiple</sl-menu-item>
-  <sl-menu-item value="leaf">Leaf</sl-menu-item>
+  <sl-option value="single">Single</sl-option>
+  <sl-option value="multiple">Multiple</sl-option>
+  <sl-option value="leaf">Leaf</sl-option>
 </sl-select>
 
 <br />

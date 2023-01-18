@@ -14,7 +14,7 @@ Dropdowns are designed to work well with [menus](/components/menu) to provide a 
     <sl-menu-item>Dropdown Item 2</sl-menu-item>
     <sl-menu-item>Dropdown Item 3</sl-menu-item>
     <sl-divider></sl-divider>
-    <sl-menu-item checked>Checked</sl-menu-item>
+    <sl-menu-item type="checkbox" checked>Checkbox</sl-menu-item>
     <sl-menu-item disabled>Disabled</sl-menu-item>
     <sl-divider></sl-divider>
     <sl-menu-item>
@@ -42,7 +42,9 @@ const App = () => (
       <SlMenuItem>Dropdown Item 2</SlMenuItem>
       <SlMenuItem>Dropdown Item 3</SlMenuItem>
       <SlDivider />
-      <SlMenuItem checked>Checked</SlMenuItem>
+      <SlMenuItem type="checkbox" checked>
+        Checkbox
+      </SlMenuItem>
       <SlMenuItem disabled>Disabled</SlMenuItem>
       <SlDivider />
       <SlMenuItem>

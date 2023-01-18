@@ -73,6 +73,57 @@ export default class SlAlert extends ShoelaceElement {
     this.base.hidden = !this.open;
   }
 
+  private restartAutoHide() {
+    clearTimeout(this.autoHideTimeout);
+    if (this.open && this.duration < Infinity) {
+      this.autoHideTimeout = window.setTimeout(() => this.hide(), this.duration);
+    }
+  }
+
+  private handleCloseClick() {
+    this.hide();
+  }
+
+  private handleMouseMove() {
+    this.restartAutoHide();
+  }
+
+  @watch('open', { waitUntilFirstUpdate: true })
+  async handleOpenChange() {
+    if (this.open) {
+      // Show
+      this.emit('sl-show');
+
+      if (this.duration < Infinity) {
+        this.restartAutoHide();
+      }
+
+      await stopAnimations(this.base);
+      this.base.hidden = false;
+      const { keyframes, options } = getAnimation(this, 'alert.show', { dir: this.localize.dir() });
+      await animateTo(this.base, keyframes, options);
+
+      this.emit('sl-after-show');
+    } else {
+      // Hide
+      this.emit('sl-hide');
+
+      clearTimeout(this.autoHideTimeout);
+
+      await stopAnimations(this.base);
+      const { keyframes, options } = getAnimation(this, 'alert.hide', { dir: this.localize.dir() });
+      await animateTo(this.base, keyframes, options);
+      this.base.hidden = true;
+
+      this.emit('sl-after-hide');
+    }
+  }
+
+  @watch('duration')
+  handleDurationChange() {
+    this.restartAutoHide();
+  }
+
   /** Shows the alert. */
   async show() {
     if (this.open) {
@@ -127,57 +178,6 @@ export default class SlAlert extends ShoelaceElement {
         { once: true }
       );
     });
-  }
-
-  restartAutoHide() {
-    clearTimeout(this.autoHideTimeout);
-    if (this.open && this.duration < Infinity) {
-      this.autoHideTimeout = window.setTimeout(() => this.hide(), this.duration);
-    }
-  }
-
-  handleCloseClick() {
-    this.hide();
-  }
-
-  handleMouseMove() {
-    this.restartAutoHide();
-  }
-
-  @watch('open', { waitUntilFirstUpdate: true })
-  async handleOpenChange() {
-    if (this.open) {
-      // Show
-      this.emit('sl-show');
-
-      if (this.duration < Infinity) {
-        this.restartAutoHide();
-      }
-
-      await stopAnimations(this.base);
-      this.base.hidden = false;
-      const { keyframes, options } = getAnimation(this, 'alert.show', { dir: this.localize.dir() });
-      await animateTo(this.base, keyframes, options);
-
-      this.emit('sl-after-show');
-    } else {
-      // Hide
-      this.emit('sl-hide');
-
-      clearTimeout(this.autoHideTimeout);
-
-      await stopAnimations(this.base);
-      const { keyframes, options } = getAnimation(this, 'alert.hide', { dir: this.localize.dir() });
-      await animateTo(this.base, keyframes, options);
-      this.base.hidden = true;
-
-      this.emit('sl-after-hide');
-    }
-  }
-
-  @watch('duration')
-  handleDurationChange() {
-    this.restartAutoHide();
   }
 
   render() {

@@ -15,7 +15,6 @@ export default css`
     line-height: 1;
     white-space: nowrap;
     user-select: none;
-    cursor: default;
   }
 
   .tag__remove::part(base) {
@@ -33,10 +32,18 @@ export default css`
     color: var(--sl-color-primary-800);
   }
 
+  .tag--primary:active > sl-icon-button {
+    color: var(--sl-color-primary-600);
+  }
+
   .tag--success {
     background-color: var(--sl-color-success-50);
     border-color: var(--sl-color-success-200);
     color: var(--sl-color-success-800);
+  }
+
+  .tag--success:active > sl-icon-button {
+    color: var(--sl-color-success-600);
   }
 
   .tag--neutral {
@@ -45,16 +52,28 @@ export default css`
     color: var(--sl-color-neutral-800);
   }
 
+  .tag--neutral:active > sl-icon-button {
+    color: var(--sl-color-neutral-600);
+  }
+
   .tag--warning {
     background-color: var(--sl-color-warning-50);
     border-color: var(--sl-color-warning-200);
     color: var(--sl-color-warning-800);
   }
 
+  .tag--warning:active > sl-icon-button {
+    color: var(--sl-color-warning-600);
+  }
+
   .tag--danger {
     background-color: var(--sl-color-danger-50);
     border-color: var(--sl-color-danger-200);
     color: var(--sl-color-danger-800);
+  }
+
+  .tag--danger:active > sl-icon-button {
+    color: var(--sl-color-danger-600);
   }
 
   /*

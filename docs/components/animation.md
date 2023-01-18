@@ -91,19 +91,19 @@ This example demonstrates all of the baked-in animations and easings. Animations
   const easings = getEasingNames();
 
   animations.map(name => {
-    const menuItem = Object.assign(document.createElement('sl-menu-item'), {
+    const option = Object.assign(document.createElement('sl-option'), {
       textContent: name,
       value: name
     });
-    animationName.appendChild(menuItem);
+    animationName.appendChild(option);
   });
 
   easings.map(name => {
-    const menuItem = Object.assign(document.createElement('sl-menu-item'), {
+    const option = Object.assign(document.createElement('sl-option'), {
       textContent: name,
       value: name
     });
-    easingName.appendChild(menuItem);
+    easingName.appendChild(option);
   });
 
   animationName.addEventListener('sl-change', () => (animation.name = animationName.value));

@@ -8,7 +8,7 @@
   <sl-menu-item>Option 2</sl-menu-item>
   <sl-menu-item>Option 3</sl-menu-item>
   <sl-divider></sl-divider>
-  <sl-menu-item checked>Checked</sl-menu-item>
+  <sl-menu-item type="checkbox" checked>Checkbox</sl-menu-item>
   <sl-menu-item disabled>Disabled</sl-menu-item>
   <sl-divider></sl-divider>
   <sl-menu-item>
@@ -31,7 +31,9 @@ const App = () => (
     <SlMenuItem>Option 2</SlMenuItem>
     <SlMenuItem>Option 3</SlMenuItem>
     <SlDivider />
-    <SlMenuItem checked>Checked</SlMenuItem>
+    <SlMenuItem type="checkbox" checked>
+      Checkbox
+    </SlMenuItem>
     <SlMenuItem disabled>Disabled</SlMenuItem>
     <SlDivider />
     <SlMenuItem>
@@ -47,30 +49,6 @@ const App = () => (
 ```
 
 ## Examples
-
-### Checked
-
-Use the `checked` attribute to draw menu items in a checked state.
-
-```html preview
-<sl-menu style="max-width: 200px;">
-  <sl-menu-item>Option 1</sl-menu-item>
-  <sl-menu-item checked>Option 2</sl-menu-item>
-  <sl-menu-item>Option 3</sl-menu-item>
-</sl-menu>
-```
-
-```jsx react
-import { SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
-
-const App = () => (
-  <SlMenu style={{ maxWidth: '200px' }}>
-    <SlMenuItem>Option 1</SlMenuItem>
-    <SlMenuItem checked>Option 2</SlMenuItem>
-    <SlMenuItem>Option 3</SlMenuItem>
-  </SlMenu>
-);
-```
 
 ### Disabled
 
@@ -150,6 +128,34 @@ const App = () => (
 );
 ```
 
+### Checkbox Menu Items
+
+Set the `type` attribute to `checkbox` to create a menu item that will toggle on and off when selected. You can use the `checked` attribute to set the initial state.
+
+Checkbox menu items are visually indistinguishable from regular menu items. Their ability to be toggled is primarily inferred from context, much like you'd find in the menu of a native app.
+
+```html preview
+<sl-menu style="max-width: 200px;">
+  <sl-menu-item type="checkbox">Autosave</sl-menu-item>
+  <sl-menu-item type="checkbox" checked>Check Spelling</sl-menu-item>
+  <sl-menu-item type="checkbox">Word Wrap</sl-menu-item>
+</sl-menu>
+```
+
+```jsx react
+import { SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlMenu style={{ maxWidth: '200px' }}>
+    <SlMenuItem type="checkbox">Autosave</SlMenuItem>
+    <SlMenuItem type="checkbox" checked>
+      Check Spelling
+    </SlMenuItem>
+    <SlMenuItem type="checkbox">Word Wrap</SlMenuItem>
+  </SlMenu>
+);
+```
+
 ### Value & Selection
 
 The `value` attribute can be used to assign a hidden value, such as a unique identifier, to a menu item. When an item is selected, the `sl-select` event will be emitted and a reference to the item will be available at `event.detail.item`. You can use this reference to access the selected item's value, its checked state, and more.
@@ -159,6 +165,10 @@ The `value` attribute can be used to assign a hidden value, such as a unique ide
   <sl-menu-item value="opt-1">Option 1</sl-menu-item>
   <sl-menu-item value="opt-2">Option 2</sl-menu-item>
   <sl-menu-item value="opt-3">Option 3</sl-menu-item>
+  <sl-divider></sl-divider>
+  <sl-menu-item type="checkbox" value="opt-4">Checkbox 4</sl-menu-item>
+  <sl-menu-item type="checkbox" value="opt-5">Checkbox 5</sl-menu-item>
+  <sl-menu-item type="checkbox" value="opt-6">Checkbox 6</sl-menu-item>
 </sl-menu>
 
 <script>
@@ -167,11 +177,12 @@ The `value` attribute can be used to assign a hidden value, such as a unique ide
   menu.addEventListener('sl-select', event => {
     const item = event.detail.item;
 
-    // Toggle checked state
-    item.checked = !item.checked;
-
     // Log value
-    console.log(`Selected value: ${item.value}`);
+    if (item.type === 'checkbox') {
+      console.log(`Selected value: ${item.value} (${item.checked ? 'checked' : 'unchecked'})`);
+    } else {
+      console.log(`Selected value: ${item.value}`);
+    }
   });
 </script>
 ```

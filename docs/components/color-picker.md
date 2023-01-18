@@ -70,6 +70,34 @@ const App = () => (
 );
 ```
 
+### Swatches
+
+Use the `swatches` attribute to add convenient presets to the color picker. Any format the color picker can parse is acceptable (including CSS color names), but each value must be separated by a semicolon (`;`). Alternatively, you can pass an array of color values to this property using JavaScript.
+
+```html preview
+<sl-color-picker
+  label="Select a color"
+  swatches="
+    #d0021b; #f5a623; #f8e71c; #8b572a; #7ed321; #417505; #bd10e0; #9013fe; 
+    #4a90e2; #50e3c2; #b8e986; #000; #444; #888; #ccc; #fff;
+  "
+></sl-color-picker>
+```
+
+```jsx react
+import { SlColorPicker } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlColorPicker
+    label="Select a color"
+    swatches="
+      #d0021b; #f5a623; #f8e71c; #8b572a; #7ed321; #417505; #bd10e0; #9013fe; 
+      #4a90e2; #50e3c2; #b8e986; #000; #444; #888; #ccc; #fff;
+    "
+  />
+);
+```
+
 ### Sizes
 
 Use the `size` attribute to change the color picker's trigger size.

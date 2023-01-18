@@ -47,10 +47,10 @@
         </sl-button>
         <sl-menu>
           <sl-menu-label>Toggle <kbd>\\</kbd></sl-menu-label>
-          <sl-menu-item value="light">Light</sl-menu-item>
-          <sl-menu-item value="dark">Dark</sl-menu-item>
+          <sl-menu-item type="checkbox" value="light">Light</sl-menu-item>
+          <sl-menu-item type="checkbox" value="dark">Dark</sl-menu-item>
           <sl-divider></sl-divider>
-          <sl-menu-item value="auto">Auto</sl-menu-item>
+          <sl-menu-item type="checkbox" value="auto">Auto</sl-menu-item>
         </sl-menu>
       `;
       document.querySelector('.sidebar-toggle').insertAdjacentElement('afterend', dropdown);
