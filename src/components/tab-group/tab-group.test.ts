@@ -1,4 +1,4 @@
-import { aTimeout, elementUpdated, expect, fixture, waitUntil } from '@open-wc/testing';
+import { aTimeout, elementUpdated, expect, fixture, oneEvent, waitUntil } from '@open-wc/testing';
 import { clickOnElement } from '../../internal/test';
 import { html } from 'lit';
 import { isElementVisibleFromOverflow } from '../../internal/test/element-visible-overflow';
@@ -12,6 +12,10 @@ import type SlTabPanel from '../tab-panel/tab-panel';
 interface ClientRectangles {
   body?: DOMRect;
   navigation?: DOMRect;
+}
+
+interface CustomEventPayload {
+  name: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -53,6 +57,23 @@ const expectOnlyOneTabPanelToBeActive = async (container: HTMLElement, dataTestI
   expect(activeTabPanels[0]).to.have.attribute('data-testid', dataTestIdOfActiveTab);
 };
 
+const expectPromiseToHaveName = async (showEventPromise: Promise<CustomEvent>, expectedName: string) => {
+  const showEvent = await showEventPromise;
+  expect((showEvent.detail as CustomEventPayload).name).to.equal(expectedName);
+};
+
+const waitForHeaderToBeActive = async (container: HTMLElement, headerTestId: string): Promise<SlTab> => {
+  const generalHeader = queryByTestId<SlTab>(container, headerTestId);
+  await waitUntil(() => {
+    return generalHeader?.hasAttribute('active');
+  });
+  if (generalHeader) {
+    return generalHeader;
+  } else {
+    throw new Error(`did not find error with testid=${headerTestId}`);
+  }
+};
+
 describe('<sl-tab-group>', () => {
   it('renders', async () => {
     const tabGroup = await fixture<SlTabGroup>(html`
@@ -76,7 +97,7 @@ describe('<sl-tab-group>', () => {
     await expect(tabGroup).to.be.accessible();
   });
 
-  it.only('displays all tabs', async () => {
+  it('displays all tabs', async () => {
     const tabGroup = await fixture<SlTabGroup>(html`
       <sl-tab-group>
         <sl-tab slot="nav" panel="general" data-testid="general-tab-header">General</sl-tab>
@@ -274,6 +295,55 @@ describe('<sl-tab-group>', () => {
 
       expect(isElementVisibleFromOverflow(tabGroup, firstTab!)).to.be.false;
       expect(isElementVisibleFromOverflow(tabGroup, lastTab!)).to.be.true;
+    });
+  });
+
+  describe('tab selection', () => {
+    it('selects a tab by clicking on it', async () => {
+      const tabGroup = await fixture<SlTabGroup>(html`
+        <sl-tab-group>
+          <sl-tab slot="nav" panel="general" data-testid="general-header">General</sl-tab>
+          <sl-tab slot="nav" panel="custom" data-testid="custom-header">Custom</sl-tab>
+          <sl-tab-panel name="general">This is the general tab panel.</sl-tab-panel>
+          <sl-tab-panel name="custom" data-testid="custom-tab-content">This is the custom tab panel.</sl-tab-panel>
+        </sl-tab-group>
+      `);
+
+      await waitForHeaderToBeActive(tabGroup, 'general-header');
+
+      const customHeader = queryByTestId<SlTab>(tabGroup, 'custom-header');
+      expect(customHeader).not.to.have.attribute('active');
+
+      const showEventPromise = oneEvent(tabGroup, 'sl-tab-show') as Promise<CustomEvent>;
+      await clickOnElement(customHeader!);
+
+      expect(customHeader).to.have.attribute('active');
+      await expectPromiseToHaveName(showEventPromise, 'custom');
+      return expectOnlyOneTabPanelToBeActive(tabGroup, 'custom-tab-content');
+    });
+
+    it('does not change if the active tab is reselected', async () => {
+      const tabGroup = await fixture<SlTabGroup>(html`
+        <sl-tab-group>
+          <sl-tab slot="nav" panel="general" data-testid="general-header">General</sl-tab>
+          <sl-tab slot="nav" panel="custom">Custom</sl-tab>
+          <sl-tab-panel name="general" data-testid="general-tab-content">This is the general tab panel.</sl-tab-panel>
+          <sl-tab-panel name="custom">This is the custom tab panel.</sl-tab-panel>
+        </sl-tab-group>
+      `);
+
+      const generalHeader = await waitForHeaderToBeActive(tabGroup, 'general-header');
+
+      let showEventFired = false;
+      let hideEventFired = false;
+      oneEvent(tabGroup, 'sl-tab-show').then(() => (showEventFired = true));
+      oneEvent(tabGroup, 'sl-tab-hide').then(() => (hideEventFired = true));
+      await clickOnElement(generalHeader);
+
+      expect(generalHeader).to.have.attribute('active');
+      expect(showEventFired).to.be.false;
+      expect(hideEventFired).to.be.false;
+      return expectOnlyOneTabPanelToBeActive(tabGroup, 'general-tab-content');
     });
   });
 });
