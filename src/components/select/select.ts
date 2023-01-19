@@ -460,7 +460,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
       option.current = true;
       option.tabIndex = 0;
       option.focus();
-      scrollIntoView(option, this.listbox);
     }
   }
 
@@ -475,9 +474,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     // Set the new selection
     if (newSelectedOptions.length) {
       newSelectedOptions.forEach(el => (el.selected = true));
-
-      // Scroll the first selected option into view
-      scrollIntoView(newSelectedOptions[0]!, this.listbox);
     }
 
     // Update selection, value, and display label
