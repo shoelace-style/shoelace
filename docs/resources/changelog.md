@@ -29,6 +29,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug that caused the value of `<sl-radio-group>` to be `undefined` depending on where the radio was activated [#1134](https://github.com/shoelace-style/shoelace/issues/1134)
 - Fixed a bug that caused body content to shift when scroll locking was enabled [#1132](https://github.com/shoelace-style/shoelace/issues/1132)
 - Fixed a bug in `<sl-icon>` that caused icons to sometimes be clipped in Safari
+- Fixed a bug that prevented label colors from inheriting by default in `<sl-checkbox>`, `<sl-radio>`, and `<sl-switch>`
 - Refactored the `ShoelaceFormControl` interface to remove the `invalid` property, allowing a more intuitive API for controlling validation internally
 - Renamed the internal `FormSubmitController` to `FormControlController` to better reflect what it's used for
 - Updated Lit to 2.6.1
