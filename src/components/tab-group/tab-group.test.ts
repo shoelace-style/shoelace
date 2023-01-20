@@ -3,6 +3,7 @@ import { clickOnElement } from '../../internal/test';
 import { html } from 'lit';
 import { isElementVisibleFromOverflow } from '../../internal/test/element-visible-overflow';
 import { queryByTestId } from '../../internal/test/data-testid-helpers';
+import { sendKeys } from '@web/test-runner-commands';
 import { waitForScrollingToEnd } from '../../internal/test/wait-for-scrolling';
 import type { HTMLTemplateResult } from 'lit';
 import type SlTab from '../tab/tab';
@@ -299,6 +300,40 @@ describe('<sl-tab-group>', () => {
   });
 
   describe('tab selection', () => {
+    const expectCustomTabToBeActiveAfter = async (tabGroup: SlTabGroup, action: () => Promise<void>): Promise<void> => {
+      const generalHeader = await waitForHeaderToBeActive(tabGroup, 'general-header');
+      generalHeader.focus();
+
+      const customHeader = queryByTestId<SlTab>(tabGroup, 'custom-header');
+      expect(customHeader).not.to.have.attribute('active');
+
+      const showEventPromise = oneEvent(tabGroup, 'sl-tab-show') as Promise<CustomEvent>;
+      await action();
+
+      expect(customHeader).to.have.attribute('active');
+      await expectPromiseToHaveName(showEventPromise, 'custom');
+      return expectOnlyOneTabPanelToBeActive(tabGroup, 'custom-tab-content');
+    };
+
+    const expectGeneralTabToBeStillActiveAfter = async (
+      tabGroup: SlTabGroup,
+      action: () => Promise<void>
+    ): Promise<void> => {
+      const generalHeader = await waitForHeaderToBeActive(tabGroup, 'general-header');
+      generalHeader.focus();
+
+      let showEventFired = false;
+      let hideEventFired = false;
+      oneEvent(tabGroup, 'sl-tab-show').then(() => (showEventFired = true));
+      oneEvent(tabGroup, 'sl-tab-hide').then(() => (hideEventFired = true));
+      await action();
+
+      expect(generalHeader).to.have.attribute('active');
+      expect(showEventFired).to.be.false;
+      expect(hideEventFired).to.be.false;
+      return expectOnlyOneTabPanelToBeActive(tabGroup, 'general-tab-content');
+    };
+
     it('selects a tab by clicking on it', async () => {
       const tabGroup = await fixture<SlTabGroup>(html`
         <sl-tab-group>
@@ -309,17 +344,8 @@ describe('<sl-tab-group>', () => {
         </sl-tab-group>
       `);
 
-      await waitForHeaderToBeActive(tabGroup, 'general-header');
-
       const customHeader = queryByTestId<SlTab>(tabGroup, 'custom-header');
-      expect(customHeader).not.to.have.attribute('active');
-
-      const showEventPromise = oneEvent(tabGroup, 'sl-tab-show') as Promise<CustomEvent>;
-      await clickOnElement(customHeader!);
-
-      expect(customHeader).to.have.attribute('active');
-      await expectPromiseToHaveName(showEventPromise, 'custom');
-      return expectOnlyOneTabPanelToBeActive(tabGroup, 'custom-tab-content');
+      return expectCustomTabToBeActiveAfter(tabGroup, () => clickOnElement(customHeader!));
     });
 
     it('does not change if the active tab is reselected', async () => {
@@ -332,18 +358,93 @@ describe('<sl-tab-group>', () => {
         </sl-tab-group>
       `);
 
+      const generalHeader = queryByTestId(tabGroup, 'general-header');
+      return expectGeneralTabToBeStillActiveAfter(tabGroup, () => clickOnElement(generalHeader!));
+    });
+
+    it('does not change if a disabled tab is clicked', async () => {
+      const tabGroup = await fixture<SlTabGroup>(html`
+        <sl-tab-group>
+          <sl-tab slot="nav" panel="general" data-testid="general-header">General</sl-tab>
+          <sl-tab slot="nav" panel="disabled" data-testid="disabled-header" disabled>disabled</sl-tab>
+          <sl-tab-panel name="general" data-testid="general-tab-content">This is the general tab panel.</sl-tab-panel>
+          <sl-tab-panel name="disabled">This is the disabled tab panel.</sl-tab-panel>
+        </sl-tab-group>
+      `);
+
+      const disabledHeader = queryByTestId(tabGroup, 'disabled-header');
+      return expectGeneralTabToBeStillActiveAfter(tabGroup, () => clickOnElement(disabledHeader!));
+    });
+
+    it('selects a tab by using the arrow keys', async () => {
+      const tabGroup = await fixture<SlTabGroup>(html`
+        <sl-tab-group>
+          <sl-tab slot="nav" panel="general" data-testid="general-header">General</sl-tab>
+          <sl-tab slot="nav" panel="custom" data-testid="custom-header">Custom</sl-tab>
+          <sl-tab-panel name="general">This is the general tab panel.</sl-tab-panel>
+          <sl-tab-panel name="custom" data-testid="custom-tab-content">This is the custom tab panel.</sl-tab-panel>
+        </sl-tab-group>
+      `);
+
+      return expectCustomTabToBeActiveAfter(tabGroup, () => sendKeys({ press: 'ArrowRight' }));
+    });
+
+    it('selects a tab by using the arrow keys and enter if activation is set to manual', async () => {
+      const tabGroup = await fixture<SlTabGroup>(html`
+        <sl-tab-group>
+          <sl-tab slot="nav" panel="general" data-testid="general-header">General</sl-tab>
+          <sl-tab slot="nav" panel="custom" data-testid="custom-header">Custom</sl-tab>
+          <sl-tab-panel name="general">This is the general tab panel.</sl-tab-panel>
+          <sl-tab-panel name="custom" data-testid="custom-tab-content">This is the custom tab panel.</sl-tab-panel>
+        </sl-tab-group>
+      `);
+      tabGroup.activation = 'manual';
+
       const generalHeader = await waitForHeaderToBeActive(tabGroup, 'general-header');
+      generalHeader.focus();
 
-      let showEventFired = false;
-      let hideEventFired = false;
-      oneEvent(tabGroup, 'sl-tab-show').then(() => (showEventFired = true));
-      oneEvent(tabGroup, 'sl-tab-hide').then(() => (hideEventFired = true));
-      await clickOnElement(generalHeader);
+      const customHeader = queryByTestId<SlTab>(tabGroup, 'custom-header');
+      expect(customHeader).not.to.have.attribute('active');
 
+      const showEventPromise = oneEvent(tabGroup, 'sl-tab-show') as Promise<CustomEvent>;
+      await sendKeys({ press: 'ArrowRight' });
+      await aTimeout(0);
       expect(generalHeader).to.have.attribute('active');
-      expect(showEventFired).to.be.false;
-      expect(hideEventFired).to.be.false;
-      return expectOnlyOneTabPanelToBeActive(tabGroup, 'general-tab-content');
+
+      await sendKeys({ press: 'Enter' });
+
+      expect(customHeader).to.have.attribute('active');
+      await expectPromiseToHaveName(showEventPromise, 'custom');
+      return expectOnlyOneTabPanelToBeActive(tabGroup, 'custom-tab-content');
+    });
+
+    it('does not allow selection of disabled tabs with arrow keys', async () => {
+      const tabGroup = await fixture<SlTabGroup>(html`
+        <sl-tab-group>
+          <sl-tab slot="nav" panel="general" data-testid="general-header">General</sl-tab>
+          <sl-tab slot="nav" panel="disabled" disabled>Disabled</sl-tab>
+          <sl-tab-panel name="general" data-testid="general-tab-content">This is the general tab panel.</sl-tab-panel>
+          <sl-tab-panel name="disabled">This is the custom tab panel.</sl-tab-panel>
+        </sl-tab-group>
+      `);
+
+      return expectGeneralTabToBeStillActiveAfter(tabGroup, () => sendKeys({ press: 'ArrowRight' }));
+    });
+
+    it('selects a tab by using the show function', async () => {
+      const tabGroup = await fixture<SlTabGroup>(html`
+        <sl-tab-group>
+          <sl-tab slot="nav" panel="general" data-testid="general-header">General</sl-tab>
+          <sl-tab slot="nav" panel="custom" data-testid="custom-header">Custom</sl-tab>
+          <sl-tab-panel name="general">This is the general tab panel.</sl-tab-panel>
+          <sl-tab-panel name="custom" data-testid="custom-tab-content">This is the custom tab panel.</sl-tab-panel>
+        </sl-tab-group>
+      `);
+
+      return expectCustomTabToBeActiveAfter(tabGroup, () => {
+        tabGroup.show('custom');
+        return aTimeout(0);
+      });
     });
   });
 });
