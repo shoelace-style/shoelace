@@ -168,9 +168,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
    */
   @property({ reflect: true }) form = '';
 
-  connectedCallback() {
-    super.connectedCallback();
-
+  firstUpdated() {
     if (this.value) {
       this.setColor(this.value);
       this.inputValue = this.value;

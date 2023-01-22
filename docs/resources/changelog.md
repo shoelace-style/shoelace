@@ -23,6 +23,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-select>` that caused the listbox to scroll to the first selected item when selecting multiple items [#1138](https://github.com/shoelace-style/shoelace/issues/1138)
 - Fixed a bug in `<sl-color-picker>` that logged a console error when parsing swatches with whitespace
 - Fixed a bug in `<sl-color-picker>` that caused selected colors to be wrong due to incorrect HSV calculations
+- Fixed a bug in `<sl-color-picker>` that prevented the initial value from being set as a property [#1141](https://github.com/shoelace-style/shoelace/issues/1141)
 - Fixed a bug in `<sl-radio-button>` that caused the checked button's right border to be incorrect [#1110](https://github.com/shoelace-style/shoelace/issues/1110)
 - Fixed a bug in `<sl-spinner>` that caused the animation to stop working correctly in Safari [#1121](https://github.com/shoelace-style/shoelace/issues/1121)
 - Fixed a bug that prevented the entire `<sl-tab-panel>` to be hidden when inactive
