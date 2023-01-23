@@ -92,7 +92,6 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
 
   private readonly formControlController = new FormControlController(this);
   private isSafeValue = false;
-  private lastValueEmitted: string;
   private readonly localize = new LocalizeController(this);
 
   @query('[part~="input"]') input: SlInput;
@@ -170,16 +169,16 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
    */
   @property({ reflect: true }) form = '';
 
-  firstUpdated() {
+  connectedCallback() {
+    super.connectedCallback();
+
     if (this.value) {
       this.setColor(this.value);
       this.inputValue = this.value;
-      this.lastValueEmitted = this.value;
       this.syncValues();
     } else {
       this.isEmpty = true;
       this.inputValue = '';
-      this.lastValueEmitted = '';
     }
   }
 
@@ -626,7 +625,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
       this.brightness = 100;
       this.alpha = 100;
     }
-    if (!this.isSafeValue && oldValue !== undefined) {
+    if (!this.isSafeValue) {
       const newColor = this.parseColor(newValue);
 
       if (newColor !== null) {
@@ -636,12 +635,8 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
         this.brightness = newColor.hsva.v;
         this.alpha = newColor.hsva.a * 100;
       } else {
-        this.inputValue = oldValue;
+        this.inputValue = oldValue ?? '';
       }
-    }
-
-    if (this.value !== this.lastValueEmitted) {
-      this.lastValueEmitted = this.value;
     }
   }
 
