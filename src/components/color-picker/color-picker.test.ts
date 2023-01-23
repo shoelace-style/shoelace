@@ -365,7 +365,7 @@ describe('<sl-color-picker>', () => {
     it('should reset the element to its initial value', async () => {
       const form = await fixture<HTMLFormElement>(html`
         <form>
-          <sl-color-picker name="a" value="#FFFFFF"></sl-color-picker>
+          <sl-color-picker name="a" value="#ffffff"></sl-color-picker>
           <sl-button type="reset">Reset</sl-button>
         </form>
       `);
@@ -379,7 +379,7 @@ describe('<sl-color-picker>', () => {
       await oneEvent(form, 'reset');
       await colorPicker.updateComplete;
 
-      expect(colorPicker.value).to.equal('#FFFFFF');
+      expect(colorPicker.value).to.equal('#ffffff');
 
       colorPicker.defaultValue = '';
 

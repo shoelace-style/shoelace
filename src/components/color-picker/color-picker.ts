@@ -169,19 +169,6 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
    */
   @property({ reflect: true }) form = '';
 
-  connectedCallback() {
-    super.connectedCallback();
-
-    if (this.value) {
-      this.setColor(this.value);
-      this.inputValue = this.value;
-      this.syncValues();
-    } else {
-      this.isEmpty = true;
-      this.inputValue = '';
-    }
-  }
-
   private handleCopy() {
     this.input.select();
     document.execCommand('copy');
@@ -635,6 +622,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
         this.saturation = newColor.hsva.s;
         this.brightness = newColor.hsva.v;
         this.alpha = newColor.hsva.a * 100;
+        this.syncValues();
       } else {
         this.inputValue = oldValue ?? '';
       }
