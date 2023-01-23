@@ -21,6 +21,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-select>` that caused tags to not be rounded when using the `pill` attribute [#1117](https://github.com/shoelace-style/shoelace/issues/1117)
 - Fixed a bug in `<sl-select>` where the `sl-change` and `sl-input` events didn't weren't emitted when removing tags [#1119](https://github.com/shoelace-style/shoelace/issues/1119)
 - Fixed a bug in `<sl-select>` that caused the listbox to scroll to the first selected item when selecting multiple items [#1138](https://github.com/shoelace-style/shoelace/issues/1138)
+- Fixed a bug in `<sl-select>` where the input color and input hover color wasn't using the correct design tokens [#1143](https://github.com/shoelace-style/shoelace/issues/1143)
 - Fixed a bug in `<sl-color-picker>` that logged a console error when parsing swatches with whitespace
 - Fixed a bug in `<sl-color-picker>` that caused selected colors to be wrong due to incorrect HSV calculations
 - Fixed a bug in `<sl-color-picker>` that prevented the initial value from being set as a property [#1141](https://github.com/shoelace-style/shoelace/issues/1141)
