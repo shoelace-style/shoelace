@@ -17,6 +17,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Added the `form` attribute to all form controls to allow placing them outside of a `<form>` element [#1130](https://github.com/shoelace-style/shoelace/issues/1130)
 - Added the `getFormControls()` function as an alternative to `HTMLFormElement.elements`
 - Added missing docs for the `header-actions` slot in `<sl-dialog>` and `<sl-drawer>`
+- Added `hue-slider-handle` and `opacity-slider-handle` parts to `<sl-color-picker>` and correct other part names in the docs [#1142](https://github.com/shoelace-style/shoelace/issues/1142)
 - Fixed a bug in `<sl-select>` that prevented placeholders from showing when `multiple` was used [#1109](https://github.com/shoelace-style/shoelace/issues/1109)
 - Fixed a bug in `<sl-select>` that caused tags to not be rounded when using the `pill` attribute [#1117](https://github.com/shoelace-style/shoelace/issues/1117)
 - Fixed a bug in `<sl-select>` where the `sl-change` and `sl-input` events didn't weren't emitted when removing tags [#1119](https://github.com/shoelace-style/shoelace/issues/1119)
