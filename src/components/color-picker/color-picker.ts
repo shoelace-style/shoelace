@@ -625,6 +625,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
       this.brightness = 100;
       this.alpha = 100;
     }
+
     if (!this.isSafeValue) {
       const newColor = this.parseColor(newValue);
 
