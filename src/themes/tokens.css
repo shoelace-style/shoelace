@@ -1048,6 +1048,69 @@ sl-menu-item::part(label) {
   line-height: var(--ts-leading-5);
 }
 
+
+/** ********** **/
+/* Menu label styling */
+/** ********** **/
+sl-menu-label::part(base) {
+  color: var(--ts-color-text-subdued);
+  font-size: var(--sl-font-size-x-small);
+  font-weight: var(--sl-font-weight-normal);
+}
+
+/** ******************************** */
+/** Select */
+/** ******************************** */
+/* Control gap between select & menu panel */
+sl-select::part(listbox) {
+  margin-top: var(--sl-spacing-x-small);
+}
+
+/** ********** **/
+/* Option styling */
+/** ********** **/
+sl-option::part(base) {
+  padding: var(--sl-spacing-x-small) var(--sl-spacing-2x-small);
+}
+
+sl-option::part(base):not(.option--selected),
+sl-option::part(base):not(.option--current) {
+  color: var(--ts-color-text-default);
+}
+
+sl-option:hover::part(base),
+sl-option:focus::part(base),
+sl-option:focus-visible::part(base) {
+  background-color: var(--sl-color-neutral-100);
+  color: var(--ts-color-text-default);
+}
+
+sl-option[disabled]:hover::part(base) {
+  background-color: var(--sl-color-neutral-0);
+}
+
+sl-option:active::part(base) {
+  background-color: var(--sl-color-neutral-200);
+  color: var(--ts-color-text-default);
+}
+
+sl-option::part(label) {
+  font-size: var(--sl-font-size-small);
+  line-height: var(--ts-leading-5);
+}
+
+/** ********** **/
+/* Menu label styling */
+/** ********** **/
+sl-menu-label::part(base) {
+  color: var(--ts-color-text-subdued);
+  font-size: var(--sl-font-size-x-small);
+  font-weight: var(--sl-font-weight-normal);
+}
+
+/** ******************************** */
+/** Tooltip */
+/** ******************************** */
 :root,
 :host,
 sl-theme {
