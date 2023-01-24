@@ -12,6 +12,7 @@ This is the first stable release of Shoelace 2, meaning breaking changes to the 
 
 - 55 components have been built
 - [Over 2,500 commits](https://github.com/shoelace-style/shoelace/commits/next) have been made to the project
+- [88 beta versions](https://github.com/shoelace-style/shoelace/tags) have been released
 - [85 people](https://github.com/shoelace-style/shoelace/graphs/contributors) have contributed to the project
 - [669 issues](https://github.com/shoelace-style/shoelace/issues?q=is%3Aissue+is%3Aclosed) have been filed on GitHub
 - [274 pull requests](https://github.com/shoelace-style/shoelace/pulls) have been opened
