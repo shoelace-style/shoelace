@@ -1,15 +1,15 @@
-import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property } from 'lit/decorators.js';
+import { html } from 'lit';
 import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './skeleton.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
- * @summary Skeletons are used to show where content will eventually be drawn.
- *
- * @since 2.0
+ * @summary Skeletons are used to provide a visual representation of where content will eventually be drawn.
+ * @documentation https://shoelace.style/components/skeleton
  * @status stable
+ * @since 2.0
  *
  * @csspart base - The component's base wrapper.
  * @csspart indicator - The skeleton's indicator which is responsible for its color and animation.

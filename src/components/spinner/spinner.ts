@@ -1,15 +1,15 @@
-import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import ShoelaceElement from '../../internal/shoelace-element';
+import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './spinner.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Spinners are used to show the progress of an indeterminate operation.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/spinner
  * @status stable
+ * @since 2.0
  *
  * @csspart base - The component's base wrapper.
  *

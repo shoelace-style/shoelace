@@ -1,13 +1,13 @@
-import type SlButton from '../components/button/button';
-import type { ShoelaceFormControl } from '../internal/shoelace-element';
 import type { ReactiveController, ReactiveControllerHost } from 'lit';
+import type { ShoelaceFormControl } from '../internal/shoelace-element';
+import type SlButton from '../components/button/button';
 
 //
 // We store a WeakMap of forms + controls so we can keep references to all Shoelace controls within a given form. As
 // elements connect and disconnect to/from the DOM, their containing form is used as the key and the form control is
 // added and removed from the form's set, respectively.
 //
-const formCollections: WeakMap<HTMLFormElement, Set<ShoelaceFormControl>> = new WeakMap();
+export const formCollections: WeakMap<HTMLFormElement, Set<ShoelaceFormControl>> = new WeakMap();
 
 //
 // We store a WeakMap of controls that users have interacted with. This allows us to determine the interaction state
@@ -21,7 +21,7 @@ const userInteractedControls: WeakMap<ShoelaceFormControl, boolean> = new WeakMa
 //
 const reportValidityOverloads: WeakMap<HTMLFormElement, () => boolean> = new WeakMap();
 
-export interface FormSubmitControllerOptions {
+export interface FormControlControllerOptions {
   /** A function that returns the form containing the form control. */
   form: (input: ShoelaceFormControl) => HTMLFormElement | null;
   /** A function that returns the form control's name, which will be submitted with the form data. */
@@ -41,15 +41,27 @@ export interface FormSubmitControllerOptions {
   setValue: (input: ShoelaceFormControl, value: unknown) => void;
 }
 
-export class FormSubmitController implements ReactiveController {
+export class FormControlController implements ReactiveController {
   host: ShoelaceFormControl & ReactiveControllerHost;
   form?: HTMLFormElement | null;
-  options: FormSubmitControllerOptions;
+  options: FormControlControllerOptions;
 
-  constructor(host: ReactiveControllerHost & ShoelaceFormControl, options?: Partial<FormSubmitControllerOptions>) {
+  constructor(host: ReactiveControllerHost & ShoelaceFormControl, options?: Partial<FormControlControllerOptions>) {
     (this.host = host).addController(this);
     this.options = {
-      form: input => input.closest('form'),
+      form: input => {
+        // If there's a form attribute, use it to find the target form by id
+        if (input.hasAttribute('form') && input.getAttribute('form') !== '') {
+          const root = input.getRootNode() as Document | ShadowRoot;
+          const formId = input.getAttribute('form');
+
+          if (formId) {
+            return root.getElementById(formId) as HTMLFormElement;
+          }
+        }
+
+        return input.closest('form');
+      },
       name: input => input.name,
       value: input => input.value,
       defaultValue: input => input.defaultValue,
@@ -66,9 +78,43 @@ export class FormSubmitController implements ReactiveController {
   }
 
   hostConnected() {
-    this.form = this.options.form(this.host);
+    const form = this.options.form(this.host);
 
-    if (this.form) {
+    if (form) {
+      this.attachForm(form);
+    }
+
+    this.host.addEventListener('sl-input', this.handleUserInput);
+  }
+
+  hostDisconnected() {
+    this.detachForm();
+    this.host.removeEventListener('sl-input', this.handleUserInput);
+  }
+
+  hostUpdated() {
+    const form = this.options.form(this.host);
+
+    // Detach if the form no longer exists
+    if (!form) {
+      this.detachForm();
+    }
+
+    // If the form has changed, reattach it
+    if (form && this.form !== form) {
+      this.detachForm();
+      this.attachForm(form);
+    }
+
+    if (this.host.hasUpdated) {
+      this.setValidity(this.host.checkValidity());
+    }
+  }
+
+  private attachForm(form?: HTMLFormElement) {
+    if (form) {
+      this.form = form;
+
       // Add this element to the form's collection
       if (formCollections.has(this.form)) {
         formCollections.get(this.form)!.add(this.host);
@@ -85,12 +131,12 @@ export class FormSubmitController implements ReactiveController {
         reportValidityOverloads.set(this.form, this.form.reportValidity);
         this.form.reportValidity = () => this.reportFormValidity();
       }
+    } else {
+      this.form = undefined;
     }
-
-    this.host.addEventListener('sl-input', this.handleUserInput);
   }
 
-  hostDisconnected() {
+  private detachForm() {
     if (this.form) {
       // Remove this element from the form's collection
       formCollections.get(this.form)?.delete(this.host);
@@ -104,45 +150,12 @@ export class FormSubmitController implements ReactiveController {
         this.form.reportValidity = reportValidityOverloads.get(this.form)!;
         reportValidityOverloads.delete(this.form);
       }
-
-      this.form = undefined;
     }
 
-    this.host.removeEventListener('sl-input', this.handleUserInput);
+    this.form = undefined;
   }
 
-  hostUpdated() {
-    //
-    // We're mapping the following "states" to data attributes. In the future, we can use ElementInternals.states to
-    // create a similar mapping, but instead of [data-invalid] it will look like :--invalid.
-    //
-    // See this RFC for more details: https://github.com/shoelace-style/shoelace/issues/1011
-    //
-    const host = this.host;
-    const hasInteracted = Boolean(userInteractedControls.get(host));
-    const invalid = Boolean(host.invalid);
-    const required = Boolean(host.required);
-
-    if (this.form?.noValidate) {
-      // Form validation is disabled, remove the attributes
-      host.removeAttribute('data-required');
-      host.removeAttribute('data-optional');
-      host.removeAttribute('data-invalid');
-      host.removeAttribute('data-valid');
-      host.removeAttribute('data-user-invalid');
-      host.removeAttribute('data-user-valid');
-    } else {
-      // Form validation is enabled, set the attributes
-      host.toggleAttribute('data-required', required);
-      host.toggleAttribute('data-optional', !required);
-      host.toggleAttribute('data-invalid', invalid);
-      host.toggleAttribute('data-valid', !invalid);
-      host.toggleAttribute('data-user-invalid', invalid && hasInteracted);
-      host.toggleAttribute('data-user-valid', !invalid && hasInteracted);
-    }
-  }
-
-  handleFormData(event: FormDataEvent) {
+  private handleFormData(event: FormDataEvent) {
     const disabled = this.options.disabled(this.host);
     const name = this.options.name(this.host);
     const value = this.options.value(this.host);
@@ -162,7 +175,7 @@ export class FormSubmitController implements ReactiveController {
     }
   }
 
-  handleFormSubmit(event: Event) {
+  private handleFormSubmit(event: Event) {
     const disabled = this.options.disabled(this.host);
     const reportValidity = this.options.reportValidity;
 
@@ -179,17 +192,17 @@ export class FormSubmitController implements ReactiveController {
     }
   }
 
-  handleFormReset() {
+  private handleFormReset() {
     this.options.setValue(this.host, this.options.defaultValue(this.host));
     this.setUserInteracted(this.host, false);
   }
 
-  async handleUserInput() {
+  private async handleUserInput() {
     await this.host.updateComplete;
     this.setUserInteracted(this.host, true);
   }
 
-  reportFormValidity() {
+  private reportFormValidity() {
     //
     // Shoelace form controls work hard to act like regular form controls. They support the Constraint Validation API
     // and its associated methods such as setCustomValidity() and reportValidity(). However, the HTMLFormElement also
@@ -219,12 +232,12 @@ export class FormSubmitController implements ReactiveController {
     return true;
   }
 
-  setUserInteracted(el: ShoelaceFormControl, hasInteracted: boolean) {
+  private setUserInteracted(el: ShoelaceFormControl, hasInteracted: boolean) {
     userInteractedControls.set(el, hasInteracted);
     el.requestUpdate();
   }
 
-  doAction(type: 'submit' | 'reset', invoker?: HTMLInputElement | SlButton) {
+  private doAction(type: 'submit' | 'reset', invoker?: HTMLInputElement | SlButton) {
     if (this.form) {
       const button = document.createElement('button');
       button.type = type;
@@ -263,5 +276,48 @@ export class FormSubmitController implements ReactiveController {
     // Calling form.submit() bypasses the submit event and constraint validation. To prevent this, we can inject a
     // native submit button into the form, "click" it, then remove it to simulate a standard form submission.
     this.doAction('submit', invoker);
+  }
+
+  /**
+   * Synchronously sets the form control's validity. Call this when you know the future validity but need to update
+   * the host element immediately, i.e. before Lit updates the component in the next update.
+   */
+  setValidity(isValid: boolean) {
+    const host = this.host;
+    const hasInteracted = Boolean(userInteractedControls.get(host));
+    const required = Boolean(host.required);
+
+    //
+    // We're mapping the following "states" to data attributes. In the future, we can use ElementInternals.states to
+    // create a similar mapping, but instead of [data-invalid] it will look like :--invalid.
+    //
+    // See this RFC for more details: https://github.com/shoelace-style/shoelace/issues/1011
+    //
+    if (this.form?.noValidate) {
+      // Form validation is disabled, remove the attributes
+      host.removeAttribute('data-required');
+      host.removeAttribute('data-optional');
+      host.removeAttribute('data-invalid');
+      host.removeAttribute('data-valid');
+      host.removeAttribute('data-user-invalid');
+      host.removeAttribute('data-user-valid');
+    } else {
+      // Form validation is enabled, set the attributes
+      host.toggleAttribute('data-required', required);
+      host.toggleAttribute('data-optional', !required);
+      host.toggleAttribute('data-invalid', !isValid);
+      host.toggleAttribute('data-valid', isValid);
+      host.toggleAttribute('data-user-invalid', !isValid && hasInteracted);
+      host.toggleAttribute('data-user-valid', isValid && hasInteracted);
+    }
+  }
+
+  /**
+   * Updates the form control's validity based on the current value of `host.checkValidity()`. Call this when anything
+   * that affects constraint validation changes so the component receives the correct validity states.
+   */
+  updateValidity() {
+    const host = this.host;
+    this.setValidity(host.checkValidity());
   }
 }

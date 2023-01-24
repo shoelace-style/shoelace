@@ -13,6 +13,7 @@ export default css`
   .form-control {
     border: none;
     padding: 0;
+    margin: 0;
   }
 
   .form-control__label {

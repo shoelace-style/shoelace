@@ -562,7 +562,13 @@ export default css`
   }
 
   /* Add a visual separator between solid buttons */
-  :host(.sl-button-group__button:not(.sl-button-group__button--first, .sl-button-group__button--radio, [variant='default']):not(:hover))
+  :host(
+      .sl-button-group__button:not(
+          .sl-button-group__button--first,
+          .sl-button-group__button--radio,
+          [variant='default']
+        ):not(:hover)
+    )
     .button:after {
     content: '';
     position: absolute;

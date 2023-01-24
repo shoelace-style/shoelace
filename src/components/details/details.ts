@@ -1,21 +1,21 @@
-import { html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '../../internal/animate';
-import { waitForEvent } from '../../internal/event';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { watch } from '../../internal/watch';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
-import { LocalizeController } from '../../utilities/localize';
 import '../icon/icon';
+import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '../../internal/animate';
+import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query } from 'lit/decorators.js';
+import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
+import { html } from 'lit';
+import { LocalizeController } from '../../utilities/localize';
+import { waitForEvent } from '../../internal/event';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './details.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Details show a brief summary and expand to show additional content.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/details
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  *

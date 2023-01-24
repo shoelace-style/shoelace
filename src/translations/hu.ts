@@ -9,7 +9,7 @@ const translation: Translation = {
   clearEntry: 'Bejegyzés törlése',
   close: 'Bezárás',
   copy: 'Másolás',
-  numOptionsSelected: (num: number) => {
+  numOptionsSelected: num => {
     if (num === 0) return 'Nincsenek kiválasztva opciók';
     if (num === 1) return '1 lehetőség kiválasztva';
     return `${num} lehetőség kiválasztva`;

@@ -1,4 +1,4 @@
-import { expect, fixture, html, elementUpdated } from '@open-wc/testing';
+import { elementUpdated, expect, fixture, html } from '@open-wc/testing';
 import type SlFormatBytes from './format-bytes';
 
 describe('<sl-format-bytes>', () => {

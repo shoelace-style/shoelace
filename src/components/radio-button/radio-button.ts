@@ -1,18 +1,18 @@
-import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { html } from 'lit/static-html.js';
-import ShoelaceElement from '../../internal/shoelace-element';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { HasSlotController } from '../../internal/slot';
+import { html } from 'lit/static-html.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './radio-button.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Radios buttons allow the user to select a single option from a group using a button-like control.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/radio-button
  * @status stable
+ * @since 2.0
  *
  * @slot - The radio button's label.
  * @slot prefix - A presentational prefix icon or similar element.
@@ -38,7 +38,12 @@ export default class SlRadioButton extends ShoelaceElement {
   @query('.hidden-input') hiddenInput: HTMLInputElement;
 
   @state() protected hasFocus = false;
-  @state() checked = false;
+
+  /**
+   * @internal The radio button's checked state. This is exposed as an "internal" attribute so we can reflect it, making
+   * it easier to style in button groups.
+   */
+  @property({ type: Boolean, reflect: true }) checked = false;
 
   /** The radio's value. When selected, the radio group will receive this value. */
   @property() value: string;

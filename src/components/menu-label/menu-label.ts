@@ -1,14 +1,14 @@
-import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
+import { html } from 'lit';
 import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './menu-label.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Menu labels are used to describe a group of menu items.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/menu-label
  * @status stable
+ * @since 2.0
  *
  * @slot - The menu label's content.
  *

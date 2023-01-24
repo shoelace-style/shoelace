@@ -9,7 +9,7 @@ const translation: Translation = {
   clearEntry: 'נקה קלט',
   close: 'סגור',
   copy: 'העתק',
-  numOptionsSelected: (num: number) => {
+  numOptionsSelected: num => {
     if (num === 0) return 'לא נבחרו אפשרויות';
     if (num === 1) return 'נבחרה אפשרות אחת';
     return `נבחרו ${num} אפשרויות`;

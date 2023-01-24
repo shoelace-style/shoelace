@@ -1,13 +1,13 @@
-import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import ShoelaceElement from '../../internal/shoelace-element';
+import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize';
+import ShoelaceElement from '../../internal/shoelace-element';
 
 /**
  * @summary Formats a date/time using the specified locale and options.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/format-date
  * @status stable
+ * @since 2.0
  */
 @customElement('sl-format-date')
 export default class SlFormatDate extends ShoelaceElement {

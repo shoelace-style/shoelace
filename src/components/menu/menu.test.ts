@@ -1,78 +1,102 @@
-import { expect, fixture, waitUntil } from '@open-wc/testing';
-import { sendKeys } from '@web/test-runner-commands';
+import { clickOnElement } from '../../internal/test';
+import { expect, fixture } from '@open-wc/testing';
 import { html } from 'lit';
+import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-import type SlMenuItem from '../menu-item/menu-item';
 import type SlMenu from './menu';
-
-interface Payload {
-  item: SlMenuItem;
-}
-
-const createTestMenu = (): Promise<SlMenu> => {
-  return fixture<SlMenu>(html`
-    <sl-menu>
-      <sl-menu-item value="test1">test1</sl-menu-item>
-      <sl-menu-item value="test2">test2</sl-menu-item>
-      <sl-menu-item value="test3">test3</sl-menu-item>
-      <sl-menu-item value="testDisabled" disabled>testDisabled</sl-menu-item>
-    </sl-menu>
-  `);
-};
-
-const clickOnItemWithValue = (menu: SlMenu, value: string) => {
-  const clickedItem = menu.querySelector(`[value=${value}]`);
-  if (clickedItem) {
-    (clickedItem as SlMenuItem).click();
-  }
-};
-
-const spyOnSelectHandler = (menu: SlMenu): sinon.SinonSpy => {
-  const selectHandler = sinon.spy();
-  menu.addEventListener('sl-select', selectHandler);
-  return selectHandler;
-};
-
-const expectSelectHandlerToHaveBeenCalledOn = async (
-  selectHandler: sinon.SinonSpy,
-  expectedValue: string
-): Promise<void> => {
-  await waitUntil(() => selectHandler.called);
-  expect(selectHandler).to.have.been.calledOnce;
-  const event = selectHandler.args[0][0] as CustomEvent;
-  const detail = event.detail as Payload;
-  expect(detail.item.value).to.equal(expectedValue);
-};
+import type SlMenuItem from '../menu-item/menu-item';
 
 describe('<sl-menu>', () => {
-  it('emits sl-select on click of an item returning the selected item as payload', async () => {
-    const menu = await createTestMenu();
-    const selectHandler = spyOnSelectHandler(menu);
+  it('emits sl-select with the correct event detail when clicking an item', async () => {
+    const menu = await fixture<SlMenu>(html`
+      <sl-menu>
+        <sl-menu-item value="item-1">Item 1</sl-menu-item>
+        <sl-menu-item value="item-2">Item 2</sl-menu-item>
+        <sl-menu-item value="item-3">Item 3</sl-menu-item>
+        <sl-menu-item value="item-4">Item 4</sl-menu-item>
+      </sl-menu>
+    `);
+    const item2 = menu.querySelectorAll('sl-menu-item')[1];
+    const selectHandler = sinon.spy((event: CustomEvent) => {
+      const item = event.detail.item as SlMenuItem; // eslint-disable-line
+      if (item !== item2) {
+        expect.fail('Incorrect event detail emitted with sl-select');
+      }
+    });
 
-    clickOnItemWithValue(menu, 'test1');
+    menu.addEventListener('sl-select', selectHandler);
+    await clickOnElement(item2);
 
-    await expectSelectHandlerToHaveBeenCalledOn(selectHandler, 'test1');
+    expect(selectHandler).to.have.been.calledOnce;
   });
 
   it('can be selected via keyboard', async () => {
-    const menu = await createTestMenu();
-    const selectHandler = spyOnSelectHandler(menu);
+    const menu = await fixture<SlMenu>(html`
+      <sl-menu>
+        <sl-menu-item value="item-1">Item 1</sl-menu-item>
+        <sl-menu-item value="item-2">Item 2</sl-menu-item>
+        <sl-menu-item value="item-3">Item 3</sl-menu-item>
+        <sl-menu-item value="item-4">Item 4</sl-menu-item>
+      </sl-menu>
+    `);
+    const [item1, item2] = menu.querySelectorAll('sl-menu-item');
+    const selectHandler = sinon.spy((event: CustomEvent) => {
+      const item = event.detail.item as SlMenuItem; // eslint-disable-line
+      if (item !== item2) {
+        expect.fail('Incorrect item selected');
+      }
+    });
 
-    await sendKeys({ press: 'Tab' });
+    menu.addEventListener('sl-select', selectHandler);
+
+    item1.focus();
+    await item1.updateComplete;
     await sendKeys({ press: 'ArrowDown' });
     await sendKeys({ press: 'Enter' });
 
-    await expectSelectHandlerToHaveBeenCalledOn(selectHandler, 'test2');
+    expect(selectHandler).to.have.been.calledOnce;
   });
 
-  it('does not select disabled items', async () => {
-    const menu = await createTestMenu();
-    const selectHandler = spyOnSelectHandler(menu);
+  it('does not select disabled items when clicking', async () => {
+    const menu = await fixture<SlMenu>(html`
+      <sl-menu>
+        <sl-menu-item value="item-1">Item 1</sl-menu-item>
+        <sl-menu-item value="item-2" disabled>Item 2</sl-menu-item>
+        <sl-menu-item value="item-3">Item 3</sl-menu-item>
+        <sl-menu-item value="item-4">Item 4</sl-menu-item>
+      </sl-menu>
+    `);
+    const item2 = menu.querySelectorAll('sl-menu-item')[1];
+    const selectHandler = sinon.spy();
 
-    await sendKeys({ press: 'Tab' });
-    await sendKeys({ type: 'testDisabled' });
+    menu.addEventListener('sl-select', selectHandler);
+
+    await clickOnElement(item2);
+
+    expect(selectHandler).to.not.have.been.calledOnce;
+  });
+
+  it('does not select disabled items when pressing enter', async () => {
+    const menu = await fixture<SlMenu>(html`
+      <sl-menu>
+        <sl-menu-item value="item-1">Item 1</sl-menu-item>
+        <sl-menu-item value="item-2" disabled>Item 2</sl-menu-item>
+        <sl-menu-item value="item-3">Item 3</sl-menu-item>
+        <sl-menu-item value="item-4">Item 4</sl-menu-item>
+      </sl-menu>
+    `);
+    const [item1, item2] = menu.querySelectorAll('sl-menu-item');
+    const selectHandler = sinon.spy();
+
+    menu.addEventListener('sl-select', selectHandler);
+
+    item1.focus();
+    await item1.updateComplete;
+    await sendKeys({ press: 'ArrowDown' });
+    expect(document.activeElement).to.equal(item2);
     await sendKeys({ press: 'Enter' });
+    await item2.updateComplete;
 
-    await expectSelectHandlerToHaveBeenCalledOn(selectHandler, 'test1');
+    expect(selectHandler).to.not.have.been.called;
   });
 });

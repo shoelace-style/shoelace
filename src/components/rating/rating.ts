@@ -1,24 +1,28 @@
-import { html } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import '../icon/icon';
+import { clamp } from '../../internal/math';
 import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { html } from 'lit';
+import { LocalizeController } from '../../utilities/localize';
 import { styleMap } from 'lit/directives/style-map.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { clamp } from '../../internal/math';
+import { watch } from '../../internal/watch';
 import ShoelaceElement from '../../internal/shoelace-element';
-import { LocalizeController } from '../../utilities/localize';
-import '../icon/icon';
 import styles from './rating.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Ratings give users a way to quickly view and provide feedback.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/rating
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  *
  * @event sl-change - Emitted when the rating's value changes.
+ * @event {{ phase: 'start' | 'move' | 'end', value: number }} sl-hover - Emitted when the user hovers over a value. The
+ *  `phase` property indicates when hovering starts, moves to a new value, or ends. The `value` property tells what the
+ *  rating's value would be if the user were to commit to the hovered value.
  *
  * @csspart base - The component's base wrapper.
  *
@@ -134,8 +138,9 @@ export default class SlRating extends ShoelaceElement {
     }
   }
 
-  private handleMouseEnter() {
+  private handleMouseEnter(event: MouseEvent) {
     this.isHovering = true;
+    this.hoverValue = this.getValueFromMousePosition(event);
   }
 
   private handleMouseMove(event: MouseEvent) {
@@ -147,6 +152,7 @@ export default class SlRating extends ShoelaceElement {
   }
 
   private handleTouchStart(event: TouchEvent) {
+    this.isHovering = true;
     this.hoverValue = this.getValueFromTouchPosition(event);
 
     // Prevent scrolling when touch is initiated
@@ -154,7 +160,6 @@ export default class SlRating extends ShoelaceElement {
   }
 
   private handleTouchMove(event: TouchEvent) {
-    this.isHovering = true;
     this.hoverValue = this.getValueFromTouchPosition(event);
   }
 
@@ -170,6 +175,26 @@ export default class SlRating extends ShoelaceElement {
   private roundToPrecision(numberToRound: number, precision = 0.5) {
     const multiplier = 1 / precision;
     return Math.ceil(numberToRound * multiplier) / multiplier;
+  }
+
+  @watch('hoverValue')
+  handleHoverValueChange() {
+    this.emit('sl-hover', {
+      detail: {
+        phase: 'move',
+        value: this.hoverValue
+      }
+    });
+  }
+
+  @watch('isHovering')
+  handleIsHoveringChange() {
+    this.emit('sl-hover', {
+      detail: {
+        phase: this.isHovering ? 'start' : 'end',
+        value: this.hoverValue
+      }
+    });
   }
 
   /** Sets focus on the rating. */
