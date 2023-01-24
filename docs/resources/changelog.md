@@ -6,7 +6,27 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
-## Next
+## 2.0.0
+
+This is the first stable release of Shoelace 2, meaning breaking changes to the API will no longer be accepted for this version. Development of Shoelace 2.0 started in January 2020. The first beta was released on [July 15, 2020](https://github.com/shoelace-style/shoelace/releases/tag/v2.0.0-beta.1). Since then, Shoelace has grown quite a bit! Here are some stats from the project as of January 24, 2023:
+
+- 55 components have been built
+- [Over 2,500 commits](https://github.com/shoelace-style/shoelace/commits/next) have been made to the project
+- [85 people](https://github.com/shoelace-style/shoelace/graphs/contributors) have contributed to the project
+- [669 issues](https://github.com/shoelace-style/shoelace/issues?q=is%3Aissue+is%3Aclosed) have been filed on GitHub
+- [274 pull requests](https://github.com/shoelace-style/shoelace/pulls) have been opened
+- [More than 150 discussions](https://github.com/shoelace-style/shoelace/discussions) have been started on GitHub
+- [Over 500 people](https://discord.com/invite/mg8f26C) have joined the Shoelace community on Discord
+- [Over 300 million CDN hits](https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace) per month
+- [Over 13,000 npm downloads](https://www.npmjs.com/package/@shoelace-style/shoelace) per week
+- [73rd most popular project](https://www.jsdelivr.com/statistics) on jsDelivr
+- [#2 product of the day](https://www.producthunt.com/products/shoelace-css) on Product Hunt (July 25, 2020)
+
+I'd like to extend a very special thank you to every single contributor who worked to make this possible. Everyone who's filed a bug, submitted a PR, requested a feature, started a discussion, helped with testing, and advocated for the project. You are just as responsible for Shoelace's success as I am. I'd also like to thank the folks at [Font&nbsp;Awesome](https://fontawesome.com/) for recognizing Shoelace's potential and [believing in me](https://blog.fontawesome.com/shoelace-joins-font-awesome/) to make it happen.
+
+Thank you! And keep building _awesome_ stuff!
+
+Without further ado, here are the notes for this release.
 
 - Added support for the `inert` attribute on `<sl-menu-item>` to allow hidden menu items to not accept focus [#1107](https://github.com/shoelace-style/shoelace/issues/1107)
 - Added the `tag` part to `<sl-select>`
