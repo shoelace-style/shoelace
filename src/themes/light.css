@@ -318,10 +318,14 @@
    * Border radii
    */
 
-  --sl-border-radius-small: 0.1875rem; /* 3px */
-  --sl-border-radius-medium: 0.25rem; /* 4px */
-  --sl-border-radius-large: 0.5rem; /* 8px */
-  --sl-border-radius-x-large: 1rem; /* 16px */
+  --sl-border-radius-small: 0.1875rem;
+  /* 3px */
+  --sl-border-radius-medium: 0.25rem;
+  /* 4px */
+  --sl-border-radius-large: 0.5rem;
+  /* 8px */
+  --sl-border-radius-x-large: 1rem;
+  /* 16px */
 
   --sl-border-radius-circle: 50%;
   --sl-border-radius-pill: 9999px;
@@ -340,16 +344,26 @@
    * Spacings
    */
 
-  --sl-spacing-3x-small: 0.125rem; /* 2px */
-  --sl-spacing-2x-small: 0.25rem; /* 4px */
-  --sl-spacing-x-small: 0.5rem; /* 8px */
-  --sl-spacing-small: 0.75rem; /* 12px */
-  --sl-spacing-medium: 1rem; /* 16px */
-  --sl-spacing-large: 1.25rem; /* 20px */
-  --sl-spacing-x-large: 1.75rem; /* 28px */
-  --sl-spacing-2x-large: 2.25rem; /* 36px */
-  --sl-spacing-3x-large: 3rem; /* 48px */
-  --sl-spacing-4x-large: 4.5rem; /* 72px */
+  --sl-spacing-3x-small: 0.125rem;
+  /* 2px */
+  --sl-spacing-2x-small: 0.25rem;
+  /* 4px */
+  --sl-spacing-x-small: 0.5rem;
+  /* 8px */
+  --sl-spacing-small: 0.75rem;
+  /* 12px */
+  --sl-spacing-medium: 1rem;
+  /* 16px */
+  --sl-spacing-large: 1.25rem;
+  /* 20px */
+  --sl-spacing-x-large: 1.75rem;
+  /* 28px */
+  --sl-spacing-2x-large: 2.25rem;
+  /* 36px */
+  --sl-spacing-3x-large: 3rem;
+  /* 48px */
+  --sl-spacing-4x-large: 4.5rem;
+  /* 72px */
 
   /*
    * Transitions
@@ -372,15 +386,24 @@
   --sl-font-serif: Georgia, 'Times New Roman', serif;
 
   /* Font sizes */
-  --sl-font-size-2x-small: 0.625rem; /* 10px */
-  --sl-font-size-x-small: 0.75rem; /* 12px */
-  --sl-font-size-small: 0.875rem; /* 14px */
-  --sl-font-size-medium: 1rem; /* 16px */
-  --sl-font-size-large: 1.25rem; /* 20px */
-  --sl-font-size-x-large: 1.5rem; /* 24px */
-  --sl-font-size-2x-large: 2.25rem; /* 36px */
-  --sl-font-size-3x-large: 3rem; /* 48px */
-  --sl-font-size-4x-large: 4.5rem; /* 72px */
+  --sl-font-size-2x-small: 0.625rem;
+  /* 10px */
+  --sl-font-size-x-small: 0.75rem;
+  /* 12px */
+  --sl-font-size-small: 0.875rem;
+  /* 14px */
+  --sl-font-size-medium: 1rem;
+  /* 16px */
+  --sl-font-size-large: 1.25rem;
+  /* 20px */
+  --sl-font-size-x-large: 1.5rem;
+  /* 24px */
+  --sl-font-size-2x-large: 2.25rem;
+  /* 36px */
+  --sl-font-size-3x-large: 3rem;
+  /* 48px */
+  --sl-font-size-4x-large: 4.5rem;
+  /* 72px */
 
   /* Font weights */
   --sl-font-weight-light: 300;
@@ -419,9 +442,12 @@
   --sl-button-font-size-large: var(--sl-font-size-medium);
 
   /* Inputs */
-  --sl-input-height-small: 1.875rem; /* 30px */
-  --sl-input-height-medium: 2.5rem; /* 40px */
-  --sl-input-height-large: 3.125rem; /* 50px */
+  --sl-input-height-small: 1.875rem;
+  /* 30px */
+  --sl-input-height-medium: 2.5rem;
+  /* 40px */
+  --sl-input-height-large: 3.125rem;
+  /* 50px */
 
   --sl-input-background-color: var(--sl-color-neutral-0);
   --sl-input-background-color-hover: var(--sl-input-background-color);
@@ -487,9 +513,12 @@
   --sl-input-help-text-color: var(--sl-color-neutral-500);
 
   /* Toggles (checkboxes, radios, switches) */
-  --sl-toggle-size-small: 0.875rem; /* 14px @ 16px base  */
-  --sl-toggle-size-medium: 1.125rem; /* 18px @ 16px base */
-  --sl-toggle-size-large: 1.375rem; /* 22px @ 16px base */
+  --sl-toggle-size-small: 0.875rem;
+  /* 14px @ 16px base  */
+  --sl-toggle-size-medium: 1.125rem;
+  /* 18px @ 16px base */
+  --sl-toggle-size-large: 1.375rem;
+  /* 22px @ 16px base */
 
   /*
    * Overlays

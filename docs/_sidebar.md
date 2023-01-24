@@ -1,3 +1,10 @@
+- Teamshares
+
+  - [Overview](/teamshares/overview)
+  - [Contributing](/teamshares/contributing)
+  - [Recipe Book](/teamshares/recipes)
+  - [Changelog](/teamshares/changelog)
+
 - Getting Started
 
   - [Teamshares](/getting-started/teamshares)

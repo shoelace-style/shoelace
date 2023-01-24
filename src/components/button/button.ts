@@ -67,7 +67,7 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
     'default';
 
   /** The button's size. */
-  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
+  @property({ reflect: true }) size: 'small' | 'medium' | 'large' | 'x-large' = 'medium';
 
   /** Draws the button with a caret. Used to indicate that the button triggers a dropdown menu or similar behavior. */
   @property({ type: Boolean, reflect: true }) caret = false;
@@ -81,8 +81,8 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
   /** Draws an outlined button. */
   @property({ type: Boolean, reflect: true }) outline = false;
 
-  /** Draws a pill-style button with rounded edges. */
-  @property({ type: Boolean, reflect: true }) pill = false;
+  /** Draws a square button instead of the Teamshares default pill. */
+  @property({ type: Boolean, reflect: true }) square = false;
 
   /**
    * Draws a circular icon button. When this attribute is present, the button expects a single `<sl-icon>` in the
@@ -250,6 +250,7 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
           'button--small': this.size === 'small',
           'button--medium': this.size === 'medium',
           'button--large': this.size === 'large',
+          'button--x-large': this.size === 'x-large',
           'button--caret': this.caret,
           'button--circle': this.circle,
           'button--disabled': this.disabled,
@@ -257,7 +258,7 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
           'button--loading': this.loading,
           'button--standard': !this.outline,
           'button--outline': this.outline,
-          'button--pill': this.pill,
+          'button--square': this.square,
           'button--rtl': this.localize.dir() === 'rtl',
           'button--has-label': this.hasSlotController.test('[default]'),
           'button--has-prefix': this.hasSlotController.test('prefix'),

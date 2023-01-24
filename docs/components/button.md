@@ -21,8 +21,6 @@ Use the `variant` attribute to set the button's variant.
 ```html preview
 <sl-button variant="default">Default</sl-button>
 <sl-button variant="primary">Primary</sl-button>
-<sl-button variant="success">Success</sl-button>
-<sl-button variant="neutral">Neutral</sl-button>
 <sl-button variant="warning">Warning</sl-button>
 <sl-button variant="danger">Danger</sl-button>
 ```
@@ -34,8 +32,6 @@ const App = () => (
   <>
     <SlButton variant="default">Default</SlButton>
     <SlButton variant="primary">Primary</SlButton>
-    <SlButton variant="success">Success</SlButton>
-    <SlButton variant="neutral">Neutral</SlButton>
     <SlButton variant="warning">Warning</SlButton>
     <SlButton variant="danger">Danger</SlButton>
   </>
@@ -50,6 +46,7 @@ Use the `size` attribute to change a button's size.
 <sl-button size="small">Small</sl-button>
 <sl-button size="medium">Medium</sl-button>
 <sl-button size="large">Large</sl-button>
+<sl-button size="x-large">Extra Large</sl-button>
 ```
 
 ```jsx react
@@ -60,6 +57,7 @@ const App = () => (
     <SlButton size="small">Small</SlButton>
     <SlButton size="medium">Medium</SlButton>
     <SlButton size="large">Large</SlButton>
+    <SlButton size="x-large">Extra Large</SlButton>
   </>
 );
 ```
@@ -71,8 +69,6 @@ Use the `outline` attribute to draw outlined buttons with transparent background
 ```html preview
 <sl-button variant="default" outline>Default</sl-button>
 <sl-button variant="primary" outline>Primary</sl-button>
-<sl-button variant="success" outline>Success</sl-button>
-<sl-button variant="neutral" outline>Neutral</sl-button>
 <sl-button variant="warning" outline>Warning</sl-button>
 <sl-button variant="danger" outline>Danger</sl-button>
 ```
@@ -88,12 +84,6 @@ const App = () => (
     <SlButton variant="primary" outline>
       Primary
     </SlButton>
-    <SlButton variant="success" outline>
-      Success
-    </SlButton>
-    <SlButton variant="neutral" outline>
-      Neutral
-    </SlButton>
     <SlButton variant="warning" outline>
       Warning
     </SlButton>
@@ -104,14 +94,15 @@ const App = () => (
 );
 ```
 
-### Pill Buttons
+### Square Buttons
 
-Use the `pill` attribute to give buttons rounded edges.
+Teamshares uses pill-shaped buttons by default. Use the `square` attribute to give buttons a rounded-rectangle shape.
 
 ```html preview
-<sl-button size="small" pill>Small</sl-button>
-<sl-button size="medium" pill>Medium</sl-button>
-<sl-button size="large" pill>Large</sl-button>
+<sl-button size="small" square>Small</sl-button>
+<sl-button size="medium" square>Medium</sl-button>
+<sl-button size="large" square>Large</sl-button>
+<sl-button size="x-large" square>Extra Large</sl-button>
 ```
 
 ```jsx react
@@ -119,14 +110,17 @@ import { SlButton } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
-    <SlButton size="small" pill>
+    <SlButton size="small" square>
       Small
     </SlButton>
-    <SlButton size="medium" pill>
+    <SlButton size="medium" square>
       Medium
     </SlButton>
-    <SlButton size="large" pill>
+    <SlButton size="large" square>
       Large
+    </SlButton>
+    <SlButton size="x-large" square>
+      Extra Large
     </SlButton>
   </>
 );
@@ -148,6 +142,10 @@ Use the `circle` attribute to create circular icon buttons. When this attribute 
 <sl-button variant="default" size="large" circle>
   <sl-icon name="cog-6-tooth" label="Settings"></sl-icon>
 </sl-button>
+
+<sl-button variant="default" size="x-large" circle>
+  <sl-icon name="cog-6-tooth" label="Settings"></sl-icon>
+</sl-button>
 ```
 
 ```jsx react
@@ -164,11 +162,14 @@ const App = () => (
     <SlButton variant="default" size="large" circle>
       <SlIcon name="cog-6-tooth" />
     </SlButton>
+    <SlButton variant="default" size="x-large" circle>
+      <SlIcon name="cog-6-tooth" />
+    </SlButton>
   </>
 );
 ```
 
-### Text Buttons
+<!-- ### Text Buttons
 
 Use the `text` variant to create text buttons that share the same size as regular buttons but don't have backgrounds or borders.
 
@@ -194,7 +195,7 @@ const App = () => (
     </SlButton>
   </>
 );
-```
+``` -->
 
 ### Link Buttons
 
@@ -235,7 +236,8 @@ As expected, buttons can be given a custom width by setting the `width` attribut
 ```html preview
 <sl-button variant="default" size="small" style="width: 100%; margin-bottom: 1rem;">Small</sl-button>
 <sl-button variant="default" size="medium" style="width: 100%; margin-bottom: 1rem;">Medium</sl-button>
-<sl-button variant="default" size="large" style="width: 100%;">Large</sl-button>
+<sl-button variant="default" size="large" style="width: 100%; margin-bottom: 1rem;">Large</sl-button>
+<sl-button variant="default" size="x-large" style="width: 100%;">Extra Large</sl-button>
 ```
 
 ```jsx react
@@ -249,8 +251,11 @@ const App = () => (
     <SlButton variant="default" size="medium" style={{ width: '100%', marginBottom: '1rem' }}>
       Medium
     </SlButton>
-    <SlButton variant="default" size="large" style={{ width: '100%' }}>
+    <SlButton variant="default" size="large" style={{ width: '100%', marginBottom: '1rem' }}>
       Large
+    </SlButton>
+    <SlButton variant="default" size="x-large" style={{ width: '100%' }}>
+      Extra Large
     </SlButton>
   </>
 );
@@ -312,6 +317,24 @@ Use the `prefix` and `suffix` slots to add icons.
   <sl-icon slot="suffix" name="arrow-top-right-on-square"></sl-icon>
   Open
 </sl-button>
+
+<br /><br />
+
+<sl-button variant="default" size="x-large">
+  <sl-icon slot="prefix" name="cog-6-tooth"></sl-icon>
+  Settings
+</sl-button>
+
+<sl-button variant="default" size="x-large">
+  <sl-icon slot="suffix" name="arrow-uturn-left"></sl-icon>
+  Refresh
+</sl-button>
+
+<sl-button variant="default" size="x-large">
+  <sl-icon slot="prefix" name="arrows-pointing-out"></sl-icon>
+  <sl-icon slot="suffix" name="arrow-top-right-on-square"></sl-icon>
+  Open
+</sl-button>
 ```
 
 ```jsx react
@@ -372,6 +395,25 @@ const App = () => (
       <SlIcon slot="suffix" name="arrow-top-right-on-square"></SlIcon>
       Open
     </SlButton>
+
+    <br />
+    <br />
+
+    <SlButton variant="default" size="x-large">
+      <SlIcon slot="prefix" name="cog-6-tooth"></SlIcon>
+      Settings
+    </SlButton>
+
+    <SlButton variant="default" size="x-large">
+      <SlIcon slot="suffix" name="arrow-uturn-left"></SlIcon>
+      Refresh
+    </SlButton>
+
+    <SlButton variant="default" size="x-large">
+      <SlIcon slot="prefix" name="arrows-pointing-out"></SlIcon>
+      <SlIcon slot="suffix" name="arrow-top-right-on-square"></SlIcon>
+      Open
+    </SlButton>
   </>
 );
 ```
@@ -384,6 +426,7 @@ Use the `caret` attribute to add a dropdown indicator when a button will trigger
 <sl-button size="small" caret>Small</sl-button>
 <sl-button size="medium" caret>Medium</sl-button>
 <sl-button size="large" caret>Large</sl-button>
+<sl-button size="x-large" caret>Extra Large</sl-button>
 ```
 
 ```jsx react
@@ -400,6 +443,9 @@ const App = () => (
     <SlButton size="large" caret>
       Large
     </SlButton>
+    <SlButton size="x-large" caret>
+      Large
+    </SlButton>
   </>
 );
 ```
@@ -411,8 +457,6 @@ Use the `loading` attribute to make a button busy. The width will remain the sam
 ```html preview
 <sl-button variant="default" loading>Default</sl-button>
 <sl-button variant="primary" loading>Primary</sl-button>
-<sl-button variant="success" loading>Success</sl-button>
-<sl-button variant="neutral" loading>Neutral</sl-button>
 <sl-button variant="warning" loading>Warning</sl-button>
 <sl-button variant="danger" loading>Danger</sl-button>
 ```
@@ -427,12 +471,6 @@ const App = () => (
     </SlButton>
     <SlButton variant="primary" loading>
       Primary
-    </SlButton>
-    <SlButton variant="success" loading>
-      Success
-    </SlButton>
-    <SlButton variant="neutral" loading>
-      Neutral
     </SlButton>
     <SlButton variant="warning" loading>
       Warning
@@ -451,8 +489,6 @@ Use the `disabled` attribute to disable a button. Clicks will be suppressed unti
 ```html preview
 <sl-button variant="default" disabled>Default</sl-button>
 <sl-button variant="primary" disabled>Primary</sl-button>
-<sl-button variant="success" disabled>Success</sl-button>
-<sl-button variant="neutral" disabled>Neutral</sl-button>
 <sl-button variant="warning" disabled>Warning</sl-button>
 <sl-button variant="danger" disabled>Danger</sl-button>
 ```
@@ -465,23 +501,12 @@ const App = () => (
     <SlButton variant="default" disabled>
       Default
     </SlButton>
-
     <SlButton variant="primary" disabled>
       Primary
     </SlButton>
-
-    <SlButton variant="success" disabled>
-      Success
-    </SlButton>
-
-    <SlButton variant="neutral" disabled>
-      Neutral
-    </SlButton>
-
     <SlButton variant="warning" disabled>
       Warning
     </SlButton>
-
     <SlButton variant="danger" disabled>
       Danger
     </SlButton>
@@ -492,6 +517,8 @@ const App = () => (
 ### Styling Buttons
 
 This example demonstrates how to style buttons using a custom class. This is the recommended approach if you need to add additional variations. To customize an existing variation, modify the selector to target the button's `variant` attribute instead of a class (e.g. `sl-button[variant="primary"]`).
+
+**Teamshares note: In general, you shouldn't need to do this. If you are working on a design that requires custom styling, please ensure that there's not a standard button in the design system that would work instead.**
 
 ```html preview
 <sl-button class="pink">Pink Button</sl-button>
