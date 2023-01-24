@@ -1,8 +1,5 @@
-/* stylelint-disable */
-/* stylelint-enable */
 :host,
-:root,
-sp-theme {
+:root {
   /** ****** **/
   /** Colors **/
   /** ****** **/
@@ -197,8 +194,7 @@ sp-theme {
 }
 
 :host,
-:root,
-sp-theme {
+:root {
   --ts-font-sans: Inter, Helvetica, Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --ts-font-serif: 'DM Serif Display', Georgia, Times, serif;
   --ts-font-mono: 'SFMono-Regular', Menlo, monospace;
@@ -255,8 +251,7 @@ sp-theme {
 }
 
 :host,
-:root,
-sp-theme {
+:root {
   /** ************* **/
   /** Miscellaneous **/
   /** ************* **/
@@ -290,28 +285,8 @@ sp-theme {
   /* 40px */
   --ts-input-height-large: 3rem;
   /* 48px */
-  --ts-input-height-xlarge: 4rem;
+  --ts-input-height-x-large: 4rem;
   /* 64px */
-}
-
-.sl-scroll-lock {
-  overflow: hidden !important;
-}
-
-.sl-toast-stack {
-  position: fixed;
-  top: 0;
-  inset-inline-end: 0;
-  z-index: var(--sl-z-index-toast);
-  width: 28rem;
-  max-width: 100%;
-  max-height: 100%;
-  overflow: auto;
-}
-
-.sl-toast-stack sl-alert {
-  --box-shadow: var(--sl-shadow-large);
-  margin: var(--sl-spacing-medium);
 }
 
 :root,
@@ -377,6 +352,13 @@ sp-theme {
   color-scheme: light;
 }
 
+
+/** ******************************** */
+/** ******************************** */
+/** Global Overrides                 */
+/** ******************************** */
+/** ******************************** */
+
 :root,
 :host,
 .sl-theme-light {
@@ -406,10 +388,12 @@ sp-theme {
   --sl-input-height-small: var(--ts-input-height-small);
   --sl-input-height-medium: var(--ts-input-height-medium);
   --sl-input-height-large: var(--ts-input-height-large);
+  --sl-input-height-x-large: var(--ts-input-height-x-large);
   /* Input border radius */
   --sl-input-border-radius-small: var(--sl-border-radius-small);
   --sl-input-border-radius-medium: var(--sl-border-radius-large);
   --sl-input-border-radius-large: var(--sl-border-radius-large);
+  --sl-input-border-radius-x-large: var(--sl-border-radius-x-large);
   /* Input border colors */
   --sl-input-border-color: var(--sl-color-neutral-400);
   --sl-input-border-color-hover: var(--sl-color-neutral-400);
@@ -432,39 +416,54 @@ sp-theme {
   --sl-panel-border-width: 1px;
 }
 
-:root sl-input[type],
-:root sl-input[multiple],
-:root sl-input textarea,
-:root sl-input select sl-input,
-:host sl-input[type],
-:host sl-input[multiple],
-:host sl-input textarea,
-:host sl-input select sl-input,
-.sl-theme-light sl-input[type],
-.sl-theme-light sl-input[multiple],
-.sl-theme-light sl-input textarea,
-.sl-theme-light sl-input select sl-input {
+sl-input[type],
+sl-input[multiple],
+sl-input textarea,
+sl-input select sl-input {
   border-width: 0;
   padding: initial;
 }
 
-:root sl-icon[type],
-:host sl-icon[type],
-.sl-theme-light sl-icon[type] {
+sl-icon[type] {
   border-width: 0;
 }
 
-:root sl-menu,
-:host sl-menu,
-.sl-theme-light sl-menu {
+sl-menu {
   border: solid var(--sl-panel-border-color) var(--sl-panel-border-width);
 }
 
-:root sl-divider,
-:host sl-divider,
-.sl-theme-light sl-divider {
+sl-divider {
   border-top: solid var(--sl-panel-border-color) var(--sl-panel-border-width);
 }
+
+sl-select[multiple] {
+  appearance: initial;
+  appearance: initial;
+  appearance: initial;
+  background-color: transparent;
+  border: none;
+  font-size: initial;
+  line-height: initial;
+  padding: 0;
+}
+
+sl-select[multiple]:focus {
+  border-color: initial;
+  box-shadow: initial;
+  outline: initial;
+  outline-offset: initial;
+}
+
+/** ******************************** */
+/** ******************************** */
+/** Component Overrides              */
+/** ******************************** */
+/** ******************************** */
+
+
+/** ******************************** */
+/** Alert */
+/** ******************************** */
 
 sl-alert::part(message) {
   color: var(--ts-color-text-default);
@@ -475,6 +474,11 @@ sl-alert::part(message) {
   /* normal */
   line-height: var(--ts-leading-5);
   /* 1.25rem * 20px */
+}
+
+sl-alert::part(icon) {
+  font-size: 24px;
+  /* Only needed if we use Heroicons outline set */
 }
 
 sl-alert[variant='primary']::part(base) {
@@ -531,6 +535,11 @@ sl-alert::part(close-button__base):active {
   color: var(--sl-color-neutral-900);
 }
 
+
+/** ******************************** */
+/** Button */
+/** ******************************** */
+
 :root,
 :host,
 sl-theme {
@@ -566,24 +575,6 @@ sl-button[variant='default']::part(base):hover {
 sl-button[variant='default']::part(base):active {
   background-color: var(--sl-color-neutral-300);
   border-color: var(--sl-color-neutral-300);
-  color: var(--ts-color-text-default);
-}
-
-sl-button[variant='neutral']::part(base) {
-  background-color: transparent;
-  border-color: var(--sl-color-neutral-400);
-  color: var(--ts-color-text-default);
-}
-
-sl-button[variant='neutral']::part(base):hover {
-  background-color: var(--sl-color-neutral-200);
-  border-color: var(--sl-color-neutral-400);
-  color: var(--ts-color-text-default);
-}
-
-sl-button[variant='neutral']::part(base):active {
-  background-color: var(--sl-color-neutral-300);
-  border-color: var(--sl-color-neutral-400);
   color: var(--ts-color-text-default);
 }
 
@@ -625,8 +616,83 @@ sl-button[variant='danger']::part(base):active {
   border-color: var(--sl-color-danger-700);
 }
 
+/* Custom colors for outline buttons */
 sl-button[outline]::part(base) {
   background-color: transparent;
+}
+
+sl-button[variant='default'][outline]::part(base) {
+  border-color: var(--sl-color-neutral-400);
+}
+
+sl-button[variant='default'][outline]::part(base):hover {
+  background-color: var(--sl-color-neutral-200);
+  border-color: var(--sl-color-neutral-400);
+}
+
+sl-button[variant='default'][outline]::part(base):active {
+  background-color: var(--sl-color-neutral-300);
+  border-color: var(--sl-color-neutral-400);
+}
+
+sl-button[variant='primary'][outline]::part(label),
+sl-button[variant='primary'][outline]::part(prefix),
+sl-button[variant='primary'][outline]::part(suffix) {
+  color: var(--sl-color-primary-600);
+}
+
+sl-button[variant='primary'][outline]::part(base) {
+  border-color: var(--sl-color-primary-200);
+}
+
+sl-button[variant='primary'][outline]::part(base):hover {
+  background-color: var(--sl-color-primary-50);
+  border-color: var(--sl-color-primary-200);
+}
+
+sl-button[variant='primary'][outline]::part(base):active {
+  background-color: var(--sl-color-primary-100);
+  border-color: var(--sl-color-primary-200);
+}
+
+sl-button[variant='warning'][outline]::part(label),
+sl-button[variant='warning'][outline]::part(prefix),
+sl-button[variant='warning'][outline]::part(suffix) {
+  color: var(--sl-color-warning-800);
+}
+
+sl-button[variant='warning'][outline]::part(base) {
+  border-color: var(--sl-color-warning-400);
+}
+
+sl-button[variant='warning'][outline]::part(base):hover {
+  background-color: var(--sl-color-warning-100);
+  border-color: var(--sl-color-warning-400);
+}
+
+sl-button[variant='warning'][outline]::part(base):active {
+  background-color: var(--sl-color-warning-200);
+  border-color: var(--sl-color-warning-400);
+}
+
+sl-button[variant='danger'][outline]::part(label),
+sl-button[variant='danger'][outline]::part(prefix),
+sl-button[variant='danger'][outline]::part(suffix) {
+  color: var(--sl-color-danger-800);
+}
+
+sl-button[variant='danger'][outline]::part(base) {
+  border-color: var(--sl-color-danger-200);
+}
+
+sl-button[variant='danger'][outline]::part(base):hover {
+  background-color: var(--sl-color-danger-100);
+  border-color: var(--sl-color-danger-200);
+}
+
+sl-button[variant='danger'][outline]::part(base):active {
+  background-color: var(--sl-color-danger-300);
+  border-color: var(--sl-color-danger-200);
 }
 
 /** ********** **/
@@ -681,32 +747,92 @@ sl-button.no-gap {
   margin: 0;
 }
 
-/** ********** **/
-/* Button custom size, x-large */
-/** ********** **/
-sl-button.x-large::part(base) {
-  height: var(--sl-spacing-4x-large);
-  /* 64px */
-  padding: 0 var(--sl-spacing-2x-large);
-  /* 32px */
-}
-
-sl-button.x-large::part(label) {
-  font-size: var(--ts-font-base);
-  /* 16px */
-  line-height: calc(var(--sl-spacing-4x-large) - var(--sl-input-border-width) * 2);
-}
-
-sl-button.x-large::part(caret),
-sl-button.x-large::part(prefix),
-sl-button.x-large::part(suffix) {
-  font-size: var(--ts-font-2xl);
-  /* 24px */
-}
+/** ******************************** */
+/** Card */
+/** ******************************** */
 
 sl-card {
   --border-color: var(--sl-color-neutral-300);
 }
+
+
+/** ******************************** */
+/** Colors */
+/** ******************************** */
+
+
+:root,
+:host,
+.sl-theme-light {
+  --sl-color-primary-50: var(--ts-color-primary-50);
+  --sl-color-primary-100: var(--ts-color-primary-100);
+  --sl-color-primary-200: var(--ts-color-primary-200);
+  --sl-color-primary-300: var(--ts-color-primary-300);
+  --sl-color-primary-400: var(--ts-color-primary-400);
+  --sl-color-primary-500: var(--ts-color-primary-500);
+  --sl-color-primary-600: var(--ts-color-primary-600);
+  --sl-color-primary-700: var(--ts-color-primary-700);
+  --sl-color-primary-800: var(--ts-color-primary-800);
+  --sl-color-primary-900: var(--ts-color-primary-900);
+  --sl-color-primary-950: var(--ts-color-primary-950);
+
+  --sl-color-success-50: var(--ts-color-success-50);
+  --sl-color-success-100: var(--ts-color-success-100);
+  --sl-color-success-200: var(--ts-color-success-200);
+  --sl-color-success-300: var(--ts-color-success-300);
+  --sl-color-success-400: var(--ts-color-success-400);
+  --sl-color-success-500: var(--ts-color-success-500);
+  --sl-color-success-600: var(--ts-color-success-600);
+  --sl-color-success-700: var(--ts-color-success-700);
+  --sl-color-success-800: var(--ts-color-success-800);
+  --sl-color-success-900: var(--ts-color-success-900);
+  --sl-color-success-950: var(--ts-color-success-950);
+
+  --sl-color-warning-50: var(--ts-color-warning-50);
+  --sl-color-warning-100: var(--ts-color-warning-100);
+  --sl-color-warning-200: var(--ts-color-warning-200);
+  --sl-color-warning-300: var(--ts-color-warning-300);
+  --sl-color-warning-400: var(--ts-color-warning-400);
+  --sl-color-warning-500: var(--ts-color-warning-500);
+  --sl-color-warning-600: var(--ts-color-warning-600);
+  --sl-color-warning-700: var(--ts-color-warning-700);
+  --sl-color-warning-800: var(--ts-color-warning-800);
+  --sl-color-warning-900: var(--ts-color-warning-900);
+  --sl-color-warning-950: var(--ts-color-warning-950);
+
+  --sl-color-danger-50: var(--ts-color-danger-50);
+  --sl-color-danger-100: var(--ts-color-danger-100);
+  --sl-color-danger-200: var(--ts-color-danger-200);
+  --sl-color-danger-300: var(--ts-color-danger-300);
+  --sl-color-danger-400: var(--ts-color-danger-400);
+  --sl-color-danger-500: var(--ts-color-danger-500);
+  --sl-color-danger-600: var(--ts-color-danger-600);
+  --sl-color-danger-700: var(--ts-color-danger-700);
+  --sl-color-danger-800: var(--ts-color-danger-800);
+  --sl-color-danger-900: var(--ts-color-danger-900);
+  --sl-color-danger-950: var(--ts-color-danger-950);
+
+  --sl-color-neutral-50: var(--ts-color-neutral-50);
+  --sl-color-neutral-100: var(--ts-color-neutral-100);
+  --sl-color-neutral-200: var(--ts-color-neutral-200);
+  --sl-color-neutral-300: var(--ts-color-neutral-300);
+  --sl-color-neutral-400: var(--ts-color-neutral-400);
+  --sl-color-neutral-500: var(--ts-color-neutral-500);
+  --sl-color-neutral-600: var(--ts-color-neutral-600);
+  --sl-color-neutral-700: var(--ts-color-neutral-700);
+  --sl-color-neutral-800: var(--ts-color-neutral-800);
+  --sl-color-neutral-900: var(--ts-color-neutral-900);
+  --sl-color-neutral-950: var(--ts-color-neutral-950);
+
+  --sl-color-neutral-0: var(--ts-color-white);
+  --sl-color-neutral-1000: var(--ts-color-black);
+
+  color-scheme: light;
+}
+
+/** ******************************** */
+/** Details */
+/** ******************************** */
 
 sl-details::part(base) {
   border: 1px solid var(--sl-color-neutral-300);
@@ -721,6 +847,10 @@ sl-details.card-shadow::part(base) {
 sl-details.no-border::part(base) {
   border: 0;
 }
+
+/** ******************************** */
+/** Dialog */
+/** ******************************** */
 
 sl-dialog {
   --body-spacing: 0 16px;
@@ -787,12 +917,12 @@ sl-dialog.small::part(body) {
     max-height: 90vh;
   }
 
-  sl-dialog.has-icon > div {
+  sl-dialog.has-icon>div {
     display: flex;
     flex-direction: column;
   }
 
-  sl-dialog.has-icon > div > :first-child {
+  sl-dialog.has-icon>div> :first-child {
     margin-bottom: var(--sl-spacing-medium);
     /* 16px */
   }
@@ -817,12 +947,12 @@ sl-dialog.small::part(body) {
     --header-spacing: 32px 0 16px 24px;
   }
 
-  sl-dialog.has-icon > div {
+  sl-dialog.has-icon>div {
     align-items: center;
     display: flex;
   }
 
-  sl-dialog.has-icon > div * {
+  sl-dialog.has-icon>div * {
     margin-right: var(--sl-spacing-medium);
     /* 16px */
   }
@@ -840,6 +970,7 @@ sl-dialog.small::part(body) {
   }
 
   /* Dialog widths, only apply at > 401px */
+
   sl-dialog {
     --width: 480px;
   }
@@ -853,14 +984,24 @@ sl-dialog.small::part(body) {
   }
 }
 
+/** ******************************** */
+/** Divider */
+/** ******************************** */
+
 sl-divider {
   --color: var(--sl-color-neutral-300);
 }
 
+/** ******************************** */
+/** Drawer */
+/** ******************************** */
 sl-drawer::part(panel) {
   border-radius: 0;
 }
 
+/** ******************************** */
+/** Forms */
+/** ******************************** */
 :root,
 :host,
 sl-theme {
@@ -948,6 +1089,9 @@ sl-range::part(input) {
   padding: 0;
 }
 
+/** ******************************** */
+/** Icon */
+/** ******************************** */
 sl-icon.info::part(base) {
   color: var(--ts-color-text-info);
 }
@@ -1001,17 +1145,15 @@ sl-dialog::part(close-button__base):active {
   color: var(--ts-color-text-default);
 }
 
+/** ******************************** */
+/** Menu */
+/** ******************************** */
 /** ********** **/
 /* Menu panel styling */
 /** ********** **/
 ::part(panel) {
   border-radius: var(--sl-border-radius-large);
   box-shadow: var(--sl-shadow-medium);
-}
-
-/* Control gap between select & menu panel */
-sl-select::part(menu) {
-  margin-top: var(--sl-spacing-x-small);
 }
 
 /* Control gap between dropdown & menu panel */
@@ -1047,7 +1189,6 @@ sl-menu-item::part(label) {
   font-size: var(--sl-font-size-small);
   line-height: var(--ts-leading-5);
 }
-
 
 /** ********** **/
 /* Menu label styling */
