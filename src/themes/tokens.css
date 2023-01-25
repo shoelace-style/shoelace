@@ -352,7 +352,6 @@
   color-scheme: light;
 }
 
-
 /** ******************************** */
 /** ******************************** */
 /** Global Overrides                 */
@@ -460,7 +459,6 @@ sl-select[multiple]:focus {
 /** ******************************** */
 /** ******************************** */
 
-
 /** ******************************** */
 /** Alert */
 /** ******************************** */
@@ -534,7 +532,6 @@ sl-alert::part(close-button__base):hover {
 sl-alert::part(close-button__base):active {
   color: var(--sl-color-neutral-900);
 }
-
 
 /** ******************************** */
 /** Button */
@@ -755,11 +752,9 @@ sl-card {
   --border-color: var(--sl-color-neutral-300);
 }
 
-
 /** ******************************** */
 /** Colors */
 /** ******************************** */
-
 
 :root,
 :host,
@@ -917,12 +912,12 @@ sl-dialog.small::part(body) {
     max-height: 90vh;
   }
 
-  sl-dialog.has-icon>div {
+  sl-dialog.has-icon > div {
     display: flex;
     flex-direction: column;
   }
 
-  sl-dialog.has-icon>div> :first-child {
+  sl-dialog.has-icon > div > :first-child {
     margin-bottom: var(--sl-spacing-medium);
     /* 16px */
   }
@@ -947,12 +942,12 @@ sl-dialog.small::part(body) {
     --header-spacing: 32px 0 16px 24px;
   }
 
-  sl-dialog.has-icon>div {
+  sl-dialog.has-icon > div {
     align-items: center;
     display: flex;
   }
 
-  sl-dialog.has-icon>div * {
+  sl-dialog.has-icon > div * {
     margin-right: var(--sl-spacing-medium);
     /* 16px */
   }
