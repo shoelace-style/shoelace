@@ -5,6 +5,7 @@
  */
 
 .sl-scroll-lock {
+  padding-right: var(--sl-scroll-lock-size) !important;
   overflow: hidden !important;
 }
 

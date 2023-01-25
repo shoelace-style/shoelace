@@ -26,6 +26,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @slot - The drawer's main content.
  * @slot label - The drawer's label. Alternatively, you can use the `label` attribute.
+ * @slot header-actions - Optional actions to add to the header. Works best with `<sl-icon-button>`.
  * @slot footer - The drawer's footer, usually one or more buttons representing various options.
  *
  * @event sl-show - Emitted when the drawer opens.

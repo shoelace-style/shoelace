@@ -58,23 +58,25 @@ declare const EyeDropper: EyeDropperConstructor;
  * @csspart swatch - Each individual swatch.
  * @csspart grid - The color grid.
  * @csspart grid-handle - The color grid's handle.
- * @csspart hue-slider - The hue slider.
- * @csspart opacity-slider - The opacity slider.
  * @csspart slider - Hue and opacity sliders.
  * @csspart slider-handle - Hue and opacity slider handles.
+ * @csspart hue-slider - The hue slider.
+ * @csspart hue-slider-handle - The hue slider's handle.
+ * @csspart opacity-slider - The opacity slider.
+ * @csspart opacity-slider-handle - The opacity slider's handle.
  * @csspart preview - The preview color.
  * @csspart input - The text input.
  * @csspart eye-dropper-button - The eye dropper button.
- * @csspart eye-dropper-button__button - The eye dropper button's exported `button` part.
+ * @csspart eye-dropper-button__base - The eye dropper button's exported `button` part.
  * @csspart eye-dropper-button__prefix - The eye dropper button's exported `prefix` part.
  * @csspart eye-dropper-button__label - The eye dropper button's exported `label` part.
- * @csspart eye-dropper-button__button-suffix - The eye dropper button's exported `suffix` part.
+ * @csspart eye-dropper-button__suffix - The eye dropper button's exported `suffix` part.
  * @csspart eye-dropper-button__caret - The eye dropper button's exported `caret` part.
  * @csspart format-button - The format button.
- * @csspart format-button__button - The format button's exported `button` part.
+ * @csspart format-button__base - The format button's exported `button` part.
  * @csspart format-button__prefix - The format button's exported `prefix` part.
  * @csspart format-button__label - The format button's exported `label` part.
- * @csspart format-button__button-suffix - The format button's exported `suffix` part.
+ * @csspart format-button__suffix - The format button's exported `suffix` part.
  * @csspart format-button__caret - The format button's exported `caret` part.
  *
  * @cssproperty --grid-width - The width of the color grid.
@@ -90,7 +92,6 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
 
   private readonly formControlController = new FormControlController(this);
   private isSafeValue = false;
-  private lastValueEmitted: string;
   private readonly localize = new LocalizeController(this);
 
   @query('[part~="input"]') input: SlInput;
@@ -167,21 +168,6 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
    * the same document or shadow root for this to work.
    */
   @property({ reflect: true }) form = '';
-
-  connectedCallback() {
-    super.connectedCallback();
-
-    if (this.value) {
-      this.setColor(this.value);
-      this.inputValue = this.value;
-      this.lastValueEmitted = this.value;
-      this.syncValues();
-    } else {
-      this.isEmpty = true;
-      this.inputValue = '';
-      this.lastValueEmitted = '';
-    }
-  }
 
   private handleCopy() {
     this.input.select();
@@ -626,7 +612,8 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
       this.brightness = 100;
       this.alpha = 100;
     }
-    if (!this.isSafeValue && oldValue !== undefined) {
+
+    if (!this.isSafeValue) {
       const newColor = this.parseColor(newValue);
 
       if (newColor !== null) {
@@ -635,13 +622,10 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
         this.saturation = newColor.hsva.s;
         this.brightness = newColor.hsva.v;
         this.alpha = newColor.hsva.a * 100;
+        this.syncValues();
       } else {
-        this.inputValue = oldValue;
+        this.inputValue = oldValue ?? '';
       }
-    }
-
-    if (this.value !== this.lastValueEmitted) {
-      this.lastValueEmitted = this.value;
     }
   }
 
@@ -761,7 +745,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
               @touchmove=${this.handleTouchMove}
             >
               <span
-                part="slider-handle"
+                part="slider-handle hue-slider-handle"
                 class="color-picker__slider-handle"
                 style=${styleMap({
                   left: `${this.hue === 0 ? 0 : 100 / (360 / this.hue)}%`
@@ -796,7 +780,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
                       })}
                     ></div>
                     <span
-                      part="slider-handle"
+                      part="slider-handle opacity-slider-handle"
                       class="color-picker__slider-handle"
                       style=${styleMap({
                         left: `${this.alpha}%`

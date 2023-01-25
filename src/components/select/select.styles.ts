@@ -56,11 +56,16 @@ export default css`
     font: inherit;
     border: none;
     background: none;
+    color: var(--sl-input-color);
     cursor: inherit;
     overflow: hidden;
     padding: 0;
     margin: 0;
     -webkit-appearance: none;
+  }
+
+  .select:not(.select--disabled):hover .select__display-input {
+    color: var(--sl-input-color-hover);
   }
 
   .select__display-input:focus {
