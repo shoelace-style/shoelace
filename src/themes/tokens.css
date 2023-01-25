@@ -1027,10 +1027,12 @@ sl-theme {
   /* normal */
   line-height: var(--ts-leading-5);
   /* 1.25rem * 20px */
+  margin-top: var(--sl-spacing-x-small);
+  /* .5rem * 8px */
 }
 
 ::part(form-control-input) {
-  margin: var(--sl-spacing-2x-small) 0 var(--sl-spacing-x-small);
+  margin: var(--sl-spacing-2x-small) 0 0;
 }
 
 ::part(input),
