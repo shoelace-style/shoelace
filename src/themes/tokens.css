@@ -1231,6 +1231,14 @@ sl-option:active::part(base) {
   color: var(--ts-color-text-default);
 }
 
+sl-option::part(checked-icon) {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg width='16' height='16' viewBox='0 0 20 20' fill='currentColor' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z' fill='%232e333c' stroke='none'/%3E%3C/svg%3E");
+  background-position: center;
+  background-repeat: no-repeat;
+  color: transparent;
+  padding-right: var(--sl-spacing-x-small);
+}
+
 sl-option::part(label) {
   font-size: var(--sl-font-size-small);
   line-height: var(--ts-leading-5);
