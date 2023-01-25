@@ -1206,11 +1206,12 @@ sl-select::part(listbox) {
 /* Option styling */
 /** ********** **/
 sl-option::part(base) {
+  color: var(--ts-color-text-default);
   padding: var(--sl-spacing-x-small) var(--sl-spacing-2x-small);
 }
 
-sl-option::part(base):not(.option--selected),
-sl-option::part(base):not(.option--current) {
+sl-option[tabindex="0"]::part(base) {
+  background-color: var(--sl-color-neutral-100);
   color: var(--ts-color-text-default);
 }
 
