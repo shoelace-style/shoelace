@@ -50,8 +50,8 @@ export default css`
     opacity: 0;
   }
 
-  :host([play]) slot[name='play-icon'],
-  :host(:not([play])) slot[name='pause-icon'] {
+  :host([play]) slot[name='pause-icon'],
+  :host(:not([play])) slot[name='play-icon'] {
     display: none;
   }
 `;
