@@ -7,11 +7,10 @@
 
 - Getting Started
 
-  - [Teamshares](/getting-started/teamshares)
   - [Overview](/)
   <!-- - [Installation](/getting-started/installation) -->
   - [Usage](/getting-started/usage)
-  - [Themes](/getting-started/themes)
+  <!-- - [Themes](/getting-started/themes) -->
   - [Customizing](/getting-started/customizing)
   - [Form Controls](/getting-started/form-controls)
   - [Localization](/getting-started/localization)
