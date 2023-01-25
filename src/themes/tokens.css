@@ -1091,9 +1091,21 @@ sl-radio::part(base) {
 /** ********** **/
 /* Switch & range */
 /** ********** **/
-sl-switch {
-  --height: calc(var(--sl-toggle-size) + 6px);
-  --thumb-size: calc(var(--sl-toggle-size) + 4px);
+sl-switch[size='small'] {
+  --height: calc(var(--sl-toggle-size-small) + 6px);
+  --thumb-size: calc(var(--sl-toggle-size-small) + 4px);
+  --width: calc(var(--height) * 1.8);
+}
+
+sl-switch[size='medium'] {
+  --height: calc(var(--sl-toggle-size-medium) + 6px);
+  --thumb-size: calc(var(--sl-toggle-size-medium) + 4px);
+  --width: calc(var(--height) * 1.8);
+}
+
+sl-switch[size='large'] {
+  --height: calc(var(--sl-toggle-size-large) + 6px);
+  --thumb-size: calc(var(--sl-toggle-size-large) + 4px);
   --width: calc(var(--height) * 1.8);
 }
 
