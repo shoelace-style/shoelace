@@ -298,13 +298,13 @@ const App = () => (
 
 ### Split Buttons
 
-Create a split button using a button and a dropdown. Use a [visually hidden](/components/visually-hidden) label to ensure the dropdown is accessible to users with assistive devices.
+Create a split button using a button and a dropdown. Use a [visually hidden](/components/visually-hidden) label to ensure the dropdown is accessible to users with assistive devices. Also use a `no-pad-l` class to remove extra padding from the caret button.
 
 ```html preview
 <sl-button-group label="Example Button Group">
   <sl-button variant="primary">Save</sl-button>
   <sl-dropdown placement="bottom-end">
-    <sl-button slot="trigger" variant="primary" caret>
+    <sl-button class="no-pad-l" slot="trigger" variant="primary" caret>
       <sl-visually-hidden>More options</sl-visually-hidden>
     </sl-button>
     <sl-menu>
@@ -323,7 +323,7 @@ const App = () => (
   <SlButtonGroup label="Example Button Group">
     <SlButton variant="primary">Save</SlButton>
     <SlDropdown placement="bottom-end">
-      <SlButton slot="trigger" variant="primary" caret></SlButton>
+      <SlButton class="no-pad-l" slot="trigger" variant="primary" caret></SlButton>
       <SlMenu>
         <SlMenuItem>Save</SlMenuItem>
         <SlMenuItem>Save as&hellip;</SlMenuItem>
