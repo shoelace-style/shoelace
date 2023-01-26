@@ -7,7 +7,7 @@
 ```
 
 ```jsx react
-import { SlColorPicker } from '@shoelace-style/shoelace/dist/react';
+import { SlColorPicker } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlColorPicker label="Select a color" />;
 ```
@@ -25,7 +25,7 @@ Use the `value` attribute to set an initial value for the color picker.
 ```
 
 ```jsx react
-import { SlColorPicker } from '@shoelace-style/shoelace/dist/react';
+import { SlColorPicker } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlColorPicker value="#4a90e2" label="Select a color" />;
 ```
@@ -39,7 +39,7 @@ Use the `opacity` attribute to enable the opacity slider. When this is enabled, 
 ```
 
 ```jsx react
-import { SlColorPicker } from '@shoelace-style/shoelace/dist/react';
+import { SlColorPicker } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlColorPicker opacity label="Select a color" />;
 ```
@@ -58,7 +58,7 @@ To prevent users from toggling the format themselves, add the `no-format-toggle`
 ```
 
 ```jsx react
-import { SlColorPicker } from '@shoelace-style/shoelace/dist/react';
+import { SlColorPicker } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <>
@@ -85,7 +85,7 @@ Use the `swatches` attribute to add convenient presets to the color picker. Any 
 ```
 
 ```jsx react
-import { SlColorPicker } from '@shoelace-style/shoelace/dist/react';
+import { SlColorPicker } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlColorPicker
@@ -109,7 +109,7 @@ Use the `size` attribute to change the color picker's trigger size.
 ```
 
 ```jsx react
-import { SlColorPicker } from '@shoelace-style/shoelace/dist/react';
+import { SlColorPicker } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <>
@@ -129,7 +129,7 @@ The color picker can be rendered inline instead of in a dropdown using the `inli
 ```
 
 ```jsx react
-import { SlColorPicker } from '@shoelace-style/shoelace/dist/react';
+import { SlColorPicker } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlColorPicker inline label="Select a color" />;
 ```

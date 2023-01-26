@@ -8,7 +8,7 @@
 - Getting Started
 
   - [Overview](/)
-  <!-- - [Installation](/getting-started/installation) -->
+  - [Installation](/getting-started/installation)
   - [Usage](/getting-started/usage)
   <!-- - [Themes](/getting-started/themes) -->
   - [Customizing](/getting-started/customizing)

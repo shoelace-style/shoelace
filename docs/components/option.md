@@ -11,7 +11,7 @@
 ```
 
 ```jsx react
-import { SlOption, SlSelect } from '@shoelace-style/shoelace/dist/react';
+import { SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlSelect>
@@ -37,7 +37,7 @@ Use the `disabled` attribute to disable an option and prevent it from being sele
 ```
 
 ```jsx react
-import { SlOption, SlSelect } from '@shoelace-style/shoelace/dist/react';
+import { SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlSelect>

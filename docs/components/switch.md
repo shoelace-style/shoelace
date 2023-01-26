@@ -7,7 +7,7 @@
 ```
 
 ```jsx react
-import { SlSwitch } from '@shoelace-style/shoelace/dist/react';
+import { SlSwitch } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlSwitch>Switch</SlSwitch>;
 ```
@@ -25,7 +25,7 @@ Use the `checked` attribute to activate the switch.
 ```
 
 ```jsx react
-import { SlSwitch } from '@shoelace-style/shoelace/dist/react';
+import { SlSwitch } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlSwitch checked>Checked</SlSwitch>;
 ```
@@ -39,7 +39,7 @@ Use the `disabled` attribute to disable the switch.
 ```
 
 ```jsx react
-import { SlSwitch } from '@shoelace-style/shoelace/dist/react';
+import { SlSwitch } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlSwitch disabled>Disabled</SlSwitch>;
 ```
@@ -57,7 +57,7 @@ Use the `size` attribute to change a switch's size.
 ```
 
 ```jsx react
-import { SlSwitch } from '@shoelace-style/shoelace/dist/react';
+import { SlSwitch } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <>
@@ -79,7 +79,7 @@ Use the available custom properties to change how the switch is styled.
 ```
 
 ```jsx react
-import { SlSwitch } from '@shoelace-style/shoelace/dist/react';
+import { SlSwitch } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlSwitch

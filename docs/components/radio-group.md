@@ -11,7 +11,7 @@
 ```
 
 ```jsx react
-import { SlRadio, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
+import { SlRadio, SlRadioGroup } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlRadioGroup label="Select an option" name="a" value="1">
@@ -37,7 +37,7 @@ Add descriptive help text to a radio group with the `help-text` attribute. For h
 ```
 
 ```jsx react
-import { SlRadio, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
+import { SlRadio, SlRadioGroup } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlRadioGroup label="Select an option" help-text="Choose the most appropriate option." name="a" value="1">
@@ -61,7 +61,7 @@ const App = () => (
 ```
 
 ```jsx react
-import { SlRadioButton, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
+import { SlRadioButton, SlRadioGroup } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlRadioGroup label="Select an option" name="a" value="1">
@@ -85,7 +85,7 @@ Radios and radio buttons can be disabled by adding the `disabled` attribute to t
 ```
 
 ```jsx react
-import { SlRadio, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
+import { SlRadio, SlRadioGroup } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlRadioGroup label="Select an option" name="a" value="1">
@@ -125,7 +125,7 @@ Setting the `required` attribute to make selecting an option mandatory. If a val
 ```
 
 ```jsx react
-import { SlButton, SlIcon, SlRadio, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
+import { SlButton, SlIcon, SlRadio, SlRadioGroup } from '@teamshares/shoelace/dist/react';
 const App = () => {
   function handleSubmit(event) {
     event.preventDefault();
@@ -195,7 +195,7 @@ Use the `setCustomValidity()` method to set a custom validation message. This wi
 
 ```jsx react
 import { useEffect, useRef } from 'react';
-import { SlButton, SlIcon, SlRadio, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
+import { SlButton, SlIcon, SlRadio, SlRadioGroup } from '@teamshares/shoelace/dist/react';
 const App = () => {
   const radioGroup = useRef(null);
   const errorMessage = 'You must choose this option';

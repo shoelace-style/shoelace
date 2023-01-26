@@ -9,7 +9,7 @@ For a full list of icons that come bundled with Shoelace, refer to the [icon com
 ```
 
 ```jsx react
-import { SlIconButton } from '@shoelace-style/shoelace/dist/react';
+import { SlIconButton } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlIconButton name="cog-6-tooth" label="Settings" />;
 ```
@@ -27,7 +27,7 @@ Icon buttons inherit their parent element's `font-size`.
 ```
 
 ```jsx react
-import { SlIconButton } from '@shoelace-style/shoelace/dist/react';
+import { SlIconButton } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <>
@@ -66,7 +66,7 @@ Icon buttons are designed to have a uniform appearance, so their color is not in
 ```
 
 ```jsx react
-import { SlIconButton } from '@shoelace-style/shoelace/dist/react';
+import { SlIconButton } from '@teamshares/shoelace/dist/react';
 
 const css = `
   .icon-button-color sl-icon-button::part(base) {
@@ -105,7 +105,7 @@ Use the `href` attribute to convert the button to a link.
 ```
 
 ```jsx react
-import { SlIconButton } from '@shoelace-style/shoelace/dist/react';
+import { SlIconButton } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlIconButton name="cog-6-tooth" label="Settings" href="https://example.com" target="_blank" />;
 ```
@@ -121,7 +121,7 @@ Wrap a tooltip around an icon button to provide contextual information to the us
 ```
 
 ```jsx react
-import { SlIconButton, SlTooltip } from '@shoelace-style/shoelace/dist/react';
+import { SlIconButton, SlTooltip } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlTooltip content="Settings">
@@ -139,7 +139,7 @@ Use the `disabled` attribute to disable the icon button.
 ```
 
 ```jsx react
-import { SlIconButton } from '@shoelace-style/shoelace/dist/react';
+import { SlIconButton } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlIconButton name="cog-6-tooth" label="Settings" disabled />;
 ```

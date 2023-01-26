@@ -1,37 +1,68 @@
 # Contributing
 
-Coming soon
-
-<!-- Shoelace is straightforward to install and run on your local machine.
+Want to contribute to the Teamshares design system? Shoelace is straightforward to install and run on your local machine.
 
 ## Installation
 
-If you have issues running `npm i` when installing Shoelace locally, try
+If you have a new project and you want to start playing with our fork of Shoelace, you can add it to any page very easily via [linking from the CDN](/getting-started/installation?id=cdn-installation-easiest). If you're planning to contribute, you'll need to install and run it locally. Follow the "Local installation" instructions under [Installation](/getting-started/installation?id=local-installation).
 
-`rm -rf node_modules/ && yarn cache clean`
+Once you have Shoelace installed, running it locally is as simple as
 
-### Connecting your local Shoelace instance to a local Teamshares app
+```bash
+npm start
+```
 
-Within the Shoelace directory in your console:
+## Making changes
 
-`yarn link`
+Documentation is built directly into Shoelace, so you only need to update the markdown pages under `docs` if you're adding or changing functionality. The site should refresh automatically as you make changes.
 
-`npm run build` (rerun this after every change)
+Unless you're one of the core DS engineers, most of what you'll be doing in Shoelace will probably involve styling. Styles in Shoelace components are found in `src/components/[component].styles.ts`. Make sure that any styling changes you want to make have been approved by the design system designers and will work across all our apps.
 
-On Teamshares UI:
+Once you're happy with your changes, you can push your changes up to a branch and make a PR for review. (If you don't know what this means or how to do it, you probably shouldn't be editing the code directly.) **Please _DO NOT_ push your changes directly into the `next` branch!**
 
-`yarn link @teamshares/shoelace`
+## Connecting to a local Teamshares app
 
-`yarn install —force`
+**Note: These instructions should only apply to a small number of core design system engineers.**
 
-On OS app:
+To see your how your changes to Shoelace show up in one of our apps, you'll need to link the running instance of Shoelace to both `shared-ui` and the app itself, then run the production build within Shoelace after each change.
 
-`yarn link @teamshares/ui`
+#### Within the Shoelace directory in your console:
 
-`yarn link @teamshares/shoelace`
+```bash
+yarn link
+npm run build
+```
 
-`yarn install —force`
+#### Within `shared-ui`:
 
-`restart yarn build —watch` (do this after every change)
+```bash
+yarn link @teamshares/shoelace
+yarn install --force
+```
 
-`restart yarn build:css —watch` (do this after every change) -->
+#### Within your Teamshares app:
+
+```bash
+yarn link @teamshares/ui
+yarn link @teamshares/shoelace
+yarn install --force
+```
+
+You can string all the above commands together into a single abomination like so:
+
+```bash
+(cd ../shoelace && npm run build) && (cd ../teamshares-ui && yarn link @teamshares/shoelace && yarn install --force) && yarn link @teamshares/ui && yarn link @teamshares/shoelace && yarn install --force
+```
+
+Once all that is set up, you'll start your app like normal, i.e. `rails server` and `yarn build:all`. After each change in Shoelace, you'll need to run `npm run build` to generate the production build that `shared-ui` picks up. If you're using `yarn build --watch` and `yarn build:css --watch`, you'll need to restart those after each change as well.
+
+### Developer experience improvements
+
+The above setup is far from ideal. We're working on improving that, but in the meantime, you can add the following scripts to your `package.json`:
+
+```
+    "build:sl": "cd ../shoelace && npm run build",
+    "sl-dev": "yarn build:sl && yarn build:all"
+```
+
+This at least gets you the ability to run `sl-dev` and see your latest changes. In the future, we may add an additional script to Shoelace to run the production build and restart the yarn watchers.

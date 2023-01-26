@@ -24,7 +24,7 @@ To animate an element, wrap it in `<sl-animation>` and set an animation `name`. 
 ```
 
 ```jsx react
-import { SlAnimation } from '@shoelace-style/shoelace/dist/react';
+import { SlAnimation } from '@teamshares/shoelace/dist/react';
 
 const css = `
   .animation-overview .box {
@@ -168,7 +168,7 @@ Use an [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/
 
 ```jsx react
 import { useEffect, useRef, useState } from 'react';
-import { SlAnimation } from '@shoelace-style/shoelace/dist/react';
+import { SlAnimation } from '@teamshares/shoelace/dist/react';
 
 const css = `
   .animation-scroll {
@@ -257,7 +257,7 @@ Supply your own [keyframe formats](https://developer.mozilla.org/en-US/docs/Web/
 ```
 
 ```jsx react
-import { SlAnimation } from '@shoelace-style/shoelace/dist/react';
+import { SlAnimation } from '@teamshares/shoelace/dist/react';
 
 const css = `
   .animation-keyframes .box {
@@ -324,7 +324,7 @@ Animations won't play until you apply the `play` attribute. You can omit it init
 
 ```jsx react
 import { useState } from 'react';
-import { SlAnimation, SlButton } from '@shoelace-style/shoelace/dist/react';
+import { SlAnimation, SlButton } from '@teamshares/shoelace/dist/react';
 
 const App = () => {
   const [play, setPlay] = useState(false);

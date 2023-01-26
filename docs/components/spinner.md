@@ -7,7 +7,7 @@
 ```
 
 ```jsx react
-import { SlSpinner } from '@shoelace-style/shoelace/dist/react';
+import { SlSpinner } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlSpinner />;
 ```
@@ -25,7 +25,7 @@ Spinners are sized based on the current font size. To change their size, set the
 ```
 
 ```jsx react
-import { SlSpinner } from '@shoelace-style/shoelace/dist/react';
+import { SlSpinner } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <>
@@ -45,7 +45,7 @@ The width of the spinner's track can be changed by setting the `--track-width` c
 ```
 
 ```jsx react
-import { SlSpinner } from '@shoelace-style/shoelace/dist/react';
+import { SlSpinner } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlSpinner
@@ -66,7 +66,7 @@ The spinner's colors can be changed by setting the `--indicator-color` and `--tr
 ```
 
 ```jsx react
-import { SlSpinner } from '@shoelace-style/shoelace/dist/react';
+import { SlSpinner } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlSpinner

@@ -21,8 +21,8 @@ Designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
 </div>
 </div>
 
-[![jsDelivr](https://data.jsdelivr.com/v1/package/npm/@shoelace-style/shoelace/badge)](https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace)
-[![npm](https://img.shields.io/npm/dw/@shoelace-style/shoelace?label=npm&style=flat-square)](https://www.npmjs.com/package/@shoelace-style/shoelace)
+[![jsDelivr](https://data.jsdelivr.com/v1/package/npm/@teamshares/shoelace/badge)](https://www.jsdelivr.com/package/npm/@teamshares/shoelace)
+[![npm](https://img.shields.io/npm/dw/@teamshares/shoelace?label=npm&style=flat-square)](https://www.npmjs.com/package/@teamshares/shoelace)
 [![License](https://img.shields.io/badge/license-MIT-232323.svg?style=flat-square)](https://github.com/shoelace-style/shoelace/blob/next/LICENSE.md)<br>
 [![Discord](https://img.shields.io/badge/Discord-Join%20the%20chat-5965f2.svg?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/mg8f26C)
 [![Twitter](https://img.shields.io/badge/Twitter-Follow-00acee.svg?style=flat-square&logo=twitter&logoColor=white)](https://twitter.com/shoelace_style)
@@ -33,8 +33,8 @@ Designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
 Add the following code to your page.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/light.css" />
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@teamshares/shoelace@%VERSION%/dist/themes/light.css" />
+<script type="module" src="https://cdn.jsdelivr.net/npm/@teamshares/shoelace@%VERSION%/dist/shoelace.js"></script>
 ```
 
 Now you have access to all of Shoelace's components! Try adding a button:

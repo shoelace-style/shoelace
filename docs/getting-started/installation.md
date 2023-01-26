@@ -9,8 +9,8 @@ If you're using a framework, make sure to check out the pages for [React](/frame
 The easiest way to install Shoelace is with the CDN. Just add the following tags to your page to get all components and the default light theme.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/light.css" />
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@teamshares/shoelace@%VERSION%/dist/themes/light.css" />
+<script type="module" src="https://cdn.jsdelivr.net/npm/@teamshares/shoelace@%VERSION%/dist/shoelace.js"></script>
 ```
 
 ?> If you're only using a handful of components, it will be more efficient to [cherry pick](#cherry-picking) the ones you need.
@@ -20,8 +20,8 @@ The easiest way to install Shoelace is with the CDN. Just add the following tags
 If you prefer to use the [dark theme](/getting-started/themes#dark-theme) instead, use this code and add `<html class="sl-theme-dark">` to the page.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/dark.css" />
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@teamshares/shoelace@%VERSION%/dist/themes/dark.css" />
+<script type="module" src="https://cdn.jsdelivr.net/npm/@teamshares/shoelace@%VERSION%/dist/shoelace.js"></script>
 ```
 
 ### Light & Dark Theme
@@ -32,15 +32,15 @@ If you want to load the light or dark theme based on the user's `prefers-color-s
 <link
   rel="stylesheet"
   media="(prefers-color-scheme:light)"
-  href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/light.css"
+  href="https://cdn.jsdelivr.net/npm/@teamshares/shoelace@%VERSION%/dist/themes/light.css"
 />
 <link
   rel="stylesheet"
   media="(prefers-color-scheme:dark)"
-  href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/dark.css"
+  href="https://cdn.jsdelivr.net/npm/@teamshares/shoelace@%VERSION%/dist/themes/dark.css"
   onload="document.documentElement.classList.add('sl-theme-dark');"
 />
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@teamshares/shoelace@%VERSION%/dist/shoelace.js"></script>
 ```
 
 Now you can [start using Shoelace!](/getting-started/usage)
@@ -50,10 +50,10 @@ Now you can [start using Shoelace!](/getting-started/usage)
 If you don't want to use the CDN, you can install Shoelace locally with the following command.
 
 ```bash
-npm install @shoelace-style/shoelace
+npm install @teamshares/shoelace
 ```
 
-It's up to you to make the source files available to your app. One way to do this is to create a route in your app called `/shoelace` that serves static files from `node_modules/@shoelace-style/shoelace`.
+It's up to you to make the source files available to your app. One way to do this is to create a route in your app called `/shoelace` that serves static files from `node_modules/@teamshares/shoelace`.
 
 Once you've done that, add the following tags to your page. Make sure to update `href` and `src` so they point to the route you created.
 
@@ -64,7 +64,7 @@ Once you've done that, add the following tags to your page. Make sure to update 
 
 Alternatively, [you can use a bundler](#bundling).
 
-?> For clarity, the docs will usually show imports from `@shoelace-style/shoelace`. If you're not using a module resolver or bundler, you'll need to adjust these paths to point to the folder Shoelace is in.
+?> For clarity, the docs will usually show imports from `@teamshares/shoelace`. If you're not using a module resolver or bundler, you'll need to adjust these paths to point to the folder Shoelace is in.
 
 ## Setting the Base Path
 
@@ -79,7 +79,7 @@ However, if you're [cherry picking](#cherry-picking) or [bundling](#bundling) Sh
 <!-- Option 2: the setBasePath() method -->
 <script src="bundle.js"></script>
 <script type="module">
-  import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.js';
+  import { setBasePath } from '@teamshares/shoelace/dist/utilities/base-path.js';
   setBasePath('/path/to/shoelace/dist');
 </script>
 ```
@@ -90,7 +90,7 @@ However, if you're [cherry picking](#cherry-picking) or [bundling](#bundling) Sh
 
 The previous approach is the _easiest_ way to load Shoelace, but easy isn't always efficient. You'll incur the full size of the library even if you only use a handful of components. This is convenient for prototyping or if you're using most of the components, but it may result in longer load times in production. To improve this, you can cherry pick the components you need.
 
-Cherry picking can be done from your local install or [directly from the CDN](https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/). This will limit the number of files the browser has to download and reduce the amount of bytes being transferred. The disadvantage is that you need to load components manually.
+Cherry picking can be done from your local install or [directly from the CDN](https://cdn.jsdelivr.net/npm/@teamshares/shoelace@%VERSION%/). This will limit the number of files the browser has to download and reduce the amount of bytes being transferred. The disadvantage is that you need to load components manually.
 
 Here's an example that loads only the button component. Again, if you're not using a module resolver, you'll need to adjust the path to point to the folder Shoelace is in.
 
@@ -98,7 +98,7 @@ Here's an example that loads only the button component. Again, if you're not usi
 <link rel="stylesheet" href="/path/to/shoelace/dist/themes/light.css" />
 
 <script type="module" data-shoelace="/path/to/shoelace/dist">
-  import '@shoelace-style/shoelace/dist/components/button/button.js';
+  import '@teamshares/shoelace/dist/components/button/button.js';
 
   // <sl-button> is ready to use!
 </script>
@@ -117,23 +117,23 @@ Shoelace is distributed as a collection of standard ES modules that [all modern 
 To use Shoelace with a bundler, first install Shoelace along with your bundler of choice.
 
 ```bash
-npm install @shoelace-style/shoelace
+npm install @teamshares/shoelace
 ```
 
 Now it's time to configure your bundler. Configurations vary for each tool, but here are some examples to help you get started.
 
-- [Example webpack config](https://github.com/shoelace-style/webpack-example/blob/master/webpack.config.js)
-- [Example Rollup config](https://github.com/shoelace-style/rollup-example/blob/master/rollup.config.js)
+- [Example webpack config](https://github.com/teamshares/webpack-example/blob/master/webpack.config.js)
+- [Example Rollup config](https://github.com/teamshares/rollup-example/blob/master/rollup.config.js)
 
 Once your bundler is configured, you'll be able to import Shoelace components and utilities.
 
 ```js
-import '@shoelace-style/shoelace/dist/themes/light.css';
-import '@shoelace-style/shoelace/dist/components/button/button.js';
-import '@shoelace-style/shoelace/dist/components/icon/icon.js';
-import '@shoelace-style/shoelace/dist/components/input/input.js';
-import '@shoelace-style/shoelace/dist/components/rating/rating.js';
-import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.js';
+import '@teamshares/shoelace/dist/themes/light.css';
+import '@teamshares/shoelace/dist/components/button/button.js';
+import '@teamshares/shoelace/dist/components/icon/icon.js';
+import '@teamshares/shoelace/dist/components/input/input.js';
+import '@teamshares/shoelace/dist/components/rating/rating.js';
+import { setBasePath } from '@teamshares/shoelace/dist/utilities/base-path.js';
 
 // Set the base path to the folder you copied Shoelace's assets to
 setBasePath('/path/to/shoelace/dist');
@@ -141,4 +141,4 @@ setBasePath('/path/to/shoelace/dist');
 // <sl-button>, <sl-icon>, <sl-input>, and <sl-rating> are ready to use!
 ```
 
-!> Component modules include side effects for registration purposes. Because of this, importing directly from `@shoelace-style/shoelace` may result in a larger bundle size than necessary. For optimal tree shaking, always cherry pick, i.e. import components and utilities from their respective files, as shown above.
+!> Component modules include side effects for registration purposes. Because of this, importing directly from `@teamshares/shoelace` may result in a larger bundle size than necessary. For optimal tree shaking, always cherry pick, i.e. import components and utilities from their respective files, as shown above.

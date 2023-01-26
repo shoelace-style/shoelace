@@ -10,7 +10,7 @@ Localization is handled by the browser's [`Intl.DateTimeFormat` API](https://dev
 ```
 
 ```jsx react
-import { SlFormatDate } from '@shoelace-style/shoelace/dist/react';
+import { SlFormatDate } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlFormatDate date="2020-07-15T09:17:00-04:00" />;
 ```
@@ -46,7 +46,7 @@ Formatting options are based on those found in the [`Intl.DateTimeFormat` API](h
 ```
 
 ```jsx react
-import { SlFormatDate } from '@shoelace-style/shoelace/dist/react';
+import { SlFormatDate } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <>
@@ -86,7 +86,7 @@ By default, the browser will determine whether to use 12-hour or 24-hour time. T
 ```
 
 ```jsx react
-import { SlFormatDate } from '@shoelace-style/shoelace/dist/react';
+import { SlFormatDate } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <>
@@ -108,7 +108,7 @@ Russian: <sl-format-date lang="ru"></sl-format-date>
 ```
 
 ```jsx react
-import { SlFormatDate } from '@shoelace-style/shoelace/dist/react';
+import { SlFormatDate } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <>

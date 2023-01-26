@@ -17,7 +17,7 @@ You can use [menu items](/components/menu-item), [menu labels](/components/menu-
 ```
 
 ```jsx react
-import { SlDivider, SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
+import { SlDivider, SlMenu, SlMenuItem } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlMenu style={{ maxWidth: '200px' }}>

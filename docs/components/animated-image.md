@@ -10,7 +10,7 @@
 ```
 
 ```jsx react
-import { SlAnimatedImage } from '@shoelace-style/shoelace/dist/react';
+import { SlAnimatedImage } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlAnimatedImage
@@ -36,7 +36,7 @@ Both GIF and WEBP images are supported.
 ```
 
 ```jsx react
-import { SlAnimatedImage } from '@shoelace-style/shoelace/dist/react';
+import { SlAnimatedImage } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlAnimatedImage src="https://shoelace.style/assets/images/tie.webp" alt="Animation of a shoe being tied" />
@@ -57,7 +57,7 @@ To set a custom size, apply a width and/or height to the host element.
 ```
 
 ```jsx react
-import { SlAnimatedImage } from '@shoelace-style/shoelace/dist/react';
+import { SlAnimatedImage } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlAnimatedImage
@@ -93,7 +93,7 @@ You can change the appearance and location of the control box by targeting the `
 ```
 
 ```jsx react
-import { SlAnimatedImage } from '@shoelace-style/shoelace/dist/react';
+import { SlAnimatedImage } from '@teamshares/shoelace/dist/react';
 
 const css = `
   .animated-image-custom-control-box::part(control-box) {

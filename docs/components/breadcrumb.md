@@ -14,7 +14,7 @@ Breadcrumbs are usually placed before a page's main content with the current pag
 ```
 
 ```jsx react
-import { SlBreadcrumb, SlBreadcrumbItem } from '@shoelace-style/shoelace/dist/react';
+import { SlBreadcrumb, SlBreadcrumbItem } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlBreadcrumb>
@@ -47,7 +47,7 @@ For websites, you'll probably want to use links instead. You can make any breadc
 ```
 
 ```jsx react
-import { SlBreadcrumb, SlBreadcrumbItem } from '@shoelace-style/shoelace/dist/react';
+import { SlBreadcrumb, SlBreadcrumbItem } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlBreadcrumb>
@@ -94,8 +94,8 @@ Use the `separator` slot to change the separator that goes between breadcrumb it
 ```
 
 ```jsx react
-import '@shoelace-style/shoelace/dist/components/icon/icon.js';
-import { SlBreadcrumb, SlBreadcrumbItem } from '@shoelace-style/shoelace/dist/react';
+import '@teamshares/shoelace/dist/components/icon/icon.js';
+import { SlBreadcrumb, SlBreadcrumbItem } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <>
@@ -143,7 +143,7 @@ Use the `prefix` slot to add content before any breadcrumb item.
 ```
 
 ```jsx react
-import { SlBreadcrumb, SlBreadcrumbItem, SlIcon } from '@shoelace-style/shoelace/dist/react';
+import { SlBreadcrumb, SlBreadcrumbItem, SlIcon } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlBreadcrumb>
@@ -173,7 +173,7 @@ Use the `suffix` slot to add content after any breadcrumb item.
 ```
 
 ```jsx react
-import { SlBreadcrumb, SlBreadcrumbItem, SlIcon } from '@shoelace-style/shoelace/dist/react';
+import { SlBreadcrumb, SlBreadcrumbItem, SlIcon } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlBreadcrumb>
@@ -221,7 +221,7 @@ import {
   SlIcon,
   SlMenu,
   SlMenuItem
-} from '@shoelace-style/shoelace/dist/react';
+} from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlBreadcrumb>

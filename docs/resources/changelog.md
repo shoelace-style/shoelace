@@ -154,7 +154,7 @@ This release includes a complete rewrite of `<sl-select>` to improve accessibili
 - Moved all component descriptions to `@summary` to get them within documentation tools [#962](https://github.com/shoelace-style/shoelace/pull/962)
 - Refactored form controls to use the `ShoelaceFormControl` interface to improve type safety and consistency
 - Updated Lit to 2.4.1
-- Updated `@shoelace-style/localize` t0 3.0.3 to support for extended language codes
+- Updated `@teamshares/localize` t0 3.0.3 to support for extended language codes
 - Updated Bootstrap Icons to 1.10.2
 - Updated TypeScript to 4.8.4
 - Updated esbuild to 0.15.14
@@ -310,7 +310,7 @@ To upgrade to this version, you will need to rework your radio controls by movin
 - Improved RTL styles for `<sl-button-group>` [#783](https://github.com/shoelace-style/shoelace/issues/783)
 - Improved RTL styles for the toast stack [#785](https://github.com/shoelace-style/shoelace/issues/785)
 - Improved typings for translations and localized terms
-- Upgraded @shoelace-style/localize to 3.0
+- Upgraded @teamshares/localize to 3.0
 
 ## 2.0.0-beta.75
 
@@ -895,7 +895,7 @@ The most elegant solution I found was to use the [Web Animations API](https://de
 - Removed `src/utilities/index.ts` to prevent tree-shaking confusion (please import utilities directly from their respective modules)
 - Removed global `[hidden]` styles so they don't affect anything outside of components
 - Updated to Bootstrap Icons 1.5.0
-- Updated React docs to use [`@shoelace-style/react`](https://github.com/shoelace-style/react)
+- Updated React docs to use [`@teamshares/react`](https://github.com/shoelace-style/react)
 - Updated NextJS docs [#434](https://github.com/shoelace-style/shoelace/pull/434)
 - Updated TypeScript to 4.2.4
 
@@ -967,10 +967,10 @@ The most elegant solution I found was to use the [Web Animations API](https://de
 
 This release changes the way components are registered if you're [cherry picking](/getting-started/installation?id=cherry-picking) or [using a bundler](/getting-started/installation?id=bundling). This recommendation came from the LitElement team and simplifies Shoelace's dependency graph. It also eliminates the need to call a `register()` function before using each component.
 
-From now on, importing a component will register it automatically. The caveat is that bundlers may not tree shake the library properly if you import from `@shoelace-style/shoelace`, so the recommendation is to import components and utilities from their corresponding files instead.
+From now on, importing a component will register it automatically. The caveat is that bundlers may not tree shake the library properly if you import from `@teamshares/shoelace`, so the recommendation is to import components and utilities from their corresponding files instead.
 
 - 🚨 BREAKING: removed `all.shoelace.js` (use `shoelace.js` instead)
-- 🚨 BREAKING: component modules now have a side effect, so bundlers may not tree shake properly when importing from `@shoelace-style/shoelace` (see the [installation page](/getting-started/installation?id=bundling) for more details and how to update)
+- 🚨 BREAKING: component modules now have a side effect, so bundlers may not tree shake properly when importing from `@teamshares/shoelace` (see the [installation page](/getting-started/installation?id=bundling) for more details and how to update)
 - Added `sl-clear` event to `<sl-select>`
 - Fixed a bug where dynamically changing menu items in `<sl-select>` would cause the display label to be blank [#374](https://github.com/shoelace-style/shoelace/discussions/374)
 - Fixed a bug where setting the `value` attribute or property on `<sl-input>` and `<sl-textarea>` would trigger validation too soon
@@ -1066,7 +1066,7 @@ The component API remains the same except for the changes noted below. Thanks fo
 
 - 🚨 BREAKING: Fixed animations bloat
   - Removed ~400 baked-in Animista animations because they were causing ~200KB of bloat (they can still be used with custom keyframes)
-  - Reworked animations into a separate module ([`@shoelace-style/animations`](https://github.com/shoelace-style/animations)) so it's more maintainable and animations are sync with the latest version of animate.css
+  - Reworked animations into a separate module ([`@teamshares/animations`](https://github.com/shoelace-style/animations)) so it's more maintainable and animations are sync with the latest version of animate.css
   - Animation and easing names are now camelCase (e.g. `easeInOut` instead of `ease-in-out`)
 - Added initial E2E tests [#169](https://github.com/shoelace-style/shoelace/pull/169)
 - Added the `FocusOptions` argument to all components that have a `setFocus()` method

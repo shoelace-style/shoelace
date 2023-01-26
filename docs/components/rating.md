@@ -7,7 +7,7 @@
 ```
 
 ```jsx react
-import { SlRating } from '@shoelace-style/shoelace/dist/react';
+import { SlRating } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlRating label="Rating" />;
 ```
@@ -23,7 +23,7 @@ Ratings are commonly identified contextually, so labels aren't displayed. Howeve
 ```
 
 ```jsx react
-import { SlRating } from '@shoelace-style/shoelace/dist/react';
+import { SlRating } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlRating label="Rate this component" />;
 ```
@@ -37,7 +37,7 @@ Ratings are 0-5 by default. To change the maximum possible value, use the `max` 
 ```
 
 ```jsx react
-import { SlRating } from '@shoelace-style/shoelace/dist/react';
+import { SlRating } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlRating label="Rating" max={3} />;
 ```
@@ -51,7 +51,7 @@ Use the `precision` attribute to let users select fractional ratings.
 ```
 
 ```jsx react
-import { SlRating } from '@shoelace-style/shoelace/dist/react';
+import { SlRating } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlRating label="Rating" precision={0.5} value={2.5} />;
 ```
@@ -65,7 +65,7 @@ Set the `--symbol-size` custom property to adjust the size.
 ```
 
 ```jsx react
-import { SlRating } from '@shoelace-style/shoelace/dist/react';
+import { SlRating } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlRating label="Rating" style={{ '--symbol-size': '2rem' }} />;
 ```
@@ -79,7 +79,7 @@ Use the `readonly` attribute to display a rating that users can't change.
 ```
 
 ```jsx react
-import { SlRating } from '@shoelace-style/shoelace/dist/react';
+import { SlRating } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlRating label="Rating" readonly value={3} />;
 ```
@@ -93,7 +93,7 @@ Use the `disable` attribute to disable the rating.
 ```
 
 ```jsx react
-import { SlRating } from '@shoelace-style/shoelace/dist/react';
+import { SlRating } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlRating label="Rating" disabled value={3} />;
 ```
@@ -112,8 +112,8 @@ You can provide custom icons by passing a function to the `getSymbol` property.
 ```
 
 ```jsx react
-import '@shoelace-style/shoelace/dist/components/icon/icon';
-import { SlRating } from '@shoelace-style/shoelace/dist/react';
+import '@teamshares/shoelace/dist/components/icon/icon';
+import { SlRating } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlRating
@@ -142,8 +142,8 @@ You can also use the `getSymbol` property to render different icons based on val
 ```
 
 ```jsx react
-import '@shoelace-style/shoelace/dist/components/icon/icon';
-import { SlRating } from '@shoelace-style/shoelace/dist/react';
+import '@teamshares/shoelace/dist/components/icon/icon';
+import { SlRating } from '@teamshares/shoelace/dist/react';
 
 function getSymbol(value) {
   const icons = ['emoji-angry', 'emoji-frown', 'emoji-expressionless', 'emoji-smile', 'emoji-laughing'];

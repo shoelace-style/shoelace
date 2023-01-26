@@ -17,7 +17,7 @@ This integration has been tested with the following:
 To get started using Shoelace with NextJS, the following packages must be installed.
 
 ```bash
-yarn add @shoelace-style/shoelace copy-webpack-plugin next-compose-plugins next-transpile-modules
+yarn add @teamshares/shoelace copy-webpack-plugin next-compose-plugins next-transpile-modules
 ```
 
 ### Enabling ESM
@@ -36,7 +36,7 @@ There's one more step to enable ESM in NextJS, but we'll tackle that in our Next
 The next step is to import Shoelace's default theme (stylesheet) in your `_app.js` file:
 
 ```css
-import '@shoelace-style/shoelace/dist/themes/light.css';
+import '@teamshares/shoelace/dist/themes/light.css';
 ```
 
 ### Defining Custom Elements
@@ -55,14 +55,14 @@ function CustomEls({ URL }) {
       return;
     }
 
-    import('@shoelace-style/shoelace/dist/utilities/base-path').then(({ setBasePath }) => {
+    import('@teamshares/shoelace/dist/utilities/base-path').then(({ setBasePath }) => {
       setBasePath(`${URL}/static/static`);
 
       // This imports all components
-      import('@shoelace-style/shoelace/dist/shoelace');
+      import('@teamshares/shoelace/dist/shoelace');
       // If you're wanting to selectively import components, replace this line with your own definitions
 
-      // import("@shoelace-style/shoelace/dist/components/button/button");
+      // import("@teamshares/shoelace/dist/components/button/button");
       customEls.current = true;
     });
   }, [URL, customEls]);
@@ -126,7 +126,7 @@ import CopyPlugin from 'copy-webpack-plugin';
 import withPlugins from 'next-compose-plugins';
 import withTM from 'next-transpile-modules';
 
-const withTMCompiled = withTM(['@shoelace-style/shoelace']);
+const withTMCompiled = withTM(['@teamshares/shoelace']);
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -138,7 +138,7 @@ export default withPlugins([withTMCompiled], {
       new CopyPlugin({
         patterns: [
           {
-            from: resolve(__dirname, 'node_modules/@shoelace-style/shoelace/dist/assets/icons'),
+            from: resolve(__dirname, 'node_modules/@teamshares/shoelace/dist/assets/icons'),
             to: resolve(__dirname, 'static/icons')
           }
         ]

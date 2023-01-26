@@ -16,7 +16,7 @@
     const version = sessionStorage.getItem('sl-version');
 
     html = html
-      .replace(/@shoelace-style\/shoelace/g, `https://cdn.skypack.dev/@teamshares/shoelace@${version}`)
+      .replace(/@teamshares\/shoelace/g, `https://cdn.skypack.dev/@teamshares/shoelace@${version}`)
       .replace(/from 'react'/g, `from 'https://cdn.skypack.dev/react@${reactVersion}'`)
       .replace(/from "react"/g, `from "https://cdn.skypack.dev/react@${reactVersion}"`);
 

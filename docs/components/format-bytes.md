@@ -19,7 +19,7 @@
 
 ```jsx react
 import { useState } from 'react';
-import { SlButton, SlFormatBytes, SlInput } from '@shoelace-style/shoelace/dist/react';
+import { SlButton, SlFormatBytes, SlInput } from '@teamshares/shoelace/dist/react';
 
 const App = () => {
   const [value, setValue] = useState(1000);
@@ -55,7 +55,7 @@ Set the `value` attribute to a number to get the value in bytes.
 ```
 
 ```jsx react
-import { SlFormatBytes } from '@shoelace-style/shoelace/dist/react';
+import { SlFormatBytes } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <>
@@ -82,7 +82,7 @@ To get the value in bits, set the `unit` attribute to `bit`.
 ```
 
 ```jsx react
-import { SlFormatBytes } from '@shoelace-style/shoelace/dist/react';
+import { SlFormatBytes } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <>
@@ -109,7 +109,7 @@ Use the `lang` attribute to set the number formatting locale.
 ```
 
 ```jsx react
-import { SlFormatBytes } from '@shoelace-style/shoelace/dist/react';
+import { SlFormatBytes } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <>

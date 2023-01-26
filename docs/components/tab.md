@@ -10,7 +10,7 @@
 ```
 
 ```jsx react
-import { SlTab } from '@shoelace-style/shoelace/dist/react';
+import { SlTab } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <>

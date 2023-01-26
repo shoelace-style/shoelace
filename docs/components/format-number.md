@@ -22,7 +22,7 @@ Localization is handled by the browser's [`Intl.NumberFormat` API](https://devel
 
 ```jsx react
 import { useState } from 'react';
-import { SlFormatNumber, SlInput } from '@shoelace-style/shoelace/dist/react';
+import { SlFormatNumber, SlInput } from '@teamshares/shoelace/dist/react';
 
 const App = () => {
   const [value, setValue] = useState(1000);
@@ -59,7 +59,7 @@ To get the value as a percent, set the `type` attribute to `percent`.
 ```
 
 ```jsx react
-import { SlFormatNumber } from '@shoelace-style/shoelace/dist/react';
+import { SlFormatNumber } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <>
@@ -87,7 +87,7 @@ Russian: <sl-format-number value="2000" lang="ru" minimum-fraction-digits="2"></
 ```
 
 ```jsx react
-import { SlFormatNumber } from '@shoelace-style/shoelace/dist/react';
+import { SlFormatNumber } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <>
@@ -113,7 +113,7 @@ To format a number as a monetary value, set the `type` attribute to `currency` a
 ```
 
 ```jsx react
-import { SlFormatNumber } from '@shoelace-style/shoelace/dist/react';
+import { SlFormatNumber } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <>

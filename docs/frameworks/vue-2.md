@@ -9,19 +9,19 @@ Vue [plays nice](https://custom-elements-everywhere.com/#vue) with custom elemen
 To add Shoelace to your Vue app, install the package from npm.
 
 ```bash
-npm install @shoelace-style/shoelace
+npm install @teamshares/shoelace
 ```
 
 Next, [include a theme](/getting-started/themes) and set the [base path](/getting-started/installation#setting-the-base-path) for icons and other assets. In this example, we'll import the light theme and use the CDN as a base path.
 
 ```jsx
-import '@shoelace-style/shoelace/dist/themes/light.css';
-import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path';
+import '@teamshares/shoelace/dist/themes/light.css';
+import { setBasePath } from '@teamshares/shoelace/dist/utilities/base-path';
 
-setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/');
+setBasePath('https://cdn.jsdelivr.net/npm/@teamshares/shoelace@%VERSION%/dist/');
 ```
 
-?> If you'd rather not use the CDN for assets, you can create a build task that copies `node_modules/@shoelace-style/shoelace/dist/assets` into a public folder in your app. Then you can point the base path to that folder instead.
+?> If you'd rather not use the CDN for assets, you can create a build task that copies `node_modules/@teamshares/shoelace/dist/assets` into a public folder in your app. Then you can point the base path to that folder instead.
 
 ## Configuration
 
@@ -63,17 +63,17 @@ One caveat is there's currently [no support for v-model on custom elements](http
 <sl-input :value="name" @input="name = $event.target.value"></sl-input>
 ```
 
-If that's too verbose for your liking, you can use a custom directive instead. [This utility](https://www.npmjs.com/package/@shoelace-style/vue-sl-model) adds a custom directive that will work just like `v-model` but for Shoelace components. To install it, use this command.
+If that's too verbose for your liking, you can use a custom directive instead. [This utility](https://www.npmjs.com/package/@teamshares/vue-sl-model) adds a custom directive that will work just like `v-model` but for Shoelace components. To install it, use this command.
 
 ```bash
-npm install @shoelace-style/vue-sl-model@1
+npm install @teamshares/vue-sl-model@1
 ```
 
 Next, import the directive and enable it like this.
 
 ```js
 import Vue from 'vue';
-import ShoelaceModelDirective from '@shoelace-style/vue-sl-model';
+import ShoelaceModelDirective from '@teamshares/vue-sl-model';
 import App from './App.vue';
 
 Vue.use(ShoelaceModelDirective);

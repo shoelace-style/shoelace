@@ -7,20 +7,20 @@ Shoelace offers a React version of every component to provide an idiomatic exper
 To add Shoelace to your React app, install the package from npm.
 
 ```bash
-npm install @shoelace-style/shoelace
+npm install @teamshares/shoelace
 ```
 
 Next, [include a theme](/getting-started/themes) and set the [base path](/getting-started/installation#setting-the-base-path) for icons and other assets. In this example, we'll import the light theme and use the CDN as a base path.
 
 ```jsx
 // App.jsx
-import '@shoelace-style/shoelace/dist/themes/light.css';
-import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path';
+import '@teamshares/shoelace/dist/themes/light.css';
+import { setBasePath } from '@teamshares/shoelace/dist/utilities/base-path';
 
-setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/');
+setBasePath('https://cdn.jsdelivr.net/npm/@teamshares/shoelace@%VERSION%/dist/');
 ```
 
-?> If you'd rather not use the CDN for assets, you can create a [build task](https://webpack.js.org/plugins/copy-webpack-plugin/) that copies `node_modules/@shoelace-style/shoelace/dist/assets` into your app's `public` directory. Then you can point the base path to that folder instead.
+?> If you'd rather not use the CDN for assets, you can create a [build task](https://webpack.js.org/plugins/copy-webpack-plugin/) that copies `node_modules/@teamshares/shoelace/dist/assets` into your app's `public` directory. Then you can point the base path to that folder instead.
 
 Now you can start using components!
 
@@ -31,7 +31,7 @@ Now you can start using components!
 Every Shoelace component is available to import as a React component. Note that we're importing the `<SlButton>` _React component_ instead of the `<sl-button>` _custom element_ in the example below.
 
 ```jsx
-import { SlButton } from '@shoelace-style/shoelace/dist/react';
+import { SlButton } from '@teamshares/shoelace/dist/react';
 
 const MyComponent = () => <SlButton variant="primary">Click me</SlButton>;
 
@@ -48,7 +48,7 @@ Here's how you can bind the input's value to a state variable.
 
 ```jsx
 import { useState } from 'react';
-import { SlInput } from '@shoelace-style/shoelace/dist/react';
+import { SlInput } from '@teamshares/shoelace/dist/react';
 
 function MyComponent() {
   const [value, setValue] = useState('');
@@ -63,8 +63,8 @@ If you're using TypeScript, it's important to note that `event.target` will be a
 
 ```tsx
 import { useState } from 'react';
-import { SlInput } from '@shoelace-style/shoelace/dist/react';
-import type SlInputElement from '@shoelace-style/shoelace/dist/components/input/input';
+import { SlInput } from '@teamshares/shoelace/dist/react';
+import type SlInputElement from '@teamshares/shoelace/dist/components/input/input';
 
 function MyComponent() {
   const [value, setValue] = useState('');

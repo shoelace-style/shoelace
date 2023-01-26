@@ -38,7 +38,7 @@
 ```
 
 ```jsx react
-import { SlButton, SlCard, SlRating } from '@shoelace-style/shoelace/dist/react';
+import { SlButton, SlCard, SlRating } from '@teamshares/shoelace/dist/react';
 
 const css = `
   .card-overview {
@@ -101,7 +101,7 @@ Basic cards aren't very exciting, but they can display any content you want them
 ```
 
 ```jsx react
-import { SlCard } from '@shoelace-style/shoelace/dist/react';
+import { SlCard } from '@teamshares/shoelace/dist/react';
 
 const css = `
   .card-basic {
@@ -156,7 +156,7 @@ Headers can be used to display titles and more.
 ```
 
 ```jsx react
-import { SlCard, SlIconButton } from '@shoelace-style/shoelace/dist/react';
+import { SlCard, SlIconButton } from '@teamshares/shoelace/dist/react';
 
 const css = `
   .card-header {
@@ -221,7 +221,7 @@ Footers can be used to display actions, summaries, or other relevant content.
 ```
 
 ```jsx react
-import { SlButton, SlCard, SlRating } from '@shoelace-style/shoelace/dist/react';
+import { SlButton, SlCard, SlRating } from '@teamshares/shoelace/dist/react';
 
 const css = `
   .card-footer {
@@ -274,7 +274,7 @@ Cards accept an `image` slot. The image is displayed atop the card and stretches
 ```
 
 ```jsx react
-import { SlCard } from '@shoelace-style/shoelace/dist/react';
+import { SlCard } from '@teamshares/shoelace/dist/react';
 
 const css = `
   .card-image {

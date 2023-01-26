@@ -12,7 +12,7 @@
 ```
 
 ```jsx react
-import { SlDetails } from '@shoelace-style/shoelace/dist/react';
+import { SlDetails } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlDetails summary="Toggle Me">
@@ -36,7 +36,7 @@ Use the `disable` attribute to prevent the details from expanding.
 ```
 
 ```jsx react
-import { SlDetails } from '@shoelace-style/shoelace/dist/react';
+import { SlDetails } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlDetails summary="Disabled" disabled>
@@ -68,7 +68,7 @@ Use the `expand-icon` and `collapse-icon` slots to change the expand and collaps
 ```
 
 ```jsx react
-import { SlDetails, SlIcon } from '@shoelace-style/shoelace/dist/react';
+import { SlDetails, SlIcon } from '@teamshares/shoelace/dist/react';
 
 const css = `
   sl-details.custom-icon::part(summary-icon) {

@@ -22,7 +22,7 @@ const data = new FormData(form);
 However, some folks find `FormData` tricky to work with or they need to pass a JSON payload to their server. To accommodate this, Shoelace offers a serialization utility that gathers form data and returns a simple JavaScript object instead.
 
 ```js
-import { serialize } from '@shoelace-style/shoelace/dist/utilities/form.js';
+import { serialize } from '@teamshares/shoelace/dist/utilities/form.js';
 
 const form = document.querySelector('form');
 const data = serialize(form);
@@ -76,7 +76,7 @@ The form will not be submitted if a required field is incomplete.
 ```
 
 ```jsx react
-import { SlButton, SlCheckbox, SlInput, SlMenuItem, SlSelect, SlTextarea } from '@shoelace-style/shoelace/dist/react';
+import { SlButton, SlCheckbox, SlInput, SlMenuItem, SlSelect, SlTextarea } from '@teamshares/shoelace/dist/react';
 
 const App = () => {
   function handleSubmit(event) {
@@ -130,7 +130,7 @@ To restrict a value to a specific [pattern](https://developer.mozilla.org/en-US/
 ```
 
 ```jsx react
-import { SlButton, SlInput } from '@shoelace-style/shoelace/dist/react';
+import { SlButton, SlInput } from '@teamshares/shoelace/dist/react';
 
 const App = () => {
   function handleSubmit(event) {
@@ -174,7 +174,7 @@ Some input types will automatically trigger constraints, such as `email` and `ur
 ```
 
 ```jsx react
-import { SlButton, SlInput } from '@shoelace-style/shoelace/dist/react';
+import { SlButton, SlInput } from '@teamshares/shoelace/dist/react';
 
 const App = () => {
   function handleSubmit(event) {
@@ -229,7 +229,7 @@ To create a custom validation error, pass a non-empty string to the `setCustomVa
 
 ```jsx react
 import { useRef, useState } from 'react';
-import { SlButton, SlInput } from '@shoelace-style/shoelace/dist/react';
+import { SlButton, SlInput } from '@teamshares/shoelace/dist/react';
 
 const App = () => {
   const input = useRef(null);

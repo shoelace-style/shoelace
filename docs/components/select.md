@@ -14,7 +14,7 @@
 ```
 
 ```jsx react
-import { SlOption, SlSelect } from '@shoelace-style/shoelace/dist/react';
+import { SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlSelect>
@@ -45,7 +45,7 @@ Use the `label` attribute to give the select an accessible label. For labels tha
 ```
 
 ```jsx react
-import { SlOption, SlSelect } from '@shoelace-style/shoelace/dist/react';
+import { SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlSelect label="Select one">
@@ -69,7 +69,7 @@ Add descriptive help text to a select with the `help-text` attribute. For help t
 ```
 
 ```jsx react
-import { SlOption, SlSelect } from '@shoelace-style/shoelace/dist/react';
+import { SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlSelect label="Experience" help-text="Please tell us your skill level.">
@@ -93,7 +93,7 @@ Use the `placeholder` attribute to add a placeholder.
 ```
 
 ```jsx react
-import { SlOption, SlSelect } from '@shoelace-style/shoelace/dist/react';
+import { SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlSelect placeholder="Select one">
@@ -117,7 +117,7 @@ Use the `clearable` attribute to make the control clearable. The clear button on
 ```
 
 ```jsx react
-import { SlOption, SlSelect } from '@shoelace-style/shoelace/dist/react';
+import { SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlSelect placeholder="Clearable" clearable>
@@ -141,7 +141,7 @@ Add the `filled` attribute to draw a filled select.
 ```
 
 ```jsx react
-import { SlOption, SlSelect } from '@shoelace-style/shoelace/dist/react';
+import { SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlSelect filled>
@@ -165,7 +165,7 @@ Use the `pill` attribute to give selects rounded edges.
 ```
 
 ```jsx react
-import { SlOption, SlSelect } from '@shoelace-style/shoelace/dist/react';
+import { SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlSelect pill>
@@ -189,7 +189,7 @@ Use the `disabled` attribute to disable a select.
 ```
 
 ```jsx react
-import { SlOption, SlSelect } from '@shoelace-style/shoelace/dist/react';
+import { SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlSelect placeholder="Disabled" disabled>
@@ -216,7 +216,7 @@ To allow multiple options to be selected, use the `multiple` attribute. It's a g
 ```
 
 ```jsx react
-import { SlOption, SlSelect } from '@shoelace-style/shoelace/dist/react';
+import { SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlSelect label="Select a Few" value="option-1 option-2 option-3" multiple clearable>
@@ -246,7 +246,7 @@ Use the `value` attribute to set the initial selection. When using `multiple`, u
 ```
 
 ```jsx react
-import { SlDivider, SlOption, SlSelect } from '@shoelace-style/shoelace/dist/react';
+import { SlDivider, SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlSelect value="option-1 option-2" multiple clearable>
@@ -276,7 +276,7 @@ Use `<sl-divider>` to group listbox items visually. You can also use `<small>` t
 ```
 
 ```jsx react
-import { SlOption, SlSelect } from '@shoelace-style/shoelace/dist/react';
+import { SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlSelect>
@@ -319,7 +319,7 @@ Use the `size` attribute to change a select's size. Note that size does not appl
 ```
 
 ```jsx react
-import { SlOption, SlSelect } from '@shoelace-style/shoelace/dist/react';
+import { SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <>
@@ -364,7 +364,7 @@ The preferred placement of the select's listbox can be set with the `placement` 
 import {
   SlOption,
   SlSelect
-} from '@shoelace-style/shoelace/dist/react';
+} from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlSelect placement="top">
@@ -403,7 +403,7 @@ Use the `prefix` slot to prepend an icon to the control.
 ```
 
 ```jsx react
-import { SlIcon, SlOption, SlSelect } from '@shoelace-style/shoelace/dist/react';
+import { SlIcon, SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <>

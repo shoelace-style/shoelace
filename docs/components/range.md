@@ -7,7 +7,7 @@
 ```
 
 ```jsx react
-import { SlRange } from '@shoelace-style/shoelace/dist/react';
+import { SlRange } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlRange />;
 ```
@@ -25,7 +25,7 @@ Use the `label` attribute to give the range an accessible label. For labels that
 ```
 
 ```jsx react
-import { SlRange } from '@shoelace-style/shoelace/dist/react';
+import { SlRange } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlRange label="Volume" min={0} max={100} />;
 ```
@@ -39,7 +39,7 @@ Add descriptive help text to a range with the `help-text` attribute. For help te
 ```
 
 ```jsx react
-import { SlRange } from '@shoelace-style/shoelace/dist/react';
+import { SlRange } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlRange label="Volume" help-text="Controls the volume of the current song." min={0} max={100} />;
 ```
@@ -53,7 +53,7 @@ Use the `min` and `max` attributes to set the range's minimum and maximum values
 ```
 
 ```jsx react
-import { SlRange } from '@shoelace-style/shoelace/dist/react';
+import { SlRange } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlRange min={0} max={10} step={1} />;
 ```
@@ -67,7 +67,7 @@ Use the `disabled` attribute to disable a slider.
 ```
 
 ```jsx react
-import { SlRange } from '@shoelace-style/shoelace/dist/react';
+import { SlRange } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlRange disabled />;
 ```
@@ -81,7 +81,7 @@ By default, the tooltip is shown on top. Set `tooltip` to `bottom` to show it be
 ```
 
 ```jsx react
-import { SlRange } from '@shoelace-style/shoelace/dist/react';
+import { SlRange } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlRange tooltip="bottom" />;
 ```
@@ -95,7 +95,7 @@ To disable the tooltip, set `tooltip` to `none`.
 ```
 
 ```jsx react
-import { SlRange } from '@shoelace-style/shoelace/dist/react';
+import { SlRange } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlRange tooltip="none" />;
 ```
@@ -114,7 +114,7 @@ You can customize the active and inactive portions of the track using the `--tra
 ```
 
 ```jsx react
-import { SlRange } from '@shoelace-style/shoelace/dist/react';
+import { SlRange } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlRange
@@ -143,7 +143,7 @@ You can customize the initial offset of the active track using the `--track-acti
 ```
 
 ```jsx react
-import { SlRange } from '@shoelace-style/shoelace/dist/react';
+import { SlRange } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlRange
@@ -172,7 +172,7 @@ You can change the tooltip's content by setting the `tooltipFormatter` property 
 ```
 
 ```jsx react
-import { SlRange } from '@shoelace-style/shoelace/dist/react';
+import { SlRange } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlRange min={0} max={100} step={1} tooltipFormatter={value => `Total - ${value}%`} />;
 ```
