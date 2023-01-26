@@ -9,6 +9,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 ## Next
 
 - Fixed a bug in `<sl-animated-image>` where the play and pause buttons were transposed [#1147](https://github.com/shoelace-style/shoelace/issues/1147)
+- Fixed a bug that prevented `web-types.json` from being generated [#1154](https://github.com/shoelace-style/shoelace/discussions/1154)
 
 ## 2.0.0
 

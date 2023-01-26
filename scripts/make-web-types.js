@@ -64,6 +64,7 @@ const jsonataExprString = `{
 
 // Run the conversion
 const expression = jsonata(jsonataExprString);
+const result = await expression.evaluate(metadata);
 
 console.log('Generating web types');
-fs.writeFileSync(path.join(outdir, 'web-types.json'), JSON.stringify(expression.evaluate(metadata), null, 2), 'utf8');
+fs.writeFileSync(path.join(outdir, 'web-types.json'), JSON.stringify(result, null, 2), 'utf8');
