@@ -62,7 +62,7 @@ Set the `variant` attribute to change the alert's variant.
 <br />
 
 <sl-alert variant="danger" open>
-  <sl-icon slot="icon" name="exclamation-circle-solid"></sl-icon>
+  <sl-icon slot="icon" name="exclamation-circle"></sl-icon>
   <strong>Your account has been deleted</strong><br />
   We're very sorry to see you go!
 </sl-alert>

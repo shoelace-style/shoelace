@@ -383,6 +383,15 @@
   --sl-spacing-4x-large: var(--ts-spacing-4x-large);
   /* Input font color */
   --sl-input-color: var(--ts-color-text-default);
+  --sl-input-color-hover: var(--ts-color-text-default);
+  --sl-input-color-focus: var(--ts-color-text-default);
+  --sl-input-color-disabled: var(--ts-color-text-default);
+  --sl-input-placeholder-color: var(--ts-color-text-subdued);
+  --sl-input-placeholder-color-disabled: var(--ts-color-text-subdued);
+  /* Input icon colors */
+  --sl-input-icon-color: var(--sl-color-neutral-700);
+  --sl-input-icon-color-hover: var(--sl-color-neutral-700);
+  --sl-input-icon-color-focus: var(--sl-color-neutral-700);
   /* Input sizes */
   --sl-input-height-small: var(--ts-input-height-small);
   --sl-input-height-medium: var(--ts-input-height-medium);
@@ -396,10 +405,6 @@
   /* Input border colors */
   --sl-input-border-color: var(--sl-color-neutral-400);
   --sl-input-border-color-hover: var(--sl-color-neutral-400);
-  /* Input icon colors */
-  --sl-input-icon-color: var(--sl-color-neutral-600);
-  --sl-input-icon-color-hover: var(--sl-color-neutral-700);
-  --sl-input-icon-color-focus: var(--sl-color-neutral-700);
   /* Focus rings */
   --sl-focus-ring-color: rgba(var(--ts-color-blue-500-rgb), 0.5);
   --sl-focus-ring-style: solid;
@@ -436,8 +441,6 @@ sl-divider {
 }
 
 sl-select[multiple] {
-  appearance: initial;
-  appearance: initial;
   appearance: initial;
   background-color: transparent;
   border: none;
@@ -714,9 +717,20 @@ sl-button[size='large']::part(label) {
   /* 12px */
 }
 
+sl-button[size='x-large']::part(base) {
+  padding: 0 var(--sl-spacing-2x-large); /* 32px */
+}
+
+sl-button[size='x-large']::part(label) {
+  font-size: var(--ts-font-base); /* 16px */
+  line-height: calc(var(--sl-spacing-4x-large) - var(--sl-input-border-width) * 2);
+  padding: 0 var(--sl-spacing-x-small); /* 8px */
+}
+
 sl-button[size='medium']::part(caret),
 sl-button[size='medium']::part(prefix),
-sl-button[size='medium']::part(suffix) {
+sl-button[size='medium']::part(suffix),
+sl-button[size='medium'][circle]::part(label) {
   font-size: var(--ts-font-base);
   /* 16px */
 }
@@ -724,10 +738,16 @@ sl-button[size='medium']::part(suffix) {
 sl-button[size='large']::part(caret),
 sl-button[size='large']::part(prefix),
 sl-button[size='large']::part(suffix),
-sl-button[size='medium'][circle]::part(base),
-sl-button[size='large'][circle]::part(base) {
+sl-button[size='large'][circle]::part(label) {
   font-size: var(--ts-font-xl);
   /* 20px */
+}
+
+sl-button[size='x-large']::part(caret),
+sl-button[size='x-large']::part(prefix),
+sl-button[size='x-large']::part(suffix),
+sl-button[size='x-large'][circle]::part(label) {
+  font-size: var(--ts-font-2xl); /* 24px */
 }
 
 /* To remove default padding from split buttons */
@@ -1029,10 +1049,12 @@ sl-theme {
   /* normal */
   line-height: var(--ts-leading-5);
   /* 1.25rem * 20px */
+  margin-top: var(--sl-spacing-x-small);
+  /* .5rem * 8px */
 }
 
 ::part(form-control-input) {
-  margin: var(--sl-spacing-2x-small) 0 var(--sl-spacing-x-small);
+  margin: var(--sl-spacing-2x-small) 0 0;
 }
 
 ::part(input),
@@ -1045,6 +1067,18 @@ sl-select::part(control):not(:focus),
 sl-input::part(input):not(:focus),
 sl-textarea::part(textarea):not(:focus) {
   box-shadow: var(--sl-shadow-small);
+}
+
+/* Set prefix icon color to subdued text color */
+sl-select::part(prefix),
+sl-input::part(prefix),
+sl-input::part(suffix) {
+  color: var(--ts-color-text-subdued);
+}
+
+/* Set color of text displayed in select */
+sl-select::part(display-input) {
+  color: var(--ts-color-text-default);
 }
 
 /** ********** **/
@@ -1074,14 +1108,32 @@ sl-radio::part(base) {
 /** ********** **/
 /* Switch & range */
 /** ********** **/
-sl-switch {
-  --height: calc(var(--sl-toggle-size) + 6px);
-  --thumb-size: calc(var(--sl-toggle-size) + 4px);
+sl-switch[size='small'] {
+  --height: calc(var(--sl-toggle-size-small) + 6px);
+  --thumb-size: calc(var(--sl-toggle-size-small) + 4px);
+  --width: calc(var(--height) * 1.8);
+}
+
+sl-switch[size='medium'] {
+  --height: calc(var(--sl-toggle-size-medium) + 6px);
+  --thumb-size: calc(var(--sl-toggle-size-medium) + 4px);
+  --width: calc(var(--height) * 1.8);
+}
+
+sl-switch[size='large'] {
+  --height: calc(var(--sl-toggle-size-large) + 6px);
+  --thumb-size: calc(var(--sl-toggle-size-large) + 4px);
   --width: calc(var(--height) * 1.8);
 }
 
 sl-range::part(input) {
   padding: 0;
+}
+
+sl-range {
+  --track-height: var(--sl-spacing-x-small); /* 8px */
+  --track-color-active: var(--sl-color-neutral-300);
+  --track-color-inactive:  var(--sl-color-neutral-300);
 }
 
 /** ******************************** */
@@ -1206,11 +1258,12 @@ sl-select::part(listbox) {
 /* Option styling */
 /** ********** **/
 sl-option::part(base) {
+  color: var(--ts-color-text-default);
   padding: var(--sl-spacing-x-small) var(--sl-spacing-2x-small);
 }
 
-sl-option::part(base):not(.option--selected),
-sl-option::part(base):not(.option--current) {
+sl-option[tabindex="0"]::part(base) {
+  background-color: var(--sl-color-neutral-100);
   color: var(--ts-color-text-default);
 }
 
@@ -1228,6 +1281,14 @@ sl-option[disabled]:hover::part(base) {
 sl-option:active::part(base) {
   background-color: var(--sl-color-neutral-200);
   color: var(--ts-color-text-default);
+}
+
+sl-option::part(checked-icon) {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg width='16' height='16' viewBox='0 0 20 20' fill='currentColor' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z' fill='%232e333c' stroke='none'/%3E%3C/svg%3E");
+  background-position: center;
+  background-repeat: no-repeat;
+  color: transparent;
+  padding-right: var(--sl-spacing-x-small);
 }
 
 sl-option::part(label) {
