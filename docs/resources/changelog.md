@@ -10,6 +10,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 - Fixed a bug in `<sl-animated-image>` where the play and pause buttons were transposed [#1147](https://github.com/shoelace-style/shoelace/issues/1147)
 - Fixed a bug that prevented `web-types.json` from being generated [#1154](https://github.com/shoelace-style/shoelace/discussions/1154)
+- Fixe a bug in `<sl-color-picker>` that prevented `sl-change` and `sl-input` from emitting when using the eye dropper [#1157](https://github.com/shoelace-style/shoelace/issues/1157)
 
 ## 2.0.0
 

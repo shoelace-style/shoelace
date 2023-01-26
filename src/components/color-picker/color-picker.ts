@@ -563,7 +563,16 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
 
     eyeDropper
       .open()
-      .then(colorSelectionResult => this.setColor(colorSelectionResult.sRGBHex))
+      .then(colorSelectionResult => {
+        const oldValue = this.value;
+
+        this.setColor(colorSelectionResult.sRGBHex);
+
+        if (this.value !== oldValue) {
+          this.emit('sl-change');
+          this.emit('sl-input');
+        }
+      })
       .catch(() => {
         // The user canceled, do nothing
       });
