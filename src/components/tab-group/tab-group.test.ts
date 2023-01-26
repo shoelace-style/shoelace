@@ -19,9 +19,8 @@ interface CustomEventPayload {
   name: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const waitForScrollButtonsToBeRendered = (tabGroup: SlTabGroup): Promise<any> => {
-  return waitUntil(() => {
+const waitForScrollButtonsToBeRendered = async (tabGroup: SlTabGroup): Promise<void> => {
+  await waitUntil(() => {
     const scrollButtons = tabGroup.shadowRoot?.querySelectorAll('sl-icon-button');
     return scrollButtons?.length === 2;
   });
