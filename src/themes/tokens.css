@@ -1133,7 +1133,7 @@ sl-range::part(input) {
 sl-range {
   --track-height: var(--sl-spacing-x-small); /* 8px */
   --track-color-active: var(--sl-color-neutral-300);
-  --track-color-inactive:  var(--sl-color-neutral-300);
+  --track-color-inactive: var(--sl-color-neutral-300);
 }
 
 /** ******************************** */
@@ -1262,7 +1262,7 @@ sl-option::part(base) {
   padding: var(--sl-spacing-x-small) var(--sl-spacing-2x-small);
 }
 
-sl-option[tabindex="0"]::part(base) {
+sl-option[tabindex='0']::part(base) {
   background-color: var(--sl-color-neutral-100);
   color: var(--ts-color-text-default);
 }
