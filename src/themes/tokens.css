@@ -383,6 +383,15 @@
   --sl-spacing-4x-large: var(--ts-spacing-4x-large);
   /* Input font color */
   --sl-input-color: var(--ts-color-text-default);
+  --sl-input-color-hover: var(--ts-color-text-default);
+  --sl-input-color-focus: var(--ts-color-text-default);
+  --sl-input-color-disabled: var(--ts-color-text-default);
+  --sl-input-placeholder-color: var(--ts-color-text-subdued);
+  --sl-input-placeholder-color-disabled: var(--ts-color-text-subdued);
+  /* Input icon colors */
+  --sl-input-icon-color: var(--sl-color-neutral-700);
+  --sl-input-icon-color-hover: var(--sl-color-neutral-700);
+  --sl-input-icon-color-focus: var(--sl-color-neutral-700);
   /* Input sizes */
   --sl-input-height-small: var(--ts-input-height-small);
   --sl-input-height-medium: var(--ts-input-height-medium);
@@ -396,10 +405,6 @@
   /* Input border colors */
   --sl-input-border-color: var(--sl-color-neutral-400);
   --sl-input-border-color-hover: var(--sl-color-neutral-400);
-  /* Input icon colors */
-  --sl-input-icon-color: var(--sl-color-neutral-600);
-  --sl-input-icon-color-hover: var(--sl-color-neutral-700);
-  --sl-input-icon-color-focus: var(--sl-color-neutral-700);
   /* Focus rings */
   --sl-focus-ring-color: rgba(var(--ts-color-blue-500-rgb), 0.5);
   --sl-focus-ring-style: solid;
@@ -1062,6 +1067,18 @@ sl-select::part(control):not(:focus),
 sl-input::part(input):not(:focus),
 sl-textarea::part(textarea):not(:focus) {
   box-shadow: var(--sl-shadow-small);
+}
+
+/* Set prefix icon color to subdued text color */
+sl-select::part(prefix),
+sl-input::part(prefix),
+sl-input::part(suffix) {
+  color: var(--ts-color-text-subdued);
+}
+
+/* Set color of text displayed in select */
+sl-select::part(display-input) {
+  color: var(--ts-color-text-default);
 }
 
 /** ********** **/
