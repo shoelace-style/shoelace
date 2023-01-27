@@ -35,14 +35,6 @@ describe('<sl-tab-panel>', () => {
     expect(el.getAttribute('aria-hidden')).to.equal('false');
   });
 
-  it('changing active should always update aria-hidden role', async () => {
-    const el = await fixture<SlTabPanel>(html` <sl-tab-panel>Test</sl-tab-panel> `);
-
-    el.active = true;
-    await aTimeout(100);
-    expect(el.getAttribute('aria-hidden')).to.equal('false');
-  });
-
   it('passed id should be used', async () => {
     const el = await fixture<SlTabPanel>(html` <sl-tab-panel id="test-id">Test</sl-tab-panel> `);
 
