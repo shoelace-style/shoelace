@@ -1,14 +1,14 @@
-import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property } from 'lit/decorators.js';
 import { generateCalendarGrid, getAllDayNames, getMonthName, isSameDay } from '../../internal/calendar';
-import { partMap } from '../../internal/part-map';
-import ShoelaceElement from '../../internal/shoelace-element';
 import { HasSlotController } from '../../internal/slot';
-import { watch } from '../../internal/watch';
+import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize';
+import { partMap } from '../../internal/part-map';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './calendar.styles';
-import type { TemplateResult } from 'lit';
+import type { CSSResultGroup, TemplateResult } from 'lit';
 
 export interface RenderDayOptions {
   disabled?: boolean;
@@ -17,6 +17,7 @@ export interface RenderDayOptions {
 
 /**
  * @summary A calendar prototype for Shoelace.
+ * @documentation https://shoelace.style/components/calendar
  *
  * @since 2.0
  * @status experimental
