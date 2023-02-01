@@ -38,7 +38,7 @@ export default css`
     font-family: var(--sl-input-font-family);
     font-size: inherit;
     font-weight: var(--sl-input-font-weight);
-    color: var(--sl-input-color);
+    color: var(--sl-input-label-color);
     vertical-align: middle;
     cursor: pointer;
   }

@@ -16,9 +16,9 @@ interface WatchOptions {
 }
 
 /**
- * Runs when an observed property changes, e.g. @property or @state, but before the component updates.
- * To wait for an update to complete after a change occurs, use `await this.updateComplete` in the handler. To start
- * watching after the initial update/render, use `{ waitUntilFirstUpdate: true }` or `this.hasUpdated` in the handler.
+ * Runs when observed properties change, e.g. @property or @state, but before the component updates. To wait for an
+ * update to complete after a change occurs, use `await this.updateComplete` in the handler. To start watching after the
+ * initial update/render, use `{ waitUntilFirstUpdate: true }` or `this.hasUpdated` in the handler.
  *
  * Usage:
  *
@@ -27,21 +27,23 @@ interface WatchOptions {
  *   ...
  * }
  */
-export function watch(propName: string, options?: WatchOptions) {
+export function watch(propertyName: string | string[], options?: WatchOptions) {
   const resolvedOptions: Required<WatchOptions> = {
     waitUntilFirstUpdate: false,
     ...options
   };
   return <ElemClass extends LitElement>(proto: ElemClass, decoratedFnName: UpdateHandlerFunctionKeys<ElemClass>) => {
-    // @ts-expect-error -- update is a protected property
+    // @ts-expect-error - update is a protected property
     const { update } = proto;
-    if (propName in proto) {
-      const propNameKey = propName as keyof ElemClass;
-      // @ts-expect-error -- update is a protected property
-      proto.update = function (this: ElemClass, changedProps: Map<keyof ElemClass, ElemClass[keyof ElemClass]>) {
-        if (changedProps.has(propNameKey)) {
-          const oldValue = changedProps.get(propNameKey);
-          const newValue = this[propNameKey];
+    const watchedProperties = Array.isArray(propertyName) ? propertyName : [propertyName];
+
+    // @ts-expect-error - update is a protected property
+    proto.update = function (this: ElemClass, changedProps: Map<keyof ElemClass, ElemClass[keyof ElemClass]>) {
+      watchedProperties.forEach(property => {
+        const key = property as keyof ElemClass;
+        if (changedProps.has(key)) {
+          const oldValue = changedProps.get(key);
+          const newValue = this[key];
 
           if (oldValue !== newValue) {
             if (!resolvedOptions.waitUntilFirstUpdate || this.hasUpdated) {
@@ -49,9 +51,9 @@ export function watch(propName: string, options?: WatchOptions) {
             }
           }
         }
+      });
 
-        update.call(this, changedProps);
-      };
-    }
+      update.call(this, changedProps);
+    };
   };
 }

@@ -8,6 +8,10 @@ export default css`
     display: block;
   }
 
+  :host([inert]) {
+    display: none;
+  }
+
   .menu-item {
     position: relative;
     display: flex;

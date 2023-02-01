@@ -1,4 +1,4 @@
-import { expect, fixture, html, waitUntil, aTimeout } from '@open-wc/testing';
+import { aTimeout, expect, fixture, html, waitUntil } from '@open-wc/testing';
 import sinon from 'sinon';
 import type SlInclude from './include';
 

@@ -1,18 +1,18 @@
-import { html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { getTextContent } from '../../internal/slot';
-import { watch } from '../../internal/watch';
 import '../icon/icon';
+import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query } from 'lit/decorators.js';
+import { getTextContent } from '../../internal/slot';
+import { html } from 'lit';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './menu-item.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Menu items provide options for the user to pick from in a menu.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/menu-item
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  *

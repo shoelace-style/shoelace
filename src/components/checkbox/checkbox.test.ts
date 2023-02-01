@@ -1,4 +1,5 @@
-import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
+import { clickOnElement } from '../../internal/test';
+import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlCheckbox from './checkbox';
@@ -48,8 +49,7 @@ describe('<sl-checkbox>', () => {
 
   it('should be valid by default', async () => {
     const el = await fixture<SlCheckbox>(html` <sl-checkbox></sl-checkbox> `);
-
-    expect(el.invalid).to.be.false;
+    expect(el.checkValidity()).to.be.true;
   });
 
   it('should emit sl-change and sl-input when clicked', async () => {
@@ -139,25 +139,50 @@ describe('<sl-checkbox>', () => {
       expect(formData!.get('a')).to.equal('on');
     });
 
-    it('should show a constraint validation error when setCustomValidity() is called', async () => {
-      const form = await fixture<HTMLFormElement>(html`
-        <form>
-          <sl-checkbox name="a" value="1" checked></sl-checkbox>
-          <sl-button type="submit">Submit</sl-button>
-        </form>
-      `);
-      const button = form.querySelector('sl-button')!;
-      const checkbox = form.querySelector('sl-checkbox')!;
-      const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    it('should be invalid when setCustomValidity() is called with a non-empty value', async () => {
+      const checkbox = await fixture<HTMLFormElement>(html` <sl-checkbox></sl-checkbox> `);
 
       // Submitting the form after setting custom validity should not trigger the handler
       checkbox.setCustomValidity('Invalid selection');
-      form.addEventListener('submit', submitHandler);
-      button.click();
+      await checkbox.updateComplete;
 
-      await aTimeout(100);
+      expect(checkbox.checkValidity()).to.be.false;
+      expect(checkbox.checkValidity()).to.be.false;
+      expect(checkbox.hasAttribute('data-invalid')).to.be.true;
+      expect(checkbox.hasAttribute('data-valid')).to.be.false;
+      expect(checkbox.hasAttribute('data-user-invalid')).to.be.false;
+      expect(checkbox.hasAttribute('data-user-valid')).to.be.false;
 
-      expect(submitHandler).to.not.have.been.called;
+      await clickOnElement(checkbox);
+      await checkbox.updateComplete;
+
+      expect(checkbox.hasAttribute('data-user-invalid')).to.be.true;
+      expect(checkbox.hasAttribute('data-user-valid')).to.be.false;
+    });
+
+    it('should be invalid when required and unchecked', async () => {
+      const checkbox = await fixture<HTMLFormElement>(html` <sl-checkbox required></sl-checkbox> `);
+      expect(checkbox.checkValidity()).to.be.false;
+    });
+
+    it('should be valid when required and checked', async () => {
+      const checkbox = await fixture<HTMLFormElement>(html` <sl-checkbox required checked></sl-checkbox> `);
+      expect(checkbox.checkValidity()).to.be.true;
+    });
+
+    it('should be present in form data when using the form attribute and located outside of a <form>', async () => {
+      const el = await fixture<HTMLFormElement>(html`
+        <div>
+          <form id="f">
+            <sl-button type="submit">Submit</sl-button>
+          </form>
+          <sl-checkbox form="f" name="a" value="1" checked></sl-checkbox>
+        </div>
+      `);
+      const form = el.querySelector('form')!;
+      const formData = new FormData(form);
+
+      expect(formData.get('a')).to.equal('1');
     });
   });
 

@@ -1,12 +1,12 @@
 import { customElement, property } from 'lit/decorators.js';
-import ShoelaceElement from '../../internal/shoelace-element';
 import { LocalizeController } from '../../utilities/localize';
+import ShoelaceElement from '../../internal/shoelace-element';
 
 /**
  * @summary Formats a number as a human readable bytes value.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/format-bytes
  * @status stable
+ * @since 2.0
  */
 @customElement('sl-format-bytes')
 export default class SlFormatBytes extends ShoelaceElement {

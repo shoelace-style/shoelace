@@ -1,20 +1,20 @@
-import { html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { watch } from '../../internal/watch';
-import styles from './icon.styles';
 import { getIconLibrary, unwatchIcon, watchIcon } from './library';
+import { html } from 'lit';
 import { requestIcon } from './request';
+import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
+import styles from './icon.styles';
 import type { CSSResultGroup } from 'lit';
 
 let parser: DOMParser;
 
 /**
  * @summary Icons are symbols that can be used to represent various options within an application.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/icon
  * @status stable
+ * @since 2.0
  *
  * @event sl-load - Emitted when the icon has loaded.
  * @event sl-error - Emitted when the icon fails to load due to an error.
@@ -80,9 +80,7 @@ export default class SlIcon extends ShoelaceElement {
     }
   }
 
-  @watch('name')
-  @watch('src')
-  @watch('library')
+  @watch(['name', 'src', 'library'])
   async setIcon() {
     const library = getIconLibrary(this.library);
     const url = this.getUrl();

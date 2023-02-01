@@ -1,9 +1,9 @@
-import { html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
 import { clamp } from '../../internal/math';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { watch } from '../../internal/watch';
+import { customElement, property, query } from 'lit/decorators.js';
+import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import SlTreeItem from '../tree-item/tree-item';
 import styles from './tree.styles';
 import type { CSSResultGroup } from 'lit';
@@ -50,9 +50,9 @@ function syncCheckboxes(changedTreeItem: SlTreeItem, initialSync = false) {
 
 /**
  * @summary Trees allow you to display a hierarchical list of selectable [tree items](/components/tree-item). Items with children can be expanded and collapsed as desired by the user.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/tree
  * @status stable
+ * @since 2.0
  *
  * @event {{ selection: TreeItem[] }} sl-selection-change - Emitted when a tree item is selected or deselected.
  *
@@ -218,34 +218,8 @@ export default class SlTree extends ShoelaceElement {
     }
   }
 
-  // Returns the list of tree items that are selected in the tree.
-  private get selectedItems(): SlTreeItem[] {
-    const items = this.getAllTreeItems();
-    const isSelected = (item: SlTreeItem) => item.selected;
-
-    return items.filter(isSelected);
-  }
-
   private getAllTreeItems() {
     return [...this.querySelectorAll<SlTreeItem>('sl-tree-item')];
-  }
-
-  private getFocusableItems() {
-    const items = this.getAllTreeItems();
-    const collapsedItems = new Set();
-
-    return items.filter(item => {
-      // Exclude disabled elements
-      if (item.disabled) return false;
-
-      // Exclude those whose parent is collapsed or loading
-      const parent: SlTreeItem | null | undefined = item.parentElement?.closest('[role=treeitem]');
-      if (parent && (!parent.expanded || parent.loading || collapsedItems.has(parent))) {
-        collapsedItems.add(item);
-      }
-
-      return !collapsedItems.has(item);
-    });
   }
 
   private focusItem(item?: SlTreeItem | null) {
@@ -387,6 +361,33 @@ export default class SlTree extends ShoelaceElement {
         syncCheckboxes(treeItem, true)
       );
     }
+  }
+
+  /** @internal Returns the list of tree items that are selected in the tree. */
+  get selectedItems(): SlTreeItem[] {
+    const items = this.getAllTreeItems();
+    const isSelected = (item: SlTreeItem) => item.selected;
+
+    return items.filter(isSelected);
+  }
+
+  /** @internal Gets focusable tree items in the tree. */
+  getFocusableItems() {
+    const items = this.getAllTreeItems();
+    const collapsedItems = new Set();
+
+    return items.filter(item => {
+      // Exclude disabled elements
+      if (item.disabled) return false;
+
+      // Exclude those whose parent is collapsed or loading
+      const parent: SlTreeItem | null | undefined = item.parentElement?.closest('[role=treeitem]');
+      if (parent && (!parent.expanded || parent.loading || collapsedItems.has(parent))) {
+        collapsedItems.add(item);
+      }
+
+      return !collapsedItems.has(item);
+    });
   }
 
   render() {

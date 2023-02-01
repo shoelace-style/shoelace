@@ -9,7 +9,7 @@ const translation: Translation = {
   clearEntry: 'پاک کردن ورودی',
   close: 'بستن',
   copy: 'رونوشت',
-  numOptionsSelected: (num: number) => {
+  numOptionsSelected: num => {
     if (num === 0) return 'هیچ گزینه ای انتخاب نشده است';
     if (num === 1) return '1 گزینه انتخاب شده است';
     return `${num} گزینه انتخاب شده است`;

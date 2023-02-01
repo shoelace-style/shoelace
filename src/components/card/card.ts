@@ -1,16 +1,16 @@
-import { html } from 'lit';
-import { customElement } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import ShoelaceElement from '../../internal/shoelace-element';
+import { customElement } from 'lit/decorators.js';
 import { HasSlotController } from '../../internal/slot';
+import { html } from 'lit';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './card.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Cards can be used to group related subjects in a container.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/card
  * @status stable
+ * @since 2.0
  *
  * @slot - The card's main content.
  * @slot header - An optional header for the card.

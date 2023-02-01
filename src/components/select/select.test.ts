@@ -1,8 +1,8 @@
 import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
-import { sendKeys } from '@web/test-runner-commands';
-import sinon from 'sinon';
 import { clickOnElement } from '../../internal/test';
+import { sendKeys } from '@web/test-runner-commands';
 import { serialize } from '../../utilities/form';
+import sinon from 'sinon';
 import type SlOption from '../option/option';
 import type SlSelect from './select';
 
@@ -27,6 +27,34 @@ describe('<sl-select>', () => {
       </sl-select>
     `);
     expect(el.displayInput.disabled).to.be.true;
+  });
+
+  it('should show a placeholder when no options are selected', async () => {
+    const el = await fixture<SlSelect>(html`
+      <sl-select placeholder="Select one">
+        <sl-option value="option-1">Option 1</sl-option>
+        <sl-option value="option-2">Option 2</sl-option>
+        <sl-option value="option-3">Option 3</sl-option>
+      </sl-select>
+    `);
+    const displayInput = el.shadowRoot!.querySelector<HTMLInputElement>('[part~="display-input"]')!;
+
+    expect(getComputedStyle(displayInput).opacity).to.not.equal('0');
+    expect(displayInput.placeholder).to.equal('Select one');
+  });
+
+  it('should show a placeholder when no options are selected and multiple is set', async () => {
+    const el = await fixture<SlSelect>(html`
+      <sl-select placeholder="Select a few" multiple>
+        <sl-option value="option-1">Option 1</sl-option>
+        <sl-option value="option-2">Option 2</sl-option>
+        <sl-option value="option-3">Option 3</sl-option>
+      </sl-select>
+    `);
+    const displayInput = el.shadowRoot!.querySelector<HTMLInputElement>('[part~="display-input"]')!;
+
+    expect(getComputedStyle(displayInput).opacity).to.not.equal('0');
+    expect(displayInput.placeholder).to.equal('Select a few');
   });
 
   it('should not allow selection when the option is disabled', async () => {
@@ -213,9 +241,62 @@ describe('<sl-select>', () => {
       el.requestSubmit();
       expect(select.shadowRoot!.activeElement).to.equal(select.displayInput);
     });
+
+    it('should receive the correct validation attributes ("states") when valid', async () => {
+      const el = await fixture<SlSelect>(html`
+        <sl-select label="Select one" required value="option-1">
+          <sl-option value="option-1">Option 1</sl-option>
+          <sl-option value="option-2">Option 2</sl-option>
+          <sl-option value="option-3">Option 3</sl-option>
+        </sl-select>
+      `);
+      const secondOption = el.querySelectorAll('sl-option')[1]!;
+
+      expect(el.checkValidity()).to.be.true;
+      expect(el.hasAttribute('data-required')).to.be.true;
+      expect(el.hasAttribute('data-optional')).to.be.false;
+      expect(el.hasAttribute('data-invalid')).to.be.false;
+      expect(el.hasAttribute('data-valid')).to.be.true;
+      expect(el.hasAttribute('data-user-invalid')).to.be.false;
+      expect(el.hasAttribute('data-user-valid')).to.be.false;
+
+      await el.show();
+      await clickOnElement(secondOption);
+      await el.updateComplete;
+
+      expect(el.checkValidity()).to.be.true;
+      expect(el.hasAttribute('data-user-invalid')).to.be.false;
+      expect(el.hasAttribute('data-user-valid')).to.be.true;
+    });
+
+    it('should receive the correct validation attributes ("states") when invalid', async () => {
+      const el = await fixture<SlSelect>(html`
+        <sl-select label="Select one" required>
+          <sl-option value="option-1">Option 1</sl-option>
+          <sl-option value="option-2">Option 2</sl-option>
+          <sl-option value="option-3">Option 3</sl-option>
+        </sl-select>
+      `);
+      const secondOption = el.querySelectorAll('sl-option')[1]!;
+
+      expect(el.hasAttribute('data-required')).to.be.true;
+      expect(el.hasAttribute('data-optional')).to.be.false;
+      expect(el.hasAttribute('data-invalid')).to.be.true;
+      expect(el.hasAttribute('data-valid')).to.be.false;
+      expect(el.hasAttribute('data-user-invalid')).to.be.false;
+      expect(el.hasAttribute('data-user-valid')).to.be.false;
+
+      await el.show();
+      await clickOnElement(secondOption);
+      el.value = '';
+      await el.updateComplete;
+
+      expect(el.hasAttribute('data-user-invalid')).to.be.true;
+      expect(el.hasAttribute('data-user-valid')).to.be.false;
+    });
   });
 
-  describe('when serializing', () => {
+  describe('when submitting a form', () => {
     it('should serialize its name and value with FormData', async () => {
       const form = await fixture<HTMLFormElement>(html`
         <form>
@@ -272,6 +353,25 @@ describe('<sl-select>', () => {
       const json = serialize(form);
       expect(JSON.stringify(json)).to.equal(JSON.stringify({ a: ['option-2', 'option-3'] }));
     });
+
+    it('should be present in form data when using the form attribute and located outside of a <form>', async () => {
+      const el = await fixture<HTMLFormElement>(html`
+        <div>
+          <form id="f">
+            <sl-button type="submit">Submit</sl-button>
+          </form>
+          <sl-select form="f" name="a" value="option-1">
+            <sl-option value="option-1">Option 1</sl-option>
+            <sl-option value="option-2">Option 2</sl-option>
+            <sl-option value="option-3">Option 3</sl-option>
+          </sl-select>
+        </div>
+      `);
+      const form = el.querySelector('form')!;
+      const formData = new FormData(form);
+
+      expect(formData.get('a')).to.equal('option-1');
+    });
   });
 
   describe('when resetting a form', () => {
@@ -288,12 +388,10 @@ describe('<sl-select>', () => {
       `);
       const resetButton = form.querySelector('sl-button')!;
       const select = form.querySelector('sl-select')!;
-      const option2 = form.querySelectorAll('sl-option')![1];
 
-      await select.show();
-      await clickOnElement(option2);
+      select.value = 'option-3';
       await select.updateComplete;
-      expect(select.value).to.equal('option-2');
+      expect(select.value).to.equal('option-3');
 
       setTimeout(() => clickOnElement(resetButton));
       await oneEvent(form, 'reset');
@@ -364,6 +462,29 @@ describe('<sl-select>', () => {
     expect(clearHandler).to.have.been.calledOnce;
   });
 
+  it('should emit sl-change and sl-input when a tag is removed', async () => {
+    const el = await fixture<SlSelect>(html`
+      <sl-select value="option-1 option-2 option-3" multiple>
+        <sl-option value="option-1">Option 1</sl-option>
+        <sl-option value="option-2">Option 2</sl-option>
+        <sl-option value="option-3">Option 3</sl-option>
+      </sl-select>
+    `);
+    const changeHandler = sinon.spy();
+    const inputHandler = sinon.spy();
+    const tag = el.shadowRoot!.querySelector('[part~="tag"]')!;
+    const removeButton = tag.shadowRoot!.querySelector('[part~="remove-button"]')!;
+
+    el.addEventListener('sl-change', changeHandler);
+    el.addEventListener('sl-input', inputHandler);
+
+    await clickOnElement(removeButton);
+    await el.updateComplete;
+
+    expect(changeHandler).to.have.been.calledOnce;
+    expect(inputHandler).to.have.been.calledOnce;
+  });
+
   it('should emit sl-show, sl-after-show, sl-hide, and sl-after-hide events when the listbox opens and closes', async () => {
     const el = await fixture<SlSelect>(html`
       <sl-select value="option-1">
@@ -389,5 +510,18 @@ describe('<sl-select>', () => {
     await el.hide();
     expect(hideHandler).to.have.been.calledOnce;
     expect(afterHideHandler).to.have.been.calledOnce;
+  });
+
+  it('should have rounded tags when using the pill attribute', async () => {
+    const el = await fixture<SlSelect>(html`
+      <sl-select value="option-1 option-2" multiple pill>
+        <sl-option value="option-1">Option 1</sl-option>
+        <sl-option value="option-2">Option 2</sl-option>
+        <sl-option value="option-3">Option 3</sl-option>
+      </sl-select>
+    `);
+    const tag = el.shadowRoot!.querySelector('[part~="tag"]')!;
+
+    expect(tag.hasAttribute('pill')).to.be.true;
   });
 });

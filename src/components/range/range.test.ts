@@ -1,8 +1,8 @@
+import { clickOnElement } from '../../internal/test';
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
-import sinon from 'sinon';
-import { clickOnElement } from '../../internal/test';
 import { serialize } from '../../utilities/form';
+import sinon from 'sinon';
 import type SlRange from './range';
 
 describe('<sl-range>', () => {
@@ -20,7 +20,7 @@ describe('<sl-range>', () => {
     expect(el.label).to.equal('');
     expect(el.helpText).to.equal('');
     expect(el.disabled).to.be.false;
-    expect(el.invalid).to.be.false;
+    expect(el.checkValidity()).to.be.true;
     expect(el.min).to.equal(0);
     expect(el.max).to.equal(100);
     expect(el.step).to.equal(1);
@@ -137,7 +137,7 @@ describe('<sl-range>', () => {
     });
   });
 
-  describe('when serializing', () => {
+  describe('when submitting a form', () => {
     it('should serialize its name and value with FormData', async () => {
       const form = await fixture<HTMLFormElement>(html` <form><sl-range name="a" value="1"></sl-range></form> `);
       const formData = new FormData(form);
@@ -148,6 +148,40 @@ describe('<sl-range>', () => {
       const form = await fixture<HTMLFormElement>(html` <form><sl-range name="a" value="1"></sl-range></form> `);
       const json = serialize(form);
       expect(json.a).to.equal('1');
+    });
+
+    it('should be invalid when setCustomValidity() is called with a non-empty value', async () => {
+      const range = await fixture<HTMLFormElement>(html` <sl-range></sl-range> `);
+
+      range.setCustomValidity('Invalid selection');
+      await range.updateComplete;
+
+      expect(range.checkValidity()).to.be.false;
+      expect(range.hasAttribute('data-invalid')).to.be.true;
+      expect(range.hasAttribute('data-valid')).to.be.false;
+      expect(range.hasAttribute('data-user-invalid')).to.be.false;
+      expect(range.hasAttribute('data-user-valid')).to.be.false;
+
+      await clickOnElement(range);
+      await range.updateComplete;
+
+      expect(range.hasAttribute('data-user-invalid')).to.be.true;
+      expect(range.hasAttribute('data-user-valid')).to.be.false;
+    });
+
+    it('should be present in form data when using the form attribute and located outside of a <form>', async () => {
+      const el = await fixture<HTMLFormElement>(html`
+        <div>
+          <form id="f">
+            <sl-button type="submit">Submit</sl-button>
+          </form>
+          <sl-range form="f" name="a" value="50"></sl-range>
+        </div>
+      `);
+      const form = el.querySelector('form')!;
+      const formData = new FormData(form);
+
+      expect(formData.get('a')).to.equal('50');
     });
   });
 

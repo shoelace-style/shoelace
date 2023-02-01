@@ -1,17 +1,17 @@
-import { html } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { watch } from '../../internal/watch';
 import '../icon/icon';
+import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, state } from 'lit/decorators.js';
+import { html } from 'lit';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './radio.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Radios allow the user to select a single option from a group.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/radio
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  *

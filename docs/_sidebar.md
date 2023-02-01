@@ -76,6 +76,7 @@
   - [Border Radius](/tokens/border-radius)
   - [Transition](/tokens/transition)
   - [Z-index](/tokens/z-index)
+  - [More](/tokens/more)
 
 - Utilities
 

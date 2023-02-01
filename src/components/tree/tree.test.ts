@@ -1,8 +1,8 @@
 import { expect, fixture, html, triggerBlurFor, triggerFocusFor } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-import type SlTreeItem from '../tree-item/tree-item';
 import type SlTree from './tree';
+import type SlTreeItem from '../tree-item/tree-item';
 
 describe('<sl-tree>', () => {
   let el: SlTree;

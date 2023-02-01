@@ -1,6 +1,6 @@
 import { expect, fixture, html } from '@open-wc/testing';
-import type SlRadioGroup from '../radio-group/radio-group';
 import type SlRadio from './radio';
+import type SlRadioGroup from '../radio-group/radio-group';
 
 describe('<sl-radio>', () => {
   it('should not get checked when disabled', async () => {

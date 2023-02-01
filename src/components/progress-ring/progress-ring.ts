@@ -1,15 +1,15 @@
-import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import ShoelaceElement from '../../internal/shoelace-element';
+import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './progress-ring.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Progress rings are used to show the progress of a determinate operation in a circular fashion.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/progress-ring
  * @status stable
+ * @since 2.0
  *
  * @slot - A label to show inside the ring.
  *

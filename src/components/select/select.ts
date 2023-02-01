@@ -1,30 +1,30 @@
-import { html } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { scrollIntoView } from 'src/internal/scroll';
-import { animateTo, stopAnimations } from '../../internal/animate';
-import { defaultValue } from '../../internal/default-value';
-import { waitForEvent } from '../../internal/event';
-import { FormSubmitController } from '../../internal/form';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { HasSlotController } from '../../internal/slot';
-import { watch } from '../../internal/watch';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
-import { LocalizeController } from '../../utilities/localize';
 import '../icon/icon';
 import '../popup/popup';
 import '../tag/tag';
+import { animateTo, stopAnimations } from '../../internal/animate';
+import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { defaultValue } from '../../internal/default-value';
+import { FormControlController } from '../../internal/form';
+import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
+import { HasSlotController } from '../../internal/slot';
+import { html } from 'lit';
+import { LocalizeController } from '../../utilities/localize';
+import { scrollIntoView } from 'src/internal/scroll';
+import { waitForEvent } from '../../internal/event';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './select.styles';
+import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type SlOption from '../option/option';
 import type SlPopup from '../popup/popup';
-import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Selects allow you to choose items from a menu of predefined options.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/select
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  * @dependency sl-popup
@@ -55,6 +55,8 @@ import type { CSSResultGroup } from 'lit';
  * @csspart prefix - The container that wraps the prefix slot.
  * @csspart display-input - The element that displays the selected option's label, an `<input>` element.
  * @csspart listbox - The listbox container where options are slotted.
+ * @csspart tags - The container that houses option tags when `multiselect` is used.
+ * @csspart tag - The individual tags that represent each multiselect option.
  * @csspart clear-button - The clear button.
  * @csspart expand-icon - The container that wraps the expand icon.
  */
@@ -62,8 +64,7 @@ import type { CSSResultGroup } from 'lit';
 export default class SlSelect extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  // @ts-expect-error -- Controller is currently unused
-  private readonly formSubmitController = new FormSubmitController(this);
+  private readonly formControlController = new FormControlController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private readonly localize = new LocalizeController(this);
   private typeToSelectString = '';
@@ -79,7 +80,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   @state() displayLabel = '';
   @state() currentOption: SlOption;
   @state() selectedOptions: SlOption[] = [];
-  @state() invalid = false;
 
   /** The name of the select, submitted as a name/value pair with form data. */
   @property() name = '';
@@ -149,6 +149,13 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
   /** The select's help text. If you need to display HTML, use the `help-text` slot instead. */
   @property({ attribute: 'help-text' }) helpText = '';
+
+  /**
+   * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
+   * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
+   * the same document or shadow root for this to work.
+   */
+  @property({ reflect: true }) form = '';
 
   /** The select's required attribute. */
   @property({ type: Boolean, reflect: true }) required = false;
@@ -405,7 +412,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     allOptions.forEach(option => {
       if (values.includes(option.value)) {
         console.error(
-          `An option with duplicate values has been found in <sl-select>. All options must have unique values.`,
+          `An option with a duplicate value of "${option.value}" has been found in <sl-select>. All options must have unique values.`,
           option
         );
       }
@@ -414,6 +421,16 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
     // Select only the options that match the new value
     this.setSelectedOptions(allOptions.filter(el => value.includes(el.value)));
+  }
+
+  private handleTagRemove(event: CustomEvent, option: SlOption) {
+    event.stopPropagation();
+
+    if (!this.disabled) {
+      this.toggleOptionSelection(option, false);
+      this.emit('sl-input');
+      this.emit('sl-change');
+    }
   }
 
   // Gets an array of all <sl-option> elements
@@ -443,7 +460,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
       option.current = true;
       option.tabIndex = 0;
       option.focus();
-      scrollIntoView(option, this.listbox);
     }
   }
 
@@ -458,9 +474,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     // Set the new selection
     if (newSelectedOptions.length) {
       newSelectedOptions.forEach(el => (el.selected = true));
-
-      // Scroll the first selected option into view
-      scrollIntoView(newSelectedOptions[0]!, this.listbox);
     }
 
     // Update selection, value, and display label
@@ -487,14 +500,22 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     // Update the value and display label
     if (this.multiple) {
       this.value = this.selectedOptions.map(el => el.value);
-      this.displayLabel = this.localize.term('numOptionsSelected', this.selectedOptions.length);
+
+      if (this.placeholder && this.value.length === 0) {
+        // When no items are selected, keep the value empty so the placeholder shows
+        this.displayLabel = '';
+      } else {
+        this.displayLabel = this.localize.term('numOptionsSelected', this.selectedOptions.length);
+      }
     } else {
       this.value = this.selectedOptions[0]?.value ?? '';
       this.displayLabel = this.selectedOptions[0]?.getTextLabel() ?? '';
     }
 
     // Update validity
-    this.updateComplete.then(() => (this.invalid = !this.checkValidity()));
+    this.updateComplete.then(() => {
+      this.formControlController.updateValidity();
+    });
   }
 
   @watch('disabled', { waitUntilFirstUpdate: true })
@@ -590,10 +611,10 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     return this.valueInput.reportValidity();
   }
 
-  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  /** Sets a custom validation message. Pass an empty string to restore validity. */
   setCustomValidity(message: string) {
     this.valueInput.setCustomValidity(message);
-    this.invalid = !this.valueInput.checkValidity();
+    this.formControlController.updateValidity();
   }
 
   /** Sets focus on the control. */
@@ -612,6 +633,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
     const hasClearIcon = this.clearable && !this.disabled && this.value.length > 0;
+    const isPlaceholderVisible = this.placeholder && this.value.length === 0;
 
     return html`
       <div
@@ -646,6 +668,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
               'select--disabled': this.disabled,
               'select--multiple': this.multiple,
               'select--focused': this.hasFocus,
+              'select--placeholder-visible': isPlaceholderVisible,
               'select--top': this.placement === 'top',
               'select--bottom': this.placement === 'bottom',
               'select--small': this.size === 'small',
@@ -699,14 +722,11 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
                         if (index < this.maxOptionsVisible || this.maxOptionsVisible <= 0) {
                           return html`
                             <sl-tag
+                              part="tag"
+                              ?pill=${this.pill}
                               size=${this.size}
                               removable
-                              @sl-remove=${(event: CustomEvent) => {
-                                event.stopPropagation();
-                                if (!this.disabled) {
-                                  this.toggleOptionSelection(option, false);
-                                }
-                              }}
+                              @sl-remove=${(event: CustomEvent) => this.handleTagRemove(event, option)}
                             >
                               ${option.getTextLabel()}
                             </sl-tag>

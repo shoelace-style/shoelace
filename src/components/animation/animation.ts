@@ -1,16 +1,16 @@
-import { html } from 'lit';
-import { customElement, property, queryAsync } from 'lit/decorators.js';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { watch } from '../../internal/watch';
-import styles from './animation.styles';
 import { animations } from './animations';
+import { customElement, property, queryAsync } from 'lit/decorators.js';
+import { html } from 'lit';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
+import styles from './animation.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Animate elements declaratively with nearly 100 baked-in presets, or roll your own with custom keyframes. Powered by the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API).
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/animation
  * @status stable
+ * @since 2.0
  *
  * @event sl-cancel - Emitted when the animation is canceled.
  * @event sl-finish - Emitted when the animation finishes.
@@ -161,16 +161,18 @@ export default class SlAnimation extends ShoelaceElement {
     }
   }
 
-  @watch('name')
-  @watch('delay')
-  @watch('direction')
-  @watch('duration')
-  @watch('easing')
-  @watch('endDelay')
-  @watch('fill')
-  @watch('iterations')
-  @watch('iterationsStart')
-  @watch('keyframes')
+  @watch([
+    'name',
+    'delay',
+    'direction',
+    'duration',
+    'easing',
+    'endDelay',
+    'fill',
+    'iterations',
+    'iterationsStart',
+    'keyframes'
+  ])
   handleAnimationChange() {
     if (!this.hasUpdated) {
       return;

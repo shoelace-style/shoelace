@@ -1,23 +1,23 @@
-import { html } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { defaultValue } from '../../internal/default-value';
+import { FormControlController } from '../../internal/form';
+import { HasSlotController } from '../../internal/slot';
+import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import { defaultValue } from '../../internal/default-value';
-import { FormSubmitController } from '../../internal/form';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { HasSlotController } from '../../internal/slot';
-import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './range.styles';
-import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type { CSSResultGroup } from 'lit';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 
 /**
  * @summary Ranges allow the user to select a single value within a given range using a slider.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/range
  * @status stable
+ * @since 2.0
  *
  * @slot label - The range's label. Alternatively, you can use the `label` attribute.
  * @slot help-text - Text that describes how to use the input. Alternatively, you can use the `help-text` attribute.
@@ -46,8 +46,7 @@ import type { CSSResultGroup } from 'lit';
 export default class SlRange extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  // @ts-expect-error -- Controller is currently unused
-  private readonly formSubmitController = new FormSubmitController(this);
+  private readonly formControlController = new FormControlController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private readonly localize = new LocalizeController(this);
   private resizeObserver: ResizeObserver;
@@ -57,7 +56,6 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
 
   @state() private hasFocus = false;
   @state() private hasTooltip = false;
-  @state() invalid = false;
   @property() title = ''; // make reactive to pass through
 
   /** The name of the range, submitted as a name/value pair with form data. */
@@ -92,6 +90,13 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
    * function should return a string to display in the tooltip.
    */
   @property({ attribute: false }) tooltipFormatter: (value: number) => string = (value: number) => value.toString();
+
+  /**
+   * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
+   * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
+   * the same document or shadow root for this to work.
+   */
+  @property({ reflect: true }) form = '';
 
   /** The default value of the form control. Primarily used for resetting the form control. */
   @defaultValue() defaultValue = 0;
@@ -175,7 +180,7 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
 
   @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
-    this.invalid = !this.checkValidity();
+    this.formControlController.updateValidity();
 
     // The value may have constraints, so we set the native control's value and sync it back to ensure it adhere's to
     // min, max, and step properly
@@ -187,9 +192,8 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
 
   @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
-    // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    this.input.disabled = this.disabled;
-    this.invalid = !this.checkValidity();
+    // Disabled form controls are always valid
+    this.formControlController.setValidity(this.disabled);
   }
 
   @watch('hasTooltip', { waitUntilFirstUpdate: true })
@@ -239,10 +243,10 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
     return this.input.reportValidity();
   }
 
-  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  /** Sets a custom validation message. Pass an empty string to restore validity. */
   setCustomValidity(message: string) {
     this.input.setCustomValidity(message);
-    this.invalid = !this.checkValidity();
+    this.formControlController.updateValidity();
   }
 
   render() {
