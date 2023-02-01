@@ -1,15 +1,15 @@
-import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import ShoelaceElement from '../../internal/shoelace-element';
+import { html } from 'lit';
 import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './resize-observer.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary The Resize Observer component offers a thin, declarative interface to the [`ResizeObserver API`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver).
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/resize-observer
  * @status stable
+ * @since 2.0
  *
  * @slot - One or more elements to watch for resizing.
  *
@@ -41,13 +41,13 @@ export default class SlResizeObserver extends ShoelaceElement {
     this.stopObserver();
   }
 
-  handleSlotChange() {
+  private handleSlotChange() {
     if (!this.disabled) {
       this.startObserver();
     }
   }
 
-  startObserver() {
+  private startObserver() {
     const slot = this.shadowRoot!.querySelector('slot');
 
     if (slot !== null) {
@@ -65,7 +65,7 @@ export default class SlResizeObserver extends ShoelaceElement {
     }
   }
 
-  stopObserver() {
+  private stopObserver() {
     this.resizeObserver.disconnect();
   }
 

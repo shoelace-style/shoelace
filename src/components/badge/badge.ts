@@ -1,15 +1,15 @@
-import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property } from 'lit/decorators.js';
+import { html } from 'lit';
 import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './badge.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Badges are used to draw attention and display statuses or counts.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/badge
  * @status stable
+ * @since 2.0
  *
  * @slot - The badge's content.
  *

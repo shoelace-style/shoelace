@@ -8,6 +8,10 @@ export default css`
     display: block;
   }
 
+  :host([inert]) {
+    display: none;
+  }
+
   .menu-item {
     position: relative;
     display: flex;
@@ -60,11 +64,16 @@ export default css`
     outline: none;
   }
 
-  :host(:hover:not([aria-disabled='true'])) .menu-item,
-  :host(:focus-visible:not(.sl-focus-invisible):not([aria-disabled='true'])) .menu-item {
+  :host(:hover:not([aria-disabled='true'])) .menu-item {
+    background-color: var(--sl-color-neutral-100);
+    color: var(--sl-color-neutral-1000);
+  }
+
+  :host(:focus-visible) .menu-item {
     outline: none;
     background-color: var(--sl-color-primary-600);
     color: var(--sl-color-neutral-0);
+    opacity: 1;
   }
 
   .menu-item .menu-item__check,
@@ -84,7 +93,7 @@ export default css`
 
   @media (forced-colors: active) {
     :host(:hover:not([aria-disabled='true'])) .menu-item,
-    :host(:focus-visible:not(.sl-focus-invisible):not([aria-disabled='true'])) .menu-item {
+    :host(:focus-visible) .menu-item {
       outline: dashed 1px SelectedItem;
       outline-offset: -1px;
     }

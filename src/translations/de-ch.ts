@@ -1,25 +1,14 @@
 import { registerTranslation } from '../utilities/localize';
+import baseTranslation from './de';
 import type { Translation } from '../utilities/localize';
 
 const translation: Translation = {
+  ...baseTranslation,
   $code: 'de-CH',
   $name: 'Deutsch (Schweiz)',
-  $dir: 'ltr',
 
-  clearEntry: 'Eingabe löschen',
   close: 'Schliessen',
-  copy: 'Kopieren',
-  currentValue: 'Aktueller Wert',
-  hidePassword: 'Passwort verbergen',
-  loading: 'Wird geladen',
-  progress: 'Fortschritt',
-  remove: 'Entfernen',
-  resize: 'Grösse ändern',
-  scrollToEnd: 'Zum Ende scrollen',
-  scrollToStart: 'Zum Anfang scrollen',
-  selectAColorFromTheScreen: 'Wähle eine Farbe vom Bildschirm',
-  showPassword: 'Passwort anzeigen',
-  toggleColorFormat: 'Farbformat umschalten'
+  resize: 'Grösse ändern'
 };
 
 registerTranslation(translation);

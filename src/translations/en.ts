@@ -9,6 +9,11 @@ const translation: Translation = {
   clearEntry: 'Clear entry',
   close: 'Close',
   copy: 'Copy',
+  numOptionsSelected: num => {
+    if (num === 0) return 'No options selected';
+    if (num === 1) return '1 option selected';
+    return `${num} options selected`;
+  },
   currentValue: 'Current value',
   nextMonth: 'Next Month',
   previousMonth: 'Previous Month',

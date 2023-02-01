@@ -1,14 +1,14 @@
-import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
+import { html } from 'lit';
 import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './button-group.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Button groups can be used to group related buttons into sections.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/button-group
  * @status stable
+ * @since 2.0
  *
  * @slot - One or more `<sl-button>` elements to display in the button group.
  *
@@ -28,27 +28,27 @@ export default class SlButtonGroup extends ShoelaceElement {
    */
   @property() label = '';
 
-  handleFocus(event: CustomEvent) {
+  private handleFocus(event: CustomEvent) {
     const button = findButton(event.target as HTMLElement);
     button?.classList.add('sl-button-group__button--focus');
   }
 
-  handleBlur(event: CustomEvent) {
+  private handleBlur(event: CustomEvent) {
     const button = findButton(event.target as HTMLElement);
     button?.classList.remove('sl-button-group__button--focus');
   }
 
-  handleMouseOver(event: CustomEvent) {
+  private handleMouseOver(event: CustomEvent) {
     const button = findButton(event.target as HTMLElement);
     button?.classList.add('sl-button-group__button--hover');
   }
 
-  handleMouseOut(event: CustomEvent) {
+  private handleMouseOut(event: CustomEvent) {
     const button = findButton(event.target as HTMLElement);
     button?.classList.remove('sl-button-group__button--hover');
   }
 
-  handleSlotChange() {
+  private handleSlotChange() {
     const slottedElements = [...this.defaultSlot.assignedElements({ flatten: true })] as HTMLElement[];
 
     slottedElements.forEach(el => {

@@ -1,21 +1,21 @@
-import { html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { styleMap } from 'lit/directives/style-map.js';
-import { drag } from '../../internal/drag';
-import { clamp } from '../../internal/math';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { watch } from '../../internal/watch';
-import { LocalizeController } from '../../utilities/localize';
 import '../icon/icon';
+import { clamp } from '../../internal/math';
+import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query } from 'lit/decorators.js';
+import { drag } from '../../internal/drag';
+import { html } from 'lit';
+import { LocalizeController } from '../../utilities/localize';
+import { styleMap } from 'lit/directives/style-map.js';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './image-comparer.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Compare visual differences between similar photos with a sliding panel.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/image-comparer
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  *
@@ -38,15 +38,15 @@ import type { CSSResultGroup } from 'lit';
 export default class SlImageComparer extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
+  private readonly localize = new LocalizeController(this);
+
   @query('.image-comparer') base: HTMLElement;
   @query('.image-comparer__handle') handle: HTMLElement;
-
-  private readonly localize = new LocalizeController(this);
 
   /** The position of the divider as a percentage. */
   @property({ type: Number, reflect: true }) position = 50;
 
-  handleDrag(event: PointerEvent) {
+  private handleDrag(event: PointerEvent) {
     const { width } = this.base.getBoundingClientRect();
     const isRtl = this.localize.dir() === 'rtl';
 
@@ -61,7 +61,7 @@ export default class SlImageComparer extends ShoelaceElement {
     });
   }
 
-  handleKeyDown(event: KeyboardEvent) {
+  private handleKeyDown(event: KeyboardEvent) {
     const isLtr = this.localize.dir() === 'ltr';
     const isRtl = this.localize.dir() === 'rtl';
 

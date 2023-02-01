@@ -3,7 +3,6 @@ import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
 import { deleteSync } from 'del';
-import { pascalCase } from 'pascal-case';
 import prettier from 'prettier';
 import prettierConfig from '../prettier.config.cjs';
 import { getAllComponents } from './shared.js';
@@ -40,14 +39,14 @@ components.map(component => {
       import { createComponent } from '@lit-labs/react';
       import Component from '../../${importPath}';
 
-      export default createComponent(
-        React,
-        '${component.tagName}',
-        Component,
-        {
+      export default createComponent({
+        tagName: '${component.tagName}',
+        elementClass: Component,
+        react: React,
+        events: {
           ${events}
         }
-      );
+      });
     `,
     Object.assign(prettierConfig, {
       parser: 'babel-ts'

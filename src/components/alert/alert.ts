@@ -1,14 +1,14 @@
-import { html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { animateTo, stopAnimations } from '../../internal/animate';
-import { waitForEvent } from '../../internal/event';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { HasSlotController } from '../../internal/slot';
-import { watch } from '../../internal/watch';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
-import { LocalizeController } from '../../utilities/localize';
 import '../icon-button/icon-button';
+import { animateTo, stopAnimations } from '../../internal/animate';
+import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query } from 'lit/decorators.js';
+import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
+import { HasSlotController } from '../../internal/slot';
+import { html } from 'lit';
+import { LocalizeController } from '../../utilities/localize';
+import { waitForEvent } from '../../internal/event';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './alert.styles';
 import type { CSSResultGroup } from 'lit';
 
@@ -16,9 +16,9 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
 
 /**
  * @summary Alerts are used to display important messages inline or as toast notifications.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/alert
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon-button
  *
@@ -71,6 +71,57 @@ export default class SlAlert extends ShoelaceElement {
 
   firstUpdated() {
     this.base.hidden = !this.open;
+  }
+
+  private restartAutoHide() {
+    clearTimeout(this.autoHideTimeout);
+    if (this.open && this.duration < Infinity) {
+      this.autoHideTimeout = window.setTimeout(() => this.hide(), this.duration);
+    }
+  }
+
+  private handleCloseClick() {
+    this.hide();
+  }
+
+  private handleMouseMove() {
+    this.restartAutoHide();
+  }
+
+  @watch('open', { waitUntilFirstUpdate: true })
+  async handleOpenChange() {
+    if (this.open) {
+      // Show
+      this.emit('sl-show');
+
+      if (this.duration < Infinity) {
+        this.restartAutoHide();
+      }
+
+      await stopAnimations(this.base);
+      this.base.hidden = false;
+      const { keyframes, options } = getAnimation(this, 'alert.show', { dir: this.localize.dir() });
+      await animateTo(this.base, keyframes, options);
+
+      this.emit('sl-after-show');
+    } else {
+      // Hide
+      this.emit('sl-hide');
+
+      clearTimeout(this.autoHideTimeout);
+
+      await stopAnimations(this.base);
+      const { keyframes, options } = getAnimation(this, 'alert.hide', { dir: this.localize.dir() });
+      await animateTo(this.base, keyframes, options);
+      this.base.hidden = true;
+
+      this.emit('sl-after-hide');
+    }
+  }
+
+  @watch('duration')
+  handleDurationChange() {
+    this.restartAutoHide();
   }
 
   /** Shows the alert. */
@@ -127,57 +178,6 @@ export default class SlAlert extends ShoelaceElement {
         { once: true }
       );
     });
-  }
-
-  restartAutoHide() {
-    clearTimeout(this.autoHideTimeout);
-    if (this.open && this.duration < Infinity) {
-      this.autoHideTimeout = window.setTimeout(() => this.hide(), this.duration);
-    }
-  }
-
-  handleCloseClick() {
-    this.hide();
-  }
-
-  handleMouseMove() {
-    this.restartAutoHide();
-  }
-
-  @watch('open', { waitUntilFirstUpdate: true })
-  async handleOpenChange() {
-    if (this.open) {
-      // Show
-      this.emit('sl-show');
-
-      if (this.duration < Infinity) {
-        this.restartAutoHide();
-      }
-
-      await stopAnimations(this.base);
-      this.base.hidden = false;
-      const { keyframes, options } = getAnimation(this, 'alert.show', { dir: this.localize.dir() });
-      await animateTo(this.base, keyframes, options);
-
-      this.emit('sl-after-show');
-    } else {
-      // Hide
-      this.emit('sl-hide');
-
-      clearTimeout(this.autoHideTimeout);
-
-      await stopAnimations(this.base);
-      const { keyframes, options } = getAnimation(this, 'alert.hide', { dir: this.localize.dir() });
-      await animateTo(this.base, keyframes, options);
-      this.base.hidden = true;
-
-      this.emit('sl-after-hide');
-    }
-  }
-
-  @watch('duration')
-  handleDurationChange() {
-    this.restartAutoHide();
   }
 
   render() {

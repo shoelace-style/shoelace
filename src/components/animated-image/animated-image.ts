@@ -1,16 +1,16 @@
-import { html } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { watch } from '../../internal/watch';
 import '../icon/icon';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { html } from 'lit';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './animated-image.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary A component for displaying animated GIFs and WEBPs that play and pause on interaction.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/animated-image
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  *
@@ -29,10 +29,10 @@ import type { CSSResultGroup } from 'lit';
 export default class SlAnimatedImage extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
+  @query('.animated-image__animated') animatedImage: HTMLImageElement;
+
   @state() frozenFrame: string;
   @state() isLoaded = false;
-
-  @query('.animated-image__animated') animatedImage: HTMLImageElement;
 
   /** The path to the image to load. */
   @property() src: string;
@@ -43,11 +43,11 @@ export default class SlAnimatedImage extends ShoelaceElement {
   /** Plays the animation. When this attribute is remove, the animation will pause. */
   @property({ type: Boolean, reflect: true }) play: boolean;
 
-  handleClick() {
+  private handleClick() {
     this.play = !this.play;
   }
 
-  handleLoad() {
+  private handleLoad() {
     const canvas = document.createElement('canvas');
     const { width, height } = this.animatedImage;
     canvas.width = width;
@@ -61,7 +61,7 @@ export default class SlAnimatedImage extends ShoelaceElement {
     }
   }
 
-  handleError() {
+  private handleError() {
     this.emit('sl-error');
   }
 

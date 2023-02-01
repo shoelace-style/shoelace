@@ -1,16 +1,16 @@
-import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { watch } from '../../internal/watch';
-import styles from './include.styles';
+import { html } from 'lit';
 import { requestInclude } from './request';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
+import styles from './include.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Includes give you the power to embed external HTML files into the page.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/include
  * @status stable
+ * @since 2.0
  *
  * @event sl-load - Emitted when the included file is loaded.
  * @event {{ status: number }} sl-error - Emitted when the included file fails to load due to an error.
@@ -34,7 +34,7 @@ export default class SlInclude extends ShoelaceElement {
    */
   @property({ attribute: 'allow-scripts', type: Boolean }) allowScripts = false;
 
-  executeScript(script: HTMLScriptElement) {
+  private executeScript(script: HTMLScriptElement) {
     // Create a copy of the script and swap it out so the browser executes it
     const newScript = document.createElement('script');
     [...script.attributes].forEach(attr => newScript.setAttribute(attr.name, attr.value));

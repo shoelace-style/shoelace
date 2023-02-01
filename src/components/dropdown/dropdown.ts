@@ -1,28 +1,28 @@
-import { html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { animateTo, stopAnimations } from '../../internal/animate';
-import { waitForEvent } from '../../internal/event';
-import { scrollIntoView } from '../../internal/scroll';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { getTabbableBoundary } from '../../internal/tabbable';
-import { watch } from '../../internal/watch';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
-import { LocalizeController } from '../../utilities/localize';
 import '../popup/popup';
+import { animateTo, stopAnimations } from '../../internal/animate';
+import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query } from 'lit/decorators.js';
+import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
+import { getTabbableBoundary } from '../../internal/tabbable';
+import { html } from 'lit';
+import { LocalizeController } from '../../utilities/localize';
+import { scrollIntoView } from '../../internal/scroll';
+import { waitForEvent } from '../../internal/event';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './dropdown.styles';
+import type { CSSResultGroup } from 'lit';
 import type SlButton from '../button/button';
 import type SlIconButton from '../icon-button/icon-button';
-import type SlMenuItem from '../menu-item/menu-item';
 import type SlMenu from '../menu/menu';
+import type SlMenuItem from '../menu-item/menu-item';
 import type SlPopup from '../popup/popup';
-import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Dropdowns expose additional content that "drops down" in a panel.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/dropdown
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-popup
  *
@@ -265,12 +265,6 @@ export default class SlDropdown extends ShoelaceElement {
             }
           });
         }
-      }
-
-      // Other keys bring focus to the menu and initiate type-to-select behavior
-      const ignoredKeys = ['Tab', 'Shift', 'Meta', 'Ctrl', 'Alt'];
-      if (this.open && !ignoredKeys.includes(event.key)) {
-        menu.typeToSelect(event);
       }
     }
   }

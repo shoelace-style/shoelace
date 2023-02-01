@@ -1,21 +1,22 @@
-import { html } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import '../icon/icon';
 import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { defaultValue } from '../../internal/default-value';
+import { FormControlController } from '../../internal/form';
+import { HasSlotController } from '../../internal/slot';
+import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import { defaultValue } from '../../internal/default-value';
-import { FormSubmitController } from '../../internal/form';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { HasSlotController } from '../../internal/slot';
-import { watch } from '../../internal/watch';
 import { LocalizeController } from '../../utilities/localize';
-import '../icon/icon';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './input.styles';
-import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type { CSSResultGroup } from 'lit';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 
+//
 // It's currently impossible to hide Firefox's built-in clear icon when using <input type="date|time">, so we need this
-// check to apply a clip-path to hide it. I know, I know...user agent sniffing is nasty but, if it fails, we only see a
+// check to apply a clip-path to hide it. I know, I know…user agent sniffing is nasty but, if it fails, we only see a
 // redundant clear icon so nothing important is breaking. The benefits outweigh the costs for this one. See the
 // discussion at: https://github.com/shoelace-style/shoelace/pull/794
 //
@@ -27,9 +28,9 @@ const isFirefox = isChromium ? false : navigator.userAgent.includes('Firefox');
 
 /**
  * @summary Inputs collect data from the user.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/input
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  *
@@ -62,14 +63,13 @@ const isFirefox = isChromium ? false : navigator.userAgent.includes('Firefox');
 export default class SlInput extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  @query('.input__control') input: HTMLInputElement;
-
-  private readonly formSubmitController = new FormSubmitController(this);
+  private readonly formControlController = new FormControlController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private readonly localize = new LocalizeController(this);
 
+  @query('.input__control') input: HTMLInputElement;
+
   @state() private hasFocus = false;
-  @state() invalid = false;
   @property() title = ''; // make reactive to pass through
 
   /**
@@ -88,9 +88,6 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
     | 'time'
     | 'url' = 'text';
 
-  /** The input's size. */
-  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
-
   /** The name of the input, submitted as a name/value pair with form data. */
   @property() name = '';
 
@@ -99,6 +96,9 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
 
   /** The default value of the form control. Primarily used for resetting the form control. */
   @defaultValue() defaultValue = '';
+
+  /** The input's size. */
+  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Draws a filled input. */
   @property({ type: Boolean, reflect: true }) filled = false;
@@ -115,6 +115,15 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   /** Adds a clear button when the input is not empty. */
   @property({ type: Boolean }) clearable = false;
 
+  /** Disables the input. */
+  @property({ type: Boolean, reflect: true }) disabled = false;
+
+  /** Placeholder text to show as a hint when the input is empty. */
+  @property() placeholder = '';
+
+  /** Makes the input readonly. */
+  @property({ type: Boolean, reflect: true }) readonly = false;
+
   /** Adds a button to toggle the password's visibility. Only applies to password types. */
   @property({ attribute: 'password-toggle', type: Boolean }) passwordToggle = false;
 
@@ -124,14 +133,18 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   /** Hides the browser's built-in increment/decrement spin buttons for number inputs. */
   @property({ attribute: 'no-spin-buttons', type: Boolean }) noSpinButtons = false;
 
-  /** Placeholder text to show as a hint when the input is empty. */
-  @property() placeholder = '';
+  /**
+   * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
+   * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
+   * the same document or shadow root for this to work.
+   */
+  @property({ reflect: true }) form = '';
 
-  /** Disables the input. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
+  /** Makes the input a required field. */
+  @property({ type: Boolean, reflect: true }) required = false;
 
-  /** Makes the input readonly. */
-  @property({ type: Boolean, reflect: true }) readonly = false;
+  /** A regular expression pattern to validate input against. */
+  @property() pattern: string;
 
   /** The minimum length of input that will be considered valid. */
   @property({ type: Number }) minlength: number;
@@ -140,22 +153,16 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   @property({ type: Number }) maxlength: number;
 
   /** The input's minimum value. Only applies to date and number input types. */
-  @property() min: number;
+  @property({ type: Number }) min: number;
 
   /** The input's maximum value. Only applies to date and number input types. */
-  @property() max: number;
+  @property({ type: Number }) max: number;
 
   /**
    * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
    * implied, allowing any numeric value. Only applies to date and number input types.
    */
   @property() step: number | 'any';
-
-  /** A regular expression pattern to validate input against. */
-  @property() pattern: string;
-
-  /** Makes the input a required field. */
-  @property({ type: Boolean, reflect: true }) required = false;
 
   /** Controls whether and how text input is automatically capitalized as it is entered by the user. */
   @property() autocapitalize: 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters';
@@ -176,7 +183,15 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   @property() enterkeyhint: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
 
   /** Enables spell checking on the input. */
-  @property({ type: Boolean }) spellcheck: boolean;
+  @property({
+    type: Boolean,
+    converter: {
+      // Allow "true|false" attribute values but keep the property boolean
+      fromAttribute: value => (!value || value === 'false' ? false : true),
+      toAttribute: value => (value ? 'true' : 'false')
+    }
+  })
+  spellcheck = true;
 
   /**
    * Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual
@@ -211,7 +226,86 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   }
 
   firstUpdated() {
-    this.invalid = !this.input.checkValidity();
+    this.formControlController.updateValidity();
+  }
+
+  private handleBlur() {
+    this.hasFocus = false;
+    this.emit('sl-blur');
+  }
+
+  private handleChange() {
+    this.value = this.input.value;
+    this.emit('sl-change');
+  }
+
+  private handleClearClick(event: MouseEvent) {
+    this.value = '';
+    this.emit('sl-clear');
+    this.emit('sl-input');
+    this.emit('sl-change');
+    this.input.focus();
+
+    event.stopPropagation();
+  }
+
+  private handleFocus() {
+    this.hasFocus = true;
+    this.emit('sl-focus');
+  }
+
+  private handleInput() {
+    this.value = this.input.value;
+    this.formControlController.updateValidity();
+    this.emit('sl-input');
+  }
+
+  private handleInvalid() {
+    this.formControlController.setValidity(false);
+  }
+
+  private handleKeyDown(event: KeyboardEvent) {
+    const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+
+    // Pressing enter when focused on an input should submit the form like a native input, but we wait a tick before
+    // submitting to allow users to cancel the keydown event if they need to
+    if (event.key === 'Enter' && !hasModifier) {
+      setTimeout(() => {
+        //
+        // When using an Input Method Editor (IME), pressing enter will cause the form to submit unexpectedly. One way
+        // to check for this is to look at event.isComposing, which will be true when the IME is open.
+        //
+        // See https://github.com/shoelace-style/shoelace/pull/988
+        //
+        if (!event.defaultPrevented && !event.isComposing) {
+          this.formControlController.submit();
+        }
+      });
+    }
+  }
+
+  private handlePasswordToggle() {
+    this.passwordVisible = !this.passwordVisible;
+  }
+
+  @watch('disabled', { waitUntilFirstUpdate: true })
+  handleDisabledChange() {
+    // Disabled form controls are always valid
+    this.formControlController.setValidity(this.disabled);
+  }
+
+  @watch('step', { waitUntilFirstUpdate: true })
+  handleStepChange() {
+    // If step changes, the value may become invalid so we need to recheck after the update. We set the new step
+    // imperatively so we don't have to wait for the next render to report the updated validity.
+    this.input.step = String(this.step);
+    this.formControlController.updateValidity();
+  }
+
+  @watch('value', { waitUntilFirstUpdate: true })
+  async handleValueChange() {
+    await this.updateComplete;
+    this.formControlController.updateValidity();
   }
 
   /** Sets focus on the input. */
@@ -286,89 +380,10 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
     return this.input.reportValidity();
   }
 
-  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  /** Sets a custom validation message. Pass an empty string to restore validity. */
   setCustomValidity(message: string) {
     this.input.setCustomValidity(message);
-    this.invalid = !this.input.checkValidity();
-  }
-
-  handleBlur() {
-    this.hasFocus = false;
-    this.emit('sl-blur');
-  }
-
-  handleChange() {
-    this.value = this.input.value;
-    this.emit('sl-change');
-  }
-
-  handleClearClick(event: MouseEvent) {
-    this.value = '';
-    this.emit('sl-clear');
-    this.emit('sl-input');
-    this.emit('sl-change');
-    this.input.focus();
-
-    event.stopPropagation();
-  }
-
-  @watch('disabled', { waitUntilFirstUpdate: true })
-  handleDisabledChange() {
-    // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    this.input.disabled = this.disabled;
-    this.invalid = !this.input.checkValidity();
-  }
-
-  @watch('step', { waitUntilFirstUpdate: true })
-  handleStepChange() {
-    // If step changes, the value may become invalid so we need to recheck after the update. We set the new step
-    // imperatively so we don't have to wait for the next render to report the updated validity.
-    this.input.step = String(this.step);
-    this.invalid = !this.input.checkValidity();
-  }
-
-  handleFocus() {
-    this.hasFocus = true;
-    this.emit('sl-focus');
-  }
-
-  handleInput() {
-    this.value = this.input.value;
-    this.emit('sl-input');
-  }
-
-  handleInvalid() {
-    this.invalid = true;
-  }
-
-  handleKeyDown(event: KeyboardEvent) {
-    const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
-
-    // Pressing enter when focused on an input should submit the form like a native input, but we wait a tick before
-    // submitting to allow users to cancel the keydown event if they need to
-    if (event.key === 'Enter' && !hasModifier) {
-      setTimeout(() => {
-        //
-        // When using an Input Method Editor (IME), pressing enter will cause the form to submit unexpectedly. One way
-        // to check for this is to look at event.isComposing, which will be true when the IME is open.
-        //
-        // See https://github.com/shoelace-style/shoelace/pull/988
-        //
-        if (!event.defaultPrevented && !event.isComposing) {
-          this.formSubmitController.submit();
-        }
-      });
-    }
-  }
-
-  handlePasswordToggle() {
-    this.passwordVisible = !this.passwordVisible;
-  }
-
-  @watch('value', { waitUntilFirstUpdate: true })
-  handleValueChange() {
-    this.input.value = this.value; // force a sync update
-    this.invalid = !this.input.checkValidity();
+    this.formControlController.updateValidity();
   }
 
   render() {
@@ -418,7 +433,6 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
               'input--disabled': this.disabled,
               'input--focused': this.hasFocus,
               'input--empty': !this.value,
-              'input--invalid': this.invalid,
               'input--no-spin-buttons': this.noSpinButtons,
               'input--is-firefox': isFirefox
             })}
@@ -445,12 +459,11 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
               autocomplete=${ifDefined(this.type === 'password' ? 'off' : this.autocomplete)}
               autocorrect=${ifDefined(this.type === 'password' ? 'off' : this.autocorrect)}
               ?autofocus=${this.autofocus}
-              spellcheck=${ifDefined(this.spellcheck)}
+              spellcheck=${this.spellcheck}
               pattern=${ifDefined(this.pattern)}
               enterkeyhint=${ifDefined(this.enterkeyhint)}
               inputmode=${ifDefined(this.inputmode)}
               aria-describedby="help-text"
-              aria-invalid=${this.invalid ? 'true' : 'false'}
               @change=${this.handleChange}
               @input=${this.handleInput}
               @invalid=${this.handleInvalid}

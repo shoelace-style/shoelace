@@ -1,17 +1,17 @@
-import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property } from 'lit/decorators.js';
+import { HasSlotController } from '../../internal/slot';
+import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import ShoelaceElement from '../../internal/shoelace-element';
-import { HasSlotController } from '../../internal/slot';
 import styles from './breadcrumb-item.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Breadcrumb Items are used inside [breadcrumbs](/components/breadcrumb) to represent different links.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/breadcrumb-item
  * @status stable
+ * @since 2.0
  *
  * @slot - The breadcrumb item's label.
  * @slot prefix - An optional prefix, usually an icon or icon button.

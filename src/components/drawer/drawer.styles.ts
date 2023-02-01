@@ -148,7 +148,7 @@ export default css`
   }
 
   .drawer--contained .drawer__overlay {
-    position: absolute;
+    display: none;
   }
 
   @media (forced-colors: active) {

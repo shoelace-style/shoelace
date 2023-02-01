@@ -1,17 +1,17 @@
-import { customElement, property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { html, literal } from 'lit/static-html.js';
-import ShoelaceElement from '../../internal/shoelace-element';
 import '../icon/icon';
+import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { html, literal } from 'lit/static-html.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './icon-button.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Icons buttons are simple, icon-only buttons that can be used for actions and in toolbars.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/icon-button
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  *
@@ -24,9 +24,9 @@ import type { CSSResultGroup } from 'lit';
 export default class SlIconButton extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
-  @state() private hasFocus = false;
-
   @query('.icon-button') button: HTMLButtonElement | HTMLLinkElement;
+
+  @state() private hasFocus = false;
 
   /** The name of the icon to draw. Available names depend on the icon library being used. */
   @property() name?: string;
@@ -58,6 +58,23 @@ export default class SlIconButton extends ShoelaceElement {
   /** Disables the button. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
+  private handleBlur() {
+    this.hasFocus = false;
+    this.emit('sl-blur');
+  }
+
+  private handleFocus() {
+    this.hasFocus = true;
+    this.emit('sl-focus');
+  }
+
+  private handleClick(event: MouseEvent) {
+    if (this.disabled) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }
+
   /** Simulates a click on the icon button. */
   click() {
     this.button.click();
@@ -71,23 +88,6 @@ export default class SlIconButton extends ShoelaceElement {
   /** Removes focus from the icon button. */
   blur() {
     this.button.blur();
-  }
-
-  handleBlur() {
-    this.hasFocus = false;
-    this.emit('sl-blur');
-  }
-
-  handleFocus() {
-    this.hasFocus = true;
-    this.emit('sl-focus');
-  }
-
-  handleClick(event: MouseEvent) {
-    if (this.disabled) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
   }
 
   render() {

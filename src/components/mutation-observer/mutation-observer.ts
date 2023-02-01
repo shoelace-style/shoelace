@@ -1,15 +1,15 @@
-import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import ShoelaceElement from '../../internal/shoelace-element';
+import { html } from 'lit';
 import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './mutation-observer.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary The Mutation Observer component offers a thin, declarative interface to the [`MutationObserver API`](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver).
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/mutation-observer
  * @status stable
+ * @since 2.0
  *
  * @event {{ mutationList: MutationRecord[] }} sl-mutation - Emitted when a mutation occurs.
  *
@@ -57,32 +57,13 @@ export default class SlMutationObserver extends ShoelaceElement {
     this.stopObserver();
   }
 
-  @watch('disabled')
-  handleDisabledChange() {
-    if (this.disabled) {
-      this.stopObserver();
-    } else {
-      this.startObserver();
-    }
-  }
-
-  @watch('attr', { waitUntilFirstUpdate: true })
-  @watch('attr-old-value', { waitUntilFirstUpdate: true })
-  @watch('char-data', { waitUntilFirstUpdate: true })
-  @watch('char-data-old-value', { waitUntilFirstUpdate: true })
-  @watch('childList', { waitUntilFirstUpdate: true })
-  handleChange() {
-    this.stopObserver();
-    this.startObserver();
-  }
-
-  handleMutation(mutationList: MutationRecord[]) {
+  private handleMutation(mutationList: MutationRecord[]) {
     this.emit('sl-mutation', {
       detail: { mutationList }
     });
   }
 
-  startObserver() {
+  private startObserver() {
     const observeAttributes = typeof this.attr === 'string' && this.attr.length > 0;
     const attributeFilter = observeAttributes && this.attr !== '*' ? this.attr.split(' ') : undefined;
 
@@ -105,8 +86,27 @@ export default class SlMutationObserver extends ShoelaceElement {
     }
   }
 
-  stopObserver() {
+  private stopObserver() {
     this.mutationObserver.disconnect();
+  }
+
+  @watch('disabled')
+  handleDisabledChange() {
+    if (this.disabled) {
+      this.stopObserver();
+    } else {
+      this.startObserver();
+    }
+  }
+
+  @watch('attr', { waitUntilFirstUpdate: true })
+  @watch('attr-old-value', { waitUntilFirstUpdate: true })
+  @watch('char-data', { waitUntilFirstUpdate: true })
+  @watch('char-data-old-value', { waitUntilFirstUpdate: true })
+  @watch('childList', { waitUntilFirstUpdate: true })
+  handleChange() {
+    this.stopObserver();
+    this.startObserver();
   }
 
   render() {

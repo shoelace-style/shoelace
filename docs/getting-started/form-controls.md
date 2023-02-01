@@ -6,8 +6,6 @@ Shoelace solves this problem by using the [`formdata`](https://developer.mozilla
 
 ?> Shoelace uses event listeners to intercept the form's `formdata` and `submit` events. This allows it to inject data and trigger validation as necessary. If you're also attaching an event listener to the form, _you must attach it after Shoelace form controls are connected to the DOM_, otherwise your logic will run before Shoelace has a chance to inject form data and validate form controls.
 
-?> If you're using an older browser that doesn't support the `formdata` event, a lightweight polyfill will be automatically applied to ensure forms submit as expected.
-
 ## Data Serialization
 
 Serialization is just a fancy word for collecting form data. If you're relying on standard form submissions, e.g. `<form action="...">`, you can probably skip this section. However, most modern apps use the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) or a library such as [axios](https://github.com/axios/axios) to submit forms using JavaScript.
@@ -55,10 +53,10 @@ The form will not be submitted if a required field is incomplete.
   <sl-input name="name" label="Name" required></sl-input>
   <br />
   <sl-select label="Favorite Animal" clearable required>
-    <sl-menu-item value="birds">Birds</sl-menu-item>
-    <sl-menu-item value="cats">Cats</sl-menu-item>
-    <sl-menu-item value="dogs">Dogs</sl-menu-item>
-    <sl-menu-item value="other">Other</sl-menu-item>
+    <sl-option value="birds">Birds</sl-option>
+    <sl-option value="cats">Cats</sl-option>
+    <sl-option value="dogs">Dogs</sl-option>
+    <sl-option value="other">Other</sl-option>
   </sl-select>
   <br />
   <sl-textarea name="comment" label="Comment" required></sl-textarea>
@@ -298,10 +296,10 @@ This example demonstrates custom validation styles using `data-user-invalid` and
   ></sl-input>
 
   <sl-select label="Favorite Animal" help-text="Select the best option." clearable required>
-    <sl-menu-item value="birds">Birds</sl-menu-item>
-    <sl-menu-item value="cats">Cats</sl-menu-item>
-    <sl-menu-item value="dogs">Dogs</sl-menu-item>
-    <sl-menu-item value="other">Other</sl-menu-item>
+    <sl-option value="birds">Birds</sl-option>
+    <sl-option value="cats">Cats</sl-option>
+    <sl-option value="dogs">Dogs</sl-option>
+    <sl-option value="other">Other</sl-option>
   </sl-select>
 
   <sl-button type="submit" variant="primary">Submit</sl-button>
@@ -324,7 +322,7 @@ This example demonstrates custom validation styles using `data-user-invalid` and
 
   /* user invalid styles */
   .validity-styles sl-input[data-user-invalid]::part(base),
-  .validity-styles sl-select[data-user-invalid]::part(control) {
+  .validity-styles sl-select[data-user-invalid]::part(combobox) {
     border-color: var(--sl-color-danger-600);
   }
 
@@ -334,14 +332,14 @@ This example demonstrates custom validation styles using `data-user-invalid` and
   }
 
   .validity-styles sl-input:focus-within[data-user-invalid]::part(base),
-  .validity-styles sl-select:focus-within[data-user-invalid]::part(control) {
+  .validity-styles sl-select:focus-within[data-user-invalid]::part(combobox) {
     border-color: var(--sl-color-danger-600);
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-danger-300);
   }
 
   /* User valid styles */
   .validity-styles sl-input[data-user-valid]::part(base),
-  .validity-styles sl-select[data-user-valid]::part(control) {
+  .validity-styles sl-select[data-user-valid]::part(combobox) {
     border-color: var(--sl-color-success-600);
   }
 
@@ -351,9 +349,24 @@ This example demonstrates custom validation styles using `data-user-invalid` and
   }
 
   .validity-styles sl-input:focus-within[data-user-valid]::part(base),
-  .validity-styles sl-select:focus-within[data-user-valid]::part(control) {
+  .validity-styles sl-select:focus-within[data-user-valid]::part(combobox) {
     border-color: var(--sl-color-success-600);
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-success-300);
   }
 </style>
 ```
+
+## Getting Associated Form Controls
+
+At this time, using [`HTMLFormElement.elements`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/elements) will not return Shoelace form controls because the browser is unaware of their status as custom element form controls. Fortunately, Shoelace provides an `elements()` function that does something very similar. However, instead of returning an [`HTMLFormControlsCollection`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormControlsCollection), it returns an array of HTML and Shoelace form controls in the order they appear in the DOM.
+
+```js
+import { getFormControls } from '@shoelace-style/shoelace/dist/utilities/form.js';
+
+const form = document.querySelector('#my-form');
+const formControls = getFormControls(form);
+
+console.log(formControls); // e.g. [input, sl-input, ...]
+```
+
+?> You probably don't need this function! If you're gathering form data for submission, you probably want to use [Data Serialization](#data-serializing) instead.

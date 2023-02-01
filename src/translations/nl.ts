@@ -3,12 +3,17 @@ import type { Translation } from '../utilities/localize';
 
 const translation: Translation = {
   $code: 'nl',
-  $name: 'Dutch',
+  $name: 'Nederlands',
   $dir: 'ltr',
 
   clearEntry: 'Invoer wissen',
   close: 'Sluiten',
   copy: 'Kopiëren',
+  numOptionsSelected: num => {
+    if (num === 0) return 'Geen optie geselecteerd';
+    if (num === 1) return '1 optie geselecteerd';
+    return `${num} opties geselecteerd`;
+  },
   currentValue: 'Huidige waarde',
   hidePassword: 'Verberg wachtwoord',
   loading: 'Bezig met laden',

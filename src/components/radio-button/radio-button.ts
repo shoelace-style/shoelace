@@ -1,18 +1,18 @@
-import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { html } from 'lit/static-html.js';
-import ShoelaceElement from '../../internal/shoelace-element';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { HasSlotController } from '../../internal/slot';
+import { html } from 'lit/static-html.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './radio-button.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Radios buttons allow the user to select a single option from a group using a button-like control.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/radio-button
  * @status stable
+ * @since 2.0
  *
  * @slot - The radio button's label.
  * @slot prefix - A presentational prefix icon or similar element.
@@ -32,13 +32,18 @@ import type { CSSResultGroup } from 'lit';
 export default class SlRadioButton extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
+  private readonly hasSlotController = new HasSlotController(this, '[default]', 'prefix', 'suffix');
+
   @query('.button') input: HTMLInputElement;
   @query('.hidden-input') hiddenInput: HTMLInputElement;
 
-  private readonly hasSlotController = new HasSlotController(this, '[default]', 'prefix', 'suffix');
-
   @state() protected hasFocus = false;
-  @state() checked = false;
+
+  /**
+   * @internal The radio button's checked state. This is exposed as an "internal" attribute so we can reflect it, making
+   * it easier to style in button groups.
+   */
+  @property({ type: Boolean, reflect: true }) checked = false;
 
   /** The radio's value. When selected, the radio group will receive this value. */
   @property() value: string;
@@ -52,9 +57,34 @@ export default class SlRadioButton extends ShoelaceElement {
   /** Draws a pill-style radio button with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;
 
-  connectedCallback(): void {
+  connectedCallback() {
     super.connectedCallback();
     this.setAttribute('role', 'presentation');
+  }
+
+  private handleBlur() {
+    this.hasFocus = false;
+    this.emit('sl-blur');
+  }
+
+  private handleClick(e: MouseEvent) {
+    if (this.disabled) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+
+    this.checked = true;
+  }
+
+  private handleFocus() {
+    this.hasFocus = true;
+    this.emit('sl-focus');
+  }
+
+  @watch('disabled', { waitUntilFirstUpdate: true })
+  handleDisabledChange() {
+    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
   }
 
   /** Sets focus on the radio button. */
@@ -65,31 +95,6 @@ export default class SlRadioButton extends ShoelaceElement {
   /** Removes focus from the radio button. */
   blur() {
     this.input.blur();
-  }
-
-  handleBlur() {
-    this.hasFocus = false;
-    this.emit('sl-blur');
-  }
-
-  handleClick(e: MouseEvent) {
-    if (this.disabled) {
-      e.preventDefault();
-      e.stopPropagation();
-      return;
-    }
-
-    this.checked = true;
-  }
-
-  @watch('disabled', { waitUntilFirstUpdate: true })
-  handleDisabledChange() {
-    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
-  }
-
-  handleFocus() {
-    this.hasFocus = true;
-    this.emit('sl-focus');
   }
 
   render() {

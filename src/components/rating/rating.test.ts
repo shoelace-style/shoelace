@@ -1,7 +1,7 @@
+import { clickOnElement } from '../../internal/test';
 import { expect, fixture, html } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-import { clickOnElement } from '../../internal/test';
 import type SlRating from './rating';
 
 describe('<sl-rating>', () => {

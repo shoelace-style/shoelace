@@ -9,6 +9,11 @@ const translation: Translation = {
   clearEntry: 'Borrar entrada',
   close: 'Cerrar',
   copy: 'Copiar',
+  numOptionsSelected: num => {
+    if (num === 0) return 'No hay opciones seleccionadas';
+    if (num === 1) return '1 opción seleccionada';
+    return `${num} opción seleccionada`;
+  },
   currentValue: 'Valor actual',
   hidePassword: 'Ocultar contraseña',
   loading: 'Cargando',

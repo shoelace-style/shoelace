@@ -3,7 +3,6 @@
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
     "target": "es2017",
-    "module": "es2015",
     "lib": [
       "dom",
       "dom.Iterable",
@@ -22,6 +21,7 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "experimentalDecorators": true,
+    "useDefineForClassFields": false, /* See https://lit.dev/docs/components/properties/#avoiding-issues-with-class-fields */
     "removeComments": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,

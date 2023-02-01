@@ -9,6 +9,11 @@ const translation: Translation = {
   clearEntry: 'Återställ val',
   close: 'Stäng',
   copy: 'Kopiera',
+  numOptionsSelected: num => {
+    if (num === 0) return 'Inga alternativ har valts';
+    if (num === 1) return '1 alternativ valt';
+    return `${num} alternativ valda`;
+  },
   currentValue: 'Nuvarande värde',
   hidePassword: 'Dölj lösenord',
   loading: 'Läser in',

@@ -1,23 +1,23 @@
-import { customElement, property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { html, literal } from 'lit/static-html.js';
-import { FormSubmitController } from '../../internal/form';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { HasSlotController } from '../../internal/slot';
-import { watch } from '../../internal/watch';
-import { LocalizeController } from '../../utilities/localize';
 import '../icon/icon';
 import '../spinner/spinner';
+import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { FormControlController } from '../../internal/form';
+import { HasSlotController } from '../../internal/slot';
+import { html, literal } from 'lit/static-html.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { LocalizeController } from '../../utilities/localize';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './button.styles';
-import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type { CSSResultGroup } from 'lit';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 
 /**
  * @summary Buttons represent actions that are available to the user.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/button
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  * @dependency sl-spinner
@@ -39,9 +39,7 @@ import type { CSSResultGroup } from 'lit';
 export default class SlButton extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  @query('.button') button: HTMLButtonElement | HTMLLinkElement;
-
-  private readonly formSubmitController = new FormSubmitController(this, {
+  private readonly formControlController = new FormControlController(this, {
     form: input => {
       // Buttons support a form attribute that points to an arbitrary form, so if this attribute it set we need to query
       // the form from the same root using its id
@@ -57,6 +55,8 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
   });
   private readonly hasSlotController = new HasSlotController(this, '[default]', 'prefix', 'suffix');
   private readonly localize = new LocalizeController(this);
+
+  @query('.button') button: HTMLButtonElement | HTMLLinkElement;
 
   @state() private hasFocus = false;
   @state() invalid = false;
@@ -141,7 +141,49 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
 
   firstUpdated() {
     if (this.isButton()) {
-      this.invalid = !(this.button as HTMLButtonElement).checkValidity();
+      this.formControlController.updateValidity();
+    }
+  }
+
+  private handleBlur() {
+    this.hasFocus = false;
+    this.emit('sl-blur');
+  }
+
+  private handleFocus() {
+    this.hasFocus = true;
+    this.emit('sl-focus');
+  }
+
+  private handleClick(event: MouseEvent) {
+    if (this.disabled || this.loading) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+
+    if (this.type === 'submit') {
+      this.formControlController.submit(this);
+    }
+
+    if (this.type === 'reset') {
+      this.formControlController.reset(this);
+    }
+  }
+
+  private isButton() {
+    return this.href ? false : true;
+  }
+
+  private isLink() {
+    return this.href ? true : false;
+  }
+
+  @watch('disabled', { waitUntilFirstUpdate: true })
+  handleDisabledChange() {
+    if (this.isButton()) {
+      // Disabled form controls are always valid
+      this.formControlController.setValidity(this.disabled);
     }
   }
 
@@ -178,55 +220,12 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
     return true;
   }
 
-  /** Sets a custom validation message. If `message` is not empty, the field will be considered invalid. */
+  /** Sets a custom validation message. Pass an empty string to restore validity. */
   setCustomValidity(message: string) {
     if (this.isButton()) {
       (this.button as HTMLButtonElement).setCustomValidity(message);
-      this.invalid = !(this.button as HTMLButtonElement).checkValidity();
+      this.formControlController.updateValidity();
     }
-  }
-
-  handleBlur() {
-    this.hasFocus = false;
-    this.emit('sl-blur');
-  }
-
-  handleFocus() {
-    this.hasFocus = true;
-    this.emit('sl-focus');
-  }
-
-  handleClick(event: MouseEvent) {
-    if (this.disabled || this.loading) {
-      event.preventDefault();
-      event.stopPropagation();
-      return;
-    }
-
-    if (this.type === 'submit') {
-      this.formSubmitController.submit(this);
-    }
-
-    if (this.type === 'reset') {
-      this.formSubmitController.reset(this);
-    }
-  }
-
-  @watch('disabled', { waitUntilFirstUpdate: true })
-  handleDisabledChange() {
-    // Disabled form controls are always valid, so we need to recheck validity when the state changes
-    if (this.isButton()) {
-      this.button.disabled = this.disabled;
-      this.invalid = !(this.button as HTMLButtonElement).checkValidity();
-    }
-  }
-
-  private isButton() {
-    return this.href ? false : true;
-  }
-
-  private isLink() {
-    return this.href ? true : false;
   }
 
   render() {

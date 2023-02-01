@@ -1,31 +1,32 @@
-import { html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { animateTo, stopAnimations } from '../../internal/animate';
-import { waitForEvent } from '../../internal/event';
-import Modal from '../../internal/modal';
-import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { HasSlotController } from '../../internal/slot';
-import { uppercaseFirstLetter } from '../../internal/string';
-import { watch } from '../../internal/watch';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
-import { LocalizeController } from '../../utilities/localize';
 import '../icon-button/icon-button';
+import { animateTo, stopAnimations } from '../../internal/animate';
+import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query } from 'lit/decorators.js';
+import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
+import { HasSlotController } from '../../internal/slot';
+import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { LocalizeController } from '../../utilities/localize';
+import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
+import { uppercaseFirstLetter } from '../../internal/string';
+import { waitForEvent } from '../../internal/event';
+import { watch } from '../../internal/watch';
+import Modal from '../../internal/modal';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './drawer.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Drawers slide in from a container to expose additional options and information.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/drawer
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon-button
  *
  * @slot - The drawer's main content.
  * @slot label - The drawer's label. Alternatively, you can use the `label` attribute.
+ * @slot header-actions - Optional actions to add to the header. Works best with `<sl-icon-button>`.
  * @slot footer - The drawer's footer, usually one or more buttons representing various options.
  *
  * @event sl-show - Emitted when the drawer opens.
@@ -72,14 +73,14 @@ import type { CSSResultGroup } from 'lit';
 export default class SlDrawer extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
-  @query('.drawer') drawer: HTMLElement;
-  @query('.drawer__panel') panel: HTMLElement;
-  @query('.drawer__overlay') overlay: HTMLElement;
-
   private readonly hasSlotController = new HasSlotController(this, 'footer');
   private readonly localize = new LocalizeController(this);
   private modal: Modal;
   private originalTrigger: HTMLElement | null;
+
+  @query('.drawer') drawer: HTMLElement;
+  @query('.drawer__panel') panel: HTMLElement;
+  @query('.drawer__overlay') overlay: HTMLElement;
 
   /**
    * Indicates whether or not the drawer is open. You can toggle this attribute to show and hide the drawer, or you can
@@ -117,36 +118,19 @@ export default class SlDrawer extends ShoelaceElement {
   firstUpdated() {
     this.drawer.hidden = !this.open;
 
-    if (this.open && !this.contained) {
+    if (this.open) {
       this.addOpenListeners();
-      this.modal.activate();
-      lockBodyScrolling(this);
+
+      if (!this.contained) {
+        this.modal.activate();
+        lockBodyScrolling(this);
+      }
     }
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     unlockBodyScrolling(this);
-  }
-
-  /** Shows the drawer. */
-  async show() {
-    if (this.open) {
-      return undefined;
-    }
-
-    this.open = true;
-    return waitForEvent(this, 'sl-after-show');
-  }
-
-  /** Hides the drawer */
-  async hide() {
-    if (!this.open) {
-      return undefined;
-    }
-
-    this.open = false;
-    return waitForEvent(this, 'sl-after-hide');
   }
 
   private requestClose(source: 'close-button' | 'keyboard' | 'overlay') {
@@ -164,16 +148,16 @@ export default class SlDrawer extends ShoelaceElement {
     this.hide();
   }
 
-  addOpenListeners() {
+  private addOpenListeners() {
     document.addEventListener('keydown', this.handleDocumentKeyDown);
   }
 
-  removeOpenListeners() {
+  private removeOpenListeners() {
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
-  handleDocumentKeyDown(event: KeyboardEvent) {
-    if (this.open && event.key === 'Escape') {
+  private handleDocumentKeyDown(event: KeyboardEvent) {
+    if (this.open && !this.contained && event.key === 'Escape') {
       event.stopPropagation();
       this.requestClose('keyboard');
     }
@@ -240,8 +224,11 @@ export default class SlDrawer extends ShoelaceElement {
       // Hide
       this.emit('sl-hide');
       this.removeOpenListeners();
-      this.modal.deactivate();
-      unlockBodyScrolling(this);
+
+      if (!this.contained) {
+        this.modal.deactivate();
+        unlockBodyScrolling(this);
+      }
 
       await Promise.all([stopAnimations(this.drawer), stopAnimations(this.overlay)]);
       const panelAnimation = getAnimation(this, `drawer.hide${uppercaseFirstLetter(this.placement)}`, {
@@ -275,6 +262,39 @@ export default class SlDrawer extends ShoelaceElement {
 
       this.emit('sl-after-hide');
     }
+  }
+
+  @watch('contained', { waitUntilFirstUpdate: true })
+  handleNoModalChange() {
+    if (this.open && !this.contained) {
+      this.modal.activate();
+      lockBodyScrolling(this);
+    }
+
+    if (this.open && this.contained) {
+      this.modal.deactivate();
+      unlockBodyScrolling(this);
+    }
+  }
+
+  /** Shows the drawer. */
+  async show() {
+    if (this.open) {
+      return undefined;
+    }
+
+    this.open = true;
+    return waitForEvent(this, 'sl-after-show');
+  }
+
+  /** Hides the drawer */
+  async hide() {
+    if (!this.open) {
+      return undefined;
+    }
+
+    this.open = false;
+    return waitForEvent(this, 'sl-after-hide');
   }
 
   render() {

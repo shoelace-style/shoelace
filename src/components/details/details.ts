@@ -1,21 +1,21 @@
-import { html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '../../internal/animate';
-import { waitForEvent } from '../../internal/event';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { watch } from '../../internal/watch';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
-import { LocalizeController } from '../../utilities/localize';
 import '../icon/icon';
+import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '../../internal/animate';
+import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query } from 'lit/decorators.js';
+import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
+import { html } from 'lit';
+import { LocalizeController } from '../../utilities/localize';
+import { waitForEvent } from '../../internal/event';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './details.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Details show a brief summary and expand to show additional content.
- *
- * @since 2.0
+ * @documentation https://shoelace.style/components/details
  * @status stable
+ * @since 2.0
  *
  * @dependency sl-icon
  *
@@ -42,12 +42,12 @@ import type { CSSResultGroup } from 'lit';
 export default class SlDetails extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
+  private readonly localize = new LocalizeController(this);
+
   @query('.details') details: HTMLElement;
   @query('.details__header') header: HTMLElement;
   @query('.details__body') body: HTMLElement;
   @query('.details__expand-icon-slot') expandIconSlot: HTMLSlotElement;
-
-  private readonly localize = new LocalizeController(this);
 
   /**
    * Indicates whether or not the details is open. You can toggle this attribute to show and hide the details, or you
@@ -66,27 +66,7 @@ export default class SlDetails extends ShoelaceElement {
     this.body.style.height = this.open ? 'auto' : '0';
   }
 
-  /** Shows the details. */
-  async show() {
-    if (this.open || this.disabled) {
-      return undefined;
-    }
-
-    this.open = true;
-    return waitForEvent(this, 'sl-after-show');
-  }
-
-  /** Hides the details */
-  async hide() {
-    if (!this.open || this.disabled) {
-      return undefined;
-    }
-
-    this.open = false;
-    return waitForEvent(this, 'sl-after-hide');
-  }
-
-  handleSummaryClick() {
+  private handleSummaryClick() {
     if (!this.disabled) {
       if (this.open) {
         this.hide();
@@ -98,7 +78,7 @@ export default class SlDetails extends ShoelaceElement {
     }
   }
 
-  handleSummaryKeyDown(event: KeyboardEvent) {
+  private handleSummaryKeyDown(event: KeyboardEvent) {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
 
@@ -155,6 +135,26 @@ export default class SlDetails extends ShoelaceElement {
 
       this.emit('sl-after-hide');
     }
+  }
+
+  /** Shows the details. */
+  async show() {
+    if (this.open || this.disabled) {
+      return undefined;
+    }
+
+    this.open = true;
+    return waitForEvent(this, 'sl-after-show');
+  }
+
+  /** Hides the details */
+  async hide() {
+    if (!this.open || this.disabled) {
+      return undefined;
+    }
+
+    this.open = false;
+    return waitForEvent(this, 'sl-after-hide');
   }
 
   render() {
