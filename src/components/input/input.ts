@@ -225,6 +225,16 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
     this.value = input.value;
   }
 
+  /** Gets the validity state object */
+  get validity() {
+    return this.input.validity;
+  }
+
+  /** Gets the validation message */
+  get validationMessage() {
+    return this.input.validationMessage;
+  }
+
   firstUpdated() {
     this.formControlController.updateValidity();
   }

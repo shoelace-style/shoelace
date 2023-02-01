@@ -160,6 +160,16 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   /** The select's required attribute. */
   @property({ type: Boolean, reflect: true }) required = false;
 
+  /** Gets the validity state object */
+  get validity() {
+    return this.valueInput.validity;
+  }
+
+  /** Gets the validation message */
+  get validationMessage() {
+    return this.valueInput.validationMessage;
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this.handleDocumentFocusIn = this.handleDocumentFocusIn.bind(this);

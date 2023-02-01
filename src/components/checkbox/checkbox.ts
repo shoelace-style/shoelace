@@ -85,6 +85,16 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
   /** Makes the checkbox a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
+  /** Gets the validity state object */
+  get validity() {
+    return this.input.validity;
+  }
+
+  /** Gets the validation message */
+  get validationMessage() {
+    return this.input.validationMessage;
+  }
+
   firstUpdated() {
     this.formControlController.updateValidity();
   }

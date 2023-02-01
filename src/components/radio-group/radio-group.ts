@@ -6,6 +6,13 @@ import { HasSlotController } from '../../internal/slot';
 import { html } from 'lit';
 import { watch } from '../../internal/watch';
 import ShoelaceElement from '../../internal/shoelace-element';
+
+import {
+  customErrorValidityState,
+  validValidityState,
+  valueMissingValidityState
+} from '../../internal/validity-states';
+
 import styles from './radio-group.styles';
 import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element';
@@ -74,6 +81,34 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
 
   /** Ensures a child radio is checked before allowing the containing form to submit. */
   @property({ type: Boolean, reflect: true }) required = false;
+
+  /** Gets the validity state object */
+  get validity() {
+    const isRequiredAndEmpty = this.required && !this.value;
+    const hasCustomValidityMessage = this.customValidityMessage !== '';
+
+    if (hasCustomValidityMessage) {
+      return customErrorValidityState;
+    } else if (isRequiredAndEmpty) {
+      return valueMissingValidityState;
+    }
+
+    return validValidityState;
+  }
+
+  /** Gets the validation message */
+  get validationMessage() {
+    const isRequiredAndEmpty = this.required && !this.value;
+    const hasCustomValidityMessage = this.customValidityMessage !== '';
+
+    if (hasCustomValidityMessage) {
+      return this.customValidityMessage;
+    } else if (isRequiredAndEmpty) {
+      return this.validationInput.validationMessage;
+    }
+
+    return '';
+  }
 
   connectedCallback() {
     super.connectedCallback();

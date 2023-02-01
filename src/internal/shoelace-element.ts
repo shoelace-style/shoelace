@@ -40,6 +40,10 @@ export interface ShoelaceFormControl extends ShoelaceElement {
   minlength?: number;
   maxlength?: number;
 
+  // Validation properties
+  readonly validity: ValidityState;
+  readonly validationMessage: string;
+
   // Validation methods
   checkValidity: () => boolean;
   reportValidity: () => boolean;
