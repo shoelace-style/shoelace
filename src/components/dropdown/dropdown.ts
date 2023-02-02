@@ -236,9 +236,16 @@ export default class SlDropdown extends ShoelaceElement {
     const menu = this.getMenu();
 
     if (menu) {
-      const menuItems = menu.defaultSlot
-        .assignedElements({ flatten: true })
-        .filter(item => item.tagName === 'SL-MENU-ITEM') as SlMenuItem[];
+      const menuItems = menu.defaultSlot.assignedElements({ flatten: true }).filter((el: HTMLElement) => {
+        const isMenuItem =
+          el.tagName.toLowerCase() === 'sl-menu-item' ||
+          ['menuitem', 'menuitemcheckbox', 'menuitemradio'].includes(el.getAttribute('role') ?? '');
+        if (el.inert || !isMenuItem) {
+          return false;
+        }
+
+        return true;
+      }) as SlMenuItem[];
       const firstMenuItem = menuItems[0];
       const lastMenuItem = menuItems[menuItems.length - 1];
 
