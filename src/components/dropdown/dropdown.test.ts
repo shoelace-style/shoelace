@@ -193,6 +193,7 @@ describe('<sl-dropdown>', () => {
     const item = el.querySelector('sl-menu-item')!;
 
     trigger.focus();
+    await trigger.updateComplete;
     await sendKeys({ press: 'ArrowDown' });
     await el.updateComplete;
     const itemFocused = document.activeElement === item;
