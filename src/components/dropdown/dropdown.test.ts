@@ -179,6 +179,27 @@ describe('<sl-dropdown>', () => {
     expect(el.open).to.be.true;
   });
 
+  it('should navigate to first focusable item on arrow navigation', async () => {
+    const el = await fixture<SlDropdown>(html`
+      <sl-dropdown>
+        <sl-button slot="trigger" caret>Toggle</sl-button>
+        <sl-menu>
+          <sl-menu-label>Top Label</sl-menu-label>
+          <sl-menu-item>Item 1</sl-menu-item>
+        </sl-menu>
+      </sl-dropdown>
+    `);
+    const trigger = el.querySelector('sl-button')!;
+    const item = el.querySelector('sl-menu-item')!;
+
+    trigger.focus();
+    await sendKeys({ press: 'ArrowDown' });
+    await el.updateComplete;
+    const itemFocused = document.activeElement === item;
+
+    expect(itemFocused).to.be.true;
+  });
+
   it('should close on escape key', async () => {
     const el = await fixture<SlDropdown>(html`
       <sl-dropdown open>
