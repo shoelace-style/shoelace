@@ -359,7 +359,7 @@ This example demonstrates custom validation styles using `data-user-invalid` and
 ## Using Inline Validation Messages
 
 ```html preview
-<sl-animation id="shake-form" name="shakeX" duration="750" iterations="1">
+<sl-animation id="shake-form" name="shakeX" duration="1000" iterations="1" easing="easeInOut">
   <form class="validation-styles" data-inline-validation>
     <sl-input
       name="name"
@@ -400,7 +400,10 @@ This example demonstrates custom validation styles using `data-user-invalid` and
       // has an attribute 'data-inline-validation'
       if (form.hasAttribute('data-inline-validation')) {
         ev.preventDefault(); // this will prevent HTML 5 validation tooltips
-        document.querySelector('sl-animation#shake-form').play = true;
+
+        setTimeout(() => {
+          document.querySelector('sl-animation#shake-form').play = true;
+        }, 100);
       }
     },
     true
@@ -424,11 +427,6 @@ This example demonstrates custom validation styles using `data-user-invalid` and
     border-color: var(--sl-color-danger-600);
   }
 
-  .validation-styles [data-user-invalid]::part(form-control-label),
-  .validation-styles [data-user-invalid]::part(form-control-help-text) {
-    color: var(--sl-color-danger-700);
-  }
-
   .validation-styles sl-input:focus-within[data-user-invalid]::part(base),
   .validation-styles sl-select:focus-within[data-user-invalid]::part(combobox) {
     border-color: var(--sl-color-danger-600);
@@ -441,25 +439,31 @@ This example demonstrates custom validation styles using `data-user-invalid` and
     border-color: var(--sl-color-success-600);
   }
 
-  .validation-styles [data-user-valid]::part(form-control-label),
-  .validation-styles [data-user-valid]::part(form-control-help-text) {
-    color: var(--sl-color-success-700);
-  }
-
   .validation-styles sl-input:focus-within[data-user-valid]::part(base),
   .validation-styles sl-select:focus-within[data-user-valid]::part(combobox) {
     border-color: var(--sl-color-success-600);
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-success-300);
   }
 
-  form[data-inline-validation] [data-user-invalid]::part(form-control)::after {
+  form[data-inline-validation] :is([data-valid], [data-invalid])::part(form-control)::after {
     display: block;
+    font-size: var(--sl-font-size-medium);
     color: var(--sl-color-danger-700);
-    content: attr(data-error);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: transform 500ms, max-height 300ms;
   }
 
-  form[data-inline-validation] [data-user-invalid]::part(form-control-help-text) {
-    display: none;
+  form[data-inline-validation] :is([data-valid], [data-invalid])::part(form-control)::after {
+    content: '\00a0';
+    transform: scaleY(0);
+    max-height: 0;
+  }
+
+  form[data-inline-validation] [data-user-invalid]::part(form-control)::after {
+    content: attr(data-error);
+    transform: scaleY(1);
+    max-height: 8em;
   }
 </style>
 ```
