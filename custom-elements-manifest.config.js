@@ -136,7 +136,7 @@ export default {
           //  components/button/button.js
           //
           const terms = [
-            { from: /^src\//, to: 'dist/' }, // Strip the src/ prefix
+            { from: /^src\//, to: '' }, // Strip the src/ prefix
             { from: /\.(t|j)sx?$/, to: '.js' } // Convert .ts to .js
           ];
 
