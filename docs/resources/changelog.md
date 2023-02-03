@@ -12,6 +12,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug that prevented `web-types.json` from being generated [#1154](https://github.com/shoelace-style/shoelace/discussions/1154)
 - Fixed a bug in `<sl-color-picker>` that prevented `sl-change` and `sl-input` from emitting when using the eye dropper [#1157](https://github.com/shoelace-style/shoelace/issues/1157)
 - Fixed a bug in `<sl-dropdown>` that prevented keyboard users from selecting menu items when using the keyboard [#1165](https://github.com/shoelace-style/shoelace/issues/1165)
+- Fixed a bug in Shoelace's CEM Analyzer plugin that caused it to generate the wrong path for component modules [#1166](https://github.com/shoelace-style/shoelace/issues/1166)
 
 ## 2.0.0
 

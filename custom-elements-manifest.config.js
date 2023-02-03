@@ -1,8 +1,8 @@
-import fs from 'fs';
 import { generateCustomData } from 'cem-plugin-vs-code-custom-data-generator';
-import commandLineArgs from 'command-line-args';
 import { parse } from 'comment-parser';
 import { pascalCase } from 'pascal-case';
+import commandLineArgs from 'command-line-args';
+import fs from 'fs';
 
 const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 const { name, description, version, author, homepage, license } = packageData;
@@ -136,7 +136,7 @@ export default {
           //  components/button/button.js
           //
           const terms = [
-            { from: /^src\//, to: '' }, // Strip the src/ prefix
+            { from: /^src\//, to: 'dist/' }, // Strip the src/ prefix
             { from: /\.(t|j)sx?$/, to: '.js' } // Convert .ts to .js
           ];
 
