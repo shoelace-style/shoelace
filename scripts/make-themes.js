@@ -16,7 +16,7 @@ const filesToEmbed = globbySync('./src/themes/**/_*.css');
 const themesDir = path.join(outdir, 'themes');
 const embeds = {};
 
-console.log('Generating stylesheets');
+console.log('Generating theme stylesheets');
 
 mkdirSync(themesDir, { recursive: true });
 
@@ -57,6 +57,6 @@ try {
     fs.writeFileSync(jsFile, js, 'utf8');
   });
 } catch (err) {
-  console.error(chalk.red('Error generating stylesheets!'));
+  console.error(chalk.red('Error generating theme stylesheets!'));
   console.error(err);
 }

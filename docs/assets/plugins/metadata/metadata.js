@@ -1,6 +1,4 @@
 (() => {
-  const isDev = location.hostname === 'localhost';
-  const isNext = location.hostname === 'next.shoelace.style';
   const customElements = fetch('/dist/custom-elements.json')
     .then(res => res.json())
     .catch(err => console.error(err));
@@ -330,7 +328,7 @@
       // Add version
       const version = document.createElement('div');
       version.classList.add('sidebar-version');
-      version.textContent = isDev ? 'Development' : isNext ? 'Next' : metadata.package.version;
+      version.textContent = `Version ${metadata.package.version} (Upstream: ${metadata.package.upstreamVersion})`;
       target.appendChild(version);
 
       // Store version for reuse

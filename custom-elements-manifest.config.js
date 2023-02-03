@@ -1,11 +1,11 @@
-import fs from 'fs';
 import { generateCustomData } from 'cem-plugin-vs-code-custom-data-generator';
-import commandLineArgs from 'command-line-args';
 import { parse } from 'comment-parser';
 import { pascalCase } from 'pascal-case';
+import commandLineArgs from 'command-line-args';
+import fs from 'fs';
 
 const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
-const { name, description, version, author, homepage, license } = packageData;
+const { name, description, version, upstreamVersion, author, homepage, license } = packageData;
 
 const { outdir } = commandLineArgs([
   { name: 'litelement', type: String },
@@ -33,7 +33,7 @@ export default {
     {
       name: 'shoelace-package-data',
       packageLinkPhase({ customElementsManifest }) {
-        customElementsManifest.package = { name, description, version, author, homepage, license };
+        customElementsManifest.package = { name, description, version, upstreamVersion, author, homepage, license };
       }
     },
 

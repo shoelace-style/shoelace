@@ -39,8 +39,7 @@
     <!-- Import Shoelace -->
     <link rel="stylesheet" href="dist/themes/light.css" />
     <link rel="stylesheet" href="dist/themes/dark.css" />
-    <link rel="stylesheet" href="dist/themes/tokens.css" />
-    <link rel="stylesheet" href="dist/themes/vendor.css" />
+    <link rel="stylesheet" href="dist/styles/index.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -105,12 +104,5 @@
     <script src="assets/plugins/search/search.js"></script>
     <script src="assets/plugins/theme-picker/theme-picker.js"></script>
     <script src="dist/vendor/index.js" type="module"></script>
-    <script type="module">
-      import { registerIconLibrary } from '/dist/utilities/icon-library.js';
-
-      registerIconLibrary('bootstrap', {
-        resolver: name => `https://cdn.jsdelivr.net/npm/bootstrap-icons@1.0.0/icons/${name}.svg`
-      });
-    </script>
   </body>
 </html>
