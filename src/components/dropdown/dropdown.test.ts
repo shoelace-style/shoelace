@@ -1,4 +1,4 @@
-import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+import { aTimeout, expect, fixture, html, waitUntil } from '@open-wc/testing';
 import { sendKeys, sendMouse } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlDropdown from './dropdown';
@@ -196,6 +196,7 @@ describe('<sl-dropdown>', () => {
     await trigger.updateComplete;
     await sendKeys({ press: 'ArrowDown' });
     await el.updateComplete;
+    await aTimeout(500); // sigh, Safari
     const itemFocused = document.activeElement === item;
 
     expect(itemFocused).to.be.true;
