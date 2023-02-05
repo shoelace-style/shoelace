@@ -94,6 +94,21 @@ describe('<sl-checkbox>', () => {
     await el.updateComplete;
   });
 
+  it('should hide the native input with the correct positioning to scroll correctly when contained in an overflow', async () => {
+    //
+    // See: https://github.com/shoelace-style/shoelace/issues/1169
+    //
+    const el = await fixture<SlCheckbox>(html` <sl-checkbox></sl-checkbox> `);
+    const label = el.shadowRoot!.querySelector('.checkbox')!;
+    const input = el.shadowRoot!.querySelector('.checkbox__input')!;
+
+    const labelPosition = getComputedStyle(label).position;
+    const inputPosition = getComputedStyle(input).position;
+
+    expect(labelPosition).to.equal('relative');
+    expect(inputPosition).to.equal('absolute');
+  });
+
   describe('when submitting a form', () => {
     it('should submit the correct value when a value is provided', async () => {
       const form = await fixture<HTMLFormElement>(html`
