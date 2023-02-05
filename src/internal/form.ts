@@ -341,16 +341,6 @@ export class FormControlController implements ReactiveController {
       host.toggleAttribute('data-user-invalid', !isValid && hasInteracted);
       host.toggleAttribute('data-user-valid', isValid && hasInteracted);
     }
-
-    const formControl = host.shadowRoot?.querySelector('[part=form-control]');
-
-    if (formControl) {
-      if (isValid) {
-        formControl.removeAttribute('data-error');
-      } else {
-        formControl.setAttribute('data-error', this.host.validationMessage);
-      }
-    }
   }
 
   /**
