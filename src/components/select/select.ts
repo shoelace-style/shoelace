@@ -798,17 +798,17 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
               @slotchange=${this.handleDefaultSlotChange}
             ></slot>
           </sl-popup>
-
-          <slot
-            name="help-text"
-            part="form-control-help-text"
-            id="help-text"
-            class="form-control__help-text"
-            aria-hidden=${hasHelpText ? 'false' : 'true'}
-          >
-            ${this.helpText}
-          </slot>
         </div>
+
+        <slot
+          name="help-text"
+          part="form-control-help-text"
+          id="help-text"
+          class="form-control__help-text"
+          aria-hidden=${hasHelpText ? 'false' : 'true'}
+        >
+          ${this.helpText}
+        </slot>
       </div>
     `;
   }

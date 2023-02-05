@@ -9,6 +9,7 @@ export default css`
   }
 
   .checkbox {
+    position: relative;
     display: inline-flex;
     align-items: top;
     font-family: var(--sl-input-font-family);

@@ -1,4 +1,4 @@
-import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+import { aTimeout, expect, fixture, html, waitUntil } from '@open-wc/testing';
 import { sendKeys, sendMouse } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlDropdown from './dropdown';
@@ -177,6 +177,29 @@ describe('<sl-dropdown>', () => {
     await el.updateComplete;
 
     expect(el.open).to.be.true;
+  });
+
+  it('should navigate to first focusable item on arrow navigation', async () => {
+    const el = await fixture<SlDropdown>(html`
+      <sl-dropdown>
+        <sl-button slot="trigger" caret>Toggle</sl-button>
+        <sl-menu>
+          <sl-menu-label>Top Label</sl-menu-label>
+          <sl-menu-item>Item 1</sl-menu-item>
+        </sl-menu>
+      </sl-dropdown>
+    `);
+    const trigger = el.querySelector('sl-button')!;
+    const item = el.querySelector('sl-menu-item')!;
+
+    trigger.focus();
+    await trigger.updateComplete;
+    await sendKeys({ press: 'ArrowDown' });
+    await el.updateComplete;
+    await aTimeout(500); // sigh, Safari
+    const itemFocused = document.activeElement === item;
+
+    expect(itemFocused).to.be.true;
   });
 
   it('should close on escape key', async () => {
