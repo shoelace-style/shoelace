@@ -41,6 +41,7 @@ export interface FormControlControllerOptions {
   setValue: (input: ShoelaceFormControl, value: unknown) => void;
 }
 
+/** A reactive controller to allow form controls to participate in form submission, validation, etc. */
 export class FormControlController implements ReactiveController {
   host: ShoelaceFormControl & ReactiveControllerHost;
   form?: HTMLFormElement | null;

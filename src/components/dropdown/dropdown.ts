@@ -155,6 +155,14 @@ export default class SlDropdown extends ShoelaceElement {
   }
 
   handleDocumentKeyDown(event: KeyboardEvent) {
+    // Close when escape or tab is pressed
+    if (event.key === 'Escape' && this.open) {
+      event.stopPropagation();
+      this.focusOnTrigger();
+      this.hide();
+      return;
+    }
+
     // Handle tabbing
     if (event.key === 'Tab') {
       // Tabbing within an open menu should close the dropdown and refocus the trigger
@@ -217,14 +225,6 @@ export default class SlDropdown extends ShoelaceElement {
   }
 
   handleTriggerKeyDown(event: KeyboardEvent) {
-    // Close when escape or tab is pressed
-    if (event.key === 'Escape' && this.open) {
-      event.stopPropagation();
-      this.focusOnTrigger();
-      this.hide();
-      return;
-    }
-
     // When spacebar/enter is pressed, show the panel but don't focus on the menu. This let's the user press the same
     // key again to hide the menu in case they don't want to make a selection.
     if ([' ', 'Enter'].includes(event.key)) {
@@ -236,7 +236,7 @@ export default class SlDropdown extends ShoelaceElement {
     const menu = this.getMenu();
 
     if (menu) {
-      const menuItems = menu.defaultSlot.assignedElements({ flatten: true }) as SlMenuItem[];
+      const menuItems = menu.getAllItems();
       const firstMenuItem = menuItems[0];
       const lastMenuItem = menuItems[menuItems.length - 1];
 

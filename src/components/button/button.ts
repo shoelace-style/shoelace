@@ -139,6 +139,17 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
   /** Used to override the form owner's `target` attribute. */
   @property({ attribute: 'formtarget' }) formTarget: '_self' | '_blank' | '_parent' | '_top' | string;
 
+  connectedCallback() {
+    super.connectedCallback();
+    this.handleHostClick = this.handleHostClick.bind(this);
+    this.addEventListener('click', this.handleHostClick);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('click', this.handleHostClick);
+  }
+
   firstUpdated() {
     if (this.isButton()) {
       this.formControlController.updateValidity();
@@ -155,19 +166,21 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
     this.emit('sl-focus');
   }
 
-  private handleClick(event: MouseEvent) {
-    if (this.disabled || this.loading) {
-      event.preventDefault();
-      event.stopPropagation();
-      return;
-    }
-
+  private handleClick() {
     if (this.type === 'submit') {
       this.formControlController.submit(this);
     }
 
     if (this.type === 'reset') {
       this.formControlController.reset(this);
+    }
+  }
+
+  private handleHostClick(event: MouseEvent) {
+    // Prevent the click event from being emitted when the button is disabled or loading
+    if (this.disabled || this.loading) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
     }
   }
 

@@ -1,5 +1,6 @@
 import type { ReactiveController, ReactiveControllerHost } from 'lit';
 
+/** A reactive controller that determines when slots exist. */
 export class HasSlotController implements ReactiveController {
   host: ReactiveControllerHost & Element;
   slotNames: string[] = [];

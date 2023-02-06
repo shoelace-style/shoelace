@@ -33,6 +33,7 @@ export default css`
   }
 
   .switch {
+    position: relative;
     display: inline-flex;
     align-items: center;
     font-family: var(--sl-input-font-family);

@@ -247,7 +247,7 @@ Use [CSS parts](#css-parts) to customize the way form controls are drawn. This e
 
 <style>
   .label-on-left {
-    --label-width: 60px;
+    --label-width: 3.75rem;
     --gap-width: 1rem;
   }
 
@@ -267,8 +267,7 @@ Use [CSS parts](#css-parts) to customize the way form controls are drawn. This e
   }
 
   .label-on-left::part(form-control-help-text) {
-    grid-column: span 2;
-    padding-left: calc(var(--label-width) + var(--gap-width));
+    grid-column-start: 2;
   }
 </style>
 ```

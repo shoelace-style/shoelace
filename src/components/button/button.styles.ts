@@ -48,7 +48,7 @@ export default css`
     cursor: not-allowed;
   }
 
-  /* When disabled, prevent mouse events from bubbling up */
+  /* When disabled, prevent mouse events from bubbling up from children */
   .button--disabled * {
     pointer-events: none;
   }

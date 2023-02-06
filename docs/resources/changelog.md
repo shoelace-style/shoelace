@@ -6,6 +6,16 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## Next
+
+- Fixed a bug in `<sl-animated-image>` where the play and pause buttons were transposed [#1147](https://github.com/shoelace-style/shoelace/issues/1147)
+- Fixed a bug that prevented `web-types.json` from being generated [#1154](https://github.com/shoelace-style/shoelace/discussions/1154)
+- Fixed a bug in `<sl-color-picker>` that prevented `sl-change` and `sl-input` from emitting when using the eye dropper [#1157](https://github.com/shoelace-style/shoelace/issues/1157)
+- Fixed a bug in `<sl-dropdown>` that prevented keyboard users from selecting menu items when using the keyboard [#1165](https://github.com/shoelace-style/shoelace/issues/1165)
+- Fixed a bug in the template for `<sl-select>` that caused the `form-control-help-text` part to not be in the same location as other form controls [#1178](https://github.com/shoelace-style/shoelace/issues/1178)
+- Fixed a bug in `<sl-checkbox>` and `<sl-switch>` that caused the browser to scroll incorrectly when focusing on a control in a container with overflow [#1169](https://github.com/shoelace-style/shoelace/issues/1169)
+- Fixed a bug in `<sl-menu-item>` that caused the `click` event to be emitted when the item was disabled [#1113](https://github.com/shoelace-style/shoelace/issues/1113)
+
 ## 2.0.0
 
 This is the first stable release of Shoelace 2, meaning breaking changes to the API will no longer be accepted for this version. Development of Shoelace 2.0 started in January 2020. The first beta was released on [July 15, 2020](https://github.com/shoelace-style/shoelace/releases/tag/v2.0.0-beta.1). Since then, Shoelace has grown quite a bit! Here are some stats from the project as of January 24, 2023:
