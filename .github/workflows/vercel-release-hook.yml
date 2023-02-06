@@ -1,0 +1,11 @@
+on:
+  push:
+    # Pattern matched against refs/tags
+    tags:        
+      - '*' # Push events to every tag not containing /
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - run: curl -X POST -d {} https://api.vercel.com/v1/integrations/deploy/prj_daRchTcHCR2iXTkby85z8Bmy7gbE/c0J4LKbMRT
