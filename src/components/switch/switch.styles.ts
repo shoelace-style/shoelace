@@ -154,4 +154,11 @@ export default css`
     content: var(--sl-input-required-content);
     margin-inline-start: var(--sl-input-required-content-offset);
   }
+
+  @media (forced-colors: active) {
+    .switch.switch--checked:not(.switch--disabled) .switch__control:hover .switch__thumb,
+    .switch--checked .switch__control .switch__thumb {
+      background-color: ButtonText;
+    }
+  }
 `;

@@ -18,6 +18,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in form controls that erroneously prevented validation states from being set when `novalidate` was used on the containing form [#1164](https://github.com/shoelace-style/shoelace/issues/1164)
 - Improved the behavior of `<sl-dropdown>` in Safari so keyboard interaction works the same as in other browsers [#1177](https://github.com/shoelace-style/shoelace/issues/1177)
 - Improved the [icons](/components/icon) page so it's not as sluggish in Safari [#1122](https://github.com/shoelace-style/shoelace/issues/1122)
+- Improved the accessibility of `<sl-switch>` when used in forced-colors / Windows High Contrast mode [#1114](https://github.com/shoelace-style/shoelace/issues/1114)
 
 ## 2.0.0
 
