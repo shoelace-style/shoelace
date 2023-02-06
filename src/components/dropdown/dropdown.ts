@@ -253,7 +253,7 @@ export default class SlDropdown extends ShoelaceElement {
 
         if (menuItems.length > 0) {
           // Focus on the first/last menu item after showing
-          requestAnimationFrame(() => {
+          this.updateComplete.then(() => {
             if (event.key === 'ArrowDown' || event.key === 'Home') {
               menu.setCurrentItem(firstMenuItem);
               firstMenuItem.focus();
@@ -319,6 +319,7 @@ export default class SlDropdown extends ShoelaceElement {
     }
 
     this.open = true;
+    this.focusOnTrigger();
     return waitForEvent(this, 'sl-after-show');
   }
 
