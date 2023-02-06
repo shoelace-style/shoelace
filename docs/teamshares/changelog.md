@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.2
+
+- Updated to upstream [release 2.0.0](/resources/changelog)
+  - First stable release
+  - Some fixes for selects and form elements
+- Migrated tokens and overrides from `shared-ui`
+  - This repo is now the source of truth for tokens and override styles
+- Updated Heroicons to 2.0.14
+  - No significant changes, just keeping up with upstream
+
 ## 1.0.1-alpha.4
 
 - Updated to upstream [version 2.0.0-beta.88](/resources/changelog)
