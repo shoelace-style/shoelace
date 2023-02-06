@@ -14,6 +14,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-dropdown>` that prevented keyboard users from selecting menu items when using the keyboard [#1165](https://github.com/shoelace-style/shoelace/issues/1165)
 - Fixed a bug in the template for `<sl-select>` that caused the `form-control-help-text` part to not be in the same location as other form controls [#1178](https://github.com/shoelace-style/shoelace/issues/1178)
 - Fixed a bug in `<sl-checkbox>` and `<sl-switch>` that caused the browser to scroll incorrectly when focusing on a control in a container with overflow [#1169](https://github.com/shoelace-style/shoelace/issues/1169)
+- Fixed a bug in `<sl-menu-item>` that caused the `click` event to be emitted when the item was disabled [#1113](https://github.com/shoelace-style/shoelace/issues/1113)
 
 ## 2.0.0
 
