@@ -221,6 +221,7 @@ export default class SlDropdown extends ShoelaceElement {
       this.hide();
     } else {
       this.show();
+      this.focusOnTrigger();
     }
   }
 
@@ -319,7 +320,6 @@ export default class SlDropdown extends ShoelaceElement {
     }
 
     this.open = true;
-    this.focusOnTrigger();
     return waitForEvent(this, 'sl-after-show');
   }
 
