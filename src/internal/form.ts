@@ -294,23 +294,12 @@ export class FormControlController implements ReactiveController {
     //
     // See this RFC for more details: https://github.com/shoelace-style/shoelace/issues/1011
     //
-    if (this.form?.noValidate) {
-      // Form validation is disabled, remove the attributes
-      host.removeAttribute('data-required');
-      host.removeAttribute('data-optional');
-      host.removeAttribute('data-invalid');
-      host.removeAttribute('data-valid');
-      host.removeAttribute('data-user-invalid');
-      host.removeAttribute('data-user-valid');
-    } else {
-      // Form validation is enabled, set the attributes
-      host.toggleAttribute('data-required', required);
-      host.toggleAttribute('data-optional', !required);
-      host.toggleAttribute('data-invalid', !isValid);
-      host.toggleAttribute('data-valid', isValid);
-      host.toggleAttribute('data-user-invalid', !isValid && hasInteracted);
-      host.toggleAttribute('data-user-valid', isValid && hasInteracted);
-    }
+    host.toggleAttribute('data-required', required);
+    host.toggleAttribute('data-optional', !required);
+    host.toggleAttribute('data-invalid', !isValid);
+    host.toggleAttribute('data-valid', isValid);
+    host.toggleAttribute('data-user-invalid', !isValid && hasInteracted);
+    host.toggleAttribute('data-user-valid', isValid && hasInteracted);
   }
 
   /**

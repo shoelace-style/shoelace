@@ -155,6 +155,18 @@ describe('<sl-input>', () => {
       expect(el.hasAttribute('data-user-invalid')).to.be.true;
       expect(el.hasAttribute('data-user-valid')).to.be.false;
     });
+
+    it('should receive validation attributes ("states") even when novalidate is used on the parent form', async () => {
+      const el = await fixture<HTMLFormElement>(html` <form novalidate><sl-input required></sl-input></form> `);
+      const input = el.querySelector<SlInput>('sl-input')!;
+
+      expect(input.hasAttribute('data-required')).to.be.true;
+      expect(input.hasAttribute('data-optional')).to.be.false;
+      expect(input.hasAttribute('data-invalid')).to.be.true;
+      expect(input.hasAttribute('data-valid')).to.be.false;
+      expect(input.hasAttribute('data-user-invalid')).to.be.false;
+      expect(input.hasAttribute('data-user-valid')).to.be.false;
+    });
   });
 
   describe('when submitting a form', () => {

@@ -169,6 +169,19 @@ describe('<sl-range>', () => {
       expect(range.hasAttribute('data-user-valid')).to.be.false;
     });
 
+    it('should receive validation attributes ("states") even when novalidate is used on the parent form', async () => {
+      const el = await fixture<HTMLFormElement>(html` <form novalidate><sl-range></sl-range></form> `);
+      const range = el.querySelector<SlRange>('sl-range')!;
+
+      range.setCustomValidity('Invalid value');
+      await range.updateComplete;
+
+      expect(range.hasAttribute('data-invalid')).to.be.true;
+      expect(range.hasAttribute('data-valid')).to.be.false;
+      expect(range.hasAttribute('data-user-invalid')).to.be.false;
+      expect(range.hasAttribute('data-user-valid')).to.be.false;
+    });
+
     it('should be present in form data when using the form attribute and located outside of a <form>', async () => {
       const el = await fixture<HTMLFormElement>(html`
         <div>

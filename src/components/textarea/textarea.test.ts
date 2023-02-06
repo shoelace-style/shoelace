@@ -171,6 +171,18 @@ describe('<sl-textarea>', () => {
       expect(el.hasAttribute('data-user-invalid')).to.be.true;
       expect(el.hasAttribute('data-user-valid')).to.be.false;
     });
+
+    it('should receive validation attributes ("states") even when novalidate is used on the parent form', async () => {
+      const el = await fixture<HTMLFormElement>(html` <form novalidate><sl-textarea required></sl-textarea></form> `);
+      const textarea = el.querySelector<SlTextarea>('sl-textarea')!;
+
+      expect(textarea.hasAttribute('data-required')).to.be.true;
+      expect(textarea.hasAttribute('data-optional')).to.be.false;
+      expect(textarea.hasAttribute('data-invalid')).to.be.true;
+      expect(textarea.hasAttribute('data-valid')).to.be.false;
+      expect(textarea.hasAttribute('data-user-invalid')).to.be.false;
+      expect(textarea.hasAttribute('data-user-valid')).to.be.false;
+    });
   });
 
   describe('when submitting a form', () => {
