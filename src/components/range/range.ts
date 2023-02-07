@@ -146,7 +146,6 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
   }
 
   private handleThumbDragStart() {
-    this.focus(); // force Safari to focus so we can listen for the sl-blur interaction
     this.hasTooltip = true;
   }
 

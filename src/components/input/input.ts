@@ -63,7 +63,9 @@ const isFirefox = isChromium ? false : navigator.userAgent.includes('Firefox');
 export default class SlInput extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  private readonly formControlController = new FormControlController(this);
+  private readonly formControlController = new FormControlController(this, {
+    assumeInteractionOn: ['sl-blur', 'sl-input']
+  });
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private readonly localize = new LocalizeController(this);
 

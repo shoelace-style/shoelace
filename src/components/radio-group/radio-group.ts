@@ -38,9 +38,7 @@ import type SlRadioButton from '../radio-button/radio-button';
 export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  protected readonly formControlController = new FormControlController(this, {
-    assumeInteractionOn: ['sl-input']
-  });
+  protected readonly formControlController = new FormControlController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private customValidityMessage = '';
   private validationTimeout: number;

@@ -90,9 +90,7 @@ declare const EyeDropper: EyeDropperConstructor;
 export default class SlColorPicker extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  private readonly formControlController = new FormControlController(this, {
-    assumeInteractionOn: ['sl-input']
-  });
+  private readonly formControlController = new FormControlController(this);
   private isSafeValue = false;
   private readonly localize = new LocalizeController(this);
 
