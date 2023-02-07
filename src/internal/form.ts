@@ -10,16 +10,16 @@ import type SlButton from '../components/button/button';
 export const formCollections: WeakMap<HTMLFormElement, Set<ShoelaceFormControl>> = new WeakMap();
 
 //
-// We store a WeakMap of controls that users have interacted with. This allows us to determine the interaction state
-// without littering the DOM with additional data attributes.
-//
-const userInteractedControls: WeakMap<ShoelaceFormControl, boolean> = new WeakMap();
-
-//
 // We store a WeakMap of reportValidity() overloads so we can override it when form controls connect to the DOM and
 // restore the original behavior when they disconnect.
 //
 const reportValidityOverloads: WeakMap<HTMLFormElement, () => boolean> = new WeakMap();
+
+//
+// We store a Set of controls that users have interacted with. This allows us to determine the interaction state
+// without littering the DOM with additional data attributes.
+//
+const userInteractedControls: Set<ShoelaceFormControl> = new Set();
 
 export interface FormControlControllerOptions {
   /** A function that returns the form containing the form control. */
@@ -234,7 +234,12 @@ export class FormControlController implements ReactiveController {
   }
 
   private setUserInteracted(el: ShoelaceFormControl, hasInteracted: boolean) {
-    userInteractedControls.set(el, hasInteracted);
+    if (hasInteracted) {
+      userInteractedControls.add(el);
+    } else {
+      userInteractedControls.delete(el);
+    }
+
     el.requestUpdate();
   }
 
@@ -290,7 +295,7 @@ export class FormControlController implements ReactiveController {
    */
   setValidity(isValid: boolean) {
     const host = this.host;
-    const hasInteracted = Boolean(userInteractedControls.get(host));
+    const hasInteracted = Boolean(userInteractedControls.has(host));
     const required = Boolean(host.required);
 
     //
