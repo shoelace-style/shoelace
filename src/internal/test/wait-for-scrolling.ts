@@ -10,10 +10,12 @@ export const waitForScrollingToEnd = (element: Element, timeoutInMs = 500): Prom
   let lastLeft = element.scrollLeft;
   let lastTop = element.scrollTop;
   let framesWithoutChange = 0;
+
   return new Promise((resolve, reject) => {
     const timeout = window.setTimeout(() => {
       reject(new Error('Waiting for scroll end timed out'));
     }, timeoutInMs);
+
     function checkScrollingChanged() {
       if (element.scrollLeft !== lastLeft || element.scrollTop !== lastTop) {
         framesWithoutChange = 0;
@@ -28,6 +30,7 @@ export const waitForScrollingToEnd = (element: Element, timeoutInMs = 500): Prom
       }
       window.requestAnimationFrame(checkScrollingChanged);
     }
+
     checkScrollingChanged();
   });
 };

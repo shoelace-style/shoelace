@@ -155,6 +155,14 @@ export default class SlDropdown extends ShoelaceElement {
   }
 
   handleDocumentKeyDown(event: KeyboardEvent) {
+    // Close when escape or tab is pressed
+    if (event.key === 'Escape' && this.open) {
+      event.stopPropagation();
+      this.focusOnTrigger();
+      this.hide();
+      return;
+    }
+
     // Handle tabbing
     if (event.key === 'Tab') {
       // Tabbing within an open menu should close the dropdown and refocus the trigger
@@ -213,18 +221,11 @@ export default class SlDropdown extends ShoelaceElement {
       this.hide();
     } else {
       this.show();
+      this.focusOnTrigger();
     }
   }
 
   handleTriggerKeyDown(event: KeyboardEvent) {
-    // Close when escape or tab is pressed
-    if (event.key === 'Escape' && this.open) {
-      event.stopPropagation();
-      this.focusOnTrigger();
-      this.hide();
-      return;
-    }
-
     // When spacebar/enter is pressed, show the panel but don't focus on the menu. This let's the user press the same
     // key again to hide the menu in case they don't want to make a selection.
     if ([' ', 'Enter'].includes(event.key)) {
@@ -253,7 +254,7 @@ export default class SlDropdown extends ShoelaceElement {
 
         if (menuItems.length > 0) {
           // Focus on the first/last menu item after showing
-          requestAnimationFrame(() => {
+          this.updateComplete.then(() => {
             if (event.key === 'ArrowDown' || event.key === 'Home') {
               menu.setCurrentItem(firstMenuItem);
               firstMenuItem.focus();

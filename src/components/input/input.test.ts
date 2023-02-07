@@ -130,6 +130,8 @@ describe('<sl-input>', () => {
       await el.updateComplete;
       await sendKeys({ press: 'b' });
       await el.updateComplete;
+      el.blur();
+      await el.updateComplete;
 
       expect(el.checkValidity()).to.be.true;
       expect(el.hasAttribute('data-user-invalid')).to.be.false;
@@ -151,9 +153,23 @@ describe('<sl-input>', () => {
       await sendKeys({ press: 'a' });
       await sendKeys({ press: 'Backspace' });
       await el.updateComplete;
+      el.blur();
+      await el.updateComplete;
 
       expect(el.hasAttribute('data-user-invalid')).to.be.true;
       expect(el.hasAttribute('data-user-valid')).to.be.false;
+    });
+
+    it('should receive validation attributes ("states") even when novalidate is used on the parent form', async () => {
+      const el = await fixture<HTMLFormElement>(html` <form novalidate><sl-input required></sl-input></form> `);
+      const input = el.querySelector<SlInput>('sl-input')!;
+
+      expect(input.hasAttribute('data-required')).to.be.true;
+      expect(input.hasAttribute('data-optional')).to.be.false;
+      expect(input.hasAttribute('data-invalid')).to.be.true;
+      expect(input.hasAttribute('data-valid')).to.be.false;
+      expect(input.hasAttribute('data-user-invalid')).to.be.false;
+      expect(input.hasAttribute('data-user-valid')).to.be.false;
     });
   });
 
@@ -217,6 +233,8 @@ describe('<sl-input>', () => {
 
       input.focus();
       await sendKeys({ type: 'test' });
+      await input.updateComplete;
+      input.blur();
       await input.updateComplete;
 
       expect(input.hasAttribute('data-user-invalid')).to.be.true;

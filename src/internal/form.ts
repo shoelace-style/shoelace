@@ -10,16 +10,21 @@ import type SlButton from '../components/button/button';
 export const formCollections: WeakMap<HTMLFormElement, Set<ShoelaceFormControl>> = new WeakMap();
 
 //
-// We store a WeakMap of controls that users have interacted with. This allows us to determine the interaction state
-// without littering the DOM with additional data attributes.
-//
-const userInteractedControls: WeakMap<ShoelaceFormControl, boolean> = new WeakMap();
-
-//
 // We store a WeakMap of reportValidity() overloads so we can override it when form controls connect to the DOM and
 // restore the original behavior when they disconnect.
 //
 const reportValidityOverloads: WeakMap<HTMLFormElement, () => boolean> = new WeakMap();
+
+//
+// We store a Set of controls that users have interacted with. This allows us to determine the interaction state
+// without littering the DOM with additional data attributes.
+//
+const userInteractedControls: Set<ShoelaceFormControl> = new Set();
+
+//
+// We store a WeakMap of interactions for each form control so we can track when all conditions are met for validation.
+//
+const interactions = new WeakMap<ShoelaceFormControl, string[]>();
 
 export interface FormControlControllerOptions {
   /** A function that returns the form containing the form control. */
@@ -39,8 +44,13 @@ export interface FormControlControllerOptions {
   reportValidity: (input: ShoelaceFormControl) => boolean;
   /** A function that sets the form control's value */
   setValue: (input: ShoelaceFormControl, value: unknown) => void;
+  /**
+   * An array of event names to listen to. When all events in the list are emitted, the control will receive validity
+   * states such as user-valid and user-invalid.user interacted validity states. */
+  assumeInteractionOn: string[];
 }
 
+/** A reactive controller to allow form controls to participate in form submission, validation, etc. */
 export class FormControlController implements ReactiveController {
   host: ShoelaceFormControl & ReactiveControllerHost;
   form?: HTMLFormElement | null;
@@ -68,13 +78,14 @@ export class FormControlController implements ReactiveController {
       disabled: input => input.disabled ?? false,
       reportValidity: input => (typeof input.reportValidity === 'function' ? input.reportValidity() : true),
       setValue: (input, value: string) => (input.value = value),
+      assumeInteractionOn: ['sl-input'],
       ...options
     };
     this.handleFormData = this.handleFormData.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleFormReset = this.handleFormReset.bind(this);
     this.reportFormValidity = this.reportFormValidity.bind(this);
-    this.handleUserInput = this.handleUserInput.bind(this);
+    this.handleInteraction = this.handleInteraction.bind(this);
   }
 
   hostConnected() {
@@ -84,12 +95,21 @@ export class FormControlController implements ReactiveController {
       this.attachForm(form);
     }
 
-    this.host.addEventListener('sl-input', this.handleUserInput);
+    // Listen for interactions
+    interactions.set(this.host, []);
+    this.options.assumeInteractionOn.forEach(event => {
+      this.host.addEventListener(event, this.handleInteraction);
+    });
   }
 
   hostDisconnected() {
     this.detachForm();
-    this.host.removeEventListener('sl-input', this.handleUserInput);
+
+    // Clean up interactions
+    interactions.delete(this.host);
+    this.options.assumeInteractionOn.forEach(event => {
+      this.host.removeEventListener(event, this.handleInteraction);
+    });
   }
 
   hostUpdated() {
@@ -207,11 +227,20 @@ export class FormControlController implements ReactiveController {
   private handleFormReset() {
     this.options.setValue(this.host, this.options.defaultValue(this.host));
     this.setUserInteracted(this.host, false);
+    interactions.set(this.host, []);
   }
 
-  private async handleUserInput() {
-    await this.host.updateComplete;
-    this.setUserInteracted(this.host, true);
+  private handleInteraction(event: Event) {
+    const emittedEvents = interactions.get(this.host)!;
+
+    if (!emittedEvents.includes(event.type)) {
+      emittedEvents.push(event.type);
+    }
+
+    // Mark it as user-interacted as soon as all associated events have been emitted
+    if (emittedEvents.length === this.options.assumeInteractionOn.length) {
+      this.setUserInteracted(this.host, true);
+    }
   }
 
   private reportFormValidity() {
@@ -264,7 +293,12 @@ export class FormControlController implements ReactiveController {
   }
 
   private setUserInteracted(el: ShoelaceFormControl, hasInteracted: boolean) {
-    userInteractedControls.set(el, hasInteracted);
+    if (hasInteracted) {
+      userInteractedControls.add(el);
+    } else {
+      userInteractedControls.delete(el);
+    }
+
     el.requestUpdate();
   }
 
@@ -297,6 +331,11 @@ export class FormControlController implements ReactiveController {
     }
   }
 
+  /** Returns the associated `<form>` element, if one exists. */
+  getForm() {
+    return this.form ?? null;
+  }
+
   /** Resets the form, restoring all the control to their default value */
   reset(invoker?: HTMLInputElement | SlButton) {
     this.doAction('reset', invoker);
@@ -315,7 +354,7 @@ export class FormControlController implements ReactiveController {
    */
   setValidity(isValid: boolean) {
     const host = this.host;
-    const hasInteracted = Boolean(userInteractedControls.get(host));
+    const hasInteracted = Boolean(userInteractedControls.has(host));
     const required = Boolean(host.required);
 
     //
@@ -324,23 +363,12 @@ export class FormControlController implements ReactiveController {
     //
     // See this RFC for more details: https://github.com/shoelace-style/shoelace/issues/1011
     //
-    if (this.form?.noValidate) {
-      // Form validation is disabled, remove the attributes
-      host.removeAttribute('data-required');
-      host.removeAttribute('data-optional');
-      host.removeAttribute('data-invalid');
-      host.removeAttribute('data-valid');
-      host.removeAttribute('data-user-invalid');
-      host.removeAttribute('data-user-valid');
-    } else {
-      // Form validation is enabled, set the attributes
-      host.toggleAttribute('data-required', required);
-      host.toggleAttribute('data-optional', !required);
-      host.toggleAttribute('data-invalid', !isValid);
-      host.toggleAttribute('data-valid', isValid);
-      host.toggleAttribute('data-user-invalid', !isValid && hasInteracted);
-      host.toggleAttribute('data-user-valid', isValid && hasInteracted);
-    }
+    host.toggleAttribute('data-required', required);
+    host.toggleAttribute('data-optional', !required);
+    host.toggleAttribute('data-invalid', !isValid);
+    host.toggleAttribute('data-valid', isValid);
+    host.toggleAttribute('data-user-invalid', !isValid && hasInteracted);
+    host.toggleAttribute('data-user-valid', isValid && hasInteracted);
   }
 
   /**

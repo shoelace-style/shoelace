@@ -217,6 +217,18 @@ describe('<sl-switch>', () => {
 
       expect(formData.get('a')).to.equal('1');
     });
+
+    it('should receive validation attributes ("states") even when novalidate is used on the parent form', async () => {
+      const el = await fixture<HTMLFormElement>(html` <form novalidate><sl-switch required></sl-switch></form> `);
+      const slSwitch = el.querySelector<SlSwitch>('sl-switch')!;
+
+      expect(slSwitch.hasAttribute('data-required')).to.be.true;
+      expect(slSwitch.hasAttribute('data-optional')).to.be.false;
+      expect(slSwitch.hasAttribute('data-invalid')).to.be.true;
+      expect(slSwitch.hasAttribute('data-valid')).to.be.false;
+      expect(slSwitch.hasAttribute('data-user-invalid')).to.be.false;
+      expect(slSwitch.hasAttribute('data-user-valid')).to.be.false;
+    });
   });
 
   describe('when resetting a form', () => {

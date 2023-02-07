@@ -263,6 +263,8 @@ describe('<sl-select>', () => {
       await el.show();
       await clickOnElement(secondOption);
       await el.updateComplete;
+      el.blur();
+      await el.updateComplete;
 
       expect(el.checkValidity()).to.be.true;
       expect(el.hasAttribute('data-user-invalid')).to.be.false;
@@ -290,9 +292,31 @@ describe('<sl-select>', () => {
       await clickOnElement(secondOption);
       el.value = '';
       await el.updateComplete;
+      el.blur();
+      await el.updateComplete;
 
       expect(el.hasAttribute('data-user-invalid')).to.be.true;
       expect(el.hasAttribute('data-user-valid')).to.be.false;
+    });
+
+    it('should receive validation attributes ("states") even when novalidate is used on the parent form', async () => {
+      const el = await fixture<HTMLFormElement>(html`
+        <form novalidate>
+          <sl-select required>
+            <sl-option value="option-1">Option 1</sl-option>
+            <sl-option value="option-2">Option 2</sl-option>
+            <sl-option value="option-3">Option 3</sl-option>
+          </sl-select>
+        </form>
+      `);
+      const select = el.querySelector<SlSelect>('sl-select')!;
+
+      expect(select.hasAttribute('data-required')).to.be.true;
+      expect(select.hasAttribute('data-optional')).to.be.false;
+      expect(select.hasAttribute('data-invalid')).to.be.true;
+      expect(select.hasAttribute('data-valid')).to.be.false;
+      expect(select.hasAttribute('data-user-invalid')).to.be.false;
+      expect(select.hasAttribute('data-user-valid')).to.be.false;
     });
   });
 

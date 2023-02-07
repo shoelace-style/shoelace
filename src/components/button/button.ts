@@ -42,7 +42,7 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
 
   private readonly formControlController = new FormControlController(this, {
     form: input => {
-      // Buttons support a form attribute that points to an arbitrary form, so if this attribute it set we need to query
+      // Buttons support a form attribute that points to an arbitrary form, so if this attribute is set we need to query
       // the form from the same root using its id
       if (input.hasAttribute('form')) {
         const doc = input.getRootNode() as Document | ShadowRoot;
@@ -52,7 +52,8 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
 
       // Fall back to the closest containing form
       return input.closest('form');
-    }
+    },
+    assumeInteractionOn: ['click']
   });
   private readonly hasSlotController = new HasSlotController(this, '[default]', 'prefix', 'suffix');
   private readonly localize = new LocalizeController(this);
@@ -140,22 +141,15 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
   /** Used to override the form owner's `target` attribute. */
   @property({ attribute: 'formtarget' }) formTarget: '_self' | '_blank' | '_parent' | '_top' | string;
 
-  /** Gets the validity state object */
-  get validity() {
-    if (this.isButton()) {
-      return (this.button as HTMLButtonElement).validity;
-    }
-
-    return validValidityState;
+  connectedCallback() {
+    super.connectedCallback();
+    this.handleHostClick = this.handleHostClick.bind(this);
+    this.addEventListener('click', this.handleHostClick);
   }
 
-  /** Gets the validation message */
-  get validationMessage() {
-    if (this.isButton()) {
-      return (this.button as HTMLButtonElement).validationMessage;
-    }
-
-    return '';
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('click', this.handleHostClick);
   }
 
   firstUpdated() {
@@ -174,19 +168,21 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
     this.emit('sl-focus');
   }
 
-  private handleClick(event: MouseEvent) {
-    if (this.disabled || this.loading) {
-      event.preventDefault();
-      event.stopPropagation();
-      return;
-    }
-
+  private handleClick() {
     if (this.type === 'submit') {
       this.formControlController.submit(this);
     }
 
     if (this.type === 'reset') {
       this.formControlController.reset(this);
+    }
+  }
+
+  private handleHostClick(event: MouseEvent) {
+    // Prevent the click event from being emitted when the button is disabled or loading
+    if (this.disabled || this.loading) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
     }
   }
 

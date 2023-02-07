@@ -8,12 +8,21 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- Added the `sl-focus` and `sl-blur` events to `<sl-color-picker>`
+- Added the `focus()` and `blur()` methods to `<sl-color-picker>`
 - Fixed a bug in `<sl-animated-image>` where the play and pause buttons were transposed [#1147](https://github.com/shoelace-style/shoelace/issues/1147)
 - Fixed a bug that prevented `web-types.json` from being generated [#1154](https://github.com/shoelace-style/shoelace/discussions/1154)
 - Fixed a bug in `<sl-color-picker>` that prevented `sl-change` and `sl-input` from emitting when using the eye dropper [#1157](https://github.com/shoelace-style/shoelace/issues/1157)
 - Fixed a bug in `<sl-dropdown>` that prevented keyboard users from selecting menu items when using the keyboard [#1165](https://github.com/shoelace-style/shoelace/issues/1165)
 - Fixed a bug in the template for `<sl-select>` that caused the `form-control-help-text` part to not be in the same location as other form controls [#1178](https://github.com/shoelace-style/shoelace/issues/1178)
 - Fixed a bug in `<sl-checkbox>` and `<sl-switch>` that caused the browser to scroll incorrectly when focusing on a control in a container with overflow [#1169](https://github.com/shoelace-style/shoelace/issues/1169)
+- Fixed a bug in `<sl-menu-item>` that caused the `click` event to be emitted when the item was disabled [#1113](https://github.com/shoelace-style/shoelace/issues/1113)
+- Fixed a bug in form controls that erroneously prevented validation states from being set when `novalidate` was used on the containing form [#1164](https://github.com/shoelace-style/shoelace/issues/1164)
+- Fixed a bug in `<sl-checkbox>` that caused the required asterisk to appear before the label in Chrome
+- Improved the behavior of `<sl-dropdown>` in Safari so keyboard interaction works the same as in other browsers [#1177](https://github.com/shoelace-style/shoelace/issues/1177)
+- Improved the [icons](/components/icon) page so it's not as sluggish in Safari [#1122](https://github.com/shoelace-style/shoelace/issues/1122)
+- Improved the accessibility of `<sl-switch>` when used in forced-colors / Windows High Contrast mode [#1114](https://github.com/shoelace-style/shoelace/issues/1114)
+- Improved user interaction heuristics for all form controls [#1175](https://github.com/shoelace-style/shoelace/issues/1175)
 
 ## 2.0.0
 
