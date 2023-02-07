@@ -272,8 +272,9 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
     this.emit('sl-input');
   }
 
-  private handleInvalid() {
+  private handleInvalid(event: Event) {
     this.formControlController.setValidity(false);
+    this.formControlController.emitSlInvalidEvent(event);
   }
 
   private handleKeyDown(event: KeyboardEvent) {

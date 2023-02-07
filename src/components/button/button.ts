@@ -141,6 +141,24 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
   /** Used to override the form owner's `target` attribute. */
   @property({ attribute: 'formtarget' }) formTarget: '_self' | '_blank' | '_parent' | '_top' | string;
 
+  /** Gets the validity state object */
+  get validity() {
+    if (this.isButton()) {
+      return (this.button as HTMLButtonElement).validity;
+    }
+
+    return validValidityState;
+  }
+
+  /** Gets the validation message */
+  get validationMessage() {
+    if (this.isButton()) {
+      return (this.button as HTMLButtonElement).validationMessage;
+    }
+
+    return '';
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this.handleHostClick = this.handleHostClick.bind(this);

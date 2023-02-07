@@ -356,6 +356,105 @@ This example demonstrates custom validation styles using `data-user-invalid` and
 </style>
 ```
 
+## Inline form validation
+
+```html preview
+<form class="inline-validation">
+  <sl-input
+    name="name"
+    label="Name"
+    help-text="What would you like people to call you?"
+    autocomplete="off"
+    required
+  ></sl-input>
+
+  <sl-select label="Favorite Animal" help-text="Select the best option." clearable required>
+    <sl-option value="birds">Birds</sl-option>
+    <sl-option value="cats">Cats</sl-option>
+    <sl-option value="dogs">Dogs</sl-option>
+    <sl-option value="other">Other</sl-option>
+  </sl-select>
+
+  <sl-button type="submit" variant="primary">Submit</sl-button>
+  <sl-button type="reset" variant="default">Reset</sl-button>
+</form>
+
+<script type="module">
+  const form = document.querySelector('form.inline-validation');
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    alert('All fields are valid!');
+  });
+
+  form.addEventListener('sl-invalid', event => {
+    console.log('sl-invalid');
+    event.preventDefault();
+  });
+
+  form.addEventListener(
+    'sl-input',
+    event => {
+      const elem = event.target;
+      console.log('sl-input', event.target.validationMessage);
+      if (
+        elem.hasAttribute('data-valid') ||
+        (elem.hasAttribute('data-invalid') && typeof elem.validationMessage === 'string')
+      ) {
+        if (elem.validationMessage === '') {
+          elem.removeAttribute('data-error');
+        } else {
+          elem.setAttribute('data-error', elem.validationMessage);
+        }
+      }
+    },
+    true
+  );
+</script>
+
+<style>
+  .inline-validation sl-input,
+  .inline-validation sl-select {
+    margin-bottom: var(--sl-spacing-medium);
+  }
+
+  /* user invalid styles */
+  .inline-validation sl-input[data-user-invalid]::part(base),
+  .inline-validation sl-select[data-user-invalid]::part(combobox) {
+    border-color: var(--sl-color-danger-600);
+  }
+
+  .inline-validation sl-input:focus-within[data-user-invalid]::part(base),
+  .inline-validation sl-select:focus-within[data-user-invalid]::part(combobox) {
+    border-color: var(--sl-color-danger-600);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-danger-300);
+  }
+
+  /* User valid styles */
+  .inline-validation sl-input[data-user-valid]::part(base),
+  .inline-validation sl-select[data-user-valid]::part(combobox) {
+    border-color: var(--sl-color-success-600);
+  }
+
+  .validity-styles [data-user-valid]::part(form-control-label),
+  .validity-styles [data-user-valid]::part(form-control-help-text) {
+    color: var(--sl-color-success-700);
+  }
+
+  .inline-validation sl-input:focus-within[data-user-valid]::part(base),
+  .inline-validation sl-select:focus-within[data-user-valid]::part(combobox) {
+    border-color: var(--sl-color-success-600);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-success-300);
+  }
+
+  .inline-validation sl-input[data-user-invalid]::after {
+    font-size: var(--sl-font-size-medium);
+    color: var(--sl-color-danger-600);
+    content: attr(data-error);
+  }
+</style>
+```
+
 ## Getting Associated Form Controls
 
 At this time, using [`HTMLFormElement.elements`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/elements) will not return Shoelace form controls because the browser is unaware of their status as custom element form controls. Fortunately, Shoelace provides an `elements()` function that does something very similar. However, instead of returning an [`HTMLFormControlsCollection`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormControlsCollection), it returns an array of HTML and Shoelace form controls in the order they appear in the DOM.
