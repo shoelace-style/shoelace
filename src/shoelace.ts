@@ -60,3 +60,6 @@ export { default as SlOption } from './components/option/option';
 export * from './utilities/animation';
 export * from './utilities/base-path';
 export * from './utilities/icon-library';
+
+// Events
+export * from './events/events';
