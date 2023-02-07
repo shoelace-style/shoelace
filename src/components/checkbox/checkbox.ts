@@ -42,7 +42,8 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
   private readonly formControlController = new FormControlController(this, {
     value: (control: SlCheckbox) => (control.checked ? control.value || 'on' : undefined),
     defaultValue: (control: SlCheckbox) => control.defaultChecked,
-    setValue: (control: SlCheckbox, checked: boolean) => (control.checked = checked)
+    setValue: (control: SlCheckbox, checked: boolean) => (control.checked = checked),
+    assumeInteractionOn: ['sl-input']
   });
 
   @query('input[type="checkbox"]') input: HTMLInputElement;

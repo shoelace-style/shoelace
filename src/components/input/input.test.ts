@@ -130,6 +130,8 @@ describe('<sl-input>', () => {
       await el.updateComplete;
       await sendKeys({ press: 'b' });
       await el.updateComplete;
+      el.blur();
+      await el.updateComplete;
 
       expect(el.checkValidity()).to.be.true;
       expect(el.hasAttribute('data-user-invalid')).to.be.false;
@@ -150,6 +152,8 @@ describe('<sl-input>', () => {
       await el.updateComplete;
       await sendKeys({ press: 'a' });
       await sendKeys({ press: 'Backspace' });
+      await el.updateComplete;
+      el.blur();
       await el.updateComplete;
 
       expect(el.hasAttribute('data-user-invalid')).to.be.true;
@@ -229,6 +233,8 @@ describe('<sl-input>', () => {
 
       input.focus();
       await sendKeys({ type: 'test' });
+      await input.updateComplete;
+      input.blur();
       await input.updateComplete;
 
       expect(input.hasAttribute('data-user-invalid')).to.be.true;

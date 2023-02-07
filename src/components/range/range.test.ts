@@ -164,6 +164,8 @@ describe('<sl-range>', () => {
 
       await clickOnElement(range);
       await range.updateComplete;
+      range.blur();
+      await range.updateComplete;
 
       expect(range.hasAttribute('data-user-invalid')).to.be.true;
       expect(range.hasAttribute('data-user-valid')).to.be.false;

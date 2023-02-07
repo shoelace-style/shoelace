@@ -147,6 +147,8 @@ describe('<sl-textarea>', () => {
       el.focus();
       await sendKeys({ press: 'b' });
       await el.updateComplete;
+      el.blur();
+      await el.updateComplete;
 
       expect(el.checkValidity()).to.be.true;
       expect(el.hasAttribute('data-user-invalid')).to.be.false;
@@ -166,6 +168,8 @@ describe('<sl-textarea>', () => {
       el.focus();
       await sendKeys({ press: 'a' });
       await sendKeys({ press: 'Backspace' });
+      await el.updateComplete;
+      el.blur();
       await el.updateComplete;
 
       expect(el.hasAttribute('data-user-invalid')).to.be.true;
@@ -212,6 +216,8 @@ describe('<sl-textarea>', () => {
 
       textarea.focus();
       await sendKeys({ type: 'test' });
+      await textarea.updateComplete;
+      textarea.blur();
       await textarea.updateComplete;
 
       expect(textarea.hasAttribute('data-user-invalid')).to.be.true;

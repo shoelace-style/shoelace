@@ -263,6 +263,8 @@ describe('<sl-select>', () => {
       await el.show();
       await clickOnElement(secondOption);
       await el.updateComplete;
+      el.blur();
+      await el.updateComplete;
 
       expect(el.checkValidity()).to.be.true;
       expect(el.hasAttribute('data-user-invalid')).to.be.false;
@@ -289,6 +291,8 @@ describe('<sl-select>', () => {
       await el.show();
       await clickOnElement(secondOption);
       el.value = '';
+      await el.updateComplete;
+      el.blur();
       await el.updateComplete;
 
       expect(el.hasAttribute('data-user-invalid')).to.be.true;

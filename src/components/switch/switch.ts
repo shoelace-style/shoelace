@@ -40,7 +40,8 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
   private readonly formControlController = new FormControlController(this, {
     value: (control: SlSwitch) => (control.checked ? control.value || 'on' : undefined),
     defaultValue: (control: SlSwitch) => control.defaultChecked,
-    setValue: (control: SlSwitch, checked: boolean) => (control.checked = checked)
+    setValue: (control: SlSwitch, checked: boolean) => (control.checked = checked),
+    assumeInteractionOn: ['sl-input']
   });
 
   @query('input[type="checkbox"]') input: HTMLInputElement;
