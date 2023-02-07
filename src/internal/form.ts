@@ -267,6 +267,11 @@ export class FormControlController implements ReactiveController {
     }
   }
 
+  /** Returns the associated `<form>` element, if one exists. */
+  getForm() {
+    return this.form ?? null;
+  }
+
   /** Resets the form, restoring all the control to their default value */
   reset(invoker?: HTMLInputElement | SlButton) {
     this.doAction('reset', invoker);
