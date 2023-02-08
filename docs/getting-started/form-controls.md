@@ -339,6 +339,7 @@ This example demonstrates custom validation styles using `data-user-invalid` and
 
   /* User valid styles */
   .validity-styles sl-input[data-user-valid]::part(base),
+  .validity-styles sl-textarea[data-user-valid]::part(base),
   .validity-styles sl-select[data-user-valid]::part(combobox) {
     border-color: var(--sl-color-success-600);
   }
@@ -349,6 +350,7 @@ This example demonstrates custom validation styles using `data-user-invalid` and
   }
 
   .validity-styles sl-input:focus-within[data-user-valid]::part(base),
+  .validity-styles sl-textarea:focus-within[data-user-valid]::part(base),
   .validity-styles sl-select:focus-within[data-user-valid]::part(combobox) {
     border-color: var(--sl-color-success-600);
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-success-300);
@@ -457,16 +459,13 @@ This example demonstrates custom validation styles using `data-user-invalid` and
 
   /* User valid styles */
   .inline-validation sl-input[data-user-valid]::part(base),
+  .inline-validation sl-textarea[data-user-valid]::part(base),
   .inline-validation sl-select[data-user-valid]::part(combobox) {
     border-color: var(--sl-color-success-600);
   }
 
-  .validity-styles [data-user-valid]::part(form-control-label),
-  .validity-styles [data-user-valid]::part(form-control-help-text) {
-    color: var(--sl-color-success-700);
-  }
-
   .inline-validation sl-input:focus-within[data-user-valid]::part(base),
+  .inline-validation sl-textarea:focus-within[data-user-valid]::part(base),
   .inline-validation sl-select:focus-within[data-user-valid]::part(combobox) {
     border-color: var(--sl-color-success-600);
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-success-300);
