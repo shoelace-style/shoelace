@@ -174,6 +174,9 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
    */
   @property({ reflect: true }) form = '';
 
+  /** Makes the color picker a required field. */
+  @property({ type: Boolean, reflect: true }) required = false;
+
   /** Gets the validity state object */
   get validity() {
     return this.input.validity;
@@ -452,6 +455,11 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
         this.hue = 0;
       }
     }
+  }
+
+  private handleInputInvalid(event: Event) {
+    this.formControlController.setValidity(false);
+    this.formControlController.emitSlInvalidEvent(event);
   }
 
   private handleTouchMove(event: TouchEvent) {
@@ -903,11 +911,13 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
             autocapitalize="off"
             spellcheck="false"
             value=${this.isEmpty ? '' : this.inputValue}
+            ?required=${this.required}
             ?disabled=${this.disabled}
             aria-label=${this.localize.term('currentValue')}
             @keydown=${this.handleInputKeyDown}
             @sl-change=${this.handleInputChange}
             @sl-input=${this.handleInputInput}
+            @sl-invalid=${this.handleInputInvalid}
             @sl-blur=${this.stopNestedEventPropagation}
             @sl-focus=${this.stopNestedEventPropagation}
           ></sl-input>

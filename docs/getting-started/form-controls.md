@@ -370,14 +370,19 @@ This example demonstrates custom validation styles using `data-user-invalid` and
     <sl-input name="name" label="Name" required></sl-input>
     <sl-input name="email" type="email" label="Email" required></sl-input>
 
-    <sl-select name="country" label="Country" help-text="Shipping only to USA and Canada" clearable required>
+    <sl-select name="country" label="Country" help-text="Only USA and Canada" clearable required>
       <sl-option value="US">USA</sl-option>
       <sl-option value="CA">Canada</sl-option>
     </sl-select>
 
-    <sl-switch name="customer" required>Already customer</sl-switch>
+    <label>
+      Your favorite color *
+      <sl-color-picker required>Your favorite color</sl-color-picker>
+    </label>
 
-    <sl-textarea name="question" label="What's your question?" required></sl-textarea>
+    <sl-switch name="customer" required>Please approve that this is really your favorite color</sl-switch>
+
+    <sl-textarea name="question" label="Your question" required></sl-textarea>
 
     <sl-checkbox name="accept" required>Accept terms and conditions</sl-checkbox>
 

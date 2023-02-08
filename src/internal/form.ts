@@ -56,10 +56,6 @@ export class FormControlController implements ReactiveController {
   form?: HTMLFormElement | null;
   options: FormControlControllerOptions;
 
-  // Indicates whether the form control has a valid value.
-  // Will be modified by method `setValidity`
-  private isValid = true;
-
   constructor(host: ReactiveControllerHost & ShoelaceFormControl, options?: Partial<FormControlControllerOptions>) {
     (this.host = host).addController(this);
     this.options = {
@@ -358,11 +354,10 @@ export class FormControlController implements ReactiveController {
    *
    * Returns true if the host's validity has changed otherwise false
    */
-  setValidity(isValid: boolean): boolean {
+  setValidity(isValid: boolean) {
     const host = this.host;
     const hasInteracted = Boolean(userInteractedControls.has(host));
     const required = Boolean(host.required);
-    const validityChanged = isValid !== this.isValid;
 
     //
     // We're mapping the following "states" to data attributes. In the future, we can use ElementInternals.states to
@@ -376,22 +371,15 @@ export class FormControlController implements ReactiveController {
     host.toggleAttribute('data-valid', isValid);
     host.toggleAttribute('data-user-invalid', !isValid && hasInteracted);
     host.toggleAttribute('data-user-valid', isValid && hasInteracted);
-
-    this.isValid = isValid;
-    return validityChanged;
   }
 
   /**
    * Updates the form control's validity based on the current value of `host.checkValidity()`. Call this when anything
    * that affects constraint validation changes so the component receives the correct validity states.
    */
-  updateValidity(): boolean {
+  updateValidity() {
     const host = this.host;
-    const isValid = host.checkValidity();
-    const validityChanged = isValid !== this.isValid;
-    this.setValidity(isValid);
-
-    return validityChanged;
+    this.setValidity(host.checkValidity());
   }
 
   /**
@@ -412,3 +400,37 @@ export class FormControlController implements ReactiveController {
     }
   }
 }
+
+/*
+ * Predefined common validity states.
+ * All of them are read-only.
+ */
+
+// A validity state object that represents `valid`
+export const validValidityState: ValidityState = Object.freeze({
+  badInput: false,
+  customError: false,
+  patternMismatch: false,
+  rangeOverflow: false,
+  rangeUnderflow: false,
+  stepMismatch: false,
+  tooLong: false,
+  tooShort: false,
+  typeMismatch: false,
+  valid: true,
+  valueMissing: false
+});
+
+// A validity state object that represents `value missing`
+export const valueMissingValidityState: ValidityState = Object.freeze({
+  ...validValidityState,
+  valid: false,
+  valueMissing: true
+});
+
+// A validity state object that represents a custom error
+export const customErrorValidityState: ValidityState = Object.freeze({
+  ...validValidityState,
+  valid: false,
+  customError: true
+});

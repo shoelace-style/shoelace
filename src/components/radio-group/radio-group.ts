@@ -1,17 +1,18 @@
 import '../button-group/button-group';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { FormControlController } from '../../internal/form';
+
+import {
+  customErrorValidityState,
+  FormControlController,
+  validValidityState,
+  valueMissingValidityState
+} from '../../internal/form';
+
 import { HasSlotController } from '../../internal/slot';
 import { html } from 'lit';
 import { watch } from '../../internal/watch';
 import ShoelaceElement from '../../internal/shoelace-element';
-
-import {
-  customErrorValidityState,
-  validValidityState,
-  valueMissingValidityState
-} from '../../internal/validity-states';
 
 import styles from './radio-group.styles';
 import type { CSSResultGroup } from 'lit';
