@@ -6,3 +6,4 @@ export { default as SlSelectionChangeEvent } from './sl-selection-change';
 export { default as SlTabHideEvent } from './sl-tab-hide';
 export { default as SlTabShowEvent } from './sl-tab-show';
 export { default as SlErrorEvent } from './sl-error';
+export { default as SlRequestCloseEvent } from './sl-request-close';
