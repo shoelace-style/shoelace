@@ -1,13 +1,19 @@
 import { LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
+type SlEventInit<T> = T extends keyof GlobalEventHandlersEventMap
+  ? GlobalEventHandlersEventMap[T] extends CustomEvent
+    ? CustomEventInit<GlobalEventHandlersEventMap[T]['detail']>
+    : CustomEventInit
+  : CustomEventInit;
+
 export default class ShoelaceElement extends LitElement {
   // Make localization attributes reactive
   @property() dir: string;
   @property() lang: string;
 
   /** Emits a custom event with more convenient defaults. */
-  emit(name: string, options?: CustomEventInit) {
+  emit<T extends string>(name: T, options?: SlEventInit<T>) {
     const event = new CustomEvent(name, {
       bubbles: true,
       cancelable: false,
