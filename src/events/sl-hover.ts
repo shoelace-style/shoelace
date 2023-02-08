@@ -3,4 +3,10 @@ type SlHoverEvent = CustomEvent<{
   value: number;
 }>;
 
+declare global {
+  interface GlobalEventHandlersEventMap {
+    'sl-hover': SlHoverEvent;
+  }
+}
+
 export default SlHoverEvent;
