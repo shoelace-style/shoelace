@@ -1,9 +1,12 @@
 import { LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
+type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] };
 type SlEventInit<T> = T extends keyof GlobalEventHandlersEventMap
   ? GlobalEventHandlersEventMap[T] extends CustomEvent
-    ? CustomEventInit<GlobalEventHandlersEventMap[T]['detail']>
+    ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<string, never>>
+      ? CustomEventInit<GlobalEventHandlersEventMap[T]['detail']>
+      : WithRequired<CustomEventInit<GlobalEventHandlersEventMap[T]['detail']>, 'detail'>
     : CustomEventInit
   : CustomEventInit;
 
@@ -13,6 +16,7 @@ export default class ShoelaceElement extends LitElement {
   @property() lang: string;
 
   /** Emits a custom event with more convenient defaults. */
+  // TODO is there a way to make the options parameter required if the event has details?
   emit<T extends string>(name: T, options?: SlEventInit<T>) {
     const event = new CustomEvent(name, {
       bubbles: true,
