@@ -339,7 +339,6 @@ This example demonstrates custom validation styles using `data-user-invalid` and
 
   /* User valid styles */
   .validity-styles sl-input[data-user-valid]::part(base),
-  .validity-styles sl-textarea[data-user-valid]::part(base),
   .validity-styles sl-select[data-user-valid]::part(combobox) {
     border-color: var(--sl-color-success-600);
   }
@@ -445,7 +444,6 @@ This example demonstrates custom validation styles using `data-user-invalid` and
 
   /* user invalid styles */
   .inline-validation sl-input[data-user-invalid]::part(base),
-  .inline-validation sl-textarea[data-user-invalid]::part(base),
   .inline-validation sl-select[data-user-invalid]::part(combobox) {
     border-color: var(--sl-color-danger-600);
   }
