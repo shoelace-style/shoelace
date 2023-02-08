@@ -5,3 +5,4 @@ export { default as SlSelectEvent } from './sl-select';
 export { default as SlSelectionChangeEvent } from './sl-selection-change';
 export { default as SlTabHideEvent } from './sl-tab-hide';
 export { default as SlTabShowEvent } from './sl-tab-show';
+export { default as SlErrorEvent } from './sl-error';
