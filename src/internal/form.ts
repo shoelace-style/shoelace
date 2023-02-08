@@ -127,7 +127,7 @@ export class FormControlController implements ReactiveController {
     }
 
     if (this.host.hasUpdated) {
-      this.setValidity(this.host.checkValidity());
+      this.setValidity(this.host.validity.valid);
     }
   }
 
@@ -374,12 +374,12 @@ export class FormControlController implements ReactiveController {
   }
 
   /**
-   * Updates the form control's validity based on the current value of `host.checkValidity()`. Call this when anything
+   * Updates the form control's validity based on the current value of `host.validity.valid`. Call this when anything
    * that affects constraint validation changes so the component receives the correct validity states.
    */
   updateValidity() {
     const host = this.host;
-    this.setValidity(host.checkValidity());
+    this.setValidity(host.validity.valid);
   }
 
   /**

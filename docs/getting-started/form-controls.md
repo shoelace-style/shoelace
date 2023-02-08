@@ -406,7 +406,7 @@ This example demonstrates custom validation styles using `data-user-invalid` and
     event => {
       updateValidationMessage(event.target);
       event.preventDefault();
-      //animation.play = true;
+      animation.play = true;
     },
     true
   );
