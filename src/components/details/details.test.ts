@@ -2,6 +2,8 @@
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import sinon from 'sinon';
 import type SlDetails from './details';
+import type SlHideEvent from '../../events/sl-hide';
+import type SlShowEvent from '../../events/sl-show';
 
 describe('<sl-details>', () => {
   it('should be visible with the open attribute', async () => {
@@ -134,7 +136,7 @@ describe('<sl-details>', () => {
         consequat.
       </sl-details>
     `);
-    const showHandler = sinon.spy((event: CustomEvent) => event.preventDefault());
+    const showHandler = sinon.spy((event: SlShowEvent) => event.preventDefault());
 
     el.addEventListener('sl-show', showHandler);
     el.open = true;
@@ -153,7 +155,7 @@ describe('<sl-details>', () => {
         consequat.
       </sl-details>
     `);
-    const hideHandler = sinon.spy((event: CustomEvent) => event.preventDefault());
+    const hideHandler = sinon.spy((event: SlHideEvent) => event.preventDefault());
 
     el.addEventListener('sl-hide', hideHandler);
     el.open = false;

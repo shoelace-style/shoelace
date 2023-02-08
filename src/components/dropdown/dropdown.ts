@@ -17,6 +17,7 @@ import type SlIconButton from '../icon-button/icon-button';
 import type SlMenu from '../menu/menu';
 import type SlMenuItem from '../menu-item/menu-item';
 import type SlPopup from '../popup/popup';
+import type SlSelectEvent from '../../events/sl-select';
 
 /**
  * @summary Dropdowns expose additional content that "drops down" in a panel.
@@ -206,7 +207,7 @@ export default class SlDropdown extends ShoelaceElement {
     scrollIntoView(item, this.panel);
   }
 
-  handlePanelSelect(event: CustomEvent) {
+  handlePanelSelect(event: SlSelectEvent) {
     const target = event.target as HTMLElement;
 
     // Hide the dropdown when a menu item is selected
