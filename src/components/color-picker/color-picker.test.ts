@@ -324,6 +324,101 @@ describe('<sl-color-picker>', () => {
     expect(previewColor).to.equal('#ff000050');
   });
 
+  it('should emit sl-focus when rendered as a dropdown and focused', async () => {
+    const el = await fixture<SlColorPicker>(html`
+      <div>
+        <sl-color-picker></sl-color-picker>
+        <button type="button">Click me</button>
+      </div>
+    `);
+    const colorPicker = el.querySelector('sl-color-picker')!;
+    const trigger = colorPicker.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
+    const button = el.querySelector('button')!;
+    const focusHandler = sinon.spy();
+    const blurHandler = sinon.spy();
+
+    colorPicker.addEventListener('sl-focus', focusHandler);
+    colorPicker.addEventListener('sl-blur', blurHandler);
+
+    await clickOnElement(trigger);
+    await colorPicker.updateComplete;
+    expect(focusHandler).to.have.been.calledOnce;
+
+    await clickOnElement(button);
+    await colorPicker.updateComplete;
+    expect(blurHandler).to.have.been.calledOnce;
+  });
+
+  it('should emit sl-focus when rendered inline and focused', async () => {
+    const el = await fixture<SlColorPicker>(html`
+      <div>
+        <sl-color-picker inline></sl-color-picker>
+        <button type="button">Click me</button>
+      </div>
+    `);
+    const colorPicker = el.querySelector('sl-color-picker')!;
+    const button = el.querySelector('button')!;
+    const focusHandler = sinon.spy();
+    const blurHandler = sinon.spy();
+
+    colorPicker.addEventListener('sl-focus', focusHandler);
+    colorPicker.addEventListener('sl-blur', blurHandler);
+
+    await clickOnElement(colorPicker);
+    await colorPicker.updateComplete;
+    expect(focusHandler).to.have.been.calledOnce;
+
+    await clickOnElement(button);
+    await colorPicker.updateComplete;
+    expect(blurHandler).to.have.been.calledOnce;
+  });
+
+  it('should focus and blur when calling focus() and blur() and rendered as a dropdown', async () => {
+    const colorPicker = await fixture<SlColorPicker>(html` <sl-color-picker></sl-color-picker> `);
+    const focusHandler = sinon.spy();
+    const blurHandler = sinon.spy();
+
+    colorPicker.addEventListener('sl-focus', focusHandler);
+    colorPicker.addEventListener('sl-blur', blurHandler);
+
+    // Focus
+    colorPicker.focus();
+    await colorPicker.updateComplete;
+
+    expect(document.activeElement).to.equal(colorPicker);
+    expect(focusHandler).to.have.been.calledOnce;
+
+    // Blur
+    colorPicker.blur();
+    await colorPicker.updateComplete;
+
+    expect(document.activeElement).to.equal(document.body);
+    expect(blurHandler).to.have.been.calledOnce;
+  });
+
+  it('should focus and blur when calling focus() and blur() and rendered inline', async () => {
+    const colorPicker = await fixture<SlColorPicker>(html` <sl-color-picker inline></sl-color-picker> `);
+    const focusHandler = sinon.spy();
+    const blurHandler = sinon.spy();
+
+    colorPicker.addEventListener('sl-focus', focusHandler);
+    colorPicker.addEventListener('sl-blur', blurHandler);
+
+    // Focus
+    colorPicker.focus();
+    await colorPicker.updateComplete;
+
+    expect(document.activeElement).to.equal(colorPicker);
+    expect(focusHandler).to.have.been.calledOnce;
+
+    // Blur
+    colorPicker.blur();
+    await colorPicker.updateComplete;
+
+    expect(document.activeElement).to.equal(document.body);
+    expect(blurHandler).to.have.been.calledOnce;
+  });
+
   describe('when submitting a form', () => {
     it('should serialize its name and value with FormData', async () => {
       const form = await fixture<HTMLFormElement>(html`

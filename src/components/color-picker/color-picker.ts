@@ -51,7 +51,9 @@ declare const EyeDropper: EyeDropperConstructor;
  *
  * @slot label - The color picker's form label. Alternatively, you can use the `label` attribute.
  *
+ * @event sl-blur Emitted when the color picker loses focus.
  * @event sl-change Emitted when the color picker's value changes.
+ * @event sl-focus Emitted when the color picker receives focus.
  * @event sl-input Emitted when the color picker receives input.
  *
  * @csspart base - The component's base wrapper.
@@ -96,10 +98,13 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
   private isSafeValue = false;
   private readonly localize = new LocalizeController(this);
 
+  @query('[part~="base"]') base: HTMLElement;
   @query('[part~="input"]') input: SlInput;
-  @query('[part~="preview"]') previewButton: HTMLButtonElement;
   @query('.color-dropdown') dropdown: SlDropdown;
+  @query('[part~="preview"]') previewButton: HTMLButtonElement;
+  @query('[part~="trigger"]') trigger: HTMLButtonElement;
 
+  @state() private hasFocus = false;
   @state() private isDraggingGridHandle = false;
   @state() private isEmpty = false;
   @state() private inputValue = '';
@@ -171,6 +176,20 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
    */
   @property({ reflect: true }) form = '';
 
+  connectedCallback() {
+    super.connectedCallback();
+    this.handleFocusIn = this.handleFocusIn.bind(this);
+    this.handleFocusOut = this.handleFocusOut.bind(this);
+    this.addEventListener('focusin', this.handleFocusIn);
+    this.addEventListener('focusout', this.handleFocusOut);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('focusin', this.handleFocusIn);
+    this.removeEventListener('focusout', this.handleFocusOut);
+  }
+
   private handleCopy() {
     this.input.select();
     document.execCommand('copy');
@@ -181,6 +200,16 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     this.previewButton.addEventListener('animationend', () => {
       this.previewButton.classList.remove('color-picker__preview-color--copied');
     });
+  }
+
+  private handleFocusIn() {
+    this.hasFocus = true;
+    this.emit('sl-focus');
+  }
+
+  private handleFocusOut() {
+    this.hasFocus = false;
+    this.emit('sl-blur');
   }
 
   private handleFormatToggle() {
@@ -391,6 +420,8 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
   }
 
   private handleInputInput(event: SlInputEvent) {
+    this.formControlController.updateValidity();
+
     // Prevent the <sl-input>'s sl-input event from bubbling up
     event.stopPropagation();
   }
@@ -603,6 +634,11 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     return color.toHex8String();
   }
 
+  // Prevents nested components from leaking events
+  private stopNestedEventPropagation(event: CustomEvent) {
+    event.stopImmediatePropagation();
+  }
+
   @watch('format', { waitUntilFirstUpdate: true })
   handleFormatChange() {
     this.syncValues();
@@ -637,6 +673,32 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
       } else {
         this.inputValue = oldValue ?? '';
       }
+    }
+  }
+
+  /** Sets focus on the color picker. */
+  focus(options?: FocusOptions) {
+    if (this.inline) {
+      this.base.focus(options);
+    } else {
+      this.trigger.focus(options);
+    }
+  }
+
+  /** Removes focus from the color picker. */
+  blur() {
+    const elementToBlur = this.inline ? this.base : this.trigger;
+
+    if (this.hasFocus) {
+      // We don't know which element in the color picker has focus, so we'll move it to the trigger or base (inline) and
+      // blur that instead. This results in document.activeElement becoming the <body>. This doesn't cause another focus
+      // event because we're using focusin and something inside the color picker already has focus.
+      elementToBlur.focus({ preventScroll: true });
+      elementToBlur.blur();
+    }
+
+    if (this.dropdown?.open) {
+      this.dropdown.hide();
     }
   }
 
@@ -708,7 +770,8 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
         class=${classMap({
           'color-picker': true,
           'color-picker--inline': this.inline,
-          'color-picker--disabled': this.disabled
+          'color-picker--disabled': this.disabled,
+          'color-picker--focused': this.hasFocus
         })}
         aria-disabled=${this.disabled ? 'true' : 'false'}
         aria-labelledby="label"
@@ -837,6 +900,8 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
             @keydown=${this.handleInputKeyDown}
             @sl-change=${this.handleInputChange}
             @sl-input=${this.handleInputInput}
+            @sl-blur=${this.stopNestedEventPropagation}
+            @sl-focus=${this.stopNestedEventPropagation}
           ></sl-input>
 
           <sl-button-group>
@@ -853,6 +918,8 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
                       caret:format-button__caret
                     "
                     @click=${this.handleFormatToggle}
+                    @sl-blur=${this.stopNestedEventPropagation}
+                    @sl-focus=${this.stopNestedEventPropagation}
                   >
                     ${this.setLetterCase(this.format)}
                   </sl-button>
@@ -870,6 +937,8 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
                       caret:eye-dropper-button__caret
                     "
                     @click=${this.handleEyeDropper}
+                    @sl-blur=${this.stopNestedEventPropagation}
+                    @sl-focus=${this.stopNestedEventPropagation}
                   >
                     <sl-icon
                       library="system"
@@ -943,6 +1012,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
             'color-dropdown__trigger--medium': this.size === 'medium',
             'color-dropdown__trigger--large': this.size === 'large',
             'color-dropdown__trigger--empty': this.isEmpty,
+            'color-dropdown__trigger--focused': this.hasFocus,
             'color-picker__transparent-bg': true
           })}
           style=${styleMap({
