@@ -356,75 +356,95 @@ This example demonstrates custom validation styles using `data-user-invalid` and
 </style>
 ```
 
-## Inline form validation
+## Inline Form Validation
 
 ```html preview
-<form class="inline-validation">
-  <sl-input
-    name="name"
-    label="Name"
-    help-text="What would you like people to call you?"
-    autocomplete="off"
-    required
-  ></sl-input>
+<sl-animation class="animation-inline-validation" name="shakeX" duration="1000" iterations="1" easing="easeInOut">
+  <form class="inline-validation">
+    <sl-radio-group name="salutation" label="Salutation" required>
+      <sl-radio value="mrs">Mrs.</sl-radio>
+      <sl-radio value="mr">Mr.</sl-radio>
+      <sl-radio value="other">Other</sl-radio>
+    </sl-radio-group>
 
-  <sl-select label="Favorite Animal" help-text="Select the best option." clearable required>
-    <sl-option value="birds">Birds</sl-option>
-    <sl-option value="cats">Cats</sl-option>
-    <sl-option value="dogs">Dogs</sl-option>
-    <sl-option value="other">Other</sl-option>
-  </sl-select>
+    <sl-input name="name" label="Name" required></sl-input>
+    <sl-input name="email" type="email" label="Email" required></sl-input>
 
-  <sl-button type="submit" variant="primary">Submit</sl-button>
-  <sl-button type="reset" variant="default">Reset</sl-button>
-</form>
+    <sl-select name="country" label="Country" help-text="Shipping only to USA and Canada" clearable required>
+      <sl-option value="US">USA</sl-option>
+      <sl-option value="CA">Canada</sl-option>
+    </sl-select>
+
+    <sl-switch name="customer" required>Already customer</sl-switch>
+
+    <sl-textarea name="question" label="What's your question?" required></sl-textarea>
+
+    <sl-checkbox name="accept" required>Accept terms and conditions</sl-checkbox>
+
+    <sl-button type="submit" variant="primary">Submit</sl-button>
+    <sl-button type="reset" variant="default">Reset</sl-button>
+  </form>
+</sl-animation>
 
 <script type="module">
   const form = document.querySelector('form.inline-validation');
+  const animation = document.querySelector('sl-animation.animation-inline-validation');
 
   form.addEventListener('submit', event => {
     event.preventDefault();
     alert('All fields are valid!');
   });
 
-  form.addEventListener('sl-invalid', event => {
-    console.log('sl-invalid');
-    event.preventDefault();
-  });
-
   form.addEventListener(
-    'sl-input',
+    'sl-invalid',
     event => {
-      const elem = event.target;
-      console.log('sl-input', event.target.validationMessage);
-      if (
-        elem.hasAttribute('data-valid') ||
-        (elem.hasAttribute('data-invalid') && typeof elem.validationMessage === 'string')
-      ) {
-        if (elem.validationMessage === '') {
-          elem.removeAttribute('data-error');
-        } else {
-          elem.setAttribute('data-error', elem.validationMessage);
-        }
-      }
+      updateValidationMessage(event.target);
+      event.preventDefault();
+      //animation.play = true;
     },
     true
   );
+
+  form.checkValidity();
+
+  form.addEventListener('sl-input', event => {
+    updateValidationMessage(event.target);
+  });
+
+  function isFormControl(elem) {
+    return (
+      elem.hasAttribute('data-valid') ||
+      (elem.hasAttribute('data-invalid') && typeof elem.validationMessage === 'string')
+    );
+  }
+
+  function updateValidationMessage(formControl) {
+    if (isFormControl(formControl)) {
+      formControl.setAttribute('data-error', formControl.validationMessage);
+    }
+  }
 </script>
 
 <style>
-  .inline-validation sl-input,
-  .inline-validation sl-select {
-    margin-bottom: var(--sl-spacing-medium);
+  .inline-validation :is([data-valid], [data-invalid]):not(sl-button) {
+    display: block;
+    margin-bottom: var(--sl-spacing-small);
+  }
+
+  .inline-validation sl-radio-group sl-radio {
+    display: inline-block;
+    margin-right: 1rem;
   }
 
   /* user invalid styles */
   .inline-validation sl-input[data-user-invalid]::part(base),
+  .inline-validation sl-textarea[data-user-invalid]::part(base),
   .inline-validation sl-select[data-user-invalid]::part(combobox) {
     border-color: var(--sl-color-danger-600);
   }
 
   .inline-validation sl-input:focus-within[data-user-invalid]::part(base),
+  .inline-validation sl-textarea:focus-within[data-user-invalid]::part(base),
   .inline-validation sl-select:focus-within[data-user-invalid]::part(combobox) {
     border-color: var(--sl-color-danger-600);
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-danger-300);
@@ -447,9 +467,14 @@ This example demonstrates custom validation styles using `data-user-invalid` and
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-success-300);
   }
 
-  .inline-validation sl-input[data-user-invalid]::after {
-    font-size: var(--sl-font-size-medium);
-    color: var(--sl-color-danger-600);
+  .inline-validation :is([data-valid], [data-invalid]):not(sl-button)::after {
+    display: block;
+    font-size: var(--sl-font-size-small);
+    color: var(--sl-color-danger-700);
+    content: '\00a0';
+  }
+
+  .inline-validation [data-user-invalid]:not(sl-button)::after {
     content: attr(data-error);
   }
 </style>

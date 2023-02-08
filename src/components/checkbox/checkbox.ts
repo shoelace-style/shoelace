@@ -114,6 +114,11 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
     this.emit('sl-input');
   }
 
+  private handleInvalid(event: Event) {
+    this.formControlController.setValidity(false);
+    this.formControlController.emitSlInvalidEvent(event);
+  }
+
   private handleFocus() {
     this.hasFocus = true;
     this.emit('sl-focus');
@@ -199,6 +204,7 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
           aria-checked=${this.checked ? 'true' : 'false'}
           @click=${this.handleClick}
           @input=${this.handleInput}
+          @invalid=${this.handleInvalid}
           @blur=${this.handleBlur}
           @focus=${this.handleFocus}
         />

@@ -99,6 +99,11 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
     this.emit('sl-input');
   }
 
+  private handleInvalid(event: Event) {
+    this.formControlController.setValidity(false);
+    this.formControlController.emitSlInvalidEvent(event);
+  }
+
   private handleClick() {
     this.checked = !this.checked;
     this.emit('sl-change');
@@ -195,6 +200,7 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
           aria-checked=${this.checked ? 'true' : 'false'}
           @click=${this.handleClick}
           @input=${this.handleInput}
+          @invalid=${this.handleInvalid}
           @blur=${this.handleBlur}
           @focus=${this.handleFocus}
           @keydown=${this.handleKeyDown}

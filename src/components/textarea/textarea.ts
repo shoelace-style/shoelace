@@ -185,6 +185,11 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
     this.emit('sl-input');
   }
 
+  private handleInvalid(event: Event) {
+    this.formControlController.setValidity(false);
+    this.formControlController.emitSlInvalidEvent(event);
+  }
+
   private setTextareaHeight() {
     if (this.resize === 'auto') {
       this.input.style.height = 'auto';
@@ -354,6 +359,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
               aria-describedby="help-text"
               @change=${this.handleChange}
               @input=${this.handleInput}
+              @invalid=${this.handleInvalid}
               @focus=${this.handleFocus}
               @blur=${this.handleBlur}
             ></textarea>

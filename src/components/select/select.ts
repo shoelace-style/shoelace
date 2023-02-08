@@ -530,6 +530,11 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     });
   }
 
+  private handleInvalid(event: Event) {
+    this.formControlController.setValidity(false);
+    this.formControlController.emitSlInvalidEvent(event);
+  }
+
   @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     // Close the listbox when the control is disabled
@@ -762,6 +767,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
                 tabindex="-1"
                 aria-hidden="true"
                 @focus=${() => this.focus()}
+                @invalid=${this.handleInvalid}
               />
 
               ${hasClearIcon

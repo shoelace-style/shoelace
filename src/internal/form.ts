@@ -56,6 +56,10 @@ export class FormControlController implements ReactiveController {
   form?: HTMLFormElement | null;
   options: FormControlControllerOptions;
 
+  // Indicates whether the form control has a valid value.
+  // Will be modified by method `setValidity`
+  private isValid = true;
+
   constructor(host: ReactiveControllerHost & ShoelaceFormControl, options?: Partial<FormControlControllerOptions>) {
     (this.host = host).addController(this);
     this.options = {
@@ -351,11 +355,14 @@ export class FormControlController implements ReactiveController {
   /**
    * Synchronously sets the form control's validity. Call this when you know the future validity but need to update
    * the host element immediately, i.e. before Lit updates the component in the next update.
+   *
+   * Returns true if the host's validity has changed otherwise false
    */
-  setValidity(isValid: boolean) {
+  setValidity(isValid: boolean): boolean {
     const host = this.host;
     const hasInteracted = Boolean(userInteractedControls.has(host));
     const required = Boolean(host.required);
+    const validityChanged = isValid !== this.isValid;
 
     //
     // We're mapping the following "states" to data attributes. In the future, we can use ElementInternals.states to
@@ -369,26 +376,33 @@ export class FormControlController implements ReactiveController {
     host.toggleAttribute('data-valid', isValid);
     host.toggleAttribute('data-user-invalid', !isValid && hasInteracted);
     host.toggleAttribute('data-user-valid', isValid && hasInteracted);
+
+    this.isValid = isValid;
+    return validityChanged;
   }
 
   /**
    * Updates the form control's validity based on the current value of `host.checkValidity()`. Call this when anything
    * that affects constraint validation changes so the component receives the correct validity states.
    */
-  updateValidity() {
+  updateValidity(): boolean {
     const host = this.host;
-    this.setValidity(host.checkValidity());
+    const isValid = host.checkValidity();
+    const validityChanged = isValid !== this.isValid;
+    this.setValidity(isValid);
+
+    return validityChanged;
   }
 
   /**
-   * Dispatches a cancelable custom event of type `sl-invalid`.
+   * Dispatches a non-bubbling, cancelable custom event of type `sl-invalid`.
    * If the `sl-invalid` event will be cancelled than the original
    * `invalid` event (which may have been passed as optional argument)
    * will also be cancelled.
    */
   emitSlInvalidEvent(originalInvalidEvent?: Event) {
-    const slInvalidEvent = new CustomEvent('sl-invalid', {
-      bubbles: true,
+    const slInvalidEvent = new CustomEvent<void>('sl-invalid', {
+      bubbles: false,
       composed: false,
       cancelable: true
     });

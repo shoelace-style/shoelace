@@ -222,6 +222,11 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     }
   }
 
+  private handleInvalid(event: Event) {
+    this.formControlController.setValidity(false);
+    this.formControlController.emitSlInvalidEvent(event);
+  }
+
   private updateCheckedRadio() {
     const radios = this.getAllRadios();
     radios.forEach(radio => (radio.checked = radio.value === this.value));
@@ -324,6 +329,7 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
                 ?required=${this.required}
                 tabindex="-1"
                 hidden
+                @invalid=${this.handleInvalid}
               />
             </label>
           </div>
