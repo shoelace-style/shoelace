@@ -396,6 +396,8 @@ This example demonstrates custom validation styles using `data-user-invalid` and
   const form = document.querySelector('form.inline-validation');
   const animation = document.querySelector('sl-animation.animation-inline-validation');
 
+  updateAllValidationMessages(form);
+
   form.addEventListener('submit', event => {
     event.preventDefault();
     alert('All fields are valid!');
@@ -411,8 +413,6 @@ This example demonstrates custom validation styles using `data-user-invalid` and
     true
   );
 
-  form.checkValidity();
-
   form.addEventListener('sl-input', event => {
     updateValidationMessage(event.target);
   });
@@ -427,6 +427,14 @@ This example demonstrates custom validation styles using `data-user-invalid` and
   function updateValidationMessage(formControl) {
     if (isFormControl(formControl)) {
       formControl.setAttribute('data-error', formControl.validationMessage);
+    }
+  }
+
+  function updateAllValidationMessages(container) {
+    for (const elem of container.querySelectorAll('*')) {
+      if (isFormControl(elem)) {
+        updateValidationMessage(elem);
+      }
     }
   }
 </script>

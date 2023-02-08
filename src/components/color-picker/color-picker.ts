@@ -201,6 +201,13 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     this.removeEventListener('focusout', this.handleFocusOut);
   }
 
+  firstUpdated() {
+    // we have to wait for SlInput's validity object to be initialized
+    setTimeout(() => {
+      this.formControlController.updateValidity();
+    });
+  }
+
   private handleCopy() {
     this.input.select();
     document.execCommand('copy');
