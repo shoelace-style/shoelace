@@ -3,7 +3,7 @@ import { property } from 'lit/decorators.js';
 
 type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] };
 type SlEventInit<T> = T extends keyof GlobalEventHandlersEventMap
-  ? GlobalEventHandlersEventMap[T] extends CustomEvent
+  ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<string, unknown>>
     ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<string, never>>
       ? CustomEventInit<GlobalEventHandlersEventMap[T]['detail']>
       : WithRequired<CustomEventInit<GlobalEventHandlersEventMap[T]['detail']>, 'detail'>
