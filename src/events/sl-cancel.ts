@@ -1,4 +1,4 @@
-type SlCancelEvent = CustomEvent<null>;
+type SlCancelEvent = CustomEvent<Record<string, never>>;
 
 declare global {
   interface GlobalEventHandlersEventMap {

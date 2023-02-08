@@ -1,4 +1,4 @@
-type SlShowEvent = CustomEvent<null>;
+type SlShowEvent = CustomEvent<Record<string, never>>;
 
 declare global {
   interface GlobalEventHandlersEventMap {

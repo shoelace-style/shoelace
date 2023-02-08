@@ -1,4 +1,4 @@
-type SlStartEvent = CustomEvent<null>;
+type SlStartEvent = CustomEvent<Record<string, never>>;
 
 declare global {
   interface GlobalEventHandlersEventMap {

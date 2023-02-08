@@ -1,4 +1,4 @@
-type SlInitialFocusEvent = CustomEvent<null>;
+type SlInitialFocusEvent = CustomEvent<Record<string, never>>;
 
 declare global {
   interface GlobalEventHandlersEventMap {

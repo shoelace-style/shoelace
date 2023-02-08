@@ -1,4 +1,4 @@
-type SlBlurEvent = CustomEvent<null>;
+type SlBlurEvent = CustomEvent<Record<string, never>>;
 
 declare global {
   interface GlobalEventHandlersEventMap {

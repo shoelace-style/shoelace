@@ -1,4 +1,4 @@
-type SlAfterExpandEvent = CustomEvent<null>;
+type SlAfterExpandEvent = CustomEvent<Record<string, never>>;
 
 declare global {
   interface GlobalEventHandlersEventMap {

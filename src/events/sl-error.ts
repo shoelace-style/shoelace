@@ -1,4 +1,4 @@
-type SlErrorEvent = CustomEvent<null | { status: number }>;
+type SlErrorEvent = CustomEvent<{ status?: number }>;
 
 declare global {
   interface GlobalEventHandlersEventMap {

@@ -1,4 +1,4 @@
-type SlClearEvent = CustomEvent<null>;
+type SlClearEvent = CustomEvent<Record<string, never>>;
 
 declare global {
   interface GlobalEventHandlersEventMap {

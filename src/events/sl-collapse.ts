@@ -1,4 +1,4 @@
-type SlCollapseEvent = CustomEvent<null>;
+type SlCollapseEvent = CustomEvent<Record<string, never>>;
 
 declare global {
   interface GlobalEventHandlersEventMap {
