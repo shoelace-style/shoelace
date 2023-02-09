@@ -1,4 +1,5 @@
 import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
+import { runFormControlBaseTest } from '../../internal/test/form-control-base-test';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlSwitch from './switch';
@@ -260,4 +261,6 @@ describe('<sl-switch>', () => {
       expect(switchEl.checked).to.false;
     });
   });
+
+  runFormControlBaseTest('sl-switch');
 });

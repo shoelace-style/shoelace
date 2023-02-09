@@ -764,11 +764,15 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. Will emit an `sl-invalid` event in case of negative result. */
   reportValidity() {
-    if (!this.inline && !this.checkValidity()) {
+    if (!this.inline && !this.validity.valid) {
       // If the input is inline and invalid, show the dropdown so the browser can focus on it
       this.dropdown.show();
       this.addEventListener('sl-after-show', () => this.input.reportValidity(), { once: true });
-      return this.checkValidity();
+
+      // By standards we have to emit a `sl-invalid` event here synchronously.
+      this.formControlController.emitSlInvalidEvent();
+
+      return false;
     }
 
     return this.input.reportValidity();

@@ -232,7 +232,7 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
   private updateCheckedRadio() {
     const radios = this.getAllRadios();
     radios.forEach(radio => (radio.checked = radio.value === this.value));
-    this.formControlController.setValidity(this.checkValidity());
+    this.formControlController.setValidity(this.validity.valid);
   }
 
   @watch('value')
@@ -248,6 +248,7 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     const hasCustomValidityMessage = this.customValidityMessage !== '';
 
     if (isRequiredAndEmpty || hasCustomValidityMessage) {
+      this.formControlController.emitSlInvalidEvent();
       return false;
     }
 
@@ -264,7 +265,7 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. Will emit an `sl-invalid` event in case of negative result. */
   reportValidity(): boolean {
-    const isValid = this.checkValidity();
+    const isValid = this.validity.valid;
 
     this.errorMessage = this.customValidityMessage || isValid ? '' : this.validationInput.validationMessage;
     this.formControlController.setValidity(isValid);

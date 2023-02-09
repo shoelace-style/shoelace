@@ -1,4 +1,5 @@
 import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
+import { runFormControlBaseTest } from '../../internal/test/form-control-base-test';
 import { sendKeys } from '@web/test-runner-commands';
 import { serialize } from '../../utilities/form';
 import sinon from 'sinon';
@@ -292,4 +293,6 @@ describe('<sl-textarea>', () => {
       expect(textarea.spellcheck).to.be.false;
     });
   });
+
+  runFormControlBaseTest('sl-textarea');
 });
