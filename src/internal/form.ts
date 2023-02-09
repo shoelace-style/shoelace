@@ -206,18 +206,6 @@ export class FormControlController implements ReactiveController {
       });
     }
 
-    // Handle `invalid` form events
-    if (this.form && !this.validateForm()) {
-      const invalidEvent = new Event('invalid', { cancelable: true });
-      this.form.dispatchEvent(invalidEvent);
-
-      if (invalidEvent.defaultPrevented) {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        return;
-      }
-    }
-
     if (this.form && !this.form.noValidate && !disabled && !reportValidity(this.host)) {
       event.preventDefault();
       event.stopImmediatePropagation();
@@ -264,25 +252,6 @@ export class FormControlController implements ReactiveController {
       for (const element of elements) {
         if (typeof element.reportValidity === 'function') {
           if (!element.reportValidity()) {
-            return false;
-          }
-        }
-      }
-    }
-
-    return true;
-  }
-
-  // Validate the form fields without side effects
-  private validateForm() {
-    if (this.form && !this.form.noValidate) {
-      // This seems sloppy, but checking all elements will cover native inputs,
-      // Shoelace inputs, and other custom elements that support the constraint validation API.
-      const elements = this.form.querySelectorAll<HTMLInputElement>('*');
-
-      for (const element of elements) {
-        if (typeof element.reportValidity === 'function') {
-          if (!element.validity.valid) {
             return false;
           }
         }
@@ -351,8 +320,6 @@ export class FormControlController implements ReactiveController {
   /**
    * Synchronously sets the form control's validity. Call this when you know the future validity but need to update
    * the host element immediately, i.e. before Lit updates the component in the next update.
-   *
-   * Returns true if the host's validity has changed otherwise false
    */
   setValidity(isValid: boolean) {
     const host = this.host;
