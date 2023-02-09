@@ -223,7 +223,7 @@ export default class SlPopup extends ShoelaceElement {
       // Locate the anchor by id
       const root = this.getRootNode() as Document | ShadowRoot;
       this.anchorEl = root.getElementById(this.anchor);
-    } else if (this.anchor instanceof HTMLElement) {
+    } else if (this.anchor instanceof Element) {
       // Use the anchor's reference
       this.anchorEl = this.anchor;
     } else {
