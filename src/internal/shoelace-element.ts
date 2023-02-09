@@ -1,14 +1,47 @@
 import { LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
+type EventTypeRequiresDetail<T> = T extends keyof GlobalEventHandlersEventMap
+  ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<string, unknown>>
+    ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<string, never>>
+      ? never
+      : Partial<GlobalEventHandlersEventMap[T]['detail']> extends GlobalEventHandlersEventMap[T]['detail']
+      ? never
+      : T
+    : never
+  : never;
+
+type EventTypeDoesNotRequireDetail<T> = T extends keyof GlobalEventHandlersEventMap
+  ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<string, unknown>>
+    ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<string, never>>
+      ? T
+      : Partial<GlobalEventHandlersEventMap[T]['detail']> extends GlobalEventHandlersEventMap[T]['detail']
+      ? T
+      : never
+    : T
+  : T;
+
+type EventTypesWithRequiredDetail = {
+  [EventType in keyof GlobalEventHandlersEventMap as EventTypeRequiresDetail<EventType>]: true;
+};
+
+type EventTypesWithoutRequiredDetail = {
+  [EventType in keyof GlobalEventHandlersEventMap as EventTypeDoesNotRequireDetail<EventType>]: true;
+};
+
 type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] };
 type SlEventInit<T> = T extends keyof GlobalEventHandlersEventMap
   ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<string, unknown>>
     ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<string, never>>
       ? CustomEventInit<GlobalEventHandlersEventMap[T]['detail']>
+      : Partial<GlobalEventHandlersEventMap[T]['detail']> extends GlobalEventHandlersEventMap[T]['detail']
+      ? CustomEventInit<GlobalEventHandlersEventMap[T]['detail']>
       : WithRequired<CustomEventInit<GlobalEventHandlersEventMap[T]['detail']>, 'detail'>
     : CustomEventInit
   : CustomEventInit;
+
+// `keyof ValidEventTypeMap` is equivalent to `keyof GlobalEventHandlersEventMap` but gives a nicer error message
+type ValidEventTypeMap = EventTypesWithRequiredDetail | EventTypesWithoutRequiredDetail;
 
 export default class ShoelaceElement extends LitElement {
   // Make localization attributes reactive
@@ -16,8 +49,15 @@ export default class ShoelaceElement extends LitElement {
   @property() lang: string;
 
   /** Emits a custom event with more convenient defaults. */
-  // TODO is there a way to make the options parameter required if the event has details?
-  emit<T extends string>(name: T, options?: SlEventInit<T>) {
+  emit<T extends string & keyof EventTypesWithoutRequiredDetail>(
+    name: EventTypeDoesNotRequireDetail<T>,
+    options?: SlEventInit<T> | undefined
+  ): CustomEvent;
+  emit<T extends string & keyof EventTypesWithRequiredDetail>(
+    name: EventTypeRequiresDetail<T>,
+    options: SlEventInit<T>
+  ): CustomEvent;
+  emit<T extends string & keyof ValidEventTypeMap>(name: T, options?: SlEventInit<T> | undefined): CustomEvent {
     const event = new CustomEvent(name, {
       bubbles: true,
       cancelable: false,
