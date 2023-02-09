@@ -377,8 +377,8 @@ This example demonstrates custom validation styles using `data-user-invalid` and
 
 ## Inline Form Validation
 
-You can switch from normal validation mode, where validation messages are presented by browser specific tooltips, to an inline validation mode where the validation messages are shown below the form fields, normally in red color.
-This can be achieved completely with customizations using CSS and JavaScript.
+You can switch from normal validation mode, where validation messages are presented by browser specific tooltips, to an inline validation mode where the validation messages are displayed below the form fields, normally in red color.
+This can be achieved completely in userland with customizations using CSS and JavaScript.
 Here's the same example as the previous one, but this time we use inline form validation.
 
 ```html preview
@@ -463,7 +463,7 @@ Here's the same example as the previous one, but this time we use inline form va
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-success-300);
   }
 
-  /* styles for the inline messages */
+  /* styles for the inline validation messages */
 
   .inline-validation :is([data-valid], [data-invalid]):not(sl-button)::after {
     display: block;
@@ -478,6 +478,9 @@ Here's the same example as the previous one, but this time we use inline form va
 </style>
 
 <script type="module">
+  // With the following few lines of JavaScript code plus the app independent
+  // utility function `activateInlineFormValidation` you can switch to
+  // inline form validation mode.
   const form = document.querySelector('form.inline-validation');
   const animation = document.querySelector('sl-animation.animation-inline-validation');
 
@@ -488,8 +491,8 @@ Here's the same example as the previous one, but this time we use inline form va
     alert('All fields are valid');
   });
 
-  // Shake form for a moment, to indicate the user that she has tried to
-  // submit invalid data.
+  // I the user tries to submit invalid form data then shake the form
+  // for a moment to indicate an submit error
   form.addEventListener(
     'sl-invalid',
     () => {
@@ -501,10 +504,10 @@ Here's the same example as the previous one, but this time we use inline form va
   /**
    * `activateInlineFormValidation` is a utility function for Shoelace based HTML
    * forms. It allows to switch from the usual tooltip based way of showing validation
-   * errors to inline form validation where validation errors will be shown below the
-   * corresponding form controls.
+   * errors to inline form validation where validation errors will be displayed below
+   * the corresponding form controls.
    * This will be achieved by dynamically adding data attributes for error messages
-   * to the form controls if required. And to use the CSS function `attr(...)`
+   * to the form controls, if required. And to use the CSS function `attr(...)`
    * to retrieve the error messages in CSS (by using the `::after` pseudo-element).
    *
    * @param container  A DOM container element, for example the form element
@@ -512,13 +515,13 @@ Here's the same example as the previous one, but this time we use inline form va
    *                        store the current validation message. Default value is
    *                        'data-error'.
    *
-   * @return  Returns a cancel function to undo the changes that
-   *          were necessary to activate inline validation
+   * @return  Returns a cancellation function to undo the changes that
+   *          have been necessary to activate inline validation
    */
   function activateInlineFormValidation(container, errorAttribute = 'data-error') {
     let formControls = null; // type: Set<HTMLElement> | null
 
-    // checks whether an element is a Shoelace form control
+    // Checks whether an element is a Shoelace form control
     const isFormControl = elem => {
       return (
         elem instanceof HTMLElement &&
@@ -528,20 +531,21 @@ Here's the same example as the previous one, but this time we use inline form va
       );
     };
 
-    // updates the error data attribute of a given Shoelace form control,
+    // Updates the error data attribute of a given Shoelace form control,
     // depending on the form control's `validationMessage` property
     const updateValidationMessage = formControl => {
       const message = formControl.validationMessage;
 
       if (typeof message === 'string' && message !== '') {
-        formControl.setAttribute(errorAttribute, formControl.validationMessage);
+        formControl.setAttribute(errorAttribute, message);
       } else {
         formControl.removeAttribute(errorAttribute);
       }
     };
 
     // Updates the error attributes for all Shoelace form controls
-    // in the container
+    // in the container and returns a set of all currently existing
+    // Shoelace form controls in the container.
     const updateAllValidationMessages = () => {
       const ret = new Set();
 
@@ -558,6 +562,7 @@ Here's the same example as the previous one, but this time we use inline form va
     // --- event handlers --------------
 
     const onInvalid = event => {
+      // Prevent the browser from showing the usual validation error tooltips
       event.preventDefault();
     };
 
@@ -565,6 +570,7 @@ Here's the same example as the previous one, but this time we use inline form va
       const target = event.target;
 
       if (formControls.has(target)) {
+        // Update error attribute depending on validation message
         updateValidationMessage(target);
       }
     };
@@ -577,9 +583,11 @@ Here's the same example as the previous one, but this time we use inline form va
 
     // Register mutation observer to detect dynamically added
     // or removed form controls
-    const observer = new MutationObserver(x => {
+    const observer = new MutationObserver(() => {
+      // Update and remember current form controls
       const newFormControls = updateAllValidationMessages();
 
+      // Cleanup previously removed form controls
       for (const formControl of formControls) {
         if (!newFormControls.has(formControl)) {
           formControl.removeAttribute(errorAttribute);
@@ -589,7 +597,7 @@ Here's the same example as the previous one, but this time we use inline form va
       formControls = newFormControls;
     });
 
-    // Observe the whole DOM subtree
+    // Observe the whole DOM subtree of the container
     observer.observe(container, {
       childList: true,
       subtree: true
@@ -597,7 +605,7 @@ Here's the same example as the previous one, but this time we use inline form va
 
     formControls = updateAllValidationMessages();
 
-    // provide cancel functionality
+    // provide cancellation functionality
 
     let cancelled = false;
 
