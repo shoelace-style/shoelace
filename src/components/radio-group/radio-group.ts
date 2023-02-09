@@ -34,6 +34,7 @@ import type SlRadioButton from '../radio-button/radio-button';
  *
  * @event sl-change - Emitted when the radio group's selected value changes.
  * @event sl-input - Emitted when the radio group receives user input.
+ * @event sl-invalid - Emitted when `.checkValidity()` or `.reportValidity()` has been called and the returned value is `false`.
  *
  * @csspart form-control - The form control that wraps the label, input, and help text.
  * @csspart form-control-label - The label's wrapper.
@@ -241,7 +242,7 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     }
   }
 
-  /** Checks for validity but does not show the browser's validation message. */
+  /** Checks for validity but does not show the browser's validation message. Will emit an `sl-invalid` event in case of negative result. */
   checkValidity() {
     const isRequiredAndEmpty = this.required && !this.value;
     const hasCustomValidityMessage = this.customValidityMessage !== '';
@@ -261,7 +262,7 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     this.formControlController.updateValidity();
   }
 
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  /** Checks for validity and shows the browser's validation message if the control is invalid. Will emit an `sl-invalid` event in case of negative result. */
   reportValidity(): boolean {
     const isValid = this.checkValidity();
 

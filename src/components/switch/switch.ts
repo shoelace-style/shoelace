@@ -23,6 +23,7 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element';
  * @event sl-change - Emitted when the control's checked state changes.
  * @event sl-input - Emitted when the control receives input.
  * @event sl-focus - Emitted when the control gains focus.
+ * @event sl-invalid - Emitted when `.checkValidity()` or `.reportValidity()` has been called and the returned value is `false`.
  *
  * @csspart base - The component's base wrapper.
  * @csspart control - The control that houses the switch's thumb.
@@ -157,12 +158,12 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
     this.input.blur();
   }
 
-  /** Checks for validity but does not show the browser's validation message. */
+  /** Checks for validity but does not show the browser's validation message. Will emit an `sl-invalid` event in case of negative result. */
   checkValidity() {
     return this.input.checkValidity();
   }
 
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  /** Checks for validity and shows the browser's validation message if the control is invalid. Will emit an `sl-invalid` event in case of negative result. */
   reportValidity() {
     return this.input.reportValidity();
   }

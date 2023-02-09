@@ -46,6 +46,7 @@ import type SlPopup from '../popup/popup';
  * @event sl-after-show - Emitted after the select's menu opens and all animations are complete.
  * @event sl-hide - Emitted when the select's menu closes.
  * @event sl-after-hide - Emitted after the select's menu closes and all animations are complete.
+ * @event sl-invalid - Emitted when `.checkValidity()` or `.reportValidity()` has been called and the returned value is `false`.
  *
  * @csspart form-control - The form control that wraps the label, input, and help text.
  * @csspart form-control-label - The label's wrapper.
@@ -618,12 +619,12 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     return waitForEvent(this, 'sl-after-hide');
   }
 
-  /** Checks for validity but does not show the browser's validation message. */
+  /** Checks for validity but does not show the browser's validation message. Will emit an `sl-invalid` event in case of negative result. */
   checkValidity() {
     return this.valueInput.checkValidity();
   }
 
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  /** Checks for validity and shows the browser's validation message if the control is invalid. Will emit an `sl-invalid` event in case of negative result. */
   reportValidity() {
     return this.valueInput.reportValidity();
   }

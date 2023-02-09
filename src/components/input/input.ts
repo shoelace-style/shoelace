@@ -47,6 +47,7 @@ const isFirefox = isChromium ? false : navigator.userAgent.includes('Firefox');
  * @event sl-clear - Emitted when the clear button is activated.
  * @event sl-focus - Emitted when the control gains focus.
  * @event sl-input - Emitted when the control receives input.
+ * @event sl-invalid - Emitted when `.checkValidity()` or `.reportValidity()` has been called and the returned value is `false`.
  *
  * @csspart form-control - The form control that wraps the label, input, and help text.
  * @csspart form-control-label - The label's wrapper.
@@ -383,12 +384,12 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
     }
   }
 
-  /** Checks for validity but does not show the browser's validation message. */
+  /** Checks for validity but does not show the browser's validation message. Will emit an `sl-invalid` event in case of negative result. */
   checkValidity() {
     return this.input.checkValidity();
   }
 
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  /** Checks for validity and shows the browser's validation message if the control is invalid. Will emit an `sl-invalid` event in case of negative result. */
   reportValidity() {
     return this.input.reportValidity();
   }

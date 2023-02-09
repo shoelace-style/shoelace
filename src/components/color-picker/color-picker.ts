@@ -49,10 +49,11 @@ declare const EyeDropper: EyeDropperConstructor;
  *
  * @slot label - The color picker's form label. Alternatively, you can use the `label` attribute.
  *
- * @event sl-blur Emitted when the color picker loses focus.
- * @event sl-change Emitted when the color picker's value changes.
- * @event sl-focus Emitted when the color picker receives focus.
- * @event sl-input Emitted when the color picker receives input.
+ * @event sl-blur - Emitted when the color picker loses focus.
+ * @event sl-change - Emitted when the color picker's value changes.
+ * @event sl-focus - Emitted when the color picker receives focus.
+ * @event sl-input - Emitted when the color picker receives input.
+ * @event sl-invalid - Emitted when `.checkValidity()` or `.reportValidity()` has been called and the returned value is `false`.
  *
  * @csspart base - The component's base wrapper.
  * @csspart trigger - The color picker's dropdown trigger.
@@ -202,8 +203,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
   }
 
   firstUpdated() {
-    // we have to wait for SlInput's validity object to be initialized
-    setTimeout(() => {
+    this.input.updateComplete.then(() => {
       this.formControlController.updateValidity();
     });
   }
@@ -757,12 +757,12 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     }
   }
 
-  /** Checks for validity but does not show the browser's validation message. */
+  /** Checks for validity but does not show the browser's validation message. Will emit an `sl-invalid` event in case of negative result. */
   checkValidity() {
     return this.input.checkValidity();
   }
 
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  /** Checks for validity and shows the browser's validation message if the control is invalid. Will emit an `sl-invalid` event in case of negative result. */
   reportValidity() {
     if (!this.inline && !this.checkValidity()) {
       // If the input is inline and invalid, show the dropdown so the browser can focus on it

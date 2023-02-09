@@ -26,6 +26,7 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element';
  * @event sl-change - Emitted when the checked state changes.
  * @event sl-focus - Emitted when the checkbox gains focus.
  * @event sl-input - Emitted when the checkbox receives input.
+ * @event sl-invalid - Emitted when `.checkValidity()` or `.reportValidity()` has been called and the returned value is `false`.
  *
  * @csspart base - The component's base wrapper.
  * @csspart control - The square container that wraps the checkbox's checked state.
@@ -152,12 +153,12 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
     this.input.blur();
   }
 
-  /** Checks for validity but does not show a validation message. Returns true when valid and false when invalid. */
+  /** Checks for validity but does not show a validation message. Returns true when valid and false when invalid. Will emit an `sl-invalid` event in case of negative result. */
   checkValidity() {
     return this.input.checkValidity();
   }
 
-  /** Checks for validity and shows a validation message if the control is invalid. */
+  /** Checks for validity and shows a validation message if the control is invalid. Will emit an `sl-invalid` event in case of negative result. */
   reportValidity() {
     return this.input.reportValidity();
   }

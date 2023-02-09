@@ -349,7 +349,6 @@ This example demonstrates custom validation styles using `data-user-invalid` and
   }
 
   .validity-styles sl-input:focus-within[data-user-valid]::part(base),
-  .validity-styles sl-textarea:focus-within[data-user-valid]::part(base),
   .validity-styles sl-select:focus-within[data-user-valid]::part(combobox) {
     border-color: var(--sl-color-success-600);
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-success-300);
