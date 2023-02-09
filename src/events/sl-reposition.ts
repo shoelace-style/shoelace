@@ -1,4 +1,4 @@
-type SlRepositionEvent = CustomEvent<Record<string, never>>;
+type SlRepositionEvent = CustomEvent<Record<PropertyKey, never>>;
 
 declare global {
   interface GlobalEventHandlersEventMap {

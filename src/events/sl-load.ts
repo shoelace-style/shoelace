@@ -1,4 +1,4 @@
-type SlLoadEvent = CustomEvent<Record<string, never>>;
+type SlLoadEvent = CustomEvent<Record<PropertyKey, never>>;
 
 declare global {
   interface GlobalEventHandlersEventMap {

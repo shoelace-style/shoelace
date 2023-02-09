@@ -1,4 +1,4 @@
-type SlHideEvent = CustomEvent<Record<string, never>>;
+type SlHideEvent = CustomEvent<Record<PropertyKey, never>>;
 
 declare global {
   interface GlobalEventHandlersEventMap {

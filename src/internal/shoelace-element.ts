@@ -2,8 +2,8 @@ import { LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
 type EventTypeRequiresDetail<T> = T extends keyof GlobalEventHandlersEventMap
-  ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<string, unknown>>
-    ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<string, never>>
+  ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<PropertyKey, unknown>>
+    ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<PropertyKey, never>>
       ? never
       : Partial<GlobalEventHandlersEventMap[T]['detail']> extends GlobalEventHandlersEventMap[T]['detail']
       ? never
@@ -12,8 +12,8 @@ type EventTypeRequiresDetail<T> = T extends keyof GlobalEventHandlersEventMap
   : never;
 
 type EventTypeDoesNotRequireDetail<T> = T extends keyof GlobalEventHandlersEventMap
-  ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<string, unknown>>
-    ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<string, never>>
+  ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<PropertyKey, unknown>>
+    ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<PropertyKey, never>>
       ? T
       : Partial<GlobalEventHandlersEventMap[T]['detail']> extends GlobalEventHandlersEventMap[T]['detail']
       ? T
@@ -31,8 +31,8 @@ type EventTypesWithoutRequiredDetail = {
 
 type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] };
 type SlEventInit<T> = T extends keyof GlobalEventHandlersEventMap
-  ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<string, unknown>>
-    ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<string, never>>
+  ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<PropertyKey, unknown>>
+    ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<PropertyKey, never>>
       ? CustomEventInit<GlobalEventHandlersEventMap[T]['detail']>
       : Partial<GlobalEventHandlersEventMap[T]['detail']> extends GlobalEventHandlersEventMap[T]['detail']
       ? CustomEventInit<GlobalEventHandlersEventMap[T]['detail']>

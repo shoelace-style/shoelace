@@ -1,4 +1,4 @@
-type SlFocusEvent = CustomEvent<Record<string, never>>;
+type SlFocusEvent = CustomEvent<Record<PropertyKey, never>>;
 
 declare global {
   interface GlobalEventHandlersEventMap {

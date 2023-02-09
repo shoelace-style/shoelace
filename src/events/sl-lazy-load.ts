@@ -1,4 +1,4 @@
-type SlLazyLoadEvent = CustomEvent<Record<string, never>>;
+type SlLazyLoadEvent = CustomEvent<Record<PropertyKey, never>>;
 
 declare global {
   interface GlobalEventHandlersEventMap {

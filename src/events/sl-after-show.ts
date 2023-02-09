@@ -1,4 +1,4 @@
-type SlAfterShowEvent = CustomEvent<Record<string, never>>;
+type SlAfterShowEvent = CustomEvent<Record<PropertyKey, never>>;
 
 declare global {
   interface GlobalEventHandlersEventMap {

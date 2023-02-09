@@ -1,4 +1,4 @@
-type SlRemoveEvent = CustomEvent<Record<string, never>>;
+type SlRemoveEvent = CustomEvent<Record<PropertyKey, never>>;
 
 declare global {
   interface GlobalEventHandlersEventMap {

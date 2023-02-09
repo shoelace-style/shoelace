@@ -1,4 +1,4 @@
-type SlFinishEvent = CustomEvent<Record<string, never>>;
+type SlFinishEvent = CustomEvent<Record<PropertyKey, never>>;
 
 declare global {
   interface GlobalEventHandlersEventMap {

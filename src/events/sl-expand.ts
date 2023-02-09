@@ -1,4 +1,4 @@
-type SlExpandEvent = CustomEvent<Record<string, never>>;
+type SlExpandEvent = CustomEvent<Record<PropertyKey, never>>;
 
 declare global {
   interface GlobalEventHandlersEventMap {
