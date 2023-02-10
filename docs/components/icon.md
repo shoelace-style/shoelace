@@ -637,6 +637,19 @@ If you want to change the icons Shoelace uses internally, you can register an ic
 
 <!-- Supporting scripts and styles for the search utility -->
 <script>
+  function wrapWithTooltip(item) {
+    const tooltip = document.createElement('sl-tooltip');
+    tooltip.content = item.getAttribute('data-name');
+
+    // Close open tooltips
+    document.querySelectorAll('.icon-list sl-tooltip[open]').forEach(tooltip => tooltip.hide());
+
+    // Wrap it with a tooltip and trick it into showing up
+    item.parentNode.insertBefore(tooltip, item);
+    tooltip.appendChild(item);
+    requestAnimationFrame(() => tooltip.dispatchEvent(new MouseEvent('mouseover')));
+  }
+
   fetch('/dist/assets/icons/icons.json')
     .then(res => res.json())  
     .then(icons => {
@@ -660,19 +673,23 @@ If you want to change the icons Shoelace uses internally, you can register an ic
             <use xlink:href="/assets/icons/sprite.svg#${i.name}"></use>
           </svg>      
         `;
+        list.appendChild(item);
 
-        const tooltip = document.createElement('sl-tooltip');
-        tooltip.content = i.name;
-        
-        tooltip.appendChild(item);
-        list.appendChild(tooltip);
+        // Wrap it with a tooltip the first time the mouse lands on it. We do this instead of baking them into the DOM 
+        // to improve this page's performance. See: https://github.com/shoelace-style/shoelace/issues/1122
+        item.addEventListener('mouseover', () => wrapWithTooltip(item), { once: true });
 
+        // Copy on click
         item.addEventListener('click', () => {
+          const tooltip = item.closest('sl-tooltip');
           copyInput.value = i.name;
           copyInput.select();
           document.execCommand('copy');
-          tooltip.content = 'Copied!';
-          setTimeout(() => tooltip.content = i.name, 1000);
+
+          if (tooltip) {
+            tooltip.content = 'Copied!';
+            setTimeout(() => tooltip.content = i.name, 1000);
+          }
         });
       });
 

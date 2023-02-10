@@ -199,6 +199,18 @@ describe('<sl-checkbox>', () => {
 
       expect(formData.get('a')).to.equal('1');
     });
+
+    it('should receive validation attributes ("states") even when novalidate is used on the parent form', async () => {
+      const el = await fixture<HTMLFormElement>(html` <form novalidate><sl-checkbox required></sl-checkbox></form> `);
+      const checkbox = el.querySelector<SlCheckbox>('sl-checkbox')!;
+
+      expect(checkbox.hasAttribute('data-required')).to.be.true;
+      expect(checkbox.hasAttribute('data-optional')).to.be.false;
+      expect(checkbox.hasAttribute('data-invalid')).to.be.true;
+      expect(checkbox.hasAttribute('data-valid')).to.be.false;
+      expect(checkbox.hasAttribute('data-user-invalid')).to.be.false;
+      expect(checkbox.hasAttribute('data-user-valid')).to.be.false;
+    });
   });
 
   describe('when resetting a form', () => {
