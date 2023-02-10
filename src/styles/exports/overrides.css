@@ -758,6 +758,21 @@ sl-dropdown::part(panel) {
 
 /* Menu item styling */
 
+/* Undo Tailwind resets */
+sl-menu-item[type] {
+  display: block;
+  width: initial;
+  height: initial;
+  border: none;
+  padding: initial;
+  margin: initial;
+}
+
+sl-menu-item[type]:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 sl-menu-item::part(base) {
   color: var(--ts-color-text-default);
   padding: var(--sl-spacing-x-small) var(--sl-spacing-2x-small);

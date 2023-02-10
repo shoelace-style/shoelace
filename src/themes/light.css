@@ -558,3 +558,8 @@
 }
 
 /* _utility.css */
+
+/* Handles FOUCE. See https://design.teamshares.com/#/getting-started/usage?id=waiting-for-components-to-load */
+:not(:defined) {
+  visibility: hidden;
+}

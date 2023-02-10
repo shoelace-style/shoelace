@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3
+
+- Pulled in upstream fixes on `next` branch, including fixes for `dropdown` and `select`
+- Hide shoelace elements until they are defined (FOUCE)
+- Fixes for Tailwind resets that broke menu styling
+
 ## 1.0.2
 
 - Updated to upstream [release 2.0.0](/resources/changelog)
