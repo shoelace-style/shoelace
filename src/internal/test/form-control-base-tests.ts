@@ -171,7 +171,7 @@ function runSpecialTests_slButtonOfTypeButton(createControl: CreateControlFn) {
     expect(control.reportValidity()).to.equal(true);
   });
 
-  it('should not emit an `sl-invalid` event when `.checkValidity()` is called in custom error case, and not disabled, and `type="button"` or `href="..."`', async () => {
+  it('should not emit an `sl-invalid` event when `.checkValidity()` is called in custom error case, and not disabled', async () => {
     const control = await createControl();
     control.setCustomValidity('error');
     control.disabled = false;
@@ -180,7 +180,7 @@ function runSpecialTests_slButtonOfTypeButton(createControl: CreateControlFn) {
     expect(emittedEvents.length).to.equal(0);
   });
 
-  it('should not emit an `sl-invalid` event when `.reportValidity()` is called in custom error case, and not disabled, and `type="button"` or `href="..."`', async () => {
+  it('should not emit an `sl-invalid` event when `.reportValidity()` is called in custom error case, and not disabled', async () => {
     const control = await createControl();
     control.setCustomValidity('error');
     control.disabled = false;

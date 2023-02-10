@@ -276,12 +276,12 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
     }
   }
 
-  /** Checks for validity but does not show the browser's validation message. Will emit an `sl-invalid` event in case of negative result. */
+  /** Checks for validity but does not show the browser's validation message. Will emit an `sl-invalid` event in case of negative result (if not disabled). */
   checkValidity() {
     return this.input.checkValidity();
   }
 
-  /** Checks for validity and shows the browser's validation message if the control is invalid. Will emit an `sl-invalid` event in case of negative result. */
+  /** Checks for validity and shows the browser's validation message if the control is invalid. Will emit an `sl-invalid` event in case of negative result (if not disabled). */
   reportValidity() {
     return this.input.reportValidity();
   }
