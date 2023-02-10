@@ -42,7 +42,7 @@ function runFormControlBaseTests<T extends ShoelaceFormControl = ShoelaceFormCon
     return control;
   };
 
-  runAllValidityTests(displayName, createControl);
+  runAllValidityTests(tagName, displayName, createControl);
 }
 
 // === all validity tests ============================================
@@ -55,13 +55,12 @@ function runFormControlBaseTests<T extends ShoelaceFormControl = ShoelaceFormCon
 //   - `.setCustomValidity(msg)`
 //
 // Applicable for all Shoelace form controls
-async function runAllValidityTests(
-  displayName: string, //
+function runAllValidityTests(
+  tagName: string, //
+  displayName: string,
   createControl: () => Promise<ShoelaceFormControl>
 ) {
   // will be used later to retrieve meta information about the control
-  const sampleControl = await createControl();
-
   describe(`Form validity base test for ${displayName}`, async () => {
     it('should have a property `validity` of type `object`', async () => {
       const control = await createControl();
@@ -117,7 +116,7 @@ async function runAllValidityTests(
 
     // TODO: As soon as `SlRadioGroup` has a property `disabled` this
     // condition can be removed
-    if ('disabled' in sampleControl) {
+    if (tagName !== 'sl-radio-group') {
       it('should not emit an `sl-invalid` event when `.checkValidity()` is called in custom error case while disabled', async () => {
         const control = await createControl();
         control.setCustomValidity('error');
@@ -146,8 +145,7 @@ async function runAllValidityTests(
     } else if (mode === 'slButtonWithHRef') {
       runSpecialTests_slButtonWithHref(createControl);
     } else {
-      // TODO!!!
-      //await runSpecialTests_standard(createControl);
+      runSpecialTests_standard(createControl);
     }
   });
 }
@@ -227,13 +225,10 @@ function runSpecialTests_slButtonWithHref(createControl: CreateControlFn) {
 
 // === special tests for all components with usual behavior  =========
 
-async function runSpecialTests_standard(createControl: CreateControlFn) {
-  const sampleControl = await createControl();
-
+function runSpecialTests_standard(createControl: CreateControlFn) {
   it('should make sure that `.validity.valid` is `false` in custom error case', async () => {
     const control = await createControl();
     control.setCustomValidity('error');
-    console.log(control.validity.valid);
     expect(control.validity.valid).to.equal(false);
   });
 
@@ -249,27 +244,23 @@ async function runSpecialTests_standard(createControl: CreateControlFn) {
     expect(control.reportValidity()).to.equal(false);
   });
 
-  // TODO: As soon as `SlRadioGroup` has a property `disabled` this
-  // condition can be removed
-  if ('disabled' in sampleControl) {
-    it('should emit an `sl-invalid` event when `.checkValidity()` is called in custom error case and not disabled', async () => {
-      const control = await createControl();
-      control.setCustomValidity('error');
-      control.disabled = false;
-      await control.updateComplete;
-      const emittedEvents = checkEventEmissions(control, 'sl-invalid', () => control.checkValidity());
-      expect(emittedEvents.length).to.equal(1);
-    });
+  it('should emit an `sl-invalid` event when `.checkValidity()` is called in custom error case and not disabled', async () => {
+    const control = await createControl();
+    control.setCustomValidity('error');
+    control.disabled = false;
+    await control.updateComplete;
+    const emittedEvents = checkEventEmissions(control, 'sl-invalid', () => control.checkValidity());
+    expect(emittedEvents.length).to.equal(1);
+  });
 
-    it('should emit an `sl-invalid` event when `.reportValidity()` is called in custom error case and not disabled', async () => {
-      const control = await createControl();
-      control.setCustomValidity('error');
-      control.disabled = false;
-      await control.updateComplete;
-      const emittedEvents = checkEventEmissions(control, 'sl-invalid', () => control.reportValidity());
-      expect(emittedEvents.length).to.equal(1);
-    });
-  }
+  it('should emit an `sl-invalid` event when `.reportValidity()` is called in custom error case and not disabled', async () => {
+    const control = await createControl();
+    control.setCustomValidity('error');
+    control.disabled = false;
+    await control.updateComplete;
+    const emittedEvents = checkEventEmissions(control, 'sl-invalid', () => control.reportValidity());
+    expect(emittedEvents.length).to.equal(1);
+  });
 }
 
 // === Local helper functions ========================================
