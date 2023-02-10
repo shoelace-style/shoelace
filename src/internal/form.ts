@@ -351,9 +351,9 @@ export class FormControlController implements ReactiveController {
 
   /**
    * Dispatches a non-bubbling, cancelable custom event of type `sl-invalid`.
-   * If the `sl-invalid` event will be cancelled than the original `invalid`
+   * If the `sl-invalid` event will be cancelled then the original `invalid`
    * event (which may have been passed as argument) will also be cancelled.
-   * If no original `invalid` event has been passed than the `sl-invalid`
+   * If no original `invalid` event has been passed then the `sl-invalid`
    * event will be cancelled before being dispatched.
    */
   emitSlInvalidEvent(originalInvalidEvent?: Event) {

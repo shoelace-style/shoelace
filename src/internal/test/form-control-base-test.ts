@@ -69,7 +69,7 @@ async function runValidityTest(tagName: string) {
     });
 
     it('should not emit an `sl-invalid` event when `.reportValidity()` is called while valid', () => {
-      const emittedEvents = checkEventEmissions(control, 'sl-invalid', () => control.checkValidity());
+      const emittedEvents = checkEventEmissions(control, 'sl-invalid', () => control.reportValidity());
 
       expect(emittedEvents.length).to.equal(0);
     });
@@ -92,7 +92,7 @@ async function runValidityTest(tagName: string) {
   });
 }
 
-// -- Local helper functions ---
+// --- Local helper functions ---
 
 // Creates a testable Shoelace form control instance
 async function createFormControl<T extends ShoelaceFormControl = ShoelaceFormControl>(tagName: string): Promise<T> {
@@ -103,8 +103,8 @@ async function createFormControl<T extends ShoelaceFormControl = ShoelaceFormCon
 // the validity to the previous value state and returns the return value
 // of the performed action.
 function runWithCustomValidity<R>(control: ShoelaceFormControl, action: () => R, customError = 'some-custom-error') {
-  const oldValidationMessage = control.validationMessage;
   let ret: R;
+  const oldValidationMessage = control.validationMessage;
 
   try {
     control.setCustomValidity(customError);
@@ -116,9 +116,9 @@ function runWithCustomValidity<R>(control: ShoelaceFormControl, action: () => R,
   return ret;
 }
 
-// Runs an actions while listening for emitted events of a given type.
+// Runs an action while listening for emitted events of a given type.
 // Returns an array of all events of the given type that have been
-// been emitted.
+// been emitted while the action was running.
 function checkEventEmissions(control: ShoelaceFormControl, eventType: string, action: () => void): Event[] {
   const emittedEvents: Event[] = [];
 
