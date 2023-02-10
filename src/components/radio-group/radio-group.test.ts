@@ -130,6 +130,25 @@ describe('<sl-radio-group>', () => {
       expect(radioGroup.hasAttribute('data-user-invalid')).to.be.true;
       expect(radioGroup.hasAttribute('data-user-valid')).to.be.false;
     });
+
+    it('should receive validation attributes ("states") even when novalidate is used on the parent form', async () => {
+      const el = await fixture<HTMLFormElement>(html`
+        <form novalidate>
+          <sl-radio-group required>
+            <sl-radio value="1"></sl-radio>
+            <sl-radio value="2"></sl-radio>
+          </sl-radio-group>
+        </form>
+      `);
+      const radioGroup = el.querySelector<SlRadioGroup>('sl-radio-group')!;
+
+      expect(radioGroup.hasAttribute('data-required')).to.be.true;
+      expect(radioGroup.hasAttribute('data-optional')).to.be.false;
+      expect(radioGroup.hasAttribute('data-invalid')).to.be.true;
+      expect(radioGroup.hasAttribute('data-valid')).to.be.false;
+      expect(radioGroup.hasAttribute('data-user-invalid')).to.be.false;
+      expect(radioGroup.hasAttribute('data-user-valid')).to.be.false;
+    });
   });
 
   it('should show a constraint validation error when setCustomValidity() is called', async () => {
