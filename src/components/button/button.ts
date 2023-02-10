@@ -203,6 +203,11 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
     }
   }
 
+  private handleInvalid(event: Event) {
+    this.formControlController.setValidity(false);
+    this.formControlController.emitSlInvalidEvent(event);
+  }
+
   private isButton() {
     return this.href ? false : true;
   }
@@ -308,6 +313,7 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
         tabindex=${this.disabled ? '-1' : '0'}
         @blur=${this.handleBlur}
         @focus=${this.handleFocus}
+        @invalid=${this.isButton() ? this.handleInvalid : null}
         @click=${this.handleClick}
       >
         <slot name="prefix" part="prefix" class="button__prefix"></slot>

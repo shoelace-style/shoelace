@@ -769,8 +769,10 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
       this.dropdown.show();
       this.addEventListener('sl-after-show', () => this.input.reportValidity(), { once: true });
 
-      // By standards we have to emit a `sl-invalid` event here synchronously.
-      this.formControlController.emitSlInvalidEvent();
+      if (!this.disabled) {
+        // By standards we have to emit a `sl-invalid` event here synchronously.
+        this.formControlController.emitSlInvalidEvent();
+      }
 
       return false;
     }

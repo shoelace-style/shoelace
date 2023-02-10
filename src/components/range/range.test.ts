@@ -1,6 +1,6 @@
 import { clickOnElement } from '../../internal/test';
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
-import { runFormControlBaseTest } from '../../internal/test/form-control-base-test';
+import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
 import { sendKeys } from '@web/test-runner-commands';
 import { serialize } from '../../utilities/form';
 import sinon from 'sinon';
@@ -231,5 +231,5 @@ describe('<sl-range>', () => {
     });
   });
 
-  runFormControlBaseTest('sl-range');
+  runFormControlBaseTests('sl-range');
 });

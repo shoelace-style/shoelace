@@ -1,7 +1,7 @@
 // eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
 import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { getFormControls } from '../../../dist/utilities/form.js';
-import { runFormControlBaseTest } from '../../internal/test/form-control-base-test';
+import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
 import { sendKeys } from '@web/test-runner-commands'; // must come from the same module
 import { serialize } from '../../utilities/form';
 import sinon from 'sinon';
@@ -498,5 +498,5 @@ describe('<sl-input>', () => {
     });
   });
 
-  runFormControlBaseTest('sl-input');
+  runFormControlBaseTests('sl-input');
 });
