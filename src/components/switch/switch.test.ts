@@ -113,6 +113,21 @@ describe('<sl-switch>', () => {
     await el.updateComplete;
   });
 
+  it('should hide the native input with the correct positioning to scroll correctly when contained in an overflow', async () => {
+    //
+    // See: https://github.com/shoelace-style/shoelace/issues/1169
+    //
+    const el = await fixture<SlSwitch>(html` <sl-switch></sl-switch> `);
+    const label = el.shadowRoot!.querySelector('.switch')!;
+    const input = el.shadowRoot!.querySelector('.switch__input')!;
+
+    const labelPosition = getComputedStyle(label).position;
+    const inputPosition = getComputedStyle(input).position;
+
+    expect(labelPosition).to.equal('relative');
+    expect(inputPosition).to.equal('absolute');
+  });
+
   describe('when submitting a form', () => {
     it('should submit the correct value when a value is provided', async () => {
       const form = await fixture<HTMLFormElement>(html`
@@ -201,6 +216,18 @@ describe('<sl-switch>', () => {
       const formData = new FormData(form);
 
       expect(formData.get('a')).to.equal('1');
+    });
+
+    it('should receive validation attributes ("states") even when novalidate is used on the parent form', async () => {
+      const el = await fixture<HTMLFormElement>(html` <form novalidate><sl-switch required></sl-switch></form> `);
+      const slSwitch = el.querySelector<SlSwitch>('sl-switch')!;
+
+      expect(slSwitch.hasAttribute('data-required')).to.be.true;
+      expect(slSwitch.hasAttribute('data-optional')).to.be.false;
+      expect(slSwitch.hasAttribute('data-invalid')).to.be.true;
+      expect(slSwitch.hasAttribute('data-valid')).to.be.false;
+      expect(slSwitch.hasAttribute('data-user-invalid')).to.be.false;
+      expect(slSwitch.hasAttribute('data-user-valid')).to.be.false;
     });
   });
 

@@ -157,6 +157,11 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
   }
 
   render() {
+    //
+    // NOTE: we use a <div> around the label slot because of this Chrome bug.
+    //
+    // https://bugs.chromium.org/p/chromium/issues/detail?id=1413733
+    //
     return html`
       <label
         part="base"
@@ -209,7 +214,9 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
             : ''}
         </span>
 
-        <slot part="label" class="checkbox__label"></slot>
+        <div part="label" class="checkbox__label">
+          <slot></slot>
+        </div>
       </label>
     `;
   }
