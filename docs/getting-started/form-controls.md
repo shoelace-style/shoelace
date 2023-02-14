@@ -295,12 +295,14 @@ This example demonstrates custom validation styles using `data-user-invalid` and
     required
   ></sl-input>
 
-  <sl-select label="Favorite Animal" help-text="Select the best option." clearable required>
+  <sl-select name="animal" label="Favorite Animal" help-text="Select the best option." clearable required>
     <sl-option value="birds">Birds</sl-option>
     <sl-option value="cats">Cats</sl-option>
     <sl-option value="dogs">Dogs</sl-option>
     <sl-option value="other">Other</sl-option>
   </sl-select>
+
+  <sl-checkbox value="accept" required>Accept terms and conditions</sl-checkbox>
 
   <sl-button type="submit" variant="primary">Submit</sl-button>
   <sl-button type="reset" variant="default">Reset</sl-button>
@@ -316,42 +318,448 @@ This example demonstrates custom validation styles using `data-user-invalid` and
 
 <style>
   .validity-styles sl-input,
-  .validity-styles sl-select {
+  .validity-styles sl-select,
+  .validity-styles sl-checkbox {
+    display: block;
     margin-bottom: var(--sl-spacing-medium);
   }
 
   /* user invalid styles */
   .validity-styles sl-input[data-user-invalid]::part(base),
-  .validity-styles sl-select[data-user-invalid]::part(combobox) {
+  .validity-styles sl-select[data-user-invalid]::part(combobox),
+  .validity-styles sl-checkbox[data-user-invalid]::part(control) {
     border-color: var(--sl-color-danger-600);
   }
 
   .validity-styles [data-user-invalid]::part(form-control-label),
-  .validity-styles [data-user-invalid]::part(form-control-help-text) {
+  .validity-styles [data-user-invalid]::part(form-control-help-text),
+  .validity-styles sl-checkbox[data-user-invalid]::part(label) {
     color: var(--sl-color-danger-700);
   }
 
+  .validity-styles sl-checkbox[data-user-invalid]::part(control) {
+    outline: none;
+  }
+
   .validity-styles sl-input:focus-within[data-user-invalid]::part(base),
-  .validity-styles sl-select:focus-within[data-user-invalid]::part(combobox) {
+  .validity-styles sl-select:focus-within[data-user-invalid]::part(combobox),
+  .validity-styles sl-checkbox:focus-within[data-user-invalid]::part(control) {
     border-color: var(--sl-color-danger-600);
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-danger-300);
   }
 
   /* User valid styles */
   .validity-styles sl-input[data-user-valid]::part(base),
-  .validity-styles sl-select[data-user-valid]::part(combobox) {
+  .validity-styles sl-select[data-user-valid]::part(combobox),
+  .validity-styles sl-checkbox[data-user-valid]::part(control) {
     border-color: var(--sl-color-success-600);
   }
 
   .validity-styles [data-user-valid]::part(form-control-label),
-  .validity-styles [data-user-valid]::part(form-control-help-text) {
+  .validity-styles [data-user-valid]::part(form-control-help-text),
+  .validity-styles sl-checkbox[data-user-valid]::part(label) {
     color: var(--sl-color-success-700);
   }
 
+  .validity-styles sl-checkbox[data-user-valid]::part(control) {
+    background-color: var(--sl-color-success-600);
+    outline: none;
+  }
+
   .validity-styles sl-input:focus-within[data-user-valid]::part(base),
-  .validity-styles sl-select:focus-within[data-user-valid]::part(combobox) {
+  .validity-styles sl-select:focus-within[data-user-valid]::part(combobox),
+  .validity-styles sl-checkbox:focus-within[data-user-valid]::part(control) {
     border-color: var(--sl-color-success-600);
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-success-300);
+  }
+</style>
+```
+
+## Inline Form Validation
+
+You can switch from normal validation mode, where validation messages are presented by browser specific tooltips, to an inline validation mode where the validation messages are displayed below the form fields, normally in red color.
+This can be achieved completely in userland with customizations using CSS and JavaScript.
+Here's the same example as the previous one, but this time we use inline form validation.
+
+```html preview
+<sl-animation class="animation-inline-validation" name="shakeX" duration="1000" iterations="1" easing="easeInOut">
+  <form class="inline-validation">
+    <sl-input
+      name="name"
+      label="Name"
+      help-text="What would you like people to call you?"
+      autocomplete="off"
+      required
+    ></sl-input>
+
+    <sl-select name="animal" label="Favorite Animal" help-text="Select the best option." clearable required>
+      <sl-option value="birds">Birds</sl-option>
+      <sl-option value="cats">Cats</sl-option>
+      <sl-option value="dogs">Dogs</sl-option>
+      <sl-option value="other">Other</sl-option>
+    </sl-select>
+
+    <sl-checkbox value="accept" required>Accept terms and conditions</sl-checkbox>
+
+    <sl-button type="submit" variant="primary">Submit</sl-button>
+    <sl-button type="reset" variant="default">Reset</sl-button>
+  </form>
+</sl-animation>
+
+<style>
+  .inline-validation sl-input,
+  .inline-validation sl-select,
+  .inline-validation sl-checkbox {
+    display: block;
+    margin-bottom: var(--sl-spacing-medium);
+  }
+
+  /* user invalid styles */
+  .inline-validation sl-input[data-user-invalid]::part(base),
+  .inline-validation sl-select[data-user-invalid]::part(combobox),
+  .inline-validation sl-checkbox[data-user-invalid]::part(control) {
+    border-color: var(--sl-color-danger-600);
+  }
+
+  .inline-validation [data-user-invalid]::part(form-control-label),
+  .inline-validation [data-user-invalid]::part(form-control-help-text),
+  .inline-validation sl-checkbox[data-user-invalid]::part(label) {
+    color: var(--sl-color-danger-700);
+  }
+
+  .inline-validation sl-checkbox[data-user-invalid]::part(control) {
+    outline: none;
+  }
+
+  .inline-validation sl-input:focus-within[data-user-invalid]::part(base),
+  .inline-validation sl-select:focus-within[data-user-invalid]::part(combobox),
+  .inline-validation sl-checkbox:focus-within[data-user-invalid]::part(control) {
+    border-color: var(--sl-color-danger-600);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-danger-300);
+  }
+
+  /* User valid styles */
+  .inline-validation sl-input[data-user-valid]::part(base),
+  .inline-validation sl-select[data-user-valid]::part(combobox),
+  .inline-validation sl-checkbox[data-user-valid]::part(control) {
+    border-color: var(--sl-color-success-600);
+  }
+
+  .inline-validation [data-user-valid]::part(form-control-label),
+  .inline-validation [data-user-valid]::part(form-control-help-text),
+  .inline-validation sl-checkbox[data-user-valid]::part(label) {
+    color: var(--sl-color-success-700);
+  }
+
+  .inline-validation sl-checkbox[data-user-valid]::part(control) {
+    background-color: var(--sl-color-success-600);
+    outline: none;
+  }
+
+  .inline-validation sl-input:focus-within[data-user-valid]::part(base),
+  .inline-validation sl-select:focus-within[data-user-valid]::part(combobox),
+  .inline-validation sl-checkbox:focus-within[data-user-valid]::part(control) {
+    border-color: var(--sl-color-success-600);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-success-300);
+  }
+
+  /* styles for the inline validation messages */
+
+  .inline-validation :is([data-valid], [data-invalid]):not(sl-button)::after {
+    display: block;
+    font-size: var(--sl-font-size-small);
+    color: var(--sl-color-danger-700);
+    content: '\00a0';
+  }
+
+  .inline-validation [data-user-invalid]:not(sl-button)::after {
+    content: attr(data-error);
+  }
+</style>
+
+<script type="module">
+  // With the following few lines of JavaScript code plus the app independent
+  // utility function `activateInlineFormValidation` you can switch to
+  // inline form validation mode.
+  const form = document.querySelector('form.inline-validation');
+  const animation = document.querySelector('sl-animation.animation-inline-validation');
+
+  activateInlineFormValidation(form);
+
+  form.addEventListener('submit', ev => {
+    ev.preventDefault();
+    alert('All fields are valid');
+  });
+
+  // I the user tries to submit invalid form data then shake the form
+  // for a moment to indicate an submit error
+  form.addEventListener(
+    'sl-invalid',
+    () => {
+      animation.play = true;
+    },
+    true
+  );
+
+  /**
+   * `activateInlineFormValidation` is a utility function for Shoelace based HTML
+   * forms. It allows to switch from the usual tooltip based way of showing validation
+   * errors to inline form validation where validation errors will be displayed below
+   * the corresponding form controls.
+   * This will be achieved by dynamically adding data attributes for error messages
+   * to the form controls, if required. And to use the CSS function `attr(...)`
+   * to retrieve the error messages in CSS (by using the `::after` pseudo-element).
+   *
+   * @param container  A DOM container element, for example the form element
+   * @param errorAttribute  Name of the data attribute of the form controls to
+   *                        store the current validation message. Default value is
+   *                        'data-error'.
+   *
+   * @return  Returns a cancellation function to undo the changes that
+   *          have been necessary to activate inline validation
+   */
+  function activateInlineFormValidation(container, errorAttribute = 'data-error') {
+    let formControls = null; // type: Set<HTMLElement> | null
+
+    // Checks whether an element is a Shoelace form control
+    const isFormControl = elem => {
+      return (
+        elem instanceof HTMLElement &&
+        typeof elem.checkValidity === 'function' &&
+        typeof elem.reportValidity === 'function' &&
+        typeof elem.validationMessage === 'string'
+      );
+    };
+
+    // Updates the error data attribute of a given Shoelace form control,
+    // depending on the form control's `validationMessage` property
+    const updateValidationMessage = formControl => {
+      const message = formControl.validationMessage;
+
+      if (typeof message === 'string' && message !== '') {
+        formControl.setAttribute(errorAttribute, message);
+      } else {
+        formControl.removeAttribute(errorAttribute);
+      }
+    };
+
+    // Updates the error attributes for all Shoelace form controls
+    // in the container and returns a set of all currently existing
+    // Shoelace form controls in the container.
+    const updateAllValidationMessages = () => {
+      const ret = new Set();
+
+      for (const elem of container.querySelectorAll(':is([data-valid], [data-invalid])')) {
+        if (isFormControl(elem)) {
+          ret.add(elem);
+          updateValidationMessage(elem);
+        }
+      }
+
+      return ret;
+    };
+
+    // --- event handlers --------------
+
+    const onInvalid = event => {
+      // Prevent the browser from showing the usual validation error tooltips
+      event.preventDefault();
+    };
+
+    const onInput = event => {
+      const target = event.target;
+
+      if (formControls.has(target)) {
+        // Update error attribute depending on validation message
+        updateValidationMessage(target);
+      }
+    };
+
+    // --- main ------------------------
+
+    // Register event handlers
+    container.addEventListener('sl-input', onInput);
+    container.addEventListener('sl-invalid', onInvalid, true);
+
+    // Register mutation observer to detect dynamically added
+    // or removed form controls
+    const observer = new MutationObserver(() => {
+      // Update and remember current form controls
+      const newFormControls = updateAllValidationMessages();
+
+      // Cleanup previously removed form controls
+      for (const formControl of formControls) {
+        if (!newFormControls.has(formControl)) {
+          formControl.removeAttribute(errorAttribute);
+        }
+      }
+
+      formControls = newFormControls;
+    });
+
+    // Observe the whole DOM subtree of the container
+    observer.observe(container, {
+      childList: true,
+      subtree: true
+    });
+
+    formControls = updateAllValidationMessages();
+
+    // provide cancellation functionality
+
+    let cancelled = false;
+
+    const cancel = () => {
+      if (cancelled) {
+        return;
+      }
+
+      container.removeEventListener('sl-input', onInput);
+      container.removeEventListener('sl-invalid', onInvalid, true);
+      observer.disconnect();
+
+      for (const formControl of formControls) {
+        formControl.removeAttribute(errorAttribute);
+      }
+
+      formControls = null;
+      cancelled = true;
+    };
+
+    return cancel;
+  }
+</script>
+```
+
+## Inline Form Validation (old version - to be deleted after testing) // TODO!!!!
+
+```html preview
+<sl-animation class="animation-inline-validation2" name="shakeX" duration="1000" iterations="1" easing="easeInOut">
+  <form class="inline-validation2">
+    <sl-radio-group name="salutation" label="Salutation" required>
+      <sl-radio value="mrs">Mrs.</sl-radio>
+      <sl-radio value="mr">Mr.</sl-radio>
+      <sl-radio value="other">Other</sl-radio>
+    </sl-radio-group>
+
+    <sl-input name="name" label="Name" required></sl-input>
+    <sl-input name="email" type="email" label="Email" required></sl-input>
+
+    <sl-select name="country" label="Country" help-text="Only USA and Canada" clearable required>
+      <sl-option value="US">USA</sl-option>
+      <sl-option value="CA">Canada</sl-option>
+    </sl-select>
+
+    <label>
+      Your favorite color *
+      <sl-color-picker required>Your favorite color</sl-color-picker>
+    </label>
+
+    <sl-switch name="customer" required>Please approve that this is really your favorite color</sl-switch>
+
+    <sl-textarea name="question" label="Your question" required></sl-textarea>
+
+    <sl-checkbox name="accept" required>Accept terms and conditions</sl-checkbox>
+
+    <sl-button type="submit" variant="primary">Submit</sl-button>
+    <sl-button type="reset" variant="default">Reset</sl-button>
+  </form>
+</sl-animation>
+
+<script type="module">
+  const form = document.querySelector('form.inline-validation2');
+  const animation = document.querySelector('sl-animation.animation-inline-validation2');
+
+  updateAllValidationMessages(form);
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    alert('All fields are valid!');
+  });
+
+  form.addEventListener(
+    'sl-invalid',
+    event => {
+      updateValidationMessage(event.target);
+      event.preventDefault();
+      animation.play = true;
+    },
+    true
+  );
+
+  form.addEventListener('sl-input', event => {
+    updateValidationMessage(event.target);
+  });
+
+  function isFormControl(elem) {
+    return (
+      elem.hasAttribute('data-valid') ||
+      (elem.hasAttribute('data-invalid') && typeof elem.validationMessage === 'string')
+    );
+  }
+
+  function updateValidationMessage(formControl) {
+    if (isFormControl(formControl)) {
+      formControl.setAttribute('data-error', formControl.validationMessage);
+    }
+  }
+
+  function updateAllValidationMessages(container) {
+    for (const elem of container.querySelectorAll('*')) {
+      if (isFormControl(elem)) {
+        updateValidationMessage(elem);
+      }
+    }
+  }
+</script>
+
+<style>
+  .inline-validation2 :is([data-valid], [data-invalid]):not(sl-button) {
+    display: block;
+    margin-bottom: var(--sl-spacing-small);
+  }
+
+  .inline-validation2 sl-radio-group sl-radio {
+    display: inline-block;
+    margin-right: 1rem;
+  }
+
+  /* user invalid styles */
+  .inline-validation2 sl-input[data-user-invalid]::part(base),
+  .inline-validation2 sl-select[data-user-invalid]::part(combobox) {
+    border-color: var(--sl-color-danger-600);
+  }
+
+  .inline-validation2 sl-input:focus-within[data-user-invalid]::part(base),
+  .inline-validation2 sl-textarea:focus-within[data-user-invalid]::part(base),
+  .inline-validation2 sl-select:focus-within[data-user-invalid]::part(combobox) {
+    border-color: var(--sl-color-danger-600);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-danger-300);
+  }
+
+  /* User valid styles */
+  .inline-validation2 sl-input[data-user-valid]::part(base),
+  .inline-validation2 sl-textarea[data-user-valid]::part(base),
+  .inline-validation2 sl-select[data-user-valid]::part(combobox) {
+    border-color: var(--sl-color-success-600);
+  }
+
+  .inline-validation2 sl-input:focus-within[data-user-valid]::part(base),
+  .inline-validation2 sl-textarea:focus-within[data-user-valid]::part(base),
+  .inline-validation2 sl-select:focus-within[data-user-valid]::part(combobox) {
+    border-color: var(--sl-color-success-600);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-success-300);
+  }
+
+  .inline-validation2 :is([data-valid], [data-invalid]):not(sl-button)::after {
+    display: block;
+    font-size: var(--sl-font-size-small);
+    color: var(--sl-color-danger-700);
+    content: '\00a0';
+  }
+
+  .inline-validation2 [data-user-invalid]:not(sl-button)::after {
+    content: attr(data-error);
   }
 </style>
 ```

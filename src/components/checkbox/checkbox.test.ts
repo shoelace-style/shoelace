@@ -1,5 +1,6 @@
 import { clickOnElement } from '../../internal/test';
 import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
+import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlCheckbox from './checkbox';
@@ -308,5 +309,7 @@ describe('<sl-checkbox>', () => {
 
       expect(indeterminateIcon).to.be.null;
     });
+
+    runFormControlBaseTests('sl-checkbox');
   });
 });

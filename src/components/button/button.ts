@@ -2,7 +2,7 @@ import '../icon/icon';
 import '../spinner/spinner';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { FormControlController } from '../../internal/form';
+import { FormControlController, validValidityState } from '../../internal/form';
 import { HasSlotController } from '../../internal/slot';
 import { html, literal } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -140,6 +140,24 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
   /** Used to override the form owner's `target` attribute. */
   @property({ attribute: 'formtarget' }) formTarget: '_self' | '_blank' | '_parent' | '_top' | string;
 
+  /** Gets the validity state object */
+  get validity() {
+    if (this.isButton()) {
+      return (this.button as HTMLButtonElement).validity;
+    }
+
+    return validValidityState;
+  }
+
+  /** Gets the validation message */
+  get validationMessage() {
+    if (this.isButton()) {
+      return (this.button as HTMLButtonElement).validationMessage;
+    }
+
+    return '';
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this.handleHostClick = this.handleHostClick.bind(this);
@@ -183,6 +201,11 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
       event.preventDefault();
       event.stopImmediatePropagation();
     }
+  }
+
+  private handleInvalid(event: Event) {
+    this.formControlController.setValidity(false);
+    this.formControlController.emitSlInvalidEvent(event);
   }
 
   private isButton() {
@@ -290,6 +313,7 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
         tabindex=${this.disabled ? '-1' : '0'}
         @blur=${this.handleBlur}
         @focus=${this.handleFocus}
+        @invalid=${this.isButton() ? this.handleInvalid : null}
         @click=${this.handleClick}
       >
         <slot name="prefix" part="prefix" class="button__prefix"></slot>

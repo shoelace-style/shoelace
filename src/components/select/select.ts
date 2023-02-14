@@ -46,6 +46,7 @@ import type SlPopup from '../popup/popup';
  * @event sl-after-show - Emitted after the select's menu opens and all animations are complete.
  * @event sl-hide - Emitted when the select's menu closes.
  * @event sl-after-hide - Emitted after the select's menu closes and all animations are complete.
+ * @event sl-invalid - Emitted when `.checkValidity()` or `.reportValidity()` has been called and the returned value is `false`.
  *
  * @csspart form-control - The form control that wraps the label, input, and help text.
  * @csspart form-control-label - The label's wrapper.
@@ -161,6 +162,16 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
   /** The select's required attribute. */
   @property({ type: Boolean, reflect: true }) required = false;
+
+  /** Gets the validity state object */
+  get validity() {
+    return this.valueInput.validity;
+  }
+
+  /** Gets the validation message */
+  get validationMessage() {
+    return this.valueInput.validationMessage;
+  }
 
   connectedCallback() {
     super.connectedCallback();
@@ -520,6 +531,11 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     });
   }
 
+  private handleInvalid(event: Event) {
+    this.formControlController.setValidity(false);
+    this.formControlController.emitSlInvalidEvent(event);
+  }
+
   @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     // Close the listbox when the control is disabled
@@ -603,12 +619,12 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     return waitForEvent(this, 'sl-after-hide');
   }
 
-  /** Checks for validity but does not show the browser's validation message. */
+  /** Checks for validity but does not show the browser's validation message. Will emit an `sl-invalid` event in case of negative result (if not disabled). */
   checkValidity() {
     return this.valueInput.checkValidity();
   }
 
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  /** Checks for validity and shows the browser's validation message if the control is invalid. Will emit an `sl-invalid` event in case of negative result (if not disabled). */
   reportValidity() {
     return this.valueInput.reportValidity();
   }
@@ -752,6 +768,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
                 tabindex="-1"
                 aria-hidden="true"
                 @focus=${() => this.focus()}
+                @invalid=${this.handleInvalid}
               />
 
               ${hasClearIcon

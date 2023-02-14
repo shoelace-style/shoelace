@@ -127,7 +127,7 @@ export class FormControlController implements ReactiveController {
     }
 
     if (this.host.hasUpdated) {
-      this.setValidity(this.host.checkValidity());
+      this.setValidity(this.host.validity.valid);
     }
   }
 
@@ -341,11 +341,68 @@ export class FormControlController implements ReactiveController {
   }
 
   /**
-   * Updates the form control's validity based on the current value of `host.checkValidity()`. Call this when anything
+   * Updates the form control's validity based on the current value of `host.validity.valid`. Call this when anything
    * that affects constraint validation changes so the component receives the correct validity states.
    */
   updateValidity() {
     const host = this.host;
-    this.setValidity(host.checkValidity());
+    this.setValidity(host.validity.valid);
+  }
+
+  /**
+   * Dispatches a non-bubbling, cancelable custom event of type `sl-invalid`.
+   * If the `sl-invalid` event will be cancelled then the original `invalid`
+   * event (which may have been passed as argument) will also be cancelled.
+   * If no original `invalid` event has been passed then the `sl-invalid`
+   * event will be cancelled before being dispatched.
+   */
+  emitSlInvalidEvent(originalInvalidEvent?: Event) {
+    const slInvalidEvent = new CustomEvent<void>('sl-invalid', {
+      bubbles: false,
+      composed: false,
+      cancelable: true
+    });
+
+    if (!originalInvalidEvent) {
+      slInvalidEvent.preventDefault();
+    }
+
+    if (!this.host.dispatchEvent(slInvalidEvent)) {
+      originalInvalidEvent?.preventDefault();
+    }
   }
 }
+
+/*
+ * Predefined common validity states.
+ * All of them are read-only.
+ */
+
+// A validity state object that represents `valid`
+export const validValidityState: ValidityState = Object.freeze({
+  badInput: false,
+  customError: false,
+  patternMismatch: false,
+  rangeOverflow: false,
+  rangeUnderflow: false,
+  stepMismatch: false,
+  tooLong: false,
+  tooShort: false,
+  typeMismatch: false,
+  valid: true,
+  valueMissing: false
+});
+
+// A validity state object that represents `value missing`
+export const valueMissingValidityState: ValidityState = Object.freeze({
+  ...validValidityState,
+  valid: false,
+  valueMissing: true
+});
+
+// A validity state object that represents a custom error
+export const customErrorValidityState: ValidityState = Object.freeze({
+  ...validValidityState,
+  valid: false,
+  customError: true
+});

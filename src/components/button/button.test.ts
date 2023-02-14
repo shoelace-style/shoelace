@@ -1,4 +1,5 @@
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
 import sinon from 'sinon';
 import type SlButton from './button';
 
@@ -233,5 +234,32 @@ describe('<sl-button>', () => {
 
       expect(clickHandler).to.have.been.calledOnce;
     });
+  });
+
+  runFormControlBaseTests({
+    tagName: 'sl-button',
+    variantName: 'type="button"',
+
+    init: (control: SlButton) => {
+      control.type = 'button';
+    }
+  });
+
+  runFormControlBaseTests({
+    tagName: 'sl-button',
+    variantName: 'type="submit"',
+
+    init: (control: SlButton) => {
+      control.type = 'submit';
+    }
+  });
+
+  runFormControlBaseTests({
+    tagName: 'sl-button',
+    variantName: 'href="xyz"',
+
+    init: (control: SlButton) => {
+      control.href = 'some-url';
+    }
   });
 });

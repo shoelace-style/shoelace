@@ -101,6 +101,16 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
   /** The default value of the form control. Primarily used for resetting the form control. */
   @defaultValue() defaultValue = 0;
 
+  /** Gets the validity state object */
+  get validity() {
+    return this.input.validity;
+  }
+
+  /** Gets the validation message */
+  get validationMessage() {
+    return this.input.validationMessage;
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this.resizeObserver = new ResizeObserver(() => this.syncRange());
@@ -207,6 +217,11 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
     }
   }
 
+  private handleInvalid(event: Event) {
+    this.formControlController.setValidity(false);
+    this.formControlController.emitSlInvalidEvent(event);
+  }
+
   /** Sets focus on the range. */
   focus(options?: FocusOptions) {
     this.input.focus(options);
@@ -306,8 +321,9 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
               .value=${live(this.value.toString())}
               aria-describedby="help-text"
               @change=${this.handleChange}
-              @input=${this.handleInput}
               @focus=${this.handleFocus}
+              @input=${this.handleInput}
+              @invalid=${this.handleInvalid}
               @blur=${this.handleBlur}
             />
             ${this.tooltip !== 'none' && !this.disabled

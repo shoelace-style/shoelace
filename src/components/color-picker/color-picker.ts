@@ -49,10 +49,11 @@ declare const EyeDropper: EyeDropperConstructor;
  *
  * @slot label - The color picker's form label. Alternatively, you can use the `label` attribute.
  *
- * @event sl-blur Emitted when the color picker loses focus.
- * @event sl-change Emitted when the color picker's value changes.
- * @event sl-focus Emitted when the color picker receives focus.
- * @event sl-input Emitted when the color picker receives input.
+ * @event sl-blur - Emitted when the color picker loses focus.
+ * @event sl-change - Emitted when the color picker's value changes.
+ * @event sl-focus - Emitted when the color picker receives focus.
+ * @event sl-input - Emitted when the color picker receives input.
+ * @event sl-invalid - Emitted when `.checkValidity()` or `.reportValidity()` has been called and the returned value is `false`.
  *
  * @csspart base - The component's base wrapper.
  * @csspart trigger - The color picker's dropdown trigger.
@@ -174,6 +175,19 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
    */
   @property({ reflect: true }) form = '';
 
+  /** Makes the color picker a required field. */
+  @property({ type: Boolean, reflect: true }) required = false;
+
+  /** Gets the validity state object */
+  get validity() {
+    return this.input.validity;
+  }
+
+  /** Gets the validation message */
+  get validationMessage() {
+    return this.input.validationMessage;
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this.handleFocusIn = this.handleFocusIn.bind(this);
@@ -186,6 +200,12 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     super.disconnectedCallback();
     this.removeEventListener('focusin', this.handleFocusIn);
     this.removeEventListener('focusout', this.handleFocusOut);
+  }
+
+  firstUpdated() {
+    this.input.updateComplete.then(() => {
+      this.formControlController.updateValidity();
+    });
   }
 
   private handleCopy() {
@@ -442,6 +462,11 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
         this.hue = 0;
       }
     }
+  }
+
+  private handleInputInvalid(event: Event) {
+    this.formControlController.setValidity(false);
+    this.formControlController.emitSlInvalidEvent(event);
   }
 
   private handleTouchMove(event: TouchEvent) {
@@ -732,18 +757,24 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     }
   }
 
-  /** Checks for validity but does not show the browser's validation message. */
+  /** Checks for validity but does not show the browser's validation message. Will emit an `sl-invalid` event in case of negative result (if not disabled). */
   checkValidity() {
     return this.input.checkValidity();
   }
 
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  /** Checks for validity and shows the browser's validation message if the control is invalid. Will emit an `sl-invalid` event in case of negative result (if not disabled). */
   reportValidity() {
-    if (!this.inline && !this.checkValidity()) {
+    if (!this.inline && !this.validity.valid) {
       // If the input is inline and invalid, show the dropdown so the browser can focus on it
       this.dropdown.show();
       this.addEventListener('sl-after-show', () => this.input.reportValidity(), { once: true });
-      return this.checkValidity();
+
+      if (!this.disabled) {
+        // By standards we have to emit a `sl-invalid` event here synchronously.
+        this.formControlController.emitSlInvalidEvent();
+      }
+
+      return false;
     }
 
     return this.input.reportValidity();
@@ -893,11 +924,13 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
             autocapitalize="off"
             spellcheck="false"
             value=${this.isEmpty ? '' : this.inputValue}
+            ?required=${this.required}
             ?disabled=${this.disabled}
             aria-label=${this.localize.term('currentValue')}
             @keydown=${this.handleInputKeyDown}
             @sl-change=${this.handleInputChange}
             @sl-input=${this.handleInputInput}
+            @sl-invalid=${this.handleInputInvalid}
             @sl-blur=${this.stopNestedEventPropagation}
             @sl-focus=${this.stopNestedEventPropagation}
           ></sl-input>
