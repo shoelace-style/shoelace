@@ -47,7 +47,7 @@ const isFirefox = isChromium ? false : navigator.userAgent.includes('Firefox');
  * @event sl-clear - Emitted when the clear button is activated.
  * @event sl-focus - Emitted when the control gains focus.
  * @event sl-input - Emitted when the control receives input.
- * @event sl-invalid - Emitted when `.checkValidity()` or `.reportValidity()` has been called and the returned value is `false`.
+ * @event sl-invalid - Emitted when the form control has been checked for validity and its constraints aren't satisfied.
  *
  * @csspart form-control - The form control that wraps the label, input, and help text.
  * @csspart form-control-label - The label's wrapper.

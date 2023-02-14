@@ -1,19 +1,16 @@
 import '../button-group/button-group';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
-
 import {
   customErrorValidityState,
   FormControlController,
   validValidityState,
   valueMissingValidityState
 } from '../../internal/form';
-
 import { HasSlotController } from '../../internal/slot';
 import { html } from 'lit';
 import { watch } from '../../internal/watch';
 import ShoelaceElement from '../../internal/shoelace-element';
-
 import styles from './radio-group.styles';
 import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element';
@@ -34,7 +31,7 @@ import type SlRadioButton from '../radio-button/radio-button';
  *
  * @event sl-change - Emitted when the radio group's selected value changes.
  * @event sl-input - Emitted when the radio group receives user input.
- * @event sl-invalid - Emitted when `.checkValidity()` or `.reportValidity()` has been called and the returned value is `false`.
+ * @event sl-invalid - Emitted when the form control has been checked for validity and its constraints aren't satisfied.
  *
  * @csspart form-control - The form control that wraps the label, input, and help text.
  * @csspart form-control-label - The label's wrapper.

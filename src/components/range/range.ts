@@ -26,6 +26,7 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element';
  * @event sl-change - Emitted when an alteration to the control's value is committed by the user.
  * @event sl-focus - Emitted when the control gains focus.
  * @event sl-input - Emitted when the control receives input.
+ * @event sl-invalid - Emitted when the form control has been checked for validity and its constraints aren't satisfied.
  *
  * @csspart form-control - The form control that wraps the label, input, and help text.
  * @csspart form-control-label - The label's wrapper.

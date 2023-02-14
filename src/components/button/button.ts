@@ -24,6 +24,7 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element';
  *
  * @event sl-blur - Emitted when the button loses focus.
  * @event sl-focus - Emitted when the button gains focus.
+ * @event sl-invalid - Emitted when the form control has been checked for validity and its constraints aren't satisfied.
  *
  * @slot - The button's label.
  * @slot prefix - A presentational prefix icon or similar element.

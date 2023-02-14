@@ -23,7 +23,7 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element';
  * @event sl-change - Emitted when the control's checked state changes.
  * @event sl-input - Emitted when the control receives input.
  * @event sl-focus - Emitted when the control gains focus.
- * @event sl-invalid - Emitted when `.checkValidity()` or `.reportValidity()` has been called and the returned value is `false`.
+ * @event sl-invalid - Emitted when the form control has been checked for validity and its constraints aren't satisfied.
  *
  * @csspart base - The component's base wrapper.
  * @csspart control - The control that houses the switch's thumb.
