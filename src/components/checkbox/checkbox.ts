@@ -153,12 +153,12 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
     this.input.blur();
   }
 
-  /** Checks for validity but does not show a validation message. Returns true when valid and false when invalid. Will emit an `sl-invalid` event in case of negative result (if not disabled). */
+  /** Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid. */
   checkValidity() {
     return this.input.checkValidity();
   }
 
-  /** Checks for validity and shows a validation message if the control is invalid. Will emit an `sl-invalid` event in case of negative result (if not disabled). */
+  /** Checks for validity and shows the browser's validation message if the control is invalid. */
   reportValidity() {
     return this.input.reportValidity();
   }

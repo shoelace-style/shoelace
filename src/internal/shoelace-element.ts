@@ -46,6 +46,7 @@ export interface ShoelaceFormControl extends ShoelaceElement {
 
   // Validation methods
   checkValidity: () => boolean;
+  /** Checks for validity and shows the browser's validation message if the control is invalid. */
   reportValidity: () => boolean;
   setCustomValidity: (message: string) => void;
 }

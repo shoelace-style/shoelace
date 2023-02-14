@@ -239,7 +239,7 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     }
   }
 
-  /** Checks for validity but does not show the browser's validation message. Will emit an `sl-invalid` event in case of negative result. */
+  /** Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid. */
   checkValidity() {
     const isRequiredAndEmpty = this.required && !this.value;
     const hasCustomValidityMessage = this.customValidityMessage !== '';
@@ -260,7 +260,7 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     this.formControlController.updateValidity();
   }
 
-  /** Checks for validity and shows the browser's validation message if the control is invalid. Will emit an `sl-invalid` event in case of negative result. */
+  /** Checks for validity and shows the browser's validation message if the control is invalid. */
   reportValidity(): boolean {
     const isValid = this.validity.valid;
 

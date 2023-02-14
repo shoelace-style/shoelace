@@ -249,7 +249,7 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
     }
   }
 
-  /** Checks for validity but does not show the browser's validation message. */
+  /** Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid. */
   checkValidity() {
     return this.input.checkValidity();
   }

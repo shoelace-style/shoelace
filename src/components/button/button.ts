@@ -240,7 +240,7 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
     this.button.blur();
   }
 
-  /** Checks for validity but does not show the browser's validation message. */
+  /** Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid. */
   checkValidity() {
     if (this.isButton()) {
       return (this.button as HTMLButtonElement).checkValidity();
