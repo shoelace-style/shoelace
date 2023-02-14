@@ -193,7 +193,7 @@ describe('<sl-alert>', () => {
       expect(toastStack).to.be.null;
     };
 
-    it.only('deletes the toast stack after the last alert is done', async () => {
+    it('deletes the toast stack after the last alert is done', async () => {
       const container = await fixture<HTMLElement>(html`<div>
         <sl-alert data-testid="alert1" closable>alert 1</sl-alert>
         <sl-alert data-testid="alert2" closable>alert 2</sl-alert>
