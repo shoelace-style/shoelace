@@ -1,18 +1,10 @@
 import { expect, fixture } from '@open-wc/testing';
 import type { ShoelaceFormControl } from '../shoelace-element';
 
-// === exports =======================================================
-
-export { runFormControlBaseTests };
-
-// === types =========================================================
-
 type CreateControlFn = () => Promise<ShoelaceFormControl>;
 
-// === all form control tests ========================================
-
-// Runs a set of generic tests for Shoelace form controls
-function runFormControlBaseTests<T extends ShoelaceFormControl = ShoelaceFormControl>(
+/** Runs a set of generic tests for Shoelace form controls */
+export function runFormControlBaseTests<T extends ShoelaceFormControl = ShoelaceFormControl>(
   tagNameOrConfig:
     | string
     | {
@@ -45,16 +37,14 @@ function runFormControlBaseTests<T extends ShoelaceFormControl = ShoelaceFormCon
   runAllValidityTests(tagName, displayName, createControl);
 }
 
-// === all validity tests ============================================
-
-// Checks the correct behavior of:
+//
+// Applicable for all Shoelace form controls. This function checks the behavior of:
 //   - `.validity`
 //   - `.validationMessage`,
 //   - `.checkValidity()`
 //   - `.reportValidity()`
 //   - `.setCustomValidity(msg)`
 //
-// Applicable for all Shoelace form controls
 function runAllValidityTests(
   tagName: string, //
   displayName: string,
@@ -150,8 +140,9 @@ function runAllValidityTests(
   });
 }
 
-// === special tests for <sl-button type=button"...> =================
-
+//
+//  Special tests for <sl-button type="button">
+//
 function runSpecialTests_slButtonOfTypeButton(createControl: CreateControlFn) {
   it('should make sure that `.validity.valid` is `false` in custom error case', async () => {
     const control = await createControl();
@@ -191,8 +182,9 @@ function runSpecialTests_slButtonOfTypeButton(createControl: CreateControlFn) {
   });
 }
 
-// === special tests for <sl-button href="xyz"...> ===================
-
+//
+// Special tests for <sl-button href="...">
+//
 function runSpecialTests_slButtonWithHref(createControl: CreateControlFn) {
   it('should make sure that calling `.checkValidity()` will return `true` in custom error case', async () => {
     const control = await createControl();
@@ -223,8 +215,9 @@ function runSpecialTests_slButtonWithHref(createControl: CreateControlFn) {
   });
 }
 
-// === special tests for all components with usual behavior  =========
-
+//
+// Special tests for all components with standard behavior
+//
 function runSpecialTests_standard(createControl: CreateControlFn) {
   it('should make sure that `.validity.valid` is `false` in custom error case', async () => {
     const control = await createControl();
@@ -263,16 +256,17 @@ function runSpecialTests_standard(createControl: CreateControlFn) {
   });
 }
 
-// === Local helper functions ========================================
+//
+// Local helper functions
+//
 
 // Creates a testable Shoelace form control instance
 async function createFormControl<T extends ShoelaceFormControl = ShoelaceFormControl>(tagName: string): Promise<T> {
   return await fixture<T>(`<${tagName}></${tagName}>`);
 }
 
-// Runs an action while listening for emitted events of a given type.
-// Returns an array of all events of the given type that have been
-// been emitted while the action was running.
+// Runs an action while listening for emitted events of a given type. Returns an array of all events of the given type
+// that have been been emitted while the action was running.
 function checkEventEmissions(control: ShoelaceFormControl, eventType: string, action: () => void): Event[] {
   const emittedEvents: Event[] = [];
 
@@ -290,15 +284,9 @@ function checkEventEmissions(control: ShoelaceFormControl, eventType: string, ac
   return emittedEvents;
 }
 
-// Component `sl-button` behaves quite different to the other
-// components. To keep things simple we use simple conditions
-// here. `sl-button` might stay the only component in Shoelace
-// core behaves that way, so we just hard code it here.
+// Component `sl-button` behaves quite different to the other components. To keep things simple we use simple conditions
+// here. `sl-button` might stay the only component in Shoelace core behaves that way, so we just hard code it here.
 function getMode(control: ShoelaceFormControl) {
-  // <sl-button type="button" ...> shall behave the same way as
-  // <button type="button" ...>
-  // Please find here a little demo:
-  // https://jsbin.com/qiwaxivuta/edit?html,console,output
   if (
     control.localName === 'sl-button' && //
     'href' in control &&
@@ -309,12 +297,8 @@ function getMode(control: ShoelaceFormControl) {
     return 'slButtonOfTypeButton';
   }
 
-  // <sl-button href="[xyz]" ...>
-  if (
-    control.localName === 'sl-button' && //
-    'href' in control &&
-    !!control.href
-  ) {
+  // <sl-button href="...">
+  if (control.localName === 'sl-button' && 'href' in control && !!control.href) {
     return 'slButtonWithHRef';
   }
 
