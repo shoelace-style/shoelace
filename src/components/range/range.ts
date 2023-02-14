@@ -220,7 +220,7 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
 
   private handleInvalid(event: Event) {
     this.formControlController.setValidity(false);
-    this.formControlController.emitSlInvalidEvent(event);
+    this.formControlController.emitInvalidEvent(event);
   }
 
   /** Sets focus on the range. */

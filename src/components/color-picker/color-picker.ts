@@ -466,7 +466,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
 
   private handleInputInvalid(event: Event) {
     this.formControlController.setValidity(false);
-    this.formControlController.emitSlInvalidEvent(event);
+    this.formControlController.emitInvalidEvent(event);
   }
 
   private handleTouchMove(event: TouchEvent) {
@@ -771,7 +771,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
 
       if (!this.disabled) {
         // By standards we have to emit a `sl-invalid` event here synchronously.
-        this.formControlController.emitSlInvalidEvent();
+        this.formControlController.emitInvalidEvent();
       }
 
       return false;

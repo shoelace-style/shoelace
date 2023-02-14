@@ -102,7 +102,7 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
 
   private handleInvalid(event: Event) {
     this.formControlController.setValidity(false);
-    this.formControlController.emitSlInvalidEvent(event);
+    this.formControlController.emitInvalidEvent(event);
   }
 
   private handleClick() {

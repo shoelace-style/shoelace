@@ -356,7 +356,7 @@ export class FormControlController implements ReactiveController {
    * If no original `invalid` event has been passed then the `sl-invalid`
    * event will be cancelled before being dispatched.
    */
-  emitSlInvalidEvent(originalInvalidEvent?: Event) {
+  emitInvalidEvent(originalInvalidEvent?: Event) {
     const slInvalidEvent = new CustomEvent<void>('sl-invalid', {
       bubbles: false,
       composed: false,

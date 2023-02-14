@@ -188,7 +188,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
 
   private handleInvalid(event: Event) {
     this.formControlController.setValidity(false);
-    this.formControlController.emitSlInvalidEvent(event);
+    this.formControlController.emitInvalidEvent(event);
   }
 
   private setTextareaHeight() {
