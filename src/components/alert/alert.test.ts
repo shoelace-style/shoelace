@@ -140,11 +140,26 @@ describe('<sl-alert>', () => {
   });
 
   describe('toast', () => {
+    const getToastStack = (): HTMLDivElement | null => document.querySelector<HTMLDivElement>('.sl-toast-stack');
+
+    const closeRemainingAlerts = async (): Promise<void> => {
+      const toastStack = getToastStack();
+      if (toastStack?.children) {
+        for (const element of toastStack.children) {
+          await (element as SlAlert).hide();
+        }
+      }
+    };
+
+    beforeEach(async () => {
+      await closeRemainingAlerts();
+    });
+
     it('can be rendered as a toast', async () => {
       const alert = await fixture<SlAlert>(html`<sl-alert>I am an alert</sl-alert>`);
 
       expectShowAndAfterShowToBeEmittedInCorrectOrder(alert, () => alert.toast());
-      const toastStack = document.querySelector('.sl-toast-stack');
+      const toastStack = getToastStack();
       expect(toastStack).to.be.visible;
       expect(toastStack?.firstChild).to.be.equal(alert);
     });
@@ -169,6 +184,16 @@ describe('<sl-alert>', () => {
       expect(toastPromiseResolved).to.be.true;
     });
 
+    const expectToastStack = () => {
+      const toastStack = getToastStack();
+      expect(toastStack).not.to.be.null;
+    };
+
+    const expectNoToastStack = () => {
+      const toastStack = getToastStack();
+      expect(toastStack).to.be.null;
+    };
+
     const openToast = async (alert: SlAlert): Promise<void> => {
       const openPromise = oneEvent(alert, 'sl-after-show');
       alert.toast();
@@ -181,16 +206,6 @@ describe('<sl-alert>', () => {
       await clickOnElement(closeButton!);
       await closePromise;
       await aTimeout(0);
-    };
-
-    const expectToastStack = () => {
-      const toastStack = document.querySelector('.sl-toast-stack');
-      expect(toastStack).not.to.be.null;
-    };
-
-    const expectNoToastStack = () => {
-      const toastStack = document.querySelector('.sl-toast-stack');
-      expect(toastStack).to.be.null;
     };
 
     it('deletes the toast stack after the last alert is done', async () => {
