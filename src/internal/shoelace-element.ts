@@ -31,7 +31,7 @@ type EventTypesWithRequiredDetail = {
   [EventType in keyof GlobalEventHandlersEventMap as EventTypeRequiresDetail<EventType>]: true;
 };
 
-// `keyof EventTypesWithRequiredDetail` lists all registered event types that do NOT require detail
+// `keyof EventTypesWithoutRequiredDetail` lists all registered event types that do NOT require detail
 type EventTypesWithoutRequiredDetail = {
   [EventType in keyof GlobalEventHandlersEventMap as EventTypeDoesNotRequireDetail<EventType>]: true;
 };
