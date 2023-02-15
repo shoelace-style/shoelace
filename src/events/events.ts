@@ -30,3 +30,4 @@ export { default as SlLazyLoadEvent } from './sl-lazy-load';
 export { default as SlCancelEvent } from './sl-cancel';
 export { default as SlFinishEvent } from './sl-finish';
 export { default as SlStartEvent } from './sl-start';
+export { default as SlInvalidEvent } from './sl-invalid';
