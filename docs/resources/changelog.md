@@ -271,8 +271,7 @@ This release removes the `<sl-responsive-media>` component. When this component 
 - Fixed a bug in `<sl-tree>` that prevented the keyboard from working when the component was nested in a shadow root [#871](https://github.com/shoelace-style/shoelace/issues/871)
 - Fixed a bug in `<sl-tab-group>` that prevented the keyboard from working when the component was nested in a shadow root [#872](https://github.com/shoelace-style/shoelace/issues/872)
 - Fixed a bug in `<sl-tab>` that allowed disabled tabs to erroneously receive focus
-- Improved single selection in `<sl-tree>` so nodes expand and collapse and rece
-  ive selection when clicking on the label
+- Improved single selection in `<sl-tree>` so nodes expand and collapse and receive selection when clicking on the label
 - Renamed `expanded-icon` and `collapsed-icon` slots to `expand-icon` and `collapse-icon` in the experimental `<sl-tree>` and `<sl-tree-item>` components
 - Improved RTL support for `<sl-image-comparer>`
 - Refactored components to extend from `ShoelaceElement` to make `dir` and `lang` reactive properties in all components
