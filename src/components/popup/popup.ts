@@ -38,7 +38,7 @@ import type { CSSResultGroup } from 'lit';
 export default class SlPopup extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
-  private anchorEl: HTMLElement | null;
+  private anchorEl: Element | null;
   private cleanup: ReturnType<typeof autoUpdate> | undefined;
 
   /** A reference to the internal popup container. Useful for animating and styling the popup with JavaScript. */
@@ -223,7 +223,7 @@ export default class SlPopup extends ShoelaceElement {
       // Locate the anchor by id
       const root = this.getRootNode() as Document | ShadowRoot;
       this.anchorEl = root.getElementById(this.anchor);
-    } else if (this.anchor instanceof HTMLElement) {
+    } else if (this.anchor instanceof Element) {
       // Use the anchor's reference
       this.anchorEl = this.anchor;
     } else {

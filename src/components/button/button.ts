@@ -2,7 +2,7 @@ import '../icon/icon';
 import '../spinner/spinner';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { FormControlController } from '../../internal/form';
+import { FormControlController, validValidityState } from '../../internal/form';
 import { HasSlotController } from '../../internal/slot';
 import { html, literal } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -24,6 +24,7 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element';
  *
  * @event sl-blur - Emitted when the button loses focus.
  * @event sl-focus - Emitted when the button gains focus.
+ * @event sl-invalid - Emitted when the form control has been checked for validity and its constraints aren't satisfied.
  *
  * @slot - The button's label.
  * @slot prefix - A presentational prefix icon or similar element.
@@ -140,6 +141,24 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
   /** Used to override the form owner's `target` attribute. */
   @property({ attribute: 'formtarget' }) formTarget: '_self' | '_blank' | '_parent' | '_top' | string;
 
+  /** Gets the validity state object */
+  get validity() {
+    if (this.isButton()) {
+      return (this.button as HTMLButtonElement).validity;
+    }
+
+    return validValidityState;
+  }
+
+  /** Gets the validation message */
+  get validationMessage() {
+    if (this.isButton()) {
+      return (this.button as HTMLButtonElement).validationMessage;
+    }
+
+    return '';
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this.handleHostClick = this.handleHostClick.bind(this);
@@ -185,6 +204,11 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
     }
   }
 
+  private handleInvalid(event: Event) {
+    this.formControlController.setValidity(false);
+    this.formControlController.emitInvalidEvent(event);
+  }
+
   private isButton() {
     return this.href ? false : true;
   }
@@ -216,7 +240,7 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
     this.button.blur();
   }
 
-  /** Checks for validity but does not show the browser's validation message. */
+  /** Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid. */
   checkValidity() {
     if (this.isButton()) {
       return (this.button as HTMLButtonElement).checkValidity();
@@ -290,6 +314,7 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
         tabindex=${this.disabled ? '-1' : '0'}
         @blur=${this.handleBlur}
         @focus=${this.handleFocus}
+        @invalid=${this.isButton() ? this.handleInvalid : null}
         @click=${this.handleClick}
       >
         <slot name="prefix" part="prefix" class="button__prefix"></slot>

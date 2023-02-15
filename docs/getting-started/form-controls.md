@@ -295,12 +295,14 @@ This example demonstrates custom validation styles using `data-user-invalid` and
     required
   ></sl-input>
 
-  <sl-select label="Favorite Animal" help-text="Select the best option." clearable required>
+  <sl-select name="animal" label="Favorite Animal" help-text="Select the best option." clearable required>
     <sl-option value="birds">Birds</sl-option>
     <sl-option value="cats">Cats</sl-option>
     <sl-option value="dogs">Dogs</sl-option>
     <sl-option value="other">Other</sl-option>
   </sl-select>
+
+  <sl-checkbox value="accept" required>Accept terms and conditions</sl-checkbox>
 
   <sl-button type="submit" variant="primary">Submit</sl-button>
   <sl-button type="reset" variant="default">Reset</sl-button>
@@ -316,40 +318,57 @@ This example demonstrates custom validation styles using `data-user-invalid` and
 
 <style>
   .validity-styles sl-input,
-  .validity-styles sl-select {
+  .validity-styles sl-select,
+  .validity-styles sl-checkbox {
+    display: block;
     margin-bottom: var(--sl-spacing-medium);
   }
 
   /* user invalid styles */
   .validity-styles sl-input[data-user-invalid]::part(base),
-  .validity-styles sl-select[data-user-invalid]::part(combobox) {
+  .validity-styles sl-select[data-user-invalid]::part(combobox),
+  .validity-styles sl-checkbox[data-user-invalid]::part(control) {
     border-color: var(--sl-color-danger-600);
   }
 
   .validity-styles [data-user-invalid]::part(form-control-label),
-  .validity-styles [data-user-invalid]::part(form-control-help-text) {
+  .validity-styles [data-user-invalid]::part(form-control-help-text),
+  .validity-styles sl-checkbox[data-user-invalid]::part(label) {
     color: var(--sl-color-danger-700);
   }
 
+  .validity-styles sl-checkbox[data-user-invalid]::part(control) {
+    outline: none;
+  }
+
   .validity-styles sl-input:focus-within[data-user-invalid]::part(base),
-  .validity-styles sl-select:focus-within[data-user-invalid]::part(combobox) {
+  .validity-styles sl-select:focus-within[data-user-invalid]::part(combobox),
+  .validity-styles sl-checkbox:focus-within[data-user-invalid]::part(control) {
     border-color: var(--sl-color-danger-600);
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-danger-300);
   }
 
   /* User valid styles */
   .validity-styles sl-input[data-user-valid]::part(base),
-  .validity-styles sl-select[data-user-valid]::part(combobox) {
+  .validity-styles sl-select[data-user-valid]::part(combobox),
+  .validity-styles sl-checkbox[data-user-valid]::part(control) {
     border-color: var(--sl-color-success-600);
   }
 
   .validity-styles [data-user-valid]::part(form-control-label),
-  .validity-styles [data-user-valid]::part(form-control-help-text) {
+  .validity-styles [data-user-valid]::part(form-control-help-text),
+  .validity-styles sl-checkbox[data-user-valid]::part(label) {
     color: var(--sl-color-success-700);
   }
 
+  .validity-styles sl-checkbox[data-user-valid]::part(control) {
+    background-color: var(--sl-color-success-600);
+    outline: none;
+  }
+
   .validity-styles sl-input:focus-within[data-user-valid]::part(base),
-  .validity-styles sl-select:focus-within[data-user-valid]::part(combobox) {
+  .validity-styles sl-select:focus-within[data-user-valid]::part(combobox),
+  .validity-styles sl-checkbox:focus-within[data-user-valid]::part(control) {
     border-color: var(--sl-color-success-600);
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-success-300);
   }
