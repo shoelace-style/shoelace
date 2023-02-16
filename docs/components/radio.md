@@ -12,6 +12,13 @@ Radios are designed to be used with [radio groups](/components/radio-group).
 </sl-radio-group>
 ```
 
+```pug slim
+sl-radio-group label="Select an option" name="a" value="1"
+  sl-radio value="1" Option 1
+  sl-radio value="2" Option 2
+  sl-radio value="3" Option 3
+```
+
 ```jsx react
 import { SlRadio, SlRadioGroup } from '@teamshares/shoelace/dist/react';
 
@@ -40,6 +47,13 @@ To set the initial value and checked state, use the `value` attribute on the con
 </sl-radio-group>
 ```
 
+```pug slim
+sl-radio-group label="Select an option" name="a" value="3"
+  sl-radio value="1" Option 1
+  sl-radio value="2" Option 2
+  sl-radio value="3" Option 3
+```
+
 ```jsx react
 import { SlRadio, SlRadioGroup } from '@teamshares/shoelace/dist/react';
 
@@ -64,6 +78,13 @@ Use the `disabled` attribute to disable a radio.
 </sl-radio-group>
 ```
 
+```pug slim
+sl-radio-group label="Select an option" name="a" value="1"
+  sl-radio value="1" Option 1
+  sl-radio value="2" disabled="true" Option 2
+  sl-radio value="3" Option 3
+```
+
 ```jsx react
 import { SlRadio, SlRadioGroup } from '@teamshares/shoelace/dist/react';
 
@@ -86,6 +107,12 @@ Use the `size` attribute to change a radio's size.
 <sl-radio size="small">Small</sl-radio>
 <sl-radio size="medium">Medium</sl-radio>
 <sl-radio size="large">Large</sl-radio>
+```
+
+```pug slim
+sl-radio size="small" Small
+sl-radio size="medium" Medium
+sl-radio size="large" Large
 ```
 
 ```jsx react

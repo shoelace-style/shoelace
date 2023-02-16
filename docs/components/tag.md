@@ -10,6 +10,14 @@
 <sl-tag variant="danger">Danger</sl-tag>
 ```
 
+```pug slim
+sl-tag variant="primary" Primary
+sl-tag variant="success" Success
+sl-tag variant="neutral" Neutral
+sl-tag variant="warning" Warning
+sl-tag variant="danger" Danger
+```
+
 ```jsx react
 import { SlTag } from '@teamshares/shoelace/dist/react';
 
@@ -36,6 +44,12 @@ Use the `size` attribute to change a tab's size.
 <sl-tag size="large">Large</sl-tag>
 ```
 
+```pug slim
+sl-tag size="small" Small
+sl-tag size="medium" Medium
+sl-tag size="large" Large
+```
+
 ```jsx react
 import { SlTag } from '@teamshares/shoelace/dist/react';
 
@@ -56,6 +70,12 @@ Use the `pill` attribute to give tabs rounded edges.
 <sl-tag size="small" pill>Small</sl-tag>
 <sl-tag size="medium" pill>Medium</sl-tag>
 <sl-tag size="large" pill>Large</sl-tag>
+```
+
+```pug slim
+sl-tag size="small" pill="true" Small
+sl-tag size="medium" pill="true" Medium
+sl-tag size="large" pill="true" Large
 ```
 
 ```jsx react
@@ -102,6 +122,27 @@ Use the `removable` attribute to add a remove button to the tag.
     transition: var(--sl-transition-medium) opacity;
   }
 </style>
+```
+
+```pug slim
+div.tags-removable
+  sl-tag size="small" removable="true" Small
+  sl-tag size="medium" removable="true" Medium
+  sl-tag size="large" removable="true" Large
+
+javascript:
+  const div = document.querySelector(.tags-removable);
+
+  div.addEventListener(sl-remove, event => {
+    const tag = event.target;
+    tag.style.opacity = 0;
+    setTimeout(() => (tag.style.opacity = 1), 2000);
+  });
+
+css:
+  .tags-removable sl-tag {
+    transition: var(--sl-transition-medium) opacity;
+  }
 ```
 
 ```jsx react

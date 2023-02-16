@@ -6,6 +6,10 @@
 <sl-range></sl-range>
 ```
 
+```pug slim
+sl-range
+```
+
 ```jsx react
 import { SlRange } from '@teamshares/shoelace/dist/react';
 
@@ -24,6 +28,10 @@ Use the `label` attribute to give the range an accessible label. For labels that
 <sl-range label="Volume" min="0" max="100"></sl-range>
 ```
 
+```pug slim
+sl-range label="Volume" min="0" max="100"
+```
+
 ```jsx react
 import { SlRange } from '@teamshares/shoelace/dist/react';
 
@@ -36,6 +44,10 @@ Add descriptive help text to a range with the `help-text` attribute. For help te
 
 ```html preview
 <sl-range label="Volume" help-text="Controls the volume of the current song." min="0" max="100"></sl-range>
+```
+
+```pug slim
+sl-range label="Volume" help-text="Controls the volume of the current song." min="0" max="100"
 ```
 
 ```jsx react
@@ -52,6 +64,10 @@ Use the `min` and `max` attributes to set the range's minimum and maximum values
 <sl-range min="0" max="10" step="1"></sl-range>
 ```
 
+```pug slim
+sl-range min="0" max="10" step="1"
+```
+
 ```jsx react
 import { SlRange } from '@teamshares/shoelace/dist/react';
 
@@ -64,6 +80,10 @@ Use the `disabled` attribute to disable a slider.
 
 ```html preview
 <sl-range disabled></sl-range>
+```
+
+```pug slim
+sl-range disabled="true"
 ```
 
 ```jsx react
@@ -80,6 +100,10 @@ By default, the tooltip is shown on top. Set `tooltip` to `bottom` to show it be
 <sl-range tooltip="bottom"></sl-range>
 ```
 
+```pug slim
+sl-range tooltip="bottom"
+```
+
 ```jsx react
 import { SlRange } from '@teamshares/shoelace/dist/react';
 
@@ -92,6 +116,10 @@ To disable the tooltip, set `tooltip` to `none`.
 
 ```html preview
 <sl-range tooltip="none"></sl-range>
+```
+
+```pug slim
+sl-range tooltip="none"
 ```
 
 ```jsx react
@@ -111,6 +139,13 @@ You can customize the active and inactive portions of the track using the `--tra
   --track-color-inactive: var(--sl-color-primary-100);
 "
 ></sl-range>
+```
+
+```pug slim
+sl-range[style="
+  --track-color-active: var(--sl-color-primary-600);
+  --track-color-inactive: var(--sl-color-primary-100);
+"]
 ```
 
 ```jsx react
@@ -142,6 +177,14 @@ You can customize the initial offset of the active track using the `--track-acti
 ></sl-range>
 ```
 
+```pug slim
+sl-range[min="-100" max="100" style="
+  --track-color-active: var(--sl-color-primary-600);
+  --track-color-inactive: var(--sl-color-primary-100);
+  --track-active-offset: 50%;
+"]
+```
+
 ```jsx react
 import { SlRange } from '@teamshares/shoelace/dist/react';
 
@@ -169,6 +212,14 @@ You can change the tooltip's content by setting the `tooltipFormatter` property 
   const range = document.querySelector('.range-with-custom-formatter');
   range.tooltipFormatter = value => `Total - ${value}%`;
 </script>
+```
+
+```pug slim
+sl-range.range-with-custom-formatter min="0" max="100" step="1"
+
+javascript:
+  const range = document.querySelector(.range-with-custom-formatter);
+  range.tooltipFormatter = value => `Total - ${value}%`;
 ```
 
 ```jsx react

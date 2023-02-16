@@ -9,6 +9,10 @@
 ></sl-animated-image>
 ```
 
+```pug slim
+sl-animated-image src="https://shoelace.style/assets/images/walk.gif" alt="Animation of untied shoes walking on pavement"
+```
+
 ```jsx react
 import { SlAnimatedImage } from '@teamshares/shoelace/dist/react';
 
@@ -35,6 +39,10 @@ Both GIF and WEBP images are supported.
 ></sl-animated-image>
 ```
 
+```pug slim
+sl-animated-image src="https://shoelace.style/assets/images/tie.webp" alt="Animation of a shoe being tied"
+```
+
 ```jsx react
 import { SlAnimatedImage } from '@teamshares/shoelace/dist/react';
 
@@ -54,6 +62,10 @@ To set a custom size, apply a width and/or height to the host element.
   style="width: 150px; height: 200px;"
 >
 </sl-animated-image>
+```
+
+```pug slim
+sl-animated-image src="https://shoelace.style/assets/images/walk.gif" alt="Animation of untied shoes walking on pavement" style="width: 150px; height: 200px;"
 ```
 
 ```jsx react
@@ -90,6 +102,21 @@ You can change the appearance and location of the control box by targeting the `
     color: pink;
   }
 </style>
+```
+
+```pug slim
+sl-animated-image.animated-image-custom-control-box src="https://shoelace.style/assets/images/walk.gif" alt="Animation of untied shoes walking on pavement"
+
+css:
+  .animated-image-custom-control-box::part(control-box) {
+    top: auto;
+    right: auto;
+    bottom: 1rem;
+    left: 1rem;
+    background-color: deeppink;
+    border: none;
+    color: pink;
+  }
 ```
 
 ```jsx react

@@ -20,6 +20,21 @@ Localization is handled by the browser's [`Intl.NumberFormat` API](https://devel
 </script>
 ```
 
+```pug slim
+div.format-number-overview
+  sl-format-number value="1000"
+  br
+  br
+  sl-input type="number" value="1000" label="Number to Format" style="max-width: 180px;"
+
+javascript:
+  const container = document.querySelector(.format-number-overview);
+  const formatter = container.querySelector(sl-format-number);
+  const input = container.querySelector(sl-input);
+
+  input.addEventListener(sl-input, () => (formatter.value = input.value || 0));
+```
+
 ```jsx react
 import { useState } from 'react';
 import { SlFormatNumber, SlInput } from '@teamshares/shoelace/dist/react';
@@ -58,6 +73,18 @@ To get the value as a percent, set the `type` attribute to `percent`.
 <sl-format-number type="percent" value="1"></sl-format-number>
 ```
 
+```pug slim
+sl-format-number type="percent" value="0"
+br
+sl-format-number type="percent" value="0.25"
+br
+sl-format-number type="percent" value="0.50"
+br
+sl-format-number type="percent" value="0.75"
+br
+sl-format-number type="percent" value="1"
+```
+
 ```jsx react
 import { SlFormatNumber } from '@teamshares/shoelace/dist/react';
 
@@ -86,6 +113,17 @@ German: <sl-format-number value="2000" lang="de" minimum-fraction-digits="2"></s
 Russian: <sl-format-number value="2000" lang="ru" minimum-fraction-digits="2"></sl-format-number>
 ```
 
+```pug slim
+| English:
+sl-format-number value="2000" lang="en" minimum-fraction-digits="2"
+br
+| German:
+sl-format-number value="2000" lang="de" minimum-fraction-digits="2"
+br
+| Russian:
+sl-format-number value="2000" lang="ru" minimum-fraction-digits="2"
+```
+
 ```jsx react
 import { SlFormatNumber } from '@teamshares/shoelace/dist/react';
 
@@ -110,6 +148,18 @@ To format a number as a monetary value, set the `type` attribute to `currency` a
 <sl-format-number type="currency" currency="EUR" value="2000" lang="de"></sl-format-number><br />
 <sl-format-number type="currency" currency="RUB" value="2000" lang="ru"></sl-format-number><br />
 <sl-format-number type="currency" currency="CNY" value="2000" lang="zh-cn"></sl-format-number>
+```
+
+```pug slim
+sl-format-number type="currency" currency="USD" value="2000" lang="en-US"
+br
+sl-format-number type="currency" currency="GBP" value="2000" lang="en-GB"
+br
+sl-format-number type="currency" currency="EUR" value="2000" lang="de"
+br
+sl-format-number type="currency" currency="RUB" value="2000" lang="ru"
+br
+sl-format-number type="currency" currency="CNY" value="2000" lang="zh-cn"
 ```
 
 ```jsx react

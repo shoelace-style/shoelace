@@ -13,6 +13,16 @@
 </sl-select>
 ```
 
+```pug slim
+sl-select
+  sl-option value="option-1" Option 1
+  sl-option value="option-2" Option 2
+  sl-option value="option-3" Option 3
+  sl-option value="option-4" Option 4
+  sl-option value="option-5" Option 5
+  sl-option value="option-6" Option 6
+```
+
 ```jsx react
 import { SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
@@ -44,6 +54,13 @@ Use the `label` attribute to give the select an accessible label. For labels tha
 </sl-select>
 ```
 
+```pug slim
+sl-select label="Select one"
+  sl-option value="option-1" Option 1
+  sl-option value="option-2" Option 2
+  sl-option value="option-3" Option 3
+```
+
 ```jsx react
 import { SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
@@ -66,6 +83,13 @@ Add descriptive help text to a select with the `help-text` attribute. For help t
   <sl-option value="2">Intermediate</sl-option>
   <sl-option value="3">Advanced</sl-option>
 </sl-select>
+```
+
+```pug slim
+sl-select label="Experience" help-text="Please tell us your skill level."
+  sl-option value="1" Novice
+  sl-option value="2" Intermediate
+  sl-option value="3" Advanced
 ```
 
 ```jsx react
@@ -92,6 +116,13 @@ Use the `placeholder` attribute to add a placeholder.
 </sl-select>
 ```
 
+```pug slim
+sl-select placeholder="Select one"
+  sl-option value="option-1" Option 1
+  sl-option value="option-2" Option 2
+  sl-option value="option-3" Option 3
+```
+
 ```jsx react
 import { SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
@@ -114,6 +145,13 @@ Use the `clearable` attribute to make the control clearable. The clear button on
   <sl-option value="option-2">Option 2</sl-option>
   <sl-option value="option-3">Option 3</sl-option>
 </sl-select>
+```
+
+```pug slim
+sl-select clearable="true" value="option-1"
+  sl-option value="option-1" Option 1
+  sl-option value="option-2" Option 2
+  sl-option value="option-3" Option 3
 ```
 
 ```jsx react
@@ -140,6 +178,13 @@ Add the `filled` attribute to draw a filled select.
 </sl-select>
 ```
 
+```pug slim
+sl-select filled="true"
+  sl-option value="option-1" Option 1
+  sl-option value="option-2" Option 2
+  sl-option value="option-3" Option 3
+```
+
 ```jsx react
 import { SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
@@ -164,6 +209,13 @@ Use the `pill` attribute to give selects rounded edges.
 </sl-select>
 ```
 
+```pug slim
+sl-select pill="true"
+  sl-option value="option-1" Option 1
+  sl-option value="option-2" Option 2
+  sl-option value="option-3" Option 3
+```
+
 ```jsx react
 import { SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
@@ -186,6 +238,13 @@ Use the `disabled` attribute to disable a select.
   <sl-option value="option-2">Option 2</sl-option>
   <sl-option value="option-3">Option 3</sl-option>
 </sl-select>
+```
+
+```pug slim
+sl-select placeholder="Disabled" disabled="true"
+  sl-option value="option-1" Option 1
+  sl-option value="option-2" Option 2
+  sl-option value="option-3" Option 3
 ```
 
 ```jsx react
@@ -213,6 +272,16 @@ To allow multiple options to be selected, use the `multiple` attribute. It's a g
   <sl-option value="option-5">Option 5</sl-option>
   <sl-option value="option-6">Option 6</sl-option>
 </sl-select>
+```
+
+```pug slim
+sl-select label="Select a Few" value="option-1 option-2 option-3" multiple="true" clearable="true"
+  sl-option value="option-1" Option 1
+  sl-option value="option-2" Option 2
+  sl-option value="option-3" Option 3
+  sl-option value="option-4" Option 4
+  sl-option value="option-5" Option 5
+  sl-option value="option-6" Option 6
 ```
 
 ```jsx react
@@ -245,6 +314,14 @@ Use the `value` attribute to set the initial selection. When using `multiple`, u
 </sl-select>
 ```
 
+```pug slim
+sl-select value="option-1 option-2" multiple="true" clearable="true"
+  sl-option value="option-1" Option 1
+  sl-option value="option-2" Option 2
+  sl-option value="option-3" Option 3
+  sl-option value="option-4" Option 4
+```
+
 ```jsx react
 import { SlDivider, SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
@@ -273,6 +350,19 @@ Use `<sl-divider>` to group listbox items visually. You can also use `<small>` t
   <sl-option value="option-5">Option 5</sl-option>
   <sl-option value="option-6">Option 6</sl-option>
 </sl-select>
+```
+
+```pug slim
+sl-select
+  small Section 1
+  sl-option value="option-1" Option 1
+  sl-option value="option-2" Option 2
+  sl-option value="option-3" Option 3
+  sl-divider
+  small Section 2
+  sl-option value="option-4" Option 4
+  sl-option value="option-5" Option 5
+  sl-option value="option-6" Option 6
 ```
 
 ```jsx react
@@ -318,6 +408,23 @@ Use the `size` attribute to change a select's size. Note that size does not appl
 </sl-select>
 ```
 
+```pug slim
+sl-select placeholder="Small" size="small"
+  sl-option value="option-1" Option 1
+  sl-option value="option-2" Option 2
+  sl-option value="option-3" Option 3
+br
+sl-select placeholder="Medium" size="medium"
+  sl-option value="option-1" Option 1
+  sl-option value="option-2" Option 2
+  sl-option value="option-3" Option 3
+br
+sl-select placeholder="Large" size="large"
+  sl-option value="option-1" Option 1
+  sl-option value="option-2" Option 2
+  sl-option value="option-3" Option 3
+```
+
 ```jsx react
 import { SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
@@ -360,6 +467,13 @@ The preferred placement of the select's listbox can be set with the `placement` 
 </sl-select>
 ```
 
+```pug slim
+sl-select placement="top"
+  sl-option value="option-1" Option 1
+  sl-option value="option-2" Option 2
+  sl-option value="option-3" Option 3
+```
+
 ```jsx react
 import {
   SlOption,
@@ -400,6 +514,26 @@ Use the `prefix` slot to prepend an icon to the control.
   <sl-option value="option-2">Option 2</sl-option>
   <sl-option value="option-3">Option 3</sl-option>
 </sl-select>
+```
+
+```pug slim
+sl-select placeholder="Small" size="small" clearable="true"
+  sl-icon name="home" slot="prefix"
+  sl-option value="option-1" Option 1
+  sl-option value="option-2" Option 2
+  sl-option value="option-3" Option 3
+br
+sl-select placeholder="Medium" size="medium" clearable="true"
+  sl-icon name="home" slot="prefix"
+  sl-option value="option-1" Option 1
+  sl-option value="option-2" Option 2
+  sl-option value="option-3" Option 3
+br
+sl-select placeholder="Large" size="large" clearable="true"
+  sl-icon name="home" slot="prefix"
+  sl-option value="option-1" Option 1
+  sl-option value="option-2" Option 2
+  sl-option value="option-3" Option 3
 ```
 
 ```jsx react

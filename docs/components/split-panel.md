@@ -19,6 +19,14 @@
 </sl-split-panel>
 ```
 
+```pug slim
+sl-split-panel
+  div slot="start" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    | Start
+  div slot="end" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    | End
+```
+
 ```jsx react
 import { SlSplitPanel } from '@teamshares/shoelace/dist/react';
 
@@ -75,6 +83,14 @@ To set the initial position, use the `position` attribute. If no position is pro
 </sl-split-panel>
 ```
 
+```pug slim
+sl-split-panel position="75"
+  div slot="start" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    | Start
+  div slot="end" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    | End
+```
+
 ### Initial Position in Pixels
 
 To set the initial position in pixels instead of a percentage, use the `position-in-pixels` attribute.
@@ -94,6 +110,14 @@ To set the initial position in pixels instead of a percentage, use the `position
     End
   </div>
 </sl-split-panel>
+```
+
+```pug slim
+sl-split-panel position-in-pixels="150"
+  div slot="start" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    | Start
+  div slot="end" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    | End
 ```
 
 ```jsx react
@@ -148,6 +172,14 @@ Add the `vertical` attribute to render the split panel in a vertical orientation
     End
   </div>
 </sl-split-panel>
+```
+
+```pug slim
+sl-split-panel vertical="true" style="height: 400px;"
+  div slot="start" style="height: 100%; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    | Start
+  div slot="end" style="height: 100%; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    | End
 ```
 
 ```jsx react
@@ -232,6 +264,41 @@ To snap panels at specific positions while dragging, add the `snap` attribute wi
     left: 50%;
   }
 </style>
+```
+
+```pug slim
+div.split-panel-snapping
+  sl-split-panel snap="100px 50%"
+    div slot="start" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+      | Start
+    div slot="end" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+      | End
+  div.split-panel-snapping-dots
+
+css:
+  .split-panel-snapping {
+    position: relative;
+  }
+
+  .split-panel-snapping-dots::before,
+  .split-panel-snapping-dots::after {
+    content: ;
+    position: absolute;
+    bottom: -12px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--sl-color-neutral-400);
+    transform: translateX(-3px);
+  }
+
+  .split-panel-snapping-dots::before {
+    left: 100px;
+  }
+
+  .split-panel-snapping-dots::after {
+    left: 50%;
+  }
 ```
 
 ```jsx react
@@ -322,6 +389,14 @@ Add the `disabled` attribute to prevent the divider from being repositioned.
 </sl-split-panel>
 ```
 
+```pug slim
+sl-split-panel disabled="true"
+  div slot="start" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    | Start
+  div slot="end" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    | End
+```
+
 ```jsx react
 import { SlSplitPanel } from '@teamshares/shoelace/dist/react';
 
@@ -392,6 +467,26 @@ Try resizing the example below with each option and notice how the panels respon
 
   select.addEventListener('sl-change', () => (splitPanel.primary = select.value));
 </script>
+```
+
+```pug slim
+div.split-panel-primary
+  sl-split-panel
+    div slot="start" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+      | Start
+    div slot="end" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+      | End
+  sl-select label="Primary Panel" value="" style="max-width: 200px; margin-top: 1rem;"
+    sl-option value="" None
+    sl-option value="start" Start
+    sl-option value="end" End
+
+javascript:
+  const container = document.querySelector(.split-panel-primary);
+  const splitPanel = container.querySelector(sl-split-panel);
+  const select = container.querySelector(sl-select);
+
+  select.addEventListener(sl-change, () => (splitPanel.primary = select.value));
 ```
 
 ```jsx react
@@ -468,6 +563,14 @@ This examples demonstrates how you can ensure both panels are at least 150px usi
 </sl-split-panel>
 ```
 
+```pug slim
+sl-split-panel style="--min: 150px; --max: calc(100% - 150px);"
+  div slot="start" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    | Start
+  div slot="end" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    | End
+```
+
 ```jsx react
 import { SlSplitPanel } from '@teamshares/shoelace/dist/react';
 
@@ -530,6 +633,18 @@ Create complex layouts that can be repositioned independently by nesting split p
     </sl-split-panel>
   </div>
 </sl-split-panel>
+```
+
+```pug slim
+sl-split-panel
+  div slot="start" style="height: 400px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    | Start
+  div slot="end"
+    sl-split-panel vertical="true" style="height: 400px;"
+      div slot="start" style="height: 100%; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+        | Top
+      div slot="end" style="height: 100%; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+        | Bottom
 ```
 
 ```jsx react
@@ -601,6 +716,15 @@ You can target the `divider` part to apply CSS properties to the divider. To add
     End
   </div>
 </sl-split-panel>
+```
+
+```pug slim
+sl-split-panel style="--divider-width: 20px;"
+  sl-icon slot="divider" name="grip-vertical" library="bootstrap"
+  div slot="start" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    | Start
+  div slot="end" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    | End
 ```
 
 ```jsx react
@@ -684,6 +808,42 @@ Here's a more elaborate example that changes the divider's color and width and a
     color: var(--sl-color-neutral-0);
   }
 </style>
+```
+
+```pug slim
+div.split-panel-divider
+  sl-split-panel
+    sl-icon slot="divider" name="grip-vertical" library="bootstrap"
+    div slot="start" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+      | Start
+    div slot="end" style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+      | End
+
+css:
+  .split-panel-divider sl-split-panel {
+    --divider-width: 2px;
+  }
+
+  .split-panel-divider sl-split-panel::part(divider) {
+    background-color: var(--sl-color-pink-600);
+  }
+
+  .split-panel-divider sl-icon {
+    position: absolute;
+    border-radius: var(--sl-border-radius-small);
+    background: var(--sl-color-pink-600);
+    color: var(--sl-color-neutral-0);
+    padding: 0.5rem 0.125rem;
+  }
+
+  .split-panel-divider sl-split-panel::part(divider):focus-visible {
+    background-color: var(--sl-color-primary-600);
+  }
+
+  .split-panel-divider sl-split-panel:focus-within sl-icon {
+    background-color: var(--sl-color-primary-600);
+    color: var(--sl-color-neutral-0);
+  }
 ```
 
 ```jsx react

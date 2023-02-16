@@ -32,6 +32,30 @@ QR codes are useful for providing small pieces of information to users who can q
 </style>
 ```
 
+```pug slim
+div.qr-overview
+  sl-qr-code value="https://shoelace.style/" label="Scan this code to visit Shoelace on the web!"
+  br
+  sl-input maxlength="255" clearable="true" label="Value"
+
+javascript:
+  const container = document.querySelector(.qr-overview);
+  const qrCode = container.querySelector(sl-qr-code);
+  const input = container.querySelector(sl-input);
+
+  input.value = qrCode.value;
+  input.addEventListener(sl-input, () => (qrCode.value = input.value));
+
+css:
+  .qr-overview {
+    max-width: 256px;
+  }
+
+  .qr-overview sl-input {
+    margin-top: 1rem;
+  }
+```
+
 ```jsx react
 import { useState } from 'react';
 import { SlQrCode, SlInput } from '@teamshares/shoelace/dist/react';
@@ -74,6 +98,10 @@ Use the `fill` and `background` attributes to modify the QR code's colors. You s
 <sl-qr-code value="https://shoelace.style/" fill="deeppink" background="white"></sl-qr-code>
 ```
 
+```pug slim
+sl-qr-code value="https://shoelace.style/" fill="deeppink" background="white"
+```
+
 ```jsx react
 import { SlQrCode } from '@teamshares/shoelace/dist/react';
 
@@ -88,6 +116,10 @@ Use the `size` attribute to change the size of the QR code.
 <sl-qr-code value="https://shoelace.style/" size="64"></sl-qr-code>
 ```
 
+```pug slim
+sl-qr-code value="https://shoelace.style/" size="64"
+```
+
 ```jsx react
 import { SlQrCode } from '@teamshares/shoelace/dist/react';
 
@@ -100,6 +132,10 @@ Create a rounded effect with the `radius` attribute.
 
 ```html preview
 <sl-qr-code value="https://shoelace.style/" radius="0.5"></sl-qr-code>
+```
+
+```pug slim
+sl-qr-code value="https://shoelace.style/" radius="0.5"
 ```
 
 ```jsx react
@@ -127,6 +163,21 @@ QR codes can be rendered with various levels of [error correction](https://www.q
     gap: 1rem;
   }
 </style>
+```
+
+```pug slim
+div.qr-error-correction
+  sl-qr-code value="https://shoelace.style/" error-correction="L"
+  sl-qr-code value="https://shoelace.style/" error-correction="M"
+  sl-qr-code value="https://shoelace.style/" error-correction="Q"
+  sl-qr-code value="https://shoelace.style/" error-correction="H"
+
+css:
+  .qr-error-correction {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
 ```
 
 ```jsx react

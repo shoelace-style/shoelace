@@ -22,6 +22,21 @@
 </script>
 ```
 
+```pug slim
+sl-dialog label="Dialog" class="dialog-overview"
+  | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  sl-button slot="footer" variant="primary" Close
+sl-button Open Dialog
+
+javascript:
+  const dialog = document.querySelector(.dialog-overview);
+  const openButton = dialog.nextElementSibling;
+  const closeButton = dialog.querySelector(sl-button[slot=footer]);
+
+  openButton.addEventListener(click, () => dialog.show());
+  closeButton.addEventListener(click, () => dialog.hide());
+```
+
 ```jsx react
 import { useState } from 'react';
 import { SlButton, SlDialog } from '@teamshares/shoelace/dist/react';
@@ -74,6 +89,21 @@ Use the `--width` custom property to set the dialog's width.
 </script>
 ```
 
+```pug slim
+sl-dialog label="Dialog" class="dialog-width" style="--width: 50vw;"
+  | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  sl-button slot="footer" variant="primary" Close
+sl-button Open Dialog
+
+javascript:
+  const dialog = document.querySelector(.dialog-width);
+  const openButton = dialog.nextElementSibling;
+  const closeButton = dialog.querySelector(sl-button[slot=footer]);
+
+  openButton.addEventListener(click, () => dialog.show());
+  closeButton.addEventListener(click, () => dialog.hide());
+```
+
 ```jsx react
 import { useState } from 'react';
 import { SlButton, SlDialog } from '@teamshares/shoelace/dist/react';
@@ -118,6 +148,22 @@ By design, a dialog's height will never exceed that of the viewport. As such, di
   openButton.addEventListener('click', () => dialog.show());
   closeButton.addEventListener('click', () => dialog.hide());
 </script>
+```
+
+```pug slim
+sl-dialog label="Dialog" class="dialog-scrolling"
+  div style="height: 150vh; border: dashed 2px var(--sl-color-neutral-200); padding: 0 1rem;"
+    p Scroll down and give it a try! 👇
+  sl-button slot="footer" variant="primary" Close
+sl-button Open Dialog
+
+javascript:
+  const dialog = document.querySelector(.dialog-scrolling);
+  const openButton = dialog.nextElementSibling;
+  const closeButton = dialog.querySelector(sl-button[slot=footer]);
+
+  openButton.addEventListener(click, () => dialog.show());
+  closeButton.addEventListener(click, () => dialog.hide());
 ```
 
 ```jsx react
@@ -174,6 +220,24 @@ The header shows a functional close button by default. You can use the `header-a
   closeButton.addEventListener('click', () => dialog.hide());
   newWindowButton.addEventListener('click', () => window.open(location.href));
 </script>
+```
+
+```pug slim
+sl-dialog label="Dialog" class="dialog-header-actions"
+  sl-icon-button class="new-window" slot="header-actions" name="arrow-top-right-on-square"
+  | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  sl-button slot="footer" variant="primary" Close
+sl-button Open Dialog
+
+javascript:
+  const dialog = document.querySelector(.dialog-header-actions);
+  const openButton = dialog.nextElementSibling;
+  const closeButton = dialog.querySelector(sl-button[slot=footer]);
+  const newWindowButton = dialog.querySelector(.new-window);
+
+  openButton.addEventListener(click, () => dialog.show());
+  closeButton.addEventListener(click, () => dialog.hide());
+  newWindowButton.addEventListener(click, () => window.open(location.href));
 ```
 
 ```jsx react
@@ -237,6 +301,28 @@ You can use `event.detail.source` to determine what triggered the request to clo
 </script>
 ```
 
+```pug slim
+sl-dialog label="Dialog" class="dialog-deny-close"
+  | This dialog will not close when you click on the overlay.
+  sl-button slot="footer" variant="primary" Close
+sl-button Open Dialog
+
+javascript:
+  const dialog = document.querySelector(.dialog-deny-close);
+  const openButton = dialog.nextElementSibling;
+  const closeButton = dialog.querySelector(sl-button[slot=footer]);
+
+  openButton.addEventListener(click, () => dialog.show());
+  closeButton.addEventListener(click, () => dialog.hide());
+
+  // Prevent the dialog from closing when the user clicks on the overlay
+  dialog.addEventListener(sl-request-close, event => {
+    if (event.detail.source === overlay) {
+      event.preventDefault();
+    }
+  });
+```
+
 ```jsx react
 import { useState } from 'react';
 import { SlButton, SlDialog } from '@teamshares/shoelace/dist/react';
@@ -287,6 +373,22 @@ By default, the dialog's panel will gain focus when opened. This allows a subseq
   openButton.addEventListener('click', () => dialog.show());
   closeButton.addEventListener('click', () => dialog.hide());
 </script>
+```
+
+```pug slim
+sl-dialog label="Dialog" class="dialog-focus"
+  sl-input autofocus="true" placeholder="I will have focus when the dialog is opened"
+  sl-button slot="footer" variant="primary" Close
+sl-button Open Dialog
+
+javascript:
+  const dialog = document.querySelector(.dialog-focus);
+  const input = dialog.querySelector(sl-input);
+  const openButton = dialog.nextElementSibling;
+  const closeButton = dialog.querySelector(sl-button[slot=footer]);
+
+  openButton.addEventListener(click, () => dialog.show());
+  closeButton.addEventListener(click, () => dialog.hide());
 ```
 
 ```jsx react

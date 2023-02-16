@@ -14,6 +14,12 @@ Since visually hidden content can receive focus when tabbing, the element will b
 </div>
 ```
 
+```pug slim
+div style="min-height: 1.875rem;"
+  sl-visually-hidden
+    a href="#" Skip to main content
+```
+
 ## Examples
 
 ### Links That Open in New Windows
@@ -28,6 +34,13 @@ In this example, the link will open a new window. Screen readers will announce "
 </a>
 ```
 
+```pug slim
+a href="https://example.com/" target="_blank"
+  | Visit External Page
+  sl-icon name="arrow-top-right-on-square"
+  sl-visually-hidden opens in a new window
+```
+
 ### Content Conveyed By Context
 
 Adding a label may seem redundant at times, but they're very helpful for unsighted users. Rather than omit them, you can provide context to unsighted users with visually hidden content that will be announced by assistive devices such as screen readers.
@@ -40,6 +53,14 @@ Adding a label may seem redundant at times, but they're very helpful for unsight
   <sl-input label="Name" style="margin-bottom: .5rem;"></sl-input>
   <sl-input label="Email" type="email"></sl-input>
 </sl-card>
+```
+
+```pug slim
+sl-card style="width: 100%; max-width: 360px;"
+  header
+    sl-visually-hidden Personal Info
+  sl-input label="Name" style="margin-bottom: .5rem;"
+  sl-input label="Email" type="email"
 ```
 
 [component-metadata:sl-visually-hidden]

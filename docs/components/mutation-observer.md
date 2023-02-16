@@ -40,6 +40,38 @@ The mutation observer will report changes to the content it wraps through the `s
 </div>
 ```
 
+```pug slim
+.mutation-overview
+  sl-mutation-observer attr="variant"
+    sl-button variant="primary"
+      | Click to mutate
+  br
+  |  👆 Click the button and watch the console
+
+javascript:
+  const container = document.querySelector('.mutation-overview');
+  const mutationObserver = container.querySelector('sl-mutation-observer');
+  const button = container.querySelector('sl-button');
+  const variants = ['primary', 'success', 'neutral', 'warning', 'danger'];
+  let clicks = 0;
+
+  // Change the button's variant attribute
+  button.addEventListener('click', () => {
+    clicks++;
+    button.setAttribute('variant', variants[clicks % variants.length]);
+  });
+
+  // Log mutations
+  mutationObserver.addEventListener('sl-mutation', event => {
+    console.log(event.detail);
+  });
+
+css:
+  .mutation-overview sl-button {
+    margin-bottom: 1rem;
+  }
+```
+
 ```jsx react
 import { useState } from 'react';
 import { SlButton, SlMutationObserver } from '@teamshares/shoelace/dist/react';
@@ -137,6 +169,51 @@ Use the `child-list` attribute to watch for new child elements that are added or
     }
   </style>
 </div>
+```
+
+```pug slim
+.mutation-child-list
+  sl-mutation-observer child-list="true"
+    .buttons
+      sl-button variant="primary"
+        | Add button
+
+javascript:
+  const container = document.querySelector('.mutation-child-list');
+  const mutationObserver = container.querySelector('sl-mutation-observer');
+  const buttons = container.querySelector('.buttons');
+  const button = container.querySelector('sl-button[variant="primary"]');
+  let i = 0;
+
+  // Add a button
+  button.addEventListener('click', () => {
+    const button = document.createElement('sl-button');
+    button.textContent = ++i;
+    buttons.append(button);
+  });
+
+  // Remove a button
+  buttons.addEventListener('click', event => {
+    const target = event.target.closest('sl-button:not([variant="primary"])');
+    event.stopPropagation();
+
+    if (target) {
+      target.remove();
+    }
+  });
+
+  // Log mutations
+  mutationObserver.addEventListener('sl-mutation', event => {
+    console.log(event.detail);
+  });
+
+css:
+  .mutation-child-list .buttons {
+    display: flex;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
 ```
 
 ```jsx react

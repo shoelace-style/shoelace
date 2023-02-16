@@ -6,6 +6,10 @@
 <sl-spinner></sl-spinner>
 ```
 
+```pug slim
+sl-spinner
+```
+
 ```jsx react
 import { SlSpinner } from '@teamshares/shoelace/dist/react';
 
@@ -22,6 +26,12 @@ Spinners are sized based on the current font size. To change their size, set the
 <sl-spinner></sl-spinner>
 <sl-spinner style="font-size: 2rem;"></sl-spinner>
 <sl-spinner style="font-size: 3rem;"></sl-spinner>
+```
+
+```pug slim
+sl-spinner
+sl-spinner style="font-size: 2rem;"
+sl-spinner style="font-size: 3rem;"
 ```
 
 ```jsx react
@@ -44,6 +54,10 @@ The width of the spinner's track can be changed by setting the `--track-width` c
 <sl-spinner style="font-size: 50px; --track-width: 10px;"></sl-spinner>
 ```
 
+```pug slim
+sl-spinner style="font-size: 50px; --track-width: 10px;"
+```
+
 ```jsx react
 import { SlSpinner } from '@teamshares/shoelace/dist/react';
 
@@ -63,6 +77,10 @@ The spinner's colors can be changed by setting the `--indicator-color` and `--tr
 
 ```html preview
 <sl-spinner style="font-size: 3rem; --indicator-color: deeppink; --track-color: pink;"></sl-spinner>
+```
+
+```pug slim
+sl-spinner style="font-size: 3rem; --indicator-color: deeppink; --track-color: pink;"
 ```
 
 ```jsx react

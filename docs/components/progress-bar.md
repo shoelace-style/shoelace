@@ -6,6 +6,10 @@
 <sl-progress-bar value="50"></sl-progress-bar>
 ```
 
+```pug slim
+sl-progress-bar value="50"
+```
+
 ```jsx react
 import { SlProgressBar } from '@teamshares/shoelace/dist/react';
 
@@ -22,6 +26,10 @@ Use the `label` attribute to label the progress bar and tell assistive devices h
 <sl-progress-bar value="50" label="Upload progress"></sl-progress-bar>
 ```
 
+```pug slim
+sl-progress-bar value="50" label="Upload progress"
+```
+
 ```jsx react
 import { SlProgressBar } from '@teamshares/shoelace/dist/react';
 
@@ -34,6 +42,10 @@ Use the `--height` custom property to set the progress bar's height.
 
 ```html preview
 <sl-progress-bar value="50" style="--height: 6px;"></sl-progress-bar>
+```
+
+```pug slim
+sl-progress-bar value="50" style="--height: 6px;"
 ```
 
 ```jsx react
@@ -71,6 +83,32 @@ Use the default slot to show a value.
     progressBar.textContent = `${value}%`;
   });
 </script>
+```
+
+```pug slim
+sl-progress-bar.progress-bar-values value="50" 50%
+br
+sl-button circle="true"
+  sl-icon name="minus" label="Decrease"
+sl-button circle="true"
+  sl-icon name="plus" label="Increase"
+
+javascript:
+  const progressBar = document.querySelector(.progress-bar-values);
+  const subtractButton = progressBar.nextElementSibling.nextElementSibling;
+  const addButton = subtractButton.nextElementSibling;
+
+  addButton.addEventListener(click, () => {
+  const value = Math.min(100, progressBar.value + 10);
+  progressBar.value = value;
+  progressBar.textContent = `${value}%`;
+  });
+
+  subtractButton.addEventListener(click, () => {
+  const value = Math.max(0, progressBar.value - 10);
+  progressBar.value = value;
+  progressBar.textContent = `${value}%`;
+  });
 ```
 
 ```jsx react
@@ -111,6 +149,10 @@ The `indeterminate` attribute can be used to inform the user that the operation 
 
 ```html preview
 <sl-progress-bar indeterminate></sl-progress-bar>
+```
+
+```pug slim
+sl-progress-bar indeterminate="true"
 ```
 
 ```jsx react

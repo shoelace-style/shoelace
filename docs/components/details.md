@@ -11,6 +11,12 @@
 </sl-details>
 ```
 
+```pug slim
+sl-details summary="Toggle Me"
+  | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+  | aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+```
+
 ```jsx react
 import { SlDetails } from '@teamshares/shoelace/dist/react';
 
@@ -33,6 +39,12 @@ Use the `disable` attribute to prevent the details from expanding.
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
   aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 </sl-details>
+```
+
+```pug slim
+sl-details summary="Disabled" disabled="true"
+  | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+  | aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 ```
 
 ```jsx react
@@ -65,6 +77,20 @@ Use the `expand-icon` and `collapse-icon` slots to change the expand and collaps
     rotate: none;
   }
 </style>
+```
+
+```pug slim
+sl-details summary="Toggle Me" class="custom-icons"
+  sl-icon name="plus-square" slot="expand-icon"
+  sl-icon name="dash-square" slot="collapse-icon"
+  | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+  | aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+css:
+  sl-details.custom-icons::part(summary-icon) {
+    /* Disable the expand/collapse animation */
+    rotate: none;
+  }
 ```
 
 ```jsx react
@@ -128,6 +154,29 @@ Details are designed to function independently, but you can simulate a group or 
     margin-bottom: var(--sl-spacing-2x-small);
   }
 </style>
+```
+
+```pug slim
+.details-group-example
+  sl-details summary="First" open="true"
+    |  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  sl-details summary="Second"
+    |  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  sl-details summary="Third"
+    |  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+javascript:
+  const container = document.querySelector('.details-group-example');
+
+  // Close all other details when one is shown
+  container.addEventListener('sl-show', event => {
+    [...container.querySelectorAll('sl-details')].map(details => (details.open = event.target === details));
+  });
+
+css:
+  .details-group-example sl-details:not(:last-of-type) {
+    margin-bottom: var(--sl-spacing-2x-small);
+  }
 ```
 
 [component-metadata:sl-details]

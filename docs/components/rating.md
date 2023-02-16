@@ -6,6 +6,10 @@
 <sl-rating label="Rating"></sl-rating>
 ```
 
+```pug slim
+sl-rating label="Rating"
+```
+
 ```jsx react
 import { SlRating } from '@teamshares/shoelace/dist/react';
 
@@ -22,6 +26,10 @@ Ratings are commonly identified contextually, so labels aren't displayed. Howeve
 <sl-rating label="Rate this component"></sl-rating>
 ```
 
+```pug slim
+sl-rating label="Rate this component"
+```
+
 ```jsx react
 import { SlRating } from '@teamshares/shoelace/dist/react';
 
@@ -34,6 +42,10 @@ Ratings are 0-5 by default. To change the maximum possible value, use the `max` 
 
 ```html preview
 <sl-rating label="Rating" max="3"></sl-rating>
+```
+
+```pug slim
+sl-rating label="Rating" max="3"
 ```
 
 ```jsx react
@@ -50,6 +62,10 @@ Use the `precision` attribute to let users select fractional ratings.
 <sl-rating label="Rating" precision="0.5" value="2.5"></sl-rating>
 ```
 
+```pug slim
+sl-rating label="Rating" precision="0.5" value="2.5"
+```
+
 ```jsx react
 import { SlRating } from '@teamshares/shoelace/dist/react';
 
@@ -62,6 +78,10 @@ Set the `--symbol-size` custom property to adjust the size.
 
 ```html preview
 <sl-rating label="Rating" style="--symbol-size: 2rem;"></sl-rating>
+```
+
+```pug slim
+sl-rating label="Rating" style="--symbol-size: 2rem;"
 ```
 
 ```jsx react
@@ -78,6 +98,10 @@ Use the `readonly` attribute to display a rating that users can't change.
 <sl-rating label="Rating" readonly value="3"></sl-rating>
 ```
 
+```pug slim
+sl-rating label="Rating" readonly="true" value="3"
+```
+
 ```jsx react
 import { SlRating } from '@teamshares/shoelace/dist/react';
 
@@ -92,6 +116,10 @@ Use the `disable` attribute to disable the rating.
 <sl-rating label="Rating" disabled value="3"></sl-rating>
 ```
 
+```pug slim
+sl-rating label="Rating" disabled="true" value="3"
+```
+
 ```jsx react
 import { SlRating } from '@teamshares/shoelace/dist/react';
 
@@ -104,7 +132,7 @@ Use the `sl-hover` event to detect when the user hovers over (or touch and drag)
 
 The event has a payload with `phase` and `value` properties. The `phase` property tells when hovering starts, moves to a new value, and ends. The `value` property tells what the rating's value would be if the user were to commit to the hovered value.
 
-```html preview
+```html preview skip
 <div class="detect-hover">
   <sl-rating label="Rating"></sl-rating>
   <span></span>
@@ -204,6 +232,14 @@ You can provide custom icons by passing a function to the `getSymbol` property.
 </script>
 ```
 
+```pug slim
+sl-rating.rating-hearts label="Rating" style="--symbol-color-active: #ff4136;"
+
+javascript:
+  const rating = document.querySelector('.rating-hearts');
+  rating.getSymbol = () => '<sl-icon name="heart-solid"></sl-icon>';
+```
+
 ```jsx react
 // import '@teamshares/shoelace/dist/components/icon/icon';
 import { SlRating } from '@teamshares/shoelace/dist/react';
@@ -232,6 +268,18 @@ You can also use the `getSymbol` property to render different icons based on val
     return `<sl-icon name="${icons[value - 1]}" library="bootstrap"></sl-icon>`;
   };
 </script>
+```
+
+```pug slim
+sl-rating.rating-emojis label="Rating"
+
+javascript:
+  const rating = document.querySelector('.rating-emojis');
+
+  rating.getSymbol = value => {
+    const icons = ['emoji-angry', 'emoji-frown', 'emoji-expressionless', 'emoji-smile', 'emoji-laughing'];
+    return `<sl-icon name="${icons[value - 1]}" library="bootstrap"></sl-icon>`;
+  };
 ```
 
 ```jsx react

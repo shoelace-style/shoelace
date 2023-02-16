@@ -22,6 +22,23 @@
 </sl-menu>
 ```
 
+```pug slim
+sl-menu style="max-width: 200px;"
+  sl-menu-item Option 1
+  sl-menu-item Option 2
+  sl-menu-item Option 3
+  sl-divider
+  sl-menu-item type="checkbox" checked="true" Checkbox
+  sl-menu-item disabled="true" Disabled
+  sl-divider
+  sl-menu-item
+    | Prefix Icon
+    sl-icon slot="prefix" name="gift"
+  sl-menu-item
+    | Suffix Icon
+    sl-icon slot="suffix" name="heart"
+```
+
 ```jsx react
 import { SlDivider, SlIcon, SlMenu, SlMenuItem } from '@teamshares/shoelace/dist/react';
 
@@ -62,6 +79,13 @@ Add the `disabled` attribute to disable the menu item so it cannot be selected.
 </sl-menu>
 ```
 
+```pug slim
+sl-menu style="max-width: 200px;"
+  sl-menu-item Option 1
+  sl-menu-item disabled="true" Option 2
+  sl-menu-item Option 3
+```
+
 ```jsx react
 import { SlMenu, SlMenuItem } from '@teamshares/shoelace/dist/react';
 
@@ -98,6 +122,21 @@ Add content to the start and end of menu items using the `prefix` and `suffix` s
     Settings
   </sl-menu-item>
 </sl-menu>
+```
+
+```pug slim
+sl-menu style="max-width: 200px;"
+  sl-menu-item
+    sl-icon slot="prefix" name="home"
+    | Home
+  sl-menu-item
+    sl-icon slot="prefix" name="envelope"
+    | Messages
+    sl-badge slot="suffix" variant="primary" pill="true" 12
+  sl-divider
+  sl-menu-item
+    sl-icon slot="prefix" name="cog-6-tooth"
+    | Settings
 ```
 
 ```jsx react
@@ -140,6 +179,13 @@ Checkbox menu items are visually indistinguishable from regular menu items. Thei
   <sl-menu-item type="checkbox" checked>Check Spelling</sl-menu-item>
   <sl-menu-item type="checkbox">Word Wrap</sl-menu-item>
 </sl-menu>
+```
+
+```pug slim
+sl-menu style="max-width: 200px;"
+  sl-menu-item type="checkbox" Autosave
+  sl-menu-item type="checkbox" checked="true" Check Spelling
+  sl-menu-item type="checkbox" Word Wrap
 ```
 
 ```jsx react
@@ -185,6 +231,31 @@ The `value` attribute can be used to assign a hidden value, such as a unique ide
     }
   });
 </script>
+```
+
+```pug slim
+sl-menu.menu-value style="max-width: 200px;"
+  sl-menu-item value="opt-1" Option 1
+  sl-menu-item value="opt-2" Option 2
+  sl-menu-item value="opt-3" Option 3
+  sl-divider
+  sl-menu-item type="checkbox" value="opt-4" Checkbox 4
+  sl-menu-item type="checkbox" value="opt-5" Checkbox 5
+  sl-menu-item type="checkbox" value="opt-6" Checkbox 6
+
+javascript:
+  const menu = document.querySelector(.menu-value);
+
+  menu.addEventListener(sl-select, event => {
+  const item = event.detail.item;
+
+  // Log value
+  if (item.type === checkbox) {
+    console.log(`Selected value: ${item.value} (${item.checked ? checked : unchecked})`);
+  } else {
+    console.log(`Selected value: ${item.value}`);
+  }
+  });
 ```
 
 ```jsx react

@@ -32,6 +32,30 @@ The resize observer will report changes to the dimensions of the elements it wra
 </style>
 ```
 
+```pug slim
+div.resize-observer-overview
+  sl-resize-observer
+    div Resize this box and watch the console 👉
+
+javascript:
+  const container = document.querySelector(.resize-observer-overview);
+  const resizeObserver = container.querySelector(sl-resize-observer);
+
+  resizeObserver.addEventListener(sl-resize, event => {
+    console.log(event.detail);
+  });
+
+css:
+  .resize-observer-overview div {
+    display: flex;
+    border: solid 2px var(--sl-input-border-color);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+```
+
 ```jsx react
 import { SlResizeObserver } from '@teamshares/shoelace/dist/react';
 

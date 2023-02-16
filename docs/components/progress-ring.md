@@ -6,6 +6,10 @@
 <sl-progress-ring value="25"></sl-progress-ring>
 ```
 
+```pug slim
+sl-progress-ring value="25"
+```
+
 ```jsx react
 import { SlProgressRing } from '@teamshares/shoelace/dist/react';
 
@@ -22,6 +26,10 @@ Use the `--size` custom property to set the diameter of the progress ring.
 <sl-progress-ring value="50" style="--size: 200px;"></sl-progress-ring>
 ```
 
+```pug slim
+sl-progress-ring value="50" style="--size: 200px;"
+```
+
 ```jsx react
 import { SlProgressRing } from '@teamshares/shoelace/dist/react';
 
@@ -34,6 +42,10 @@ Use the `--track-width` and `--indicator-width` custom properties to set the wid
 
 ```html preview
 <sl-progress-ring value="50" style="--track-width: 6px; --indicator-width: 12px;"></sl-progress-ring>
+```
+
+```pug slim
+sl-progress-ring value="50" style="--track-width: 6px; --indicator-width: 12px;"
 ```
 
 ```jsx react
@@ -56,6 +68,10 @@ To change the color, use the `--track-color` and `--indicator-color` custom prop
 ></sl-progress-ring>
 ```
 
+```pug slim
+sl-progress-ring value="50" style="--track-color: pink; --indicator-color: deeppink;"
+```
+
 ```jsx react
 import { SlProgressRing } from '@teamshares/shoelace/dist/react';
 
@@ -76,6 +92,10 @@ Use the `label` attribute to label the progress ring and tell assistive devices 
 
 ```html preview
 <sl-progress-ring value="50" label="Upload progress"></sl-progress-ring>
+```
+
+```pug slim
+sl-progress-ring value="50" label="Upload progress"
 ```
 
 ```jsx react
@@ -113,6 +133,32 @@ Use the default slot to show a label inside the progress ring.
     progressRing.textContent = `${value}%`;
   });
 </script>
+```
+
+```pug slim
+sl-progress-ring.progress-ring-values value="50" style="margin-bottom: .5rem;" 50%
+br
+sl-button circle="true"
+  sl-icon name="minus" label="Decrease"
+sl-button circle="true"
+  sl-icon name="plus" label="Increase"
+
+javascript:
+  const progressRing = document.querySelector(.progress-ring-values);
+  const subtractButton = progressRing.nextElementSibling.nextElementSibling;
+  const addButton = subtractButton.nextElementSibling;
+
+  addButton.addEventListener(click, () => {
+    const value = Math.min(100, progressRing.value + 10);
+    progressRing.value = value;
+    progressRing.textContent = `${value}%`;
+  });
+
+  subtractButton.addEventListener(click, () => {
+    const value = Math.max(0, progressRing.value - 10);
+    progressRing.value = value;
+    progressRing.textContent = `${value}%`;
+  });
 ```
 
 ```jsx react

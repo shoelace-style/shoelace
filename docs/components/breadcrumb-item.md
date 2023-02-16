@@ -13,6 +13,15 @@
 </sl-breadcrumb>
 ```
 
+```pug slim
+sl-breadcrumb
+  sl-breadcrumb-item
+    sl-icon slot="prefix" name="home"
+    | Home
+  sl-breadcrumb-item Clothing
+  sl-breadcrumb-item Shirts
+```
+
 ```jsx react
 import { SlBreadcrumb, SlBreadcrumbItem, SlIcon } from '@teamshares/shoelace/dist/react';
 

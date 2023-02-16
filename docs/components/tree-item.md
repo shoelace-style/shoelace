@@ -15,6 +15,17 @@
 </sl-tree>
 ```
 
+```pug slim
+sl-tree
+  sl-tree-item
+    | Item 1
+    sl-tree-item Item A
+    sl-tree-item Item B
+    sl-tree-item Item C
+  sl-tree-item Item 2
+  sl-tree-item Item 3
+```
+
 <!-- prettier-ignore -->
 ```jsx react
 import { SlTree, SlTreeItem } from '@teamshares/shoelace/dist/react';
@@ -57,6 +68,21 @@ A tree item can contain other tree items. This allows the node to be expanded or
 </sl-tree>
 ```
 
+```pug slim
+sl-tree
+  sl-tree-item
+    | Item 1
+    sl-tree-item
+      | Item A
+      sl-tree-item Item Z
+      sl-tree-item Item Y
+      sl-tree-item Item X
+    sl-tree-item Item B
+    sl-tree-item Item C
+  sl-tree-item Item 2
+  sl-tree-item Item 3
+```
+
 <!-- prettier-ignore -->
 ```jsx react
 import { SlTree, SlTreeItem } from '@teamshares/shoelace/dist/react';
@@ -97,6 +123,17 @@ Use the `selected` attribute to select a tree item initially.
 </sl-tree>
 ```
 
+```pug slim
+sl-tree
+  sl-tree-item selected="true"
+    | Item 1
+    sl-tree-item Item A
+    sl-tree-item Item B
+    sl-tree-item Item C
+  sl-tree-item Item 2
+  sl-tree-item Item 3
+```
+
 <!-- prettier-ignore -->
 ```jsx react
 import { SlTree, SlTreeItem } from '@teamshares/shoelace/dist/react';
@@ -135,6 +172,21 @@ Use the `expanded` attribute to expand a tree item initially.
   <sl-tree-item>Item 2</sl-tree-item>
   <sl-tree-item>Item 3</sl-tree-item>
 </sl-tree>
+```
+
+```pug slim
+sl-tree
+  sl-tree-item expanded="true"
+    | Item 1
+    sl-tree-item expanded="true"
+      | Item A
+      sl-tree-item Item Z
+      sl-tree-item Item Y
+      sl-tree-item Item X
+    sl-tree-item Item B
+    sl-tree-item Item C
+  sl-tree-item Item 2
+  sl-tree-item Item 3
 ```
 
 <!-- prettier-ignore -->

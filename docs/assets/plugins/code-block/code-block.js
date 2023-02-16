@@ -55,12 +55,13 @@
   }
 
   function setFlavor(newFlavor) {
-    flavor = ['html', 'react'].includes(newFlavor) ? newFlavor : 'html';
+    flavor = ['html', 'react', 'slim'].includes(newFlavor) ? newFlavor : 'html';
     localStorage.setItem('flavor', flavor);
 
     // Set the flavor class on the body
     document.body.classList.toggle('flavor-html', flavor === 'html');
     document.body.classList.toggle('flavor-react', flavor === 'react');
+    document.body.classList.toggle('flavor-slim', flavor === 'slim');
   }
 
   window.$docsify.plugins.push(hook => {
@@ -91,6 +92,16 @@
         </button>
       `;
 
+      const slimButton = `
+        <button
+          type="button"
+          title="Show Slim code"
+          class="code-block__button code-block__button--slim ${flavor === 'slim' ? 'code-block__button--selected' : ''}"
+        >
+          Slim
+        </button>
+      `;
+
       const codePenButton = `
         <button type="button" class="code-block__button code-block__button--codepen" title="Edit on CodePen">
           <svg
@@ -115,7 +126,9 @@
           const sourceGroupId = `code-block-source-group-${count}`;
           const toggleId = `code-block-toggle-${count}`;
           const reactPre = getAdjacentExample('react', pre);
+          const slimPre = getAdjacentExample('slim', pre);
           const hasReact = reactPre !== null;
+          const hasSlim = slimPre !== null;
 
           pre.setAttribute('data-lang', pre.getAttribute('data-lang').replace(/ preview$/, ''));
           pre.setAttribute('aria-labelledby', toggleId);
@@ -130,9 +143,21 @@
               </div>
 
               <div class="code-block__source-group" id="${sourceGroupId}">
-                <div class="code-block__source code-block__source--html" ${hasReact ? 'data-flavor="html"' : ''}>
+                <div class="code-block__source code-block__source--html" ${
+                  hasReact || hasSlim ? 'data-flavor="html"' : ''
+                }>
                   ${pre.outerHTML}
                 </div>
+
+                ${
+                  hasSlim
+                    ? `
+                  <div class="code-block__source code-block__source--slim" data-flavor="slim">
+                    ${slimPre.outerHTML}
+                  </div>
+                  `
+                    : ''
+                }
 
                 ${
                   hasReact
@@ -140,9 +165,10 @@
                   <div class="code-block__source code-block__source--react" data-flavor="react">
                     ${reactPre.outerHTML}
                   </div>
-                `
+                  `
                     : ''
                 }
+
               </div>
 
               <div class="code-block__buttons">
@@ -165,7 +191,7 @@
                   </svg>
                 </button>
 
-                ${hasReact ? ` ${htmlButton} ${reactButton} ` : ''}
+                ${hasReact || hasSlim ? ` ${htmlButton} ${reactButton} ${slimButton}` : ''}
 
                 ${!code.classList.contains('no-codepen') ? codePenButton : ''}
               </div>
@@ -174,6 +200,7 @@
 
           pre.replaceWith(domParser.parseFromString(codeBlock, 'text/html').body);
           reactPre?.remove();
+          slimPre?.remove();
 
           count++;
         }
@@ -243,6 +270,10 @@
       // Show React
       setFlavor('react');
       toggleSource(codeBlock, true);
+    } else if (button?.classList.contains('code-block__button--slim')) {
+      // Show React
+      setFlavor('slim');
+      toggleSource(codeBlock, true);
     } else if (button?.classList.contains('code-block__toggle')) {
       // Toggle source
       toggleSource(codeBlock);
@@ -259,6 +290,10 @@
       cb.querySelector('.code-block__button--react')?.classList.toggle(
         'code-block__button--selected',
         flavor === 'react'
+      );
+      cb.querySelector('.code-block__button--slim')?.classList.toggle(
+        'code-block__button--selected',
+        flavor === 'slim'
       );
     });
   });

@@ -16,6 +16,17 @@ You can use [menu items](/components/menu-item), [menu labels](/components/menu-
 </sl-menu>
 ```
 
+```pug slim
+sl-menu style="max-width: 200px;"
+  sl-menu-item value="undo" Undo
+  sl-menu-item value="redo" Redo
+  sl-divider
+  sl-menu-item value="cut" Cut
+  sl-menu-item value="copy" Copy
+  sl-menu-item value="paste" Paste
+  sl-menu-item value="delete" Delete
+```
+
 ```jsx react
 import { SlDivider, SlMenu, SlMenuItem } from '@teamshares/shoelace/dist/react';
 

@@ -6,6 +6,10 @@
 <sl-color-picker label="Select a color"></sl-color-picker>
 ```
 
+```pug slim
+sl-color-picker label="Select a color"
+```
+
 ```jsx react
 import { SlColorPicker } from '@teamshares/shoelace/dist/react';
 
@@ -24,6 +28,10 @@ Use the `value` attribute to set an initial value for the color picker.
 <sl-color-picker value="#4a90e2" label="Select a color"></sl-color-picker>
 ```
 
+```pug slim
+sl-color-picker value="#4a90e2" label="Select a color"
+```
+
 ```jsx react
 import { SlColorPicker } from '@teamshares/shoelace/dist/react';
 
@@ -36,6 +44,10 @@ Use the `opacity` attribute to enable the opacity slider. When this is enabled, 
 
 ```html preview
 <sl-color-picker value="#f5a623ff" opacity label="Select a color"></sl-color-picker>
+```
+
+```pug slim
+sl-color-picker value="#f5a623ff" opacity="true" label="Select a color"
 ```
 
 ```jsx react
@@ -55,6 +67,13 @@ To prevent users from toggling the format themselves, add the `no-format-toggle`
 <sl-color-picker format="rgb" value="rgb(80, 227, 194)" label="Select a color"></sl-color-picker>
 <sl-color-picker format="hsl" value="hsl(290, 87%, 47%)" label="Select a color"></sl-color-picker>
 <sl-color-picker format="hsv" value="hsv(55, 89%, 97%)" label="Select a color"></sl-color-picker>
+```
+
+```pug slim
+sl-color-picker format="hex" value="#4a90e2" label="Select a color"
+sl-color-picker format="rgb" value="rgb(80, 227, 194)" label="Select a color"
+sl-color-picker format="hsl" value="hsl(290, 87%, 47%)" label="Select a color"
+sl-color-picker format="hsv" value="hsv(55, 89%, 97%)" label="Select a color"
 ```
 
 ```jsx react
@@ -84,6 +103,10 @@ Use the `swatches` attribute to add convenient presets to the color picker. Any 
 ></sl-color-picker>
 ```
 
+```pug slim
+sl-color-picker label="Select a color" swatches=` #d0021b; #f5a623; #f8e71c; #8b572a; #7ed321; #417505; #bd10e0; #9013fe; #4a90e2; #50e3c2; #b8e986; #000; #444; #888; #ccc; #fff; `
+```
+
 ```jsx react
 import { SlColorPicker } from '@teamshares/shoelace/dist/react';
 
@@ -108,6 +131,12 @@ Use the `size` attribute to change the color picker's trigger size.
 <sl-color-picker size="large" label="Select a color"></sl-color-picker>
 ```
 
+```pug slim
+sl-color-picker size="small" label="Select a color"
+sl-color-picker size="medium" label="Select a color"
+sl-color-picker size="large" label="Select a color"
+```
+
 ```jsx react
 import { SlColorPicker } from '@teamshares/shoelace/dist/react';
 
@@ -126,6 +155,10 @@ The color picker can be rendered inline instead of in a dropdown using the `inli
 
 ```html preview
 <sl-color-picker inline label="Select a color"></sl-color-picker>
+```
+
+```pug slim
+sl-color-picker inline="true" label="Select a color"
 ```
 
 ```jsx react

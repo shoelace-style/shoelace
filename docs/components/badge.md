@@ -6,6 +6,10 @@
 <sl-badge>Badge</sl-badge>
 ```
 
+```pug slim
+sl-badge Badge
+```
+
 ```jsx react
 import { SlBadge } from '@teamshares/shoelace/dist/react';
 
@@ -24,6 +28,14 @@ Set the `variant` attribute to change the badge's variant.
 <sl-badge variant="neutral">Neutral</sl-badge>
 <sl-badge variant="warning">Warning</sl-badge>
 <sl-badge variant="danger">Danger</sl-badge>
+```
+
+```pug slim
+sl-badge variant="primary" Primary
+sl-badge variant="success" Success
+sl-badge variant="neutral" Neutral
+sl-badge variant="warning" Warning
+sl-badge variant="danger" Danger
 ```
 
 ```jsx react
@@ -50,6 +62,14 @@ Use the `pill` attribute to give badges rounded edges.
 <sl-badge variant="neutral" pill>Neutral</sl-badge>
 <sl-badge variant="warning" pill>Warning</sl-badge>
 <sl-badge variant="danger" pill>Danger</sl-badge>
+```
+
+```pug slim
+sl-badge variant="primary" pill="true" Primary
+sl-badge variant="success" pill="true" Success
+sl-badge variant="neutral" pill="true" Neutral
+sl-badge variant="warning" pill="true" Warning
+sl-badge variant="danger" pill="true" Danger
 ```
 
 ```jsx react
@@ -94,6 +114,20 @@ Use the `pulse` attribute to draw attention to the badge with a subtle animation
     margin-right: 1rem;
   }
 </style>
+```
+
+```pug slim
+div.badge-pulse
+  sl-badge variant="primary" pill="true" pulse="true" 1
+  sl-badge variant="success" pill="true" pulse="true" 1
+  sl-badge variant="neutral" pill="true" pulse="true" 1
+  sl-badge variant="warning" pill="true" pulse="true" 1
+  sl-badge variant="danger" pill="true" pulse="true" 1
+
+css:
+  .badge-pulse sl-badge:not(:last-of-type) {
+    margin-right: 1rem;
+  }
 ```
 
 ```jsx react
@@ -151,6 +185,18 @@ One of the most common use cases for badges is attaching them to buttons. To mak
 </sl-button>
 ```
 
+```pug slim
+sl-button
+  | Requests
+  sl-badge pill="true" 30
+sl-button style="margin-inline-start: 1rem;"
+  | Warnings
+  sl-badge variant="warning" pill="true" 8
+sl-button style="margin-inline-start: 1rem;"
+  | Errors
+  sl-badge variant="danger" pill="true" 6
+```
+
 ```jsx react
 import { SlBadge, SlButton } from '@teamshares/shoelace/dist/react';
 
@@ -188,6 +234,15 @@ When including badges in menu items, use the `suffix` slot to make sure they're 
   <sl-menu-item>Comments <sl-badge slot="suffix" variant="neutral" pill>4</sl-badge></sl-menu-item>
   <sl-menu-item>Replies <sl-badge slot="suffix" variant="neutral" pill>12</sl-badge></sl-menu-item>
 </sl-menu>
+```
+
+```pug slim
+sl-menu style="max-width: 240px;"
+  sl-menu-label Messages
+  sl-menu-item Comments
+    sl-badge slot="suffix" variant="neutral" pill="true" 4
+  sl-menu-item Replies
+    sl-badge slot="suffix" variant="neutral" pill="true" 12
 ```
 
 ```jsx react

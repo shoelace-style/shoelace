@@ -6,6 +6,10 @@
 <sl-divider></sl-divider>
 ```
 
+```pug slim
+sl-divider
+```
+
 ```jsx react
 import { SlDivider } from '@teamshares/shoelace/dist/react';
 
@@ -22,6 +26,10 @@ Use the `--width` custom property to change the width of the divider.
 <sl-divider style="--width: 4px;"></sl-divider>
 ```
 
+```pug slim
+sl-divider style="--width: 4px;"
+```
+
 ```jsx react
 import { SlDivider } from '@teamshares/shoelace/dist/react';
 
@@ -34,6 +42,10 @@ Use the `--color` custom property to change the color of the divider.
 
 ```html preview
 <sl-divider style="--color: tomato;"></sl-divider>
+```
+
+```pug slim
+sl-divider style="--color: tomato;"
 ```
 
 ```jsx react
@@ -52,6 +64,13 @@ Use the `--spacing` custom property to change the amount of space between the di
   <sl-divider style="--spacing: 2rem;"></sl-divider>
   Below
 </div>
+```
+
+```pug slim
+div style="text-align: center;"
+  | Above
+  sl-divider style="--spacing: 2rem;"
+  | Below
 ```
 
 ```jsx react
@@ -78,6 +97,15 @@ Add the `vertical` attribute to draw the divider in a vertical orientation. The 
   <sl-divider vertical></sl-divider>
   Last
 </div>
+```
+
+```pug slim
+div style="display: flex; align-items: center; height: 2rem;"
+  | First
+  sl-divider vertical="true"
+  | Middle
+  sl-divider vertical="true"
+  | Last
 ```
 
 ```jsx react
@@ -114,6 +142,17 @@ Use dividers in [menus](/components/menu) to visually group menu items.
   <sl-menu-item value="5">Option 5</sl-menu-item>
   <sl-menu-item value="6">Option 6</sl-menu-item>
 </sl-menu>
+```
+
+```pug slim
+sl-menu style="max-width: 200px;"
+  sl-menu-item value="1" Option 1
+  sl-menu-item value="2" Option 2
+  sl-menu-item value="3" Option 3
+  sl-divider
+  sl-menu-item value="4" Option 4
+  sl-menu-item value="5" Option 5
+  sl-menu-item value="6" Option 6
 ```
 
 ```jsx react

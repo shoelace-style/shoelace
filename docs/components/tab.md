@@ -9,6 +9,13 @@
 <sl-tab disabled>Disabled</sl-tab>
 ```
 
+```pug slim
+sl-tab Tab
+sl-tab active="true" Active
+sl-tab closable="true" Closable
+sl-tab disabled="true" Disabled
+```
+
 ```jsx react
 import { SlTab } from '@teamshares/shoelace/dist/react';
 

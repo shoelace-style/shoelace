@@ -29,6 +29,25 @@ Dropdowns are designed to work well with [menus](/components/menu) to provide a 
 </sl-dropdown>
 ```
 
+```pug slim
+sl-dropdown
+  sl-button slot="trigger" caret="true" Dropdown
+  sl-menu
+    sl-menu-item Dropdown Item 1
+    sl-menu-item Dropdown Item 2
+    sl-menu-item Dropdown Item 3
+    sl-divider
+    sl-menu-item type="checkbox" checked="true" Checkbox
+    sl-menu-item disabled="true" Disabled
+    sl-divider
+    sl-menu-item
+      | Prefix
+      sl-icon slot="prefix" name="gift"
+    sl-menu-item
+      | Suffix Icon
+      sl-icon slot="suffix" name="heart"
+```
+
 ```jsx react
 import { SlButton, SlDivider, SlDropdown, SlIcon, SlMenu, SlMenuItem } from '@teamshares/shoelace/dist/react';
 
@@ -89,6 +108,25 @@ When dropdowns are used with [menus](/components/menu), you can listen for the `
 </script>
 ```
 
+```pug slim
+div.dropdown-selection
+  sl-dropdown
+    sl-button slot="trigger" caret="true" Edit
+    sl-menu
+      sl-menu-item value="cut" Cut
+      sl-menu-item value="copy" Copy
+      sl-menu-item value="paste" Paste
+
+javascript:
+  const container = document.querySelector(.dropdown-selection);
+  const dropdown = container.querySelector(sl-dropdown);
+
+  dropdown.addEventListener(sl-select, event => {
+    const selectedItem = event.detail.item;
+    console.log(selectedItem.value);
+  });
+```
+
 ```jsx react
 import { SlButton, SlDropdown, SlMenu, SlMenuItem } from '@teamshares/shoelace/dist/react';
 
@@ -137,6 +175,26 @@ Alternatively, you can listen for the `click` event on individual menu items. No
   copy.addEventListener('click', () => console.log('copy'));
   paste.addEventListener('click', () => console.log('paste'));
 </script>
+```
+
+```pug slim
+div.dropdown-selection-alt
+  sl-dropdown
+    sl-button slot="trigger" caret="true" Edit
+    sl-menu
+      sl-menu-item value="cut" Cut
+      sl-menu-item value="copy" Copy
+      sl-menu-item value="paste" Paste
+
+javascript:
+  const container = document.querySelector(.dropdown-selection-alt);
+  const cut = container.querySelector(sl-menu-item[value=cut]);
+  const copy = container.querySelector(sl-menu-item[value=copy]);
+  const paste = container.querySelector(sl-menu-item[value=paste]);
+
+  cut.addEventListener(click, () => console.log(cut));
+  copy.addEventListener(click, () => console.log(copy));
+  paste.addEventListener(click, () => console.log(paste));
 ```
 
 ```jsx react
@@ -188,6 +246,18 @@ The preferred placement of the dropdown can be set with the `placement` attribut
 </sl-dropdown>
 ```
 
+```pug slim
+sl-dropdown placement="top-start"
+  sl-button slot="trigger" caret="true" Edit
+  sl-menu
+    sl-menu-item Cut
+    sl-menu-item Copy
+    sl-menu-item Paste
+    sl-divider
+    sl-menu-item Find
+    sl-menu-item Replace
+```
+
 ```jsx react
 import { SlButton, SlDivider, SlDropdown, SlMenu, SlMenuItem } from '@teamshares/shoelace/dist/react';
 
@@ -226,6 +296,18 @@ The distance from the panel to the trigger can be customized using the `distance
 </sl-dropdown>
 ```
 
+```pug slim
+sl-dropdown distance="30"
+  sl-button slot="trigger" caret="true" Edit
+  sl-menu
+    sl-menu-item Cut
+    sl-menu-item Copy
+    sl-menu-item Paste
+    sl-divider
+    sl-menu-item Find
+    sl-menu-item Replace
+```
+
 ```jsx react
 import { SlButton, SlDivider, SlDropdown, SlMenu, SlMenuItem } from '@teamshares/shoelace/dist/react';
 
@@ -262,6 +344,18 @@ The offset of the panel along the trigger can be customized using the `skidding`
     <sl-menu-item>Replace</sl-menu-item>
   </sl-menu>
 </sl-dropdown>
+```
+
+```pug slim
+sl-dropdown skidding="30"
+  sl-button slot="trigger" caret="true" Edit
+  sl-menu
+    sl-menu-item Cut
+    sl-menu-item Copy
+    sl-menu-item Paste
+    sl-divider
+    sl-menu-item Find
+    sl-menu-item Replace
 ```
 
 ```jsx react
@@ -317,6 +411,30 @@ Dropdown panels will be clipped if they're inside a container that has `overflow
     overflow: hidden;
   }
 </style>
+```
+
+```pug slim
+div.dropdown-hoist
+  sl-dropdown
+    sl-button slot="trigger" caret="true" No Hoist
+    sl-menu
+      sl-menu-item Item 1
+      sl-menu-item Item 2
+      sl-menu-item Item 3
+  sl-dropdown hoist="true"
+    sl-button slot="trigger" caret="true" Hoist
+    sl-menu
+      sl-menu-item Item 1
+      sl-menu-item Item 2
+      sl-menu-item Item 3
+
+css:
+  .dropdown-hoist {
+    position: relative;
+    border: solid 2px var(--sl-panel-border-color);
+    padding: var(--sl-spacing-medium);
+    overflow: hidden;
+  }
 ```
 
 ```jsx react

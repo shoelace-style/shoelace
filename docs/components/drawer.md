@@ -22,6 +22,21 @@
 </script>
 ```
 
+```pug slim
+sl-drawer.drawer-overview label="Drawer"
+  | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  sl-button slot="footer" variant="primary" Close
+sl-button Open Drawer
+
+javascript:
+  const drawer = document.querySelector(.drawer-overview);
+  const openButton = drawer.nextElementSibling;
+  const closeButton = drawer.querySelector(sl-button[variant=primary]);
+
+  openButton.addEventListener(click, () => drawer.show());
+  closeButton.addEventListener(click, () => drawer.hide());
+```
+
 ```jsx react
 import { useState } from 'react';
 import { SlButton, SlDrawer } from '@teamshares/shoelace/dist/react';
@@ -68,6 +83,21 @@ By default, drawers slide in from the end. To make the drawer slide in from the 
 </script>
 ```
 
+```pug slim
+sl-drawer.drawer-placement-start label="Drawer" placement="start"
+  | This drawer slides in from the start.
+  sl-button slot="footer" variant="primary" Close
+sl-button Open Drawer
+
+javascript:
+  const drawer = document.querySelector(.drawer-placement-start);
+  const openButton = drawer.nextElementSibling;
+  const closeButton = drawer.querySelector(sl-button[variant=primary]);
+
+  openButton.addEventListener(click, () => drawer.show());
+  closeButton.addEventListener(click, () => drawer.hide());
+```
+
 ```jsx react
 import { useState } from 'react';
 import { SlButton, SlDrawer } from '@teamshares/shoelace/dist/react';
@@ -112,6 +142,21 @@ To make the drawer slide in from the top, set the `placement` attribute to `top`
 </script>
 ```
 
+```pug slim
+sl-drawer.drawer-placement-top label="Drawer" placement="top"
+  | This drawer slides in from the top.
+  sl-button slot="footer" variant="primary" Close
+sl-button Open Drawer
+
+javascript:
+  const drawer = document.querySelector(.drawer-placement-top);
+  const openButton = drawer.nextElementSibling;
+  const closeButton = drawer.querySelector(sl-button[variant=primary]);
+
+  openButton.addEventListener(click, () => drawer.show());
+  closeButton.addEventListener(click, () => drawer.hide());
+```
+
 ```jsx react
 import { useState } from 'react';
 import { SlButton, SlDrawer } from '@teamshares/shoelace/dist/react';
@@ -154,6 +199,21 @@ To make the drawer slide in from the bottom, set the `placement` attribute to `b
   openButton.addEventListener('click', () => drawer.show());
   closeButton.addEventListener('click', () => drawer.hide());
 </script>
+```
+
+```pug slim
+sl-drawer.drawer-placement-bottom label="Drawer" placement="bottom"
+  | This drawer slides in from the bottom.
+  sl-button slot="footer" variant="primary" Close
+sl-button Open Drawer
+
+javascript:
+  const drawer = document.querySelector(.drawer-placement-bottom);
+  const openButton = drawer.nextElementSibling;
+  const closeButton = drawer.querySelector(sl-button[variant=primary]);
+
+  openButton.addEventListener(click, () => drawer.show());
+  closeButton.addEventListener(click, () => drawer.hide());
 ```
 
 ```jsx react
@@ -206,6 +266,25 @@ Unlike normal drawers, contained drawers are not modal. This means they do not s
   openButton.addEventListener('click', () => (drawer.open = !drawer.open));
   closeButton.addEventListener('click', () => drawer.hide());
 </script>
+```
+
+```pug slim
+div style="position: relative; border: solid 2px var(--sl-panel-border-color); height: 300px; padding: 1rem; margin-bottom: 1rem;"
+  | The drawer will be contained to this box. This content won't shift or be affected in any way when the drawer opens.
+  sl-drawer.drawer-contained label="Drawer" contained="true" style="--size: 50%;"
+    | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    sl-button slot="footer" variant="primary"
+      | Close
+sl-button
+  | Toggle Drawer
+
+javascript:
+  const drawer = document.querySelector('.drawer-contained');
+  const openButton = drawer.parentElement.nextElementSibling;
+  const closeButton = drawer.querySelector('sl-button[variant="primary"]');
+
+  openButton.addEventListener('click', () => (drawer.open = !drawer.open));
+  closeButton.addEventListener('click', () => drawer.hide());
 ```
 
 ```jsx react
@@ -271,6 +350,21 @@ Use the `--size` custom property to set the drawer's size. This will be applied 
 </script>
 ```
 
+```pug slim
+sl-drawer.drawer-custom-size label="Drawer" style="--size: 50vw;"
+  | This drawer is always 50% of the viewport.
+  sl-button slot="footer" variant="primary" Close
+sl-button Open Drawer
+
+javascript:
+  const drawer = document.querySelector(.drawer-custom-size);
+  const openButton = drawer.nextElementSibling;
+  const closeButton = drawer.querySelector(sl-button[variant=primary]);
+
+  openButton.addEventListener(click, () => drawer.show());
+  closeButton.addEventListener(click, () => drawer.hide());
+```
+
 ```jsx react
 import { useState } from 'react';
 import { SlButton, SlDrawer } from '@teamshares/shoelace/dist/react';
@@ -315,6 +409,22 @@ By design, a drawer's height will never exceed 100% of its container. As such, d
   openButton.addEventListener('click', () => drawer.show());
   closeButton.addEventListener('click', () => drawer.hide());
 </script>
+```
+
+```pug slim
+sl-drawer.drawer-scrolling label="Drawer"
+  div style="height: 150vh; border: dashed 2px var(--sl-color-neutral-200); padding: 0 1rem;"
+    p Scroll down and give it a try! 👇
+  sl-button slot="footer" variant="primary" Close
+sl-button Open Drawer
+
+javascript:
+  const drawer = document.querySelector(.drawer-scrolling);
+  const openButton = drawer.nextElementSibling;
+  const closeButton = drawer.querySelector(sl-button[variant=primary]);
+
+  openButton.addEventListener(click, () => drawer.show());
+  closeButton.addEventListener(click, () => drawer.hide());
 ```
 
 ```jsx react
@@ -370,6 +480,24 @@ The header shows a functional close button by default. You can use the `header-a
   closeButton.addEventListener('click', () => drawer.hide());
   newWindowButton.addEventListener('click', () => window.open(location.href));
 </script>
+```
+
+```pug slim
+sl-drawer.drawer-header-actions label="Drawer"
+  sl-icon-button.new-window slot="header-actions" name="arrow-top-right-on-square"
+  | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  sl-button slot="footer" variant="primary" Close
+sl-button Open Drawer
+
+javascript:
+  const drawer = document.querySelector(.drawer-header-actions);
+  const openButton = drawer.nextElementSibling;
+  const closeButton = drawer.querySelector(sl-button[variant=primary]);
+  const newWindowButton = drawer.querySelector(.new-window);
+
+  openButton.addEventListener(click, () => drawer.show());
+  closeButton.addEventListener(click, () => drawer.hide());
+  newWindowButton.addEventListener(click, () => window.open(location.href));
 ```
 
 ```jsx react
@@ -432,6 +560,28 @@ You can use `event.detail.source` to determine what triggered the request to clo
 </script>
 ```
 
+```pug slim
+sl-drawer.drawer-deny-close label="Drawer"
+  | This drawer will not close when you click on the overlay.
+  sl-button slot="footer" variant="primary" Close
+sl-button Open Drawer
+
+javascript:
+  const drawer = document.querySelector(.drawer-deny-close);
+  const openButton = drawer.nextElementSibling;
+  const closeButton = drawer.querySelector(sl-button[variant=primary]);
+
+  openButton.addEventListener(click, () => drawer.show());
+  closeButton.addEventListener(click, () => drawer.hide());
+
+  // Prevent the drawer from closing when the user clicks on the overlay
+  drawer.addEventListener(sl-request-close, event => {
+  if (event.detail.source === overlay) {
+  event.preventDefault();
+  }
+  });
+```
+
 ```jsx react
 import { useState } from 'react';
 import { SlButton, SlDrawer } from '@teamshares/shoelace/dist/react';
@@ -482,6 +632,22 @@ By default, the drawer's panel will gain focus when opened. This allows a subseq
   openButton.addEventListener('click', () => drawer.show());
   closeButton.addEventListener('click', () => drawer.hide());
 </script>
+```
+
+```pug slim
+sl-drawer.drawer-focus label="Drawer"
+  sl-input autofocus="true" placeholder="I will have focus when the drawer is opened"
+  sl-button slot="footer" variant="primary" Close
+sl-button Open Drawer
+
+javascript:
+  const drawer = document.querySelector(.drawer-focus);
+  const input = drawer.querySelector(sl-input);
+  const openButton = drawer.nextElementSibling;
+  const closeButton = drawer.querySelector(sl-button[variant=primary]);
+
+  openButton.addEventListener(click, () => drawer.show());
+  closeButton.addEventListener(click, () => drawer.hide());
 ```
 
 ```jsx react

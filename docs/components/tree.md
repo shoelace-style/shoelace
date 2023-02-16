@@ -32,6 +32,29 @@
 </sl-tree>
 ```
 
+```pug slim
+sl-tree
+  sl-tree-item
+    | Deciduous
+    sl-tree-item Birch
+    sl-tree-item
+      | Maple
+      sl-tree-item Field maple
+      sl-tree-item Red maple
+      sl-tree-item Sugar maple
+    sl-tree-item Oak
+  sl-tree-item
+    | Coniferous
+    sl-tree-item Cedar
+    sl-tree-item Pine
+    sl-tree-item Spruce
+  sl-tree-item
+    | Non-trees
+    sl-tree-item Bamboo
+    sl-tree-item Cactus
+    sl-tree-item Fern
+```
+
 <!-- prettier-ignore -->
 ```jsx react
 import { SlTree, SlTreeItem } from '@teamshares/shoelace/dist/react';
@@ -113,6 +136,35 @@ The `selection` attribute lets you change the selection behavior of the tree.
 </script>
 ```
 
+```pug slim
+sl-select#selection-mode value="single" label="Selection"
+  sl-option value="single" Single
+  sl-option value="multiple" Multiple
+  sl-option value="leaf" Leaf
+br
+sl-tree.tree-selectable
+  sl-tree-item
+    | Item 1
+    sl-tree-item
+      | Item A
+      sl-tree-item Item Z
+      sl-tree-item Item Y
+      sl-tree-item Item X
+    sl-tree-item Item B
+    sl-tree-item Item C
+  sl-tree-item Item 2
+  sl-tree-item Item 3
+
+javascript:
+  const selectionMode = document.querySelector(#selection-mode);
+  const tree = document.querySelector(.tree-selectable);
+
+  selectionMode.addEventListener(sl-change, () => {
+    tree.querySelectorAll(sl-tree-item).forEach(item => (item.selected = false));
+    tree.selection = selectionMode.value;
+  });
+```
+
 <!-- prettier-ignore -->
 ```jsx react
 import { SlTree, SlTreeItem } from '@teamshares/shoelace/dist/react';
@@ -190,6 +242,34 @@ Indent guides can be drawn by setting `--indent-guide-width`. You can also chang
 </style>
 ```
 
+```pug slim
+sl-tree.tree-with-lines
+  sl-tree-item expanded="true"
+    | Deciduous
+    sl-tree-item Birch
+    sl-tree-item expanded="true"
+      | Maple
+      sl-tree-item Field maple
+      sl-tree-item Red maple
+      sl-tree-item Sugar maple
+    sl-tree-item Oak
+  sl-tree-item
+    | Coniferous
+    sl-tree-item Cedar
+    sl-tree-item Pine
+    sl-tree-item Spruce
+  sl-tree-item
+    | Non-trees
+    sl-tree-item Bamboo
+    sl-tree-item Cactus
+    sl-tree-item Fern
+
+css:
+  .tree-with-lines {
+    --indent-guide-width: 1px;
+  }
+```
+
 <!-- prettier-ignore -->
 ```jsx react
 import { SlTree, SlTreeItem } from '@teamshares/shoelace/dist/react';
@@ -235,6 +315,31 @@ If you want to disable this behavior after the first load, simply remove the `la
 <sl-tree>
   <sl-tree-item lazy>Available Trees</sl-tree-item>
 </sl-tree>
+
+<script type="module">
+  const lazyItem = document.querySelector('sl-tree-item[lazy]');
+
+  lazyItem.addEventListener('sl-lazy-load', () => {
+    // Simulate asynchronous loading
+    setTimeout(() => {
+      const subItems = ['Birch', 'Cedar', 'Maple', 'Pine'];
+
+      for (const item of subItems) {
+        const treeItem = document.createElement('sl-tree-item');
+        treeItem.innerText = item;
+        lazyItem.append(treeItem);
+      }
+
+      // Disable lazy mode once the content has been loaded
+      lazyItem.lazy = false;
+    }, 1000);
+  });
+</script>
+```
+
+```pug slim
+sl-tree
+  sl-tree-item lazy="true" Available Trees
 
 <script type="module">
   const lazyItem = document.querySelector('sl-tree-item[lazy]');
@@ -331,6 +436,37 @@ Use the `expand-icon` and `collapse-icon` slots to change the expand and collaps
 </style>
 ```
 
+```pug slim
+sl-tree.custom-icons
+  sl-icon name="plus" slot="expand-icon"
+  sl-icon name="minus" slot="collapse-icon"
+  sl-tree-item
+    | Deciduous
+    sl-tree-item Birch
+    sl-tree-item
+      | Maple
+      sl-tree-item Field maple
+      sl-tree-item Red maple
+      sl-tree-item Sugar maple
+    sl-tree-item Oak
+  sl-tree-item
+    | Coniferous
+    sl-tree-item Cedar
+    sl-tree-item Pine
+    sl-tree-item Spruce
+  sl-tree-item
+    | Non-trees
+    sl-tree-item Bamboo
+    sl-tree-item Cactus
+    sl-tree-item Fern
+
+css:
+  .custom-icons sl-tree-item::part(expand-button) {
+    /* Disable the expand/collapse animation */
+    rotate: none;
+  }
+```
+
 <!-- prettier-ignore -->
 ```jsx react
 import { SlTree, SlTreeItem } from '@teamshares/shoelace/dist/react';
@@ -414,6 +550,37 @@ Decorative icons can be used before labels to provide hints for each node.
     </sl-tree-item>
   </sl-tree-item>
 </sl-tree>
+```
+
+```pug slim
+sl-tree.tree-with-icons
+  sl-tree-item expanded="true"
+    sl-icon name="folder"
+    | Documents
+    sl-tree-item
+      sl-icon name="folder"
+      | Photos
+      sl-tree-item
+        sl-icon name="photo"
+        | birds.jpg
+      sl-tree-item
+        sl-icon name="photo"
+        | kitten.jpg
+      sl-tree-item
+        sl-icon name="photo"
+        | puppy.jpg
+    sl-tree-item
+      sl-icon name="folder"
+      | Writing
+      sl-tree-item
+        sl-icon name="document-text"
+        | draft.txt
+      sl-tree-item
+        sl-icon name="document-arrow-down"
+        | final.pdf
+      sl-tree-item
+        sl-icon name="document-chart-bar"
+        | sales.xls
 ```
 
 ```jsx react

@@ -6,6 +6,10 @@
 <sl-input></sl-input>
 ```
 
+```pug slim
+sl-input
+```
+
 ```jsx react
 import { SlInput } from '@teamshares/shoelace/dist/react';
 
@@ -24,6 +28,10 @@ Use the `label` attribute to give the input an accessible label. For labels that
 <sl-input label="What is your name?"></sl-input>
 ```
 
+```pug slim
+sl-input label="What is your name?"
+```
+
 ```jsx react
 import { SlIcon, SlInput } from '@teamshares/shoelace/dist/react';
 
@@ -36,6 +44,10 @@ Add descriptive help text to an input with the `help-text` attribute. For help t
 
 ```html preview
 <sl-input label="Nickname" help-text="What would you like people to call you?"></sl-input>
+```
+
+```pug slim
+sl-input label="Nickname" help-text="What would you like people to call you?"
 ```
 
 ```jsx react
@@ -52,6 +64,10 @@ Use the `placeholder` attribute to add a placeholder.
 <sl-input placeholder="Type something"></sl-input>
 ```
 
+```pug slim
+sl-input placeholder="Type something"
+```
+
 ```jsx react
 import { SlInput } from '@teamshares/shoelace/dist/react';
 
@@ -64,6 +80,10 @@ Add the `clearable` attribute to add a clear button when the input has content.
 
 ```html preview
 <sl-input placeholder="Clearable" clearable></sl-input>
+```
+
+```pug slim
+sl-input placeholder="Clearable" clearable="true"
 ```
 
 ```jsx react
@@ -80,6 +100,10 @@ Add the `password-toggle` attribute to add a toggle button that will show the pa
 <sl-input type="password" placeholder="Password Toggle" password-toggle></sl-input>
 ```
 
+```pug slim
+sl-input type="password" placeholder="Password Toggle" password-toggle="true"
+```
+
 ```jsx react
 import { SlInput } from '@teamshares/shoelace/dist/react';
 
@@ -94,6 +118,10 @@ Add the `filled` attribute to draw a filled input.
 <sl-input placeholder="Type something" filled></sl-input>
 ```
 
+```pug slim
+sl-input placeholder="Type something" filled="true"
+```
+
 ```jsx react
 import { SlInput } from '@teamshares/shoelace/dist/react';
 
@@ -106,6 +134,10 @@ Use the `disabled` attribute to disable an input.
 
 ```html preview
 <sl-input placeholder="Disabled" disabled></sl-input>
+```
+
+```pug slim
+sl-input placeholder="Disabled" disabled="true"
 ```
 
 ```jsx react
@@ -124,6 +156,14 @@ Use the `size` attribute to change an input's size.
 <sl-input placeholder="Medium" size="medium"></sl-input>
 <br />
 <sl-input placeholder="Large" size="large"></sl-input>
+```
+
+```pug slim
+sl-input placeholder="Small" size="small"
+br
+sl-input placeholder="Medium" size="medium"
+br
+sl-input placeholder="Large" size="large"
 ```
 
 ```jsx react
@@ -152,6 +192,14 @@ Use the `pill` attribute to give inputs rounded edges.
 <sl-input placeholder="Large" size="large" pill></sl-input>
 ```
 
+```pug slim
+sl-input placeholder="Small" size="small" pill="true"
+br
+sl-input placeholder="Medium" size="medium" pill="true"
+br
+sl-input placeholder="Large" size="large" pill="true"
+```
+
 ```jsx react
 import { SlInput } from '@teamshares/shoelace/dist/react';
 
@@ -176,6 +224,14 @@ The `type` attribute controls the type of input the browser renders.
 <sl-input type="number" placeholder="Number"></sl-input>
 <br />
 <sl-input type="date" placeholder="Date"></sl-input>
+```
+
+```pug slim
+sl-input type="email" placeholder="Email"
+br
+sl-input type="number" placeholder="Number"
+br
+sl-input type="date" placeholder="Date"
 ```
 
 ```jsx react
@@ -213,6 +269,20 @@ Use the `prefix` and `suffix` slots to add icons.
 </sl-input>
 ```
 
+```pug slim
+sl-input placeholder="Small" size="small"
+  sl-icon name="home" slot="prefix"
+  sl-icon name="chat-bubble-bottom-center-text" slot="suffix"
+br
+sl-input placeholder="Medium" size="medium"
+  sl-icon name="home" slot="prefix"
+  sl-icon name="chat-bubble-bottom-center-text" slot="suffix"
+br
+sl-input placeholder="Large" size="large"
+  sl-icon name="home" slot="prefix"
+  sl-icon name="chat-bubble-bottom-center-text" slot="suffix"
+```
+
 ```jsx react
 import { SlIcon, SlInput } from '@teamshares/shoelace/dist/react';
 
@@ -241,7 +311,7 @@ const App = () => (
 Use [CSS parts](#css-parts) to customize the way form controls are drawn. This example uses CSS grid to position the label to the left of the control, but the possible orientations are nearly endless. The same technique works for inputs, textareas, radio groups, and similar form controls.
 
 ```html preview
-<sl-input class="label-on-left" label="Name" help-text="Enter your name""></sl-input>
+<sl-input class="label-on-left" label="Name" help-text="Enter your name"></sl-input>
 <sl-input class="label-on-left" label="Email" type="email" help-text="Enter your email"></sl-input>
 <sl-textarea class="label-on-left" label="Bio" help-text="Tell us something about yourself"></sl-textarea>
 
@@ -270,6 +340,37 @@ Use [CSS parts](#css-parts) to customize the way form controls are drawn. This e
     grid-column-start: 2;
   }
 </style>
+```
+
+```pug slim
+sl-input.label-on-left label="Name" help-text="Enter your name"
+sl-input.label-on-left label="Email" type="email" help-text="Enter your email"
+sl-textarea.label-on-left label="Bio" help-text="Tell us something about yourself"
+
+css:
+  .label-on-left {
+    --label-width: 3.75rem;
+    --gap-width: 1rem;
+  }
+
+  .label-on-left + .label-on-left {
+    margin-top: var(--sl-spacing-medium);
+  }
+
+  .label-on-left::part(form-control) {
+    display: grid;
+    grid: auto / var(--label-width) 1fr;
+    gap: var(--sl-spacing-3x-small) var(--gap-width);
+    align-items: center;
+  }
+
+  .label-on-left::part(form-control-label) {
+    text-align: right;
+  }
+
+  .label-on-left::part(form-control-help-text) {
+    grid-column-start: 2;
+  }
 ```
 
 [component-metadata:sl-input]

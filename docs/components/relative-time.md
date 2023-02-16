@@ -9,6 +9,11 @@ Localization is handled by the browser's [`Intl.RelativeTimeFormat` API](https:/
 <sl-relative-time date="2020-07-15T09:17:00-04:00"></sl-relative-time>
 ```
 
+```pug slim
+/ Shoelace 2 release date 🎉
+sl-relative-time date="2020-07-15T09:17:00-04:00"
+```
+
 ```jsx react
 import { SlRelativeTime } from '@teamshares/shoelace/dist/react';
 
@@ -38,6 +43,17 @@ Use the `sync` attribute to update the displayed value automatically as time pas
 </script>
 ```
 
+```pug slim
+div.relative-time-sync
+  sl-relative-time sync="true"
+
+javascript:
+  const container = document.querySelector(.relative-time-sync);
+  const relativeTime = container.querySelector(sl-relative-time);
+
+  relativeTime.date = new Date(new Date().getTime() - 60000);
+```
+
 ```jsx react
 import { SlRelativeTime } from '@teamshares/shoelace/dist/react';
 
@@ -54,6 +70,14 @@ You can change how the time is displayed using the `format` attribute. Note that
 <sl-relative-time date="2020-07-15T09:17:00-04:00" format="narrow"></sl-relative-time><br />
 <sl-relative-time date="2020-07-15T09:17:00-04:00" format="short"></sl-relative-time><br />
 <sl-relative-time date="2020-07-15T09:17:00-04:00" format="long"></sl-relative-time>
+```
+
+```pug slim
+sl-relative-time date="2020-07-15T09:17:00-04:00" format="narrow"
+br
+sl-relative-time date="2020-07-15T09:17:00-04:00" format="short"
+br
+sl-relative-time date="2020-07-15T09:17:00-04:00" format="long"
 ```
 
 ```jsx react
@@ -80,6 +104,23 @@ Chinese: <sl-relative-time date="2020-07-15T09:17:00-04:00" lang="zh-CN"></sl-re
 German: <sl-relative-time date="2020-07-15T09:17:00-04:00" lang="de"></sl-relative-time><br />
 Greek: <sl-relative-time date="2020-07-15T09:17:00-04:00" lang="el"></sl-relative-time><br />
 Russian: <sl-relative-time date="2020-07-15T09:17:00-04:00" lang="ru"></sl-relative-time>
+```
+
+```pug slim
+| English:
+sl-relative-time date="2020-07-15T09:17:00-04:00" lang="en-US"
+br
+| Chinese:
+sl-relative-time date="2020-07-15T09:17:00-04:00" lang="zh-CN"
+br
+| German:
+sl-relative-time date="2020-07-15T09:17:00-04:00" lang="de"
+br
+| Greek:
+sl-relative-time date="2020-07-15T09:17:00-04:00" lang="el"
+br
+| Russian:
+sl-relative-time date="2020-07-15T09:17:00-04:00" lang="ru"
 ```
 
 ```jsx react

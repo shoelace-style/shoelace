@@ -8,6 +8,10 @@ For a full list of icons that come bundled with Shoelace, refer to the [icon com
 <sl-icon-button name="cog-6-tooth" label="Settings"></sl-icon-button>
 ```
 
+```pug slim
+sl-icon-button name="cog-6-tooth" label="Settings"
+```
+
 ```jsx react
 import { SlIconButton } from '@teamshares/shoelace/dist/react';
 
@@ -24,6 +28,12 @@ Icon buttons inherit their parent element's `font-size`.
 <sl-icon-button name="pencil" label="Edit" style="font-size: 1.5rem;"></sl-icon-button>
 <sl-icon-button name="pencil" label="Edit" style="font-size: 2rem;"></sl-icon-button>
 <sl-icon-button name="pencil" label="Edit" style="font-size: 2.5rem;"></sl-icon-button>
+```
+
+```pug slim
+sl-icon-button name="pencil" label="Edit" style="font-size: 1.5rem;"
+sl-icon-button name="pencil" label="Edit" style="font-size: 2rem;"
+sl-icon-button name="pencil" label="Edit" style="font-size: 2.5rem;"
 ```
 
 ```jsx react
@@ -65,6 +75,27 @@ Icon buttons are designed to have a uniform appearance, so their color is not in
 </style>
 ```
 
+```pug slim
+div.icon-button-color
+  sl-icon-button name="at-symbol" label="Bold"
+  sl-icon-button name="bolt" label="Italic"
+  sl-icon-button name="no-symbol" label="Underline"
+
+css:
+  .icon-button-color sl-icon-button::part(base) {
+    color: #b00091;
+  }
+
+  .icon-button-color sl-icon-button::part(base):hover,
+  .icon-button-color sl-icon-button::part(base):focus {
+    color: #c913aa;
+  }
+
+  .icon-button-color sl-icon-button::part(base):active {
+    color: #960077;
+  }
+```
+
 ```jsx react
 import { SlIconButton } from '@teamshares/shoelace/dist/react';
 
@@ -104,6 +135,10 @@ Use the `href` attribute to convert the button to a link.
 <sl-icon-button name="cog-6-tooth" label="Settings" href="https://example.com" target="_blank"></sl-icon-button>
 ```
 
+```pug slim
+sl-icon-button name="cog-6-tooth" label="Settings" href="https://example.com" target="_blank"
+```
+
 ```jsx react
 import { SlIconButton } from '@teamshares/shoelace/dist/react';
 
@@ -118,6 +153,11 @@ Wrap a tooltip around an icon button to provide contextual information to the us
 <sl-tooltip content="Settings">
   <sl-icon-button name="cog-6-tooth" label="Settings"></sl-icon-button>
 </sl-tooltip>
+```
+
+```pug slim
+sl-tooltip content="Settings"
+  sl-icon-button name="cog-6-tooth" label="Settings"
 ```
 
 ```jsx react
@@ -136,6 +176,10 @@ Use the `disabled` attribute to disable the icon button.
 
 ```html preview
 <sl-icon-button name="cog-6-tooth" label="Settings" disabled></sl-icon-button>
+```
+
+```pug slim
+sl-icon-button name="cog-6-tooth" label="Settings" disabled="true"
 ```
 
 ```jsx react

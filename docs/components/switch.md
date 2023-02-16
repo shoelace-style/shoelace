@@ -6,6 +6,10 @@
 <sl-switch>Switch</sl-switch>
 ```
 
+```pug slim
+sl-switch Switch
+```
+
 ```jsx react
 import { SlSwitch } from '@teamshares/shoelace/dist/react';
 
@@ -24,6 +28,10 @@ Use the `checked` attribute to activate the switch.
 <sl-switch checked>Checked</sl-switch>
 ```
 
+```pug slim
+sl-switch checked="true" Checked
+```
+
 ```jsx react
 import { SlSwitch } from '@teamshares/shoelace/dist/react';
 
@@ -36,6 +44,10 @@ Use the `disabled` attribute to disable the switch.
 
 ```html preview
 <sl-switch disabled>Disabled</sl-switch>
+```
+
+```pug slim
+sl-switch disabled="true" Disabled
 ```
 
 ```jsx react
@@ -54,6 +66,14 @@ Use the `size` attribute to change a switch's size.
 <sl-switch size="medium">Medium</sl-switch>
 <br />
 <sl-switch size="large">Large</sl-switch>
+```
+
+```pug slim
+sl-switch size="small" Small
+br
+sl-switch size="medium" Medium
+br
+sl-switch size="large" Large
 ```
 
 ```jsx react
@@ -76,6 +96,10 @@ Use the available custom properties to change how the switch is styled.
 
 ```html preview
 <sl-switch style="--width: 80px; --height: 40px; --thumb-size: 36px;">Really big</sl-switch>
+```
+
+```pug slim
+sl-switch style="--width: 80px; --height: 40px; --thumb-size: 36px;" Really big
 ```
 
 ```jsx react

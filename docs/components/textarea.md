@@ -6,6 +6,10 @@
 <sl-textarea></sl-textarea>
 ```
 
+```pug slim
+sl-textarea
+```
+
 ```jsx react
 import { SlTextarea } from '@teamshares/shoelace/dist/react';
 
@@ -24,6 +28,10 @@ Use the `label` attribute to give the textarea an accessible label. For labels t
 <sl-textarea label="Comments"></sl-textarea>
 ```
 
+```pug slim
+sl-textarea label="Comments"
+```
+
 ```jsx react
 import { SlTextarea } from '@teamshares/shoelace/dist/react';
 
@@ -36,6 +44,10 @@ Add descriptive help text to a textarea with the `help-text` attribute. For help
 
 ```html preview
 <sl-textarea label="Feedback" help-text="Please tell us what you think."> </sl-textarea>
+```
+
+```pug slim
+sl-textarea label="Feedback" help-text="Please tell us what you think."
 ```
 
 ```jsx react
@@ -52,6 +64,10 @@ Use the `rows` attribute to change the number of text rows that get shown.
 <sl-textarea rows="2"></sl-textarea>
 ```
 
+```pug slim
+sl-textarea rows="2"
+```
+
 ```jsx react
 import { SlTextarea } from '@teamshares/shoelace/dist/react';
 
@@ -64,6 +80,10 @@ Use the `placeholder` attribute to add a placeholder.
 
 ```html preview
 <sl-textarea placeholder="Type something"></sl-textarea>
+```
+
+```pug slim
+sl-textarea placeholder="Type something"
 ```
 
 ```jsx react
@@ -80,6 +100,10 @@ Add the `filled` attribute to draw a filled textarea.
 <sl-textarea placeholder="Type something" filled></sl-textarea>
 ```
 
+```pug slim
+sl-textarea placeholder="Type something" filled="true"
+```
+
 ```jsx react
 import { SlTextarea } from '@teamshares/shoelace/dist/react';
 
@@ -92,6 +116,10 @@ Use the `disabled` attribute to disable a textarea.
 
 ```html preview
 <sl-textarea placeholder="Textarea" disabled></sl-textarea>
+```
+
+```pug slim
+sl-textarea placeholder="Textarea" disabled="true"
 ```
 
 ```jsx react
@@ -110,6 +138,14 @@ Use the `size` attribute to change a textarea's size.
 <sl-textarea placeholder="Medium" size="medium"></sl-textarea>
 <br />
 <sl-textarea placeholder="Large" size="large"></sl-textarea>
+```
+
+```pug slim
+sl-textarea placeholder="Small" size="small"
+br
+sl-textarea placeholder="Medium" size="medium"
+br
+sl-textarea placeholder="Large" size="large"
 ```
 
 ```jsx react
@@ -134,6 +170,10 @@ By default, textareas can be resized vertically by the user. To prevent resizing
 <sl-textarea resize="none"></sl-textarea>
 ```
 
+```pug slim
+sl-textarea resize="none"
+```
+
 ```jsx react
 import { SlTextarea } from '@teamshares/shoelace/dist/react';
 
@@ -146,6 +186,10 @@ Textareas will automatically resize to expand to fit their content when `resize`
 
 ```html preview
 <sl-textarea resize="auto"></sl-textarea>
+```
+
+```pug slim
+sl-textarea resize="auto"
 ```
 
 ```jsx react

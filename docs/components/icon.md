@@ -14,6 +14,10 @@ All available icons in the `default` icon library (Heroicons) are shown below. C
 <sl-icon name="icon-name-here"></sl-icon>
 ```
 
+```pug slim
+sl-icon name="icon-name-here"
+```
+
 <div class="icon-search">
   <div class="icon-search-controls">
     <sl-input placeholder="Search Icons" clearable>
@@ -60,6 +64,29 @@ Icons inherit their color from the current text color. Thus, you can set the `co
   <sl-icon name="star"></sl-icon>
   <sl-icon name="trash"></sl-icon>
 </div>
+```
+
+```pug slim
+div style="color: #4a90e2;"
+  sl-icon name="exclamation-triangle"
+  sl-icon name="archive-box"
+  sl-icon name="battery-50-solid"
+  sl-icon name="bell"
+div style="color: #9013fe;"
+  sl-icon name="clock"
+  sl-icon name="cloud"
+  sl-icon name="arrow-down-tray-solid"
+  sl-icon name="folder"
+div style="color: #417505;"
+  sl-icon name="flag"
+  sl-icon name="heart"
+  sl-icon name="photo"
+  sl-icon name="bolt"
+div style="color: #f5a623;"
+  sl-icon name="microphone"
+  sl-icon name="magnifying-glass-solid"
+  sl-icon name="star"
+  sl-icon name="trash"
 ```
 
 ```jsx react
@@ -120,6 +147,26 @@ Icons are sized relative to the current font size. To change their size, set the
 </div>
 ```
 
+```pug slim
+div style="font-size: 32px;"
+  sl-icon name="exclamation-triangle"
+  sl-icon name="archive-box"
+  sl-icon name="battery-50-solid"
+  sl-icon name="bell"
+  sl-icon name="clock"
+  sl-icon name="cloud"
+  sl-icon name="arrow-down-tray-solid"
+  sl-icon name="folder"
+  sl-icon name="flag"
+  sl-icon name="heart"
+  sl-icon name="photo"
+  sl-icon name="bolt"
+  sl-icon name="microphone"
+  sl-icon name="magnifying-glass-solid"
+  sl-icon name="star"
+  sl-icon name="trash"
+```
+
 ```jsx react
 import { SlIcon } from '@teamshares/shoelace/dist/react';
 
@@ -153,6 +200,10 @@ For non-decorative icons, use the `label` attribute to announce it to assistive 
 <sl-icon name="star-solid" label="Add to favorites"></sl-icon>
 ```
 
+```pug slim
+sl-icon name="star-solid" label="Add to favorites"
+```
+
 ```jsx react
 import { SlIcon } from '@teamshares/shoelace/dist/react';
 
@@ -165,6 +216,10 @@ Custom icons can be loaded individually with the `src` attribute. Only SVGs on a
 
 ```html preview
 <sl-icon src="https://shoelace.style/assets/images/shoe.svg" style="font-size: 8rem;"></sl-icon>
+```
+
+```pug slim
+sl-icon src="https://shoelace.style/assets/images/shoe.svg" style="font-size: 8rem;"
 ```
 
 ```jsx react
@@ -450,7 +505,7 @@ Icons in this library are licensed under the [MIT License](https://github.com/mi
   <sl-icon library="jam" name="picture-f"></sl-icon>
   <sl-icon library="jam" name="set-square-f"></sl-icon>
 </div>
-``` -->
+```
 
 ### Material Icons
 
@@ -495,7 +550,7 @@ Icons in this library are licensed under the [Apache 2.0 License](https://github
 </div>
 ```
 
-<!--
+
 ### Remix Icon
 
 This will register the [Remix Icon](https://remixicon.com/) library using the jsDelivr CDN. This library groups icons by categories, so the name must include the category and icon separated by a slash, as well as the `-line` or `-fill` suffix as needed. A mutator function is required to set the SVG's `fill` to `currentColor`.

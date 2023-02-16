@@ -10,6 +10,13 @@
 </sl-select>
 ```
 
+```pug slim
+sl-select label="Select one"
+  sl-option value="option-1" Option 1
+  sl-option value="option-2" Option 2
+  sl-option value="option-3" Option 3
+```
+
 ```jsx react
 import { SlOption, SlSelect } from '@teamshares/shoelace/dist/react';
 
@@ -34,6 +41,13 @@ Use the `disabled` attribute to disable an option and prevent it from being sele
   <sl-option value="option-2" disabled>Option 2</sl-option>
   <sl-option value="option-3">Option 3</sl-option>
 </sl-select>
+```
+
+```pug slim
+sl-select label="Select one"
+  sl-option value="option-1" Option 1
+  sl-option value="option-2" disabled="true" Option 2
+  sl-option value="option-3" Option 3
 ```
 
 ```jsx react
@@ -74,6 +88,22 @@ Add icons to the start and end of menu items using the `prefix` and `suffix` slo
     <sl-icon slot="suffix" name="patch-check"></sl-icon>
   </sl-option>
 </sl-select>
+```
+
+```pug slim
+sl-select label="Select one"
+  sl-option value="option-1"
+    sl-icon slot="prefix" name="envelope"
+    | Email
+    sl-icon slot="suffix" name="patch-check"
+  sl-option value="option-2"
+    sl-icon slot="prefix" name="telephone"
+    | Phone
+    sl-icon slot="suffix" name="patch-check"
+  sl-option value="option-3"
+    sl-icon slot="prefix" name="chat-dots"
+    | Chat
+    sl-icon slot="suffix" name="patch-check"
 ```
 
 [component-metadata:sl-option]

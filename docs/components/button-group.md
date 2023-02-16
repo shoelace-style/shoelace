@@ -10,6 +10,13 @@
 </sl-button-group>
 ```
 
+```pug slim
+sl-button-group label="Alignment"
+  sl-button Left
+  sl-button Center
+  sl-button Right
+```
+
 ```jsx react
 import { SlButton, SlButtonGroup } from '@teamshares/shoelace/dist/react';
 
@@ -50,6 +57,25 @@ All button sizes are supported, but avoid mixing sizes within the same button gr
   <sl-button size="large">Center</sl-button>
   <sl-button size="large">Right</sl-button>
 </sl-button-group>
+```
+
+```pug slim
+sl-button-group label="Alignment"
+  sl-button size="small" Left
+  sl-button size="small" Center
+  sl-button size="small" Right
+br
+br
+sl-button-group label="Alignment"
+  sl-button size="medium" Left
+  sl-button size="medium" Center
+  sl-button size="medium" Right
+br
+br
+sl-button-group label="Alignment"
+  sl-button size="large" Left
+  sl-button size="large" Center
+  sl-button size="large" Right
 ```
 
 ```jsx react
@@ -126,6 +152,37 @@ Theme buttons are supported through the button's `variant` attribute.
   <sl-button variant="danger">Center</sl-button>
   <sl-button variant="danger">Right</sl-button>
 </sl-button-group>
+```
+
+```pug slim
+sl-button-group label="Alignment"
+  sl-button variant="primary" Left
+  sl-button variant="primary" Center
+  sl-button variant="primary" Right
+br
+br
+sl-button-group label="Alignment"
+  sl-button variant="success" Left
+  sl-button variant="success" Center
+  sl-button variant="success" Right
+br
+br
+sl-button-group label="Alignment"
+  sl-button variant="neutral" Left
+  sl-button variant="neutral" Center
+  sl-button variant="neutral" Right
+br
+br
+sl-button-group label="Alignment"
+  sl-button variant="warning" Left
+  sl-button variant="warning" Center
+  sl-button variant="warning" Right
+br
+br
+sl-button-group label="Alignment"
+  sl-button variant="danger" Left
+  sl-button variant="danger" Center
+  sl-button variant="danger" Right
 ```
 
 ```jsx react
@@ -206,6 +263,25 @@ Pill buttons are supported through the button's `pill` attribute.
 </sl-button-group>
 ```
 
+```pug slim
+sl-button-group label="Alignment"
+  sl-button size="small" pill="true" Left
+  sl-button size="small" pill="true" Center
+  sl-button size="small" pill="true" Right
+br
+br
+sl-button-group label="Alignment"
+  sl-button size="medium" pill="true" Left
+  sl-button size="medium" pill="true" Center
+  sl-button size="medium" pill="true" Right
+br
+br
+sl-button-group label="Alignment"
+  sl-button size="large" pill="true" Left
+  sl-button size="large" pill="true" Center
+  sl-button size="large" pill="true" Right
+```
+
 ```jsx react
 import { SlButton, SlButtonGroup } from '@teamshares/shoelace/dist/react';
 
@@ -275,6 +351,18 @@ Dropdowns can be placed inside button groups as long as the trigger is an `<sl-b
 </sl-button-group>
 ```
 
+```pug slim
+sl-button-group label="Example Button Group"
+  sl-button Button
+  sl-button Button
+  sl-dropdown
+    sl-button slot="trigger" caret="true" Dropdown
+    sl-menu
+      sl-menu-item Item 1
+      sl-menu-item Item 2
+      sl-menu-item Item 3
+```
+
 ```jsx react
 import { SlButton, SlButtonGroup, SlDropdown, SlMenu, SlMenuItem } from '@teamshares/shoelace/dist/react';
 
@@ -316,6 +404,18 @@ Create a split button using a button and a dropdown. Use a [visually hidden](/co
 </sl-button-group>
 ```
 
+```pug slim
+sl-button-group label="Example Button Group"
+  sl-button variant="primary" Save
+  sl-dropdown placement="bottom-end"
+    sl-button.no-pad-l slot="trigger" variant="primary" caret="true"
+      sl-visually-hidden More options
+    sl-menu
+      sl-menu-item Save
+      sl-menu-item Save as&hellip;
+      sl-menu-item Save all
+```
+
 ```jsx react
 import { SlButton, SlButtonGroup, SlDropdown, SlMenu, SlMenuItem } from '@teamshares/shoelace/dist/react';
 
@@ -340,18 +440,28 @@ Buttons can be wrapped in tooltips to provide more detail when the user interact
 
 ```html preview
 <sl-button-group label="Alignment">
-  <sl-tooltip content="I'm on the left">
+  <sl-tooltip content="I am on the left">
     <sl-button>Left</sl-button>
   </sl-tooltip>
 
-  <sl-tooltip content="I'm in the middle">
+  <sl-tooltip content="I am in the middle">
     <sl-button>Center</sl-button>
   </sl-tooltip>
 
-  <sl-tooltip content="I'm on the right">
+  <sl-tooltip content="I am on the right">
     <sl-button>Right</sl-button>
   </sl-tooltip>
 </sl-button-group>
+```
+
+```pug slim
+sl-button-group label="Alignment"
+  sl-tooltip content="I am on the left"
+    sl-button Left
+  sl-tooltip content="I am in the middle"
+    sl-button Center
+  sl-tooltip content="I am on the right"
+    sl-button Right
 ```
 
 ```jsx react
@@ -360,15 +470,15 @@ import { SlButton, SlButtonGroup, SlTooltip } from '@teamshares/shoelace/dist/re
 const App = () => (
   <>
     <SlButtonGroup label="Alignment">
-      <SlTooltip content="I'm on the left">
+      <SlTooltip content="I am on the left">
         <SlButton>Left</SlButton>
       </SlTooltip>
 
-      <SlTooltip content="I'm in the middle">
+      <SlTooltip content="I am in the middle">
         <SlButton>Center</SlButton>
       </SlTooltip>
 
-      <SlTooltip content="I'm on the right">
+      <SlTooltip content="I am on the right">
         <SlButton>Right</SlButton>
       </SlTooltip>
     </SlButtonGroup>
@@ -421,6 +531,42 @@ Create interactive toolbars with button groups.
     margin-right: var(--sl-spacing-x-small);
   }
 </style>
+```
+
+```pug slim
+div.button-group-toolbar
+  sl-button-group label="History"
+    sl-tooltip content="Undo"
+      sl-button
+        sl-icon name="arrow-uturn-left" label="Undo"
+    sl-tooltip content="Redo"
+      sl-button
+        sl-icon name="arrow-uturn-right" label="Redo"
+  sl-button-group label="Formatting"
+    sl-tooltip content="Bold"
+      sl-button
+        sl-icon name="at-symbol" label="Bold"
+    sl-tooltip content="Italic"
+      sl-button
+        sl-icon name="bolt" label="Italic"
+    sl-tooltip content="Underline"
+      sl-button
+        sl-icon name="no-symbol" label="Underline"
+  sl-button-group label="Alignment"
+    sl-tooltip content="Align Left"
+      sl-button
+        sl-icon name="bars-3-bottom-left" label="Align Left"
+    sl-tooltip content="Align Center"
+      sl-button
+        sl-icon name="bars-3" label="Align Center"
+    sl-tooltip content="Align Right"
+      sl-button
+        sl-icon name="bars-3-bottom-right" label="Align Right"
+
+css:
+  .button-group-toolbar sl-button-group:not(:last-of-type) {
+    margin-right: var(--sl-spacing-x-small);
+  }
 ```
 
 ```jsx react

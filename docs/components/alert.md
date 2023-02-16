@@ -9,6 +9,12 @@
 </sl-alert>
 ```
 
+```pug slim
+sl-alert open="true"
+  sl-icon slot="icon" name="information-circle"
+  | This is a standard alert. You can customize its content and even the icon.
+```
+
 ```jsx react
 import { SlAlert, SlIcon } from '@teamshares/shoelace/dist/react';
 
@@ -64,8 +70,40 @@ Set the `variant` attribute to change the alert's variant.
 <sl-alert variant="danger" open>
   <sl-icon slot="icon" name="exclamation-circle"></sl-icon>
   <strong>Your account has been deleted</strong><br />
-  We're very sorry to see you go!
+  We are very sorry to see you go!
 </sl-alert>
+```
+
+```pug slim
+sl-alert variant="primary" open="true"
+  sl-icon slot="icon" name="information-circle"
+  strong This is super informative
+  br
+  | You can tell by how pretty the alert is.
+br
+sl-alert variant="success" open="true"
+  sl-icon slot="icon" name="check-circle"
+  strong Your changes have been saved
+  br
+  | You can safely exit the app now.
+br
+sl-alert variant="neutral" open="true"
+  sl-icon slot="icon" name="cog-6-tooth"
+  strong Your settings have been updated
+  br
+  | Settings will take affect on next login.
+br
+sl-alert variant="warning" open="true"
+  sl-icon slot="icon" name="exclamation-triangle"
+  strong Your session has ended
+  br
+  | Please login again to continue.
+br
+sl-alert variant="danger" open="true"
+  sl-icon slot="icon" name="exclamation-circle"
+  strong Your account has been deleted
+  br
+  | We are very sorry to see you go!
 ```
 
 ```jsx react
@@ -113,7 +151,7 @@ const App = () => (
       <SlIcon slot="icon" name="exclamation-circle-solid" />
       <strong>Your account has been deleted</strong>
       <br />
-      We're very sorry to see you go!
+      We are very sorry to see you go!
     </SlAlert>
   </>
 );
@@ -135,6 +173,18 @@ Add the `closable` attribute to show a close button that will hide the alert.
     setTimeout(() => (alert.open = true), 2000);
   });
 </script>
+```
+
+```pug slim
+sl-alert.alert-closable variant="primary" open="true" closable="true"
+  sl-icon slot="icon" name="information-circle"
+  | You can close this alert any time!
+
+javascript:
+  const alert = document.querySelector(.alert-closable);
+  alert.addEventListener(sl-after-hide, () => {
+    setTimeout(() => (alert.open = true), 2000);
+  });
 ```
 
 ```jsx react
@@ -164,6 +214,10 @@ Icons are optional. Simply omit the `icon` slot if you don't want them.
 
 ```html preview
 <sl-alert variant="primary" open> Nothing fancy here, just a simple alert. </sl-alert>
+```
+
+```pug slim
+sl-alert variant="primary" open="true"  Nothing fancy here, just a simple alert.
 ```
 
 ```jsx react
@@ -203,6 +257,26 @@ Set the `duration` attribute to automatically hide an alert after a period of ti
     margin-top: var(--sl-spacing-medium);
   }
 </style>
+```
+
+```pug slim
+div.alert-duration
+  sl-button variant="primary" Show Alert
+  sl-alert variant="primary" duration="3000" closable="true"
+    sl-icon slot="icon" name="information-circle"
+    | This alert will automatically hide itself after three seconds, unless you interact with it.
+
+javascript:
+  const container = document.querySelector(.alert-duration);
+  const button = container.querySelector(sl-button);
+  const alert = container.querySelector(sl-alert);
+
+  button.addEventListener(click, () => alert.show());
+
+css:
+  .alert-duration sl-alert {
+    margin-top: var(--sl-spacing-medium);
+  }
 ```
 
 ```jsx react
@@ -278,7 +352,7 @@ You should always use the `closable` attribute so users can dismiss the notifica
   <sl-alert variant="danger" duration="3000" closable>
     <sl-icon slot="icon" name="exclamation-circle-solid"></sl-icon>
     <strong>Your account has been deleted</strong><br />
-    We're very sorry to see you go!
+    We are very sorry to see you go!
   </sl-alert>
 </div>
 
@@ -292,6 +366,50 @@ You should always use the `closable` attribute so users can dismiss the notifica
     button.addEventListener('click', () => alert.toast());
   });
 </script>
+```
+
+```pug slim
+div.alert-toast
+  sl-button variant="primary" Primary
+  sl-button variant="success" Success
+  sl-button variant="neutral" Neutral
+  sl-button variant="warning" Warning
+  sl-button variant="danger" Danger
+  sl-alert variant="primary" duration="3000" closable="true"
+    sl-icon slot="icon" name="information-circle"
+    strong This is super informative
+    br
+    | You can tell by how pretty the alert is.
+  sl-alert variant="success" duration="3000" closable="true"
+    sl-icon slot="icon" name="check-circle"
+    strong Your changes have been saved
+    br
+    | You can safely exit the app now.
+  sl-alert variant="neutral" duration="3000" closable="true"
+    sl-icon slot="icon" name="cog-6-tooth"
+    strong Your settings have been updated
+    br
+    | Settings will take affect on next login.
+  sl-alert variant="warning" duration="3000" closable="true"
+    sl-icon slot="icon" name="exclamation-triangle"
+    strong Your session has ended
+    br
+    | Please login again to continue.
+  sl-alert variant="danger" duration="3000" closable="true"
+    sl-icon slot="icon" name="exclamation-circle-solid"
+    strong Your account has been deleted
+    br
+    | We are very sorry to see you go!
+
+javascript:
+  const container = document.querySelector(.alert-toast);
+
+  [primary, success, neutral, warning, danger].map(variant => {
+    const button = container.querySelector(`sl-button[variant="${variant}"]`);
+    const alert = container.querySelector(`sl-alert[variant="${variant}"]`);
+
+    button.addEventListener(click, () => alert.toast());
+  });
 ```
 
 ```jsx react
@@ -363,7 +481,7 @@ const App = () => {
         <SlIcon slot="icon" name="exclamation-circle-solid" />
         <strong>Your account has been deleted</strong>
         <br />
-        We're very sorry to see you go!
+        We are very sorry to see you go!
       </SlAlert>
     </>
   );
@@ -413,6 +531,44 @@ For convenience, you can create a utility that emits toast notifications with a 
 </script>
 ```
 
+```pug slim
+.alert-toast-wrapper
+  sl-button[variant="primary"]
+    | Create Toast
+
+javascript:
+  const container = document.querySelector('.alert-toast-wrapper');
+  const button = container.querySelector('sl-button');
+  let count = 0;
+
+  // Always escape HTML for text arguments!
+  function escapeHtml(html) {
+    const div = document.createElement('div');
+    div.textContent = html;
+    return div.innerHTML;
+  }
+
+  // Custom function to emit toast notifications
+  function notify(message, variant = 'primary', icon = 'information-circle', duration = 3000) {
+    const alert = Object.assign(document.createElement('sl-alert'), {
+      variant,
+      closable: true,
+      duration: duration,
+      innerHTML: `
+        <sl-icon name="${icon}" slot="icon"></sl-icon>
+        ${escapeHtml(message)}
+      `
+    });
+
+    document.body.append(alert);
+    return alert.toast();
+  }
+
+  button.addEventListener('click', () => {
+    notify(`This is custom toast #${++count}`);
+  });
+```
+
 ### The Toast Stack
 
 The toast stack is a fixed position singleton element created and managed internally by the alert component. It will be added and removed from the DOM as needed when toasts are shown. When more than one toast is visible, they will stack vertically in the toast stack.
@@ -427,5 +583,7 @@ By default, the toast stack is positioned at the top-right of the viewport. You 
 ```
 
 ?> By design, it is not possible to show toasts in more than one stack simultaneously. Such behavior is confusing and makes for a poor user experience.
+
+Extra line
 
 [component-metadata:sl-alert]

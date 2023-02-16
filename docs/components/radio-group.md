@@ -10,6 +10,13 @@
 </sl-radio-group>
 ```
 
+```pug slim
+sl-radio-group label="Select an option" name="a" value="1"
+  sl-radio value="1" Option 1
+  sl-radio value="2" Option 2
+  sl-radio value="3" Option 3
+```
+
 ```jsx react
 import { SlRadio, SlRadioGroup } from '@teamshares/shoelace/dist/react';
 
@@ -36,6 +43,13 @@ Add descriptive help text to a radio group with the `help-text` attribute. For h
 </sl-radio-group>
 ```
 
+```pug slim
+sl-radio-group label="Select an option" help-text="Choose the most appropriate option." name="a" value="1"
+  sl-radio value="1" Option 1
+  sl-radio value="2" Option 2
+  sl-radio value="3" Option 3
+```
+
 ```jsx react
 import { SlRadio, SlRadioGroup } from '@teamshares/shoelace/dist/react';
 
@@ -60,6 +74,13 @@ const App = () => (
 </sl-radio-group>
 ```
 
+```pug slim
+sl-radio-group label="Select an option" help-text="Select an option that makes you proud." name="a" value="1"
+  sl-radio-button value="1" Option 1
+  sl-radio-button value="2" Option 2
+  sl-radio-button value="3" Option 3
+```
+
 ```jsx react
 import { SlRadioButton, SlRadioGroup } from '@teamshares/shoelace/dist/react';
 
@@ -82,6 +103,13 @@ Radios and radio buttons can be disabled by adding the `disabled` attribute to t
   <sl-radio value="2" disabled>Option 2</sl-radio>
   <sl-radio value="3">Option 3</sl-radio>
 </sl-radio-group>
+```
+
+```pug slim
+sl-radio-group label="Select an option" name="a" value="1"
+  sl-radio value="1" Option 1
+  sl-radio value="2" disabled="true" Option 2
+  sl-radio value="3" Option 3
 ```
 
 ```jsx react
@@ -122,6 +150,25 @@ Setting the `required` attribute to make selecting an option mandatory. If a val
     alert('All fields are valid!');
   });
 </script>
+```
+
+```pug slim
+form.validation
+  sl-radio-group label="Select an option" name="a" required="true"
+    sl-radio value="1" Option 1
+    sl-radio value="2" Option 2
+    sl-radio value="3" Option 3
+  br
+  sl-button type="submit" variant="primary" Submit
+
+javascript:
+  const form = document.querySelector(.validation);
+
+  // Handle form submit
+  form.addEventListener(submit, event => {
+    event.preventDefault();
+    alert(All fields are valid!);
+  });
 ```
 
 ```jsx react
@@ -191,6 +238,38 @@ Use the `setCustomValidity()` method to set a custom validation message. This wi
     alert('All fields are valid!');
   });
 </script>
+```
+
+```pug slim
+form.custom-validity
+  sl-radio-group label="Select an option" name="a" value="1"
+    sl-radio value="1" Not me
+    sl-radio value="2" Me neither
+    sl-radio value="3" Choose me
+  br
+  sl-button type="submit" variant="primary" Submit
+
+javascript:
+  const form = document.querySelector(.custom-validity);
+  const radioGroup = form.querySelector(sl-radio-group);
+  const errorMessage = You must choose the last option;
+
+  // Set initial validity as soon as the element is defined
+  customElements.whenDefined(sl-radio-group).then(() => {
+    radioGroup.setCustomValidity(errorMessage);
+  });
+
+  // Update validity when a selection is made
+  form.addEventListener(sl-change, () => {
+    const isValid = radioGroup.value === 3;
+    radioGroup.setCustomValidity(isValid ?  : errorMessage);
+  });
+
+  // Handle form submit
+  form.addEventListener(submit, event => {
+    event.preventDefault();
+    alert(All fields are valid!);
+  });
 ```
 
 ```jsx react

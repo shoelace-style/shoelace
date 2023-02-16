@@ -12,6 +12,20 @@ Radio buttons are designed to be used with [radio groups](/components/radio-grou
 </sl-radio-group>
 ```
 
+```pug slim
+sl-radio-group label="Select an option" name="a" value="1"
+  sl-radio-button value="1" Option 1
+  sl-radio-button value="2" Option 2
+  sl-radio-button value="3" Option 3
+```
+
+```pug slim
+sl-radio-group label="Select an option" name="a" value="1"
+  sl-radio-button value="1" Option 1
+  sl-radio-button value="2" Option 2
+  sl-radio-button value="3" Option 3
+```
+
 ```jsx react
 import { SlRadioButton, SlRadioGroup } from '@teamshares/shoelace/dist/react';
 
@@ -62,6 +76,13 @@ Use the `disabled` attribute to disable a radio button.
 </sl-radio-group>
 ```
 
+```pug slim
+sl-radio-group label="Select an option" name="a" value="1"
+  sl-radio-button value="1" Option 1
+  sl-radio-button value="2" disabled="true" Option 2
+  sl-radio-button value="3" Option 3
+```
+
 ```jsx react
 import { SlRadioButton, SlRadioGroup } from '@teamshares/shoelace/dist/react';
 
@@ -102,6 +123,23 @@ Use the `size` attribute to change a radio button's size.
   <sl-radio-button size="large" value="2">Option 2</sl-radio-button>
   <sl-radio-button size="large" value="3">Option 3</sl-radio-button>
 </sl-radio-group>
+```
+
+```pug slim
+sl-radio-group label="Select an option" name="a" value="1"
+  sl-radio-button size="small" value="1" Option 1
+  sl-radio-button size="small" value="2" Option 2
+  sl-radio-button size="small" value="3" Option 3
+br
+sl-radio-group label="Select an option" name="a" value="1"
+  sl-radio-button size="medium" value="1" Option 1
+  sl-radio-button size="medium" value="2" Option 2
+  sl-radio-button size="medium" value="3" Option 3
+br
+sl-radio-group label="Select an option" name="a" value="1"
+  sl-radio-button size="large" value="1" Option 1
+  sl-radio-button size="large" value="2" Option 2
+  sl-radio-button size="large" value="3" Option 3
 ```
 
 ```jsx react
@@ -160,6 +198,23 @@ Use the `pill` attribute to give radio buttons rounded edges.
 </sl-radio-group>
 ```
 
+```pug slim
+sl-radio-group label="Select an option" name="a" value="1"
+  sl-radio-button pill="true" size="small" value="1" Option 1
+  sl-radio-button pill="true" size="small" value="2" Option 2
+  sl-radio-button pill="true" size="small" value="3" Option 3
+br
+sl-radio-group label="Select an option" name="a" value="1"
+  sl-radio-button pill="true" size="medium" value="1" Option 1
+  sl-radio-button pill="true" size="medium" value="2" Option 2
+  sl-radio-button pill="true" size="medium" value="3" Option 3
+br
+sl-radio-group label="Select an option" name="a" value="1"
+  sl-radio-button pill="true" size="large" value="1" Option 1
+  sl-radio-button pill="true" size="large" value="2" Option 2
+  sl-radio-button pill="true" size="large" value="3" Option 3
+```
+
 ```jsx react
 import { SlRadioButton, SlRadioGroup } from '@teamshares/shoelace/dist/react';
 
@@ -212,6 +267,20 @@ Use the `prefix` and `suffix` slots to add icons.
 </sl-radio-group>
 ```
 
+```pug slim
+sl-radio-group label="Select an option" name="a" value="1"
+  sl-radio-button value="1"
+    sl-icon slot="prefix" name="archive-box"
+    | Option 1
+  sl-radio-button value="2"
+    sl-icon slot="suffix" name="shopping-bag"
+    | Option 2
+  sl-radio-button value="3"
+    sl-icon slot="prefix" name="gift"
+    sl-icon slot="suffix" name="shopping-cart"
+    | Option 3
+```
+
 ```jsx react
 import { SlIcon, SlRadioButton, SlRadioGroup } from '@teamshares/shoelace/dist/react';
 
@@ -262,6 +331,20 @@ You can omit button labels and use icons instead. Make sure to set a `label` att
     <sl-icon name="emoji-laughing" label="Laughing" library="bootstrap"></sl-icon>
   </sl-radio-button>
 </sl-radio-group>
+```
+
+```pug slim
+sl-radio-group label="Select an option" name="a" value="neutral"
+  sl-radio-button value="angry"
+    sl-icon name="emoji-angry" label="Angry" library="bootstrap"
+  sl-radio-button value="sad"
+    sl-icon name="emoji-frown" label="Sad" library="bootstrap"
+  sl-radio-button value="neutral"
+    sl-icon name="emoji-neutral" label="Neutral" library="bootstrap"
+  sl-radio-button value="happy"
+    sl-icon name="emoji-smile" label="Happy" library="bootstrap"
+  sl-radio-button value="laughing"
+    sl-icon name="emoji-laughing" label="Laughing" library="bootstrap"
 ```
 
 ```jsx react

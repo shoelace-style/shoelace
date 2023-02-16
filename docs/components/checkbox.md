@@ -6,6 +6,10 @@
 <sl-checkbox>Checkbox</sl-checkbox>
 ```
 
+```pug slim
+sl-checkbox Checkbox
+```
+
 ```jsx react
 import { SlCheckbox } from '@teamshares/shoelace/dist/react';
 
@@ -24,6 +28,10 @@ Use the `checked` attribute to activate the checkbox.
 <sl-checkbox checked>Checked</sl-checkbox>
 ```
 
+```pug slim
+sl-checkbox checked="true" Checked
+```
+
 ```jsx react
 import { SlCheckbox } from '@teamshares/shoelace/dist/react';
 
@@ -38,6 +46,10 @@ Use the `indeterminate` attribute to make the checkbox indeterminate.
 <sl-checkbox indeterminate>Indeterminate</sl-checkbox>
 ```
 
+```pug slim
+sl-checkbox indeterminate="true" Indeterminate
+```
+
 ```jsx react
 import { SlCheckbox } from '@teamshares/shoelace/dist/react';
 
@@ -50,6 +62,10 @@ Use the `disabled` attribute to disable the checkbox.
 
 ```html preview
 <sl-checkbox disabled>Disabled</sl-checkbox>
+```
+
+```pug slim
+sl-checkbox disabled="true" Disabled
 ```
 
 ```jsx react
@@ -68,6 +84,14 @@ Use the `size` attribute to change a checkbox's size.
 <sl-checkbox size="medium">Medium</sl-checkbox>
 <br />
 <sl-checkbox size="large">Large</sl-checkbox>
+```
+
+```pug slim
+sl-checkbox size="small" Small
+br
+sl-checkbox size="medium" Medium
+br
+sl-checkbox size="large" Large
 ```
 
 ```jsx react
@@ -97,7 +121,7 @@ Use the `setCustomValidity()` method to set a custom validation message. This wi
 <script>
   const form = document.querySelector('.custom-validity');
   const checkbox = form.querySelector('sl-checkbox');
-  const errorMessage = `Don't forget to check me!`;
+  const errorMessage = `Do not forget to check me!`;
 
   // Set initial validity as soon as the element is defined
   customElements.whenDefined('sl-checkbox').then(() => {
@@ -117,13 +141,41 @@ Use the `setCustomValidity()` method to set a custom validation message. This wi
 </script>
 ```
 
+```pug slim
+form.custom-validity
+  sl-checkbox Check me
+  br
+  sl-button type="submit" variant="primary" style="margin-top: 1rem;" Submit
+
+javascript:
+  const form = document.querySelector(.custom-validity);
+  const checkbox = form.querySelector(sl-checkbox);
+  const errorMessage = `Do not forget to check me!`;
+
+  // Set initial validity as soon as the element is defined
+  customElements.whenDefined(sl-checkbox).then(() => {
+    checkbox.setCustomValidity(errorMessage);
+  });
+
+  // Update validity on change
+  checkbox.addEventListener(sl-change, () => {
+    checkbox.setCustomValidity(checkbox.checked ?  : errorMessage);
+  });
+
+  // Handle submit
+  form.addEventListener(submit, event => {
+    event.preventDefault();
+    alert(All fields are valid!);
+  });
+```
+
 ```jsx react
 import { useEffect, useRef } from 'react';
 import { SlButton, SlCheckbox } from '@teamshares/shoelace/dist/react';
 
 const App = () => {
   const checkbox = useRef(null);
-  const errorMessage = `Don't forget to check me!`;
+  const errorMessage = `Do not forget to check me!`;
 
   function handleChange() {
     checkbox.current.setCustomValidity(checkbox.current.checked ? '' : errorMessage);

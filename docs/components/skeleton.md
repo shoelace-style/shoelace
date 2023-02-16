@@ -52,6 +52,48 @@ Skeletons try not to be opinionated, as there are endless possibilities for desi
 </style>
 ```
 
+```pug slim
+div.skeleton-overview
+  header
+    sl-skeleton
+    sl-skeleton
+  sl-skeleton
+  sl-skeleton
+  sl-skeleton
+
+css:
+  .skeleton-overview header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .skeleton-overview header sl-skeleton:last-child {
+    flex: 0 0 auto;
+    width: 30%;
+  }
+
+  .skeleton-overview sl-skeleton {
+    margin-bottom: 1rem;
+  }
+
+  .skeleton-overview sl-skeleton:nth-child(1) {
+    float: left;
+    width: 3rem;
+    height: 3rem;
+    margin-right: 1rem;
+    vertical-align: middle;
+  }
+
+  .skeleton-overview sl-skeleton:nth-child(3) {
+    width: 95%;
+  }
+
+  .skeleton-overview sl-skeleton:nth-child(4) {
+    width: 80%;
+  }
+```
+
 ```jsx react
 import { SlSkeleton } from '@teamshares/shoelace/dist/react';
 
@@ -135,6 +177,25 @@ There are two built-in effects, `sheen` and `pulse`. Effects are intentionally s
 </style>
 ```
 
+```pug slim
+div.skeleton-effects
+  sl-skeleton effect="none"
+  | None
+  sl-skeleton effect="sheen"
+  | Sheen
+  sl-skeleton effect="pulse"
+  | Pulse
+
+css:
+  .skeleton-effects {
+    font-size: var(--sl-font-size-small);
+  }
+
+  .skeleton-effects sl-skeleton:not(:first-child) {
+    margin-top: 1rem;
+  }
+```
+
 ```jsx react
 import { SlSkeleton } from '@teamshares/shoelace/dist/react';
 
@@ -194,6 +255,32 @@ Use multiple skeletons and some clever styles to simulate paragraphs.
     width: 50%;
   }
 </style>
+```
+
+```pug slim
+div.skeleton-paragraphs
+  sl-skeleton
+  sl-skeleton
+  sl-skeleton
+  sl-skeleton
+  sl-skeleton
+
+css:
+  .skeleton-paragraphs sl-skeleton {
+    margin-bottom: 1rem;
+  }
+
+  .skeleton-paragraphs sl-skeleton:nth-child(2) {
+    width: 95%;
+  }
+
+  .skeleton-paragraphs sl-skeleton:nth-child(4) {
+    width: 90%;
+  }
+
+  .skeleton-paragraphs sl-skeleton:last-child {
+    width: 50%;
+  }
 ```
 
 ```jsx react
@@ -259,6 +346,29 @@ Set a matching width and height to make a circle, square, or rounded avatar skel
     --border-radius: var(--sl-border-radius-medium);
   }
 </style>
+```
+
+```pug slim
+div.skeleton-avatars
+  sl-skeleton
+  sl-skeleton
+  sl-skeleton
+
+css:
+  .skeleton-avatars sl-skeleton {
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    margin-right: 0.5rem;
+  }
+
+  .skeleton-avatars sl-skeleton:nth-child(1) {
+    --border-radius: 0;
+  }
+
+  .skeleton-avatars sl-skeleton:nth-child(2) {
+    --border-radius: var(--sl-border-radius-medium);
+  }
 ```
 
 ```jsx react
@@ -356,6 +466,62 @@ Use the `--border-radius` custom property to make circles, squares, and rectangl
 </style>
 ```
 
+```pug slim
+div.skeleton-shapes
+  sl-skeleton.square
+  sl-skeleton.circle
+  sl-skeleton.triangle
+  sl-skeleton.cross
+  sl-skeleton.comment
+
+css:
+  .skeleton-shapes sl-skeleton {
+    display: inline-flex;
+    width: 50px;
+    height: 50px;
+  }
+
+  .skeleton-shapes .square::part(indicator) {
+    --border-radius: var(--sl-border-radius-medium);
+  }
+
+  .skeleton-shapes .circle::part(indicator) {
+    --border-radius: var(--sl-border-radius-circle);
+  }
+
+  .skeleton-shapes .triangle::part(indicator) {
+    --border-radius: 0;
+    clip-path: polygon(50% 0, 0 100%, 100% 100%);
+  }
+
+  .skeleton-shapes .cross::part(indicator) {
+    --border-radius: 0;
+    clip-path: polygon(
+      20% 0%,
+      0% 20%,
+      30% 50%,
+      0% 80%,
+      20% 100%,
+      50% 70%,
+      80% 100%,
+      100% 80%,
+      70% 50%,
+      100% 20%,
+      80% 0%,
+      50% 30%
+    );
+  }
+
+  .skeleton-shapes .comment::part(indicator) {
+    --border-radius: 0;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%);
+  }
+
+  .skeleton-shapes sl-skeleton:not(:last-child) {
+    margin-right: 0.5rem;
+  }
+```
+
 ```jsx react
 import { SlSkeleton } from '@teamshares/shoelace/dist/react';
 
@@ -415,6 +581,10 @@ Set the `--color` and `--sheen-color` custom properties to adjust the skeleton's
 
 ```html preview
 <sl-skeleton effect="sheen" style="--color: tomato; --sheen-color: #ffb094;"></sl-skeleton>
+```
+
+```pug slim
+sl-skeleton effect="sheen" style="--color: tomato; --sheen-color: #ffb094;"
 ```
 
 ```jsx react

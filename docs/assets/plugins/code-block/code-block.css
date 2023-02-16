@@ -188,9 +188,11 @@
   0% {
     box-shadow: 0 0 0 0 var(--pulse-color);
   }
+
   70% {
     box-shadow: 0 0 0 0.5rem transparent;
   }
+
   100% {
     box-shadow: 0 0 0 0 transparent;
   }
@@ -221,5 +223,9 @@ body.flavor-html [data-flavor]:not([data-flavor='html']) {
 }
 
 body.flavor-react [data-flavor]:not([data-flavor='react']) {
+  display: none;
+}
+
+body.flavor-slim [data-flavor]:not([data-flavor='slim']) {
   display: none;
 }
