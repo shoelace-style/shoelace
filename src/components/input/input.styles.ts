@@ -297,4 +297,23 @@ export default css`
   .input--no-spin-buttons input[type='number'] {
     -moz-appearance: textfield;
   }
+
+  /* Validity */
+  :host([data-user-valid]) [part='base'] {
+    border-color: var(--sl-input-valid-border-color);
+  }
+
+  :host([data-user-valid]) [part='base']:focus-within {
+    border-color: var(--sl-input-valid-border-color);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-input-valid-focus-ring-color);
+  }
+
+  :host([data-user-invalid]) [part='base'] {
+    border-color: var(--sl-input-invalid-border-color);
+  }
+
+  :host([data-user-invalid]) [part='base']:focus-within {
+    border-color: var(--sl-input-invalid-border-color);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-input-invalid-focus-ring-color);
+  }
 `;

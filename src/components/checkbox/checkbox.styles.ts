@@ -116,4 +116,16 @@ export default css`
     content: var(--sl-input-required-content);
     margin-inline-start: var(--sl-input-required-content-offset);
   }
+
+  /* Validity */
+  :host([data-user-invalid]) [part='control'] {
+    border-color: var(--sl-input-invalid-border-color);
+  }
+
+  :host([data-user-invalid])
+    .checkbox:not(.checkbox--checked):not(.checkbox--disabled)
+    .checkbox__input:focus-visible
+    ~ .checkbox__control {
+    outline: var(--sl-focus-ring-style) var(--sl-focus-ring-width) var(--sl-input-invalid-focus-ring-color);
+  }
 `;

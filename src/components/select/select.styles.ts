@@ -320,4 +320,23 @@ export default css`
     padding-block: var(--sl-spacing-x-small);
     padding-inline: var(--sl-spacing-x-large);
   }
+
+  /* Validity */
+  :host([data-user-valid]) [part='combobox'] {
+    border-color: var(--sl-input-valid-border-color);
+  }
+
+  :host([data-user-valid]) :focus-within [part='combobox'] {
+    border-color: var(--sl-input-valid-border-color);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-input-valid-focus-ring-color);
+  }
+
+  :host([data-user-invalid]) [part='combobox'] {
+    border-color: var(--sl-input-invalid-border-color);
+  }
+
+  :host([data-user-invalid]) :focus-within [part='combobox'] {
+    border-color: var(--sl-input-invalid-border-color);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-input-invalid-focus-ring-color);
+  }
 `;

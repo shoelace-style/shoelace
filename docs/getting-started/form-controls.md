@@ -324,7 +324,14 @@ This example demonstrates custom validation styles using `data-user-invalid` and
     margin-bottom: var(--sl-spacing-medium);
   }
 
-  /* user invalid styles */
+  .validity-styles {
+    --sl-input-valid-border-color: var(--sl-color-success-600);
+    --sl-input-valid-focus-ring-color: var(--sl-color-success-300);
+    --sl-input-invalid-border-color: var(--sl-color-danger-600);
+    --sl-input-invalid-focus-ring-color: var(--sl-color-danger-300);
+  }
+
+  /*
   .validity-styles sl-input[data-user-invalid]::part(base),
   .validity-styles sl-select[data-user-invalid]::part(combobox),
   .validity-styles sl-checkbox[data-user-invalid]::part(control) {
@@ -348,7 +355,6 @@ This example demonstrates custom validation styles using `data-user-invalid` and
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-danger-300);
   }
 
-  /* User valid styles */
   .validity-styles sl-input[data-user-valid]::part(base),
   .validity-styles sl-select[data-user-valid]::part(combobox),
   .validity-styles sl-checkbox[data-user-valid]::part(control) {
@@ -372,6 +378,7 @@ This example demonstrates custom validation styles using `data-user-invalid` and
     border-color: var(--sl-color-success-600);
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-success-300);
   }
+  */
 </style>
 ```
 
