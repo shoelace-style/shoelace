@@ -30,11 +30,18 @@ export default {
       <body>
         <link rel="stylesheet" href="dist/themes/light.css">
         <script type="module" src="dist/shoelace.js"></script>
-        <script>window.addEventListener('error', e => {
-          if(!e.error && e.message && (e.message.includes('ResizeObserver') || e.message === 'Script error.')) {
-            e.stopImmediatePropagation();
-          }
-      });</script>
+        <script>
+          //
+          // This script has been added to prevent "null" from appearing in browser logs.
+          //
+          // More details: https://github.com/shoelace-style/shoelace/pull/1128#issuecomment-1421435432
+          //
+          window.addEventListener('error', event => {
+            if(!event.error && (event?.message.includes('ResizeObserver') || event?.message === 'Script error.')) {
+              event.stopImmediatePropagation();
+            }
+          });
+        </script>
         <script type="module" src="${testFramework}"></script>
       </body>
     </html>
