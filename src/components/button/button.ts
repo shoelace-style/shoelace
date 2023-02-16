@@ -116,6 +116,14 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
   /** Tells the browser where to open the link. Only used when `href` is present. */
   @property() target: '_blank' | '_parent' | '_self' | '_top';
 
+  /**
+   * When using `href`, this attribute will map to the underlying link's `rel` attribute. Unlike regular links, the
+   * default is `noreferrer noopener` to prevent security exploits. However, if you're using `target` to point to a
+   * specific tab/window, this will prevent that from working correctly. You can remove or change the default value by
+   * setting the attribute to an empty string or a value of your choice, respectively.
+   */
+  @property() rel = 'noreferrer noopener';
+
   /** Tells the browser to download the linked file as this filename. Only used when `href` is present. */
   @property() download?: string;
 
@@ -308,7 +316,7 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
         href=${ifDefined(isLink ? this.href : undefined)}
         target=${ifDefined(isLink ? this.target : undefined)}
         download=${ifDefined(isLink ? this.download : undefined)}
-        rel=${ifDefined(isLink && this.target ? 'noreferrer noopener' : undefined)}
+        rel=${ifDefined(isLink ? this.rel : undefined)}
         role=${ifDefined(isLink ? undefined : 'button')}
         aria-disabled=${this.disabled ? 'true' : 'false'}
         tabindex=${this.disabled ? '-1' : '0'}
