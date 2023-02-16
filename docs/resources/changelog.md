@@ -6,7 +6,7 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
-## Next
+## 2.1.0
 
 - Added the `sl-focus` and `sl-blur` events to `<sl-color-picker>`
 - Added the `focus()` and `blur()` methods to `<sl-color-picker>`
