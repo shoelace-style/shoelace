@@ -1,4 +1,5 @@
 import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
+import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
 import { sendKeys } from '@web/test-runner-commands';
 import { serialize } from '../../utilities/form';
 import sinon from 'sinon';
@@ -147,6 +148,8 @@ describe('<sl-textarea>', () => {
       el.focus();
       await sendKeys({ press: 'b' });
       await el.updateComplete;
+      el.blur();
+      await el.updateComplete;
 
       expect(el.checkValidity()).to.be.true;
       expect(el.hasAttribute('data-user-invalid')).to.be.false;
@@ -167,9 +170,23 @@ describe('<sl-textarea>', () => {
       await sendKeys({ press: 'a' });
       await sendKeys({ press: 'Backspace' });
       await el.updateComplete;
+      el.blur();
+      await el.updateComplete;
 
       expect(el.hasAttribute('data-user-invalid')).to.be.true;
       expect(el.hasAttribute('data-user-valid')).to.be.false;
+    });
+
+    it('should receive validation attributes ("states") even when novalidate is used on the parent form', async () => {
+      const el = await fixture<HTMLFormElement>(html` <form novalidate><sl-textarea required></sl-textarea></form> `);
+      const textarea = el.querySelector<SlTextarea>('sl-textarea')!;
+
+      expect(textarea.hasAttribute('data-required')).to.be.true;
+      expect(textarea.hasAttribute('data-optional')).to.be.false;
+      expect(textarea.hasAttribute('data-invalid')).to.be.true;
+      expect(textarea.hasAttribute('data-valid')).to.be.false;
+      expect(textarea.hasAttribute('data-user-invalid')).to.be.false;
+      expect(textarea.hasAttribute('data-user-valid')).to.be.false;
     });
   });
 
@@ -200,6 +217,8 @@ describe('<sl-textarea>', () => {
 
       textarea.focus();
       await sendKeys({ type: 'test' });
+      await textarea.updateComplete;
+      textarea.blur();
       await textarea.updateComplete;
 
       expect(textarea.hasAttribute('data-user-invalid')).to.be.true;
@@ -274,4 +293,6 @@ describe('<sl-textarea>', () => {
       expect(textarea.spellcheck).to.be.false;
     });
   });
+
+  runFormControlBaseTests('sl-textarea');
 });

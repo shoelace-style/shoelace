@@ -1,5 +1,6 @@
 import { clickOnElement } from '../../internal/test';
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
+import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
 import { sendKeys } from '@web/test-runner-commands';
 import { serialize } from '../../utilities/form';
 import sinon from 'sinon';
@@ -164,8 +165,23 @@ describe('<sl-range>', () => {
 
       await clickOnElement(range);
       await range.updateComplete;
+      range.blur();
+      await range.updateComplete;
 
       expect(range.hasAttribute('data-user-invalid')).to.be.true;
+      expect(range.hasAttribute('data-user-valid')).to.be.false;
+    });
+
+    it('should receive validation attributes ("states") even when novalidate is used on the parent form', async () => {
+      const el = await fixture<HTMLFormElement>(html` <form novalidate><sl-range></sl-range></form> `);
+      const range = el.querySelector<SlRange>('sl-range')!;
+
+      range.setCustomValidity('Invalid value');
+      await range.updateComplete;
+
+      expect(range.hasAttribute('data-invalid')).to.be.true;
+      expect(range.hasAttribute('data-valid')).to.be.false;
+      expect(range.hasAttribute('data-user-invalid')).to.be.false;
       expect(range.hasAttribute('data-user-valid')).to.be.false;
     });
 
@@ -214,4 +230,6 @@ describe('<sl-range>', () => {
       expect(input.value).to.equal(0);
     });
   });
+
+  runFormControlBaseTests('sl-range');
 });

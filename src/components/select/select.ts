@@ -46,6 +46,7 @@ import type SlPopup from '../popup/popup';
  * @event sl-after-show - Emitted after the select's menu opens and all animations are complete.
  * @event sl-hide - Emitted when the select's menu closes.
  * @event sl-after-hide - Emitted after the select's menu closes and all animations are complete.
+ * @event sl-invalid - Emitted when the form control has been checked for validity and its constraints aren't satisfied.
  *
  * @csspart form-control - The form control that wraps the label, input, and help text.
  * @csspart form-control-label - The label's wrapper.
@@ -64,7 +65,9 @@ import type SlPopup from '../popup/popup';
 export default class SlSelect extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  private readonly formControlController = new FormControlController(this);
+  private readonly formControlController = new FormControlController(this, {
+    assumeInteractionOn: ['sl-blur', 'sl-input']
+  });
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private readonly localize = new LocalizeController(this);
   private typeToSelectString = '';
@@ -159,6 +162,16 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
   /** The select's required attribute. */
   @property({ type: Boolean, reflect: true }) required = false;
+
+  /** Gets the validity state object */
+  get validity() {
+    return this.valueInput.validity;
+  }
+
+  /** Gets the validation message */
+  get validationMessage() {
+    return this.valueInput.validationMessage;
+  }
 
   connectedCallback() {
     super.connectedCallback();
@@ -518,6 +531,11 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     });
   }
 
+  private handleInvalid(event: Event) {
+    this.formControlController.setValidity(false);
+    this.formControlController.emitInvalidEvent(event);
+  }
+
   @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     // Close the listbox when the control is disabled
@@ -601,7 +619,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     return waitForEvent(this, 'sl-after-hide');
   }
 
-  /** Checks for validity but does not show the browser's validation message. */
+  /** Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid. */
   checkValidity() {
     return this.valueInput.checkValidity();
   }
@@ -750,6 +768,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
                 tabindex="-1"
                 aria-hidden="true"
                 @focus=${() => this.focus()}
+                @invalid=${this.handleInvalid}
               />
 
               ${hasClearIcon
@@ -788,17 +807,17 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
               @slotchange=${this.handleDefaultSlotChange}
             ></slot>
           </sl-popup>
-
-          <slot
-            name="help-text"
-            part="form-control-help-text"
-            id="help-text"
-            class="form-control__help-text"
-            aria-hidden=${hasHelpText ? 'false' : 'true'}
-          >
-            ${this.helpText}
-          </slot>
         </div>
+
+        <slot
+          name="help-text"
+          part="form-control-help-text"
+          id="help-text"
+          class="form-control__help-text"
+          aria-hidden=${hasHelpText ? 'false' : 'true'}
+        >
+          ${this.helpText}
+        </slot>
       </div>
     `;
   }

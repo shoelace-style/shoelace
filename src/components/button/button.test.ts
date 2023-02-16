@@ -1,4 +1,5 @@
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
 import sinon from 'sinon';
 import type SlButton from './button';
 
@@ -115,6 +116,30 @@ describe('<sl-button>', () => {
       const el = await fixture<SlButton>(html` <sl-button href="some/path">Button Label</sl-button> `);
       expect(el.shadowRoot!.querySelector('a')).to.exist;
       expect(el.shadowRoot!.querySelector('button')).not.to.exist;
+    });
+
+    it('should render a link with rel="noreferrer noopener" when target is set and rel is not', async () => {
+      const el = await fixture<SlButton>(
+        html` <sl-button href="https://example.com/" target="_blank">Link</sl-button> `
+      );
+      const link = el.shadowRoot!.querySelector('a')!;
+      expect(link?.getAttribute('rel')).to.equal('noreferrer noopener');
+    });
+
+    it('should render a link with rel="" when a target is provided and rel is empty', async () => {
+      const el = await fixture<SlButton>(
+        html` <sl-button href="https://example.com/" target="_blank" rel="">Link</sl-button> `
+      );
+      const link = el.shadowRoot!.querySelector('a')!;
+      expect(link?.getAttribute('rel')).to.equal('');
+    });
+
+    it(`should render a link with a custom rel when a custom rel is provided`, async () => {
+      const el = await fixture<SlButton>(
+        html` <sl-button href="https://example.com/" target="_blank" rel="1">Link</sl-button> `
+      );
+      const link = el.shadowRoot!.querySelector('a')!;
+      expect(link?.getAttribute('rel')).to.equal('1');
     });
   });
 
@@ -233,5 +258,32 @@ describe('<sl-button>', () => {
 
       expect(clickHandler).to.have.been.calledOnce;
     });
+  });
+
+  runFormControlBaseTests({
+    tagName: 'sl-button',
+    variantName: 'type="button"',
+
+    init: (control: SlButton) => {
+      control.type = 'button';
+    }
+  });
+
+  runFormControlBaseTests({
+    tagName: 'sl-button',
+    variantName: 'type="submit"',
+
+    init: (control: SlButton) => {
+      control.type = 'submit';
+    }
+  });
+
+  runFormControlBaseTests({
+    tagName: 'sl-button',
+    variantName: 'href="xyz"',
+
+    init: (control: SlButton) => {
+      control.href = 'some-url';
+    }
   });
 });

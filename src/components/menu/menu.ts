@@ -29,16 +29,6 @@ export default class SlMenu extends ShoelaceElement {
     this.setAttribute('role', 'menu');
   }
 
-  private getAllItems() {
-    return [...this.defaultSlot.assignedElements({ flatten: true })].filter((el: HTMLElement) => {
-      if (el.inert || !this.isMenuItem(el)) {
-        return false;
-      }
-
-      return true;
-    }) as SlMenuItem[];
-  }
-
   private handleClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     const item = target.closest('sl-menu-item');
@@ -123,6 +113,16 @@ export default class SlMenu extends ShoelaceElement {
       item.tagName.toLowerCase() === 'sl-menu-item' ||
       ['menuitem', 'menuitemcheckbox', 'menuitemradio'].includes(item.getAttribute('role') ?? '')
     );
+  }
+
+  /** @internal Gets all slotted menu items, ignoring dividers, headers, and other elements. */
+  getAllItems() {
+    return [...this.defaultSlot.assignedElements({ flatten: true })].filter((el: HTMLElement) => {
+      if (el.inert || !this.isMenuItem(el)) {
+        return false;
+      }
+      return true;
+    }) as SlMenuItem[];
   }
 
   /**

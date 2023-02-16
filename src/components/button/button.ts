@@ -2,7 +2,7 @@ import '../icon/icon';
 import '../spinner/spinner';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { FormControlController } from '../../internal/form';
+import { FormControlController, validValidityState } from '../../internal/form';
 import { HasSlotController } from '../../internal/slot';
 import { html, literal } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -24,6 +24,7 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element';
  *
  * @event sl-blur - Emitted when the button loses focus.
  * @event sl-focus - Emitted when the button gains focus.
+ * @event sl-invalid - Emitted when the form control has been checked for validity and its constraints aren't satisfied.
  *
  * @slot - The button's label.
  * @slot prefix - A presentational prefix icon or similar element.
@@ -41,7 +42,7 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
 
   private readonly formControlController = new FormControlController(this, {
     form: input => {
-      // Buttons support a form attribute that points to an arbitrary form, so if this attribute it set we need to query
+      // Buttons support a form attribute that points to an arbitrary form, so if this attribute is set we need to query
       // the form from the same root using its id
       if (input.hasAttribute('form')) {
         const doc = input.getRootNode() as Document | ShadowRoot;
@@ -51,7 +52,8 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
 
       // Fall back to the closest containing form
       return input.closest('form');
-    }
+    },
+    assumeInteractionOn: ['click']
   });
   private readonly hasSlotController = new HasSlotController(this, '[default]', 'prefix', 'suffix');
   private readonly localize = new LocalizeController(this);
@@ -114,6 +116,14 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
   /** Tells the browser where to open the link. Only used when `href` is present. */
   @property() target: '_blank' | '_parent' | '_self' | '_top';
 
+  /**
+   * When using `href`, this attribute will map to the underlying link's `rel` attribute. Unlike regular links, the
+   * default is `noreferrer noopener` to prevent security exploits. However, if you're using `target` to point to a
+   * specific tab/window, this will prevent that from working correctly. You can remove or change the default value by
+   * setting the attribute to an empty string or a value of your choice, respectively.
+   */
+  @property() rel = 'noreferrer noopener';
+
   /** Tells the browser to download the linked file as this filename. Only used when `href` is present. */
   @property() download?: string;
 
@@ -139,6 +149,35 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
   /** Used to override the form owner's `target` attribute. */
   @property({ attribute: 'formtarget' }) formTarget: '_self' | '_blank' | '_parent' | '_top' | string;
 
+  /** Gets the validity state object */
+  get validity() {
+    if (this.isButton()) {
+      return (this.button as HTMLButtonElement).validity;
+    }
+
+    return validValidityState;
+  }
+
+  /** Gets the validation message */
+  get validationMessage() {
+    if (this.isButton()) {
+      return (this.button as HTMLButtonElement).validationMessage;
+    }
+
+    return '';
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.handleHostClick = this.handleHostClick.bind(this);
+    this.addEventListener('click', this.handleHostClick);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('click', this.handleHostClick);
+  }
+
   firstUpdated() {
     if (this.isButton()) {
       this.formControlController.updateValidity();
@@ -155,13 +194,7 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
     this.emit('sl-focus');
   }
 
-  private handleClick(event: MouseEvent) {
-    if (this.disabled || this.loading) {
-      event.preventDefault();
-      event.stopPropagation();
-      return;
-    }
-
+  private handleClick() {
     if (this.type === 'submit') {
       this.formControlController.submit(this);
     }
@@ -169,6 +202,19 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
     if (this.type === 'reset') {
       this.formControlController.reset(this);
     }
+  }
+
+  private handleHostClick(event: MouseEvent) {
+    // Prevent the click event from being emitted when the button is disabled or loading
+    if (this.disabled || this.loading) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  }
+
+  private handleInvalid(event: Event) {
+    this.formControlController.setValidity(false);
+    this.formControlController.emitInvalidEvent(event);
   }
 
   private isButton() {
@@ -202,7 +248,7 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
     this.button.blur();
   }
 
-  /** Checks for validity but does not show the browser's validation message. */
+  /** Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid. */
   checkValidity() {
     if (this.isButton()) {
       return (this.button as HTMLButtonElement).checkValidity();
@@ -270,12 +316,13 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
         href=${ifDefined(isLink ? this.href : undefined)}
         target=${ifDefined(isLink ? this.target : undefined)}
         download=${ifDefined(isLink ? this.download : undefined)}
-        rel=${ifDefined(isLink && this.target ? 'noreferrer noopener' : undefined)}
+        rel=${ifDefined(isLink ? this.rel : undefined)}
         role=${ifDefined(isLink ? undefined : 'button')}
         aria-disabled=${this.disabled ? 'true' : 'false'}
         tabindex=${this.disabled ? '-1' : '0'}
         @blur=${this.handleBlur}
         @focus=${this.handleFocus}
+        @invalid=${this.isButton() ? this.handleInvalid : null}
         @click=${this.handleClick}
       >
         <slot name="prefix" part="prefix" class="button__prefix"></slot>

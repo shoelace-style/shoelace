@@ -1,8 +1,9 @@
 // eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
 import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { getFormControls } from '../../../dist/utilities/form.js';
-import { sendKeys } from '@web/test-runner-commands';
-import { serialize } from '../../utilities/form'; // must come from the same module
+import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
+import { sendKeys } from '@web/test-runner-commands'; // must come from the same module
+import { serialize } from '../../utilities/form';
 import sinon from 'sinon';
 import type SlInput from './input';
 
@@ -130,6 +131,8 @@ describe('<sl-input>', () => {
       await el.updateComplete;
       await sendKeys({ press: 'b' });
       await el.updateComplete;
+      el.blur();
+      await el.updateComplete;
 
       expect(el.checkValidity()).to.be.true;
       expect(el.hasAttribute('data-user-invalid')).to.be.false;
@@ -151,9 +154,23 @@ describe('<sl-input>', () => {
       await sendKeys({ press: 'a' });
       await sendKeys({ press: 'Backspace' });
       await el.updateComplete;
+      el.blur();
+      await el.updateComplete;
 
       expect(el.hasAttribute('data-user-invalid')).to.be.true;
       expect(el.hasAttribute('data-user-valid')).to.be.false;
+    });
+
+    it('should receive validation attributes ("states") even when novalidate is used on the parent form', async () => {
+      const el = await fixture<HTMLFormElement>(html` <form novalidate><sl-input required></sl-input></form> `);
+      const input = el.querySelector<SlInput>('sl-input')!;
+
+      expect(input.hasAttribute('data-required')).to.be.true;
+      expect(input.hasAttribute('data-optional')).to.be.false;
+      expect(input.hasAttribute('data-invalid')).to.be.true;
+      expect(input.hasAttribute('data-valid')).to.be.false;
+      expect(input.hasAttribute('data-user-invalid')).to.be.false;
+      expect(input.hasAttribute('data-user-valid')).to.be.false;
     });
   });
 
@@ -217,6 +234,8 @@ describe('<sl-input>', () => {
 
       input.focus();
       await sendKeys({ type: 'test' });
+      await input.updateComplete;
+      input.blur();
       await input.updateComplete;
 
       expect(input.hasAttribute('data-user-invalid')).to.be.true;
@@ -478,4 +497,6 @@ describe('<sl-input>', () => {
       expect(formControls.map((fc: HTMLInputElement) => fc.value).join('')).to.equal('12345678910'); // eslint-disable-line
     });
   });
+
+  runFormControlBaseTests('sl-input');
 });
