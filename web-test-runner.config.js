@@ -30,6 +30,11 @@ export default {
       <body>
         <link rel="stylesheet" href="dist/themes/light.css">
         <script type="module" src="dist/shoelace.js"></script>
+        <script>window.addEventListener('error', e => {
+          if(!e.error && e.message && (e.message.includes('ResizeObserver') || e.message === 'Script error.')) {
+            e.stopImmediatePropagation();
+          }
+      });</script>
         <script type="module" src="${testFramework}"></script>
       </body>
     </html>
