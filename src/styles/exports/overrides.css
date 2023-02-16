@@ -535,12 +535,12 @@ sl-dialog.small::part(body) {
     max-height: 90vh;
   }
 
-  sl-dialog.has-icon>div {
+  sl-dialog.has-icon > div {
     display: flex;
     flex-direction: column;
   }
 
-  sl-dialog.has-icon>div> :first-child {
+  sl-dialog.has-icon > div > :first-child {
     margin-bottom: var(--sl-spacing-medium);
     /* 16px */
   }
@@ -565,12 +565,12 @@ sl-dialog.small::part(body) {
     --header-spacing: 32px 0 16px 24px;
   }
 
-  sl-dialog.has-icon>div {
+  sl-dialog.has-icon > div {
     align-items: center;
     display: flex;
   }
 
-  sl-dialog.has-icon>div * {
+  sl-dialog.has-icon > div * {
     margin-right: var(--sl-spacing-medium);
     /* 16px */
   }
@@ -869,7 +869,7 @@ sl-option::part(label) {
 /* Select menu label styling */
 
 sl-menu-label::part(base),
-sl-select>small {
+sl-select > small {
   color: var(--ts-color-text-subdued);
   font-size: var(--sl-font-size-x-small);
   font-weight: var(--sl-font-weight-semibold);
