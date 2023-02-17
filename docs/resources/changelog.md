@@ -6,12 +6,13 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
-## Next
+## 2.1.0
 
 - Added the `sl-focus` and `sl-blur` events to `<sl-color-picker>`
 - Added the `focus()` and `blur()` methods to `<sl-color-picker>`
 - Added the `sl-invalid` event to all form controls to enable custom validation logic [#1167](https://github.com/shoelace-style/shoelace/pull/1167)
 - Added `validity` and `validationMessage` properties to all form controls [#1167](https://github.com/shoelace-style/shoelace/pull/1167)
+- Added the `rel` attribute to `<sl-button>` to allow users to create button links that point to specific targets [#1200](https://github.com/shoelace-style/shoelace/issues/1200)
 - Fixed a bug in `<sl-animated-image>` where the play and pause buttons were transposed [#1147](https://github.com/shoelace-style/shoelace/issues/1147)
 - Fixed a bug that prevented `web-types.json` from being generated [#1154](https://github.com/shoelace-style/shoelace/discussions/1154)
 - Fixed a bug in `<sl-color-picker>` that prevented `sl-change` and `sl-input` from emitting when using the eye dropper [#1157](https://github.com/shoelace-style/shoelace/issues/1157)
@@ -21,6 +22,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-menu-item>` that caused the `click` event to be emitted when the item was disabled [#1113](https://github.com/shoelace-style/shoelace/issues/1113)
 - Fixed a bug in form controls that erroneously prevented validation states from being set when `novalidate` was used on the containing form [#1164](https://github.com/shoelace-style/shoelace/issues/1164)
 - Fixed a bug in `<sl-checkbox>` that caused the required asterisk to appear before the label in Chrome
+- Fixed a bug that prevented large form control labels from having the correct font size [#1195](https://github.com/shoelace-style/shoelace/pull/1195)
 - Improved the behavior of `<sl-dropdown>` in Safari so keyboard interaction works the same as in other browsers [#1177](https://github.com/shoelace-style/shoelace/issues/1177)
 - Improved the [icons](/components/icon) page so it's not as sluggish in Safari [#1122](https://github.com/shoelace-style/shoelace/issues/1122)
 - Improved the accessibility of `<sl-switch>` when used in forced-colors / Windows High Contrast mode [#1114](https://github.com/shoelace-style/shoelace/issues/1114)

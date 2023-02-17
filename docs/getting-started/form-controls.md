@@ -382,6 +382,115 @@ This example demonstrates custom validation styles using `data-user-invalid` and
 </style>
 ```
 
+## Inline Form Validation
+
+By default, Shoelace form controls use the browser's tooltip-style error messages. No mechanism is provided to show errors inline, as there are too many opinions on how that would work when combined with native form controls and other custom elements. You can, however, implement your own solution using the following technique.
+
+To disable the browser's error messages, you need to cancel the `sl-invalid` event. Then you can apply your own inline validation errors. This example demonstrates a primitive way to do this.
+
+```html preview
+<form class="inline-validation">
+  <sl-input
+    name="name"
+    label="Name"
+    help-text="What would you like people to call you?"
+    autocomplete="off"
+    required
+  ></sl-input>
+
+  <div id="name-error" aria-live="polite" hidden></div>
+
+  <sl-button type="submit" variant="primary">Submit</sl-button>
+  <sl-button type="reset" variant="default">Reset</sl-button>
+</form>
+
+<script>
+  const form = document.querySelector('.inline-validation');
+  const nameError = document.querySelector('#name-error');
+
+  // A form control is invalid
+  form.addEventListener(
+    'sl-invalid',
+    event => {
+      // Suppress the browser's constraint validation message
+      event.preventDefault();
+
+      nameError.textContent = `Error: ${event.target.validationMessage}`;
+      nameError.hidden = false;
+
+      event.target.focus();
+    },
+    { capture: true } // you must use capture since sl-invalid doesn't bubble!
+  );
+
+  // Handle form submit
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    nameError.hidden = true;
+    nameError.textContent = '';
+    setTimeout(() => alert('All fields are valid'), 50);
+  });
+
+  // Handle form reset
+  form.addEventListener('reset', event => {
+    nameError.hidden = true;
+    nameError.textContent = '';
+  });
+</script>
+
+<style>
+  #name-error {
+    font-size: var(--sl-input-help-text-font-size-medium);
+    color: var(--sl-color-danger-700);
+  }
+
+  #name-error ~ sl-button {
+    margin-top: var(--sl-spacing-medium);
+  }
+
+  .inline-validation sl-input {
+    display: block;
+  }
+
+  /* user invalid styles */
+  .inline-validation sl-input[data-user-invalid]::part(base) {
+    border-color: var(--sl-color-danger-600);
+  }
+
+  .inline-validation [data-user-invalid]::part(form-control-label),
+  .inline-validation [data-user-invalid]::part(form-control-help-text) {
+    color: var(--sl-color-danger-700);
+  }
+
+  .inline-validation sl-input:focus-within[data-user-invalid]::part(base) {
+    border-color: var(--sl-color-danger-600);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-danger-300);
+  }
+
+  /* User valid styles */
+  .inline-validation sl-input[data-user-valid]::part(base) {
+    border-color: var(--sl-color-success-600);
+  }
+
+  .inline-validation [data-user-valid]::part(form-control-label),
+  .inline-validation [data-user-valid]::part(form-control-help-text) {
+    color: var(--sl-color-success-700);
+  }
+
+  .inline-validation sl-checkbox[data-user-valid]::part(control) {
+    background-color: var(--sl-color-success-600);
+    outline: none;
+  }
+
+  .inline-validation sl-input:focus-within[data-user-valid]::part(base) {
+    border-color: var(--sl-color-success-600);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-success-300);
+  }
+</style>
+```
+
+!> This example is meant to demonstrate the concept of providing your own error messages inline. It is not intended to scale to more complex forms. Users who want this functionality are encouraged to build a more appropriate validation solution using the techniques shown below. Depending on how you implement this feature, custom error messages may affect the accessibility of your form controls.
+
 ## Getting Associated Form Controls
 
 At this time, using [`HTMLFormElement.elements`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/elements) will not return Shoelace form controls because the browser is unaware of their status as custom element form controls. Fortunately, Shoelace provides an `elements()` function that does something very similar. However, instead of returning an [`HTMLFormControlsCollection`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormControlsCollection), it returns an array of HTML and Shoelace form controls in the order they appear in the DOM.
