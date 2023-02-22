@@ -21,8 +21,7 @@
     "./dist/react": "./dist/react/index.js",
     "./dist/react/*": "./dist/react/*",
     "./dist/translations/*": "./dist/translations/*",
-    "./dist/styles": "./dist/styles/index.css",
-    "./tokens": "./dist/styles/tokens.css"
+    "./dist/styles": "./dist/styles/index.css"
   },
   "files": [
     "dist"
