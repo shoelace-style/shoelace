@@ -8,6 +8,8 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- Added an experimental autoloader
+- Added the `subpath` argument to `getBasePath()` to make it easier to generate full paths to any file
 - Fixed a bug in `<sl-select>` that caused the display label to render incorrectly in Chrome after form validation [#1197](https://github.com/shoelace-style/shoelace/discussions/1197)
 - Fixed a bug in `<sl-input>` that prevented users from applying their own value for `autocapitalize`, `autocomplete`, and `autocorrect` when using `type="password` [#1205](https://github.com/shoelace-style/shoelace/issues/1205)
 
