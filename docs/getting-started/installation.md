@@ -4,7 +4,19 @@ You can use Shoelace via CDN or by installing it locally. You can also [cherry p
 
 If you're using a framework, make sure to check out the pages for [React](/frameworks/react), [Vue](/frameworks/vue), and [Angular](/frameworks/angular).
 
-## CDN Installation (Easiest)
+## Autoloading (Experimental)
+
+The autoloader is the simplest and most efficient way to use Shoelace. A lightweight script watches the DOM for unregistered Shoelace elements and lazy loads them for you. This works for elements already on the page and elements that get added later on.
+
+<!-- prettier-ignore -->
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/light.css" />
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace-autoloader.js"></script>
+```
+
+?> While convenient, one caveat of autoloading is you may see a [Flash of Undefined Custom Elements](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements/).
+
+## CDN Installation
 
 The easiest way to install Shoelace is with the CDN. Just add the following tags to your page to get all components and the default light theme.
 
@@ -13,7 +25,7 @@ The easiest way to install Shoelace is with the CDN. Just add the following tags
 <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
 ```
 
-?> If you're only using a handful of components, it will be more efficient to [cherry pick](#cherry-picking) the ones you need.
+?> If you're only using a handful of components, it will be more efficient to [autoload](#autoloading-experimental) or [cherry pick](#cherry-picking) the ones you need.
 
 ### Dark Theme
 
@@ -68,7 +80,7 @@ Alternatively, [you can use a bundler](#bundling).
 
 ## Setting the Base Path
 
-Some components rely on assets (icons, images, etc.) and Shoelace needs to know where they're located. For convenience, Shoelace will try to auto-detect the correct location based on the script you've loaded it from. This assumes assets are colocated with `shoelace.js` and will "just work" for most users.
+Some components rely on assets (icons, images, etc.) and Shoelace needs to know where they're located. For convenience, Shoelace will try to auto-detect the correct location based on the script you've loaded it from. This assumes assets are colocated with `shoelace.js` or `shoelace-autoloader.js` and will "just work" for most users.
 
 However, if you're [cherry picking](#cherry-picking) or [bundling](#bundling) Shoelace, you'll need to set the base path. You can do this one of two ways.
 
