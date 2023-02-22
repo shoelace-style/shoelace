@@ -1,5 +1,5 @@
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { customElement, eventOptions, property, query, state } from 'lit/decorators.js';
 import { defaultValue } from '../../internal/default-value';
 import { FormControlController } from '../../internal/form';
 import { HasSlotController } from '../../internal/slot';
@@ -156,6 +156,7 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
     this.emit('sl-focus');
   }
 
+  @eventOptions({ passive: true })
   private handleThumbDragStart() {
     this.hasTooltip = true;
   }
