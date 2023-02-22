@@ -72,7 +72,7 @@ export default class SlQrCode extends ShoelaceElement {
         part="base"
         class="qr-code"
         role="img"
-        aria-label=${this.label.length > 0 ? this.label : this.value}
+        aria-label=${this.label?.length > 0 ? this.label : this.value}
         style=${styleMap({
           width: `${this.size}px`,
           height: `${this.size}px`
