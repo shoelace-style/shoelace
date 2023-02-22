@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.4
+
+- Updated to upstream [2.1.0](/resources/changelog)
+- Added teal color tokens
+- Modified exports to allow pulling in tokens more easily
+- Added Slim code to all docs
+
 ## 1.0.3
 
 - Pulled in upstream fixes on `next` branch, including fixes for `dropdown` and `select`
