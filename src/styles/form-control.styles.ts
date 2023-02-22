@@ -24,7 +24,7 @@ export default css`
     font-size: var(--sl-input-label-font-size-medium);
   }
 
-  .form-control--has-label.form-control--large .form-control_label {
+  .form-control--has-label.form-control--large .form-control__label {
     font-size: var(--sl-input-label-font-size-large);
   }
 

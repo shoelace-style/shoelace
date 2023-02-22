@@ -1,5 +1,6 @@
 import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { clickOnElement } from '../../internal/test';
+import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
 import { sendKeys } from '@web/test-runner-commands';
 import { serialize } from '../../utilities/form';
 import sinon from 'sinon';
@@ -548,4 +549,6 @@ describe('<sl-select>', () => {
 
     expect(tag.hasAttribute('pill')).to.be.true;
   });
+
+  runFormControlBaseTests('sl-select');
 });

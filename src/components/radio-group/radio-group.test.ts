@@ -1,5 +1,6 @@
 import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { clickOnElement } from '../../internal/test';
+import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlRadio from '../radio/radio';
@@ -315,4 +316,6 @@ describe('when the value changes', () => {
     radioGroup.value = '2';
     await radioGroup.updateComplete;
   });
+
+  runFormControlBaseTests('sl-radio-group');
 });

@@ -26,6 +26,7 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element';
  * @event sl-change - Emitted when an alteration to the control's value is committed by the user.
  * @event sl-focus - Emitted when the control gains focus.
  * @event sl-input - Emitted when the control receives input.
+ * @event sl-invalid - Emitted when the form control has been checked for validity and its constraints aren't satisfied.
  *
  * @csspart form-control - The form control that wraps the label, input, and help text.
  * @csspart form-control-label - The label's wrapper.
@@ -100,6 +101,16 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
 
   /** The default value of the form control. Primarily used for resetting the form control. */
   @defaultValue() defaultValue = 0;
+
+  /** Gets the validity state object */
+  get validity() {
+    return this.input.validity;
+  }
+
+  /** Gets the validation message */
+  get validationMessage() {
+    return this.input.validationMessage;
+  }
 
   connectedCallback() {
     super.connectedCallback();
@@ -207,6 +218,11 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
     }
   }
 
+  private handleInvalid(event: Event) {
+    this.formControlController.setValidity(false);
+    this.formControlController.emitInvalidEvent(event);
+  }
+
   /** Sets focus on the range. */
   focus(options?: FocusOptions) {
     this.input.focus(options);
@@ -233,7 +249,7 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
     }
   }
 
-  /** Checks for validity but does not show the browser's validation message. */
+  /** Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid. */
   checkValidity() {
     return this.input.checkValidity();
   }
@@ -306,8 +322,9 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
               .value=${live(this.value.toString())}
               aria-describedby="help-text"
               @change=${this.handleChange}
-              @input=${this.handleInput}
               @focus=${this.handleFocus}
+              @input=${this.handleInput}
+              @invalid=${this.handleInvalid}
               @blur=${this.handleBlur}
             />
             ${this.tooltip !== 'none' && !this.disabled

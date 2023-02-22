@@ -25,6 +25,7 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element';
  * @event sl-change - Emitted when an alteration to the control's value is committed by the user.
  * @event sl-focus - Emitted when the control gains focus.
  * @event sl-input - Emitted when the control receives input.
+ * @event sl-invalid - Emitted when the form control has been checked for validity and its constraints aren't satisfied.
  *
  * @csspart form-control - The form control that wraps the label, input, and help text.
  * @csspart form-control-label - The label's wrapper.
@@ -135,6 +136,16 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
   /** The default value of the form control. Primarily used for resetting the form control. */
   @defaultValue() defaultValue = '';
 
+  /** Gets the validity state object */
+  get validity() {
+    return this.input.validity;
+  }
+
+  /** Gets the validation message */
+  get validationMessage() {
+    return this.input.validationMessage;
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this.resizeObserver = new ResizeObserver(() => this.setTextareaHeight());
@@ -173,6 +184,11 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
   private handleInput() {
     this.value = this.input.value;
     this.emit('sl-input');
+  }
+
+  private handleInvalid(event: Event) {
+    this.formControlController.setValidity(false);
+    this.formControlController.emitInvalidEvent(event);
   }
 
   private setTextareaHeight() {
@@ -260,7 +276,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
     }
   }
 
-  /** Checks for validity but does not show the browser's validation message. */
+  /** Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid. */
   checkValidity() {
     return this.input.checkValidity();
   }
@@ -344,6 +360,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
               aria-describedby="help-text"
               @change=${this.handleChange}
               @input=${this.handleInput}
+              @invalid=${this.handleInvalid}
               @focus=${this.handleFocus}
               @blur=${this.handleBlur}
             ></textarea>
