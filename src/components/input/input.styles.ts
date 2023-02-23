@@ -299,21 +299,39 @@ export default css`
   }
 
   /* Validity */
-  :host([data-user-valid]) [part='base'] {
+  :host([data-user-valid]) .input {
     border-color: var(--sl-input-valid-border-color);
   }
 
-  :host([data-user-valid]) [part='base']:focus-within {
-    border-color: var(--sl-input-valid-border-color);
+  :host([data-user-valid]) .input:hover {
+    border-color: var(--sl-input-valid-border-color-hover);
+  }
+
+  :host([data-user-valid]) .input:focus-within {
+    border-color: var(--sl-input-valid-border-color-focus);
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-input-valid-focus-ring-color);
   }
 
-  :host([data-user-invalid]) [part='base'] {
+  :host([data-user-invalid]) .input {
     border-color: var(--sl-input-invalid-border-color);
   }
 
-  :host([data-user-invalid]) [part='base']:focus-within {
+  :host([data-user-invalid]) .input:hover {
+    border-color: var(--sl-input-invalid-border-color-hover);
+  }
+
+  :host([data-user-invalid]) .input:focus-within {
     border-color: var(--sl-input-invalid-border-color);
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-input-invalid-focus-ring-color);
+  }
+
+  :host([data-user-valid]) .input--filled {
+    border: solid var(--sl-input-valid-filled-border-width) var(--sl-input-valid-border-color);
+    outline: none;
+  }
+
+  :host([data-user-invalid]) .input--filled {
+    border: solid var(--sl-input-invalid-filled-border-width) var(--sl-input-invalid-border-color);
+    outline: none;
   }
 `;

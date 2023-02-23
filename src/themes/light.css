@@ -486,9 +486,16 @@
 
   /* Form control validity */
   --sl-input-valid-border-color: var(--sl-input-border-color);
+  --sl-input-valid-border-color-hover: var(--sl-input-border-color-hover);
+  --sl-input-valid-border-color-focus: var(--sl-input-border-color-focus);
   --sl-input-valid-focus-ring-color: var(--sl-input-focus-ring-color);
-  --sl-input-invalid-border-color: var(--sl-input-border-color);
-  --sl-input-invalid-focus-ring-color: var(--sl-input-focus-ring-color);
+  --sl-input-valid-filled-border-width: 0;
+
+  --sl-input-invalid-border-color: var(--sl-color-danger-600);
+  --sl-input-invalid-border-color-hover: var(--sl-color-danger-700);
+  --sl-input-invalid-border-color-focus: var(--sl-color-danger-800);
+  --sl-input-invalid-focus-ring-color: var(--sl-color-danger-300);
+  --sl-input-invalid-filled-border-width: var(--sl-input-border-width);
 
   /* Toggles (checkboxes, radios, switches) */
   --sl-toggle-size-small: 0.875rem; /* 14px */

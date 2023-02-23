@@ -166,4 +166,39 @@ export default css`
     resize: none;
     overflow-y: hidden;
   }
+
+  /* Validity */
+  :host([data-user-valid]) .textarea {
+    border-color: var(--sl-input-valid-border-color);
+  }
+
+  :host([data-user-valid]) .textarea:hover {
+    border-color: var(--sl-input-valid-border-color-hover);
+  }
+
+  :host([data-user-valid]) .textarea:focus-within {
+    border-color: var(--sl-input-valid-border-color-focus);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-input-valid-focus-ring-color);
+  }
+
+  :host([data-user-invalid]) .textarea {
+    border-color: var(--sl-input-invalid-border-color);
+  }
+
+  :host([data-user-invalid]) .textarea:hover {
+    border-color: var(--sl-input-invalid-border-color-hover);
+  }
+
+  :host([data-user-invalid]) .textarea:focus-within {
+    border-color: var(--sl-input-invalid-border-color);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-input-invalid-focus-ring-color);
+  }
+
+  :host([data-user-valid]) .textarea--filled {
+    border: solid var(--sl-input-valid-filled-border-width);
+  }
+
+  :host([data-user-invalid]) .textarea--filled {
+    border: solid var(--sl-input-invalid-filled-border-width);
+  }
 `;

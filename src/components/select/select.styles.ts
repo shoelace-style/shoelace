@@ -324,21 +324,37 @@ export default css`
   }
 
   /* Validity */
-  :host([data-user-valid]) [part='combobox'] {
+  :host([data-user-valid]) .select__combobox {
     border-color: var(--sl-input-valid-border-color);
   }
 
-  :host([data-user-valid]) :focus-within [part='combobox'] {
-    border-color: var(--sl-input-valid-border-color);
+  :host([data-user-valid]) .select__combobox:hover {
+    border-color: var(--sl-input-valid-border-color-hover);
+  }
+
+  :host([data-user-valid]) .select:focus-within .select__combobox {
+    border: solid var(--sl-input-border-width) var(--sl-input-valid-border-color-focus);
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-input-valid-focus-ring-color);
   }
 
-  :host([data-user-invalid]) [part='combobox'] {
+  :host([data-user-invalid]) .select__combobox {
     border-color: var(--sl-input-invalid-border-color);
   }
 
-  :host([data-user-invalid]) :focus-within [part='combobox'] {
+  :host([data-user-invalid]) .select__combobox:hover {
+    border-color: var(--sl-input-invalid-border-color-hover);
+  }
+
+  :host([data-user-invalid]) .select:focus-within .select__combobox {
     border-color: var(--sl-input-invalid-border-color);
     box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-input-invalid-focus-ring-color);
+  }
+
+  :host([data-user-valid]) .select--filled .select__combobox {
+    border: solid var(--sl-input-valid-filled-border-width);
+  }
+
+  :host([data-user-invalid]) .select--filled .select-combobox {
+    border: solid var(--sl-input-invalid-filled-border-width);
   }
 `;
