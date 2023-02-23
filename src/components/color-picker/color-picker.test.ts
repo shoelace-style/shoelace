@@ -5,7 +5,6 @@ import { sendKeys } from '@web/test-runner-commands';
 import { serialize } from '../../utilities/form';
 import sinon from 'sinon';
 import type SlColorPicker from './color-picker';
-import type SlInput from '../input/input';
 
 describe('<sl-color-picker>', () => {
   describe('when the value changes', () => {
