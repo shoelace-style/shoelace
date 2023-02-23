@@ -9,7 +9,6 @@ import { map } from 'lit/directives/map.js';
 import { prefersReducedMotion } from '../../internal/animate';
 import { range } from 'lit/directives/range.js';
 import { ScrollController } from './scroll-controller';
-import { styleMap } from 'lit/directives/style-map.js';
 import { watch } from '../../internal/watch';
 import { when } from 'lit/directives/when.js';
 import ShoelaceElement from '../../internal/shoelace-element';
@@ -18,7 +17,7 @@ import styles from './carousel.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
- * @summary A generic carousel used for displaying an arbitrary number of `sl-carousel-item` along horizontal or vertical axis.
+ * @summary Carousels display an arbitrary number of slides along a horizontal or vertical axis.
  *
  * @since 2.0
  * @status experimental
@@ -43,7 +42,8 @@ import type { CSSResultGroup } from 'lit';
  *
  * @cssproperty --slide-gap - The space between each slide.
  * @cssproperty --aspect-ratio - The aspect ratio of each slide.
- * @cssproperty --scroll-padding - The amount of padding to apply to the scrollport, useful to make visible the closest slides.
+ * @cssproperty --scroll-padding - The amount of padding to apply to the scroll area. Useful to make adjacent slides
+ *  visible.
  *
  */
 @customElement('sl-carousel')
@@ -68,7 +68,10 @@ export default class SlCarousel extends ShoelaceElement {
   /** Specifies how many slides should be shown at a given time.  */
   @property({ type: Number, attribute: 'slides-per-page' }) slidesPerPage = 1;
 
-  /** Specifies the number of slides the carousel will advance when scrolling, useful when specifying a `slides-per-page` greather than one. */
+  /**
+   * Specifies the number of slides the carousel will advance when scrolling, useful when specifying a `slides-per-page`
+   * greater than one.
+   */
   @property({ type: Number, attribute: 'slides-per-move' }) slidesPerMove = 1;
 
   /** Specifies the orientation in which the carousel will lay out.  */
@@ -91,10 +94,10 @@ export default class SlCarousel extends ShoelaceElement {
 
   private readonly slides = this.getElementsByTagName('sl-carousel-item');
 
-  // The interseection observer is used to determine which slide is displayed
+  // The intersection observer is used to determine which slide is displayed
   private intersectionObserver: IntersectionObserver;
 
-  // A map containig the state of all the slides
+  // A map containing the state of all the slides
   private readonly intersectionObserverEntries = new Map<Element, IntersectionObserverEntry>();
 
   private readonly localize = new LocalizeController(this);
@@ -138,7 +141,7 @@ export default class SlCarousel extends ShoelaceElement {
   }
 
   protected firstUpdated(): void {
-    this.initialiseSlides();
+    this.initializeSlides();
     this.mutationObserver = new MutationObserver(this.handleSlotChange.bind(this));
     this.mutationObserver.observe(this, { childList: true, subtree: false });
   }
@@ -186,15 +189,15 @@ export default class SlCarousel extends ShoelaceElement {
   }
 
   handleSlotChange(mutations: MutationRecord[]) {
-    const needsInitialisation = mutations.some(mutation =>
+    const needsInitialization = mutations.some(mutation =>
       [...mutation.addedNodes, ...mutation.removedNodes].some(
         node => SlCarouselItem.isCarouselItem(node) && !(node as HTMLElement).hasAttribute('data-clone')
       )
     );
 
-    // Reinitialise the carousel if a carousel item has been added and/or removed
-    if (needsInitialisation) {
-      this.initialiseSlides();
+    // Reinitialize the carousel if a carousel item has been added and/or removed
+    if (needsInitialization) {
+      this.initializeSlides();
       this.requestUpdate();
     }
   }
@@ -213,7 +216,7 @@ export default class SlCarousel extends ShoelaceElement {
       return;
     }
 
-    // Activate the first inetersecting slide
+    // Activate the first intersecting slide
     if (firstIntersecting) {
       this.activeSlide = slides.indexOf(firstIntersecting.target as SlCarouselItem);
     }
@@ -221,7 +224,7 @@ export default class SlCarousel extends ShoelaceElement {
 
   @watch('loop', { waitUntilFirstUpdate: true })
   @watch('slidesPerPage', { waitUntilFirstUpdate: true })
-  initialiseSlides() {
+  initializeSlides() {
     const slides = this.getSlides();
     const intersectionObserver = this.intersectionObserver;
 
@@ -412,9 +415,7 @@ export default class SlCarousel extends ShoelaceElement {
           @scrollend="${this.handleScrollEnd}"
           role="list"
           tabindex="0"
-          style="${styleMap({
-            '--slides-per-page': String(this.slidesPerPage)
-          })}"
+          style="--slides-per-page: ${this.slidesPerPage};"
           aria-live="${!autoplayController.stopped && !autoplayController.paused ? 'off' : 'polite'}"
           aria-busy="${scrollController.scrolling ? 'true' : 'false'}"
           aria-atomic="true"

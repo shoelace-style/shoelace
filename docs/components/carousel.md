@@ -9,31 +9,31 @@ Carousels consist of optional navigation arrows to go backwards and forwards, as
   <sl-carousel-item>
     <img
       alt="The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash"
-      src="/assets/examples/carousel/adam-kool-ndN00KmbJ1c-unsplash.jpg"
+      src="/assets/examples/carousel/mountains.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash"
-      src="/assets/examples/carousel/thomas-kelley-JoH60FhTp50-unsplash.jpg"
+      src="/assets/examples/carousel/waterfall.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash"
-      src="/assets/examples/carousel/leonard-cotte-c1Jp-fo53U8-unsplash.jpg"
+      src="/assets/examples/carousel/sunset.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash"
-      src="/assets/examples/carousel/sapan-patel-i9Q9bc-WgfE-unsplash.jpg"
+      src="/assets/examples/carousel/field.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash"
-      src="/assets/examples/carousel/v2osk-1Z2niiBPg5A-unsplash.jpg"
+      src="/assets/examples/carousel/valley.jpg"
     />
   </sl-carousel-item>
 </sl-carousel>
@@ -149,31 +149,31 @@ const App = () => {
         <SlCarouselItem>
           <img
             alt="The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash"
-            src="/assets/examples/carousel/adam-kool-ndN00KmbJ1c-unsplash.jpg"
+            src="/assets/examples/carousel/mountains.jpg"
           />
         </SlCarouselItem>
         <SlCarouselItem>
           <img
             alt="A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash"
-            src="/assets/examples/carousel/thomas-kelley-JoH60FhTp50-unsplash.jpg"
+            src="/assets/examples/carousel/waterfall.jpg"
           />
         </SlCarouselItem>
         <SlCarouselItem>
           <img
             alt="The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash"
-            src="/assets/examples/carousel/leonard-cotte-c1Jp-fo53U8-unsplash.jpg"
+            src="/assets/examples/carousel/sunset.jpg"
           />
         </SlCarouselItem>
         <SlCarouselItem>
           <img
             alt="A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash"
-            src="/assets/examples/carousel/sapan-patel-i9Q9bc-WgfE-unsplash.jpg"
+            src="/assets/examples/carousel/field.jpg"
           />
         </SlCarouselItem>
         <SlCarouselItem>
           <img
             alt="A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash"
-            src="/assets/examples/carousel/v2osk-1Z2niiBPg5A-unsplash.jpg"
+            src="/assets/examples/carousel/valley.jpg"
           />
         </SlCarouselItem>
       </SlCarousel>
@@ -411,31 +411,31 @@ it's important to specify a predefined height to the carousel through CSS.
   <sl-carousel-item>
     <img
       alt="The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash"
-      src="/assets/examples/carousel/adam-kool-ndN00KmbJ1c-unsplash.jpg"
+      src="/assets/examples/carousel/mountains.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash"
-      src="/assets/examples/carousel/thomas-kelley-JoH60FhTp50-unsplash.jpg"
+      src="/assets/examples/carousel/waterfall.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash"
-      src="/assets/examples/carousel/leonard-cotte-c1Jp-fo53U8-unsplash.jpg"
+      src="/assets/examples/carousel/sunset.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash"
-      src="/assets/examples/carousel/sapan-patel-i9Q9bc-WgfE-unsplash.jpg"
+      src="/assets/examples/carousel/field.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash"
-      src="/assets/examples/carousel/v2osk-1Z2niiBPg5A-unsplash.jpg"
+      src="/assets/examples/carousel/valley.jpg"
     />
   </sl-carousel-item>
 </sl-carousel>
@@ -487,31 +487,31 @@ const App = () => (
       <SlCarouselItem>
         <img
           alt="The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash"
-          src="/assets/examples/carousel/adam-kool-ndN00KmbJ1c-unsplash.jpg"
+          src="/assets/examples/carousel/mountains.jpg"
         />
       </SlCarouselItem>
       <SlCarouselItem>
         <img
           alt="A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash"
-          src="/assets/examples/carousel/thomas-kelley-JoH60FhTp50-unsplash.jpg"
+          src="/assets/examples/carousel/waterfall.jpg"
         />
       </SlCarouselItem>
       <SlCarouselItem>
         <img
           alt="The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash"
-          src="/assets/examples/carousel/leonard-cotte-c1Jp-fo53U8-unsplash.jpg"
+          src="/assets/examples/carousel/sunset.jpg"
         />
       </SlCarouselItem>
       <SlCarouselItem>
         <img
           alt="A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash"
-          src="/assets/examples/carousel/sapan-patel-i9Q9bc-WgfE-unsplash.jpg"
+          src="/assets/examples/carousel/field.jpg"
         />
       </SlCarouselItem>
       <SlCarouselItem>
         <img
           alt="A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash"
-          src="/assets/examples/carousel/v2osk-1Z2niiBPg5A-unsplash.jpg"
+          src="/assets/examples/carousel/valley.jpg"
         />
       </SlCarouselItem>
     </SlCarousel>
@@ -529,31 +529,31 @@ Use the `--aspect-ratio` custom property to customize the size of viewport in or
   <sl-carousel-item>
     <img
       alt="The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash"
-      src="/assets/examples/carousel/adam-kool-ndN00KmbJ1c-unsplash.jpg"
+      src="/assets/examples/carousel/mountains.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash"
-      src="/assets/examples/carousel/thomas-kelley-JoH60FhTp50-unsplash.jpg"
+      src="/assets/examples/carousel/waterfall.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash"
-      src="/assets/examples/carousel/leonard-cotte-c1Jp-fo53U8-unsplash.jpg"
+      src="/assets/examples/carousel/sunset.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash"
-      src="/assets/examples/carousel/sapan-patel-i9Q9bc-WgfE-unsplash.jpg"
+      src="/assets/examples/carousel/field.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash"
-      src="/assets/examples/carousel/v2osk-1Z2niiBPg5A-unsplash.jpg"
+      src="/assets/examples/carousel/valley.jpg"
     />
   </sl-carousel-item>
 </sl-carousel>
@@ -590,31 +590,31 @@ const App = () => {
         <SlCarouselItem>
           <img
             alt="The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash"
-            src="/assets/examples/carousel/adam-kool-ndN00KmbJ1c-unsplash.jpg"
+            src="/assets/examples/carousel/mountains.jpg"
           />
         </SlCarouselItem>
         <SlCarouselItem>
           <img
             alt="A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash"
-            src="/assets/examples/carousel/thomas-kelley-JoH60FhTp50-unsplash.jpg"
+            src="/assets/examples/carousel/waterfall.jpg"
           />
         </SlCarouselItem>
         <SlCarouselItem>
           <img
             alt="The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash"
-            src="/assets/examples/carousel/leonard-cotte-c1Jp-fo53U8-unsplash.jpg"
+            src="/assets/examples/carousel/sunset.jpg"
           />
         </SlCarouselItem>
         <SlCarouselItem>
           <img
             alt="A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash"
-            src="/assets/examples/carousel/sapan-patel-i9Q9bc-WgfE-unsplash.jpg"
+            src="/assets/examples/carousel/field.jpg"
           />
         </SlCarouselItem>
         <SlCarouselItem>
           <img
             alt="A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash"
-            src="/assets/examples/carousel/v2osk-1Z2niiBPg5A-unsplash.jpg"
+            src="/assets/examples/carousel/valley.jpg"
           />
         </SlCarouselItem>
       </SlCarousel>
@@ -649,31 +649,31 @@ be scrolled.
   <sl-carousel-item>
     <img
       alt="The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash"
-      src="/assets/examples/carousel/adam-kool-ndN00KmbJ1c-unsplash.jpg"
+      src="/assets/examples/carousel/mountains.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash"
-      src="/assets/examples/carousel/thomas-kelley-JoH60FhTp50-unsplash.jpg"
+      src="/assets/examples/carousel/waterfall.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash"
-      src="/assets/examples/carousel/leonard-cotte-c1Jp-fo53U8-unsplash.jpg"
+      src="/assets/examples/carousel/sunset.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash"
-      src="/assets/examples/carousel/sapan-patel-i9Q9bc-WgfE-unsplash.jpg"
+      src="/assets/examples/carousel/field.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash"
-      src="/assets/examples/carousel/v2osk-1Z2niiBPg5A-unsplash.jpg"
+      src="/assets/examples/carousel/valley.jpg"
     />
   </sl-carousel-item>
 </sl-carousel>
@@ -711,31 +711,31 @@ const App = () => {
         <SlCarouselItem>
           <img
             alt="The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash"
-            src="/assets/examples/carousel/adam-kool-ndN00KmbJ1c-unsplash.jpg"
+            src="/assets/examples/carousel/mountains.jpg"
           />
         </SlCarouselItem>
         <SlCarouselItem>
           <img
             alt="A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash"
-            src="/assets/examples/carousel/thomas-kelley-JoH60FhTp50-unsplash.jpg"
+            src="/assets/examples/carousel/waterfall.jpg"
           />
         </SlCarouselItem>
         <SlCarouselItem>
           <img
             alt="The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash"
-            src="/assets/examples/carousel/leonard-cotte-c1Jp-fo53U8-unsplash.jpg"
+            src="/assets/examples/carousel/sunset.jpg"
           />
         </SlCarouselItem>
         <SlCarouselItem>
           <img
             alt="A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash"
-            src="/assets/examples/carousel/sapan-patel-i9Q9bc-WgfE-unsplash.jpg"
+            src="/assets/examples/carousel/field.jpg"
           />
         </SlCarouselItem>
         <SlCarouselItem>
           <img
             alt="A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash"
-            src="/assets/examples/carousel/v2osk-1Z2niiBPg5A-unsplash.jpg"
+            src="/assets/examples/carousel/valley.jpg"
           />
         </SlCarouselItem>
       </SlCarousel>
@@ -757,38 +757,38 @@ const App = () => {
 
 ### Custom layout
 
-The appereance of the carousel can be easly customized through its slots or `part` attributes.
+The appearance of the carousel can be easily customized through its slots or `part` attributes.
 
 ```html preview
 <sl-carousel class="custom-layout" navigation pagination>
   <sl-carousel-item>
     <img
       alt="The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash"
-      src="/assets/examples/carousel/adam-kool-ndN00KmbJ1c-unsplash.jpg"
+      src="/assets/examples/carousel/mountains.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash"
-      src="/assets/examples/carousel/thomas-kelley-JoH60FhTp50-unsplash.jpg"
+      src="/assets/examples/carousel/waterfall.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash"
-      src="/assets/examples/carousel/leonard-cotte-c1Jp-fo53U8-unsplash.jpg"
+      src="/assets/examples/carousel/sunset.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash"
-      src="/assets/examples/carousel/sapan-patel-i9Q9bc-WgfE-unsplash.jpg"
+      src="/assets/examples/carousel/field.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash"
-      src="/assets/examples/carousel/v2osk-1Z2niiBPg5A-unsplash.jpg"
+      src="/assets/examples/carousel/valley.jpg"
     />
   </sl-carousel-item>
 
@@ -894,31 +894,31 @@ const App = () => (
       <SlCarouselItem>
         <img
           alt="The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash"
-          src="/assets/examples/carousel/adam-kool-ndN00KmbJ1c-unsplash.jpg"
+          src="/assets/examples/carousel/mountains.jpg"
         />
       </SlCarouselItem>
       <SlCarouselItem>
         <img
           alt="A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash"
-          src="/assets/examples/carousel/thomas-kelley-JoH60FhTp50-unsplash.jpg"
+          src="/assets/examples/carousel/waterfall.jpg"
         />
       </SlCarouselItem>
       <SlCarouselItem>
         <img
           alt="The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash"
-          src="/assets/examples/carousel/leonard-cotte-c1Jp-fo53U8-unsplash.jpg"
+          src="/assets/examples/carousel/sunset.jpg"
         />
       </SlCarouselItem>
       <SlCarouselItem>
         <img
           alt="A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash"
-          src="/assets/examples/carousel/sapan-patel-i9Q9bc-WgfE-unsplash.jpg"
+          src="/assets/examples/carousel/field.jpg"
         />
       </SlCarouselItem>
       <SlCarouselItem>
         <img
           alt="A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash"
-          src="/assets/examples/carousel/v2osk-1Z2niiBPg5A-unsplash.jpg"
+          src="/assets/examples/carousel/valley.jpg"
         />
       </SlCarouselItem>
 
@@ -937,68 +937,48 @@ use `next()` or `previous()` to go respectively to the next or the previous slid
 
 When the active slide is changed, the `sl-slide-change` event is emitted providing the `index` of the slide.
 
-Using the API is possible to extend the carousel, for exmaple by syncing the active slide with a set of thumbnails, like in the example below.
+Using the API is possible to extend the carousel, for example by syncing the active slide with a set of thumbnails, like in the example below.
 
 ```html preview
 <sl-carousel class="carousel-thumbnails" navigation loop>
   <sl-carousel-item>
     <img
       alt="The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash"
-      src="/assets/examples/carousel/adam-kool-ndN00KmbJ1c-unsplash.jpg"
+      src="/assets/examples/carousel/mountains.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash"
-      src="/assets/examples/carousel/thomas-kelley-JoH60FhTp50-unsplash.jpg"
+      src="/assets/examples/carousel/waterfall.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash"
-      src="/assets/examples/carousel/leonard-cotte-c1Jp-fo53U8-unsplash.jpg"
+      src="/assets/examples/carousel/sunset.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash"
-      src="/assets/examples/carousel/sapan-patel-i9Q9bc-WgfE-unsplash.jpg"
+      src="/assets/examples/carousel/field.jpg"
     />
   </sl-carousel-item>
   <sl-carousel-item>
     <img
       alt="A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash"
-      src="/assets/examples/carousel/v2osk-1Z2niiBPg5A-unsplash.jpg"
+      src="/assets/examples/carousel/valley.jpg"
     />
   </sl-carousel-item>
 </sl-carousel>
 <div class="thumbnails">
   <div class="thumbnails__scroller">
-    <img
-      alt="Thumbnail Photo by 1"
-      class="thumbnails__image active"
-      src="/assets/examples/carousel/adam-kool-ndN00KmbJ1c-unsplash.jpg"
-    />
-    <img
-      alt="Thumbnail Photo by 2"
-      class="thumbnails__image"
-      src="/assets/examples/carousel/thomas-kelley-JoH60FhTp50-unsplash.jpg"
-    />
-    <img
-      alt="Thumbnail Photo by 3"
-      class="thumbnails__image"
-      src="/assets/examples/carousel/leonard-cotte-c1Jp-fo53U8-unsplash.jpg"
-    />
-    <img
-      alt="Thumbnail Photo by 4"
-      class="thumbnails__image"
-      src="/assets/examples/carousel/sapan-patel-i9Q9bc-WgfE-unsplash.jpg"
-    />
-    <img
-      alt="Thumbnail Photo by 5"
-      class="thumbnails__image"
-      src="/assets/examples/carousel/v2osk-1Z2niiBPg5A-unsplash.jpg"
-    />
+    <img alt="Thumbnail Photo by 1" class="thumbnails__image active" src="/assets/examples/carousel/mountains.jpg" />
+    <img alt="Thumbnail Photo by 2" class="thumbnails__image" src="/assets/examples/carousel/waterfall.jpg" />
+    <img alt="Thumbnail Photo by 3" class="thumbnails__image" src="/assets/examples/carousel/sunset.jpg" />
+    <img alt="Thumbnail Photo by 4" class="thumbnails__image" src="/assets/examples/carousel/field.jpg" />
+    <img alt="Thumbnail Photo by 5" class="thumbnails__image" src="/assets/examples/carousel/valley.jpg" />
   </div>
 </div>
 <style>
@@ -1117,23 +1097,23 @@ const css = `
 
 const images = [
   {
-    src: '/assets/examples/carousel/adam-kool-ndN00KmbJ1c-unsplash.jpg',
+    src: '/assets/examples/carousel/mountains.jpg',
     alt: 'The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash'
   },
   {
-    src: '/assets/examples/carousel/thomas-kelley-JoH60FhTp50-unsplash.jpg',
+    src: '/assets/examples/carousel/waterfall.jpg',
     alt: 'A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash'
   },
   {
-    src: '/assets/examples/carousel/leonard-cotte-c1Jp-fo53U8-unsplash.jpg',
+    src: '/assets/examples/carousel/sunset.jpg',
     alt: 'The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash'
   },
   {
-    src: '/assets/examples/carousel/sapan-patel-i9Q9bc-WgfE-unsplash.jpg',
+    src: '/assets/examples/carousel/field.jpg',
     alt: 'A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash'
   },
   {
-    src: '/assets/examples/carousel/v2osk-1Z2niiBPg5A-unsplash.jpg',
+    src: '/assets/examples/carousel/valley.jpg',
     alt: 'A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash'
   }
 ];

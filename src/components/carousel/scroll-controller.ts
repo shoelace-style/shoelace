@@ -1,5 +1,5 @@
-import { prefersReducedMotion } from 'src/internal/animate';
 import { debounce } from 'src/internal/debounce';
+import { prefersReducedMotion } from 'src/internal/animate';
 import { waitForEvent } from 'src/internal/event';
 import type { ReactiveController, ReactiveElement } from 'lit';
 

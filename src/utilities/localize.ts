@@ -29,7 +29,9 @@ export interface Translation extends DefaultTranslation {
   showPassword: string;
   toggleColorFormat: string;
 
-  // TODO: upate translations for all languages
+  //
+  // TODO: update translations for all languages
+  //
   goToCarouselNextSlide?: string;
   goToCarouselPreviousSlide?: string;
   goToCarouselSlide?: (slide: number, count: number) => string;
