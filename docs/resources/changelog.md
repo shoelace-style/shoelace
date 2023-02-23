@@ -6,6 +6,13 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## Next
+
+- Fixed a bug in `<sl-select>` that caused the display label to render incorrectly in Chrome after form validation [#1197](https://github.com/shoelace-style/shoelace/discussions/1197)
+- Fixed a bug in `<sl-input>` that prevented users from applying their own value for `autocapitalize`, `autocomplete`, and `autocorrect` when using `type="password` [#1205](https://github.com/shoelace-style/shoelace/issues/1205)
+
+When using `<input type="password">` the default value for `autocapitalize`, `autocomplete`, and `autocorrect` may be affected due to the bug fixed in [#1205](https://github.com/shoelace-style/shoelace/issues/1205). For any affected users, setting these attributes to `off` will restore the previous behavior.
+
 ## 2.1.0
 
 - Added the `sl-focus` and `sl-blur` events to `<sl-color-picker>`

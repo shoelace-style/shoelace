@@ -469,9 +469,9 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
               max=${ifDefined(this.max)}
               step=${ifDefined(this.step as number)}
               .value=${live(this.value)}
-              autocapitalize=${ifDefined(this.type === 'password' ? 'off' : this.autocapitalize)}
-              autocomplete=${ifDefined(this.type === 'password' ? 'off' : this.autocomplete)}
-              autocorrect=${ifDefined(this.type === 'password' ? 'off' : this.autocorrect)}
+              autocapitalize=${ifDefined(this.autocapitalize)}
+              autocomplete=${ifDefined(this.autocomplete)}
+              autocorrect=${ifDefined(this.autocorrect)}
               ?autofocus=${this.autofocus}
               spellcheck=${this.spellcheck}
               pattern=${ifDefined(this.pattern)}
