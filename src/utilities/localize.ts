@@ -28,4 +28,9 @@ export interface Translation extends DefaultTranslation {
   selectAColorFromTheScreen: string;
   showPassword: string;
   toggleColorFormat: string;
+
+  // TODO: upate translations for all languages
+  goToCarouselNextSlide?: string;
+  goToCarouselPreviousSlide?: string;
+  goToCarouselSlide?: (slide: number, count: number) => string;
 }
