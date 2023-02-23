@@ -279,81 +279,6 @@ These attributes map to the browser's built-in pseudo classes for validation: [`
 
 ?> In the future, data attributes will be replaced with custom pseudo classes such as `:--valid` and `:--invalid`. Shoelace is using data attributes as a workaround until browsers support custom states through [`ElementInternals.states`](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states).
 
-### Styling form controls
-
-TODO - Description
-
-```html preview
-<form class="form-control-validity-styles">
-  <sl-input label="Text input" autocomplete="off" required></sl-input>
-  <sl-input label="Text input (filled)" autocomplete="off" filled required></sl-input>
-
-  <sl-textarea label="Textarea" required></sl-textarea>
-  <sl-textarea label="Textarea (filled)" filled required></sl-textarea>
-
-  <sl-select label="Select box" required>
-    <sl-option value="option1">Option 1</sl-option>
-    <sl-option value="option2">Option 2</sl-option>
-  </sl-select>
-
-  <sl-select label="Select box (filled)" filled required>
-    <sl-option value="option1">Option 1</sl-option>
-    <sl-option value="option2">Option 2</sl-option>
-  </sl-select>
-
-  <sl-radio-group label="Radio group" required>
-    <sl-radio value="option1">Option 1</sl-radio>
-    <sl-radio value="option2">Option 2</sl-radio>
-  </sl-radio-group>
-
-  <sl-checkbox value="checked" required>Checkbox</sl-checkbox>
-
-  <div>
-    <sl-button type="submit" variant="primary">Submit</sl-button>
-    <sl-button type="reset" variant="default">Reset</sl-button>
-  </div>
-</form>
-
-<script type="module">
-  const form = document.querySelector('.validity-styles');
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    alert('All fields are valid!');
-  });
-</script>
-
-<style>
-  .form-control-validity-styles {
-    --sl-input-valid-border-color: var(--sl-color-success-600);
-    --sl-input-valid-border-color-hover: var(--sl-color-success-700);
-    --sl-input-valid-border-color-focus: var(--sl-color-success-800);
-    --sl-input-valid-focus-ring-color: var(--sl-color-success-300);
-    --sl-input-valid-filled-border-width: var(--sl-input-border-width);
-  }
-
-  .form-control-validity-styles {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sl-spacing-medium);
-  }
-</style>
-```
-
-## Custom Validation Styles
-
-Due to the many ways form controls are used, Shoelace doesn't provide out of the box validation styles for form controls as part of its default theme. Instead, the following attributes will be applied to reflect a control's validity as users interact with it. You can use them to create custom styles for any of the validation states you're interested in.
-
-- `data-required` - the form control is required
-- `data-optional` - the form control is optional
-- `data-invalid` - the form control is currently invalid
-- `data-valid` - the form control is currently valid
-- `data-user-invalid` - the form control is currently invalid and the user has interacted with it
-- `data-user-valid` - the form control is currently valid and the user has interacted with it
-
-These attributes map to the browser's built-in pseudo classes for validation: [`:required`](https://developer.mozilla.org/en-US/docs/Web/CSS/:required), [`:optional`](https://developer.mozilla.org/en-US/docs/Web/CSS/:optional), [`:invalid`](https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid), [`:valid`](https://developer.mozilla.org/en-US/docs/Web/CSS/:valid), and the proposed [`:user-invalid`](https://developer.mozilla.org/en-US/docs/Web/CSS/:user-invalid) and [`:user-valid`](https://developer.mozilla.org/en-US/docs/Web/CSS/:user-valid).
-
-?> In the future, data attributes will be replaced with custom pseudo classes such as `:--valid` and `:--invalid`. Shoelace is using data attributes as a workaround until browsers support custom states through [`ElementInternals.states`](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states).
-
 ### Styling Invalid Form Controls
 
 You can target validity using any of the aforementioned data attributes, but it's usually preferable to target `data-user-invalid` and `data-user-valid` since they get applied only after a user interaction such as typing or submitting. This prevents empty form controls from appearing invalid immediately, which often results in a poor user experience.
@@ -450,6 +375,72 @@ This example demonstrates custom validation styles using `data-user-invalid` and
 </style>
 ```
 
+### Styling form controls
+
+TODO - Description
+
+```html preview
+<form class="form-control-validity-styles">
+  <sl-input label="Text input" autocomplete="off" required></sl-input>
+  <sl-input label="Text input (filled)" autocomplete="off" filled required></sl-input>
+
+  <sl-textarea label="Textarea" required></sl-textarea>
+  <sl-textarea label="Textarea (filled)" filled required></sl-textarea>
+
+  <sl-select label="Select box" required clearable>
+    <sl-option value="option1">Option 1</sl-option>
+    <sl-option value="option2">Option 2</sl-option>
+  </sl-select>
+
+  <sl-select label="Select box (filled)" filled required clearable>
+    <sl-option value="option1">Option 1</sl-option>
+    <sl-option value="option2">Option 2</sl-option>
+  </sl-select>
+
+  <sl-radio-group label="Radio group" required>
+    <sl-radio value="option1">Option 1</sl-radio>
+    <sl-radio value="option2">Option 2</sl-radio>
+  </sl-radio-group>
+
+  <sl-radio-group label="Radio group (with buttons)" required>
+    <sl-radio-button value="option1">Option 1</sl-radio-button>
+    <sl-radio-button value="option2">Option 2</sl-radio-button>
+  </sl-radio-group>
+
+  <sl-checkbox value="checked" required>Checkbox</sl-checkbox>
+
+  <div>
+    <sl-button type="submit" variant="primary">Submit</sl-button>
+    <sl-button type="reset" variant="default">Reset</sl-button>
+  </div>
+</form>
+
+<script type="module">
+  const form = document.querySelector('.form-control-validity-styles');
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    alert('All fields are valid!');
+  });
+</script>
+
+<style>
+  .form-control-validity-styles {
+    --sl-input-valid-border-color: var(--sl-color-success-600);
+    --sl-input-valid-border-color-hover: var(--sl-color-success-700);
+    --sl-input-valid-border-color-focus: var(--sl-color-success-800);
+    --sl-input-valid-focus-ring-color: var(--sl-color-success-300);
+    --sl-input-valid-filled-border-width: var(--sl-input-border-width);
+  }
+
+  .form-control-validity-styles {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sl-spacing-medium);
+  }
+</style>
+```
+
 ## Inline Form Validation
 
 By default, Shoelace form controls use the browser's tooltip-style error messages. No mechanism is provided to show errors inline, as there are too many opinions on how that would work when combined with native form controls and other custom elements. You can, however, implement your own solution using the following technique.
@@ -490,17 +481,6 @@ To disable the browser's error messages, you need to cancel the `sl-invalid` eve
     },
     { capture: true } // you must use capture since sl-invalid doesn't bubble!
   );
-
-  // Handle input
-  form.addEventListener('sl-input', event => {
-    if (event.target.validity.valid) {
-      nameError.textContent = '';
-      nameError.hidden = true;
-    } else {
-      nameError.textContent = event.target.validationMessage;
-      nameError.hidden = false;
-    }
-  });
 
   // Handle form submit
   form.addEventListener('submit', event => {

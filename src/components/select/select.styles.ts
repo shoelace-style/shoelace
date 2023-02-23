@@ -351,10 +351,12 @@ export default css`
   }
 
   :host([data-user-valid]) .select--filled .select__combobox {
-    border: solid var(--sl-input-valid-filled-border-width);
+    border: solid var(--sl-input-valid-filled-border-width) var(--sl-input-valid-border-color);
+    outline: none;
   }
 
-  :host([data-user-invalid]) .select--filled .select-combobox {
-    border: solid var(--sl-input-invalid-filled-border-width);
+  :host([data-user-invalid]) .select--filled .select__combobox {
+    border: solid var(--sl-input-invalid-filled-border-width) var(--sl-input-invalid-border-color);
+    outline: none;
   }
 `;

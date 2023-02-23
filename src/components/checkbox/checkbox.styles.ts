@@ -118,7 +118,7 @@ export default css`
   }
 
   /* Validity */
-  :host([data-user-invalid]) [part='control'] {
+  :host([data-user-invalid]) .checkbox__control {
     border-color: var(--sl-input-invalid-border-color);
   }
 

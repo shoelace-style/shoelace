@@ -195,10 +195,12 @@ export default css`
   }
 
   :host([data-user-valid]) .textarea--filled {
-    border: solid var(--sl-input-valid-filled-border-width);
+    border: solid var(--sl-input-valid-filled-border-width) var(--sl-input-valid-border-color);
+    outline: none;
   }
 
   :host([data-user-invalid]) .textarea--filled {
-    border: solid var(--sl-input-invalid-filled-border-width);
+    border: solid var(--sl-input-invalid-filled-border-width) var(--sl-input-invalid-border-color);
+    outline: none;
   }
 `;
