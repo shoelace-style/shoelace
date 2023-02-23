@@ -8,7 +8,7 @@ export default css`
     display: flex;
 
     --slide-gap: var(--sl-spacing-medium, 1rem);
-    --aspect-ratio: unset;
+    --aspect-ratio: 16 / 9;
     --scroll-padding: 0px;
   }
 
