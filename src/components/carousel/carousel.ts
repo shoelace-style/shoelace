@@ -17,7 +17,7 @@ import styles from './carousel.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
- * @summary Carousels display an arbitrary number of slides along a horizontal or vertical axis.
+ * @summary Carousels display an arbitrary number of content slides along a horizontal or vertical axis.
  *
  * @since 2.0
  * @status experimental
@@ -42,7 +42,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @cssproperty --slide-gap - The space between each slide.
  * @cssproperty --aspect-ratio - The aspect ratio of each slide.
- * @cssproperty --scroll-padding - The amount of padding to apply to the scroll area. Useful to make adjacent slides
+ * @cssproperty --scroll-hint - The amount of padding to apply to the scroll area. Useful to make adjacent slides
  *  visible.
  */
 @customElement('sl-carousel')
@@ -320,22 +320,17 @@ export default class SlCarousel extends ShoelaceElement {
         ${map(range(pagesCount), index => {
           const isActive = index === currentPage;
           return html`
-            <span role="presentation">
-              <button
-                @click="${() => this.goToSlide(index * slidesPerPage)}"
-                aria-selected="${isActive ? 'true' : 'false'}"
-                aria-label="${this.localize.term('goToCarouselSlide', index + 1, pagesCount)}"
-                role="tab"
-                part="
-                    pagination-item
-                    ${isActive ? 'pagination-item--active' : ''}
-                  "
-                class="${classMap({
-                  'carousel__pagination-item': true,
-                  'carousel__pagination-item--active': isActive
-                })}"
-              ></button>
-            </span>
+            <button
+              part="pagination-item ${isActive ? 'pagination-item--active' : ''}"
+              class="${classMap({
+                'carousel__pagination-item': true,
+                'carousel__pagination-item--active': isActive
+              })}"
+              aria-selected="${isActive ? 'true' : 'false'}"
+              aria-label="${this.localize.term('goToCarouselSlide', index + 1, pagesCount)}"
+              role="tab"
+              @click="${() => this.goToSlide(index * slidesPerPage)}"
+            ></button>
           `;
         })}
       </nav>

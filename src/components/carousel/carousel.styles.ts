@@ -9,25 +9,20 @@ export default css`
 
     --slide-gap: var(--sl-spacing-medium, 1rem);
     --aspect-ratio: 16 / 9;
-    --scroll-padding: 0px;
+    --scroll-hint: 0px;
   }
 
   .carousel {
-    min-height: 100%;
-    min-width: 100%;
-
     display: grid;
-
-    gap: var(--sl-spacing-medium);
-
     grid-template-columns: min-content 1fr min-content;
     grid-template-rows: 1fr min-content;
     grid-template-areas:
       '. slides .'
       '. pagination .';
-
+    gap: var(--sl-spacing-medium);
     align-items: center;
-
+    min-height: 100%;
+    min-width: 100%;
     position: relative;
   }
 
@@ -40,19 +35,16 @@ export default css`
   }
 
   .carousel__slides {
-    height: 100%;
-    width: 100%;
-
     grid-area: slides;
 
     display: grid;
+    height: 100%;
+    width: 100%;
     align-items: center;
     justify-items: center;
-
     overflow: auto;
     overscroll-behavior-x: contain;
     scrollbar-width: none;
-
     aspect-ratio: calc(var(--aspect-ratio) * var(--slides-per-page));
 
     --slide-size: calc((100% - (var(--slides-per-page) - 1) * var(--slide-gap)) / var(--slides-per-page));
@@ -69,11 +61,9 @@ export default css`
     grid-auto-columns: var(--slide-size);
     grid-auto-rows: 100%;
     column-gap: var(--slide-gap);
-
     scroll-snap-type: x mandatory;
-
-    scroll-padding-inline: var(--scroll-padding);
-    padding-inline: var(--scroll-padding);
+    scroll-padding-inline: var(--scroll-hint);
+    padding-inline: var(--scroll-hint);
   }
 
   .carousel__slides--vertical {
@@ -81,11 +71,9 @@ export default css`
     grid-auto-columns: 100%;
     grid-auto-rows: var(--slide-size);
     row-gap: var(--slide-gap);
-
     scroll-snap-type: y mandatory;
-
-    scroll-padding-block: var(--scroll-padding);
-    padding-block: var(--scroll-padding);
+    scroll-padding-block: var(--scroll-hint);
+    padding-block: var(--scroll-hint);
   }
 
   .carousel__slides--dragging,
@@ -104,7 +92,6 @@ export default css`
   .carousel__navigation {
     grid-area: navigation;
     display: contents;
-
     font-size: var(--sl-font-size-x-large);
   }
 
