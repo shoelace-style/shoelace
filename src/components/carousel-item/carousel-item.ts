@@ -12,7 +12,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @slot - The carousel item's content..
  *
- * @cssproperty --aspect-ratio - The aspect ratio of the slide.
+ * @cssproperty --aspect-ratio - The slide's aspect ratio. Inherited from the carousel by default.
  *
  */
 @customElement('sl-carousel-item')
@@ -25,7 +25,6 @@ export default class SlCarouselItem extends ShoelaceElement {
 
   connectedCallback() {
     super.connectedCallback();
-
     this.setAttribute('role', 'listitem');
     this.setAttribute('aria-roledescription', 'slide');
   }

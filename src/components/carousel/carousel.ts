@@ -26,7 +26,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @event {{ index: number, slide: SlCarouselItem }} sl-slide-change - Emitted when the active slide changes.
  *
- * @slot - The carousel's main content, where `sl-carousel-item`s are placed.
+ * @slot - The carousel's main content, one or more `<sl-carousel-item>` elements.
  * @slot next-icon - Optional next icon to use instead of the default. Works best with `<sl-icon>`.
  * @slot previous-icon - Optional previous icon to use instead of the default. Works best with `<sl-icon>`.
  *
@@ -44,7 +44,6 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --aspect-ratio - The aspect ratio of each slide.
  * @cssproperty --scroll-padding - The amount of padding to apply to the scroll area. Useful to make adjacent slides
  *  visible.
- *
  */
 @customElement('sl-carousel')
 export default class SlCarousel extends ShoelaceElement {
@@ -87,32 +86,24 @@ export default class SlCarousel extends ShoelaceElement {
   // The index of the active slide
   @state() activeSlide = 0;
 
-  private autoplayController = new AutoplayController(this, () => {
-    this.next();
-  });
+  private autoplayController = new AutoplayController(this, () => this.next());
   private scrollController = new ScrollController(this);
-
   private readonly slides = this.getElementsByTagName('sl-carousel-item');
-
-  // The intersection observer is used to determine which slide is displayed
-  private intersectionObserver: IntersectionObserver;
-
+  private intersectionObserver: IntersectionObserver; // determines which slide is displayed
   // A map containing the state of all the slides
   private readonly intersectionObserverEntries = new Map<Element, IntersectionObserverEntry>();
-
   private readonly localize = new LocalizeController(this);
   private mutationObserver: MutationObserver;
 
   connectedCallback(): void {
     super.connectedCallback();
-
     this.setAttribute('role', 'region');
     this.setAttribute('aria-roledescription', 'carousel');
 
     const intersectionObserver = new IntersectionObserver(
       (entries: IntersectionObserverEntry[]) => {
         entries.forEach(entry => {
-          // Store all the entries in a map to be processed when the scroll ends
+          // Store all the entries in a map to be processed when scrolling ends
           this.intersectionObserverEntries.set(entry.target, entry);
 
           const slide = entry.target;
@@ -151,7 +142,7 @@ export default class SlCarousel extends ShoelaceElement {
   }
 
   /**
-   * Move the carousel backwards by `slides-per-move` slides.
+   * Move the carousel backward by `slides-per-move` slides.
    *
    * @param behavior - The behavior used for scrolling.
    */
@@ -160,7 +151,7 @@ export default class SlCarousel extends ShoelaceElement {
   }
 
   /**
-   * Move the carousel forwards by `slides-per-move` slides.
+   * Move the carousel forward by `slides-per-move` slides.
    *
    * @param behavior - The behavior used for scrolling.
    */
@@ -195,7 +186,7 @@ export default class SlCarousel extends ShoelaceElement {
       )
     );
 
-    // Reinitialize the carousel if a carousel item has been added and/or removed
+    // Reinitialize the carousel if a carousel item has been added or removed
     if (needsInitialization) {
       this.initializeSlides();
       this.requestUpdate();
@@ -210,6 +201,7 @@ export default class SlCarousel extends ShoelaceElement {
 
     if (this.loop && firstIntersecting?.target.hasAttribute('data-clone')) {
       const clonePosition = Number(firstIntersecting.target.getAttribute('data-clone'));
+
       // Scrolls to the original slide without animating, so the user won't notice that the position has changed
       this.goToSlide(clonePosition, 'auto');
 
@@ -243,8 +235,7 @@ export default class SlCarousel extends ShoelaceElement {
     });
 
     if (this.loop) {
-      // Creates clones to be placed before and after the original elements
-      // so that it will be possible to simulate an infinite scrolling
+      // Creates clones to be placed before and after the original elements to simulate infinite scrolling
       const slidesPerPage = this.slidesPerPage;
       const lastSlides = slides.slice(-slidesPerPage);
       const firstSlides = slides.slice(0, slidesPerPage);
@@ -266,7 +257,7 @@ export default class SlCarousel extends ShoelaceElement {
       intersectionObserver.observe(slide);
     });
 
-    // Because the dom may be changed, restore the scroll position to the active slide
+    // Because the DOM may be changed, restore the scroll position to the active slide
     this.goToSlide(this.activeSlide, 'auto');
   }
 
@@ -277,7 +268,7 @@ export default class SlCarousel extends ShoelaceElement {
       slide.classList.toggle('--is-active', i === this.activeSlide);
     });
 
-    // Do not fire any event on first render
+    // Do not emit an event on first render
     if (this.hasUpdated) {
       this.emit('sl-slide-change', {
         detail: {
@@ -355,7 +346,6 @@ export default class SlCarousel extends ShoelaceElement {
     const { loop, activeSlide } = this;
     const slides = this.getSlides();
     const slidesCount = slides.length;
-
     const prevEnabled = loop || activeSlide > 0;
     const nextEnabled = loop || activeSlide < slidesCount - 1;
     const isLtr = this.localize.dir() === 'ltr';
