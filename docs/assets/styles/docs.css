@@ -110,12 +110,12 @@ strong {
   padding-bottom: 0.25em;
 }
 
-.sidebar-nav li.collapse > a,
-.sidebar-nav li.active > a {
+.sidebar-nav li.collapse>a,
+.sidebar-nav li.active>a {
   color: var(--sl-color-primary-600);
 }
 
-.sidebar li > p {
+.sidebar li>p {
   font-weight: var(--sl-font-weight-bold);
   border-bottom: solid 1px var(--sl-color-neutral-200);
   margin: 0 0.75rem 0.5rem 0;
@@ -187,7 +187,7 @@ strong {
   }
 
   /* Shields */
-  .splash + p {
+  .splash+p {
     margin-top: 2rem;
   }
 }
@@ -287,7 +287,7 @@ strong {
 .markdown-section code {
   font-family: var(--sl-font-mono);
   font-size: 87.5%;
-  background-color: var(--sl-color-neutral-50);
+  background-color: var(--sl-color-neutral-200);
   border-radius: var(--sl-border-radius-small);
   padding: 2px 4px;
 }
@@ -310,7 +310,7 @@ kbd,
   border-radius: var(--sl-border-radius-medium);
 }
 
-.markdown-section pre > code {
+.markdown-section pre>code {
   display: block;
   background: none;
   border-radius: 0;
@@ -551,7 +551,7 @@ kbd,
 }
 
 @media screen and (max-width: 400px) {
-  :not(.sidebar-buttons) > .repo-button {
+  :not(.sidebar-buttons)>.repo-button {
     width: 100%;
     margin-bottom: 1rem;
   }
