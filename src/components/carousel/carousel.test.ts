@@ -1,6 +1,6 @@
+import { clickOnElement } from '../../internal/test';
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import sinon from 'sinon';
-import { clickOnElement } from '../../internal/test';
 import type SlCarousel from './carousel';
 
 describe('<sl-carousel>', () => {
