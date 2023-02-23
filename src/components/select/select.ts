@@ -19,6 +19,7 @@ import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type SlOption from '../option/option';
 import type SlPopup from '../popup/popup';
+import type SlRemoveEvent from '../../events/sl-remove';
 
 /**
  * @summary Selects allow you to choose items from a menu of predefined options.
@@ -436,7 +437,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     this.setSelectedOptions(allOptions.filter(el => value.includes(el.value)));
   }
 
-  private handleTagRemove(event: CustomEvent, option: SlOption) {
+  private handleTagRemove(event: SlRemoveEvent, option: SlOption) {
     event.stopPropagation();
 
     if (!this.disabled) {
@@ -744,7 +745,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
                               ?pill=${this.pill}
                               size=${this.size}
                               removable
-                              @sl-remove=${(event: CustomEvent) => this.handleTagRemove(event, option)}
+                              @sl-remove=${(event: SlRemoveEvent) => this.handleTagRemove(event, option)}
                             >
                               ${option.getTextLabel()}
                             </sl-tag>
