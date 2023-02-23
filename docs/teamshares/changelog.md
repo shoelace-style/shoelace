@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.6
+
+- Another fix for exports / imports in shared-ui
+
 ## 1.0.5
 
 - Minor, attempting to fix imports in `shared-ui`
