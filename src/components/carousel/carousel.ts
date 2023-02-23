@@ -1,20 +1,20 @@
-import { LocalizeController } from '@shoelace-style/localize';
-import { html } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { map } from 'lit/directives/map.js';
-import { range } from 'lit/directives/range.js';
-import { styleMap } from 'lit/directives/style-map.js';
-import { when } from 'lit/directives/when.js';
-import { clamp } from 'src/internal/math';
-import { prefersReducedMotion } from '../../internal/animate';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { watch } from '../../internal/watch';
-import SlCarouselItem from '../carousel-item/carousel-item';
 import '../icon/icon';
 import { AutoplayController } from './autoplay-controller';
-import styles from './carousel.styles';
+import { clamp } from 'src/internal/math';
+import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { html } from 'lit';
+import { LocalizeController } from '@shoelace-style/localize';
+import { map } from 'lit/directives/map.js';
+import { prefersReducedMotion } from '../../internal/animate';
+import { range } from 'lit/directives/range.js';
 import { ScrollController } from './scroll-controller';
+import { styleMap } from 'lit/directives/style-map.js';
+import { watch } from '../../internal/watch';
+import { when } from 'lit/directives/when.js';
+import ShoelaceElement from '../../internal/shoelace-element';
+import SlCarouselItem from '../carousel-item/carousel-item';
+import styles from './carousel.styles';
 import type { CSSResultGroup } from 'lit';
 
 /**
