@@ -152,6 +152,7 @@
   "ignorePaths": [
     "package.json",
     "package-lock.json",
+    "docs/assets/examples/include.html",
     ".vscode/**",
     "src/translations/!(en).ts",
     "**/*.min.js"
