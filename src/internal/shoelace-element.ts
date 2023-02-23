@@ -39,9 +39,9 @@ type EventTypesWithoutRequiredDetail = {
 // Helper to make a specific property of an object non-optional
 type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] };
 
-// Given an event name string, get a valid type for the options to initialize the event that is more restrictive
-// than just CustomEventInit when appropriate (validate the type of the event detail, and require it to be
-// provided if the event requires it)
+// Given an event name string, get a valid type for the options to initialize the event that is more restrictive than
+// just CustomEventInit when appropriate (validate the type of the event detail, and require it to be provided if the
+// event requires it)
 type SlEventInit<T> = T extends keyof GlobalEventHandlersEventMap
   ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<PropertyKey, unknown>>
     ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<PropertyKey, never>>
