@@ -350,7 +350,7 @@ describe('<sl-input>', () => {
       await el.updateComplete;
     });
 
-    it('should not emit sl-change or sl-input when calling setinputText()', async () => {
+    it('should not emit sl-change or sl-input when calling setRangeText()', async () => {
       const el = await fixture<SlInput>(html` <sl-input value="hi there"></sl-input> `);
 
       el.addEventListener('sl-change', () => expect.fail('sl-change should not be emitted'));
