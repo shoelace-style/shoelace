@@ -192,7 +192,7 @@ describe('<sl-carousel>', () => {
       await el.updateComplete;
 
       // Assert
-      expect(el.scrollContainer.style.getPropertyValue('--slides-per-page')).to.be.equal('2');
+      expect(el.scrollContainer.style.getPropertyValue('--slides-per-page').trim()).to.be.equal('2');
     });
   });
 
