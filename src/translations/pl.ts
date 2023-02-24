@@ -10,13 +10,16 @@ const translation: Translation = {
   close: 'Zamknij',
   copy: 'Kopiuj',
   currentValue: 'Aktualna wartość',
+  goToSlide: (slide, count) => `Przejdź do slajdu ${slide} z ${count}`,
   hidePassword: 'Ukryj hasło',
   loading: 'Ładowanie',
+  nextSlide: 'Następny slajd',
   numOptionsSelected: num => {
     if (num === 0) return 'Nie wybrano opcji';
     if (num === 1) return 'Wybrano 1 opcję';
     return `Wybrano ${num} opcje`;
   },
+  previousSlide: 'Poprzedni slajd',
   progress: 'Postęp',
   remove: 'Usunąć',
   resize: 'Zmień rozmiar',

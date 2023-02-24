@@ -10,13 +10,16 @@ const translation: Translation = {
   close: 'Sluiten',
   copy: 'Kopiëren',
   currentValue: 'Huidige waarde',
+  goToSlide: (slide, count) => `Ga naar slide ${slide} van ${count}`,
   hidePassword: 'Verberg wachtwoord',
   loading: 'Bezig met laden',
+  nextSlide: 'Volgende dia',
   numOptionsSelected: num => {
     if (num === 0) return 'Geen optie geselecteerd';
     if (num === 1) return '1 optie geselecteerd';
     return `${num} opties geselecteerd`;
   },
+  previousSlide: 'Vorige dia',
   progress: 'Voortgang',
   remove: 'Verwijderen',
   resize: 'Formaat wijzigen',

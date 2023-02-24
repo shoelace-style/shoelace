@@ -10,16 +10,16 @@ const translation: Translation = {
   close: 'Close',
   copy: 'Copy',
   currentValue: 'Current value',
-  goToCarouselNextSlide: 'Go to next slide in carousel',
-  goToCarouselPreviousSlide: 'Go to previous slide in carousel',
-  goToCarouselSlide: (slide, count) => `Go to slide ${slide} of ${count} in carousel`,
+  goToSlide: (slide, count) => `Go to slide ${slide} of ${count}`,
   hidePassword: 'Hide password',
   loading: 'Loading',
+  nextSlide: 'Next slide',
   numOptionsSelected: num => {
     if (num === 0) return 'No options selected';
     if (num === 1) return '1 option selected';
     return `${num} options selected`;
   },
+  previousSlide: 'Previous slide',
   progress: 'Progress',
   remove: 'Remove',
   resize: 'Resize',

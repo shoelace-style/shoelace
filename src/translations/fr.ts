@@ -10,13 +10,16 @@ const translation: Translation = {
   close: 'Fermer',
   copy: 'Copier',
   currentValue: 'Valeur actuelle',
+  goToSlide: (slide, count) => `Aller à la diapositive ${slide} de ${count}`,
   hidePassword: 'Masquer le mot de passe',
   loading: 'Chargement',
+  nextSlide: 'Diapositive suivante',
   numOptionsSelected: num => {
     if (num === 0) return 'Aucune option sélectionnée';
     if (num === 1) return '1 option sélectionnée';
     return `${num} options sélectionnées`;
   },
+  previousSlide: 'Diapositive précédente',
   progress: 'Progrès',
   remove: 'Retirer',
   resize: 'Redimensionner',

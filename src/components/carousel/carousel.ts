@@ -327,7 +327,7 @@ export default class SlCarousel extends ShoelaceElement {
                 'carousel__pagination-item--active': isActive
               })}"
               aria-selected="${isActive ? 'true' : 'false'}"
-              aria-label="${this.localize.term('goToCarouselSlide', index + 1, pagesCount)}"
+              aria-label="${this.localize.term('goToSlide', index + 1, pagesCount)}"
               role="tab"
               @click="${() => this.goToSlide(index * slidesPerPage)}"
             ></button>
@@ -356,7 +356,7 @@ export default class SlCarousel extends ShoelaceElement {
             'carousel__navigation-button--previous': true,
             'carousel__navigation-button--disabled': !prevEnabled
           })}"
-          aria-label="${this.localize.term('goToCarouselPreviousSlide')}"
+          aria-label="${this.localize.term('goToPreviousSlide')}"
           part="navigation-button navigation-button--previous"
         >
           <slot name="previous-icon">
@@ -373,7 +373,7 @@ export default class SlCarousel extends ShoelaceElement {
             'carousel__navigation-button--next': true,
             'carousel__navigation-button--disabled': !nextEnabled
           })}"
-          aria-label="${this.localize.term('goToCarouselNextSlide')}"
+          aria-label="${this.localize.term('nextSlide')}"
           part="navigation-button navigation-button--next"
         >
           <slot name="next-icon">

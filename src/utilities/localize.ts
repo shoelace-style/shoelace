@@ -17,9 +17,12 @@ export interface Translation extends DefaultTranslation {
   close: string;
   copy: string;
   currentValue: string;
+  goToSlide: (slide: number, count: number) => string;
   hidePassword: string;
   loading: string;
+  nextSlide: string;
   numOptionsSelected: (num: number) => string;
+  previousSlide: string;
   progress: string;
   remove: string;
   resize: string;
@@ -28,11 +31,4 @@ export interface Translation extends DefaultTranslation {
   selectAColorFromTheScreen: string;
   showPassword: string;
   toggleColorFormat: string;
-
-  //
-  // TODO: update translations for all languages
-  //
-  goToCarouselNextSlide?: string;
-  goToCarouselPreviousSlide?: string;
-  goToCarouselSlide?: (slide: number, count: number) => string;
 }
