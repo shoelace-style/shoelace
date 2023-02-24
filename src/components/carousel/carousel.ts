@@ -42,8 +42,8 @@ import type { CSSResultGroup } from 'lit';
  *
  * @cssproperty --slide-gap - The space between each slide.
  * @cssproperty --aspect-ratio - The aspect ratio of each slide.
- * @cssproperty --scroll-hint - The amount of padding to apply to the scroll area. Useful to make adjacent slides
- *  visible.
+ * @cssproperty --scroll-hint - The amount of padding to apply to the scroll area, allowing adjacent slides to become
+ *  partially visible as a scroll hint.
  */
 @customElement('sl-carousel')
 export default class SlCarousel extends ShoelaceElement {
