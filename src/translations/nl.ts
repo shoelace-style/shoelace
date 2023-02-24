@@ -9,14 +9,14 @@ const translation: Translation = {
   clearEntry: 'Invoer wissen',
   close: 'Sluiten',
   copy: 'Kopiëren',
+  currentValue: 'Huidige waarde',
+  hidePassword: 'Verberg wachtwoord',
+  loading: 'Bezig met laden',
   numOptionsSelected: num => {
     if (num === 0) return 'Geen optie geselecteerd';
     if (num === 1) return '1 optie geselecteerd';
     return `${num} opties geselecteerd`;
   },
-  currentValue: 'Huidige waarde',
-  hidePassword: 'Verberg wachtwoord',
-  loading: 'Bezig met laden',
   progress: 'Voortgang',
   remove: 'Verwijderen',
   resize: 'Formaat wijzigen',

@@ -9,14 +9,17 @@ const translation: Translation = {
   clearEntry: 'Clear entry',
   close: 'Close',
   copy: 'Copy',
+  currentValue: 'Current value',
+  goToCarouselNextSlide: 'Go to next slide in carousel',
+  goToCarouselPreviousSlide: 'Go to previous slide in carousel',
+  goToCarouselSlide: (slide, count) => `Go to slide ${slide} of ${count} in carousel`,
+  hidePassword: 'Hide password',
+  loading: 'Loading',
   numOptionsSelected: num => {
     if (num === 0) return 'No options selected';
     if (num === 1) return '1 option selected';
     return `${num} options selected`;
   },
-  currentValue: 'Current value',
-  hidePassword: 'Hide password',
-  loading: 'Loading',
   progress: 'Progress',
   remove: 'Remove',
   resize: 'Resize',
@@ -24,10 +27,7 @@ const translation: Translation = {
   scrollToStart: 'Scroll to start',
   selectAColorFromTheScreen: 'Select a color from the screen',
   showPassword: 'Show password',
-  toggleColorFormat: 'Toggle color format',
-  goToCarouselNextSlide: 'Go to next slide in carousel',
-  goToCarouselPreviousSlide: 'Go to previous slide in carousel',
-  goToCarouselSlide: (slide, count) => `Go to slide ${slide} of ${count} in carousel`
+  toggleColorFormat: 'Toggle color format'
 };
 
 registerTranslation(translation);

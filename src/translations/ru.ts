@@ -9,14 +9,14 @@ const translation: Translation = {
   clearEntry: 'Очистить запись',
   close: 'Закрыть',
   copy: 'Скопировать',
+  currentValue: 'Текущее значение',
+  hidePassword: 'Скрыть пароль',
+  loading: 'Загрузка',
   numOptionsSelected: num => {
     if (num === 0) return 'выбрано 0 вариантов';
     if (num === 1) return 'Выбран 1 вариант';
     return `выбрано ${num} варианта`;
   },
-  currentValue: 'Текущее значение',
-  hidePassword: 'Скрыть пароль',
-  loading: 'Загрузка',
   progress: 'Прогресс',
   remove: 'Удалить',
   resize: 'Изменить размер',

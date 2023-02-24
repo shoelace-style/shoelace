@@ -9,14 +9,14 @@ const translation: Translation = {
   clearEntry: 'Ryd indtastning',
   close: 'Luk',
   copy: 'Kopier',
+  currentValue: 'Nuværende værdi',
+  hidePassword: 'Skjul adgangskode',
+  loading: 'Indlæser',
   numOptionsSelected: (num: number) => {
     if (num === 0) return 'Ingen valgt';
     if (num === 1) return '1 valgt';
     return `${num} valgt`;
   },
-  currentValue: 'Nuværende værdi',
-  hidePassword: 'Skjul adgangskode',
-  loading: 'Indlæser',
   progress: 'Status',
   remove: 'Fjern',
   resize: 'Tilpas størrelse',

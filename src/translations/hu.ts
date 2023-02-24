@@ -9,14 +9,14 @@ const translation: Translation = {
   clearEntry: 'Bejegyzés törlése',
   close: 'Bezárás',
   copy: 'Másolás',
+  currentValue: 'Aktuális érték',
+  hidePassword: 'Jelszó elrejtése',
+  loading: 'Betöltés',
   numOptionsSelected: num => {
     if (num === 0) return 'Nincsenek kiválasztva opciók';
     if (num === 1) return '1 lehetőség kiválasztva';
     return `${num} lehetőség kiválasztva`;
   },
-  currentValue: 'Aktuális érték',
-  hidePassword: 'Jelszó elrejtése',
-  loading: 'Betöltés',
   progress: 'Folyamat',
   remove: 'Eltávolítás',
   resize: 'Átméretezés',

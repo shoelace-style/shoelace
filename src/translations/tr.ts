@@ -9,14 +9,14 @@ const translation: Translation = {
   clearEntry: 'Girişi sil',
   close: 'Kapat',
   copy: 'Kopya',
+  currentValue: 'Mevcut değer',
+  hidePassword: 'Şifreyi sakla',
+  loading: 'Yükleme',
   numOptionsSelected: num => {
     if (num === 0) return 'Hiçbir seçenek seçilmedi';
     if (num === 1) return '1 seçenek seçildi';
     return `${num} seçenek seçildi`;
   },
-  currentValue: 'Mevcut değer',
-  hidePassword: 'Şifreyi sakla',
-  loading: 'Yükleme',
   progress: 'İlerleme',
   remove: 'Kaldır',
   resize: 'Yeniden boyutlandır',
