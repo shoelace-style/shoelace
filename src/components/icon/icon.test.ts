@@ -95,6 +95,7 @@ describe('<sl-icon>', () => {
       await elementUpdated(el);
 
       expect(el.shadowRoot?.querySelector('svg')).to.exist;
+      expect(el.shadowRoot?.querySelector('svg')?.part.contains('svg')).to.be.true;
       expect(el.shadowRoot?.querySelector('svg')?.getAttribute('id')).to.equal(fakeId);
     });
   });

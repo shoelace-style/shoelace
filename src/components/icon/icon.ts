@@ -18,6 +18,8 @@ let parser: DOMParser;
  *
  * @event sl-load - Emitted when the icon has loaded.
  * @event sl-error - Emitted when the icon fails to load due to an error.
+ *
+ * @csspart svg - The internal SVG element.
  */
 @customElement('sl-icon')
 export default class SlIcon extends ShoelaceElement {
@@ -102,6 +104,7 @@ export default class SlIcon extends ShoelaceElement {
           const svgEl = doc.body.querySelector('svg');
 
           if (svgEl !== null) {
+            svgEl.part.add('svg');
             library?.mutator?.(svgEl);
             this.svg = svgEl.outerHTML;
             this.emit('sl-load');
