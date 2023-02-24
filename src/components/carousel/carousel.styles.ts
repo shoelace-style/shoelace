@@ -5,11 +5,11 @@ export default css`
   ${componentStyles}
 
   :host {
-    display: flex;
-
     --slide-gap: var(--sl-spacing-medium, 1rem);
     --aspect-ratio: 16 / 9;
     --scroll-hint: 0px;
+
+    display: flex;
   }
 
   .carousel {
