@@ -119,6 +119,45 @@ Use the `pagination` attribute to show the total number of slides and the curren
 </sl-carousel>
 ```
 
+```jsx react
+import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlCarousel pagination>
+    <SlCarouselItem>
+      <img
+        alt="The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash"
+        src="/assets/examples/carousel/mountains.jpg"
+      />
+    </SlCarouselItem>
+    <SlCarouselItem>
+      <img
+        alt="A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash"
+        src="/assets/examples/carousel/waterfall.jpg"
+      />
+    </SlCarouselItem>
+    <SlCarouselItem>
+      <img
+        alt="The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash"
+        src="/assets/examples/carousel/sunset.jpg"
+      />
+    </SlCarouselItem>
+    <SlCarouselItem>
+      <img
+        alt="A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash"
+        src="/assets/examples/carousel/field.jpg"
+      />
+    </SlCarouselItem>
+    <SlCarouselItem>
+      <img
+        alt="A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash"
+        src="/assets/examples/carousel/valley.jpg"
+      />
+    </SlCarouselItem>
+  </SlCarousel>
+);
+```
+
 ### Navigation
 
 Use the `navigation` attribute to show previous and next buttons.
@@ -156,6 +195,45 @@ Use the `navigation` attribute to show previous and next buttons.
     />
   </sl-carousel-item>
 </sl-carousel>
+```
+
+```jsx react
+import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlCarousel navigation>
+    <SlCarouselItem>
+      <img
+        alt="The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash"
+        src="/assets/examples/carousel/mountains.jpg"
+      />
+    </SlCarouselItem>
+    <SlCarouselItem>
+      <img
+        alt="A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash"
+        src="/assets/examples/carousel/waterfall.jpg"
+      />
+    </SlCarouselItem>
+    <SlCarouselItem>
+      <img
+        alt="The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash"
+        src="/assets/examples/carousel/sunset.jpg"
+      />
+    </SlCarouselItem>
+    <SlCarouselItem>
+      <img
+        alt="A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash"
+        src="/assets/examples/carousel/field.jpg"
+      />
+    </SlCarouselItem>
+    <SlCarouselItem>
+      <img
+        alt="A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash"
+        src="/assets/examples/carousel/valley.jpg"
+      />
+    </SlCarouselItem>
+  </SlCarousel>
+);
 ```
 
 ### Looping
@@ -197,6 +275,45 @@ By default, the carousel will not advanced beyond the first and last slides. You
 </sl-carousel>
 ```
 
+```jsx react
+import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlCarousel loop navigation pagination>
+    <SlCarouselItem>
+      <img
+        alt="The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash"
+        src="/assets/examples/carousel/mountains.jpg"
+      />
+    </SlCarouselItem>
+    <SlCarouselItem>
+      <img
+        alt="A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash"
+        src="/assets/examples/carousel/waterfall.jpg"
+      />
+    </SlCarouselItem>
+    <SlCarouselItem>
+      <img
+        alt="The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash"
+        src="/assets/examples/carousel/sunset.jpg"
+      />
+    </SlCarouselItem>
+    <SlCarouselItem>
+      <img
+        alt="A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash"
+        src="/assets/examples/carousel/field.jpg"
+      />
+    </SlCarouselItem>
+    <SlCarouselItem>
+      <img
+        alt="A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash"
+        src="/assets/examples/carousel/valley.jpg"
+      />
+    </SlCarouselItem>
+  </SlCarousel>
+);
+```
+
 ### Autoplay
 
 The carousel will automatically advance when the `autoplay` attribute is used. To change how long a slide is shown before advancing, set `autoplay-interval` to the desired number of milliseconds. For best results, use the `loop` attribute when autoplay is enabled. Note that autoplay will pause while the user interacts with the carousel.
@@ -234,6 +351,45 @@ The carousel will automatically advance when the `autoplay` attribute is used. T
     />
   </sl-carousel-item>
 </sl-carousel>
+```
+
+```jsx react
+import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlCarousel autoplay loop pagination>
+    <SlCarouselItem>
+      <img
+        alt="The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash"
+        src="/assets/examples/carousel/mountains.jpg"
+      />
+    </SlCarouselItem>
+    <SlCarouselItem>
+      <img
+        alt="A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash"
+        src="/assets/examples/carousel/waterfall.jpg"
+      />
+    </SlCarouselItem>
+    <SlCarouselItem>
+      <img
+        alt="The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash"
+        src="/assets/examples/carousel/sunset.jpg"
+      />
+    </SlCarouselItem>
+    <SlCarouselItem>
+      <img
+        alt="A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash"
+        src="/assets/examples/carousel/field.jpg"
+      />
+    </SlCarouselItem>
+    <SlCarouselItem>
+      <img
+        alt="A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash"
+        src="/assets/examples/carousel/valley.jpg"
+      />
+    </SlCarouselItem>
+  </SlCarousel>
+);
 ```
 
 ### Mouse Dragging
@@ -293,12 +449,64 @@ This example is best demonstrated using a mouse. Try clicking and dragging the s
 </script>
 ```
 
+```jsx react
+import { useState } from 'react';
+import { SlCarousel, SlCarouselItem, SlDivider, SlSwitch } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => {
+  const [isEnabled, setIsEnabled] = useState(false);
+
+  return (
+    <>
+      <SlCarousel navigation mouseDragging={isEnabled}>
+        <SlCarouselItem>
+          <img
+            alt="The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash"
+            src="/assets/examples/carousel/mountains.jpg"
+          />
+        </SlCarouselItem>
+        <SlCarouselItem>
+          <img
+            alt="A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash"
+            src="/assets/examples/carousel/waterfall.jpg"
+          />
+        </SlCarouselItem>
+        <SlCarouselItem>
+          <img
+            alt="The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash"
+            src="/assets/examples/carousel/sunset.jpg"
+          />
+        </SlCarouselItem>
+        <SlCarouselItem>
+          <img
+            alt="A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash"
+            src="/assets/examples/carousel/field.jpg"
+          />
+        </SlCarouselItem>
+        <SlCarouselItem>
+          <img
+            alt="A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash"
+            src="/assets/examples/carousel/valley.jpg"
+          />
+        </SlCarouselItem>
+      </SlCarousel>
+
+      <SlDivider></SlDivider>
+
+      <SlSwitch checked={isEnabled} onSlInput={() => setIsEnabled(!isEnabled)}>
+        Enable mouse dragging
+      </SlSwitch>
+    </>
+  );
+};
+```
+
 ### Multiple Slides Per View
 
 The `slides-per-view` attribute makes it possible to display multiple slides at a time. You can also use the `slides-per-move` attribute to advance more than once slide at a time, if desired.
 
 ```html preview
-<sl-carousel class="multi-carousel" navigation pagination slides-per-page="2" slides-per-move="2">
+<sl-carousel navigation pagination slides-per-page="2" slides-per-move="2">
   <sl-carousel-item style="background: var(--sl-color-red-200);">Slide 1</sl-carousel-item>
   <sl-carousel-item style="background: var(--sl-color-orange-200);">Slide 2</sl-carousel-item>
   <sl-carousel-item style="background: var(--sl-color-yellow-200);">Slide 3</sl-carousel-item>
@@ -312,13 +520,13 @@ The `slides-per-view` attribute makes it possible to display multiple slides at 
 import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlCarousel class="multi-carousel" loop navigation pagination slides-per-page="3" slides-per-move="3">
-    <SlCarouselItem style="background: var(--sl-color-red-200);">Slide 1</SlCarouselItem>
-    <SlCarouselItem style="background: var(--sl-color-orange-200);">Slide 2</SlCarouselItem>
-    <SlCarouselItem style="background: var(--sl-color-yellow-200);">Slide 3</SlCarouselItem>
-    <SlCarouselItem style="background: var(--sl-color-green-200);">Slide 4</SlCarouselItem>
-    <SlCarouselItem style="background: var(--sl-color-blue-200);">Slide 5</SlCarouselItem>
-    <SlCarouselItem style="background: var(--sl-color-violet-200);">Slide 6</SlCarouselItem>
+  <SlCarousel navigation pagination slidesPerPage={2} slidesPerMove={2}>
+    <SlCarouselItem style={{ background: 'var(--sl-color-red-200)' }}>Slide 1</SlCarouselItem>
+    <SlCarouselItem style={{ background: 'var(--sl-color-orange-200)' }}>Slide 2</SlCarouselItem>
+    <SlCarouselItem style={{ background: 'var(--sl-color-yellow-200)' }}>Slide 3</SlCarouselItem>
+    <SlCarouselItem style={{ background: 'var(--sl-color-green-200)' }}>Slide 4</SlCarouselItem>
+    <SlCarouselItem style={{ background: 'var(--sl-color-blue-200)' }}>Slide 5</SlCarouselItem>
+    <SlCarouselItem style={{ background: 'var(--sl-color-violet-200)' }}>Slide 6</SlCarouselItem>
   </SlCarousel>
 );
 ```
@@ -571,7 +779,7 @@ const App = () => (
 Use the `--aspect-ratio` custom property to customize the size of the carousel's viewport.
 
 ```html preview
-<sl-carousel class="aspect-ratio" navigation pagination style="--aspect-ratio: 3/2">
+<sl-carousel class="aspect-ratio" navigation pagination style="--aspect-ratio: 3/2;">
   <sl-carousel-item>
     <img
       alt="The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash"
@@ -728,62 +936,42 @@ Use the `--scroll-hint` attribute to add inline padding in horizontal carousels 
 import { useState } from 'react';
 import { SlCarousel, SlCarouselItem, SlDivider, SlRange } from '@shoelace-style/shoelace/dist/react';
 
-const App = () => {
-  const [scrollPadding, setScrollPadding] = useState(10);
-
-  return (
-    <>
-      <SlCarousel
-        className="scroll-hint"
-        navigation
-        pagination
-        style={{ '--aspect-ratio': `calc(var(--slide-gap) + ${scrollPadding}%)` }}
-      >
-        <SlCarouselItem>
-          <img
-            alt="The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash"
-            src="/assets/examples/carousel/mountains.jpg"
-          />
-        </SlCarouselItem>
-        <SlCarouselItem>
-          <img
-            alt="A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash"
-            src="/assets/examples/carousel/waterfall.jpg"
-          />
-        </SlCarouselItem>
-        <SlCarouselItem>
-          <img
-            alt="The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash"
-            src="/assets/examples/carousel/sunset.jpg"
-          />
-        </SlCarouselItem>
-        <SlCarouselItem>
-          <img
-            alt="A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash"
-            src="/assets/examples/carousel/field.jpg"
-          />
-        </SlCarouselItem>
-        <SlCarouselItem>
-          <img
-            alt="A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash"
-            src="/assets/examples/carousel/valley.jpg"
-          />
-        </SlCarouselItem>
-      </SlCarousel>
-
-      <SlDivider />
-
-      <SlRange
-        label="Size (%)"
-        value="5"
-        min="0"
-        max="15"
-        onSlChange={event => setScrollPadding(event.target.valueAsNumber)}
-      />
-      <style>{css}</style>
-    </>
-  );
-};
+const App = () => (
+  <>
+    <SlCarousel className="scroll-hint" pagination style={{ '--scroll-hint': '10%' }}>
+      <SlCarouselItem>
+        <img
+          alt="The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash"
+          src="/assets/examples/carousel/mountains.jpg"
+        />
+      </SlCarouselItem>
+      <SlCarouselItem>
+        <img
+          alt="A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash"
+          src="/assets/examples/carousel/waterfall.jpg"
+        />
+      </SlCarouselItem>
+      <SlCarouselItem>
+        <img
+          alt="The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash"
+          src="/assets/examples/carousel/sunset.jpg"
+        />
+      </SlCarouselItem>
+      <SlCarouselItem>
+        <img
+          alt="A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash"
+          src="/assets/examples/carousel/field.jpg"
+        />
+      </SlCarouselItem>
+      <SlCarouselItem>
+        <img
+          alt="A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash"
+          src="/assets/examples/carousel/valley.jpg"
+        />
+      </SlCarouselItem>
+    </SlCarousel>
+  </>
+);
 ```
 
 ### Gallery Example
