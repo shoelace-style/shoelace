@@ -356,7 +356,7 @@ export default class SlCarousel extends ShoelaceElement {
             'carousel__navigation-button--previous': true,
             'carousel__navigation-button--disabled': !prevEnabled
           })}"
-          aria-label="${this.localize.term('goToPreviousSlide')}"
+          aria-label="${this.localize.term('previousSlide')}"
           part="navigation-button navigation-button--previous"
         >
           <slot name="previous-icon">
