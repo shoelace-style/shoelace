@@ -8,8 +8,12 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- Added TypeScript types to all custom events [#1183](https://github.com/shoelace-style/shoelace/pull/1183)
+- Added the `svg` part to `<sl-icon>`
 - Fixed a bug in `<sl-select>` that caused the display label to render incorrectly in Chrome after form validation [#1197](https://github.com/shoelace-style/shoelace/discussions/1197)
 - Fixed a bug in `<sl-input>` that prevented users from applying their own value for `autocapitalize`, `autocomplete`, and `autocorrect` when using `type="password` [#1205](https://github.com/shoelace-style/shoelace/issues/1205)
+- Fixed a bug in `<sl-tab-group>` that prevented scroll controls from showing when dynamically adding tabs [#1208](https://github.com/shoelace-style/shoelace/issues/1208)
+- Updated `@shoelace-style/localize` to 3.1.0
 
 When using `<input type="password">` the default value for `autocapitalize`, `autocomplete`, and `autocorrect` may be affected due to the bug fixed in [#1205](https://github.com/shoelace-style/shoelace/issues/1205). For any affected users, setting these attributes to `off` will restore the previous behavior.
 
@@ -280,8 +284,7 @@ This release removes the `<sl-responsive-media>` component. When this component 
 - Fixed a bug in `<sl-tree>` that prevented the keyboard from working when the component was nested in a shadow root [#871](https://github.com/shoelace-style/shoelace/issues/871)
 - Fixed a bug in `<sl-tab-group>` that prevented the keyboard from working when the component was nested in a shadow root [#872](https://github.com/shoelace-style/shoelace/issues/872)
 - Fixed a bug in `<sl-tab>` that allowed disabled tabs to erroneously receive focus
-- Improved single selection in `<sl-tree>` so nodes expand and collapse and rece
-  ive selection when clicking on the label
+- Improved single selection in `<sl-tree>` so nodes expand and collapse and receive selection when clicking on the label
 - Renamed `expanded-icon` and `collapsed-icon` slots to `expand-icon` and `collapse-icon` in the experimental `<sl-tree>` and `<sl-tree-item>` components
 - Improved RTL support for `<sl-image-comparer>`
 - Refactored components to extend from `ShoelaceElement` to make `dir` and `lang` reactive properties in all components

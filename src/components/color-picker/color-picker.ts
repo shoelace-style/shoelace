@@ -20,8 +20,10 @@ import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './color-picker.styles';
 import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element';
+import type SlChangeEvent from '../../events/sl-change';
 import type SlDropdown from '../dropdown/dropdown';
 import type SlInput from '../input/input';
+import type SlInputEvent from '../../events/sl-input';
 
 const hasEyeDropper = 'EyeDropper' in window;
 
@@ -417,7 +419,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     }
   }
 
-  private handleInputChange(event: CustomEvent) {
+  private handleInputChange(event: SlChangeEvent) {
     const target = event.target as HTMLInputElement;
     const oldValue = this.value;
 
@@ -437,7 +439,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     }
   }
 
-  private handleInputInput(event: CustomEvent) {
+  private handleInputInput(event: SlInputEvent) {
     this.formControlController.updateValidity();
 
     // Prevent the <sl-input>'s sl-input event from bubbling up

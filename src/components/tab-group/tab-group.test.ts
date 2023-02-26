@@ -9,14 +9,11 @@ import type { HTMLTemplateResult } from 'lit';
 import type SlTab from '../tab/tab';
 import type SlTabGroup from './tab-group';
 import type SlTabPanel from '../tab-panel/tab-panel';
+import type SlTabShowEvent from '../../events/sl-tab-show';
 
 interface ClientRectangles {
   body?: DOMRect;
   navigation?: DOMRect;
-}
-
-interface CustomEventPayload {
-  name: string;
 }
 
 const waitForScrollButtonsToBeRendered = async (tabGroup: SlTabGroup): Promise<void> => {
@@ -57,9 +54,9 @@ const expectOnlyOneTabPanelToBeActive = async (container: HTMLElement, dataTestI
   expect(activeTabPanels[0]).to.have.attribute('data-testid', dataTestIdOfActiveTab);
 };
 
-const expectPromiseToHaveName = async (showEventPromise: Promise<CustomEvent>, expectedName: string) => {
+const expectPromiseToHaveName = async (showEventPromise: Promise<SlTabShowEvent>, expectedName: string) => {
   const showEvent = await showEventPromise;
-  expect((showEvent.detail as CustomEventPayload).name).to.equal(expectedName);
+  expect(showEvent.detail.name).to.equal(expectedName);
 };
 
 const waitForHeaderToBeActive = async (container: HTMLElement, headerTestId: string): Promise<SlTab> => {
@@ -306,7 +303,7 @@ describe('<sl-tab-group>', () => {
       const customHeader = queryByTestId<SlTab>(tabGroup, 'custom-header');
       expect(customHeader).not.to.have.attribute('active');
 
-      const showEventPromise = oneEvent(tabGroup, 'sl-tab-show') as Promise<CustomEvent>;
+      const showEventPromise = oneEvent(tabGroup, 'sl-tab-show') as Promise<SlTabShowEvent>;
       await action();
 
       expect(customHeader).to.have.attribute('active');
@@ -405,7 +402,7 @@ describe('<sl-tab-group>', () => {
       const customHeader = queryByTestId<SlTab>(tabGroup, 'custom-header');
       expect(customHeader).not.to.have.attribute('active');
 
-      const showEventPromise = oneEvent(tabGroup, 'sl-tab-show') as Promise<CustomEvent>;
+      const showEventPromise = oneEvent(tabGroup, 'sl-tab-show') as Promise<SlTabShowEvent>;
       await sendKeys({ press: 'ArrowRight' });
       await aTimeout(0);
       expect(generalHeader).to.have.attribute('active');

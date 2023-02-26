@@ -357,10 +357,11 @@ export class FormControlController implements ReactiveController {
    * event will be cancelled before being dispatched.
    */
   emitInvalidEvent(originalInvalidEvent?: Event) {
-    const slInvalidEvent = new CustomEvent<void>('sl-invalid', {
+    const slInvalidEvent = new CustomEvent<Record<PropertyKey, never>>('sl-invalid', {
       bubbles: false,
       composed: false,
-      cancelable: true
+      cancelable: true,
+      detail: {}
     });
 
     if (!originalInvalidEvent) {

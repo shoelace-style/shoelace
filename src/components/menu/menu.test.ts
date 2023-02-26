@@ -4,7 +4,7 @@ import { html } from 'lit';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlMenu from './menu';
-import type SlMenuItem from '../menu-item/menu-item';
+import type SlSelectEvent from '../../events/sl-select';
 
 describe('<sl-menu>', () => {
   it('emits sl-select with the correct event detail when clicking an item', async () => {
@@ -17,8 +17,8 @@ describe('<sl-menu>', () => {
       </sl-menu>
     `);
     const item2 = menu.querySelectorAll('sl-menu-item')[1];
-    const selectHandler = sinon.spy((event: CustomEvent) => {
-      const item = event.detail.item as SlMenuItem; // eslint-disable-line
+    const selectHandler = sinon.spy((event: SlSelectEvent) => {
+      const item = event.detail.item;
       if (item !== item2) {
         expect.fail('Incorrect event detail emitted with sl-select');
       }
@@ -40,8 +40,8 @@ describe('<sl-menu>', () => {
       </sl-menu>
     `);
     const [item1, item2] = menu.querySelectorAll('sl-menu-item');
-    const selectHandler = sinon.spy((event: CustomEvent) => {
-      const item = event.detail.item as SlMenuItem; // eslint-disable-line
+    const selectHandler = sinon.spy((event: SlSelectEvent) => {
+      const item = event.detail.item;
       if (item !== item2) {
         expect.fail('Incorrect item selected');
       }
