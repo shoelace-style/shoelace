@@ -11,6 +11,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Added TypeScript types to all custom events [#1183](https://github.com/shoelace-style/shoelace/pull/1183)
 - Added the `svg` part to `<sl-icon>`
 - Added the `getForm()` method to all form controls [#1180](https://github.com/shoelace-style/shoelace/issues/1180)
+- Added the experimental carousel component [#851](https://github.com/shoelace-style/shoelace/pull/851)
 - Fixed a bug in `<sl-select>` that caused the display label to render incorrectly in Chrome after form validation [#1197](https://github.com/shoelace-style/shoelace/discussions/1197)
 - Fixed a bug in `<sl-input>` that prevented users from applying their own value for `autocapitalize`, `autocomplete`, and `autocorrect` when using `type="password` [#1205](https://github.com/shoelace-style/shoelace/issues/1205)
 - Fixed a bug in `<sl-tab-group>` that prevented scroll controls from showing when dynamically adding tabs [#1208](https://github.com/shoelace-style/shoelace/issues/1208)
