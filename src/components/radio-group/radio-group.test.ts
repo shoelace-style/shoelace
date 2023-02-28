@@ -3,6 +3,7 @@ import { clickOnElement } from '../../internal/test';
 import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
+import type SlChangeEvent from '../../events/sl-change';
 import type SlRadio from '../radio/radio';
 import type SlRadioGroup from './radio-group';
 
@@ -283,7 +284,7 @@ describe('when the value changes', () => {
     `);
     const radio = radioGroup.querySelector<SlRadio>('#radio-1')!;
     setTimeout(() => radio.click());
-    const event = (await oneEvent(radioGroup, 'sl-change')) as CustomEvent;
+    const event = (await oneEvent(radioGroup, 'sl-change')) as SlChangeEvent;
     expect(event.target).to.equal(radioGroup);
     expect(radioGroup.value).to.equal('1');
   });
@@ -298,7 +299,7 @@ describe('when the value changes', () => {
     const radio = radioGroup.querySelector<SlRadio>('#radio-1')!;
     radio.focus();
     setTimeout(() => sendKeys({ press: ' ' }));
-    const event = (await oneEvent(radioGroup, 'sl-change')) as CustomEvent;
+    const event = (await oneEvent(radioGroup, 'sl-change')) as SlChangeEvent;
     expect(event.target).to.equal(radioGroup);
     expect(radioGroup.value).to.equal('1');
   });
