@@ -9,14 +9,17 @@ const translation: Translation = {
   clearEntry: 'Eingabe löschen',
   close: 'Schließen',
   copy: 'Kopieren',
+  currentValue: 'Aktueller Wert',
+  goToSlide: (slide, count) => `Gehen Sie zu Folie ${slide} von ${count}`,
+  hidePassword: 'Passwort verbergen',
+  loading: 'Wird geladen',
+  nextSlide: 'Nächste Folie',
   numOptionsSelected: num => {
     if (num === 0) return 'Keine Optionen ausgewählt';
     if (num === 1) return '1 Option ausgewählt';
     return `${num} Optionen ausgewählt`;
   },
-  currentValue: 'Aktueller Wert',
-  hidePassword: 'Passwort verbergen',
-  loading: 'Wird geladen',
+  previousSlide: 'Vorherige Folie',
   progress: 'Fortschritt',
   remove: 'Entfernen',
   resize: 'Größe ändern',

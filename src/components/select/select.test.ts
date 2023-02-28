@@ -1,5 +1,6 @@
 import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { clickOnElement } from '../../internal/test';
+import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
 import { sendKeys } from '@web/test-runner-commands';
 import { serialize } from '../../utilities/form';
 import sinon from 'sinon';
@@ -160,6 +161,32 @@ describe('<sl-select>', () => {
       el.value = 'option-2';
 
       await el.updateComplete;
+    });
+
+    it('should emit sl-change and sl-input with the correct validation message when the value changes', async () => {
+      const el = await fixture<SlSelect>(html`
+        <sl-select required>
+          <sl-option value="option-1">Option 1</sl-option>
+          <sl-option value="option-2">Option 2</sl-option>
+          <sl-option value="option-3">Option 3</sl-option>
+        </sl-select>
+      `);
+      const option2 = el.querySelectorAll('sl-option')[1];
+      const handler = sinon.spy((event: CustomEvent) => {
+        if (el.validationMessage) {
+          expect.fail(`Validation message should be empty when ${event.type} is emitted and a value is set`);
+        }
+      });
+
+      el.addEventListener('sl-change', handler);
+      el.addEventListener('sl-input', handler);
+
+      await clickOnElement(el);
+      await aTimeout(500);
+      await clickOnElement(option2);
+      await el.updateComplete;
+
+      expect(handler).to.be.calledTwice;
     });
   });
 
@@ -548,4 +575,6 @@ describe('<sl-select>', () => {
 
     expect(tag.hasAttribute('pill')).to.be.true;
   });
+
+  runFormControlBaseTests('sl-select');
 });

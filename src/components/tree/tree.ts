@@ -54,7 +54,7 @@ function syncCheckboxes(changedTreeItem: SlTreeItem, initialSync = false) {
  * @status stable
  * @since 2.0
  *
- * @event {{ selection: TreeItem[] }} sl-selection-change - Emitted when a tree item is selected or deselected.
+ * @event {{ selection: SlTreeItem[] }} sl-selection-change - Emitted when a tree item is selected or deselected.
  *
  * @slot - The default slot.
  * @slot expand-icon - The icon to show when the tree item is expanded. Works best with `<sl-icon>`.

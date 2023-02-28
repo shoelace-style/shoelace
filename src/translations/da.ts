@@ -9,14 +9,17 @@ const translation: Translation = {
   clearEntry: 'Ryd indtastning',
   close: 'Luk',
   copy: 'Kopier',
+  currentValue: 'Nuværende værdi',
+  goToSlide: (slide, count) => `Gå til dias ${slide} af ${count}`,
+  hidePassword: 'Skjul adgangskode',
+  loading: 'Indlæser',
+  nextSlide: 'Næste slide',
   numOptionsSelected: (num: number) => {
     if (num === 0) return 'Ingen valgt';
     if (num === 1) return '1 valgt';
     return `${num} valgt`;
   },
-  currentValue: 'Nuværende værdi',
-  hidePassword: 'Skjul adgangskode',
-  loading: 'Indlæser',
+  previousSlide: 'Forrige dias',
   progress: 'Status',
   remove: 'Fjern',
   resize: 'Tilpas størrelse',

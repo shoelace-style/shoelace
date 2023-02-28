@@ -1,8 +1,9 @@
 // eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
 import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { getFormControls } from '../../../dist/utilities/form.js';
-import { sendKeys } from '@web/test-runner-commands';
-import { serialize } from '../../utilities/form'; // must come from the same module
+import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
+import { sendKeys } from '@web/test-runner-commands'; // must come from the same module
+import { serialize } from '../../utilities/form';
 import sinon from 'sinon';
 import type SlInput from './input';
 
@@ -349,7 +350,7 @@ describe('<sl-input>', () => {
       await el.updateComplete;
     });
 
-    it('should not emit sl-change or sl-input when calling setinputText()', async () => {
+    it('should not emit sl-change or sl-input when calling setRangeText()', async () => {
       const el = await fixture<SlInput>(html` <sl-input value="hi there"></sl-input> `);
 
       el.addEventListener('sl-change', () => expect.fail('sl-change should not be emitted'));
@@ -496,4 +497,6 @@ describe('<sl-input>', () => {
       expect(formControls.map((fc: HTMLInputElement) => fc.value).join('')).to.equal('12345678910'); // eslint-disable-line
     });
   });
+
+  runFormControlBaseTests('sl-input');
 });

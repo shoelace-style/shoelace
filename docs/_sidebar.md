@@ -32,6 +32,8 @@
   - [Button Group](/components/button-group)
   - [Calendar](/components/calendar)
   - [Card](/components/card)
+  - [Carousel](/components/carousel)
+  - [Carousel Item](/components/carousel-item)
   - [Checkbox](/components/checkbox)
   - [Color Picker](/components/color-picker)
   - [Details](/components/details)

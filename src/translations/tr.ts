@@ -9,14 +9,17 @@ const translation: Translation = {
   clearEntry: 'Girişi sil',
   close: 'Kapat',
   copy: 'Kopya',
+  currentValue: 'Mevcut değer',
+  goToSlide: (slide, count) => `${count} slayttan ${slide} slayta gidin`,
+  hidePassword: 'Şifreyi sakla',
+  loading: 'Yükleme',
+  nextSlide: 'Sonraki slayt',
   numOptionsSelected: num => {
     if (num === 0) return 'Hiçbir seçenek seçilmedi';
     if (num === 1) return '1 seçenek seçildi';
     return `${num} seçenek seçildi`;
   },
-  currentValue: 'Mevcut değer',
-  hidePassword: 'Şifreyi sakla',
-  loading: 'Yükleme',
+  previousSlide: 'Bir onceki slayt',
   progress: 'İlerleme',
   remove: 'Kaldır',
   resize: 'Yeniden boyutlandır',
