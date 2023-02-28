@@ -17,6 +17,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-tab>` that caused `sl-tab-show` to be emitted when activating the close button
 - Fixed a bug in `<sl-spinner>` that caused `--track-color` to be invisible with certain colors
 - Fixed a bug in `<sl-menu-item>` that caused the focus color to show when selecting menu items with a mouse or touch device
+- Fixed a bug in `<sl-select>` that caused `sl-change` and `sl-input` to be emitted too early [#1201](https://github.com/shoelace-style/shoelace/issues/1201)
 - Updated `@shoelace-style/localize` to 3.1.0
 
 When using `<input type="password">` the default value for `autocapitalize`, `autocomplete`, and `autocorrect` may be affected due to the bug fixed in [#1205](https://github.com/shoelace-style/shoelace/issues/1205). For any affected users, setting these attributes to `off` will restore the previous behavior.

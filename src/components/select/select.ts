@@ -253,8 +253,11 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
           this.setSelectedOptions(this.currentOption);
         }
 
-        this.emit('sl-input');
-        this.emit('sl-change');
+        // Emit after updating
+        this.updateComplete.then(() => {
+          this.emit('sl-input');
+          this.emit('sl-change');
+        });
 
         if (!this.multiple) {
           this.hide();
@@ -378,9 +381,13 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     if (this.value !== '') {
       this.setSelectedOptions([]);
       this.displayInput.focus({ preventScroll: true });
-      this.emit('sl-clear');
-      this.emit('sl-input');
-      this.emit('sl-change');
+
+      // Emit after update
+      this.updateComplete.then(() => {
+        this.emit('sl-clear');
+        this.emit('sl-input');
+        this.emit('sl-change');
+      });
     }
   }
 
@@ -406,8 +413,11 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
       this.updateComplete.then(() => this.displayInput.focus({ preventScroll: true }));
 
       if (this.value !== oldValue) {
-        this.emit('sl-input');
-        this.emit('sl-change');
+        // Emit after updating
+        this.updateComplete.then(() => {
+          this.emit('sl-input');
+          this.emit('sl-change');
+        });
       }
 
       if (!this.multiple) {
@@ -442,8 +452,12 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
     if (!this.disabled) {
       this.toggleOptionSelection(option, false);
-      this.emit('sl-input');
-      this.emit('sl-change');
+
+      // Emit after updating
+      this.updateComplete.then(() => {
+        this.emit('sl-input');
+        this.emit('sl-change');
+      });
     }
   }
 
