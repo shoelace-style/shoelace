@@ -252,12 +252,9 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     return true;
   }
 
-  /** Sets a custom validation message. Pass an empty string to restore validity. */
-  setCustomValidity(message = '') {
-    this.customValidityMessage = message;
-    this.errorMessage = message;
-    this.validationInput.setCustomValidity(message);
-    this.formControlController.updateValidity();
+  /** Gets the associated form, if one exists. */
+  getForm(): HTMLFormElement | null {
+    return this.formControlController.getForm();
   }
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
@@ -277,6 +274,14 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     }
 
     return isValid;
+  }
+
+  /** Sets a custom validation message. Pass an empty string to restore validity. */
+  setCustomValidity(message = '') {
+    this.customValidityMessage = message;
+    this.errorMessage = message;
+    this.validationInput.setCustomValidity(message);
+    this.formControlController.updateValidity();
   }
 
   render() {

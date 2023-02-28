@@ -95,7 +95,7 @@ export default class ShoelaceElement extends LitElement {
 }
 
 export interface ShoelaceFormControl extends ShoelaceElement {
-  // Standard form attributes
+  // Form attributes
   name: string;
   value: unknown;
   disabled?: boolean;
@@ -103,7 +103,7 @@ export interface ShoelaceFormControl extends ShoelaceElement {
   defaultChecked?: boolean;
   form?: string;
 
-  // Standard validation attributes
+  // Constraint validation attributes
   pattern?: string;
   min?: number | Date;
   max?: number | Date;
@@ -112,13 +112,13 @@ export interface ShoelaceFormControl extends ShoelaceElement {
   minlength?: number;
   maxlength?: number;
 
-  // Validation properties
+  // Form validation properties
   readonly validity: ValidityState;
   readonly validationMessage: string;
 
-  // Validation methods
+  // Form validation methods
   checkValidity: () => boolean;
-  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  getForm: () => HTMLFormElement | null;
   reportValidity: () => boolean;
   setCustomValidity: (message: string) => void;
 }
