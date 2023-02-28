@@ -1,7 +1,6 @@
 import { aTimeout, expect, fixture, html, triggerBlurFor, triggerFocusFor } from '@open-wc/testing';
 import { clickOnElement } from '../../internal/test';
 import { sendKeys } from '@web/test-runner-commands';
-import { waitForEvent } from '../../internal/event';
 import sinon from 'sinon';
 import type SlTree from './tree';
 import type SlTreeItem from '../tree-item/tree-item';
