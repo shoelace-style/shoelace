@@ -9,14 +9,17 @@ const translation: Translation = {
   clearEntry: 'Очистить запись',
   close: 'Закрыть',
   copy: 'Скопировать',
+  currentValue: 'Текущее значение',
+  goToSlide: (slide, count) => `Перейти к слайду ${slide} из ${count}`,
+  hidePassword: 'Скрыть пароль',
+  loading: 'Загрузка',
+  nextSlide: 'Следующий слайд',
   numOptionsSelected: num => {
     if (num === 0) return 'выбрано 0 вариантов';
     if (num === 1) return 'Выбран 1 вариант';
     return `выбрано ${num} варианта`;
   },
-  currentValue: 'Текущее значение',
-  hidePassword: 'Скрыть пароль',
-  loading: 'Загрузка',
+  previousSlide: 'Предыдущий слайд',
   progress: 'Прогресс',
   remove: 'Удалить',
   resize: 'Изменить размер',

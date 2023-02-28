@@ -6,6 +6,26 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## 2.2.0
+
+- Added TypeScript types to all custom events [#1183](https://github.com/shoelace-style/shoelace/pull/1183)
+- Added the `svg` part to `<sl-icon>`
+- Added the `getForm()` method to all form controls [#1180](https://github.com/shoelace-style/shoelace/issues/1180)
+- Fixed a bug in `<sl-select>` that caused the display label to render incorrectly in Chrome after form validation [#1197](https://github.com/shoelace-style/shoelace/discussions/1197)
+- Fixed a bug in `<sl-input>` that prevented users from applying their own value for `autocapitalize`, `autocomplete`, and `autocorrect` when using `type="password` [#1205](https://github.com/shoelace-style/shoelace/issues/1205)
+- Fixed a bug in `<sl-tab-group>` that prevented scroll controls from showing when dynamically adding tabs [#1208](https://github.com/shoelace-style/shoelace/issues/1208)
+- Fixed a big in `<sl-input>` that caused the calendar icon to be clipped in Firefox [#1213](https://github.com/shoelace-style/shoelace/pull/1213)
+- Fixed a bug in `<sl-tab>` that caused `sl-tab-show` to be emitted when activating the close button
+- Fixed a bug in `<sl-spinner>` that caused `--track-color` to be invisible with certain colors
+- Fixed a bug in `<sl-menu-item>` that caused the focus color to show when selecting menu items with a mouse or touch device
+- Fixed a bug in `<sl-select>` that caused `sl-change` and `sl-input` to be emitted too early [#1201](https://github.com/shoelace-style/shoelace/issues/1201)
+- Fixed a positioning edge case that caused `<sl-popup>` to positioned nested popups incorrectly [#1135](https://github.com/shoelace-style/shoelace/issues/1135)
+- Fixed a bug in `<sl-tree>` that caused the tree item to collapse when clicking a child item, dragging the mouse, and releasing it on the parent node [#1082](https://github.com/shoelace-style/shoelace/issues/1082)
+- Updated `@shoelace-style/localize` to 3.1.0
+- Updated `@floating-ui/dom` to 1.2.1
+
+When using `<input type="password">` the default value for `autocapitalize`, `autocomplete`, and `autocorrect` may be affected due to the bug fixed in [#1205](https://github.com/shoelace-style/shoelace/issues/1205). For any affected users, setting these attributes to `off` will restore the previous behavior.
+
 ## 2.1.0
 
 - Added the `sl-focus` and `sl-blur` events to `<sl-color-picker>`
@@ -273,8 +293,7 @@ This release removes the `<sl-responsive-media>` component. When this component 
 - Fixed a bug in `<sl-tree>` that prevented the keyboard from working when the component was nested in a shadow root [#871](https://github.com/shoelace-style/shoelace/issues/871)
 - Fixed a bug in `<sl-tab-group>` that prevented the keyboard from working when the component was nested in a shadow root [#872](https://github.com/shoelace-style/shoelace/issues/872)
 - Fixed a bug in `<sl-tab>` that allowed disabled tabs to erroneously receive focus
-- Improved single selection in `<sl-tree>` so nodes expand and collapse and rece
-  ive selection when clicking on the label
+- Improved single selection in `<sl-tree>` so nodes expand and collapse and receive selection when clicking on the label
 - Renamed `expanded-icon` and `collapsed-icon` slots to `expand-icon` and `collapse-icon` in the experimental `<sl-tree>` and `<sl-tree-item>` components
 - Improved RTL support for `<sl-image-comparer>`
 - Refactored components to extend from `ShoelaceElement` to make `dir` and `lang` reactive properties in all components

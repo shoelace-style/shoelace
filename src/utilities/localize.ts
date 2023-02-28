@@ -16,10 +16,13 @@ export interface Translation extends DefaultTranslation {
   clearEntry: string;
   close: string;
   copy: string;
-  numOptionsSelected: (num: number) => string;
   currentValue: string;
+  goToSlide: (slide: number, count: number) => string;
   hidePassword: string;
   loading: string;
+  nextSlide: string;
+  numOptionsSelected: (num: number) => string;
+  previousSlide: string;
   progress: string;
   remove: string;
   resize: string;

@@ -19,6 +19,7 @@ import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 import type SlOption from '../option/option';
 import type SlPopup from '../popup/popup';
+import type SlRemoveEvent from '../../events/sl-remove';
 
 /**
  * @summary Selects allow you to choose items from a menu of predefined options.
@@ -252,8 +253,11 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
           this.setSelectedOptions(this.currentOption);
         }
 
-        this.emit('sl-input');
-        this.emit('sl-change');
+        // Emit after updating
+        this.updateComplete.then(() => {
+          this.emit('sl-input');
+          this.emit('sl-change');
+        });
 
         if (!this.multiple) {
           this.hide();
@@ -377,9 +381,13 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     if (this.value !== '') {
       this.setSelectedOptions([]);
       this.displayInput.focus({ preventScroll: true });
-      this.emit('sl-clear');
-      this.emit('sl-input');
-      this.emit('sl-change');
+
+      // Emit after update
+      this.updateComplete.then(() => {
+        this.emit('sl-clear');
+        this.emit('sl-input');
+        this.emit('sl-change');
+      });
     }
   }
 
@@ -405,8 +413,11 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
       this.updateComplete.then(() => this.displayInput.focus({ preventScroll: true }));
 
       if (this.value !== oldValue) {
-        this.emit('sl-input');
-        this.emit('sl-change');
+        // Emit after updating
+        this.updateComplete.then(() => {
+          this.emit('sl-input');
+          this.emit('sl-change');
+        });
       }
 
       if (!this.multiple) {
@@ -436,13 +447,17 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     this.setSelectedOptions(allOptions.filter(el => value.includes(el.value)));
   }
 
-  private handleTagRemove(event: CustomEvent, option: SlOption) {
+  private handleTagRemove(event: SlRemoveEvent, option: SlOption) {
     event.stopPropagation();
 
     if (!this.disabled) {
       this.toggleOptionSelection(option, false);
-      this.emit('sl-input');
-      this.emit('sl-change');
+
+      // Emit after updating
+      this.updateComplete.then(() => {
+        this.emit('sl-input');
+        this.emit('sl-change');
+      });
     }
   }
 
@@ -624,6 +639,11 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     return this.valueInput.checkValidity();
   }
 
+  /** Gets the associated form, if one exists. */
+  getForm(): HTMLFormElement | null {
+    return this.formControlController.getForm();
+  }
+
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
   reportValidity() {
     return this.valueInput.reportValidity();
@@ -744,7 +764,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
                               ?pill=${this.pill}
                               size=${this.size}
                               removable
-                              @sl-remove=${(event: CustomEvent) => this.handleTagRemove(event, option)}
+                              @sl-remove=${(event: SlRemoveEvent) => this.handleTagRemove(event, option)}
                             >
                               ${option.getTextLabel()}
                             </sl-tag>

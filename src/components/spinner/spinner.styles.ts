@@ -34,7 +34,6 @@ export default css`
   .spinner__track {
     stroke: var(--track-color);
     transform-origin: 0% 0%;
-    mix-blend-mode: multiply;
   }
 
   .spinner__indicator {

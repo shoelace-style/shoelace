@@ -1,7 +1,7 @@
 {
   "name": "@shoelace-style/shoelace",
   "description": "A forward-thinking library of web components.",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "homepage": "https://github.com/shoelace-style/shoelace",
   "author": "Cory LaViska",
   "license": "MIT",
@@ -63,10 +63,11 @@
   },
   "dependencies": {
     "@ctrl/tinycolor": "^3.5.0",
-    "@floating-ui/dom": "^1.1.0",
+    "@floating-ui/dom": "^1.2.1",
     "@lit-labs/react": "^1.1.1",
     "@shoelace-style/animations": "^1.1.0",
-    "@shoelace-style/localize": "^3.0.4",
+    "@shoelace-style/localize": "^3.1.0",
+    "composed-offset-position": "^0.0.4",
     "lit": "^2.6.1",
     "qr-creator": "^1.0.0"
   },
