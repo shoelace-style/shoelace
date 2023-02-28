@@ -20,6 +20,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-menu-item>` that caused the focus color to show when selecting menu items with a mouse or touch device
 - Fixed a bug in `<sl-select>` that caused `sl-change` and `sl-input` to be emitted too early [#1201](https://github.com/shoelace-style/shoelace/issues/1201)
 - Fixed a positioning edge case that caused `<sl-popup>` to positioned nested popups incorrectly [#1135](https://github.com/shoelace-style/shoelace/issues/1135)
+- Fixed a bug in `<sl-tree>` that caused the tree item to collapse when clicking a child item, dragging the mouse, and releasing it on the parent node [#1082](https://github.com/shoelace-style/shoelace/issues/1082)
 - Updated `@shoelace-style/localize` to 3.1.0
 - Updated `@floating-ui/dom` to 1.2.1
 
