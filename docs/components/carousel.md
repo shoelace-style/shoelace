@@ -582,12 +582,19 @@ The content of the carousel can be changed by appending or removing carousel ite
       slide.innerText = `Slide ${dynamicCarousel.children.length + 1}`;
       slide.style.setProperty('background', `var(--sl-color-${color}-200)`);
       dynamicCarousel.appendChild(slide);
+      dynamicRemove.disabled = false;
     };
 
     const removeSlide = () => {
       const slide = dynamicCarousel.children[dynamicCarousel.children.length - 1];
-      slide.remove();
-      colorIndex--;
+      const numSlides = dynamicCarousel.querySelectorAll('sl-carousel-item').length;
+
+      if (numSlides > 1) {
+        slide.remove();
+        colorIndex--;
+      }
+
+      dynamicRemove.disabled = numSlides - 1 <= 1;
     };
 
     dynamicAdd.addEventListener('click', addSlide);
