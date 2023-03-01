@@ -6,6 +6,10 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## Next
+
+- Added `tag__base`, `tag__content`, `tag__remove-button`, `tag__remove-button__base` parts to `<sl-select>`
+
 ## 2.2.0
 
 - Added TypeScript types to all custom events [#1183](https://github.com/shoelace-style/shoelace/pull/1183)
