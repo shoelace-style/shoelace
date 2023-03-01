@@ -78,6 +78,34 @@ describe('<sl-carousel>', () => {
       // Assert
       expect(el.next).not.to.have.been.called;
     });
+
+    it('should not resume if the user is still interacting', async () => {
+      // Arrange
+      const el = await fixture<SlCarousel>(html`
+        <sl-carousel autoplay autoplay-interval="10">
+          <sl-carousel-item>Node 1</sl-carousel-item>
+          <sl-carousel-item>Node 2</sl-carousel-item>
+          <sl-carousel-item>Node 3</sl-carousel-item>
+        </sl-carousel>
+      `);
+      sinon.stub(el, 'next');
+
+      await el.updateComplete;
+
+      // Act
+      el.dispatchEvent(new Event('mouseenter'));
+      el.dispatchEvent(new Event('focusin'));
+      await el.updateComplete;
+
+      el.dispatchEvent(new Event('mouseleave'));
+      await el.updateComplete;
+
+      clock.next();
+      clock.next();
+
+      // Assert
+      expect(el.next).not.to.have.been.called;
+    });
   });
 
   describe('when `loop` attribute is provided', () => {

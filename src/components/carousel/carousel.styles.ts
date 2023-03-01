@@ -30,6 +30,7 @@ export default css`
     grid-area: pagination;
 
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: var(--sl-spacing-small);
   }

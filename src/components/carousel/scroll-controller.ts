@@ -77,6 +77,8 @@ export class ScrollController<T extends ScrollHost> implements ReactiveControlle
         })
       );
       this.host.requestUpdate();
+    } else {
+      this.handleScrollEnd();
     }
   }
 

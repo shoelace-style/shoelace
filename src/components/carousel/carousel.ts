@@ -168,13 +168,21 @@ export default class SlCarousel extends ShoelaceElement {
   goToSlide(index: number, behavior: ScrollBehavior = 'smooth') {
     const { slidesPerPage, loop } = this;
 
+    const slides = this.getSlides();
     const slidesWithClones = this.getSlides({ excludeClones: false });
-    const normalizedIndex = clamp(index + (loop ? slidesPerPage : 0), 0, slidesWithClones.length - 1);
-    const slide = slidesWithClones[normalizedIndex];
+
+    // Sets the next index without taking into account clones, if any.
+    const newActiveSlide = (index + slides.length) % slides.length;
+    this.activeSlide = newActiveSlide;
+
+    // Get the index of the next slide. For looping carousel it adds `slidesPerPage`
+    // to normalize the starting index in order to ignore the first nth clones.
+    const nextSlideIndex = clamp(index + (loop ? slidesPerPage : 0), 0, slidesWithClones.length - 1);
+    const nextSlide = slidesWithClones[nextSlideIndex];
 
     this.scrollContainer.scrollTo({
-      left: slide.offsetLeft,
-      top: slide.offsetTop,
+      left: nextSlide.offsetLeft,
+      top: nextSlide.offsetTop,
       behavior: prefersReducedMotion() ? 'auto' : behavior
     });
   }
@@ -307,13 +315,18 @@ export default class SlCarousel extends ShoelaceElement {
     this.scrollController.mouseDragging = this.mouseDragging;
   }
 
-  private renderPagination = () => {
-    const slides = this.getSlides();
-    const slidesCount = slides.length;
+  private getPageCount() {
+    return Math.ceil(this.getSlides().length / this.slidesPerPage);
+  }
 
-    const { activeSlide, slidesPerPage } = this;
-    const pagesCount = Math.ceil(slidesCount / slidesPerPage);
-    const currentPage = Math.floor(activeSlide / slidesPerPage);
+  private getCurrentPage() {
+    return Math.floor(this.activeSlide / this.slidesPerPage);
+  }
+
+  private renderPagination = () => {
+    const { slidesPerPage } = this;
+    const pagesCount = this.getPageCount();
+    const currentPage = this.getCurrentPage();
 
     return html`
       <nav part="pagination" role="tablist" class="carousel__pagination" aria-controls="scroll-container">
@@ -338,11 +351,11 @@ export default class SlCarousel extends ShoelaceElement {
   };
 
   private renderNavigation = () => {
-    const { loop, activeSlide } = this;
-    const slides = this.getSlides();
-    const slidesCount = slides.length;
-    const prevEnabled = loop || activeSlide > 0;
-    const nextEnabled = loop || activeSlide < slidesCount - 1;
+    const { loop } = this;
+    const pagesCount = this.getPageCount();
+    const currentPage = this.getCurrentPage();
+    const prevEnabled = loop || currentPage > 0;
+    const nextEnabled = loop || currentPage < pagesCount - 1;
     const isLtr = this.localize.dir() === 'ltr';
 
     return html`
