@@ -6,6 +6,7 @@ const translation: Translation = {
   $name: '日本語',
   $dir: 'ltr',
 
+  carousel: 'カルーセル',
   clearEntry: 'クリアエントリ',
   close: '閉じる',
   copy: 'コピー',
@@ -27,6 +28,7 @@ const translation: Translation = {
   scrollToStart: '最初にスクロールする',
   selectAColorFromTheScreen: '画面から色を選択してください',
   showPassword: 'パスワードを表示',
+  slide_num: slide => `スライド ${slide}`,
   toggleColorFormat: '色のフォーマットを切り替える'
 };
 

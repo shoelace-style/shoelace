@@ -6,6 +6,7 @@ const translation: Translation = {
   $name: 'Nederlands',
   $dir: 'ltr',
 
+  carousel: 'Carrousel',
   clearEntry: 'Invoer wissen',
   close: 'Sluiten',
   copy: 'Kopiëren',
@@ -27,6 +28,7 @@ const translation: Translation = {
   scrollToStart: 'Scroll naar begin',
   selectAColorFromTheScreen: 'Selecteer een kleur van het scherm',
   showPassword: 'Laat wachtwoord zien',
+  slide_num: slide => `Schuif ${slide}`,
   toggleColorFormat: 'Wissel kleurnotatie'
 };
 
