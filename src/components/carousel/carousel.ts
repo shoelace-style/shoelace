@@ -149,18 +149,22 @@ export default class SlCarousel extends ShoelaceElement {
   }
 
   private handleKeyDown(event: KeyboardEvent) {
-    if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
-      const isRtl = this.localize.dir() === 'rtl';
+    if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
       const target = event.target as HTMLElement;
+      const isRtl = this.localize.dir() === 'rtl';
       const isFocusInPagination = target.closest('[part~="pagination-item"]') !== null;
+      const isNext =
+        event.key === 'ArrowDown' || (!isRtl && event.key === 'ArrowRight') || (isRtl && event.key === 'ArrowLeft');
+      const isPrevious =
+        event.key === 'ArrowUp' || (!isRtl && event.key === 'ArrowLeft') || (isRtl && event.key === 'ArrowRight');
 
       event.preventDefault();
 
-      if ((!isRtl && event.key === 'ArrowLeft') || (isRtl && event.key === 'ArrowRight')) {
+      if (isPrevious) {
         this.previous();
       }
 
-      if ((!isRtl && event.key === 'ArrowRight') || (isRtl && event.key === 'ArrowLeft')) {
+      if (isNext) {
         this.next();
       }
 
