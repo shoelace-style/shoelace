@@ -28,10 +28,10 @@ export default css`
 
   .carousel__pagination {
     grid-area: pagination;
-
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: start;
     gap: var(--sl-spacing-small);
   }
 
@@ -141,6 +141,8 @@ export default css`
     background-color: var(--sl-color-neutral-300);
     will-change: transform;
     transition: var(--sl-transition-fast) ease-in;
+    padding: 0;
+    margin: 0;
   }
 
   .carousel__pagination-item--active {
