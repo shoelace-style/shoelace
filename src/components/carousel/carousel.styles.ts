@@ -64,6 +64,7 @@ export default css`
     scroll-snap-type: x mandatory;
     scroll-padding-inline: var(--scroll-hint);
     padding-inline: var(--scroll-hint);
+    overflow-y: hidden;
   }
 
   .carousel__slides--vertical {
@@ -74,6 +75,7 @@ export default css`
     scroll-snap-type: y mandatory;
     scroll-padding-block: var(--scroll-hint);
     padding-block: var(--scroll-hint);
+    overflow-x: hidden;
   }
 
   .carousel__slides--dragging,
