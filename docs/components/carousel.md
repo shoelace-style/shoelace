@@ -533,7 +533,7 @@ const App = () => (
 
 ### Adding and Removing Slides
 
-The content of the carousel can be changed by appending or removing carousel items. The carousel will update itself automatically.
+The content of the carousel can be changed by adding or removing carousel items. The carousel will update itself automatically.
 
 ```html preview
 <sl-carousel class="dynamic-carousel" pagination navigation>
@@ -663,9 +663,7 @@ const App = () => {
 
 ### Vertical Scrolling
 
-Setting the `orientation` attribute to `vertical`, will make the carousel laying out vertically, making it
-possible for the user to scroll it up and down. In case of heterogeneous content, for example images of different sizes,
-it's important to specify a predefined height to the carousel through CSS.
+Setting the `orientation` attribute to `vertical` will render the carousel in a vertical layout. If the content of your slides vary in height, you will need to set amn explicit `height` or `max-height` on the carousel using CSS.
 
 ```html preview
 <sl-carousel class="vertical" pagination orientation="vertical">
@@ -902,7 +900,7 @@ const App = () => {
 
 ### Scroll Hint
 
-Use the `--scroll-hint` custom property to add inline padding in horizontal carousels and block padding in vertical carousels. Setting a padding will make the closest slides slightly visible, hinting that there are more items in the carousel.
+Use the `--scroll-hint` custom property to add inline padding in horizontal carousels and block padding in vertical carousels. This will make the closest slides slightly visible, hinting that there are more items in the carousel.
 
 ```html preview
 <sl-carousel class="scroll-hint" pagination style="--scroll-hint: 10%;">
