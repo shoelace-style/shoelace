@@ -902,7 +902,7 @@ const App = () => {
 
 ### Scroll Hint
 
-Use the `--scroll-hint` attribute to add inline padding in horizontal carousels and block padding in vertical carousels. Setting a padding will make the closest slides slightly visible, hinting that there are more items in the carousel.
+Use the `--scroll-hint` custom property to add inline padding in horizontal carousels and block padding in vertical carousels. Setting a padding will make the closest slides slightly visible, hinting that there are more items in the carousel.
 
 ```html preview
 <sl-carousel class="scroll-hint" pagination style="--scroll-hint: 10%;">
