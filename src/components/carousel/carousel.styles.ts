@@ -28,8 +28,8 @@ export default css`
 
   .carousel__pagination {
     grid-area: pagination;
-
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: var(--sl-spacing-small);
   }
@@ -64,6 +64,7 @@ export default css`
     scroll-snap-type: x mandatory;
     scroll-padding-inline: var(--scroll-hint);
     padding-inline: var(--scroll-hint);
+    overflow-y: hidden;
   }
 
   .carousel__slides--vertical {
@@ -74,6 +75,7 @@ export default css`
     scroll-snap-type: y mandatory;
     scroll-padding-block: var(--scroll-hint);
     padding-block: var(--scroll-hint);
+    overflow-x: hidden;
   }
 
   .carousel__slides--dragging,
@@ -140,6 +142,8 @@ export default css`
     background-color: var(--sl-color-neutral-300);
     will-change: transform;
     transition: var(--sl-transition-fast) ease-in;
+    padding: 0;
+    margin: 0;
   }
 
   .carousel__pagination-item--active {

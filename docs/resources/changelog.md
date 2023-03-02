@@ -10,9 +10,14 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 - Added an experimental autoloader
 - Added the `subpath` argument to `getBasePath()` to make it easier to generate full paths to any file
+- Added `tag__base`, `tag__content`, `tag__remove-button`, `tag__remove-button__base` parts to `<sl-select>`
+
+## 2.2.0
+
 - Added TypeScript types to all custom events [#1183](https://github.com/shoelace-style/shoelace/pull/1183)
 - Added the `svg` part to `<sl-icon>`
 - Added the `getForm()` method to all form controls [#1180](https://github.com/shoelace-style/shoelace/issues/1180)
+- Added the experimental carousel component [#851](https://github.com/shoelace-style/shoelace/pull/851)
 - Fixed a bug in `<sl-select>` that caused the display label to render incorrectly in Chrome after form validation [#1197](https://github.com/shoelace-style/shoelace/discussions/1197)
 - Fixed a bug in `<sl-input>` that prevented users from applying their own value for `autocapitalize`, `autocomplete`, and `autocorrect` when using `type="password` [#1205](https://github.com/shoelace-style/shoelace/issues/1205)
 - Fixed a bug in `<sl-tab-group>` that prevented scroll controls from showing when dynamically adding tabs [#1208](https://github.com/shoelace-style/shoelace/issues/1208)
@@ -22,6 +27,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-menu-item>` that caused the focus color to show when selecting menu items with a mouse or touch device
 - Fixed a bug in `<sl-select>` that caused `sl-change` and `sl-input` to be emitted too early [#1201](https://github.com/shoelace-style/shoelace/issues/1201)
 - Fixed a positioning edge case that caused `<sl-popup>` to positioned nested popups incorrectly [#1135](https://github.com/shoelace-style/shoelace/issues/1135)
+- Fixed a bug in `<sl-tree>` that caused the tree item to collapse when clicking a child item, dragging the mouse, and releasing it on the parent node [#1082](https://github.com/shoelace-style/shoelace/issues/1082)
 - Updated `@shoelace-style/localize` to 3.1.0
 - Updated `@floating-ui/dom` to 1.2.1
 

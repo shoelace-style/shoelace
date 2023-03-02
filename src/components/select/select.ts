@@ -59,6 +59,10 @@ import type SlRemoveEvent from '../../events/sl-remove';
  * @csspart listbox - The listbox container where options are slotted.
  * @csspart tags - The container that houses option tags when `multiselect` is used.
  * @csspart tag - The individual tags that represent each multiselect option.
+ * @csspart tag__base - The tag's base part.
+ * @csspart tag__content - The tag's content part.
+ * @csspart tag__remove-button - The tag's remove button.
+ * @csspart tag__remove-button__base - The tag's remove button base part.
  * @csspart clear-button - The clear button.
  * @csspart expand-icon - The container that wraps the expand icon.
  */
@@ -766,6 +770,12 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
                           return html`
                             <sl-tag
                               part="tag"
+                              exportparts="
+                                base:tag__base,
+                                content:tag__content,
+                                remove-button:tag__remove-button,
+                                remove-button__base:tag__remove-button__base
+                              "
                               ?pill=${this.pill}
                               size=${this.size}
                               removable
