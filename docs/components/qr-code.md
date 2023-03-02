@@ -17,8 +17,10 @@ QR codes are useful for providing small pieces of information to users who can q
   const qrCode = container.querySelector('sl-qr-code');
   const input = container.querySelector('sl-input');
 
-  input.value = qrCode.value;
-  input.addEventListener('sl-input', () => (qrCode.value = input.value));
+  customElements.whenDefined('sl-qr-code').then(() => {
+    input.value = qrCode.value;
+    input.addEventListener('sl-input', () => (qrCode.value = input.value));
+  });
 </script>
 
 <style>
