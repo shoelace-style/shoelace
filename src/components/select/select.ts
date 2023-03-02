@@ -438,15 +438,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
     // Check for duplicate values in menu items
     if (customElements.get('sl-option')) {
-      allOptions.forEach(option => {
-        if (values.includes(option.value)) {
-          console.error(
-            `An option with a duplicate value of "${option.value}" has been found in <sl-select>. All options must have unique values.`,
-            option
-          );
-        }
-        values.push(option.value);
-      });
+      allOptions.forEach(option => values.push(option.value));
 
       // Select only the options that match the new value
       this.setSelectedOptions(allOptions.filter(el => value.includes(el.value)));
