@@ -8,6 +8,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- Added `custom-elements.json` to package exports
 - Added `tag__base`, `tag__content`, `tag__remove-button`, `tag__remove-button__base` parts to `<sl-select>`
 - Fixed a bug in `<sl-rating>` that allowed the `sl-change` event to be emitted when disabled [#1220](https://github.com/shoelace-style/shoelace/issues/1220)
 
