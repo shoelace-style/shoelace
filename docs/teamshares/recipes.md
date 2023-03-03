@@ -1,3 +1,4 @@
-# Teamshares Design System
+# Recipe Book
 
-Coming soon
+- ## [Rails UJS](/teamshares/recipes/rails-ujs.md)
+<!-- - ## [Cypress tests](/teamshares/recipes/cypress.md) -->
