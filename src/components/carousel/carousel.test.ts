@@ -17,7 +17,7 @@ describe('<sl-carousel>', () => {
     // Assert
     expect(el).to.exist;
     expect(el).to.have.attribute('role', 'region');
-    expect(el).to.have.attribute('aria-roledescription', 'carousel');
+    expect(el).to.have.attribute('aria-label', 'Carousel');
     expect(el.shadowRoot!.querySelector('.carousel__navigation')).not.to.exist;
     expect(el.shadowRoot!.querySelector('.carousel__pagination')).not.to.exist;
   });
@@ -539,7 +539,6 @@ describe('<sl-carousel>', () => {
 
       // Assert
       expect(el.scrollContainer).to.have.attribute('aria-busy', 'false');
-      expect(el.scrollContainer).to.have.attribute('aria-live', 'polite');
       expect(el.scrollContainer).to.have.attribute('aria-atomic', 'true');
 
       expect(pagination).to.have.attribute('role', 'tablist');
@@ -583,46 +582,6 @@ describe('<sl-carousel>', () => {
         await oneEvent(el.scrollContainer, 'scrollend');
         await el.updateComplete;
         expect(el.scrollContainer).to.have.attribute('aria-busy', 'false');
-      });
-    });
-
-    describe('when autoplay is active', () => {
-      it('should disable live announcement', async () => {
-        // Arrange
-        const el = await fixture<SlCarousel>(html`
-          <sl-carousel autoplay>
-            <sl-carousel-item>Node 1</sl-carousel-item>
-            <sl-carousel-item>Node 2</sl-carousel-item>
-            <sl-carousel-item>Node 3</sl-carousel-item>
-          </sl-carousel>
-        `);
-
-        await el.updateComplete;
-
-        // Assert
-        expect(el.scrollContainer).to.have.attribute('aria-live', 'off');
-      });
-
-      describe('and user is interacting with the carousel', () => {
-        it('should enable live announcement', async () => {
-          // Arrange
-          const el = await fixture<SlCarousel>(html`
-            <sl-carousel autoplay>
-              <sl-carousel-item>Node 1</sl-carousel-item>
-              <sl-carousel-item>Node 2</sl-carousel-item>
-              <sl-carousel-item>Node 3</sl-carousel-item>
-            </sl-carousel>
-          `);
-
-          await el.updateComplete;
-
-          // Act
-          el.dispatchEvent(new Event('focusin'));
-          await el.updateComplete;
-
-          // Assert
-          expect(el.scrollContainer).to.have.attribute('aria-live', 'polite');
-        });
       });
     });
   });
