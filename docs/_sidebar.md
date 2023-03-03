@@ -40,6 +40,7 @@
   - [Divider](/components/divider)
   - [Drawer](/components/drawer)
   - [Dropdown](/components/dropdown)
+  - [File Input](/components/file-input)
   - [Icon](/components/icon)
   - [Icon Button](/components/icon-button)
   - [Image Comparer](/components/image-comparer)
