@@ -79,6 +79,20 @@ describe('<sl-rating>', () => {
     expect(el.value).to.equal(1);
   });
 
+  it('should not emit sl-change when disabled', async () => {
+    const el = await fixture<SlRating>(html` <sl-rating value="5" disabled></sl-rating> `);
+    const lastSymbol = el.shadowRoot!.querySelector<HTMLSpanElement>('.rating__symbol:last-child')!;
+    const changeHandler = sinon.spy();
+
+    el.addEventListener('sl-change', changeHandler);
+
+    await clickOnElement(lastSymbol);
+    await el.updateComplete;
+
+    expect(changeHandler).to.not.have.been.called;
+    expect(el.value).to.equal(5);
+  });
+
   it('should not emit sl-change when the value is changed programmatically', async () => {
     const el = await fixture<SlRating>(html` <sl-rating label="Test" value="1"></sl-rating> `);
     el.addEventListener('sl-change', () => expect.fail('sl-change incorrectly emitted'));

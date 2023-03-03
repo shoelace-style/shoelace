@@ -89,6 +89,10 @@ export default class SlRating extends ShoelaceElement {
   }
 
   private handleClick(event: MouseEvent) {
+    if (this.disabled) {
+      return;
+    }
+
     this.setValue(this.getValueFromMousePosition(event));
     this.emit('sl-change');
   }
