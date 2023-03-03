@@ -221,8 +221,8 @@ export default class SlCarousel extends ShoelaceElement {
     // Reinitialize the carousel if a carousel item has been added or removed
     if (needsInitialization) {
       this.initializeSlides();
-      this.requestUpdate();
     }
+    this.requestUpdate();
   }
 
   @watch('loop', { waitUntilFirstUpdate: true })
