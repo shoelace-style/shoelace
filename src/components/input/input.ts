@@ -144,10 +144,10 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   @property({ type: Number }) maxlength: number;
 
   /** The input's minimum value. Only applies to date and number input types. */
-  @property({ type: Number }) min: number;
+  @property() min: number | string;
 
   /** The input's maximum value. Only applies to date and number input types. */
-  @property({ type: Number }) max: number;
+  @property() max: number | string;
 
   /**
    * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
