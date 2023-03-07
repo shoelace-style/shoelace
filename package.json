@@ -14,6 +14,7 @@
       "types": "./dist/shoelace.d.ts",
       "import": "./dist/shoelace.js"
     },
+    "./dist/custom-elements.json": "./dist/custom-elements.json",
     "./dist/themes/*": "./dist/themes/*",
     "./dist/components/*": "./dist/components/*",
     "./dist/utilities/*": "./dist/utilities/*",
