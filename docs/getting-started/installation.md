@@ -1,12 +1,18 @@
 # Installation
 
-You can use Shoelace via CDN or by installing it locally. You can also [cherry pick](#cherry-picking) individual components for faster load times.
+You can load Shoelace via CDN or by installing it locally. If you're using a framework, make sure to check out the pages for [React](/frameworks/react), [Vue](/frameworks/vue), and [Angular](/frameworks/angular) for additional information.
 
-If you're using a framework, make sure to check out the pages for [React](/frameworks/react), [Vue](/frameworks/vue), and [Angular](/frameworks/angular).
+## CDN Installation (Easiest)
 
-## Autoloading (Experimental)
+<sl-tab-group>
+<sl-tab slot="nav" panel="autoloader" active>Autoloader</sl-tab>
+<sl-tab slot="nav" panel="traditional">Traditional Loader</sl-tab>
 
-The autoloader is the simplest and most efficient way to use Shoelace. A lightweight script watches the DOM for unregistered Shoelace elements and lazy loads them for you. This works for elements already on the page and elements that get added later on.
+<sl-tab-panel name="autoloader">
+
+The experimental autoloader is the easiest and most efficient way to use Shoelace. A lightweight script watches the DOM for unregistered Shoelace elements and lazy loads them for you — even if they're added dynamically.
+
+While convenient, autoloading may lead to a [Flash of Undefined Custom Elements](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements/). The linked article describes some ways to alleviate it.
 
 <!-- prettier-ignore -->
 ```html
@@ -14,31 +20,31 @@ The autoloader is the simplest and most efficient way to use Shoelace. A lightwe
 <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace-autoloader.js"></script>
 ```
 
-?> While convenient, one caveat of autoloading is you may see a [Flash of Undefined Custom Elements](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements/).
+</sl-tab-panel>
 
-## CDN Installation
+<sl-tab-panel name="traditional">
 
-The easiest way to install Shoelace is with the CDN. Just add the following tags to your page to get all components and the default light theme.
+The traditional CDN loader registers all Shoelace elements up front. Note that, if you're only using a handful of components, it will be much more efficient to stick with the autoloader. However, you can also [cherry pick](#cherry-picking) components if you want to load specific ones up front.
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/light.css" />
 <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
 ```
 
-?> If you're only using a handful of components, it will be more efficient to [autoload](#autoloading-experimental) or [cherry pick](#cherry-picking) the ones you need.
+</sl-tab-panel>
+</sl-tab-group>
 
 ### Dark Theme
 
-If you prefer to use the [dark theme](/getting-started/themes#dark-theme) instead, use this code and add `<html class="sl-theme-dark">` to the page.
+The code above will load the light theme. If you want to use the [dark theme](/getting-started/themes#dark-theme) instead, update the stylesheet as shown below and add `<html class="sl-theme-dark">` to your page.
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/dark.css" />
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
 ```
 
 ### Light & Dark Theme
 
-If you want to load the light or dark theme based on the user's `prefers-color-scheme` setting, use this. The `media` attributes ensure that only the user's preferred theme stylesheet loads and the `onload` attribute sets the appropriate [theme class](/getting-started/themes) on the `<html>` element.
+If you want to load the light or dark theme based on the user's `prefers-color-scheme` setting, use the stylesheets below. The `media` attributes ensure that only the user's preferred theme stylesheet loads and the `onload` attribute sets the appropriate [theme class](/getting-started/themes) on the `<html>` element.
 
 ```html
 <link
@@ -52,7 +58,6 @@ If you want to load the light or dark theme based on the user's `prefers-color-s
   href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/dark.css"
   onload="document.documentElement.classList.add('sl-theme-dark');"
 />
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
 ```
 
 Now you can [start using Shoelace!](/getting-started/usage)
@@ -100,9 +105,7 @@ However, if you're [cherry picking](#cherry-picking) or [bundling](#bundling) Sh
 
 ## Cherry Picking
 
-The previous approach is the _easiest_ way to load Shoelace, but easy isn't always efficient. You'll incur the full size of the library even if you only use a handful of components. This is convenient for prototyping or if you're using most of the components, but it may result in longer load times in production. To improve this, you can cherry pick the components you need.
-
-Cherry picking can be done from your local install or [directly from the CDN](https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/). This will limit the number of files the browser has to download and reduce the amount of bytes being transferred. The disadvantage is that you need to load components manually.
+Cherry picking can be done from [the CDN](#cdn-installation-easiest) or your [local installation](#local-installation). This approach will load only the components you need up front, while limiting the number of files the browser has to download. The disadvantage is that you need to import each individual component.
 
 Here's an example that loads only the button component. Again, if you're not using a module resolver, you'll need to adjust the path to point to the folder Shoelace is in.
 
