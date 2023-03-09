@@ -16,6 +16,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a regression in `<sl-input>` that caused `min` and `max` to stop working when `type="date"` [#1224](https://github.com/shoelace-style/shoelace/issues/1224)
 - Improved accessibility of `<sl-carousel>` [#1218](https://github.com/shoelace-style/shoelace/pull/1218)
 - Improved `<sl-option>` so it converts non-string values to strings for convenience [#1226](https://github.com/shoelace-style/shoelace/issues/1226)
+- Updated the docs to dogfood the autoloader
 
 ## 2.2.0
 
