@@ -28,7 +28,7 @@ const translation: Translation = {
   scrollToStart: `Faire défiler jusqu'au début`,
   selectAColorFromTheScreen: `Sélectionnez une couleur à l'écran`,
   showPassword: 'Montrer le mot de passe',
-  slide_num: slide => `Glisser ${slide}`,
+  slide_num: slide => `Diapositive ${slide}`,
   toggleColorFormat: 'Changer le format de couleur'
 };
 
