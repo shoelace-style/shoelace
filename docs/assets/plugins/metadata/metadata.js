@@ -436,6 +436,9 @@
           result += `
             ## Importing
 
+            If you're using the autoloader or the traditional loader, you can ignore this section. Otherwise, feel free to
+            use any of the following snippets to [cherry pick](getting-started/installation#cherry-picking) this component.
+
             <sl-tab-group>
             <sl-tab slot="nav" panel="script">Script</sl-tab>
             <sl-tab slot="nav" panel="import">Import</sl-tab>

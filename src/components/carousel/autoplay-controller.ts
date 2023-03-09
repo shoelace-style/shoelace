@@ -8,6 +8,7 @@ export class AutoplayController implements ReactiveController {
   private host: ReactiveElement;
   private timerId = 0;
   private tickCallback: () => void;
+  private activeInteractions = 0;
 
   paused = false;
   stopped = true;
@@ -57,12 +58,16 @@ export class AutoplayController implements ReactiveController {
   }
 
   pause = () => {
-    this.paused = true;
-    this.host.requestUpdate();
+    if (!this.activeInteractions++) {
+      this.paused = true;
+      this.host.requestUpdate();
+    }
   };
 
   resume = () => {
-    this.paused = false;
-    this.host.requestUpdate();
+    if (!--this.activeInteractions) {
+      this.paused = false;
+      this.host.requestUpdate();
+    }
   };
 }

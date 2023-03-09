@@ -1,5 +1,4 @@
-import { expect, fixture, html, waitUntil } from '@open-wc/testing';
-import sinon from 'sinon';
+import { aTimeout, expect, fixture, html, waitUntil } from '@open-wc/testing';
 import type SlAvatar from './avatar';
 
 // The default avatar background just misses AA contrast, but the next step up is way too dark. Since avatars aren't
@@ -113,23 +112,20 @@ describe('<sl-avatar>', () => {
   });
 
   it('should not render the image when the image fails to load', async () => {
-    const errorHandler = sinon.spy();
-
     el = await fixture<SlAvatar>(html`<sl-avatar></sl-avatar>`);
-    el.addEventListener('error', errorHandler);
     el.image = 'bad_image';
-    waitUntil(() => errorHandler.calledOnce);
 
+    await aTimeout(0);
+
+    await waitUntil(() => el.shadowRoot!.querySelector('img') === null);
     expect(el.shadowRoot!.querySelector('img')).to.be.null;
   });
 
   it('should show a valid image after being passed an invalid image initially', async () => {
-    const errorHandler = sinon.spy();
-
     el = await fixture<SlAvatar>(html`<sl-avatar></sl-avatar>`);
-    el.addEventListener('error', errorHandler);
-    el.image = 'bad_image';
-    waitUntil(() => errorHandler.calledOnce);
+
+    await aTimeout(0);
+    await waitUntil(() => el.shadowRoot!.querySelector('img') === null);
 
     el.image = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
     await el.updateComplete;

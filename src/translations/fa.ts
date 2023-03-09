@@ -6,6 +6,7 @@ const translation: Translation = {
   $name: 'فارسی',
   $dir: 'rtl',
 
+  carousel: 'چرخ فلک',
   clearEntry: 'پاک کردن ورودی',
   close: 'بستن',
   copy: 'رونوشت',
@@ -27,6 +28,7 @@ const translation: Translation = {
   scrollToStart: 'پیمایش به ابتدا',
   selectAColorFromTheScreen: 'انتخاب یک رنگ از صفحه نمایش',
   showPassword: 'نمایش رمز',
+  slide_num: slide => `اسلاید ${slide}`,
   toggleColorFormat: 'تغییر قالب رنگ'
 };
 

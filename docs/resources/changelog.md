@@ -6,6 +6,18 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## 2.3.0
+
+- Added an experimental autoloader
+- Added the `subpath` argument to `getBasePath()` to make it easier to generate full paths to any file
+- Added `custom-elements.json` to package exports
+- Added `tag__base`, `tag__content`, `tag__remove-button`, `tag__remove-button__base` parts to `<sl-select>`
+- Fixed a bug in `<sl-rating>` that allowed the `sl-change` event to be emitted when disabled [#1220](https://github.com/shoelace-style/shoelace/issues/1220)
+- Fixed a regression in `<sl-input>` that caused `min` and `max` to stop working when `type="date"` [#1224](https://github.com/shoelace-style/shoelace/issues/1224)
+- Improved accessibility of `<sl-carousel>` [#1218](https://github.com/shoelace-style/shoelace/pull/1218)
+- Improved `<sl-option>` so it converts non-string values to strings for convenience [#1226](https://github.com/shoelace-style/shoelace/issues/1226)
+- Updated the docs to dogfood the autoloader
+
 ## 2.2.0
 
 - Added TypeScript types to all custom events [#1183](https://github.com/shoelace-style/shoelace/pull/1183)

@@ -59,6 +59,10 @@ import type SlRemoveEvent from '../../events/sl-remove';
  * @csspart listbox - The listbox container where options are slotted.
  * @csspart tags - The container that houses option tags when `multiselect` is used.
  * @csspart tag - The individual tags that represent each multiselect option.
+ * @csspart tag__base - The tag's base part.
+ * @csspart tag__content - The tag's content part.
+ * @csspart tag__remove-button - The tag's remove button.
+ * @csspart tag__remove-button__base - The tag's remove button base part.
  * @csspart clear-button - The clear button.
  * @csspart expand-icon - The container that wraps the expand icon.
  */
@@ -433,18 +437,15 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     const values: string[] = [];
 
     // Check for duplicate values in menu items
-    allOptions.forEach(option => {
-      if (values.includes(option.value)) {
-        console.error(
-          `An option with a duplicate value of "${option.value}" has been found in <sl-select>. All options must have unique values.`,
-          option
-        );
-      }
-      values.push(option.value);
-    });
+    if (customElements.get('sl-option')) {
+      allOptions.forEach(option => values.push(option.value));
 
-    // Select only the options that match the new value
-    this.setSelectedOptions(allOptions.filter(el => value.includes(el.value)));
+      // Select only the options that match the new value
+      this.setSelectedOptions(allOptions.filter(el => value.includes(el.value)));
+    } else {
+      // Rerun this handler when <sl-option> is registered
+      customElements.whenDefined('sl-option').then(() => this.handleDefaultSlotChange());
+    }
   }
 
   private handleTagRemove(event: SlRemoveEvent, option: SlOption) {
@@ -761,6 +762,12 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
                           return html`
                             <sl-tag
                               part="tag"
+                              exportparts="
+                                base:tag__base,
+                                content:tag__content,
+                                remove-button:tag__remove-button,
+                                remove-button__base:tag__remove-button__base
+                              "
                               ?pill=${this.pill}
                               size=${this.size}
                               removable

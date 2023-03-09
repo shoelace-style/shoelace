@@ -10,7 +10,6 @@ import { prefersReducedMotion } from '../../internal/animate';
 import { range } from 'lit/directives/range.js';
 import { ScrollController } from './scroll-controller';
 import { watch } from '../../internal/watch';
-import { when } from 'lit/directives/when.js';
 import ShoelaceElement from '../../internal/shoelace-element';
 import SlCarouselItem from '../carousel-item/carousel-item';
 import styles from './carousel.styles';
@@ -98,7 +97,7 @@ export default class SlCarousel extends ShoelaceElement {
   connectedCallback(): void {
     super.connectedCallback();
     this.setAttribute('role', 'region');
-    this.setAttribute('aria-roledescription', 'carousel');
+    this.setAttribute('aria-label', this.localize.term('carousel'));
 
     const intersectionObserver = new IntersectionObserver(
       (entries: IntersectionObserverEntry[]) => {
@@ -137,63 +136,61 @@ export default class SlCarousel extends ShoelaceElement {
     this.mutationObserver.observe(this, { childList: true, subtree: false });
   }
 
+  private getPageCount() {
+    return Math.ceil(this.getSlides().length / this.slidesPerPage);
+  }
+
+  private getCurrentPage() {
+    return Math.floor(this.activeSlide / this.slidesPerPage);
+  }
+
   private getSlides({ excludeClones = true }: { excludeClones?: boolean } = {}) {
     return [...this.slides].filter(slide => !excludeClones || !slide.hasAttribute('data-clone'));
   }
 
-  /**
-   * Move the carousel backward by `slides-per-move` slides.
-   *
-   * @param behavior - The behavior used for scrolling.
-   */
-  previous(behavior: ScrollBehavior = 'smooth') {
-    this.goToSlide(this.activeSlide - this.slidesPerMove, behavior);
-  }
+  private handleKeyDown(event: KeyboardEvent) {
+    if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
+      const target = event.target as HTMLElement;
+      const isRtl = this.localize.dir() === 'rtl';
+      const isFocusInPagination = target.closest('[part~="pagination-item"]') !== null;
+      const isNext =
+        event.key === 'ArrowDown' || (!isRtl && event.key === 'ArrowRight') || (isRtl && event.key === 'ArrowLeft');
+      const isPrevious =
+        event.key === 'ArrowUp' || (!isRtl && event.key === 'ArrowLeft') || (isRtl && event.key === 'ArrowRight');
 
-  /**
-   * Move the carousel forward by `slides-per-move` slides.
-   *
-   * @param behavior - The behavior used for scrolling.
-   */
-  next(behavior: ScrollBehavior = 'smooth') {
-    this.goToSlide(this.activeSlide + this.slidesPerMove, behavior);
-  }
+      event.preventDefault();
 
-  /**
-   * Scrolls the carousel to the slide specified by `index`.
-   *
-   * @param index - The slide index.
-   * @param behavior - The behavior used for scrolling.
-   */
-  goToSlide(index: number, behavior: ScrollBehavior = 'smooth') {
-    const { slidesPerPage, loop } = this;
+      if (isPrevious) {
+        this.previous();
+      }
 
-    const slidesWithClones = this.getSlides({ excludeClones: false });
-    const normalizedIndex = clamp(index + (loop ? slidesPerPage : 0), 0, slidesWithClones.length - 1);
-    const slide = slidesWithClones[normalizedIndex];
+      if (isNext) {
+        this.next();
+      }
 
-    this.scrollContainer.scrollTo({
-      left: slide.offsetLeft,
-      top: slide.offsetTop,
-      behavior: prefersReducedMotion() ? 'auto' : behavior
-    });
-  }
+      if (event.key === 'Home') {
+        this.goToSlide(0);
+      }
 
-  handleSlotChange(mutations: MutationRecord[]) {
-    const needsInitialization = mutations.some(mutation =>
-      [...mutation.addedNodes, ...mutation.removedNodes].some(
-        node => SlCarouselItem.isCarouselItem(node) && !(node as HTMLElement).hasAttribute('data-clone')
-      )
-    );
+      if (event.key === 'End') {
+        this.goToSlide(this.getSlides().length - 1);
+      }
 
-    // Reinitialize the carousel if a carousel item has been added or removed
-    if (needsInitialization) {
-      this.initializeSlides();
-      this.requestUpdate();
+      if (isFocusInPagination) {
+        this.updateComplete.then(() => {
+          const activePaginationItem = this.shadowRoot?.querySelector<HTMLButtonElement>(
+            '[part~="pagination-item--active"]'
+          );
+
+          if (activePaginationItem) {
+            activePaginationItem.focus();
+          }
+        });
+      }
     }
   }
 
-  handleScrollEnd() {
+  private handleScrollEnd() {
     const slides = this.getSlides();
     const entries = [...this.intersectionObserverEntries.values()];
 
@@ -214,6 +211,20 @@ export default class SlCarousel extends ShoelaceElement {
     }
   }
 
+  private handleSlotChange(mutations: MutationRecord[]) {
+    const needsInitialization = mutations.some(mutation =>
+      [...mutation.addedNodes, ...mutation.removedNodes].some(
+        node => SlCarouselItem.isCarouselItem(node) && !(node as HTMLElement).hasAttribute('data-clone')
+      )
+    );
+
+    // Reinitialize the carousel if a carousel item has been added or removed
+    if (needsInitialization) {
+      this.initializeSlides();
+    }
+    this.requestUpdate();
+  }
+
   @watch('loop', { waitUntilFirstUpdate: true })
   @watch('slidesPerPage', { waitUntilFirstUpdate: true })
   initializeSlides() {
@@ -223,11 +234,12 @@ export default class SlCarousel extends ShoelaceElement {
     this.intersectionObserverEntries.clear();
 
     // Removes all the cloned elements from the carousel
-    this.getSlides({ excludeClones: false }).forEach(slide => {
+    this.getSlides({ excludeClones: false }).forEach((slide, index) => {
       intersectionObserver.unobserve(slide);
 
       slide.classList.remove('--in-view');
       slide.classList.remove('--is-active');
+      slide.setAttribute('aria-label', this.localize.term('slide_num', index + 1));
 
       if (slide.hasAttribute('data-clone')) {
         slide.remove();
@@ -307,85 +319,59 @@ export default class SlCarousel extends ShoelaceElement {
     this.scrollController.mouseDragging = this.mouseDragging;
   }
 
-  private renderPagination = () => {
+  /**
+   * Move the carousel backward by `slides-per-move` slides.
+   *
+   * @param behavior - The behavior used for scrolling.
+   */
+  previous(behavior: ScrollBehavior = 'smooth') {
+    this.goToSlide(this.activeSlide - this.slidesPerMove, behavior);
+  }
+
+  /**
+   * Move the carousel forward by `slides-per-move` slides.
+   *
+   * @param behavior - The behavior used for scrolling.
+   */
+  next(behavior: ScrollBehavior = 'smooth') {
+    this.goToSlide(this.activeSlide + this.slidesPerMove, behavior);
+  }
+
+  /**
+   * Scrolls the carousel to the slide specified by `index`.
+   *
+   * @param index - The slide index.
+   * @param behavior - The behavior used for scrolling.
+   */
+  goToSlide(index: number, behavior: ScrollBehavior = 'smooth') {
+    const { slidesPerPage, loop } = this;
+
     const slides = this.getSlides();
-    const slidesCount = slides.length;
+    const slidesWithClones = this.getSlides({ excludeClones: false });
 
-    const { activeSlide, slidesPerPage } = this;
-    const pagesCount = Math.ceil(slidesCount / slidesPerPage);
-    const currentPage = Math.floor(activeSlide / slidesPerPage);
+    // Sets the next index without taking into account clones, if any.
+    const newActiveSlide = (index + slides.length) % slides.length;
+    this.activeSlide = newActiveSlide;
 
-    return html`
-      <nav part="pagination" role="tablist" class="carousel__pagination" aria-controls="scroll-container">
-        ${map(range(pagesCount), index => {
-          const isActive = index === currentPage;
-          return html`
-            <button
-              part="pagination-item ${isActive ? 'pagination-item--active' : ''}"
-              class="${classMap({
-                'carousel__pagination-item': true,
-                'carousel__pagination-item--active': isActive
-              })}"
-              aria-selected="${isActive ? 'true' : 'false'}"
-              aria-label="${this.localize.term('goToSlide', index + 1, pagesCount)}"
-              role="tab"
-              @click="${() => this.goToSlide(index * slidesPerPage)}"
-            ></button>
-          `;
-        })}
-      </nav>
-    `;
-  };
+    // Get the index of the next slide. For looping carousel it adds `slidesPerPage`
+    // to normalize the starting index in order to ignore the first nth clones.
+    const nextSlideIndex = clamp(index + (loop ? slidesPerPage : 0), 0, slidesWithClones.length - 1);
+    const nextSlide = slidesWithClones[nextSlideIndex];
 
-  private renderNavigation = () => {
-    const { loop, activeSlide } = this;
-    const slides = this.getSlides();
-    const slidesCount = slides.length;
-    const prevEnabled = loop || activeSlide > 0;
-    const nextEnabled = loop || activeSlide < slidesCount - 1;
-    const isLtr = this.localize.dir() === 'ltr';
-
-    return html`
-      <nav part="navigation" class="carousel__navigation">
-        <button
-          @click="${prevEnabled ? () => this.previous() : null}"
-          aria-disabled="${prevEnabled ? 'false' : 'true'}"
-          aria-controls="scroll-container"
-          class="${classMap({
-            'carousel__navigation-button': true,
-            'carousel__navigation-button--previous': true,
-            'carousel__navigation-button--disabled': !prevEnabled
-          })}"
-          aria-label="${this.localize.term('previousSlide')}"
-          part="navigation-button navigation-button--previous"
-        >
-          <slot name="previous-icon">
-            <sl-icon library="system" name="${isLtr ? 'chevron-left' : 'chevron-right'}"></sl-icon>
-          </slot>
-        </button>
-
-        <button
-          @click="${nextEnabled ? () => this.next() : null}"
-          aria-disabled="${nextEnabled ? 'false' : 'true'}"
-          aria-controls="scroll-container"
-          class="${classMap({
-            'carousel__navigation-button': true,
-            'carousel__navigation-button--next': true,
-            'carousel__navigation-button--disabled': !nextEnabled
-          })}"
-          aria-label="${this.localize.term('nextSlide')}"
-          part="navigation-button navigation-button--next"
-        >
-          <slot name="next-icon">
-            <sl-icon library="system" name="${isLtr ? 'chevron-right' : 'chevron-left'}"></sl-icon>
-          </slot>
-        </button>
-      </nav>
-    `;
-  };
+    this.scrollContainer.scrollTo({
+      left: nextSlide.offsetLeft,
+      top: nextSlide.offsetTop,
+      behavior: prefersReducedMotion() ? 'auto' : behavior
+    });
+  }
 
   render() {
-    const { autoplayController, scrollController } = this;
+    const { scrollController, slidesPerPage } = this;
+    const pagesCount = this.getPageCount();
+    const currentPage = this.getCurrentPage();
+    const prevEnabled = this.loop || currentPage > 0;
+    const nextEnabled = this.loop || currentPage < pagesCount - 1;
+    const isLtr = this.localize.dir() === 'ltr';
 
     return html`
       <div part="base" class="carousel">
@@ -397,18 +383,79 @@ export default class SlCarousel extends ShoelaceElement {
             'carousel__slides--horizontal': this.orientation === 'horizontal',
             'carousel__slides--vertical': this.orientation === 'vertical'
           })}"
-          @scrollend="${this.handleScrollEnd}"
-          role="list"
-          tabindex="0"
           style="--slides-per-page: ${this.slidesPerPage};"
-          aria-live="${!autoplayController.stopped && !autoplayController.paused ? 'off' : 'polite'}"
           aria-busy="${scrollController.scrolling ? 'true' : 'false'}"
           aria-atomic="true"
+          tabindex="0"
+          @keydown=${this.handleKeyDown}
+          @scrollend=${this.handleScrollEnd}
         >
           <slot></slot>
         </div>
 
-        ${when(this.navigation, this.renderNavigation)} ${when(this.pagination, this.renderPagination)}
+        ${this.navigation
+          ? html`
+              <div part="navigation" class="carousel__navigation">
+                <button
+                  part="navigation-button navigation-button--previous"
+                  class="${classMap({
+                    'carousel__navigation-button': true,
+                    'carousel__navigation-button--previous': true,
+                    'carousel__navigation-button--disabled': !prevEnabled
+                  })}"
+                  aria-label="${this.localize.term('previousSlide')}"
+                  aria-controls="scroll-container"
+                  aria-disabled="${prevEnabled ? 'false' : 'true'}"
+                  @click=${prevEnabled ? () => this.previous() : null}
+                >
+                  <slot name="previous-icon">
+                    <sl-icon library="system" name="${isLtr ? 'chevron-left' : 'chevron-right'}"></sl-icon>
+                  </slot>
+                </button>
+
+                <button
+                  part="navigation-button navigation-button--next"
+                  class=${classMap({
+                    'carousel__navigation-button': true,
+                    'carousel__navigation-button--next': true,
+                    'carousel__navigation-button--disabled': !nextEnabled
+                  })}
+                  aria-label="${this.localize.term('nextSlide')}"
+                  aria-controls="scroll-container"
+                  aria-disabled="${nextEnabled ? 'false' : 'true'}"
+                  @click=${nextEnabled ? () => this.next() : null}
+                >
+                  <slot name="next-icon">
+                    <sl-icon library="system" name="${isLtr ? 'chevron-right' : 'chevron-left'}"></sl-icon>
+                  </slot>
+                </button>
+              </div>
+            `
+          : ''}
+        ${this.pagination
+          ? html`
+              <div part="pagination" role="tablist" class="carousel__pagination" aria-controls="scroll-container">
+                ${map(range(pagesCount), index => {
+                  const isActive = index === currentPage;
+                  return html`
+                    <button
+                      part="pagination-item ${isActive ? 'pagination-item--active' : ''}"
+                      class="${classMap({
+                        'carousel__pagination-item': true,
+                        'carousel__pagination-item--active': isActive
+                      })}"
+                      role="tab"
+                      aria-selected="${isActive ? 'true' : 'false'}"
+                      aria-label="${this.localize.term('goToSlide', index + 1, pagesCount)}"
+                      tabindex=${isActive ? '0' : '-1'}
+                      @click=${() => this.goToSlide(index * slidesPerPage)}
+                      @keydown=${this.handleKeyDown}
+                    ></button>
+                  `;
+                })}
+              </div>
+            `
+          : ''}
       </div>
     `;
   }

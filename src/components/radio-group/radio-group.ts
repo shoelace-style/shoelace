@@ -197,27 +197,35 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
   }
 
   private handleSlotChange() {
-    const radios = this.getAllRadios();
+    if (customElements.get('sl-radio') || customElements.get('sl-radio-button')) {
+      const radios = this.getAllRadios();
+      radios.forEach(radio => (radio.checked = radio.value === this.value));
 
-    radios.forEach(radio => (radio.checked = radio.value === this.value));
+      this.hasButtonGroup = radios.some(radio => radio.tagName.toLowerCase() === 'sl-radio-button');
 
-    this.hasButtonGroup = radios.some(radio => radio.tagName.toLowerCase() === 'sl-radio-button');
+      if (!radios.some(radio => radio.checked)) {
+        if (this.hasButtonGroup) {
+          const buttonRadio = radios[0].shadowRoot?.querySelector('button');
 
-    if (!radios.some(radio => radio.checked)) {
+          if (buttonRadio) {
+            buttonRadio.tabIndex = 0;
+          }
+        } else {
+          radios[0].tabIndex = 0;
+        }
+      }
+
       if (this.hasButtonGroup) {
-        const buttonRadio = radios[0].shadowRoot!.querySelector('button')!;
-        buttonRadio.tabIndex = 0;
-      } else {
-        radios[0].tabIndex = 0;
-      }
-    }
+        const buttonGroup = this.shadowRoot?.querySelector('sl-button-group');
 
-    if (this.hasButtonGroup) {
-      const buttonGroup = this.shadowRoot?.querySelector('sl-button-group');
-
-      if (buttonGroup) {
-        buttonGroup.disableRole = true;
+        if (buttonGroup) {
+          buttonGroup.disableRole = true;
+        }
       }
+    } else {
+      // Rerun this handler when <sl-radio> or <sl-radio-button> is registered
+      customElements.whenDefined('sl-radio').then(() => this.handleSlotChange());
+      customElements.whenDefined('sl-radio-button').then(() => this.handleSlotChange());
     }
   }
 
