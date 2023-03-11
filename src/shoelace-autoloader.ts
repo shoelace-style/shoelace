@@ -13,8 +13,8 @@ const observer = new MutationObserver(mutations => {
 /**
  * Checks a node for undefined elements and attempts to register them.
  */
- export async function discover(root: Element | ShadowRoot) {
-  const rootTagName = root instanceof Element ? root.tagName.toLowerCase() : "";
+export async function discover(root: Element | ShadowRoot) {
+  const rootTagName = root instanceof Element ? root.tagName.toLowerCase() : '';
   const rootIsCustomElement = rootTagName?.includes('-');
   const tags = [...root.querySelectorAll(':not(:defined)')]
     .map(el => el.tagName.toLowerCase())
