@@ -13,16 +13,16 @@ const observer = new MutationObserver(mutations => {
 /**
  * Checks a node for undefined elements and attempts to register them.
  */
-async function discover(root: Element) {
-  const rootTagName = root.tagName.toLowerCase();
-  const rootIsCustomElement = rootTagName.includes('-');
+export async function discover(root: Element | ShadowRoot) {
+  const rootTagName = root instanceof Element ? root.tagName.toLowerCase() : '';
+  const rootIsCustomElement = rootTagName?.includes('-');
   const tags = [...root.querySelectorAll(':not(:defined)')]
     .map(el => el.tagName.toLowerCase())
     .filter(tag => tag.startsWith('sl-'));
 
   // If the root element is an undefined custom element, add it to the list
   if (rootIsCustomElement && !customElements.get(rootTagName)) {
-    tags.push(root.tagName.toLowerCase());
+    tags.push(rootTagName);
   }
 
   // Make the list unique
