@@ -8,6 +8,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- Added the `discover()` function to the experimental autoloader's exports [#1236](https://github.com/shoelace-style/shoelace/pull/1236)
 - Improved the behavior of `<sl-carousel>` when used inside a flex container [#1235](https://github.com/shoelace-style/shoelace/pull/1235)
 
 ## 2.3.0
