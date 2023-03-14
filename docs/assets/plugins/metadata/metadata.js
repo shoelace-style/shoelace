@@ -344,7 +344,7 @@
       const buttons = document.createElement('div');
       buttons.classList.add('sidebar-buttons');
       buttons.innerHTML = `
-        <sl-button size="small" class="repo-button repo-button--sponsor" href="https://github.com/sponsors/claviska" target="_blank">
+        <!-- <sl-button size="small" class="repo-button repo-button--sponsor" href="https://github.com/sponsors/claviska" target="_blank">
           <sl-icon slot="prefix" name="heart"></sl-icon> Sponsor
         </sl-button>
         <sl-button size="small" class="repo-button repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" target="_blank">
@@ -352,7 +352,7 @@
         </sl-button>
         <sl-button size="small" class="repo-button repo-button--twitter" href="https://twitter.com/shoelace_style" target="_blank">
           <sl-icon slot="prefix" src="./assets/images/twitter.svg"></sl-icon> Follow
-        </sl-button>
+        </sl-button> -->
       `;
       target.appendChild(buttons);
     });
