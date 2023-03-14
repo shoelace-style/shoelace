@@ -33,7 +33,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-select>` that caused the display label to render incorrectly in Chrome after form validation [#1197](https://github.com/shoelace-style/shoelace/discussions/1197)
 - Fixed a bug in `<sl-input>` that prevented users from applying their own value for `autocapitalize`, `autocomplete`, and `autocorrect` when using `type="password` [#1205](https://github.com/shoelace-style/shoelace/issues/1205)
 - Fixed a bug in `<sl-tab-group>` that prevented scroll controls from showing when dynamically adding tabs [#1208](https://github.com/shoelace-style/shoelace/issues/1208)
-- Fixed a big in `<sl-input>` that caused the calendar icon to be clipped in Firefox [#1213](https://github.com/shoelace-style/shoelace/pull/1213)
+- Fixed a bug in `<sl-input>` that caused the calendar icon to be clipped in Firefox [#1213](https://github.com/shoelace-style/shoelace/pull/1213)
 - Fixed a bug in `<sl-tab>` that caused `sl-tab-show` to be emitted when activating the close button
 - Fixed a bug in `<sl-spinner>` that caused `--track-color` to be invisible with certain colors
 - Fixed a bug in `<sl-menu-item>` that caused the focus color to show when selecting menu items with a mouse or touch device
