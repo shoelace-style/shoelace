@@ -62,6 +62,7 @@ export default css`
     padding: var(--sl-spacing-x-small);
     width: 1rem;
     height: 1rem;
+    flex-shrink: 0;
     cursor: pointer;
   }
 
