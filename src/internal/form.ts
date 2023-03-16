@@ -19,7 +19,7 @@ const reportValidityOverloads: WeakMap<HTMLFormElement, () => boolean> = new Wea
 // We store a Set of controls that users have interacted with. This allows us to determine the interaction state
 // without littering the DOM with additional data attributes.
 //
-const userInteractedControls: Set<ShoelaceFormControl> = new Set();
+const userInteractedControls: WeakSet<ShoelaceFormControl> = new WeakSet();
 
 //
 // We store a WeakMap of interactions for each form control so we can track when all conditions are met for validation.
