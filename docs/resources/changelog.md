@@ -10,6 +10,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 - Added the `discover()` function to the experimental autoloader's exports [#1236](https://github.com/shoelace-style/shoelace/pull/1236)
 - Fixed a bug in `<sl-tree-item>` that prevented long labels from wrapping [#1243](https://github.com/shoelace-style/shoelace/issues/1243)
+- Fixed a bug in `<sl-tree-item>` that caused labels to be misaligned when text wraps [#1244](https://github.com/shoelace-style/shoelace/issues/1244)
 - Improved the behavior of `<sl-carousel>` when used inside a flex container [#1235](https://github.com/shoelace-style/shoelace/pull/1235)
 - Improved the behavior of `<sl-tree-item>` to support buttons and other interactive elements [#1234](https://github.com/shoelace-style/shoelace/issues/1234)
 
