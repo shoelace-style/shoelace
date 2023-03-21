@@ -110,7 +110,6 @@
     "lint-staged": "^13.1.0",
     "lunr": "^2.3.9",
     "npm-check-updates": "^16.6.2",
-    "open": "^8.4.0",
     "pascal-case": "^3.1.2",
     "plop": "^3.1.1",
     "prettier": "^2.8.2",
