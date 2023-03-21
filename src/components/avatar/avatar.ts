@@ -64,14 +64,7 @@ export default class SlAvatar extends ShoelaceElement {
         role="img"
         aria-label=${this.label}
       >
-        ${this.initials
-          ? html` <div part="initials" class="avatar__initials">${this.initials}</div> `
-          : html`
-              <slot name="icon" part="icon" class="avatar__icon" aria-hidden="true">
-                <sl-icon name="person-fill" library="system"></sl-icon>
-              </slot>
-            `}
-        ${this.image && !this.hasError
+        ${this.image && !this.hasError // with image
           ? html`
               <img
                 part="image"
@@ -82,7 +75,13 @@ export default class SlAvatar extends ShoelaceElement {
                 @error="${() => (this.hasError = true)}"
               />
             `
-          : ''}
+          : this.initials // no image, just initials
+          ? html` <div part="initials" class="avatar__initials">${this.initials}</div> `
+          : html`
+              <slot name="icon" part="icon" class="avatar__icon" aria-hidden="true">
+                <sl-icon name="person-fill" library="system"></sl-icon>
+              </slot>
+            `}
       </div>
     `;
   }
