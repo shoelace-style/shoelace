@@ -8,7 +8,7 @@ For these attributes, you should instead evaluate the value in inline Ruby code 
 
 ```pug slim
 sl-checkbox[
-	checked = (@variable == value)
+  checked = (@variable == value)
 ]
 ```
 
@@ -18,32 +18,32 @@ This will render as `<sl-checkbox checked></sl-checkbox>` if true and simply `<s
 
 ## Nested rendering
 
-Shoelace rendering is more flexible than it looks: in many cases, the child of a Shoelace wrapper component such as `sl-menu` or `sl-button-group` doesn’t actually have to be a Shoelace component, nor does it have to be the direct descendant of the wrapper if is is a Shoelace component. For example, within an `sl-dropdown`, which composes an `sl-menu` as the popover, you can nest the `sl-menu-item` components inside of Rails helpers like `link_to`:
+Shoelace rendering is more flexible than it looks: in many cases, the child of a Shoelace wrapper component such as `sl-menu` or `sl-button-group` doesn’t actually have to be a Shoelace component. And if the child is a Shoelace element, it doesn't have to be the direct descendant of the wrapper. For example, within an `sl-dropdown`, which composes an `sl-menu` as the popover, you can nest the `sl-menu-item` components inside of Rails helpers like `link_to`:
 
 ```pug slim
 sl-menu
-    = link_to user_info_path
-      sl-menu-item
-        sl-icon name="cog-8-tooth" slot="prefix"
-        | Profile settings
-    = link_to destroy_user_session_path
-      sl-menu-item
-        sl-icon name="arrow-right-on-rectangle" slot="prefix"
-        | Sign out
+  = link_to user_info_path
+    sl-menu-item
+      sl-icon name="cog-8-tooth" slot="prefix"
+      | Profile settings
+  = link_to destroy_user_session_path
+    sl-menu-item
+      sl-icon name="arrow-right-on-rectangle" slot="prefix"
+      | Sign out
 ```
 
-Which allows you to use existing Rails helpers as wrappers around Shoelace elements. Likewise, you can use a Rails ViewComponent that wraps an `sl-button` within an `sl-button-group`, and it will still render the group correctly:
+Likewise, you can use a Rails ViewComponent that wraps an `sl-button` within an `sl-button-group`, and it will still render the group correctly:
 
 ```pug slim
 sl-button-group
-	sl-button variant="primary"
-		| Shoelace button
-	= render SharedUI::ButtonToComponent.new(\
+  sl-button variant="primary"
+    | Shoelace button
+  = render SharedUI::ButtonToComponent.new(\
     text: "Second button inside a VC",
     path: complete_path,
     options: {\
       "data-test-id" => "test-button",
     })
-	sl-button
-		| Another button
+  sl-button
+    | Another button
 ```
