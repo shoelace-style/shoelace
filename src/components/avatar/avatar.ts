@@ -52,6 +52,29 @@ export default class SlAvatar extends ShoelaceElement {
   }
 
   render() {
+    const avatarWithImage = html`
+      <img
+        part="image"
+        class="avatar__image"
+        src="${this.image}"
+        loading="${this.loading}"
+        alt=""
+        @error="${() => (this.hasError = true)}"
+      />
+    `;
+
+    let avatarWithoutImage = html``;
+
+    if (this.initials) {
+      avatarWithoutImage = html`<div part="initials" class="avatar__initials">${this.initials}</div>`;
+    } else {
+      avatarWithoutImage = html`
+        <slot name="icon" part="icon" class="avatar__icon" aria-hidden="true">
+          <sl-icon name="person-fill" library="system"></sl-icon>
+        </slot>
+      `;
+    }
+
     return html`
       <div
         part="base"
@@ -64,24 +87,7 @@ export default class SlAvatar extends ShoelaceElement {
         role="img"
         aria-label=${this.label}
       >
-        ${this.image && !this.hasError // with image
-          ? html`
-              <img
-                part="image"
-                class="avatar__image"
-                src="${this.image}"
-                loading="${this.loading}"
-                alt=""
-                @error="${() => (this.hasError = true)}"
-              />
-            `
-          : this.initials // no image, just initials
-          ? html` <div part="initials" class="avatar__initials">${this.initials}</div> `
-          : html`
-              <slot name="icon" part="icon" class="avatar__icon" aria-hidden="true">
-                <sl-icon name="person-fill" library="system"></sl-icon>
-              </slot>
-            `}
+        ${this.image && !this.hasError ? avatarWithImage : avatarWithoutImage}
       </div>
     `;
   }
