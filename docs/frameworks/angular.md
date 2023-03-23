@@ -60,12 +60,12 @@ export class DrawerExampleComponent implements OnInit {
 
   constructor(...) {
   }
-  
+
   ngOnInit() {
   }
 
   ...
-  
+
   showDrawer() {
     // use nativeElement to access Shoelace components
     this.drawer?.nativeElement.show();
