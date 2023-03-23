@@ -69,6 +69,7 @@ export class ScrollController<T extends ScrollHost> implements ReactiveControlle
   @debounce(100)
   handleScrollEnd() {
     if (!this.pointers.size) {
+      // If no pointer is active in the scroll area then the scroll has ended
       this.scrolling = false;
       this.host.scrollContainer.dispatchEvent(
         new CustomEvent('scrollend', {
@@ -78,6 +79,7 @@ export class ScrollController<T extends ScrollHost> implements ReactiveControlle
       );
       this.host.requestUpdate();
     } else {
+      // otherwise let's wait a bit more
       this.handleScrollEnd();
     }
   }
@@ -87,22 +89,26 @@ export class ScrollController<T extends ScrollHost> implements ReactiveControlle
       return;
     }
 
-    const scrollContainer = this.host.scrollContainer;
     this.pointers.add(event.pointerId);
-    scrollContainer.setPointerCapture(event.pointerId);
 
     if (this.mouseDragging && this.pointers.size === 1) {
       event.preventDefault();
+
+      const scrollContainer = this.host.scrollContainer;
+      const target = event.target as HTMLElement;
+
+      target.setPointerCapture(event.pointerId);
       scrollContainer.addEventListener('pointermove', this.handlePointerMove);
     }
   }
 
   handlePointerMove(event: PointerEvent) {
-    const host = this.host;
-    const scrollContainer = host.scrollContainer;
+    const target = event.target as HTMLElement;
 
-    if (scrollContainer.hasPointerCapture(event.pointerId)) {
+    // Ignore pointers that we are not tracking
+    if (target.hasPointerCapture(event.pointerId)) {
       if (!this.dragging) {
+        // Start dragging if it hasn't yet
         this.handleDragStart();
       }
 
@@ -111,11 +117,10 @@ export class ScrollController<T extends ScrollHost> implements ReactiveControlle
   }
 
   handlePointerUp(event: PointerEvent) {
-    const host = this.host;
-    const scrollContainer = host.scrollContainer;
+    const target = event.target as HTMLElement;
 
     this.pointers.delete(event.pointerId);
-    scrollContainer.releasePointerCapture(event.pointerId);
+    target.releasePointerCapture(event.pointerId);
 
     if (this.pointers.size === 0) {
       this.handleDragEnd();
