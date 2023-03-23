@@ -918,3 +918,29 @@ sl-theme {
   /* Tooltip border radius override */
   --sl-tooltip-border-radius: var(--ts-border-radius-x-small);
 }
+
+sl-radio[contained]::part(base) {
+  margin: 0.125rem;
+  padding: 1.5rem;
+  border: 1px solid var(--ts-color-gray-400);
+  border-radius: var(--sl-border-radius-medium);
+  width: 100%;
+  font-size: var(--ts-font-base);
+}
+
+sl-radio[contained]::part(base):hover,
+sl-radio[contained][checked]::part(base):hover {
+  background-color: var(--ts-color-blue-50);
+}
+
+sl-radio[contained][checked]::part(label) {
+  color: var(--ts-color-blue-600);
+  font-weight: var(--ts-font-semibold)
+}
+
+sl-radio[contained][checked]::part(base) {
+  background-color: var(--ts-color-blue-100);
+  border: 1px solid var(--ts-color-blue-600);
+  outline: 1px solid var(--ts-color-blue-600);
+}
+

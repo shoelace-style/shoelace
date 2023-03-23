@@ -28,14 +28,29 @@ export default css`
     font-size: var(--sl-input-font-size-small);
   }
 
+  .radio--small .radio__description {
+    font-size: var(--sl-font-size-x-small);
+    margin-top: var(--sl-spacing-x-small);
+  }
+
   .radio--medium {
     --toggle-size: var(--sl-toggle-size-medium);
     font-size: var(--sl-input-font-size-medium);
   }
 
+  .radio--medium .radio__description {
+    font-size: var(--sl-input-font-size-small);
+    margin-top: var(--sl-spacing-small);
+  }
+
   .radio--large {
     --toggle-size: var(--sl-toggle-size-large);
     font-size: var(--sl-input-font-size-large);
+  }
+
+  .radio--large .radio__description {
+    font-size: var(--sl-input-font-size-medium);
+    margin-top: var(--sl-spacing-medium);
   }
 
   .radio__checked-icon {
@@ -108,7 +123,10 @@ export default css`
     display: inline-block;
     color: var(--sl-input-label-color);
     line-height: var(--toggle-size);
-    margin-inline-start: 0.5em;
     user-select: none;
+  }
+  .test {
+    margin-inline-start: 0.5em;
+
   }
 `;

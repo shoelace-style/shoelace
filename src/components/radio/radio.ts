@@ -30,8 +30,10 @@ import type { CSSResultGroup } from 'lit';
 export default class SlRadio extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
-  @state() checked = false;
   @state() protected hasFocus = false;
+
+  /** The radio's description. If more detail is provided, use the `description` slot. */
+  @property({ attribute: 'description' }) description = '';
 
   /** The radio's value. When selected, the radio group will receive this value. */
   @property() value: string;
@@ -41,6 +43,8 @@ export default class SlRadio extends ShoelaceElement {
 
   /** Disables the radio. */
   @property({ type: Boolean, reflect: true }) disabled = false;
+
+  @property({ type: Boolean, reflect: true }) checked = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -121,7 +125,10 @@ export default class SlRadio extends ShoelaceElement {
             : ''}
         </span>
 
-        <slot part="label" class="radio__label"></slot>
+        <div class="test">
+          <slot part="label" class="radio__label"></slot>
+          <slot name="description" part="description" class="radio__description"></slot>
+        </div>
       </span>
     `;
   }

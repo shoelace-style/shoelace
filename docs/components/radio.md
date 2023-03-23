@@ -129,4 +129,17 @@ const App = () => (
 );
 ```
 
+## Contained
+```html preview
+<sl-radio-group label="Select an option" name="a" value="3">
+  <sl-radio contained value="1">Option 1</sl-radio>
+  <sl-radio contained disabled value="2">Option 2</sl-radio>
+  <sl-radio contained value="3">
+    Option 3
+    <div slot="description">A short description about this option</div>
+  </sl-radio>
+</sl-radio-group>
+```
+
+
 [component-metadata:sl-radio]
