@@ -656,5 +656,4 @@ export default css`
   .button--circle .button__label {
     font-size: var(--ts-font-base);
   }
-
 `;
