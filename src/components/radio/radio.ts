@@ -6,6 +6,7 @@ import { watch } from '../../internal/watch';
 import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './radio.styles';
 import type { CSSResultGroup } from 'lit';
+import {HasSlotController} from "../../internal/slot";
 
 /**
  * @summary Radios allow the user to select a single option from a group.
@@ -16,6 +17,7 @@ import type { CSSResultGroup } from 'lit';
  * @dependency sl-icon
  *
  * @slot - The radio's label.
+ * @slot description - A description of the radio's label.
  *
  * @event sl-blur - Emitted when the control loses focus.
  * @event sl-focus - Emitted when the control gains focus.
@@ -30,10 +32,10 @@ import type { CSSResultGroup } from 'lit';
 export default class SlRadio extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
-  @state() protected hasFocus = false;
+  private readonly hasSlotController = new HasSlotController(this, 'description');
 
-  /** The radio's description. If more detail is provided, use the `description` slot. */
-  @property({ attribute: 'description' }) description = '';
+  @state() checked = false;
+  @state() protected hasFocus = false;
 
   /** The radio's value. When selected, the radio group will receive this value. */
   @property() value: string;
@@ -44,7 +46,8 @@ export default class SlRadio extends ShoelaceElement {
   /** Disables the radio. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  @property({ type: Boolean, reflect: true }) checked = false;
+  /** Creates a container around the radio. */
+  @property({ type: Boolean, reflect: true }) contained = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -114,9 +117,11 @@ export default class SlRadio extends ShoelaceElement {
           'radio--checked': this.checked,
           'radio--disabled': this.disabled,
           'radio--focused': this.hasFocus,
+          'radio--contained': this.contained,
           'radio--small': this.size === 'small',
           'radio--medium': this.size === 'medium',
-          'radio--large': this.size === 'large'
+          'radio--large': this.size === 'large',
+          'radio--has-description': this.hasSlotController.test('description')
         })}
       >
         <span part="${`control${this.checked ? ' control--checked' : ''}`}" class="radio__control">
@@ -125,8 +130,9 @@ export default class SlRadio extends ShoelaceElement {
             : ''}
         </span>
 
-        <div class="test">
+        <div class="radio__label-description-container">
           <slot part="label" class="radio__label"></slot>
+          <div class="radio__description-block"></div>
           <slot name="description" part="description" class="radio__description"></slot>
         </div>
       </span>
