@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.7
+
+- Increase icon size for small buttons
+
 ## 1.0.6
 
 - Another fix for exports / imports in shared-ui
