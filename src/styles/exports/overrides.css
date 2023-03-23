@@ -377,14 +377,6 @@ sl-button[size='x-large']::part(label) {
   /* 8px */
 }
 
-sl-button[size='small']::part(caret),
-sl-button[size='small']::part(prefix),
-sl-button[size='small']::part(suffix),
-sl-button[size='small'][circle]::part(label) {
-  font-size: var(--ts-font-base);
-  /* 16px */
-}
-
 sl-button[size='medium']::part(caret),
 sl-button[size='medium']::part(prefix),
 sl-button[size='medium']::part(suffix),
