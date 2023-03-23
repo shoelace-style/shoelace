@@ -69,6 +69,7 @@ This at least gets you the ability to run `sl-dev` and see your latest changes. 
 
 ## Cutting a new release
 
+1. Bump the version number in `package.json` using semantic versioning
 1. Add an entry to the [changelog](/teamshares/changelog)
 1. Make sure everything is working locally, including tests, and run `npm run prettier`
 1. Commit to `next` and push
@@ -76,3 +77,4 @@ This at least gets you the ability to run `sl-dev` and see your latest changes. 
 1. On [Vercel](https://vercel.com/teamshares/shoelace), check that the docsite built correctly and then promote the latest preview build to production
 1. On [GitHub](https://github.com/teamshares/shoelace/releases), create a new tagged release
 1. Verify that `shared-ui` has pulled in the latest changes (should happen automatically via `renovate`)
+1. Pull in the new version of `shared-ui` into your app. May need to run `yarn add https://github.com/teamshares/shared-ui.git#main` to get the `yarn.lock` to update.
