@@ -291,4 +291,43 @@ export default css`
   .input--no-spin-buttons input[type='number'] {
     -moz-appearance: textfield;
   }
+
+  /*
+   * Button groups support a variety of button types (e.g. buttons with tooltips, buttons as dropdown triggers, etc.).
+   * This means buttons aren't always direct descendants of the button group, thus we can't target them with the
+   * ::slotted selector. To work around this, the button group component does some magic to add these special classes to
+   * buttons and we style them here instead.
+   */
+
+  :host(.sl-button-group__button--first:not(.sl-button-group__button--last)) .input {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+  }
+
+  :host(.sl-button-group__button--inner) .input {
+    border-radius: 0;
+  }
+
+  :host(.sl-button-group__button--last:not(.sl-button-group__button--first)) .input {
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+  }
+
+  /* All except the first */
+  :host(.sl-button-group__button:not(.sl-button-group__button--first)) {
+    margin-inline-start: calc(-1 * var(--sl-input-border-width));
+  }
+
+  /* Add a visual separator between solid buttons */
+
+  /* Bump hovered, focused, and checked buttons up so their focus ring isn't clipped */
+  :host(.sl-button-group__button--hover) {
+    z-index: 1;
+  }
+
+  /* Focus and checked are always on top */
+  :host(.sl-button-group__button--focus),
+  :host(.sl-button-group__button[checked]) {
+    z-index: 2;
+  }
 `;

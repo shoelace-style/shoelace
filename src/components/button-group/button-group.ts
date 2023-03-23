@@ -84,7 +84,7 @@ export default class SlButtonGroup extends ShoelaceElement {
 }
 
 function findButton(el: HTMLElement) {
-  const selector = 'sl-button, sl-radio-button';
+  const selector = 'sl-button, sl-radio-button, sl-input';
 
   // The button could be the target element or a child of it (e.g. a dropdown or tooltip anchor)
   return el.closest(selector) ?? el.querySelector(selector);
