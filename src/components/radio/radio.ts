@@ -27,6 +27,7 @@ import {HasSlotController} from "../../internal/slot";
  * @csspart control--checked - The radio control when the radio is checked.
  * @csspart checked-icon - The checked icon, an `<sl-icon>` element.
  * @csspart label - The container that wraps the radio's label.
+ * @csspart description - The container that wraps the radio's description.
  */
 @customElement('sl-radio')
 export default class SlRadio extends ShoelaceElement {

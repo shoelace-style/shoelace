@@ -108,6 +108,34 @@ const App = () => (
 );
 ```
 
+## Contained
+
+Use the `contained` attribute to add a container around the checkbox.
+
+```html preview
+  <sl-checkbox contained checked>
+    Checked
+    <div slot="description">A short description about this option</div>
+  </sl-checkbox>
+```
+
+```pug slim
+  sl-checkbox contained="true" checked="true" Checked
+    div slot="description" A short description about this option
+```
+
+```jsx react
+import { SlRadio } from '@teamshares/shoelace/dist/react';
+const App = () => (
+  <>
+    <SlCheckbox contained checked>
+      Checked
+      <div slot="description">A short description about this option</div>
+    </SlCheckbox>
+  </>
+);
+```
+
 ### Custom Validity
 
 Use the `setCustomValidity()` method to set a custom validation message. This will prevent the form from submitting and make the browser display the error message you provide. To clear the error, call this function with an empty string.

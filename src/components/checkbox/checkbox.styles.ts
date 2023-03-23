@@ -24,14 +24,26 @@ export default css`
     font-size: var(--sl-input-font-size-small);
   }
 
+  .checkbox--small .checkbox__description {
+    font-size: var(--sl-font-size-x-small);
+  }
+
   .checkbox--medium {
     --toggle-size: var(--sl-toggle-size-medium);
     font-size: var(--sl-input-font-size-medium);
   }
 
+  .checkbox--medium .checkbox__description {
+    font-size: var(--sl-input-font-size-small);
+  }
+
   .checkbox--large {
     --toggle-size: var(--sl-toggle-size-large);
     font-size: var(--sl-input-font-size-large);
+  }
+
+  .checkbox--large .checkbox__description {
+    font-size: var(--sl-input-font-size-medium);
   }
 
   .checkbox__control {
@@ -104,7 +116,13 @@ export default css`
     cursor: not-allowed;
   }
 
-  .checkbox__label {
+  :host([required]) .checkbox__label::after {
+    content: var(--sl-input-required-content);
+    margin-inline-start: var(--sl-input-required-content-offset);
+  }
+
+
+  .checkbox__label-description-container {
     display: inline-block;
     color: var(--sl-input-label-color);
     line-height: var(--toggle-size);
@@ -112,8 +130,33 @@ export default css`
     user-select: none;
   }
 
-  :host([required]) .checkbox__label::after {
-    content: var(--sl-input-required-content);
-    margin-inline-start: var(--sl-input-required-content-offset);
+  .checkbox--has-description .checkbox__description-block {
+    height: var(--sl-spacing-small);
+  }
+
+  /* Contained */
+  .checkbox--contained {
+    margin: 0.125rem;
+    padding: 1.5rem;
+    border: 1px solid var(--ts-color-gray-400);
+    border-radius: var(--sl-border-radius-medium);
+    width: 100%;
+    font-size: var(--ts-font-base);
+  }
+
+  .checkbox--contained:hover,
+   .checkbox--contained.checkbox--checked:hover {
+    background-color: var(--ts-color-blue-50);
+  }
+
+  .checkbox--contained.checkbox--checked .checkbox__label {
+    color: var(--ts-color-blue-600);
+    font-weight: var(--ts-font-semibold)
+  }
+
+  .checkbox--contained.checkbox--checked {
+    background-color: var(--ts-color-blue-100);
+    border: 1px solid var(--ts-color-blue-600);
+    outline: 1px solid var(--ts-color-blue-600);
   }
 `;
