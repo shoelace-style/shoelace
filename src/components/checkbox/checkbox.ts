@@ -78,7 +78,7 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
    */
   @property({ type: Boolean, reflect: true }) indeterminate = false;
 
-  /** Creates a container around the checkbox. */
+  /** Draws a container around the checkbox. */
   @property({ type: Boolean, reflect: true }) contained = false;
 
   /** The default value of the form control. Primarily used for resetting the form control. */

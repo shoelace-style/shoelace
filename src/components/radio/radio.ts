@@ -47,7 +47,7 @@ export default class SlRadio extends ShoelaceElement {
   /** Disables the radio. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /** Creates a container around the radio. */
+  /** Draws a container around the radio. */
   @property({ type: Boolean, reflect: true }) contained = false;
 
   connectedCallback() {
