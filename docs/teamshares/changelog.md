@@ -2,12 +2,12 @@
 
 ## 1.1.0
 
-* Checkbox
-  * Added `contained` modifier to wrap the checkbox in a container
-  * Added `description` slot to appear in smaller text below the `label`
-* Radio
-  * Added `contained` modifier to wrap the radio in a container
-  * Added `description` slot to appear in smaller text below the `label`
+- Checkbox
+  - Added `contained` modifier to wrap the checkbox in a container
+  - Added `description` slot to appear in smaller text below the `label`
+- Radio
+  - Added `contained` modifier to wrap the radio in a container
+  - Added `description` slot to appear in smaller text below the `label`
 
 ## 1.0.7
 
