@@ -269,6 +269,7 @@ Icons in this library are licensed under the [Font Awesome Free License](https:/
 ```html
 <sl-icon library="fa-free" name="face-smile"></sl-icon>
 ```
+
 <!--
 ### Boxicons
 
