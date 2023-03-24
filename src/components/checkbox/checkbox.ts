@@ -3,6 +3,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { defaultValue } from '../../internal/default-value';
 import { FormControlController } from '../../internal/form';
+import { HasSlotController } from '../../internal/slot';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
@@ -11,7 +12,6 @@ import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './checkbox.styles';
 import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element';
-import { HasSlotController } from '../../internal/slot';
 
 /**
  * @summary Checkboxes allow the user to toggle an option on or off.

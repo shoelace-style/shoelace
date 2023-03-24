@@ -1,12 +1,12 @@
 import '../icon/icon';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, state } from 'lit/decorators.js';
+import { HasSlotController } from '../../internal/slot';
 import { html } from 'lit';
 import { watch } from '../../internal/watch';
 import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './radio.styles';
 import type { CSSResultGroup } from 'lit';
-import { HasSlotController } from '../../internal/slot';
 
 /**
  * @summary Radios allow the user to select a single option from a group.
