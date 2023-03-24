@@ -113,14 +113,18 @@ const App = () => (
 Use the `contained` attribute to add a container around the checkbox.
 
 ```html preview
-  <sl-checkbox contained checked>
+  <sl-checkbox contained style="width: 100%;">
+    Checkbox
+  </sl-checkbox>
+  <sl-checkbox contained checked style="width: 100%;">
     Checked
     <div slot="description">A short description about this option</div>
   </sl-checkbox>
 ```
 
 ```pug slim
-  sl-checkbox contained="true" checked="true" Checked
+  sl-checkbox contained="true" style="width: 100%;" Checked
+  sl-checkbox contained="true" checked="true" style="width: 100%;" Checked
     div slot="description" A short description about this option
 ```
 
@@ -128,7 +132,8 @@ Use the `contained` attribute to add a container around the checkbox.
 import { SlRadio } from '@teamshares/shoelace/dist/react';
 const App = () => (
   <>
-    <SlCheckbox contained checked>
+    <SlCheckbox contained style="width: 100%;">Checked</SlCheckbox>
+    <SlCheckbox contained checked style="width: 100%;">
       Checked
       <div slot="description">A short description about this option</div>
     </SlCheckbox>
