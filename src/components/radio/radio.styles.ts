@@ -135,13 +135,13 @@ export default css`
   }
 
   .radio--contained:hover,
-   .radio--contained.radio--checked:hover {
+  .radio--contained.radio--checked:hover {
     background-color: var(--ts-color-blue-50);
   }
 
   .radio--contained.radio--checked .radio__label {
     color: var(--ts-color-blue-600);
-    font-weight: var(--ts-font-semibold)
+    font-weight: var(--ts-font-semibold);
   }
 
   .radio--contained.radio--checked {

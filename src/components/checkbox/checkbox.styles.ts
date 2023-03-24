@@ -118,7 +118,6 @@ export default css`
     margin-inline-start: var(--sl-input-required-content-offset);
   }
 
-
   .checkbox__label-description-container {
     display: inline-block;
     color: var(--sl-input-label-color);
@@ -141,13 +140,13 @@ export default css`
   }
 
   .checkbox--contained:hover,
-   .checkbox--contained.checkbox--checked:hover {
+  .checkbox--contained.checkbox--checked:hover {
     background-color: var(--ts-color-blue-50);
   }
 
   .checkbox--contained.checkbox--checked .checkbox__label {
     color: var(--ts-color-blue-600);
-    font-weight: var(--ts-font-semibold)
+    font-weight: var(--ts-font-semibold);
   }
 
   .checkbox--contained.checkbox--checked {

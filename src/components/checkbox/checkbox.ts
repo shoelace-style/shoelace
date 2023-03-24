@@ -11,7 +11,7 @@ import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './checkbox.styles';
 import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element';
-import {HasSlotController} from "../../internal/slot";
+import { HasSlotController } from '../../internal/slot';
 
 /**
  * @summary Checkboxes allow the user to toggle an option on or off.

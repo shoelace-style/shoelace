@@ -6,7 +6,7 @@ import { watch } from '../../internal/watch';
 import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './radio.styles';
 import type { CSSResultGroup } from 'lit';
-import {HasSlotController} from "../../internal/slot";
+import { HasSlotController } from '../../internal/slot';
 
 /**
  * @summary Radios allow the user to select a single option from a group.
