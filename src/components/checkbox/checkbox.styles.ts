@@ -33,17 +33,14 @@ export default css`
     font-size: var(--sl-input-font-size-medium);
   }
 
-  .checkbox--medium .checkbox__description {
+  .checkbox--medium .checkbox__description,
+  .checkbox--large .checkbox__description {
     font-size: var(--sl-input-font-size-small);
   }
 
   .checkbox--large {
     --toggle-size: var(--sl-toggle-size-large);
     font-size: var(--sl-input-font-size-large);
-  }
-
-  .checkbox--large .checkbox__description {
-    font-size: var(--sl-input-font-size-medium);
   }
 
   .checkbox__control {
@@ -141,7 +138,6 @@ export default css`
     border: 1px solid var(--ts-color-gray-400);
     border-radius: var(--sl-border-radius-medium);
     width: 100%;
-    font-size: var(--ts-font-base);
   }
 
   .checkbox--contained:hover,

@@ -37,17 +37,14 @@ export default css`
     font-size: var(--sl-input-font-size-medium);
   }
 
-  .radio--medium .radio__description {
+  .radio--medium .radio__description,
+  .radio--large .radio__description {
     font-size: var(--sl-input-font-size-small);
   }
 
   .radio--large {
     --toggle-size: var(--sl-toggle-size-large);
     font-size: var(--sl-input-font-size-large);
-  }
-
-  .radio--large .radio__description {
-    font-size: var(--sl-input-font-size-medium);
   }
 
   .radio__checked-icon {
@@ -135,7 +132,6 @@ export default css`
     border: 1px solid var(--ts-color-gray-400);
     border-radius: var(--sl-border-radius-medium);
     width: 100%;
-    font-size: var(--ts-font-base);
   }
 
   .radio--contained:hover,
