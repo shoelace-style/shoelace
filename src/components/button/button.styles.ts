@@ -648,4 +648,12 @@ export default css`
   :host(.sl-button-group__button[checked]) {
     z-index: 2;
   }
+
+  /* Increase default icon size for small buttons */
+  .button--small .button__prefix,
+  .button--small .button__suffix,
+  .button--small .button__caret,
+  .button--circle .button__label {
+    font-size: var(--ts-font-base);
+  }
 `;
