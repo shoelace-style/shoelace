@@ -3,6 +3,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { defaultValue } from '../../internal/default-value';
 import { FormControlController } from '../../internal/form';
+import { HasSlotController } from '../../internal/slot';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
@@ -21,6 +22,7 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element';
  * @dependency sl-icon
  *
  * @slot - The checkbox's label.
+ * @slot description - A description of the checkbox's label.
  *
  * @event sl-blur - Emitted when the checkbox loses focus.
  * @event sl-change - Emitted when the checked state changes.
@@ -35,10 +37,13 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element';
  * @csspart checked-icon - The checked icon, an `<sl-icon>` element.
  * @csspart indeterminate-icon - The indeterminate icon, an `<sl-icon>` element.
  * @csspart label - The container that wraps the checkbox's label.
+ * @csspart description - The container that wraps the checkbox's description.
  */
 @customElement('sl-checkbox')
 export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
+
+  private readonly hasSlotController = new HasSlotController(this, 'description');
 
   private readonly formControlController = new FormControlController(this, {
     value: (control: SlCheckbox) => (control.checked ? control.value || 'on' : undefined),
@@ -72,6 +77,9 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
    * all/none" behavior when associated checkboxes have a mix of checked and unchecked states.
    */
   @property({ type: Boolean, reflect: true }) indeterminate = false;
+
+  /** Draws a container around the checkbox. */
+  @property({ type: Boolean, reflect: true }) contained = false;
 
   /** The default value of the form control. Primarily used for resetting the form control. */
   @defaultValue('checked') defaultChecked = false;
@@ -187,9 +195,11 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
           'checkbox--disabled': this.disabled,
           'checkbox--focused': this.hasFocus,
           'checkbox--indeterminate': this.indeterminate,
+          'checkbox--contained': this.contained,
           'checkbox--small': this.size === 'small',
           'checkbox--medium': this.size === 'medium',
-          'checkbox--large': this.size === 'large'
+          'checkbox--large': this.size === 'large',
+          'checkbox--has-description': this.hasSlotController.test('description')
         })}
       >
         <input
@@ -231,8 +241,10 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
             : ''}
         </span>
 
-        <div part="label" class="checkbox__label">
-          <slot></slot>
+        <div class="checkbox__label-description-container">
+          <slot part="label" class="checkbox__label"></slot>
+          <div class="checkbox__description-block"></div>
+          <slot name="description" part="description" class="checkbox__description"></slot>
         </div>
       </label>
     `;
