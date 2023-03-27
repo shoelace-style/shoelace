@@ -260,7 +260,15 @@ To display an icon, set the `library` and `name` attributes of an `<sl-icon>` el
 
 If an icon is used before registration occurs, it will be empty initially but shown when registered.
 
-The following examples demonstrate how to register a number of popular, open source icon libraries via CDN. Feel free to adapt the code as you see fit to use your own origin or naming conventions.
+### Font Awesome
+
+The [Font Awesome Free](https://fontawesome.com/) library is registered using the jsDelivr CDN. This library has three variations: regular (`far-*`), solid (`fas-*`), and brands (`fab-*`). A mutator function is required to set the SVG's `fill` to `currentColor`.
+
+Icons in this library are licensed under the [Font Awesome Free License](https://github.com/FortAwesome/Font-Awesome/blob/master/LICENSE.txt). Some of the icons that appear on the Font Awesome website require a license and are therefore not available in the CDN.
+
+```html
+<sl-icon library="fa-free" name="face-smile"></sl-icon>
+```
 
 <!--
 ### Boxicons
