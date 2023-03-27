@@ -28,7 +28,7 @@ const translation: Translation = {
   scrollToStart: 'پیمایش به ابتدا',
   selectAColorFromTheScreen: 'انتخاب یک رنگ از صفحه نمایش',
   showPassword: 'نمایش رمز',
-  slide_num: slide => `اسلاید ${slide}`,
+  slideNum: slide => `اسلاید ${slide}`,
   toggleColorFormat: 'تغییر قالب رنگ'
 };
 

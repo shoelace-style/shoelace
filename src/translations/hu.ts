@@ -28,7 +28,7 @@ const translation: Translation = {
   scrollToStart: 'Görgessen az elejére',
   selectAColorFromTheScreen: 'Szín választása a képernyőről',
   showPassword: 'Jelszó megjelenítése',
-  slide_num: slide => `${slide}. dia`,
+  slideNum: slide => `${slide}. dia`,
   toggleColorFormat: 'Színformátum változtatása'
 };
 

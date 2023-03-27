@@ -239,7 +239,7 @@ export default class SlCarousel extends ShoelaceElement {
 
       slide.classList.remove('--in-view');
       slide.classList.remove('--is-active');
-      slide.setAttribute('aria-label', this.localize.term('slide_num', index + 1));
+      slide.setAttribute('aria-label', this.localize.term('slideNum', index + 1));
 
       if (slide.hasAttribute('data-clone')) {
         slide.remove();

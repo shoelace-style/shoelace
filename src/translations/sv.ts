@@ -28,7 +28,7 @@ const translation: Translation = {
   scrollToStart: 'Skrolla till början',
   selectAColorFromTheScreen: 'Välj en färg från skärmen',
   showPassword: 'Visa lösenord',
-  slide_num: slide => `Bild ${slide}`,
+  slideNum: slide => `Bild ${slide}`,
   toggleColorFormat: 'Växla färgformat'
 };
 

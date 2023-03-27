@@ -28,7 +28,7 @@ const translation: Translation = {
   scrollToStart: '捲至頁首',
   selectAColorFromTheScreen: '從螢幕中選擇一種顏色',
   showPassword: '顯示密碼',
-  slide_num: slide => `幻燈片 ${slide}`,
+  slideNum: slide => `幻燈片 ${slide}`,
   toggleColorFormat: '切換顏色格式'
 };
 

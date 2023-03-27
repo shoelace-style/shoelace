@@ -28,7 +28,7 @@ const translation: Translation = {
   scrollToStart: 'Scroll to start',
   selectAColorFromTheScreen: 'Select a color from the screen',
   showPassword: 'Show password',
-  slide_num: slide => `Slide ${slide}`,
+  slideNum: slide => `Slide ${slide}`,
   toggleColorFormat: 'Toggle color format'
 };
 
