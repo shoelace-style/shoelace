@@ -6,6 +6,7 @@ const translation: Translation = {
   $name: 'עברית',
   $dir: 'rtl',
 
+  carousel: 'קרוסלה',
   clearEntry: 'נקה קלט',
   close: 'סגור',
   copy: 'העתק',
@@ -27,6 +28,7 @@ const translation: Translation = {
   scrollToStart: 'גלול להתחלה',
   selectAColorFromTheScreen: 'בחור צבע מהמסך',
   showPassword: 'הראה סיסמה',
+  slide_num: slide => `שקופית ${slide}`,
   toggleColorFormat: 'החלף פורמט צבע'
 };
 

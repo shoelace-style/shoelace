@@ -6,6 +6,7 @@ const translation: Translation = {
   $name: 'Русский',
   $dir: 'ltr',
 
+  carousel: 'Карусель',
   clearEntry: 'Очистить запись',
   close: 'Закрыть',
   copy: 'Скопировать',
@@ -27,6 +28,7 @@ const translation: Translation = {
   scrollToStart: 'Пролистать к началу',
   selectAColorFromTheScreen: 'Выберите цвет на экране',
   showPassword: 'Показать пароль',
+  slide_num: slide => `Слайд ${slide}`,
   toggleColorFormat: 'Переключить цветовую модель'
 };
 

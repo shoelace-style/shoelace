@@ -764,6 +764,11 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     return this.input.checkValidity();
   }
 
+  /** Gets the associated form, if one exists. */
+  getForm(): HTMLFormElement | null {
+    return this.formControlController.getForm();
+  }
+
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
   reportValidity() {
     if (!this.inline && !this.validity.valid) {

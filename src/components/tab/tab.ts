@@ -53,7 +53,8 @@ export default class SlTab extends ShoelaceElement {
     this.setAttribute('role', 'tab');
   }
 
-  private handleCloseClick() {
+  private handleCloseClick(event: Event) {
+    event.stopPropagation();
     this.emit('sl-close');
   }
 

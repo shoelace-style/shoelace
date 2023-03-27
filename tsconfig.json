@@ -3,6 +3,7 @@
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
     "target": "es2017",
+    "module": "es2020",
     "lib": [
       "dom",
       "dom.Iterable",

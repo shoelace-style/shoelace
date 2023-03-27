@@ -13,6 +13,7 @@ export interface Translation extends DefaultTranslation {
   $name: string; // e.g. English, Español
   $dir: 'ltr' | 'rtl';
 
+  carousel: string;
   clearEntry: string;
   close: string;
   copy: string;
@@ -30,5 +31,6 @@ export interface Translation extends DefaultTranslation {
   scrollToStart: string;
   selectAColorFromTheScreen: string;
   showPassword: string;
+  slide_num: (slide: number) => string;
   toggleColorFormat: string;
 }

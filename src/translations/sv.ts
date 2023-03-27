@@ -6,6 +6,7 @@ const translation: Translation = {
   $name: 'Svenska',
   $dir: 'ltr',
 
+  carousel: 'Karusell',
   clearEntry: 'Återställ val',
   close: 'Stäng',
   copy: 'Kopiera',
@@ -27,6 +28,7 @@ const translation: Translation = {
   scrollToStart: 'Skrolla till början',
   selectAColorFromTheScreen: 'Välj en färg från skärmen',
   showPassword: 'Visa lösenord',
+  slide_num: slide => `Bild ${slide}`,
   toggleColorFormat: 'Växla färgformat'
 };
 
