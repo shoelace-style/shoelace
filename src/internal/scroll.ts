@@ -32,7 +32,7 @@ export function unlockBodyScrolling(lockingEl: HTMLElement) {
 
   if (locks.size === 0) {
     document.body.classList.remove('sl-scroll-lock');
-    document.body.style.removeProperty('--sl-scrollbar-width');
+    document.body.style.removeProperty('--sl-scroll-lock-size');
   }
 }
 
