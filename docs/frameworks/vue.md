@@ -98,3 +98,21 @@ When binding complex data such as objects and arrays, use the `.prop` modifier t
 ```
 
 ?> Are you using Shoelace with Vue? [Help us improve this page!](https://github.com/shoelace-style/shoelace/blob/next/docs/frameworks/vue.md)
+
+### Slots
+
+To use Shoelace components with slots, follow the Vue documentation on using [slots with custom elements.](https://vuejs.org/guide/extras/web-components.html#building-custom-elements-with-vue) Here is an example:
+
+```vue
+<sl-drawer
+  label="Drawer"
+  placement="start"
+  class="drawer-placement-start"
+  :open="drawerIsOpen"
+>
+  This drawer slides in from the start.
+  <div slot="footer">
+    <sl-button variant="primary" @click=" drawerIsOpen = false">Close</sl-button>
+  </div>
+</sl-drawer>
+```
