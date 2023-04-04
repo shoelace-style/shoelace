@@ -18,7 +18,7 @@ import type { CSSResultGroup } from 'lit';
 /**
  * @summary Carousels display an arbitrary number of content slides along a horizontal or vertical axis.
  *
- * @since 2.0
+ * @since 2.2
  * @status experimental
  *
  * @dependency sl-icon
