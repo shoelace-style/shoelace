@@ -98,14 +98,20 @@ export default class SlIcon extends ShoelaceElement {
     }
 
     try {
-      const svg = (await iconResolver)?.cloneNode(true) as SVGElement;
+      const svg = await iconResolver;
       if (url !== this.getUrl()) {
         // If the url has changed while fetching the icon, ignore this request
         return;
       }
 
-      this.svg = svg;
-      library?.mutator?.(svg);
+      if (!svg) {
+        this.svg = null;
+        this.emit('sl-error');
+        return;
+      }
+
+      this.svg = svg.cloneNode(true) as SVGElement;
+      library?.mutator?.(this.svg);
       this.emit('sl-load');
     } catch {
       this.svg = null;
