@@ -363,3 +363,26 @@ Avoid inlining SVG icons inside of templates. If a component requires an icon, m
 ```
 
 This will render the icons instantly whereas the default library will fetch them from a remote source. If an icon isn't available in the system library, you will need to add it to `library.system.ts`. Using the system library ensures that all icons load instantly and are customizable by users who wish to provide a custom resolver for the system library.
+
+### Writing tests
+
+What to test for a given component:
+
+- Start with a simple test that checks that the default version of the component still renders.
+- Add at least one accessibility test:
+
+```ts
+const myComponent = await fixture<SlAlert>(html`<sl-my-component>SomeContent</sl-my-component>`);
+
+await expect(myComponent).to.be.accessible();
+```
+
+- Try to cover all features advertised in the component's description
+
+Guidelines for writing tests:
+
+- Each test should declare its own, hand crafted hml fixture for the component. Do not try to write one big component to match all tests. This helps keeping each test understandable in isolation.
+- Tests should not produce log lines. Note that sometimes this cannot be prevented as the test runner might log errors (e.g. 404s).
+- Try keeping the main test readable: Extract more complicated sets of selectors/commands/assertions into separate functions.
+- Try to aim testing the user facing features of the component instead of the internal workings of the component.
+- Group multiple tests for one feature into describe blocks.
