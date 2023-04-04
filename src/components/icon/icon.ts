@@ -1,14 +1,13 @@
 import { customElement, property, state } from 'lit/decorators.js';
 import { getIconLibrary, unwatchIcon, watchIcon } from './library';
-import { html } from 'lit';
-import { requestIcon } from './request';
-import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
+import { requestInclude } from '../include/request';
 import { watch } from '../../internal/watch';
 import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './icon.styles';
 import type { CSSResultGroup } from 'lit';
 
 let parser: DOMParser;
+const iconCache = new Map<string, Promise<SVGSVGElement | null>>();
 
 /**
  * @summary Icons are symbols that can be used to represent various options within an application.
@@ -25,7 +24,7 @@ let parser: DOMParser;
 export default class SlIcon extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
-  @state() private svg = '';
+  @state() private svg: SVGElement | null = null;
 
   /** The name of the icon to draw. Available names depend on the icon library being used. */
   @property({ reflect: true }) name?: string;
@@ -87,46 +86,56 @@ export default class SlIcon extends ShoelaceElement {
     const library = getIconLibrary(this.library);
     const url = this.getUrl();
 
-    // Create an instance of the DOM parser. We do it here instead of top-level to support SSR while maintaining a
-    // single parser instance for optimal performance.
-    if (!parser) {
-      parser = new DOMParser();
+    if (!url) {
+      this.svg = null;
+      return;
     }
 
-    if (url) {
-      try {
-        const file = await requestIcon(url);
-        if (url !== this.getUrl()) {
-          // If the url has changed while fetching the icon, ignore this request
-          return;
-        } else if (file.ok) {
-          const doc = parser.parseFromString(file.svg, 'text/html');
-          const svgEl = doc.body.querySelector('svg');
+    let iconResolver = iconCache.get(url);
+    if (!iconResolver) {
+      iconResolver = SlIcon._resolveIcon(url);
+      iconCache.set(url, iconResolver);
+    }
 
-          if (svgEl !== null) {
-            svgEl.part.add('svg');
-            library?.mutator?.(svgEl);
-            this.svg = svgEl.outerHTML;
-            this.emit('sl-load');
-          } else {
-            this.svg = '';
-            this.emit('sl-error');
-          }
-        } else {
-          this.svg = '';
-          this.emit('sl-error');
-        }
-      } catch {
-        this.emit('sl-error');
+    try {
+      const svg = (await iconResolver)?.cloneNode(true) as SVGElement;
+      if (url !== this.getUrl()) {
+        // If the url has changed while fetching the icon, ignore this request
+        return;
       }
-    } else if (this.svg.length > 0) {
-      // If we can't resolve a URL and an icon was previously set, remove it
-      this.svg = '';
+
+      this.svg = svg;
+      library?.mutator?.(svg);
+      this.emit('sl-load');
+    } catch {
+      this.svg = null;
+      iconCache.delete(url);
+      this.emit('sl-error');
     }
   }
 
   render() {
-    return html` ${unsafeSVG(this.svg)} `;
+    return this.svg;
+  }
+
+  private static async _resolveIcon(url: string): Promise<SVGSVGElement | null> {
+    const fileData = await requestInclude(url);
+    if (!fileData.ok) return null;
+
+    const div = document.createElement('div');
+    div.innerHTML = fileData.html;
+
+    const svg = div.firstElementChild;
+    if (svg?.tagName?.toLowerCase() !== 'svg') return null;
+
+    if (!parser) parser = new DOMParser();
+    const doc = parser.parseFromString(svg.outerHTML, 'text/html');
+
+    const svgEl = doc.body.querySelector('svg');
+    if (!svgEl) return null;
+
+    svgEl.part.add('svg');
+    return document.adoptNode(svgEl);
   }
 }
 
