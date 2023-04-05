@@ -1,6 +1,5 @@
 import { customElement, property, state } from 'lit/decorators.js';
 import { getIconLibrary, unwatchIcon, watchIcon } from './library';
-import { requestInclude } from '../include/request';
 import { watch } from '../../internal/watch';
 import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './icon.styles';
@@ -125,11 +124,11 @@ export default class SlIcon extends ShoelaceElement {
   }
 
   private static async _resolveIcon(url: string): Promise<SVGSVGElement | null> {
-    const fileData = await requestInclude(url);
+    const fileData = await fetch(url, { mode: 'cors' });
     if (!fileData.ok) return null;
 
     const div = document.createElement('div');
-    div.innerHTML = fileData.html;
+    div.innerHTML = await fileData.text();
 
     const svg = div.firstElementChild;
     if (svg?.tagName?.toLowerCase() !== 'svg') return null;
