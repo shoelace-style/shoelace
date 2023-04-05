@@ -5,8 +5,12 @@ import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './icon.styles';
 import type { CSSResultGroup } from 'lit';
 
+const CACHEABLE_ERROR = Symbol();
+const RETRYABLE_ERROR = Symbol();
+type SVGResult = SVGSVGElement | typeof RETRYABLE_ERROR | typeof CACHEABLE_ERROR;
+
 let parser: DOMParser;
-const iconCache = new Map<string, Promise<SVGSVGElement | null>>();
+const iconCache = new Map<string, Promise<SVGResult>>();
 
 /**
  * @summary Icons are symbols that can be used to represent various options within an application.
@@ -96,26 +100,26 @@ export default class SlIcon extends ShoelaceElement {
       iconCache.set(url, iconResolver);
     }
 
-    try {
-      const svg = await iconResolver;
-      if (url !== this.getUrl()) {
-        // If the url has changed while fetching the icon, ignore this request
-        return;
-      }
+    const svg = await iconResolver;
+    if (svg === RETRYABLE_ERROR) {
+      iconCache.delete(url);
+    }
 
-      if (!svg) {
+    if (url !== this.getUrl()) {
+      // If the url has changed while fetching the icon, ignore this request
+      return;
+    }
+
+    switch (svg) {
+      case RETRYABLE_ERROR:
+      case CACHEABLE_ERROR:
         this.svg = null;
         this.emit('sl-error');
-        return;
-      }
-
-      this.svg = svg.cloneNode(true) as SVGElement;
-      library?.mutator?.(this.svg);
-      this.emit('sl-load');
-    } catch {
-      this.svg = null;
-      iconCache.delete(url);
-      this.emit('sl-error');
+        break;
+      default:
+        this.svg = svg.cloneNode(true) as SVGElement;
+        library?.mutator?.(this.svg);
+        this.emit('sl-load');
     }
   }
 
@@ -123,24 +127,33 @@ export default class SlIcon extends ShoelaceElement {
     return this.svg;
   }
 
-  private static async _resolveIcon(url: string): Promise<SVGSVGElement | null> {
-    const fileData = await fetch(url, { mode: 'cors' });
-    if (!fileData.ok) return null;
+  private static async _resolveIcon(url: string): Promise<SVGResult> {
+    let fileData: Response;
+    try {
+      fileData = await fetch(url, { mode: 'cors' });
+      if (!fileData.ok) return fileData.status === 410 ? CACHEABLE_ERROR : RETRYABLE_ERROR;
+    } catch {
+      return RETRYABLE_ERROR;
+    }
 
-    const div = document.createElement('div');
-    div.innerHTML = await fileData.text();
+    try {
+      const div = document.createElement('div');
+      div.innerHTML = await fileData.text();
 
-    const svg = div.firstElementChild;
-    if (svg?.tagName?.toLowerCase() !== 'svg') return null;
+      const svg = div.firstElementChild;
+      if (svg?.tagName?.toLowerCase() !== 'svg') return CACHEABLE_ERROR;
 
-    if (!parser) parser = new DOMParser();
-    const doc = parser.parseFromString(svg.outerHTML, 'text/html');
+      if (!parser) parser = new DOMParser();
+      const doc = parser.parseFromString(svg.outerHTML, 'text/html');
 
-    const svgEl = doc.body.querySelector('svg');
-    if (!svgEl) return null;
+      const svgEl = doc.body.querySelector('svg');
+      if (!svgEl) return CACHEABLE_ERROR;
 
-    svgEl.part.add('svg');
-    return document.adoptNode(svgEl);
+      svgEl.part.add('svg');
+      return document.adoptNode(svgEl);
+    } catch {
+      return CACHEABLE_ERROR;
+    }
   }
 }
 
