@@ -15,6 +15,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-tree-item>` that caused labels to be misaligned when text wraps [#1244](https://github.com/shoelace-style/shoelace/issues/1244)
 - Fixed an incorrect CSS property value in `<sl-checkbox>` [#1272](https://github.com/shoelace-style/shoelace/pull/1272)
 - Fixed a bug in `<sl-avatar>` that caused the initials to show up behind images with transparency [#1260](https://github.com/shoelace-style/shoelace/pull/1260)
+- Fixed a bug in `<sl-split-panel>` that prevented the divider from being focusable in some browsers [#1288](https://github.com/shoelace-style/shoelace/issues/1288)
 - Improved the behavior of `<sl-carousel>` when used inside a flex container [#1235](https://github.com/shoelace-style/shoelace/pull/1235)
 - Improved the behavior of `<sl-tree-item>` to support buttons and other interactive elements [#1234](https://github.com/shoelace-style/shoelace/issues/1234)
 - Improved the performance of `<sl-include>` to prevent an apparent memory leak in some browsers [#1284](https://github.com/shoelace-style/shoelace/pull/1284)

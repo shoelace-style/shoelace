@@ -262,9 +262,7 @@ export default class SlSplitPanel extends ShoelaceElement {
         @mousedown=${this.handleDrag}
         @touchstart=${this.handleDrag}
       >
-        <slot
-          name="divider"
-        ></slot>
+        <slot name="divider"></slot>
       </div>
 
       <slot name="end" part="panel end" class="end"></slot>
