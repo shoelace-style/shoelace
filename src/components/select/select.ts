@@ -821,7 +821,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
               </slot>
             </div>
 
-            <slot
+            <div
               id="listbox"
               role="listbox"
               aria-expanded=${this.open ? 'true' : 'false'}
@@ -832,7 +832,9 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
               tabindex="-1"
               @mouseup=${this.handleOptionClick}
               @slotchange=${this.handleDefaultSlotChange}
-            ></slot>
+            >
+              <slot></slot>
+            </div>
           </sl-popup>
         </div>
 
