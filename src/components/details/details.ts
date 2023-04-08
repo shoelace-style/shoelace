@@ -174,7 +174,6 @@ export default class SlDetails extends ShoelaceElement {
           part="header"
           id="header"
           class="details__header"
-          role="button"
           aria-expanded=${this.open ? 'true' : 'false'}
           aria-controls="content"
           aria-disabled=${this.disabled ? 'true' : 'false'}
