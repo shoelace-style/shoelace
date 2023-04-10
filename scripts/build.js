@@ -5,7 +5,7 @@ import commandLineArgs from 'command-line-args';
 import { deleteSync } from 'del';
 import esbuild from 'esbuild';
 import fs from 'fs';
-import * as path from 'path'
+import * as path from 'path';
 import getPort, { portNumbers } from 'get-port';
 import { globby } from 'globby';
 import copy from 'recursive-copy';
@@ -82,31 +82,26 @@ fs.mkdirSync(outdir, { recursive: true });
       : [...alwaysExternal, '@floating-ui/dom', '@shoelace-style/animations', 'lit', 'qr-creator'],
     splitting: true,
     plugins: []
-  }
+  };
 
-  const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), "package.json")))
+  const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json')));
   const unbundledConfig = {
     ...bundledConfig,
     // Goes to /dist/npm
-    outdir: path.join(outdir, "npm"),
-    target: "esnext",
-    external: [
-      ...Object.keys(packageJSON.dependencies || {}),
-      ...Object.keys(packageJSON.peerDependencies || {})
-    ]
-  }
+    outdir: path.join(outdir, 'npm'),
+    target: 'esnext',
+    external: [...Object.keys(packageJSON.dependencies || {}), ...Object.keys(packageJSON.peerDependencies || {})]
+  };
 
-  await esbuild.build(unbundledConfig).catch((err) => {
-    console.error(chalk.red(err))
-    console.error(chalk.red("\nFailed to build unbundledConfig"))
-    process.exit(1)
-  })
-  const buildResult = await esbuild
-    .build(bundledConfig)
-    .catch(err => {
-      console.error(chalk.red(err));
-      process.exit(1);
-    });
+  await esbuild.build(unbundledConfig).catch(err => {
+    console.error(chalk.red(err));
+    console.error(chalk.red('\nFailed to build unbundledConfig'));
+    process.exit(1);
+  });
+  const buildResult = await esbuild.build(bundledConfig).catch(err => {
+    console.error(chalk.red(err));
+    process.exit(1);
+  });
 
   // Copy the build output to an additional directory
   if (copydir) {
