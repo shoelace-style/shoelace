@@ -40,49 +40,68 @@ fs.mkdirSync(outdir, { recursive: true });
   }
 
   const alwaysExternal = ['@lit-labs/react', 'react'];
+  const bundledConfig = {
+    format: 'esm',
+    target: 'es2017',
+    entryPoints: [
+      //
+      // NOTE: Entry points must be mapped in package.json > exports, otherwise users won't be able to import them!
+      //
+      // The whole shebang
+      './src/shoelace.ts',
+      // The auto-loader
+      './src/shoelace-autoloader.ts',
+      // Components
+      ...(await globby('./src/components/**/!(*.(style|test)).ts')),
+      // Translations
+      ...(await globby('./src/translations/**/*.ts')),
+      // Public utilities
+      ...(await globby('./src/utilities/**/!(*.(style|test)).ts')),
+      // Theme stylesheets
+      ...(await globby('./src/themes/**/!(*.test).ts')),
+      // React wrappers
+      ...(await globby('./src/react/**/*.ts'))
+    ],
+    outdir,
+    chunkNames: 'chunks/[name].[hash]',
+    incremental: serve,
+    define: {
+      // Floating UI requires this to be set
+      'process.env.NODE_ENV': '"production"'
+    },
+    bundle: true,
+    //
+    // We don't bundle certain dependencies in the unbundled build. This ensures we ship bare module specifiers,
+    // allowing end users to better optimize when using a bundler. (Only packages that ship ESM can be external.)
+    //
+    // We never bundle React or @lit-labs/react though!
+    //
+    external: bundle
+      ? alwaysExternal
+      : [...alwaysExternal, '@floating-ui/dom', '@shoelace-style/animations', 'lit', 'qr-creator'],
+    splitting: true,
+    plugins: []
+  }
+
+  const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), "package.json")))
+  const unbundledConfig = {
+    ...bundledConfig,
+    // Goes to /dist/npm
+    outdir: path.join(outdir, "npm"),
+    target: "esnext",
+    external: [
+      ...Object.keys(packageJSON.dependencies || {}),
+      ...Object.keys(packageJSON.peerDependencies || {})
+    ]
+  }
+
+  await esbuild.build(unbundledConfig).catch((err) => {
+    console.error(chalk.red(err))
+    console.error(chalk.red("\nFailed to build unbundledConfig"))
+    process.exit(1)
+  })
   const buildResult = await esbuild
-    .build({
-      format: 'esm',
-      target: 'es2017',
-      entryPoints: [
-        //
-        // NOTE: Entry points must be mapped in package.json > exports, otherwise users won't be able to import them!
-        //
-        // The whole shebang
-        './src/shoelace.ts',
-        // The auto-loader
-        './src/shoelace-autoloader.ts',
-        // Components
-        ...(await globby('./src/components/**/!(*.(style|test)).ts')),
-        // Translations
-        ...(await globby('./src/translations/**/*.ts')),
-        // Public utilities
-        ...(await globby('./src/utilities/**/!(*.(style|test)).ts')),
-        // Theme stylesheets
-        ...(await globby('./src/themes/**/!(*.test).ts')),
-        // React wrappers
-        ...(await globby('./src/react/**/*.ts'))
-      ],
-      outdir,
-      chunkNames: 'chunks/[name].[hash]',
-      incremental: serve,
-      define: {
-        // Floating UI requires this to be set
-        'process.env.NODE_ENV': '"production"'
-      },
-      bundle: true,
-      //
-      // We don't bundle certain dependencies in the unbundled build. This ensures we ship bare module specifiers,
-      // allowing end users to better optimize when using a bundler. (Only packages that ship ESM can be external.)
-      //
-      // We never bundle React or @lit-labs/react though!
-      //
-      external: bundle
-        ? alwaysExternal
-        : [...alwaysExternal, '@floating-ui/dom', '@shoelace-style/animations', 'lit', 'qr-creator'],
-      splitting: true,
-      plugins: []
-    })
+    .build(bundledConfig)
     .catch(err => {
       console.error(chalk.red(err));
       process.exit(1);
