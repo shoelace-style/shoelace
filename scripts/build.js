@@ -5,6 +5,7 @@ import commandLineArgs from 'command-line-args';
 import { deleteSync } from 'del';
 import esbuild from 'esbuild';
 import fs from 'fs';
+import * as path from 'path'
 import getPort, { portNumbers } from 'get-port';
 import { globby } from 'globby';
 import copy from 'recursive-copy';
