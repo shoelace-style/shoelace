@@ -91,36 +91,31 @@ export class ScrollController<T extends ScrollHost> implements ReactiveControlle
 
     this.pointers.add(event.pointerId);
 
-    if (this.mouseDragging && this.pointers.size === 1) {
+    const canDrag = this.mouseDragging && !this.dragging && event.button === 0;
+    if (canDrag) {
       event.preventDefault();
 
-      const scrollContainer = this.host.scrollContainer;
-      const target = event.target as HTMLElement;
-
-      target.setPointerCapture(event.pointerId);
-      scrollContainer.addEventListener('pointermove', this.handlePointerMove);
+      this.host.scrollContainer.addEventListener('pointermove', this.handlePointerMove);
     }
   }
 
   handlePointerMove(event: PointerEvent) {
-    const target = event.target as HTMLElement;
+    const scrollContainer = this.host.scrollContainer;
 
-    // Ignore pointers that we are not tracking
-    if (target.hasPointerCapture(event.pointerId)) {
-      if (!this.dragging) {
-        // Start dragging if it hasn't yet
-        this.handleDragStart();
-      }
-
+    const hasMoved = !!event.movementX || !!event.movementY;
+    if (!this.dragging && hasMoved) {
+      // Start dragging if it hasn't yet
+      scrollContainer.setPointerCapture(event.pointerId);
+      this.handleDragStart();
+    } else if (scrollContainer.hasPointerCapture(event.pointerId)) {
+      // Ignore pointers that we are not tracking
       this.handleDrag(event);
     }
   }
 
   handlePointerUp(event: PointerEvent) {
-    const target = event.target as HTMLElement;
-
     this.pointers.delete(event.pointerId);
-    target.releasePointerCapture(event.pointerId);
+    this.host.scrollContainer.releasePointerCapture(event.pointerId);
 
     if (this.pointers.size === 0) {
       this.handleDragEnd();
