@@ -6,7 +6,7 @@ import type SlHideEvent from '../../events/sl-hide';
 import type SlShowEvent from '../../events/sl-show';
 
 describe('<sl-details>', () => {
-  describe('accessability', () => {
+  describe('accessibility', () => {
     it('should be accessible when closed', async () => {
       const details = await fixture<SlDetails>(html`<sl-details summary="Test"> Test text </sl-details>`);
 

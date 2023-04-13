@@ -8,7 +8,7 @@ import type SlOption from '../option/option';
 import type SlSelect from './select';
 
 describe('<sl-select>', () => {
-  describe('accessability', () => {
+  describe('accessibility', () => {
     it('should pass accessibility tests when closed', async () => {
       const select = await fixture<SlSelect>(html`
         <sl-select label="Select one">
