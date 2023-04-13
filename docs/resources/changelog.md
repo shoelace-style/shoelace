@@ -22,6 +22,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Improved the behavior of `<sl-carousel>` when used inside a flex container [#1235](https://github.com/shoelace-style/shoelace/pull/1235)
 - Improved the behavior of `<sl-tree-item>` to support buttons and other interactive elements [#1234](https://github.com/shoelace-style/shoelace/issues/1234)
 - Improved the performance of `<sl-include>` to prevent an apparent memory leak in some browsers [#1284](https://github.com/shoelace-style/shoelace/pull/1284)
+- Improved the accessibility of `<sl-select>`, `<sl-split-panel>`, and `<sl-details>` by ensuring slots don't have roles [#1287](https://github.com/shoelace-style/shoelace/issues/1287)
 
 ## 2.3.0
 
