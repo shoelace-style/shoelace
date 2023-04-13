@@ -15,14 +15,14 @@ describe('<sl-textarea>', () => {
     const el = await fixture<SlTextarea>(html` <sl-textarea></sl-textarea> `);
 
     expect(el.size).to.equal('medium');
-    expect(el.name).to.equal('');
+    expect(el.name).to.be.undefined;
     expect(el.value).to.equal('');
     expect(el.defaultValue).to.equal('');
     expect(el.title).to.equal('');
     expect(el.filled).to.be.false;
     expect(el.label).to.equal('');
     expect(el.helpText).to.equal('');
-    expect(el.placeholder).to.equal('');
+    expect(el.placeholder).to.be.undefined;
     expect(el.rows).to.equal(4);
     expect(el.resize).to.equal('vertical');
     expect(el.disabled).to.be.false;

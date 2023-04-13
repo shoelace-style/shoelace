@@ -60,7 +60,7 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
   @property() title = ''; // make reactive to pass through
 
   /** The name of the range, submitted as a name/value pair with form data. */
-  @property() name = '';
+  @property() name?: string;
 
   /** The current value of the range, submitted as a name/value pair with form data. */
   @property({ type: Number }) value = 0;

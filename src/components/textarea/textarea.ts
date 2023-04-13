@@ -50,7 +50,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
   @property() title = ''; // make reactive to pass through
 
   /** The name of the textarea, submitted as a name/value pair with form data. */
-  @property() name = '';
+  @property() name?: string;
 
   /** The current value of the textarea, submitted as a name/value pair with form data. */
   @property() value = '';
@@ -68,7 +68,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
   @property({ attribute: 'help-text' }) helpText = '';
 
   /** Placeholder text to show as a hint when the input is empty. */
-  @property() placeholder = '';
+  @property() placeholder?: string;
 
   /** The number of rows to display by default. */
   @property({ type: Number }) rows = 4;

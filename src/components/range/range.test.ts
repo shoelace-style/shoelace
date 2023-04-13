@@ -15,7 +15,7 @@ describe('<sl-range>', () => {
   it('default properties', async () => {
     const el = await fixture<SlRange>(html` <sl-range></sl-range> `);
 
-    expect(el.name).to.equal('');
+    expect(el.name).to.be.undefined;
     expect(el.value).to.equal(0);
     expect(el.title).to.equal('');
     expect(el.label).to.equal('');

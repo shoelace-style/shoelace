@@ -96,7 +96,7 @@ export default class ShoelaceElement extends LitElement {
 
 export interface ShoelaceFormControl extends ShoelaceElement {
   // Form attributes
-  name: string;
+  name?: string;
   value: unknown;
   disabled?: boolean;
   defaultValue?: unknown;

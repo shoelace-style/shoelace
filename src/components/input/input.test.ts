@@ -18,7 +18,7 @@ describe('<sl-input>', () => {
 
     expect(el.type).to.equal('text');
     expect(el.size).to.equal('medium');
-    expect(el.name).to.equal('');
+    expect(el.name).to.be.undefined;
     expect(el.value).to.equal('');
     expect(el.defaultValue).to.equal('');
     expect(el.title).to.equal('');
@@ -30,7 +30,7 @@ describe('<sl-input>', () => {
     expect(el.passwordToggle).to.be.false;
     expect(el.passwordVisible).to.be.false;
     expect(el.noSpinButtons).to.be.false;
-    expect(el.placeholder).to.equal('');
+    expect(el.placeholder).to.be.undefined;
     expect(el.disabled).to.be.false;
     expect(el.readonly).to.be.false;
     expect(el.minlength).to.be.undefined;

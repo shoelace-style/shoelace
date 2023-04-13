@@ -80,7 +80,7 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
     | 'url' = 'text';
 
   /** The name of the input, submitted as a name/value pair with form data. */
-  @property() name = '';
+  @property() name?: string;
 
   /** The current value of the input, submitted as a name/value pair with form data. */
   @property() value = '';
@@ -110,7 +110,7 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Placeholder text to show as a hint when the input is empty. */
-  @property() placeholder = '';
+  @property() placeholder?: string;
 
   /** Makes the input readonly. */
   @property({ type: Boolean, reflect: true }) readonly = false;

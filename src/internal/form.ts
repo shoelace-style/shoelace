@@ -30,7 +30,7 @@ export interface FormControlControllerOptions {
   /** A function that returns the form containing the form control. */
   form: (input: ShoelaceFormControl) => HTMLFormElement | null;
   /** A function that returns the form control's name, which will be submitted with the form data. */
-  name: (input: ShoelaceFormControl) => string;
+  name: (input: ShoelaceFormControl) => string | undefined;
   /** A function that returns the form control's current value. */
   value: (input: ShoelaceFormControl) => unknown | unknown[];
   /** A function that returns the form control's default value. */
