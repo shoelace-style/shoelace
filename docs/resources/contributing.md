@@ -369,7 +369,7 @@ This will render the icons instantly whereas the default library will fetch them
 What to test for a given component:
 
 - Start with a simple test that checks that the default version of the component still renders.
-- Add at least one accessibility test:
+- Add at least one accessibility test (The accessability check only covers the parts of the DOM which are currently visible and rendered. Depending on the component, more than one accessability test is required to cover all scenarios.):
 
 ```ts
 const myComponent = await fixture<SlAlert>(html`<sl-my-component>SomeContent</sl-my-component>`);
