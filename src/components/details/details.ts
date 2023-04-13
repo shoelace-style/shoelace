@@ -170,10 +170,11 @@ export default class SlDetails extends ShoelaceElement {
           'details--rtl': isRtl
         })}
       >
-        <header
+        <div
           part="header"
           id="header"
           class="details__header"
+          role="button"
           aria-expanded=${this.open ? 'true' : 'false'}
           aria-controls="content"
           aria-disabled=${this.disabled ? 'true' : 'false'}
@@ -191,7 +192,7 @@ export default class SlDetails extends ShoelaceElement {
               <sl-icon library="system" name=${isRtl ? 'chevron-left' : 'chevron-right'}></sl-icon>
             </slot>
           </span>
-        </header>
+        </div>
 
         <div class="details__body">
           <slot part="content" id="content" class="details__content" role="region" aria-labelledby="header"></slot>
