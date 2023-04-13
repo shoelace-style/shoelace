@@ -27,6 +27,36 @@ const iconCache = new Map<string, Promise<SVGResult>>();
 export default class SlIcon extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
+  /** Given a URL, this function returns the resulting SVG element or an appropriate error symbol. */
+  private static async resolveIcon(url: string): Promise<SVGResult> {
+    let fileData: Response;
+    try {
+      fileData = await fetch(url, { mode: 'cors' });
+      if (!fileData.ok) return fileData.status === 410 ? CACHEABLE_ERROR : RETRYABLE_ERROR;
+    } catch {
+      return RETRYABLE_ERROR;
+    }
+
+    try {
+      const div = document.createElement('div');
+      div.innerHTML = await fileData.text();
+
+      const svg = div.firstElementChild;
+      if (svg?.tagName?.toLowerCase() !== 'svg') return CACHEABLE_ERROR;
+
+      if (!parser) parser = new DOMParser();
+      const doc = parser.parseFromString(svg.outerHTML, 'text/html');
+
+      const svgEl = doc.body.querySelector('svg');
+      if (!svgEl) return CACHEABLE_ERROR;
+
+      svgEl.part.add('svg');
+      return document.adoptNode(svgEl);
+    } catch {
+      return CACHEABLE_ERROR;
+    }
+  }
+
   @state() private svg: SVGElement | null = null;
 
   /** The name of the icon to draw. Available names depend on the icon library being used. */
@@ -96,7 +126,7 @@ export default class SlIcon extends ShoelaceElement {
 
     let iconResolver = iconCache.get(url);
     if (!iconResolver) {
-      iconResolver = SlIcon._resolveIcon(url);
+      iconResolver = SlIcon.resolveIcon(url);
       iconCache.set(url, iconResolver);
     }
 
@@ -125,35 +155,6 @@ export default class SlIcon extends ShoelaceElement {
 
   render() {
     return this.svg;
-  }
-
-  private static async _resolveIcon(url: string): Promise<SVGResult> {
-    let fileData: Response;
-    try {
-      fileData = await fetch(url, { mode: 'cors' });
-      if (!fileData.ok) return fileData.status === 410 ? CACHEABLE_ERROR : RETRYABLE_ERROR;
-    } catch {
-      return RETRYABLE_ERROR;
-    }
-
-    try {
-      const div = document.createElement('div');
-      div.innerHTML = await fileData.text();
-
-      const svg = div.firstElementChild;
-      if (svg?.tagName?.toLowerCase() !== 'svg') return CACHEABLE_ERROR;
-
-      if (!parser) parser = new DOMParser();
-      const doc = parser.parseFromString(svg.outerHTML, 'text/html');
-
-      const svgEl = doc.body.querySelector('svg');
-      if (!svgEl) return CACHEABLE_ERROR;
-
-      svgEl.part.add('svg');
-      return document.adoptNode(svgEl);
-    } catch {
-      return CACHEABLE_ERROR;
-    }
   }
 }
 
