@@ -6,6 +6,20 @@ import type SlHideEvent from '../../events/sl-hide';
 import type SlShowEvent from '../../events/sl-show';
 
 describe('<sl-details>', () => {
+  describe('accessibility', () => {
+    it('should be accessible when closed', async () => {
+      const details = await fixture<SlDetails>(html`<sl-details summary="Test"> Test text </sl-details>`);
+
+      await expect(details).to.be.accessible();
+    });
+
+    it('should be accessible when open', async () => {
+      const details = await fixture<SlDetails>(html`<sl-details open summary="Test">Test text</sl-details>`);
+
+      await expect(details).to.be.accessible();
+    });
+  });
+
   it('should be visible with the open attribute', async () => {
     const el = await fixture<SlDetails>(html`
       <sl-details open>

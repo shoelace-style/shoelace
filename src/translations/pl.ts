@@ -28,7 +28,7 @@ const translation: Translation = {
   scrollToStart: 'Przewiń do początku',
   selectAColorFromTheScreen: 'Próbkuj z ekranu',
   showPassword: 'Pokaż hasło',
-  slide_num: slide => `Slajd ${slide}`,
+  slideNum: slide => `Slajd ${slide}`,
   toggleColorFormat: 'Przełącz format'
 };
 

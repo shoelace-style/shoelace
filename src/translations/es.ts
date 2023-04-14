@@ -28,7 +28,7 @@ const translation: Translation = {
   scrollToStart: 'Desplazarse al inicio',
   selectAColorFromTheScreen: 'Seleccione un color de la pantalla',
   showPassword: 'Mostrar contraseña',
-  slide_num: slide => `Diapositiva ${slide}`,
+  slideNum: slide => `Diapositiva ${slide}`,
   toggleColorFormat: 'Alternar formato de color'
 };
 

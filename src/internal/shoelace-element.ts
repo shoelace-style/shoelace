@@ -105,8 +105,8 @@ export interface ShoelaceFormControl extends ShoelaceElement {
 
   // Constraint validation attributes
   pattern?: string;
-  min?: number | Date;
-  max?: number | Date;
+  min?: number | string | Date;
+  max?: number | string | Date;
   step?: number | 'any';
   required?: boolean;
   minlength?: number;

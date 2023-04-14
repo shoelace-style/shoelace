@@ -32,9 +32,10 @@ Designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
 
 Add the following code to your page.
 
+<!-- prettier-ignore -->
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/light.css" />
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace-autoloader.js"></script>
 ```
 
 Now you have access to all of Shoelace's components! Try adding a button:
@@ -43,7 +44,7 @@ Now you have access to all of Shoelace's components! Try adding a button:
 <sl-button>Click me</sl-button>
 ```
 
-?> This will load all of Shoelace's components, but you should probably only load the ones you're actually using. To learn how, or for other ways to install Shoelace, refer to the [installation instructions](getting-started/installation).
+?> This will activate Shoelace's experimental autoloader, which registers components on the fly as you use them. To learn more about it, or for other ways to install Shoelace, refer to the [installation instructions](getting-started/installation).
 
 ## New to Web Components?
 

@@ -1,7 +1,7 @@
 import '../icon/icon';
 import { clamp } from '../../internal/math';
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { customElement, eventOptions, property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize';
 import { styleMap } from 'lit/directives/style-map.js';
@@ -163,6 +163,7 @@ export default class SlRating extends ShoelaceElement {
     event.preventDefault();
   }
 
+  @eventOptions({ passive: true })
   private handleTouchMove(event: TouchEvent) {
     this.hoverValue = this.getValueFromTouchPosition(event);
   }

@@ -437,18 +437,15 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     const values: string[] = [];
 
     // Check for duplicate values in menu items
-    allOptions.forEach(option => {
-      if (values.includes(option.value)) {
-        console.error(
-          `An option with a duplicate value of "${option.value}" has been found in <sl-select>. All options must have unique values.`,
-          option
-        );
-      }
-      values.push(option.value);
-    });
+    if (customElements.get('sl-option')) {
+      allOptions.forEach(option => values.push(option.value));
 
-    // Select only the options that match the new value
-    this.setSelectedOptions(allOptions.filter(el => value.includes(el.value)));
+      // Select only the options that match the new value
+      this.setSelectedOptions(allOptions.filter(el => value.includes(el.value)));
+    } else {
+      // Rerun this handler when <sl-option> is registered
+      customElements.whenDefined('sl-option').then(() => this.handleDefaultSlotChange());
+    }
   }
 
   private handleTagRemove(event: SlRemoveEvent, option: SlOption) {
@@ -824,7 +821,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
               </slot>
             </div>
 
-            <slot
+            <div
               id="listbox"
               role="listbox"
               aria-expanded=${this.open ? 'true' : 'false'}
@@ -835,7 +832,9 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
               tabindex="-1"
               @mouseup=${this.handleOptionClick}
               @slotchange=${this.handleDefaultSlotChange}
-            ></slot>
+            >
+              <slot></slot>
+            </div>
           </sl-popup>
         </div>
 
