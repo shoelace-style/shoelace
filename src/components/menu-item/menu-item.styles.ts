@@ -64,7 +64,7 @@ export default css`
     outline: none;
   }
 
-  :host(:hover:not([aria-disabled='true'])) .menu-item {
+  :host(:hover:not([aria-disabled='true'], :focus-visible)) .menu-item {
     background-color: var(--sl-color-neutral-100);
     color: var(--sl-color-neutral-1000);
   }

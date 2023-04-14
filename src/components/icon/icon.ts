@@ -1,14 +1,16 @@
 import { customElement, property, state } from 'lit/decorators.js';
 import { getIconLibrary, unwatchIcon, watchIcon } from './library';
-import { html } from 'lit';
-import { requestIcon } from './request';
-import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { watch } from '../../internal/watch';
 import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './icon.styles';
 import type { CSSResultGroup } from 'lit';
 
+const CACHEABLE_ERROR = Symbol();
+const RETRYABLE_ERROR = Symbol();
+type SVGResult = SVGSVGElement | typeof RETRYABLE_ERROR | typeof CACHEABLE_ERROR;
+
 let parser: DOMParser;
+const iconCache = new Map<string, Promise<SVGResult>>();
 
 /**
  * @summary Icons are symbols that can be used to represent various options within an application.
@@ -25,7 +27,37 @@ let parser: DOMParser;
 export default class SlIcon extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
-  @state() private svg = '';
+  /** Given a URL, this function returns the resulting SVG element or an appropriate error symbol. */
+  private static async resolveIcon(url: string): Promise<SVGResult> {
+    let fileData: Response;
+    try {
+      fileData = await fetch(url, { mode: 'cors' });
+      if (!fileData.ok) return fileData.status === 410 ? CACHEABLE_ERROR : RETRYABLE_ERROR;
+    } catch {
+      return RETRYABLE_ERROR;
+    }
+
+    try {
+      const div = document.createElement('div');
+      div.innerHTML = await fileData.text();
+
+      const svg = div.firstElementChild;
+      if (svg?.tagName?.toLowerCase() !== 'svg') return CACHEABLE_ERROR;
+
+      if (!parser) parser = new DOMParser();
+      const doc = parser.parseFromString(svg.outerHTML, 'text/html');
+
+      const svgEl = doc.body.querySelector('svg');
+      if (!svgEl) return CACHEABLE_ERROR;
+
+      svgEl.part.add('svg');
+      return document.adoptNode(svgEl);
+    } catch {
+      return CACHEABLE_ERROR;
+    }
+  }
+
+  @state() private svg: SVGElement | null = null;
 
   /** The name of the icon to draw. Available names depend on the icon library being used. */
   @property({ reflect: true }) name?: string;
@@ -87,46 +119,42 @@ export default class SlIcon extends ShoelaceElement {
     const library = getIconLibrary(this.library);
     const url = this.getUrl();
 
-    // Create an instance of the DOM parser. We do it here instead of top-level to support SSR while maintaining a
-    // single parser instance for optimal performance.
-    if (!parser) {
-      parser = new DOMParser();
+    if (!url) {
+      this.svg = null;
+      return;
     }
 
-    if (url) {
-      try {
-        const file = await requestIcon(url);
-        if (url !== this.getUrl()) {
-          // If the url has changed while fetching the icon, ignore this request
-          return;
-        } else if (file.ok) {
-          const doc = parser.parseFromString(file.svg, 'text/html');
-          const svgEl = doc.body.querySelector('svg');
+    let iconResolver = iconCache.get(url);
+    if (!iconResolver) {
+      iconResolver = SlIcon.resolveIcon(url);
+      iconCache.set(url, iconResolver);
+    }
 
-          if (svgEl !== null) {
-            svgEl.part.add('svg');
-            library?.mutator?.(svgEl);
-            this.svg = svgEl.outerHTML;
-            this.emit('sl-load');
-          } else {
-            this.svg = '';
-            this.emit('sl-error');
-          }
-        } else {
-          this.svg = '';
-          this.emit('sl-error');
-        }
-      } catch {
+    const svg = await iconResolver;
+    if (svg === RETRYABLE_ERROR) {
+      iconCache.delete(url);
+    }
+
+    if (url !== this.getUrl()) {
+      // If the url has changed while fetching the icon, ignore this request
+      return;
+    }
+
+    switch (svg) {
+      case RETRYABLE_ERROR:
+      case CACHEABLE_ERROR:
+        this.svg = null;
         this.emit('sl-error');
-      }
-    } else if (this.svg.length > 0) {
-      // If we can't resolve a URL and an icon was previously set, remove it
-      this.svg = '';
+        break;
+      default:
+        this.svg = svg.cloneNode(true) as SVGElement;
+        library?.mutator?.(this.svg);
+        this.emit('sl-load');
     }
   }
 
   render() {
-    return html` ${unsafeSVG(this.svg)} `;
+    return this.svg;
   }
 }
 

@@ -1,4 +1,5 @@
-import { expect, fixture, html, triggerBlurFor, triggerFocusFor } from '@open-wc/testing';
+import { aTimeout, expect, fixture, html, triggerBlurFor, triggerFocusFor } from '@open-wc/testing';
+import { clickOnElement } from '../../internal/test';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlTree from './tree';
@@ -433,7 +434,7 @@ describe('<sl-tree>', () => {
         const expandButton: HTMLElement = node.shadowRoot!.querySelector('.tree-item__expand-button')!;
 
         // Act
-        expandButton.click();
+        await clickOnElement(expandButton);
         await el.updateComplete;
 
         // Assert
@@ -453,10 +454,10 @@ describe('<sl-tree>', () => {
           await el.updateComplete;
 
           // Act
-          node0.click();
+          await clickOnElement(node0);
           await el.updateComplete;
 
-          node1.click();
+          await clickOnElement(node1);
           await el.updateComplete;
 
           // Assert
@@ -474,10 +475,10 @@ describe('<sl-tree>', () => {
           await el.updateComplete;
 
           // Act
-          node0.click();
+          await clickOnElement(node0);
           await el.updateComplete;
 
-          node1.click();
+          await clickOnElement(node1);
           await el.updateComplete;
 
           // Assert
@@ -492,7 +493,7 @@ describe('<sl-tree>', () => {
           await el.updateComplete;
 
           // Act
-          parentNode.click();
+          await clickOnElement(parentNode);
           await parentNode.updateComplete;
 
           // Assert
@@ -511,10 +512,10 @@ describe('<sl-tree>', () => {
           await el.updateComplete;
 
           // Act
-          node0.click();
+          await clickOnElement(node0);
           await el.updateComplete;
 
-          node1.click();
+          await clickOnElement(node1);
           await el.updateComplete;
 
           // Assert
@@ -529,7 +530,7 @@ describe('<sl-tree>', () => {
           const parentNode = el.children[2] as SlTreeItem;
 
           // Act
-          parentNode.click();
+          await clickOnElement(parentNode);
           await el.updateComplete;
 
           // Assert
@@ -549,7 +550,10 @@ describe('<sl-tree>', () => {
           const childNode = parentNode.children[0] as SlTreeItem;
 
           // Act
-          childNode.click();
+          parentNode.expanded = true;
+          await parentNode.updateComplete;
+          await aTimeout(300);
+          await clickOnElement(childNode);
           await el.updateComplete;
 
           // Assert
@@ -572,9 +576,9 @@ describe('<sl-tree>', () => {
           const node = el.children[0] as SlTreeItem;
 
           // Act
-          node.click();
+          await clickOnElement(node);
           await el.updateComplete;
-          node.click();
+          await clickOnElement(node);
           await Promise.all([node.updateComplete, el.updateComplete]);
 
           // Assert
@@ -598,9 +602,9 @@ describe('<sl-tree>', () => {
         const node = el.children[0] as SlTreeItem;
 
         // Act
-        node.click();
+        await clickOnElement(node);
         await el.updateComplete;
-        node.click();
+        await clickOnElement(node);
         await Promise.all([node.updateComplete, el.updateComplete]);
 
         // Assert
@@ -621,7 +625,7 @@ describe('<sl-tree>', () => {
         const node = el.querySelector<SlTreeItem>('#expandable')!;
 
         // Act
-        node.click();
+        await clickOnElement(node);
         await Promise.all([node.updateComplete, el.updateComplete]);
 
         // Assert
@@ -643,9 +647,9 @@ describe('<sl-tree>', () => {
         const node = el.children[0] as SlTreeItem;
 
         // Act
-        node.click();
+        await clickOnElement(node);
         await Promise.all([node.updateComplete, el.updateComplete]);
-        node.click();
+        await clickOnElement(node);
         await Promise.all([node.updateComplete, el.updateComplete]);
 
         // Assert

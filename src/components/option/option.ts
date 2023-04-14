@@ -92,6 +92,12 @@ export default class SlOption extends ShoelaceElement {
 
   @watch('value')
   handleValueChange() {
+    // Ensure the value is a string. This ensures the next line doesn't error and allows framework users to pass numbers
+    // instead of requiring them to cast the value to a string.
+    if (typeof this.value !== 'string') {
+      this.value = String(this.value);
+    }
+
     if (this.value.includes(' ')) {
       console.error(`Option values cannot include a space. All spaces have been replaced with underscores.`, this);
       this.value = this.value.replace(/ /g, '_');

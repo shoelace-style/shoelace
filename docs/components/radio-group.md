@@ -175,7 +175,7 @@ Use the `setCustomValidity()` method to set a custom validation message. This wi
   const errorMessage = 'You must choose the last option';
 
   // Set initial validity as soon as the element is defined
-  customElements.whenDefined('sl-radio-group').then(() => {
+  customElements.whenDefined('sl-radio').then(() => {
     radioGroup.setCustomValidity(errorMessage);
   });
 

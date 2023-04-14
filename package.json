@@ -1,7 +1,7 @@
 {
   "name": "@shoelace-style/shoelace",
   "description": "A forward-thinking library of web components.",
-  "version": "2.1.0",
+  "version": "2.4.0",
   "homepage": "https://github.com/shoelace-style/shoelace",
   "author": "Cory LaViska",
   "license": "MIT",
@@ -14,6 +14,7 @@
       "types": "./dist/shoelace.d.ts",
       "import": "./dist/shoelace.js"
     },
+    "./dist/custom-elements.json": "./dist/custom-elements.json",
     "./dist/themes/*": "./dist/themes/*",
     "./dist/components/*": "./dist/components/*",
     "./dist/utilities/*": "./dist/utilities/*",
@@ -109,7 +110,6 @@
     "lint-staged": "^13.1.0",
     "lunr": "^2.3.9",
     "npm-check-updates": "^16.6.2",
-    "open": "^8.4.0",
     "pascal-case": "^3.1.2",
     "plop": "^3.1.1",
     "prettier": "^2.8.2",

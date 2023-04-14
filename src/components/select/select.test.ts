@@ -8,15 +8,31 @@ import type SlOption from '../option/option';
 import type SlSelect from './select';
 
 describe('<sl-select>', () => {
-  it('should pass accessibility tests', async () => {
-    const el = await fixture<SlSelect>(html`
-      <sl-select label="Select one">
-        <sl-option value="option-1">Option 1</sl-option>
-        <sl-option value="option-2">Option 2</sl-option>
-        <sl-option value="option-3">Option 3</sl-option>
-      </sl-select>
-    `);
-    await expect(el).to.be.accessible();
+  describe('accessibility', () => {
+    it('should pass accessibility tests when closed', async () => {
+      const select = await fixture<SlSelect>(html`
+        <sl-select label="Select one">
+          <sl-option value="option-1">Option 1</sl-option>
+          <sl-option value="option-2">Option 2</sl-option>
+          <sl-option value="option-3">Option 3</sl-option>
+        </sl-select>
+      `);
+      await expect(select).to.be.accessible();
+    });
+
+    it('should pass accessibility tests when open', async () => {
+      const select = await fixture<SlSelect>(html`
+        <sl-select label="Select one">
+          <sl-option value="option-1">Option 1</sl-option>
+          <sl-option value="option-2">Option 2</sl-option>
+          <sl-option value="option-3">Option 3</sl-option>
+        </sl-select>
+      `);
+
+      await select.show();
+
+      await expect(select).to.be.accessible();
+    });
   });
 
   it('should be disabled with the disabled attribute', async () => {

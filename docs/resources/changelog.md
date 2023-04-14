@@ -6,20 +6,54 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
-## Next
+## 2.4.0
+
+- Added the `discover()` function to the experimental autoloader's exports [#1236](https://github.com/shoelace-style/shoelace/pull/1236)
+- Added the `size` attribute to `<sl-radio-group>` so labels and controls will be sized consistently [#1301](https://github.com/shoelace-style/shoelace/issues/1301)
+- Added tests for `<sl-animated-image>` [#1246](https://github.com/shoelace-style/shoelace/pull/1246)
+- Added tests for `<sl-animation>` [#1274](https://github.com/shoelace-style/shoelace/pull/1274)
+- Fixed a bug in `<sl-tree-item>` that prevented long labels from wrapping [#1243](https://github.com/shoelace-style/shoelace/issues/1243)
+- Fixed a bug in `<sl-tree-item>` that caused labels to be misaligned when text wraps [#1244](https://github.com/shoelace-style/shoelace/issues/1244)
+- Fixed an incorrect CSS property value in `<sl-checkbox>` [#1272](https://github.com/shoelace-style/shoelace/pull/1272)
+- Fixed a bug in `<sl-avatar>` that caused the initials to show up behind images with transparency [#1260](https://github.com/shoelace-style/shoelace/pull/1260)
+- Fixed a bug in `<sl-split-panel>` that prevented the divider from being focusable in some browsers [#1288](https://github.com/shoelace-style/shoelace/issues/1288)
+- Fixed a bug that caused `<sl-tab-group>` to affect scrolling when initializing [#1292](https://github.com/shoelace-style/shoelace/issues/1292)
+- Fixed a bug in `<sl-menu-item>` that allowed the hover state to show when focused [#1282](https://github.com/shoelace-style/shoelace/issues/1282)
+- Fixed a bug in `<sl-carousel>` that prevented interactive elements from receiving clicks [#1262](https://github.com/shoelace-style/shoelace/issues/1262)
+- Fixed a bug in `<sl-input>` that caused `valueAsDate` and `valueAsNumber` to not be set synchronously in some cases [#1302](https://github.com/shoelace-style/shoelace/issues/1302)
+- Improved the behavior of `<sl-carousel>` when used inside a flex container [#1235](https://github.com/shoelace-style/shoelace/pull/1235)
+- Improved the behavior of `<sl-tree-item>` to support buttons and other interactive elements [#1234](https://github.com/shoelace-style/shoelace/issues/1234)
+- Improved the performance of `<sl-include>` to prevent an apparent memory leak in some browsers [#1284](https://github.com/shoelace-style/shoelace/pull/1284)
+- Improved the accessibility of `<sl-select>`, `<sl-split-panel>`, and `<sl-details>` by ensuring slots don't have roles [#1287](https://github.com/shoelace-style/shoelace/issues/1287)
+
+## 2.3.0
+
+- Added an experimental autoloader
+- Added the `subpath` argument to `getBasePath()` to make it easier to generate full paths to any file
+- Added `custom-elements.json` to package exports
+- Added `tag__base`, `tag__content`, `tag__remove-button`, `tag__remove-button__base` parts to `<sl-select>`
+- Fixed a bug in `<sl-rating>` that allowed the `sl-change` event to be emitted when disabled [#1220](https://github.com/shoelace-style/shoelace/issues/1220)
+- Fixed a regression in `<sl-input>` that caused `min` and `max` to stop working when `type="date"` [#1224](https://github.com/shoelace-style/shoelace/issues/1224)
+- Improved accessibility of `<sl-carousel>` [#1218](https://github.com/shoelace-style/shoelace/pull/1218)
+- Improved `<sl-option>` so it converts non-string values to strings for convenience [#1226](https://github.com/shoelace-style/shoelace/issues/1226)
+- Updated the docs to dogfood the autoloader
+
+## 2.2.0
 
 - Added TypeScript types to all custom events [#1183](https://github.com/shoelace-style/shoelace/pull/1183)
 - Added the `svg` part to `<sl-icon>`
 - Added the `getForm()` method to all form controls [#1180](https://github.com/shoelace-style/shoelace/issues/1180)
+- Added the experimental carousel component [#851](https://github.com/shoelace-style/shoelace/pull/851)
 - Fixed a bug in `<sl-select>` that caused the display label to render incorrectly in Chrome after form validation [#1197](https://github.com/shoelace-style/shoelace/discussions/1197)
 - Fixed a bug in `<sl-input>` that prevented users from applying their own value for `autocapitalize`, `autocomplete`, and `autocorrect` when using `type="password` [#1205](https://github.com/shoelace-style/shoelace/issues/1205)
 - Fixed a bug in `<sl-tab-group>` that prevented scroll controls from showing when dynamically adding tabs [#1208](https://github.com/shoelace-style/shoelace/issues/1208)
-- Fixed a big in `<sl-input>` that caused the calendar icon to be clipped in Firefox [#1213](https://github.com/shoelace-style/shoelace/pull/1213)
+- Fixed a bug in `<sl-input>` that caused the calendar icon to be clipped in Firefox [#1213](https://github.com/shoelace-style/shoelace/pull/1213)
 - Fixed a bug in `<sl-tab>` that caused `sl-tab-show` to be emitted when activating the close button
 - Fixed a bug in `<sl-spinner>` that caused `--track-color` to be invisible with certain colors
 - Fixed a bug in `<sl-menu-item>` that caused the focus color to show when selecting menu items with a mouse or touch device
 - Fixed a bug in `<sl-select>` that caused `sl-change` and `sl-input` to be emitted too early [#1201](https://github.com/shoelace-style/shoelace/issues/1201)
 - Fixed a positioning edge case that caused `<sl-popup>` to positioned nested popups incorrectly [#1135](https://github.com/shoelace-style/shoelace/issues/1135)
+- Fixed a bug in `<sl-tree>` that caused the tree item to collapse when clicking a child item, dragging the mouse, and releasing it on the parent node [#1082](https://github.com/shoelace-style/shoelace/issues/1082)
 - Updated `@shoelace-style/localize` to 3.1.0
 - Updated `@floating-ui/dom` to 1.2.1
 

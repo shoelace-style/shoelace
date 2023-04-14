@@ -6,6 +6,7 @@ const translation: Translation = {
   $name: '正體中文',
   $dir: 'ltr',
 
+  carousel: '旋轉木馬',
   clearEntry: '清空',
   close: '關閉',
   copy: '複製',
@@ -27,6 +28,7 @@ const translation: Translation = {
   scrollToStart: '捲至頁首',
   selectAColorFromTheScreen: '從螢幕中選擇一種顏色',
   showPassword: '顯示密碼',
+  slideNum: slide => `幻燈片 ${slide}`,
   toggleColorFormat: '切換顏色格式'
 };
 

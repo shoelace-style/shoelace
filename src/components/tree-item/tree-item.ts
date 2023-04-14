@@ -263,12 +263,11 @@ export default class SlTreeItem extends ShoelaceElement {
                   ?disabled="${this.disabled}"
                   ?checked="${live(this.selected)}"
                   ?indeterminate="${this.indeterminate}"
-                >
-                  <slot class="tree-item__label" part="label"></slot>
-                </sl-checkbox>
-              `,
-            () => html` <slot class="tree-item__label" part="label"></slot> `
+                ></sl-checkbox>
+              `
           )}
+
+          <slot class="tree-item__label" part="label"></slot>
         </div>
 
         <slot

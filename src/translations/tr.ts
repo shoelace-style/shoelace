@@ -6,6 +6,7 @@ const translation: Translation = {
   $name: 'Türkçe',
   $dir: 'ltr',
 
+  carousel: 'Atlıkarınca',
   clearEntry: 'Girişi sil',
   close: 'Kapat',
   copy: 'Kopya',
@@ -27,6 +28,7 @@ const translation: Translation = {
   scrollToStart: 'Başa kay',
   selectAColorFromTheScreen: 'Ekrandan bir renk seçin',
   showPassword: 'Şifreyi göster',
+  slideNum: slide => `Slayt ${slide}`,
   toggleColorFormat: 'Renk biçimini değiştir'
 };
 

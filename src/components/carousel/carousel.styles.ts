@@ -28,8 +28,8 @@ export default css`
 
   .carousel__pagination {
     grid-area: pagination;
-
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: var(--sl-spacing-small);
   }
@@ -46,6 +46,7 @@ export default css`
     overscroll-behavior-x: contain;
     scrollbar-width: none;
     aspect-ratio: calc(var(--aspect-ratio) * var(--slides-per-page));
+    border-radius: var(--sl-border-radius-small);
 
     --slide-size: calc((100% - (var(--slides-per-page) - 1) * var(--slide-gap)) / var(--slides-per-page));
   }
@@ -64,6 +65,7 @@ export default css`
     scroll-snap-type: x mandatory;
     scroll-padding-inline: var(--scroll-hint);
     padding-inline: var(--scroll-hint);
+    overflow-y: hidden;
   }
 
   .carousel__slides--vertical {
@@ -74,6 +76,7 @@ export default css`
     scroll-snap-type: y mandatory;
     scroll-padding-block: var(--scroll-hint);
     padding-block: var(--scroll-hint);
+    overflow-x: hidden;
   }
 
   .carousel__slides--dragging,
@@ -101,7 +104,7 @@ export default css`
     align-items: center;
     background: none;
     border: none;
-    border-radius: var(--sl-border-radius-medium);
+    border-radius: var(--sl-border-radius-small);
     font-size: inherit;
     color: var(--sl-color-neutral-600);
     padding: var(--sl-spacing-x-small);
@@ -138,12 +141,20 @@ export default css`
     width: var(--sl-spacing-small);
     height: var(--sl-spacing-small);
     background-color: var(--sl-color-neutral-300);
-    will-change: transform;
-    transition: var(--sl-transition-fast) ease-in;
+    padding: 0;
+    margin: 0;
   }
 
   .carousel__pagination-item--active {
-    background-color: var(--sl-color-neutral-600);
+    background-color: var(--sl-color-neutral-700);
     transform: scale(1.2);
+  }
+
+  /* Focus styles */
+  .carousel__slides:focus-visible,
+  .carousel__navigation-button:focus-visible,
+  .carousel__pagination-item:focus-visible {
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
   }
 `;
