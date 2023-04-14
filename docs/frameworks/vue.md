@@ -58,7 +58,7 @@ Now you can start using Shoelace components in your app!
 
 ### QR code generator example
 
-```vue
+```html
 <template>
   <div class="container">
     <h1>QR code generator</h1>
@@ -70,22 +70,22 @@ Now you can start using Shoelace components in your app!
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import '@shoelace-style/shoelace/dist/components/qr-code/qr-code.js';
-import '@shoelace-style/shoelace/dist/components/input/input.js';
+  import { ref } from 'vue';
+  import '@shoelace-style/shoelace/dist/components/qr-code/qr-code.js';
+  import '@shoelace-style/shoelace/dist/components/input/input.js';
 
-const qrCode = ref();
+  const qrCode = ref();
 </script>
 
 <style>
-.container {
-  max-width: 400px;
-  margin: 0 auto;
-}
+  .container {
+    max-width: 400px;
+    margin: 0 auto;
+  }
 
-sl-input {
-  margin: var(--sl-spacing-large) 0;
-}
+  sl-input {
+    margin: var(--sl-spacing-large) 0;
+  }
 </style>
 ```
 
@@ -98,3 +98,18 @@ When binding complex data such as objects and arrays, use the `.prop` modifier t
 ```
 
 ?> Are you using Shoelace with Vue? [Help us improve this page!](https://github.com/shoelace-style/shoelace/blob/next/docs/frameworks/vue.md)
+
+### Slots
+
+To use Shoelace components with slots, follow the Vue documentation on using [slots with custom elements](https://vuejs.org/guide/extras/web-components.html#building-custom-elements-with-vue).
+
+Here is an example:
+
+```html
+<sl-drawer label="Drawer" placement="start" class="drawer-placement-start" :open="drawerIsOpen">
+  This drawer slides in from the start.
+  <div slot="footer">
+    <sl-button variant="primary" @click=" drawerIsOpen = false">Close</sl-button>
+  </div>
+</sl-drawer>
+```

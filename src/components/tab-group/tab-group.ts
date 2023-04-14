@@ -70,6 +70,11 @@ export default class SlTabGroup extends ShoelaceElement {
   @property({ attribute: 'no-scroll-controls', type: Boolean }) noScrollControls = false;
 
   connectedCallback() {
+    const whenAllDefined = Promise.allSettled([
+      customElements.whenDefined('sl-tab'),
+      customElements.whenDefined('sl-tab-panel')
+    ]);
+
     super.connectedCallback();
 
     this.resizeObserver = new ResizeObserver(() => {
@@ -89,20 +94,24 @@ export default class SlTabGroup extends ShoelaceElement {
       }
     });
 
+    // After the first update...
     this.updateComplete.then(() => {
       this.syncTabsAndPanels();
       this.mutationObserver.observe(this, { attributes: true, childList: true, subtree: true });
       this.resizeObserver.observe(this.nav);
 
-      // Set initial tab state when the tabs first become visible
-      const intersectionObserver = new IntersectionObserver((entries, observer) => {
-        if (entries[0].intersectionRatio > 0) {
-          this.setAriaLabels();
-          this.setActiveTab(this.getActiveTab() ?? this.tabs[0], { emitEvents: false });
-          observer.unobserve(entries[0].target);
-        }
+      // Wait for tabs and tab panels to be registered
+      whenAllDefined.then(() => {
+        // Set initial tab state when the tabs become visible
+        const intersectionObserver = new IntersectionObserver((entries, observer) => {
+          if (entries[0].intersectionRatio > 0) {
+            this.setAriaLabels();
+            this.setActiveTab(this.getActiveTab() ?? this.tabs[0], { emitEvents: false });
+            observer.unobserve(entries[0].target);
+          }
+        });
+        intersectionObserver.observe(this.tabGroup);
       });
-      intersectionObserver.observe(this.tabGroup);
     });
   }
 

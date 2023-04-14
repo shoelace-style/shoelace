@@ -41,6 +41,38 @@ import { AppComponent } from './app.component';
 export class AppModule {}
 ```
 
+## Reference Shoelace components in your Angular component code
+
+```js
+import { SlDrawer } from '@shoelace-style/shoelace';
+
+@Component({
+  selector: 'app-drawer-example',
+  template: '<div id="page"><button (click)="showDrawer()">Show drawer</button><sl-drawer #drawer label="Drawer" class="drawer-focus" style="--size: 50vw"><p>Drawer content</p></sl-drawer></div>'
+})
+export class DrawerExampleComponent implements OnInit {
+
+  // use @ViewChild to get a reference to the #drawer element within component template
+  @ViewChild('drawer')
+  drawer?: ElementRef<SlDrawer>;
+
+  ...
+
+  constructor(...) {
+  }
+
+  ngOnInit() {
+  }
+
+  ...
+
+  showDrawer() {
+    // use nativeElement to access Shoelace components
+    this.drawer?.nativeElement.show();
+  }
+}
+```
+
 Now you can start using Shoelace components in your app!
 
 ?> Are you using Shoelace with Angular? [Help us improve this page!](https://github.com/shoelace-style/shoelace/blob/next/docs/frameworks/angular.md)

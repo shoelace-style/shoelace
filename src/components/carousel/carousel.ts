@@ -18,7 +18,7 @@ import type { CSSResultGroup } from 'lit';
 /**
  * @summary Carousels display an arbitrary number of content slides along a horizontal or vertical axis.
  *
- * @since 2.0
+ * @since 2.2
  * @status experimental
  *
  * @dependency sl-icon
@@ -239,7 +239,7 @@ export default class SlCarousel extends ShoelaceElement {
 
       slide.classList.remove('--in-view');
       slide.classList.remove('--is-active');
-      slide.setAttribute('aria-label', this.localize.term('slide_num', index + 1));
+      slide.setAttribute('aria-label', this.localize.term('slideNum', index + 1));
 
       if (slide.hasAttribute('data-clone')) {
         slide.remove();
@@ -344,7 +344,7 @@ export default class SlCarousel extends ShoelaceElement {
    * @param behavior - The behavior used for scrolling.
    */
   goToSlide(index: number, behavior: ScrollBehavior = 'smooth') {
-    const { slidesPerPage, loop } = this;
+    const { slidesPerPage, loop, scrollContainer } = this;
 
     const slides = this.getSlides();
     const slidesWithClones = this.getSlides({ excludeClones: false });
@@ -358,9 +358,12 @@ export default class SlCarousel extends ShoelaceElement {
     const nextSlideIndex = clamp(index + (loop ? slidesPerPage : 0), 0, slidesWithClones.length - 1);
     const nextSlide = slidesWithClones[nextSlideIndex];
 
-    this.scrollContainer.scrollTo({
-      left: nextSlide.offsetLeft,
-      top: nextSlide.offsetTop,
+    const scrollContainerRect = scrollContainer.getBoundingClientRect();
+    const nextSlideRect = nextSlide.getBoundingClientRect();
+
+    scrollContainer.scrollTo({
+      left: nextSlideRect.left - scrollContainerRect.left + scrollContainer.scrollLeft,
+      top: nextSlideRect.top - scrollContainerRect.top + scrollContainer.scrollTop,
       behavior: prefersReducedMotion() ? 'auto' : behavior
     });
   }

@@ -28,7 +28,7 @@ const translation: Translation = {
   scrollToStart: 'Zum Anfang scrollen',
   selectAColorFromTheScreen: 'Wähle eine Farbe vom Bildschirm',
   showPassword: 'Passwort anzeigen',
-  slide_num: slide => `Gleiten ${slide}`,
+  slideNum: slide => `Gleiten ${slide}`,
   toggleColorFormat: 'Farbformat umschalten'
 };
 

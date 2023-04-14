@@ -28,7 +28,7 @@ const translation: Translation = {
   scrollToStart: 'גלול להתחלה',
   selectAColorFromTheScreen: 'בחור צבע מהמסך',
   showPassword: 'הראה סיסמה',
-  slide_num: slide => `שקופית ${slide}`,
+  slideNum: slide => `שקופית ${slide}`,
   toggleColorFormat: 'החלף פורמט צבע'
 };
 

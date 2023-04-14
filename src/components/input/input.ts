@@ -190,13 +190,20 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
    */
   @property() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
+  //
+  // NOTE: We use an in-memory input for these getters/setters instead of the one in the template because the properties
+  // can be set before the component is rendered.
+  //
+
   /** Gets or sets the current value as a `Date` object. Returns `null` if the value can't be converted. */
   get valueAsDate() {
-    return this.input?.valueAsDate ?? null;
+    const input = document.createElement('input');
+    input.type = 'date';
+    input.value = this.value;
+    return input.valueAsDate;
   }
 
   set valueAsDate(newValue: Date | null) {
-    // We use an in-memory input instead of the one in the template because the property can be set before render
     const input = document.createElement('input');
     input.type = 'date';
     input.valueAsDate = newValue;
@@ -205,11 +212,13 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
 
   /** Gets or sets the current value as a number. Returns `NaN` if the value can't be converted. */
   get valueAsNumber() {
-    return this.input?.valueAsNumber ?? parseFloat(this.value);
+    const input = document.createElement('input');
+    input.type = 'number';
+    input.value = this.value;
+    return input.valueAsNumber;
   }
 
   set valueAsNumber(newValue: number) {
-    // We use an in-memory input instead of the one in the template because the property can be set before render
     const input = document.createElement('input');
     input.type = 'number';
     input.valueAsNumber = newValue;

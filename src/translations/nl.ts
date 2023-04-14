@@ -28,7 +28,7 @@ const translation: Translation = {
   scrollToStart: 'Scroll naar begin',
   selectAColorFromTheScreen: 'Selecteer een kleur van het scherm',
   showPassword: 'Laat wachtwoord zien',
-  slide_num: slide => `Schuif ${slide}`,
+  slideNum: slide => `Schuif ${slide}`,
   toggleColorFormat: 'Wissel kleurnotatie'
 };
 

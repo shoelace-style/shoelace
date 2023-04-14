@@ -28,7 +28,7 @@ const translation: Translation = {
   scrollToStart: 'Başa kay',
   selectAColorFromTheScreen: 'Ekrandan bir renk seçin',
   showPassword: 'Şifreyi göster',
-  slide_num: slide => `Slayt ${slide}`,
+  slideNum: slide => `Slayt ${slide}`,
   toggleColorFormat: 'Renk biçimini değiştir'
 };
 

@@ -51,7 +51,10 @@ export default class SlRadioButton extends ShoelaceElement {
   /** Disables the radio button. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /** The radio button's size. */
+  /**
+   * The radio button's size. When used inside a radio group, the size will be determined by the radio group's size so
+   * this attribute can typically be omitted.
+   */
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Draws a pill-style radio button with rounded edges. */

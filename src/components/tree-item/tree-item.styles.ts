@@ -26,7 +26,6 @@ export default css`
     color: var(--sl-color-neutral-700);
     cursor: pointer;
     user-select: none;
-    white-space: nowrap;
   }
 
   .tree-item__checkbox {
@@ -39,7 +38,7 @@ export default css`
     font-family: var(--sl-font-sans);
     font-size: var(--sl-font-size-medium);
     font-weight: var(--sl-font-weight-normal);
-    line-height: var(--sl-line-height-normal);
+    line-height: var(--sl-line-height-dense);
     letter-spacing: var(--sl-letter-spacing-normal);
   }
 
@@ -63,6 +62,7 @@ export default css`
     padding: var(--sl-spacing-x-small);
     width: 1rem;
     height: 1rem;
+    flex-shrink: 0;
     cursor: pointer;
   }
 
