@@ -6,12 +6,12 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
-## Next
+## 2.4.0
 
 - Added the `discover()` function to the experimental autoloader's exports [#1236](https://github.com/shoelace-style/shoelace/pull/1236)
-- Added more tests for `<sl-animated-image>` [#1246](https://github.com/shoelace-style/shoelace/pull/1246)
-- Added tests for `<sl-animation>` [#1274](https://github.com/shoelace-style/shoelace/pull/1274)
 - Added the `size` attribute to `<sl-radio-group>` so labels and controls will be sized consistently [#1301](https://github.com/shoelace-style/shoelace/issues/1301)
+- Added tests for `<sl-animated-image>` [#1246](https://github.com/shoelace-style/shoelace/pull/1246)
+- Added tests for `<sl-animation>` [#1274](https://github.com/shoelace-style/shoelace/pull/1274)
 - Fixed a bug in `<sl-tree-item>` that prevented long labels from wrapping [#1243](https://github.com/shoelace-style/shoelace/issues/1243)
 - Fixed a bug in `<sl-tree-item>` that caused labels to be misaligned when text wraps [#1244](https://github.com/shoelace-style/shoelace/issues/1244)
 - Fixed an incorrect CSS property value in `<sl-checkbox>` [#1272](https://github.com/shoelace-style/shoelace/pull/1272)
