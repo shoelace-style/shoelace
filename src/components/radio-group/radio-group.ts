@@ -71,6 +71,9 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
   /** The current value of the radio group, submitted as a name/value pair with form data. */
   @property({ reflect: true }) value = '';
 
+  /** The radio group's size. This size will be applied to all child radios and radio buttons. */
+  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
+
   /**
    * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
    * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
@@ -199,7 +202,12 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
   private handleSlotChange() {
     if (customElements.get('sl-radio') || customElements.get('sl-radio-button')) {
       const radios = this.getAllRadios();
-      radios.forEach(radio => (radio.checked = radio.value === this.value));
+
+      // Sync the checked state and size
+      radios.forEach(radio => {
+        radio.checked = radio.value === this.value;
+        radio.size = this.size;
+      });
 
       this.hasButtonGroup = radios.some(radio => radio.tagName.toLowerCase() === 'sl-radio-button');
 
@@ -312,7 +320,9 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
         part="form-control"
         class=${classMap({
           'form-control': true,
-          'form-control--medium': true,
+          'form-control--small': this.size === 'small',
+          'form-control--medium': this.size === 'medium',
+          'form-control--large': this.size === 'large',
           'form-control--radio-group': true,
           'form-control--has-label': hasLabel,
           'form-control--has-help-text': hasHelpText

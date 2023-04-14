@@ -36,7 +36,10 @@ export default class SlRadio extends ShoelaceElement {
   /** The radio's value. When selected, the radio group will receive this value. */
   @property() value: string;
 
-  /** The radio's size. */
+  /**
+   * The radio's size. When used inside a radio group, the size will be determined by the radio group's size so this
+   * attribute can typically be omitted.
+   */
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Disables the radio. */
