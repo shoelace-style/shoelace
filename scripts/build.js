@@ -19,7 +19,7 @@ const { bundle, copydir, dir, serve, types } = commandLineArgs([
 ]);
 
 const outdir = dir;
-const cdnDir = "cdn"
+const cdnDir = 'cdn';
 
 deleteSync(outdir);
 deleteSync(cdnDir);
@@ -176,7 +176,7 @@ fs.mkdirSync(cdnDir, { recursive: true });
     // Rebuild and reload when source files change
     bs.watch(['src/**/!(*.test).*']).on('change', async filename => {
       console.log(`Source file changed - ${filename}`);
-      [bundledResult, unbundledResult].forEach((build) => {
+      [bundledResult, unbundledResult].forEach(build => {
         // Rebuild and reload
         build
           .rebuild()
@@ -200,7 +200,7 @@ fs.mkdirSync(cdnDir, { recursive: true });
             bs.reload();
           })
           .catch(err => console.error(chalk.red(err)));
-      })
+      });
     });
 
     // Reload without rebuilding when the docs change
@@ -214,7 +214,7 @@ fs.mkdirSync(cdnDir, { recursive: true });
 
   // Cleanup on exit
   process.on('SIGTERM', () => {
-    bundledResult.rebuild.dispose()
-    unbundledResult.rebuild.dispose()
+    bundledResult.rebuild.dispose();
+    unbundledResult.rebuild.dispose();
   });
 })();
