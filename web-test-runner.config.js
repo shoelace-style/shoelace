@@ -26,7 +26,9 @@ export default {
   ],
   testRunnerHtml: testFramework => `
     <html lang="en-US">
-      <head></head>
+      <head>
+        <script>window.process = {env: { NODE_ENV: "production" }};</script>
+      </head>
       <body>
         <link rel="stylesheet" href="dist/themes/light.css">
         <script type="module" src="dist/shoelace.js"></script>
