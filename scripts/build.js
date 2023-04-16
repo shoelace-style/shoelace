@@ -19,9 +19,12 @@ const { bundle, copydir, dir, serve, types } = commandLineArgs([
 ]);
 
 const outdir = dir;
+const cdnDir = "cdn"
 
 deleteSync(outdir);
+deleteSync(cdnDir);
 fs.mkdirSync(outdir, { recursive: true });
+fs.mkdirSync(cdnDir, { recursive: true });
 
 (async () => {
   try {
@@ -31,9 +34,18 @@ fs.mkdirSync(outdir, { recursive: true });
     execSync(`node scripts/make-web-types.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-themes.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-icons.js --outdir "${outdir}"`, { stdio: 'inherit' });
+
+    execSync(`node scripts/make-metadata.js --outdir "${cdnDir}"`, { stdio: 'inherit' });
+    execSync(`node scripts/make-search.js --outdir "${cdnDir}"`, { stdio: 'inherit' });
+    execSync(`node scripts/make-react.js --outdir "${cdnDir}"`, { stdio: 'inherit' });
+    execSync(`node scripts/make-web-types.js --outdir "${cdnDir}"`, { stdio: 'inherit' });
+    execSync(`node scripts/make-themes.js --outdir "${cdnDir}"`, { stdio: 'inherit' });
+    execSync(`node scripts/make-icons.js --outdir "${cdnDir}"`, { stdio: 'inherit' });
+
     if (types) {
       console.log('Running the TypeScript compiler...');
       execSync(`tsc --project ./tsconfig.prod.json --outdir "${outdir}"`, { stdio: 'inherit' });
+      execSync(`tsc --project ./tsconfig.prod.json --outdir "${cdnDir}"`, { stdio: 'inherit' });
     }
   } catch (err) {
     console.error(chalk.red(err));
@@ -63,7 +75,6 @@ fs.mkdirSync(outdir, { recursive: true });
       // React wrappers
       ...(await globby('./src/react/**/*.ts'))
     ],
-    outdir,
     chunkNames: 'chunks/[name].[hash]',
     incremental: serve,
     define: {
@@ -71,6 +82,7 @@ fs.mkdirSync(outdir, { recursive: true });
       'process.env.NODE_ENV': '"production"'
     },
     bundle: true,
+    outdir: cdnDir,
     //
     // We don't bundle certain dependencies in the unbundled build. This ensures we ship bare module specifiers,
     // allowing end users to better optimize when using a bundler. (Only packages that ship ESM can be external.)
@@ -88,25 +100,26 @@ fs.mkdirSync(outdir, { recursive: true });
   const unbundledConfig = {
     ...bundledConfig,
     // Goes to /dist/npm
-    outdir: path.join(outdir, 'npm'),
+    outdir,
     target: 'esnext',
     external: [...Object.keys(packageJSON.dependencies || {}), ...Object.keys(packageJSON.peerDependencies || {})]
   };
 
-  await esbuild.build(unbundledConfig).catch(err => {
+  const unbundledResult = await esbuild.build(unbundledConfig).catch(err => {
     console.error(chalk.red(err));
-    console.error(chalk.red('\nFailed to build unbundledConfig'));
+    console.error(chalk.red('\nFailed to build NPM (unbundled) build'));
     process.exit(1);
   });
-  const buildResult = await esbuild.build(bundledConfig).catch(err => {
+  const bundledResult = await esbuild.build(bundledConfig).catch(err => {
     console.error(chalk.red(err));
+    console.error(chalk.red('\nFailed to build CDN (bundled) build'));
     process.exit(1);
   });
 
   // Copy the build output to an additional directory
   if (copydir) {
     deleteSync(copydir);
-    copy(outdir, copydir);
+    copy(cdnDir, copydir);
   }
 
   console.log(chalk.green(`The build has been generated at ${outdir} 📦\n`));
@@ -133,7 +146,7 @@ fs.mkdirSync(outdir, { recursive: true });
       server: {
         baseDir: 'docs',
         routes: {
-          '/dist': './dist'
+          '/dist': './cdn'
         }
       },
       //
@@ -163,37 +176,45 @@ fs.mkdirSync(outdir, { recursive: true });
     // Rebuild and reload when source files change
     bs.watch(['src/**/!(*.test).*']).on('change', async filename => {
       console.log(`Source file changed - ${filename}`);
-      buildResult
+      [bundledResult, unbundledResult].forEach((build) => {
         // Rebuild and reload
-        .rebuild()
-        .then(() => {
-          // Rebuild stylesheets when a theme file changes
-          if (/^src\/themes/.test(filename)) {
-            execSync(`node scripts/make-themes.js --outdir "${outdir}"`, { stdio: 'inherit' });
-          }
-        })
-        .then(() => {
-          // Skip metadata when styles are changed
-          if (/(\.css|\.styles\.ts)$/.test(filename)) {
-            return;
-          }
+        build
+          .rebuild()
+          .then(() => {
+            // Rebuild stylesheets when a theme file changes
+            if (/^src\/themes/.test(filename)) {
+              execSync(`node scripts/make-themes.js --outdir "${outdir}"`, { stdio: 'inherit' });
+              execSync(`node scripts/make-themes.js --outdir "${cdnDir}"`, { stdio: 'inherit' });
+            }
+          })
+          .then(() => {
+            // Skip metadata when styles are changed
+            if (/(\.css|\.styles\.ts)$/.test(filename)) {
+              return;
+            }
 
-          execSync(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
-        })
-        .then(() => {
-          bs.reload();
-        })
-        .catch(err => console.error(chalk.red(err)));
+            execSync(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
+            execSync(`node scripts/make-metadata.js --outdir "${cdnDir}"`, { stdio: 'inherit' });
+          })
+          .then(() => {
+            bs.reload();
+          })
+          .catch(err => console.error(chalk.red(err)));
+      })
     });
 
     // Reload without rebuilding when the docs change
     bs.watch(['docs/**/*.md']).on('change', filename => {
       console.log(`Docs file changed - ${filename}`);
       execSync(`node scripts/make-search.js --outdir "${outdir}"`, { stdio: 'inherit' });
+      execSync(`node scripts/make-search.js --outdir "${cdnDir}"`, { stdio: 'inherit' });
       bs.reload();
     });
   }
 
   // Cleanup on exit
-  process.on('SIGTERM', () => buildResult.rebuild.dispose());
+  process.on('SIGTERM', () => {
+    bundledResult.rebuild.dispose()
+    unbundledResult.rebuild.dispose()
+  });
 })();
