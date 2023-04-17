@@ -52,7 +52,7 @@ import '@shoelace-style/shoelace/dist/themes/dark.css'; // Optional dark mode
 you actually need in the actual application.
 
 You can also import the CSS inside of a `.css` file if you prefer to maintain a separate CSS entrypoint.
-independently.
+Such as with CssBundling-Rails.
 
 ```css
 // application.css
