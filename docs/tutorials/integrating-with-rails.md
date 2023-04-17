@@ -22,7 +22,7 @@ When using Shoelace, there are mostly three things that need to be served to the
 
 Depending on the JS bundler you are using, you may need to do some additional configuration. However, the basic steps
 should be just about the same. Also, it is recommended to read to the [Bundling section in the Installation](/getting-started/installation?id=bundling)
-to understand how Shoalace can be set up with a JS bundler in general. In this tutorial, we will assume that your Rails
+to understand how Shoelace can be set up with a JS bundler in general. In this tutorial, we will assume that your Rails app
 is already set up with a JS bundler that supports importing CSS files directly (e.g. Turbopack, esbuild, Vite).
 
 To get started using Shoelace with Rails, the following package must be installed.
