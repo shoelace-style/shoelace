@@ -31,7 +31,7 @@ To get started using Shoelace with Rails, the following package must be installe
 yarn add @shoelace-style/shoelace
 ```
 
-This is required regardless of the JS bunlder you are using.
+This is required regardless of the JS bundler you are using.
 
 ### Javascript & CSS
 
