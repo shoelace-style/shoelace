@@ -42,7 +42,7 @@ entrypoint JS file (generally `application.js`).
 // application.js
 import '@shoelace-style/shoelace';
 
-// You can also add these two if the JS bundler of your choise supports importing CSS files.
+// You can also add these two if the JS bundler of your choice supports importing CSS files.
 import '@shoelace-style/shoelace/dist/themes/light.css';
 import '@shoelace-style/shoelace/dist/themes/dark.css'; // Optional dark mode
 ```
