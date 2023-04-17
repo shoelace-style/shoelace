@@ -51,7 +51,7 @@ import '@shoelace-style/shoelace/dist/themes/dark.css'; // Optional dark mode
 `@shoelace-style/shoelace` may result in a larger bundle size than necessary. Consider importing only the components
 you actually need in the actual application.
 
-You can also import the CSS if you prefer to maintain a separate entrypoint CSS file that is complied
+You can also import the CSS inside of a `.css` file if you prefer to maintain a separate CSS entrypoint.
 independently.
 
 ```css
