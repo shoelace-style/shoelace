@@ -47,7 +47,7 @@ import '@shoelace-style/shoelace/dist/themes/light.css';
 import '@shoelace-style/shoelace/dist/themes/dark.css'; // Optional dark mode
 ```
 
-!> In this example, the entire dependencies are imported for simplisity. However, importing directly from
+!> In this example, all Shoelace components are imported for simplicity. However, importing directly from
 `@shoelace-style/shoelace` may result in a larger bundle size than necessary. Consider importing only the components
 you actually need in the actual application.
 
