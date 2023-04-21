@@ -252,9 +252,6 @@ export default class SlRating extends ShoelaceElement {
         <span class="rating__symbols">
           ${counter.map(index => {
             if (displayValue > index && displayValue < index + 1) {
-              const clipLeft = styleMap({ clipPath: `inset(0 ${100 - ((displayValue - index) / 1) * 100}% 0 0)` });
-              const clipRight = styleMap({ clipPath: `inset(0 0 0 ${100 - ((displayValue - index) / 1) * 100}%)` });
-
               // Users can click the current value to clear the rating. When this happens, we set this.isHovering to
               // false to prevent the hover state from confusing them as they move the mouse out of the control. This
               // extra mouseenter will reinstate it if they happen to mouse over an adjacent symbol.
@@ -268,8 +265,23 @@ export default class SlRating extends ShoelaceElement {
                   role="presentation"
                   @mouseenter=${this.handleMouseEnter}
                 >
-                  <div style=${isRtl ? clipLeft : clipRight}>${unsafeHTML(this.getSymbol(index + 1))}</div>
-                  <div class="rating__partial--filled" style=${isRtl ? clipRight : clipLeft}>
+                  <div
+                    style=${styleMap({
+                      clipPath: isRtl
+                        ? `inset(0 ${(displayValue - index) * 100}% 0 0)`
+                        : `inset(0 0 0 ${(displayValue - index) * 100}%)`
+                    })}
+                  >
+                    ${unsafeHTML(this.getSymbol(index + 1))}
+                  </div>
+                  <div
+                    class="rating__partial--filled"
+                    style=${styleMap({
+                      clipPath: isRtl
+                        ? `inset(0 0 0 ${100 - (displayValue - index) * 100}%)`
+                        : `inset(0 ${100 - (displayValue - index) * 100}% 0 0)`
+                    })}
+                  >
                     ${unsafeHTML(this.getSymbol(index + 1))}
                   </div>
                 </span>
