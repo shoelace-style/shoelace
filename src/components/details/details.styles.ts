@@ -23,7 +23,7 @@ export default css`
     display: flex;
     align-items: center;
     border-radius: inherit;
-    padding: var(--ts-spacing-large);
+    padding: var(--sl-spacing-large);
     user-select: none;
     cursor: pointer;
   }
@@ -78,7 +78,7 @@ export default css`
 
   .details__content {
     display: block;
-    padding: var(--ts-spacing-large);
-    padding-top: var(--ts-spacing-small);
+    padding: var(--sl-spacing-large);
+    padding-top: 0.75rem;
   }
 `;

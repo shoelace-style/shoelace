@@ -352,10 +352,6 @@
   --ts-shadow-x-large: 0 25px 50px -12px rgb(0 0 0 / 0.25);
   /* For modals */
   /* Spacing */
-  --ts-spacing-small: 0.75rem;
-  /* 12px */
-  --ts-spacing-medium: 1rem;
-  /* 12px */
   --ts-spacing-large: 1.5rem;
   /* 24px */
   --ts-spacing-2x-large: 2rem;

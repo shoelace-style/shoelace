@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.1
+
+- Increase padding for details
+- Fix details example for alternate icons
+
 ## 1.1.0
 
 - Checkbox
