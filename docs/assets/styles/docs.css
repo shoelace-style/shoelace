@@ -287,7 +287,7 @@ strong {
 .markdown-section code {
   font-family: var(--sl-font-mono);
   font-size: 87.5%;
-  background-color: var(--sl-color-neutral-50);
+  background-color: var(--sl-color-neutral-200);
   border-radius: var(--sl-border-radius-small);
   padding: 2px 4px;
 }

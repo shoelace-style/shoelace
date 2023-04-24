@@ -66,3 +66,23 @@ The above setup is far from ideal. We're working on improving that, but in the m
 ```
 
 This at least gets you the ability to run `sl-dev` and see your latest changes. In the future, we may add an additional script to Shoelace to run the production build and restart the yarn watchers.
+
+## Cutting a new release
+
+If you're an authorized contributor, you can cut a new version following the steps below. Otherwise, please just make a PR.
+
+1. Make sure everything is working locally, including tests, and run `npm run prettier`
+1. Bump the version number in `package.json` using semantic versioning
+1. Add an entry to the [changelog](/teamshares/changelog)
+1. Commit to `next` and push
+1. Publish a release on NPM
+   1. First you'll need [an NPM account](https://docs.npmjs.com/creating-a-new-npm-user-account)
+   1. Then you'll need to be added as a [contributor to the NPM org](https://www.npmjs.com/settings/teamshares/members) by one of the admins (Daross or Adrian)
+   1. Once you've done that, you can `npm login`. You should only need to do this once.
+   1. To publish, you'll need an authenticator app such as Google Authenticator or Duo
+   1. Publish a release via `npm publish --access public`. This will require a OTP via the authenticator app
+1. On [Vercel](https://vercel.com/teamshares/shoelace), check that the docsite built correctly and then promote the latest preview build to production
+   1. You will need a [Vercel account](https://vercel.com/new/teamshares) and may need to be added to the [Teamshares Vercel org](https://vercel.com/teams/teamshares/settings/members)
+1. On [GitHub](https://github.com/teamshares/shoelace/releases), create a new tagged release
+1. Verify that `shared-ui` has pulled in the latest changes (should happen automatically via `renovate`)
+1. Pull in the new version of `shared-ui` into your app. May need to run `yarn add https://github.com/teamshares/shared-ui.git#main` to get the `yarn.lock` to update.

@@ -1,7 +1,7 @@
 {
   "name": "@teamshares/shoelace",
   "description": "The Teamshares flavor of a forward-thinking library of web components.",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "upstreamVersion": "2.1.0",
   "homepage": "https://github.com/teamshares/shoelace",
   "author": "Cory LaViska",
@@ -22,7 +22,7 @@
     "./dist/react/*": "./dist/react/*",
     "./dist/translations/*": "./dist/translations/*",
     "./dist/styles": "./dist/styles/index.css",
-    "./tokens": "./dist/styles/tokens.css"
+    "./dist/styles/*": "./dist/styles/*"
   },
   "files": [
     "dist"

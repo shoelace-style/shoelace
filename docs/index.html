@@ -49,6 +49,20 @@
     />
 
     <script type="module" src="dist/shoelace.js"></script>
+    <script type="module">
+      import { registerIconLibrary } from '/dist/utilities/icon-library.js';
+
+      registerIconLibrary('fa-free', {
+        resolver: name => {
+          const filename = name.replace(/^fa[rbs]-/, '');
+          let folder = 'regular';
+          if (name.substring(0, 4) === 'fas-') folder = 'solid';
+          if (name.substring(0, 4) === 'fab-') folder = 'brands';
+          return `https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.3.0/svgs/${folder}/${filename}.svg`;
+        },
+        mutator: svg => svg.setAttribute('fill', 'currentColor')
+      });
+    </script>
   </head>
   <body data-shoelace="/dist/">
     <div id="app"></div>

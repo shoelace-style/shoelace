@@ -129,4 +129,47 @@ const App = () => (
 );
 ```
 
+## Contained
+
+Use the `contained` attribute to add a container around the radio.
+
+```html preview
+<sl-radio-group label="Select an option" name="a" value="3">
+  <sl-radio contained value="1">Option 1</sl-radio>
+  <sl-radio contained disabled value="2">Option 2</sl-radio>
+  <sl-radio contained value="3">
+    Option 3
+    <div slot="description">A short description about this option</div>
+  </sl-radio>
+</sl-radio-group>
+```
+
+```pug slim
+sl-radio-group label="Select an option" name="a" value="3"
+  sl-radio contained="true" value="1 Option 1
+  sl-radio contained="true" disabled="true" value="2 Option 2
+  sl-radio contained="true" value="3 Option 3
+    div slot="description" A short description about this option
+```
+
+```jsx react
+import { SlRadio } from '@teamshares/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <SlRadioGroup label="Select an option" name="a" value="3">
+      <SlRadio contained value="1">
+        Option 1
+      </SlRadio>
+      <SlRadio contained value="2" disabled>
+        Option 2
+      </SlRadio>
+      <SlRadio contained value="3">
+        Option 3<div slot="description">A short description about this option</div>
+      </SlRadio>
+    </SlRadioGroup>
+  </>
+);
+```
+
 [component-metadata:sl-radio]

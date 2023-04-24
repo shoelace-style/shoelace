@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.1.0
+
+- Checkbox
+  - Added `contained` modifier to wrap the checkbox in a container
+  - Added `description` slot to appear in smaller text below the `label`
+- Radio
+  - Added `contained` modifier to wrap the radio in a container
+  - Added `description` slot to appear in smaller text below the `label`
+
+## 1.0.7
+
+- Increase icon size for small buttons
+
+## 1.0.6
+
+- Another fix for exports / imports in shared-ui
+
+## 1.0.5
+
+- Minor, attempting to fix imports in `shared-ui`
+
 ## 1.0.4
 
 - Updated to upstream [2.1.0](/resources/changelog)

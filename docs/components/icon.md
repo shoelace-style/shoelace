@@ -10,12 +10,12 @@ Teamshare's version of Shoelace comes bundled with 292 icons courtesy of [Heroic
 
 All available icons in the `default` icon library (Heroicons) are shown below. Click or tap on any icon to copy its name, then you can use it in your HTML like this.
 
-```html
-<sl-icon name="icon-name-here"></sl-icon>
+```html preview
+<sl-icon name="academic-cap"></sl-icon>
 ```
 
 ```pug slim
-sl-icon name="icon-name-here"
+sl-icon name="academic-cap"
 ```
 
 <div class="icon-search">
@@ -32,6 +32,40 @@ sl-icon name="icon-name-here"
   <div class="icon-list"></div>
   <input type="text" class="icon-copy-input" aria-hidden="true" tabindex="-1">
 </div>
+
+## Font Awesome
+
+Teamshares has enabled the free version Font Awesome's icons, with plans to add the pro version soon. Use Font Awesome Free icons by setting `sl-icon`'s `library` attribute to `fa-free`.
+
+```html
+sl-icon library="fa-free" name="user"
+```
+
+For the time being, you can use the name of the icon without a prefix, e.g. `face-smile`. Search the Font Awesome site via the form input below.
+
+<div class="fa-search">
+  <sl-input class="fa-icon-search-input" placeholder="Search Font Awesome Free Icons" clearable>
+    <sl-icon slot="prefix" name="magnifying-glass"></sl-icon>
+  </sl-input>
+  <sl-button class="fa-icon-search-button">
+    Search
+    <sl-icon name="arrow-top-right-on-square" slot="suffix">
+</sl-button>
+</div>
+
+```html preview
+<sl-icon library="fa-free" name="face-smile"></sl-icon>
+```
+
+```pug slim
+sl-icon library="fa-free" name="face-smile"
+```
+
+```jsx react
+import { SlIcon } from '@teamshares/shoelace/dist/react';
+
+const App = () => <SlIcon library="fa-free" name="face-smile" label="Add to favorites" />;
+```
 
 ## Examples
 
@@ -227,40 +261,6 @@ import { SlIcon } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlIcon src="https://shoelace.style/assets/images/shoe.svg" style={{ fontSize: '8rem' }}></SlIcon>;
 ```
-
-## Icon Libraries
-
-You can register additional icons to use with the `<sl-icon>` component through icon libraries. Icon files can exist locally or on a CORS-enabled endpoint (e.g. a CDN). There is no limit to how many icon libraries you can register and there is no cost associated with registering them, as individual icons are only requested when they're used.
-
-Shoelace ships with two built-in icon libraries, `default` and `system`. The [default icon library](#customizing-the-default-library) contains all of the icons in the Bootstrap Icons project. The [system icon library](#customizing-the-system-library) contains only a small subset of icons that are used internally by Shoelace components.
-
-To register an additional icon library, use the `registerIconLibrary()` function that's exported from `utilities/icon-library.js`. At a minimum, you must provide a name and a resolver function. The resolver function translates an icon name to a URL where the corresponding SVG file exists. Refer to the examples below to better understand how it works.
-
-If necessary, a mutator function can be used to mutate the SVG element before rendering. This is necessary for some libraries due to the many possible ways SVGs are crafted. For example, icons should ideally inherit the current text color via `currentColor`, so you may need to apply `fill="currentColor` or `stroke="currentColor"` to the SVG element using this function.
-
-Here's an example that registers an icon library located in the `/assets/icons` directory.
-
-```html
-<script type="module">
-  import { registerIconLibrary } from '/dist/utilities/icon-library.js';
-
-  registerIconLibrary('my-icons', {
-    resolver: name => `/assets/icons/${name}.svg`,
-    mutator: svg => svg.setAttribute('fill', 'currentColor')
-  });
-</script>
-```
-
-To display an icon, set the `library` and `name` attributes of an `<sl-icon>` element.
-
-```html
-<!-- This will show the icon located at /assets/icons/smile.svg -->
-<sl-icon library="my-icons" name="smile"></sl-icon>
-```
-
-If an icon is used before registration occurs, it will be empty initially but shown when registered.
-
-The following examples demonstrate how to register a number of popular, open source icon libraries via CDN. Feel free to adapt the code as you see fit to use your own origin or naming conventions.
 
 <!--
 ### Boxicons
@@ -715,6 +715,8 @@ If you want to change the icons Shoelace uses internally, you can register an ic
       const loader = container.querySelector('.icon-loader');
       const list = container.querySelector('.icon-list');
       const queue = [];
+      const faIconSearchInput = document.querySelector('.fa-icon-search-input');
+      const faIconSearchButton = document.querySelector('.fa-icon-search-button');
       let inputTimeout;
 
       // Generate icons
@@ -771,6 +773,21 @@ If you want to change the icons Shoelace uses internally, you can register an ic
       select.addEventListener('sl-change', () => {
         list.setAttribute('data-type', select.value);
         localStorage.setItem('sl-icon:type', select.value);
+      });
+
+      const onFaSearch = () => {
+        const query = faIconSearchInput.value;
+        if (query) {
+          window.open(`https://fontawesome.com/search?q=${query}&o=r&m=free`)
+        }
+      }
+
+      // Search Font Awesome free
+      faIconSearchButton.addEventListener('click', onFaSearch);
+      faIconSearchInput.addEventListener('keyup', (e) => {
+        if (e.key === "Enter") {
+          onFaSearch();
+        }
       });
     });
 </script>
@@ -895,6 +912,17 @@ If you want to change the icons Shoelace uses internally, you can register an ic
     .icon-list {
       grid-template-columns: repeat(4, 1fr);
     }    
+  }
+
+  .fa-search {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .fa-icon-search-input {
+    flex: 1;
   }
 </style>
 
