@@ -60,11 +60,11 @@ export default css`
   }
 
   .details--open .details__summary-icon {
-    rotate: 180deg;
+    rotate: -180deg;
   }
 
   .details--open.details--rtl .details__summary-icon {
-    rotate: -180deg;
+    rotate: 180deg;
   }
 
   .details--open slot[name='expand-icon'],
