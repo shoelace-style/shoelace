@@ -584,6 +584,4 @@ By default, the toast stack is positioned at the top-right of the viewport. You 
 
 ?> By design, it is not possible to show toasts in more than one stack simultaneously. Such behavior is confusing and makes for a poor user experience.
 
-Extra line
-
 [component-metadata:sl-alert]
