@@ -64,8 +64,8 @@ Use the `expand-icon` and `collapse-icon` slots to change the expand and collaps
 
 ```html preview
 <sl-details summary="Toggle Me" class="custom-icons">
-  <sl-icon name="plus-square" slot="expand-icon"></sl-icon>
-  <sl-icon name="dash-square" slot="collapse-icon"></sl-icon>
+  <sl-icon name="plus" slot="expand-icon"></sl-icon>
+  <sl-icon name="minus" slot="collapse-icon"></sl-icon>
 
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
   aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -81,8 +81,8 @@ Use the `expand-icon` and `collapse-icon` slots to change the expand and collaps
 
 ```pug slim
 sl-details summary="Toggle Me" class="custom-icons"
-  sl-icon name="plus-square" slot="expand-icon"
-  sl-icon name="dash-square" slot="collapse-icon"
+  sl-icon name="plus" slot="expand-icon"
+  sl-icon name="minus" slot="collapse-icon"
   | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
   | aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
@@ -106,8 +106,8 @@ const css = `
 const App = () => (
   <>
     <SlDetails summary="Toggle Me" class="custom-icon">
-      <SlIcon name="plus-square" slot="expand-icon" />
-      <SlIcon name="dash-square" slot="collapse-icon" />
+      <SlIcon name="plus" slot="expand-icon" />
+      <SlIcon name="minus" slot="collapse-icon" />
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
       magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
       consequat.

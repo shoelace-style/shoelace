@@ -23,7 +23,7 @@ export default css`
     display: flex;
     align-items: center;
     border-radius: inherit;
-    padding: var(--sl-spacing-medium);
+    padding: var(--sl-spacing-large);
     user-select: none;
     cursor: pointer;
   }
@@ -60,11 +60,11 @@ export default css`
   }
 
   .details--open .details__summary-icon {
-    rotate: 90deg;
+    rotate: 180deg;
   }
 
   .details--open.details--rtl .details__summary-icon {
-    rotate: -90deg;
+    rotate: -180deg;
   }
 
   .details--open slot[name='expand-icon'],
@@ -78,6 +78,7 @@ export default css`
 
   .details__content {
     display: block;
-    padding: var(--sl-spacing-medium);
+    padding: var(--sl-spacing-large);
+    padding-top: 0.75rem;
   }
 `;
