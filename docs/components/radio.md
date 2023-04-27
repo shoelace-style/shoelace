@@ -80,12 +80,30 @@ const App = () => (
 
 ## Sizes
 
-Use the `size` attribute to change a radio's size.
+Add the `size` attribute to the [Radio Group](/components/radio-group) to change the size of the radios.
 
 ```html preview
-<sl-radio size="small">Small</sl-radio>
-<sl-radio size="medium">Medium</sl-radio>
-<sl-radio size="large">Large</sl-radio>
+<sl-radio-group label="Select an option" size="small" value="1">
+  <sl-radio value="1">Small 1</sl-radio>
+  <sl-radio value="2">Small 2</sl-radio>
+  <sl-radio value="3">Small 3</sl-radio>
+</sl-radio-group>
+
+<br />
+
+<sl-radio-group label="Select an option" size="medium" value="1">
+  <sl-radio value="1">Medium 1</sl-radio>
+  <sl-radio value="2">Medium 2</sl-radio>
+  <sl-radio value="3">Medium 3</sl-radio>
+</sl-radio-group>
+
+<br />
+
+<sl-radio-group label="Select an option" size="large" value="1">
+  <sl-radio value="1">Large 1</sl-radio>
+  <sl-radio value="2">Large 2</sl-radio>
+  <sl-radio value="3">Large 3</sl-radio>
+</sl-radio-group>
 ```
 
 ```jsx react
@@ -93,11 +111,27 @@ import { SlRadio } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
   <>
-    <SlRadio size="small">Small</SlRadio>
+    <SlRadioGroup size="small" value="1">
+      <SlRadio value="1">Small 1</SlRadio>
+      <SlRadio value="2">Small 2</SlRadio>
+      <SlRadio value="3">Small 3</SlRadio>
+    </SlRadioGroup>
+
     <br />
-    <SlRadio size="medium">Medium</SlRadio>
+
+    <SlRadioGroup size="medium" value="1">
+      <SlRadio value="1">Medium 1</SlRadio>
+      <SlRadio value="2">Medium 2</SlRadio>
+      <SlRadio value="3">Medium 3</SlRadio>
+    </SlRadioGroup>
+
     <br />
-    <SlRadio size="large">Large</SlRadio>
+
+    <SlRadioGroup size="large" value="1">
+      <SlRadio value="1">Large 1</SlRadio>
+      <SlRadio value="2">Large 2</SlRadio>
+      <SlRadio value="3">Large 3</SlRadio>
+    </SlRadioGroup>
   </>
 );
 ```
