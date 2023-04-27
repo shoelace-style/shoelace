@@ -78,29 +78,29 @@ const App = () => (
 
 ### Sizes
 
-Use the `size` attribute to change a radio button's size.
+Add the `size` attribute to the [Radio Group](/components/radio-group) to change the size of the radio buttons.
 
 ```html preview
-<sl-radio-group label="Select an option" name="a" value="1">
-  <sl-radio-button size="small" value="1">Option 1</sl-radio-button>
-  <sl-radio-button size="small" value="2">Option 2</sl-radio-button>
-  <sl-radio-button size="small" value="3">Option 3</sl-radio-button>
+<sl-radio-group label="Select an option" size="small" value="1">
+  <sl-radio-button value="1">Option 1</sl-radio-button>
+  <sl-radio-button value="2">Option 2</sl-radio-button>
+  <sl-radio-button value="3">Option 3</sl-radio-button>
 </sl-radio-group>
 
 <br />
 
-<sl-radio-group label="Select an option" name="a" value="1">
-  <sl-radio-button size="medium" value="1">Option 1</sl-radio-button>
-  <sl-radio-button size="medium" value="2">Option 2</sl-radio-button>
-  <sl-radio-button size="medium" value="3">Option 3</sl-radio-button>
+<sl-radio-group label="Select an option" size="medium" value="1">
+  <sl-radio-button value="1">Option 1</sl-radio-button>
+  <sl-radio-button value="2">Option 2</sl-radio-button>
+  <sl-radio-button value="3">Option 3</sl-radio-button>
 </sl-radio-group>
 
 <br />
 
-<sl-radio-group label="Select an option" name="a" value="1">
-  <sl-radio-button size="large" value="1">Option 1</sl-radio-button>
-  <sl-radio-button size="large" value="2">Option 2</sl-radio-button>
-  <sl-radio-button size="large" value="3">Option 3</sl-radio-button>
+<sl-radio-group label="Select an option" size="large" value="1">
+  <sl-radio-button value="1">Option 1</sl-radio-button>
+  <sl-radio-button value="2">Option 2</sl-radio-button>
+  <sl-radio-button value="3">Option 3</sl-radio-button>
 </sl-radio-group>
 ```
 
@@ -108,27 +108,29 @@ Use the `size` attribute to change a radio button's size.
 import { SlRadioButton, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
 
 const App = () => (
-  <SlRadioGroup label="Select an option" name="a" value="1">
-    <SlRadioButton size="small" value="1">Option 1</SlRadioButton>
-    <SlRadioButton size="small" value="2">Option 2</SlRadioButton>
-    <SlRadioButton size="small" value="3">Option 3</SlRadioButton>
-  </SlRadioGroup>
+  <>
+    <SlRadioGroup label="Select an option" size="small" value="1">
+      <SlRadioButton value="1">Option 1</SlRadioButton>
+      <SlRadioButton value="2">Option 2</SlRadioButton>
+      <SlRadioButton value="3">Option 3</SlRadioButton>
+    </SlRadioGroup>
 
-  <br />
+    <br />
 
-  <SlRadioGroup label="Select an option" name="a" value="1">
-    <SlRadioButton size="medium" value="1">Option 1</SlRadioButton>
-    <SlRadioButton size="medium" value="2">Option 2</SlRadioButton>
-    <SlRadioButton size="medium" value="3">Option 3</SlRadioButton>
-  </SlRadioGroup>
+    <SlRadioGroup label="Select an option" size="medium" value="1">
+      <SlRadioButton value="1">Option 1</SlRadioButton>
+      <SlRadioButton value="2">Option 2</SlRadioButton>
+      <SlRadioButton value="3">Option 3</SlRadioButton>
+    </SlRadioGroup>
 
-  <br />
+    <br />
 
-  <SlRadioGroup label="Select an option" name="a" value="1">
-    <SlRadioButton size="large" value="1">Option 1</SlRadioButton>
-    <SlRadioButton size="large" value="2">Option 2</SlRadioButton>
-    <SlRadioButton size="large" value="3">Option 3</SlRadioButton>
-  </SlRadioGroup>
+    <SlRadioGroup label="Select an option" size="large" value="1">
+      <SlRadioButton value="1">Option 1</SlRadioButton>
+      <SlRadioButton value="2">Option 2</SlRadioButton>
+      <SlRadioButton value="3">Option 3</SlRadioButton>
+    </SlRadioGroup>
+  </>
 );
 ```
 
