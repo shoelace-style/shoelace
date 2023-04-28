@@ -330,7 +330,7 @@
       // Add version
       const version = document.createElement('div');
       version.classList.add('sidebar-version');
-      version.textContent = `Version ${metadata.package.version} (Upstream: ${metadata.package.upstreamVersion})`;
+      version.textContent = `Version ${metadata.package.version} (Shoelace upstream: ${metadata.package.upstreamVersion})`;
       target.appendChild(version);
 
       // Store version for reuse
