@@ -148,7 +148,7 @@ const App = () => (
     <br />
 
     <SlAlert variant="danger" open>
-      <SlIcon slot="icon" name="exclamation-circle-solid" />
+      <SlIcon slot="icon" name="exclamation-circle" />
       <strong>Your account has been deleted</strong>
       <br />
       We are very sorry to see you go!
@@ -350,7 +350,7 @@ You should always use the `closable` attribute so users can dismiss the notifica
   </sl-alert>
 
   <sl-alert variant="danger" duration="3000" closable>
-    <sl-icon slot="icon" name="exclamation-circle-solid"></sl-icon>
+    <sl-icon slot="icon" name="exclamation-circle"></sl-icon>
     <strong>Your account has been deleted</strong><br />
     We are very sorry to see you go!
   </sl-alert>
@@ -396,7 +396,7 @@ div.alert-toast
     br
     | Please login again to continue.
   sl-alert variant="danger" duration="3000" closable="true"
-    sl-icon slot="icon" name="exclamation-circle-solid"
+    sl-icon slot="icon" name="exclamation-circle"
     strong Your account has been deleted
     br
     | We are very sorry to see you go!
@@ -478,7 +478,7 @@ const App = () => {
       </SlAlert>
 
       <SlAlert ref={danger} variant="danger" duration="3000" closable>
-        <SlIcon slot="icon" name="exclamation-circle-solid" />
+        <SlIcon slot="icon" name="exclamation-circle" />
         <strong>Your account has been deleted</strong>
         <br />
         We are very sorry to see you go!
