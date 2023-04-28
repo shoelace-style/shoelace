@@ -22,7 +22,7 @@
       <div slot="footer" style="margin: 0; padding: 0;">
         <sl-button
           variant="text"
-          href="https://app.pitch.com/app/presentation/1abf8c85-db06-4d4b-a4c5-71f0fb935ab1/e4229594-37e8-442e-baa1-bc8a8e5f598b"
+          href="https://www.notion.so/teamshares/Writing-and-Communicating-for-Teamshares-599d6c1c65474306aee5b69d0734d8ec?pvs=4"
           target="_blank">
            Open
            <sl-icon slot="suffix" name="arrow-top-right-on-square"></sl-icon>
