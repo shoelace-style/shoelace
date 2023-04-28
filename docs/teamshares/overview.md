@@ -10,12 +10,20 @@
       <sl-icon name="rectangle-group" style="font-size: 48px;"></sl-icon>
     </div>
     <p class="ts-heading-5 ts-text-default">UI components (Shoelace)</p>
-    <p class="ts-body-1 ts-text-subdued">Our UI components (and this doc site) are a customized fork of Shoelace, an open-source web component library by Cory LaViska.</p>
+    <p class="ts-body-1 ts-text-subdued">Our UI components and this doc site are a customized fork of <a href="http://shoelace.style" target="_blank">Shoelace</a>, an open-source web component library by Cory LaViska.</p>
     <ul>
     <li><a class="ts-text-link" href="#/components/button">Start with a component (Button) -></a></li>
     <li><a class="ts-text-link" href="#/teamshares/contributing">See how to contribute -></a></li>
-    <li><a class="ts-text-link" href="http://shoelace.style" target="_blank">Learn more about Shoelace <sl-icon name="arrow-top-right-on-square"></sl-icon></a></li>
     </ul>
+    <sl-button
+    size="small"
+    variant="primary"
+    outline
+    href="http://shoelace.style"
+    target="_blank">
+      Learn more about Shoelace
+    <sl-icon slot="suffix" name="arrow-top-right-on-square"></sl-icon>
+    </sl-button>
   </sl-card>
   <sl-card class="card-basic">
     <div class="icon-circle">
@@ -49,4 +57,3 @@
     </ul>
   </sl-card>
 </div>
-<!-- <p>The content here is evolving. Keep the conversation going #shoelace channel. Tips - search. Shoelace.</p> -->
