@@ -12,6 +12,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug where changing the size of `<sl-radio-group>` wouldn't update the size of child elements
 - Improved `<sl-button>` so it can accept children of variable heights [#1317](https://github.com/shoelace-style/shoelace/pull/1317)
 - Improved the docs to more clearly explain sizing radios and radio buttons
+- Improved the performance of `<sl-rating>` by partially rendering unseen icons [#1310](https://github.com/shoelace-style/shoelace/pull/1310)
 
 ## 2.4.0
 
