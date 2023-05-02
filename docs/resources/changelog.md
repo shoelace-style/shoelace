@@ -10,6 +10,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 - Added the `checkbox` part and related exported parts to `<sl-tree-item>` so you can target it with CSS [#1318](https://github.com/shoelace-style/shoelace/discussions/1318)
 - Fixed a bug where changing the size of `<sl-radio-group>` wouldn't update the size of child elements
+- Improved `<sl-button>` so it can accept children of variable heights [#1317](https://github.com/shoelace-style/shoelace/pull/1317)
 - Improved the docs to more clearly explain sizing radios and radio buttons
 
 ## 2.4.0
