@@ -344,21 +344,24 @@ export default css`
 
   .button--small {
     font-size: var(--sl-button-font-size-small);
-    height: var(--sl-input-height-small);
+    height: auto;
+    min-height: var(--sl-input-height-small);
     line-height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
     border-radius: var(--sl-input-border-radius-small);
   }
 
   .button--medium {
     font-size: var(--sl-button-font-size-medium);
-    height: var(--sl-input-height-medium);
+    min-height: var(--sl-input-height-medium);
+    height: auto;
     line-height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
     border-radius: var(--sl-input-border-radius-medium);
   }
 
   .button--large {
     font-size: var(--sl-button-font-size-large);
-    height: var(--sl-input-height-large);
+    min-height: var(--sl-input-height-large);
+    height: auto;
     line-height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
     border-radius: var(--sl-input-border-radius-large);
   }
