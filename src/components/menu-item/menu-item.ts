@@ -25,6 +25,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart prefix - The prefix container.
  * @csspart label - The menu item label.
  * @csspart suffix - The suffix container.
+ * @csspart submenu-icon - The submenu icon, visible only when the menu item has a submenu (not yet implemented).
  */
 @customElement('sl-menu-item')
 export default class SlMenuItem extends ShoelaceElement {
@@ -141,7 +142,7 @@ export default class SlMenuItem extends ShoelaceElement {
 
         <slot name="suffix" part="suffix" class="menu-item__suffix"></slot>
 
-        <span class="menu-item__chevron">
+        <span part="submenu-icon" class="menu-item__chevron">
           <sl-icon name="chevron-right" library="system" aria-hidden="true"></sl-icon>
         </span>
       </div>
