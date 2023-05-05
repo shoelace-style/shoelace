@@ -1,11 +1,14 @@
 - Getting Started
 
   - [Overview](/)
+  - [Installation](/getting-started/installation)
+  - [Usage](/getting-started/usage)
   - [Contributing](/teamshares/contributing)
   - [Recipe Book](/teamshares/recipes)
   - [Changelog](/teamshares/changelog)
 
 - Teamshares Brand
+
   - [Logo & Brand Assets](/teamshares/logo-assets)
   - [Content Guidelines](/teamshares/content)
 

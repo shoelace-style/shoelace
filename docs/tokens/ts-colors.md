@@ -540,7 +540,6 @@
     </div>
   </div>
 
-
   </sl-tab-panel>
 
   <sl-tab-panel name="text-colors">
@@ -565,6 +564,7 @@
   <div class="ts-text-light">Default text, light</div>
 </div>
 ```
+
 <sl-divider style="--spacing: 3rem;"></sl-divider>
 
 <div class="panel-content">
@@ -588,6 +588,7 @@
   <div class="ts-text-light-subdued">Subdued text, light</div>
 </div>
 ```
+
 <sl-divider style="--spacing: 3rem;"></sl-divider>
 
 <div class="panel-content">
@@ -606,11 +607,19 @@
 </div>
 
 ```html preview
-<div class="ts-body-1">Teamshares helps traditional small businesses become <a href="#" class="ts-text-link">employee-owned</a> through education, good governance and digital products that make financials and operations simpler.</div>
+<div class="ts-body-1">
+  Teamshares helps traditional small businesses become <a href="#" class="ts-text-link">employee-owned</a> through
+  education, good governance and digital products that make financials and operations simpler.
+</div>
 <div class="dark-background">
-  <div class="ts-body-1 ts-text-light">Teamshares helps traditional small businesses become <a href="#" class="ts-text-link-light">employee-owned</a> through education, good governance and digital products that make financials and operations simpler.</div>
+  <div class="ts-body-1 ts-text-light">
+    Teamshares helps traditional small businesses become
+    <a href="#" class="ts-text-link-light">employee-owned</a> through education, good governance and digital products
+    that make financials and operations simpler.
+  </div>
 </div>
 ```
+
   </sl-tab-panel>
 
   <sl-tab-panel name="a11y">
