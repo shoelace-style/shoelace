@@ -1,19 +1,18 @@
-- Teamshares
+- Getting Started
 
-  - [Overview](/teamshares/overview)
+  - [Overview](/)
   - [Contributing](/teamshares/contributing)
   - [Recipe Book](/teamshares/recipes)
   - [Changelog](/teamshares/changelog)
 
-- Getting Started
+- Teamshares Brand
+  - [Logo & Brand Assets](/teamshares/logo-assets)
+  - [Content Guidelines](/teamshares/content)
 
-  - [Overview](/)
-  - [Installation](/getting-started/installation)
-  - [Usage](/getting-started/usage)
-  <!-- - [Themes](/getting-started/themes) -->
-  - [Customizing](/getting-started/customizing)
-  - [Form Controls](/getting-started/form-controls)
-  - [Localization](/getting-started/localization)
+- Styles
+
+  - [Colors](/tokens/ts-colors)
+  - [Typography](/tokens/ts-typography)
 
 - Components
 
@@ -69,7 +68,7 @@
 
   - [Data Grid](/vendor/data-grid.md)
 
-- Design Tokens
+<!-- - Design Tokens
 
   - [Typography](/tokens/typography)
   - [Color](/tokens/color)
@@ -78,7 +77,7 @@
   - [Border Radius](/tokens/border-radius)
   - [Transition](/tokens/transition)
   - [Z-index](/tokens/z-index)
-  - [More](/tokens/more)
+  - [More](/tokens/more) -->
 
 - Utilities
 
@@ -94,22 +93,31 @@
   - [Resize Observer](/components/resize-observer)
   - [Visually Hidden](/components/visually-hidden)
 
-- Frameworks
+<!-- - Shoelace
 
-  - [React](/frameworks/react)
+  - [Overview](/getting-started/overview)
+  - [Installation](/getting-started/installation)
+  - [Usage](/getting-started/usage)
+  <!-- - [Themes](/getting-started/themes) -->
+  <!-- - [Customizing](/getting-started/customizing)
+  - [Form Controls](/getting-started/form-controls)
+  - [Localization](/getting-started/localization) -->
+
+<!-- - Frameworks -->
+
+  <!-- - [React](/frameworks/react)
   - [Vue](/frameworks/vue)
-  - [Angular](/frameworks/angular)
+  - [Angular](/frameworks/angular) -->
 
-- Resources
+<!-- - Resources -->
 
-  - [Community](/resources/community)
+  <!-- - [Community](/resources/community)
   - [Accessibility](/resources/accessibility)
   - [Contributing](/resources/contributing)
-  - [Changelog](/resources/changelog)
+  - [Changelog](/resources/changelog) -->
 
-- Tutorials
+<!-- - Tutorials -->
 
-  <!-- - [Integrating with Laravel](/tutorials/integrating-with-laravel) -->
-
+  <!-- - [Integrating with Laravel](/tutorials/integrating-with-laravel)
   - [Integrating with NextJS](/tutorials/integrating-with-nextjs)
-  - [Integrating with Rails](/tutorials/integrating-with-rails)
+  - [Integrating with Rails](/tutorials/integrating-with-rails) -->

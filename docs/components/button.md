@@ -212,7 +212,7 @@ const App = () => (
 );
 ```
 
-<!-- ### Text Buttons
+### Text Buttons
 
 Use the `text` variant to create text buttons that share the same size as regular buttons but don't have backgrounds or borders.
 
@@ -244,7 +244,7 @@ const App = () => (
     </SlButton>
   </>
 );
-``` -->
+```
 
 ### Link Buttons
 
