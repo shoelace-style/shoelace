@@ -189,7 +189,6 @@ strong {
   margin: 1rem 0;
 }
 
-
 /* Sidebar */
 .sidebar {
   background-color: var(--sl-color-neutral-0);
@@ -283,7 +282,7 @@ strong {
   font-weight: var(--sl-font-weight-bold);
   border-bottom: solid 1px var(--sl-color-neutral-300);
   margin: 0 0.75rem 0.5rem 0;
-  padding: 0 0 .5rem 0;
+  padding: 0 0 0.5rem 0;
 }
 
 .sidebar ul li ul {
@@ -376,7 +375,7 @@ strong {
 .markdown-section .overview-header span {
   color: var(--ts-color-primary-700);
   display: block;
-  margin: .1em 0;
+  margin: 0.1em 0;
 }
 
 .markdown-section #overview div:first-child {
@@ -420,7 +419,6 @@ strong {
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
 }
 
-
 .markdown-section .grid-cards > * {
   height: 100%;
 }
@@ -443,7 +441,8 @@ strong {
   }
 } */
 
-sl-card.card-basic::part(base), sl-card.card-basic::part(body) {
+sl-card.card-basic::part(base),
+sl-card.card-basic::part(body) {
   height: 100%;
 }
 
@@ -474,7 +473,7 @@ sl-alert.do-dont::part(icon) {
 }
 
 sl-alert.do-dont::part(message) {
-  padding: .1rem 1rem 1rem 0;
+  padding: 0.1rem 1rem 1rem 0;
 }
 
 /** **/
@@ -912,14 +911,15 @@ body[data-page^='/tokens/'] .table-wrapper td:first-child code {
   margin: 1rem 0 4rem;
 }
 
-.color-palette__name div:first-of-type, div.panel-content h2 {
+.color-palette__name div:first-of-type,
+div.panel-content h2 {
   border: none;
   /* ts-heading-6 */
   font-size: var(--ts-font-xl); /* 20px */
   font-weight: var(--ts-font-medium); /* 500 */
   line-height: var(--ts-leading-6); /* 1.5rem * 24px */
   letter-spacing: var(--ts-tracking-tight); /* -0.025em */
-  margin: 2rem 0 .5rem;
+  margin: 2rem 0 0.5rem;
 }
 
 div.panel-content h3 {
@@ -928,10 +928,11 @@ div.panel-content h3 {
   font-weight: var(--ts-font-semibold); /* 600 */
   line-height: var(--ts-leading-5); /* 1.25rem * 20px */
   letter-spacing: var(--ts-tracking-tight); /* -0.025em */
-  margin: 2rem 0 .5rem;
+  margin: 2rem 0 0.5rem;
 }
 
-.color-palette__name div, .panel-content div {
+.color-palette__name div,
+.panel-content div {
   margin: 1rem 0;
 }
 
@@ -964,9 +965,8 @@ div.panel-content h3 {
   height: 6rem;
   border-radius: var(--sl-border-radius-medium);
   box-shadow: inset 0 0 0 1px var(--sl-color-neutral-300);
-  margin: .5rem 0 .25rem;
+  margin: 0.5rem 0 0.25rem;
 }
-
 
 @media screen and (max-width: 1200px) {
   .color-palette {
@@ -993,8 +993,8 @@ div.text-specs {
   display: grid;
   gap: 0.125rem;
   grid-template-columns: repeat(3, 1fr);
-  margin: 0 0 .75rem;
-  padding: 0 0 .75rem;
+  margin: 0 0 0.75rem;
+  padding: 0 0 0.75rem;
 }
 
 .text-specs:last-child {

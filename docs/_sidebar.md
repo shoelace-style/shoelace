@@ -6,6 +6,7 @@
   - [Changelog](/teamshares/changelog)
 
 - Teamshares Brand
+
   - [Logo & Brand Assets](/teamshares/logo-assets)
   - [Content Guidelines](/teamshares/content)
 

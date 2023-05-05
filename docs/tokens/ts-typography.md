@@ -13,23 +13,23 @@
     <div>Styles can be applied using a <code>.ts-<em>{style-name}</em></code> class. The classes are composed with Tailwind utility classes and are defined in this <a href="https://github.com/teamshares/shared-ui/blob/main/scss/includes/_typography.scss" target="_blank">_typography.scss</a> file.</div>
   </div>
 
-  ```html preview
-  <div class="ts-heading-1">Heading 1</div>
-  <div class="ts-heading-2">Heading 2</div>
-  <div class="ts-heading-3">Heading 3</div>
-  <div class="ts-heading-4">Heading 4</div>
-  <div class="ts-heading-5">Heading 5</div>
-  <div class="ts-heading-6">Heading 6</div>
-  <div class="ts-heading-7">Heading 7</div>
-  <div class="ts-heading-8">Heading 8</div>
-  <div class="ts-subheading">Subheading</div>
-  <div class="ts-body-large">Body large</div>
-  <div class="ts-body-1">Body 1</div>
-  <div class="ts-body-2">Body 2</div>
-  <div class="ts-body-3">Body 3</div>
-  ```
+```html preview
+<div class="ts-heading-1">Heading 1</div>
+<div class="ts-heading-2">Heading 2</div>
+<div class="ts-heading-3">Heading 3</div>
+<div class="ts-heading-4">Heading 4</div>
+<div class="ts-heading-5">Heading 5</div>
+<div class="ts-heading-6">Heading 6</div>
+<div class="ts-heading-7">Heading 7</div>
+<div class="ts-heading-8">Heading 8</div>
+<div class="ts-subheading">Subheading</div>
+<div class="ts-body-large">Body large</div>
+<div class="ts-body-1">Body 1</div>
+<div class="ts-body-2">Body 2</div>
+<div class="ts-body-3">Body 3</div>
+```
 
-  <sl-divider style="--spacing: 3rem;"></sl-divider>
+<sl-divider style="--spacing: 3rem;"></sl-divider>
 
   <div class="panel-content">
     <h2>Style specs</h2>

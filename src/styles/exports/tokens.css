@@ -223,7 +223,7 @@
   --ts-color-neutral-0: var(--ts-color-white);
   --ts-color-neutral-1000: var(--ts-color-black);
   /* Semantic colors */
-  --ts-color-primary:var(--ts-color-blue-700);
+  --ts-color-primary: var(--ts-color-blue-700);
   --ts-color-primary-rgb: var(--ts-color-blue-700-rgb);
   --ts-color-default: var(--ts-color-gray-900);
   --ts-color-subdued: var(--ts-color-gray-700);
