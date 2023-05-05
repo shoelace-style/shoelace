@@ -333,7 +333,7 @@
       version.textContent = `Version ${metadata.package.version} `;
       const upstreamLink = document.createElement('a');
       upstreamLink.href = `https://shoelace.style/resources/changelog?id=_${metadata.package.upstreamVersion}`;
-      upstreamLink.textContent = `(Upstream: ${metadata.package.upstreamVersion})`;
+      upstreamLink.textContent = `(Shoelace upstream: ${metadata.package.upstreamVersion})`;
       version.appendChild(upstreamLink);
       target.appendChild(version);
 
@@ -344,7 +344,7 @@
       const buttons = document.createElement('div');
       buttons.classList.add('sidebar-buttons');
       buttons.innerHTML = `
-        <sl-button size="small" class="repo-button repo-button--sponsor" href="https://github.com/sponsors/claviska" target="_blank">
+        <!-- <sl-button size="small" class="repo-button repo-button--sponsor" href="https://github.com/sponsors/claviska" target="_blank">
           <sl-icon slot="prefix" name="heart"></sl-icon> Sponsor
         </sl-button>
         <sl-button size="small" class="repo-button repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" target="_blank">
@@ -352,7 +352,7 @@
         </sl-button>
         <sl-button size="small" class="repo-button repo-button--twitter" href="https://twitter.com/shoelace_style" target="_blank">
           <sl-icon slot="prefix" src="./assets/images/twitter.svg"></sl-icon> Follow
-        </sl-button>
+        </sl-button> -->
       `;
       target.appendChild(buttons);
     });
@@ -476,27 +476,6 @@
             \`\`\`
             </sl-tab-panel>
             </sl-tab-group>
-
-            <div class="sponsor-callout">
-              <p>
-                Shoelace is designed, developed, and maintained by <a href="https://twitter.com/claviska" target="_blank">Cory LaViska</a>.
-                Please sponsor my open source work on GitHub. Your support will keep this project alive and growing!
-              </p>
-
-              <p>
-                <sl-button class="repo-button repo-button--sponsor" href="https://github.com/sponsors/claviska" target="_blank">
-                  <sl-icon slot="prefix" name="heart"></sl-icon> Sponsor <span class="sponsor-callout__secondary-label">Development</span>
-                </sl-button>
-
-                <sl-button class="repo-button repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" target="_blank">
-                  <sl-icon slot="prefix" src="./assets/images/github.svg"></sl-icon> Star <span class="sponsor-callout__secondary-label">on GitHub</span>
-                </sl-button>
-
-                <sl-button class="repo-button repo-button--twitter" href="https://twitter.com/shoelace_style" target="_blank">
-                  <sl-icon slot="prefix" src="./assets/images/twitter.svg"></sl-icon> Follow <span class="sponsor-callout__secondary-label">on Twitter</span>
-                </sl-button>
-              </p>
-            </div>
           `;
         }
 
@@ -596,3 +575,25 @@
     });
   });
 })();
+
+// Commented out sponsor callout
+// <div class="sponsor-callout">
+//  <p>
+//    Shoelace is designed, developed, and maintained by <a href="https://twitter.com/claviska" target="_blank">Cory LaViska</a>.
+//    Please sponsor my open source work on GitHub. Your support will keep this project alive and growing!
+//  </p>
+//
+//  <p>
+//    <sl-button class="repo-button repo-button--sponsor" href="https://github.com/sponsors/claviska" target="_blank">
+//      <sl-icon slot="prefix" name="heart"></sl-icon> Sponsor <span class="sponsor-callout__secondary-label">Development</span>
+//    </sl-button>
+//
+//    <sl-button class="repo-button repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" target="_blank">
+//      <sl-icon slot="prefix" src="./assets/images/github.svg"></sl-icon> Star <span class="sponsor-callout__secondary-label">on GitHub</span>
+//    </sl-button>
+//
+//    <sl-button class="repo-button repo-button--twitter" href="https://twitter.com/shoelace_style" target="_blank">
+//      <sl-icon slot="prefix" src="./assets/images/twitter.svg"></sl-icon> Follow <span class="sponsor-callout__secondary-label">on Twitter</span>
+//    </sl-button>
+//  </p>
+// </div>

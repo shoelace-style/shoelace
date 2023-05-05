@@ -149,7 +149,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  color: var(--sl-color-neutral-600);
+  color: var(--sl-color-neutral-700);
   cursor: pointer;
   -webkit-appearance: none;
 }

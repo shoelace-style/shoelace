@@ -195,6 +195,11 @@ sl-theme {
   --sl-button-font-size-large: var(--sl-font-size-small);
 }
 
+/* Button font weight */
+sl-button::part(label) {
+  font-weight: var(--ts-font-semibold);
+}
+
 /* Button custom colors */
 
 sl-button[variant='primary']::part(base):hover {
