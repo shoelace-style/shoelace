@@ -13,7 +13,6 @@
     <div>Styles can be applied using a <code>.ts-<em>{style-name}</em></code> class. The classes are composed with Tailwind utility classes and are defined in this <a href="https://github.com/teamshares/shared-ui/blob/main/scss/includes/_typography.scss" target="_blank">_typography.scss</a> file.</div>
   </div>
 
-
 ```html preview
 <div class="ts-heading-1">Heading 1</div>
 <div class="ts-heading-2">Heading 2</div>

@@ -16,8 +16,8 @@ While convenient, autoloading may lead to a [Flash of Undefined Custom Elements]
 
 <!-- prettier-ignore -->
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/light.css" />
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace-autoloader.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@teamshares/shoelace@%VERSION%/dist/themes/light.css" />
+<script type="module" src="https://cdn.jsdelivr.net/npm/@teamshares/shoelace@%VERSION%/dist/shoelace-autoloader.js"></script>
 ```
 
 </sl-tab-panel>

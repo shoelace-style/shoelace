@@ -38,7 +38,7 @@
 ```
 
 ```jsx react
-import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
+import { SlCarousel, SlCarouselItem } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <>
@@ -120,7 +120,7 @@ Use the `pagination` attribute to show the total number of slides and the curren
 ```
 
 ```jsx react
-import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
+import { SlCarousel, SlCarouselItem } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlCarousel pagination>
@@ -198,7 +198,7 @@ Use the `navigation` attribute to show previous and next buttons.
 ```
 
 ```jsx react
-import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
+import { SlCarousel, SlCarouselItem } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlCarousel navigation>
@@ -276,7 +276,7 @@ By default, the carousel will not advanced beyond the first and last slides. You
 ```
 
 ```jsx react
-import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
+import { SlCarousel, SlCarouselItem } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlCarousel loop navigation pagination>
@@ -354,7 +354,7 @@ The carousel will automatically advance when the `autoplay` attribute is used. T
 ```
 
 ```jsx react
-import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
+import { SlCarousel, SlCarouselItem } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlCarousel autoplay loop pagination>
@@ -451,7 +451,7 @@ This example is best demonstrated using a mouse. Try clicking and dragging the s
 
 ```jsx react
 import { useState } from 'react';
-import { SlCarousel, SlCarouselItem, SlDivider, SlSwitch } from '@shoelace-style/shoelace/dist/react';
+import { SlCarousel, SlCarouselItem, SlDivider, SlSwitch } from '@teamshares/shoelace/dist/react';
 
 const App = () => {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -517,7 +517,7 @@ The `slides-per-view` attribute makes it possible to display multiple slides at 
 ```
 
 ```jsx react
-import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
+import { SlCarousel, SlCarouselItem } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlCarousel navigation pagination slidesPerPage={2} slidesPerMove={2}>
@@ -605,7 +605,7 @@ The content of the carousel can be changed by adding or removing carousel items.
 
 ```jsx react
 import { useState } from 'react';
-import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
+import { SlCarousel, SlCarouselItem } from '@teamshares/shoelace/dist/react';
 
 const css = `
   .dynamic-carousel {
@@ -719,7 +719,7 @@ Setting the `orientation` attribute to `vertical` will render the carousel in a 
 ```
 
 ```jsx react
-import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
+import { SlCarousel, SlCarouselItem } from '@teamshares/shoelace/dist/react';
 
 const css = `
   .vertical {
@@ -839,7 +839,7 @@ Use the `--aspect-ratio` custom property to customize the size of the carousel's
 
 ```jsx react
 import { useState } from 'react';
-import { SlCarousel, SlCarouselItem, SlDivider, SlSelect, SlOption } from '@shoelace-style/shoelace/dist/react';
+import { SlCarousel, SlCarouselItem, SlDivider, SlSelect, SlOption } from '@teamshares/shoelace/dist/react';
 
 const App = () => {
   const [aspectRatio, setAspectRatio] = useState('3/2');
@@ -939,7 +939,7 @@ Use the `--scroll-hint` custom property to add inline padding in horizontal caro
 
 ```jsx react
 import { useState } from 'react';
-import { SlCarousel, SlCarouselItem, SlDivider, SlRange } from '@shoelace-style/shoelace/dist/react';
+import { SlCarousel, SlCarouselItem, SlDivider, SlRange } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <>
@@ -1100,7 +1100,7 @@ The carousel has a robust API that makes it possible to extend and customize. Th
 
 ```jsx react
 import { useRef } from 'react';
-import { SlCarousel, SlCarouselItem, SlDivider, SlRange } from '@shoelace-style/shoelace/dist/react';
+import { SlCarousel, SlCarouselItem, SlDivider, SlRange } from '@teamshares/shoelace/dist/react';
 
 const css = `
   .carousel-thumbnails {

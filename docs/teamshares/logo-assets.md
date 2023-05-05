@@ -123,7 +123,7 @@
   </sl-card>
   </div>
 
-  <sl-divider style="--spacing: 3rem;"></sl-divider>
+<sl-divider style="--spacing: 3rem;"></sl-divider>
 
   <h2>Product logos</h2>
 

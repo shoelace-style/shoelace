@@ -44,7 +44,7 @@ export class AppModule {}
 ## Reference Shoelace components in your Angular component code
 
 ```js
-import { SlDrawer } from '@shoelace-style/shoelace';
+import { SlDrawer } from '@teamshares/shoelace';
 
 @Component({
   selector: 'app-drawer-example',

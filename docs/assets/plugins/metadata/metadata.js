@@ -332,8 +332,9 @@
       version.classList.add('sidebar-version');
       version.textContent = `Version ${metadata.package.version} `;
       const upstreamLink = document.createElement('a');
+      upstreamLink.className = 'sidebar-version-link';
       upstreamLink.href = `https://shoelace.style/resources/changelog?id=_${metadata.package.upstreamVersion}`;
-      upstreamLink.textContent = `(Shoelace upstream: ${metadata.package.upstreamVersion})`;
+      upstreamLink.textContent = `(Shoelace: ${metadata.package.upstreamVersion})`;
       version.appendChild(upstreamLink);
       target.appendChild(version);
 
