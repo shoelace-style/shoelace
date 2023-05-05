@@ -278,6 +278,25 @@ describe('when a size is applied', () => {
     expect(radio1.size).to.equal('large');
     expect(radio2.size).to.equal('large');
   });
+
+  it('should update the size of all radio buttons when size changes', async () => {
+    const radioGroup = await fixture<SlRadioGroup>(html`
+      <sl-radio-group size="small">
+        <sl-radio-button id="radio-1" value="1"></sl-radio-button>
+        <sl-radio-button id="radio-2" value="2"></sl-radio-button>
+      </sl-radio-group>
+    `);
+    const [radio1, radio2] = radioGroup.querySelectorAll('sl-radio-button')!;
+
+    expect(radio1.size).to.equal('small');
+    expect(radio2.size).to.equal('small');
+
+    radioGroup.size = 'large';
+    await radioGroup.updateComplete;
+
+    expect(radio1.size).to.equal('large');
+    expect(radio2.size).to.equal('large');
+  });
 });
 
 describe('when the value changes', () => {

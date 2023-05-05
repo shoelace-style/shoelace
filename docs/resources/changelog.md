@@ -6,6 +6,15 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## Next
+
+- Added the `checkbox` part and related exported parts to `<sl-tree-item>` so you can target it with CSS [#1318](https://github.com/shoelace-style/shoelace/discussions/1318)
+- Added the `submenu-icon` part to `<sl-menu-item>` (submenus have not been implemented yet, but this part is required to allow customizations)
+- Fixed a bug where changing the size of `<sl-radio-group>` wouldn't update the size of child elements
+- Improved `<sl-button>` so it can accept children of variable heights [#1317](https://github.com/shoelace-style/shoelace/pull/1317)
+- Improved the docs to more clearly explain sizing radios and radio buttons
+- Improved the performance of `<sl-rating>` by partially rendering unseen icons [#1310](https://github.com/shoelace-style/shoelace/pull/1310)
+
 ## 2.4.0
 
 - Added the `discover()` function to the experimental autoloader's exports [#1236](https://github.com/shoelace-style/shoelace/pull/1236)
