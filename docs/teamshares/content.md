@@ -1,10 +1,10 @@
 # Content Guidelines
 
-> Essential info on our in-house writing style, communications guidelines, and related preferences, plus guidelines for UI writing and content for digital products.
+> Essential info on our in-house writing style, communications guidelines, and related preferences, plus guidelines for UX & UI writing and content for digital products.
 
 <sl-tab-group>
   <sl-tab slot="nav" panel="writing-for-teamshares">Writing for Teamshares</sl-tab>
-  <sl-tab slot="nav" panel="ui-writing">UI writing</sl-tab>
+  <sl-tab slot="nav" panel="ui-writing">UX & UI writing</sl-tab>
 
   <sl-tab-panel name="writing-for-teamshares">
     <div class="panel-content">
@@ -35,7 +35,7 @@
 
   <sl-tab-panel name="ui-writing">
     <div class="panel-content">
-    <h2>UI Writing</h2>
+    <h2>UX & UI Writing</h2>
     <p>These are some guidelines specific to writing in our digital products and interfaces. More coming soon!</p>
     <h3>Capitalization</h3>
     <p>Use sentence case for all headings and labels, including labels for UI elements like buttons.</p>
