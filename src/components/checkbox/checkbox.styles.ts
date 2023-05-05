@@ -11,7 +11,7 @@ export default css`
   .checkbox {
     position: relative;
     display: inline-flex;
-    align-items: top;
+    align-items: flex-start;
     font-family: var(--sl-input-font-family);
     font-weight: var(--sl-input-font-weight);
     color: var(--sl-input-label-color);

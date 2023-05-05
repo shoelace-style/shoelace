@@ -7,7 +7,6 @@ import esbuild from 'esbuild';
 import fs from 'fs';
 import getPort, { portNumbers } from 'get-port';
 import { globby } from 'globby';
-import open from 'open';
 import copy from 'recursive-copy';
 import path from 'path';
 
@@ -53,6 +52,8 @@ fs.mkdirSync(outdir, { recursive: true });
         //
         // The whole shebang
         './src/shoelace.ts',
+        // The auto-loader
+        './src/shoelace-autoloader.ts',
         // Components
         ...(await globby('./src/components/**/!(*.(style|test)).ts')),
         // Translations
@@ -110,7 +111,6 @@ fs.mkdirSync(outdir, { recursive: true });
     deleteSync('docs/dist');
 
     const browserSyncConfig = {
-      open: false,
       startPath: '/',
       port,
       logLevel: 'silent',
@@ -124,6 +124,22 @@ fs.mkdirSync(outdir, { recursive: true });
         routes: {
           '/dist': './dist'
         }
+      },
+      //
+      // Suppress Chrome's document.write() warning
+      //
+      // More info: https://github.com/BrowserSync/browser-sync/issues/1600)
+      //
+      snippetOptions: {
+        rule: {
+          match: /<\/head>/u,
+          fn: (snippet, match) => {
+            const {
+              groups: { src }
+            } = /src='(?<src>[^']+)'/u.exec(snippet);
+            return `<script src="${src}" async></script>${match}`;
+          }
+        }
       }
     };
 
@@ -131,7 +147,6 @@ fs.mkdirSync(outdir, { recursive: true });
     bs.init(browserSyncConfig, () => {
       const url = `http://localhost:${port}`;
       console.log(chalk.cyan(`Launched the Shoelace dev server at ${url} 🥾\n`));
-      open(url);
     });
 
     // Rebuild and reload when source files change

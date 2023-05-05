@@ -162,7 +162,8 @@ Use the `setCustomValidity()` method to set a custom validation message. This wi
   const errorMessage = `Do not forget to check me!`;
 
   // Set initial validity as soon as the element is defined
-  customElements.whenDefined('sl-checkbox').then(() => {
+  customElements.whenDefined('sl-checkbox').then(async () => {
+    await checkbox.updateComplete;
     checkbox.setCustomValidity(errorMessage);
   });
 

@@ -60,16 +60,16 @@ export default css`
     margin-inline-start: var(--sl-spacing-x-small);
   }
 
-  :host(:focus) {
+  :host(:focus-visible) {
     outline: none;
   }
 
-  :host(:hover:not([aria-disabled='true'])) .menu-item {
+  :host(:hover:not([aria-disabled='true'], :focus-visible)) .menu-item {
     background-color: var(--sl-color-neutral-100);
     color: var(--sl-color-neutral-1000);
   }
 
-  :host(:focus) .menu-item {
+  :host(:focus-visible) .menu-item {
     outline: none;
     background-color: var(--sl-color-primary-600);
     color: var(--sl-color-neutral-0);
@@ -93,7 +93,7 @@ export default css`
 
   @media (forced-colors: active) {
     :host(:hover:not([aria-disabled='true'])) .menu-item,
-    :host(:focus) .menu-item {
+    :host(:focus-visible) .menu-item {
       outline: dashed 1px SelectedItem;
       outline-offset: -1px;
     }

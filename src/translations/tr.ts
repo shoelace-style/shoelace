@@ -6,17 +6,21 @@ const translation: Translation = {
   $name: 'Türkçe',
   $dir: 'ltr',
 
+  carousel: 'Atlıkarınca',
   clearEntry: 'Girişi sil',
   close: 'Kapat',
   copy: 'Kopya',
+  currentValue: 'Mevcut değer',
+  goToSlide: (slide, count) => `${count} slayttan ${slide} slayta gidin`,
+  hidePassword: 'Şifreyi sakla',
+  loading: 'Yükleme',
+  nextSlide: 'Sonraki slayt',
   numOptionsSelected: num => {
     if (num === 0) return 'Hiçbir seçenek seçilmedi';
     if (num === 1) return '1 seçenek seçildi';
     return `${num} seçenek seçildi`;
   },
-  currentValue: 'Mevcut değer',
-  hidePassword: 'Şifreyi sakla',
-  loading: 'Yükleme',
+  previousSlide: 'Bir onceki slayt',
   progress: 'İlerleme',
   remove: 'Kaldır',
   resize: 'Yeniden boyutlandır',
@@ -24,6 +28,7 @@ const translation: Translation = {
   scrollToStart: 'Başa kay',
   selectAColorFromTheScreen: 'Ekrandan bir renk seçin',
   showPassword: 'Şifreyi göster',
+  slideNum: slide => `Slayt ${slide}`,
   toggleColorFormat: 'Renk biçimini değiştir'
 };
 

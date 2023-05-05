@@ -1,5 +1,5 @@
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { customElement, eventOptions, property, query, state } from 'lit/decorators.js';
 import { defaultValue } from '../../internal/default-value';
 import { FormControlController } from '../../internal/form';
 import { HasSlotController } from '../../internal/slot';
@@ -156,6 +156,7 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
     this.emit('sl-focus');
   }
 
+  @eventOptions({ passive: true })
   private handleThumbDragStart() {
     this.hasTooltip = true;
   }
@@ -252,6 +253,11 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
   /** Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid. */
   checkValidity() {
     return this.input.checkValidity();
+  }
+
+  /** Gets the associated form, if one exists. */
+  getForm(): HTMLFormElement | null {
+    return this.formControlController.getForm();
   }
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */

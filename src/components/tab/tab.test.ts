@@ -1,6 +1,8 @@
 import { expect, fixture, html } from '@open-wc/testing';
 import sinon from 'sinon';
+import type SlIconButton from '../icon-button/icon-button';
 import type SlTab from './tab';
+import type SlTabGroup from '../tab-group/tab-group';
 
 describe('<sl-tab>', () => {
   it('passes accessibility test', async () => {
@@ -88,17 +90,31 @@ describe('<sl-tab>', () => {
   });
 
   describe('closable', () => {
-    it('should emit close event when close button clicked', async () => {
-      const el = await fixture<SlTab>(html` <sl-tab closable>Test</sl-tab> `);
+    it('should emit close event when the close button is clicked', async () => {
+      const tabGroup = await fixture<SlTabGroup>(html`
+        <sl-tab-group>
+          <sl-tab slot="nav" panel="general" closable>General</sl-tab>
+          <sl-tab slot="nav" panel="custom" closable>Custom</sl-tab>
+          <sl-tab-panel name="general">This is the general tab panel.</sl-tab-panel>
+          <sl-tab-panel name="custom">This is the custom tab panel.</sl-tab-panel>
+        </sl-tab-group>
+      `);
+      const closeButton = tabGroup
+        .querySelectorAll('sl-tab')[0]!
+        .shadowRoot!.querySelector<SlIconButton>('[part~="close-button"]')!;
 
-      const closeButton = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="close-button"]')!;
-      const spy = sinon.spy();
+      const handleClose = sinon.spy();
+      const handleTabShow = sinon.spy();
 
-      el.addEventListener('sl-close', spy, { once: true });
+      tabGroup.addEventListener('sl-close', handleClose, { once: true });
+      // The sl-tab-show event shouldn't be emitted when clicking the close button
+      tabGroup.addEventListener('sl-tab-show', handleTabShow);
 
       closeButton.click();
+      await closeButton?.updateComplete;
 
-      expect(spy.called).to.equal(true);
+      expect(handleClose.called).to.equal(true);
+      expect(handleTabShow.called).to.equal(false);
     });
   });
 });

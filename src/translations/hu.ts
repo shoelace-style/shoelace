@@ -6,17 +6,21 @@ const translation: Translation = {
   $name: 'Magyar',
   $dir: 'ltr',
 
+  carousel: 'Körhinta',
   clearEntry: 'Bejegyzés törlése',
   close: 'Bezárás',
   copy: 'Másolás',
+  currentValue: 'Aktuális érték',
+  goToSlide: (slide, count) => `Ugrás a ${count}/${slide}. diára`,
+  hidePassword: 'Jelszó elrejtése',
+  loading: 'Betöltés',
+  nextSlide: 'Következő dia',
   numOptionsSelected: num => {
     if (num === 0) return 'Nincsenek kiválasztva opciók';
     if (num === 1) return '1 lehetőség kiválasztva';
     return `${num} lehetőség kiválasztva`;
   },
-  currentValue: 'Aktuális érték',
-  hidePassword: 'Jelszó elrejtése',
-  loading: 'Betöltés',
+  previousSlide: 'Előző dia',
   progress: 'Folyamat',
   remove: 'Eltávolítás',
   resize: 'Átméretezés',
@@ -24,6 +28,7 @@ const translation: Translation = {
   scrollToStart: 'Görgessen az elejére',
   selectAColorFromTheScreen: 'Szín választása a képernyőről',
   showPassword: 'Jelszó megjelenítése',
+  slideNum: slide => `${slide}. dia`,
   toggleColorFormat: 'Színformátum változtatása'
 };
 

@@ -3,6 +3,7 @@ import { clickOnElement } from '../../internal/test';
 import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
+import type SlChangeEvent from '../../events/sl-change';
 import type SlRadio from '../radio/radio';
 import type SlRadioGroup from './radio-group';
 
@@ -150,30 +151,30 @@ describe('<sl-radio-group>', () => {
       expect(radioGroup.hasAttribute('data-user-invalid')).to.be.false;
       expect(radioGroup.hasAttribute('data-user-valid')).to.be.false;
     });
-  });
 
-  it('should show a constraint validation error when setCustomValidity() is called', async () => {
-    const form = await fixture<HTMLFormElement>(html`
-      <form>
-        <sl-radio-group value="1">
-          <sl-radio id="radio-1" name="a" value="1"></sl-radio>
-          <sl-radio id="radio-2" name="a" value="2"></sl-radio>
-        </sl-radio-group>
-        <sl-button type="submit">Submit</sl-button>
-      </form>
-    `);
-    const button = form.querySelector('sl-button')!;
-    const radioGroup = form.querySelector<SlRadioGroup>('sl-radio-group')!;
-    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    it('should show a constraint validation error when setCustomValidity() is called', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-radio-group value="1">
+            <sl-radio id="radio-1" name="a" value="1"></sl-radio>
+            <sl-radio id="radio-2" name="a" value="2"></sl-radio>
+          </sl-radio-group>
+          <sl-button type="submit">Submit</sl-button>
+        </form>
+      `);
+      const button = form.querySelector('sl-button')!;
+      const radioGroup = form.querySelector<SlRadioGroup>('sl-radio-group')!;
+      const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
 
-    // Submitting the form after setting custom validity should not trigger the handler
-    radioGroup.setCustomValidity('Invalid selection');
-    form.addEventListener('submit', submitHandler);
-    button.click();
+      // Submitting the form after setting custom validity should not trigger the handler
+      radioGroup.setCustomValidity('Invalid selection');
+      form.addEventListener('submit', submitHandler);
+      button.click();
 
-    await aTimeout(100);
+      await aTimeout(100);
 
-    expect(submitHandler).to.not.have.been.called;
+      expect(submitHandler).to.not.have.been.called;
+    });
   });
 });
 
@@ -251,6 +252,34 @@ describe('when submitting a form', () => {
   });
 });
 
+describe('when a size is applied', () => {
+  it('should apply the same size to all radios', async () => {
+    const radioGroup = await fixture<SlRadioGroup>(html`
+      <sl-radio-group size="large">
+        <sl-radio id="radio-1" value="1"></sl-radio>
+        <sl-radio id="radio-2" value="2"></sl-radio>
+      </sl-radio-group>
+    `);
+    const [radio1, radio2] = radioGroup.querySelectorAll('sl-radio')!;
+
+    expect(radio1.size).to.equal('large');
+    expect(radio2.size).to.equal('large');
+  });
+
+  it('should apply the same size to all radio buttons', async () => {
+    const radioGroup = await fixture<SlRadioGroup>(html`
+      <sl-radio-group size="large">
+        <sl-radio-button id="radio-1" value="1"></sl-radio-button>
+        <sl-radio-button id="radio-2" value="2"></sl-radio-button>
+      </sl-radio-group>
+    `);
+    const [radio1, radio2] = radioGroup.querySelectorAll('sl-radio-button')!;
+
+    expect(radio1.size).to.equal('large');
+    expect(radio2.size).to.equal('large');
+  });
+});
+
 describe('when the value changes', () => {
   it('should emit sl-change when toggled with the arrow keys', async () => {
     const radioGroup = await fixture<SlRadioGroup>(html`
@@ -283,7 +312,7 @@ describe('when the value changes', () => {
     `);
     const radio = radioGroup.querySelector<SlRadio>('#radio-1')!;
     setTimeout(() => radio.click());
-    const event = (await oneEvent(radioGroup, 'sl-change')) as CustomEvent;
+    const event = (await oneEvent(radioGroup, 'sl-change')) as SlChangeEvent;
     expect(event.target).to.equal(radioGroup);
     expect(radioGroup.value).to.equal('1');
   });
@@ -298,7 +327,7 @@ describe('when the value changes', () => {
     const radio = radioGroup.querySelector<SlRadio>('#radio-1')!;
     radio.focus();
     setTimeout(() => sendKeys({ press: ' ' }));
-    const event = (await oneEvent(radioGroup, 'sl-change')) as CustomEvent;
+    const event = (await oneEvent(radioGroup, 'sl-change')) as SlChangeEvent;
     expect(event.target).to.equal(radioGroup);
     expect(radioGroup.value).to.equal('1');
   });

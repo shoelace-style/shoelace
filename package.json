@@ -1,8 +1,8 @@
 {
   "name": "@teamshares/shoelace",
   "description": "The Teamshares flavor of a forward-thinking library of web components.",
-  "version": "1.1.1",
-  "upstreamVersion": "2.1.0",
+  "version": "1.2.0",
+  "upstreamVersion": "2.4.0",
   "homepage": "https://github.com/teamshares/shoelace",
   "author": "Cory LaViska",
   "license": "MIT",
@@ -15,6 +15,7 @@
       "types": "./dist/shoelace.d.ts",
       "import": "./dist/shoelace.js"
     },
+    "./dist/custom-elements.json": "./dist/custom-elements.json",
     "./dist/themes/*": "./dist/themes/*",
     "./dist/components/*": "./dist/components/*",
     "./dist/utilities/*": "./dist/utilities/*",
@@ -67,10 +68,11 @@
   },
   "dependencies": {
     "@ctrl/tinycolor": "^3.5.0",
-    "@floating-ui/dom": "^1.1.0",
+    "@floating-ui/dom": "^1.2.1",
     "@lit-labs/react": "^1.1.1",
     "@shoelace-style/animations": "^1.1.0",
     "@shoelace-style/localize": "^3.0.4",
+    "composed-offset-position": "^0.0.4",
     "data-grid-component": "github:teamshares/data-grid",
     "lit": "^2.6.1",
     "qr-creator": "^1.0.0"
@@ -113,7 +115,6 @@
     "lint-staged": "^13.1.0",
     "lunr": "^2.3.9",
     "npm-check-updates": "^16.6.2",
-    "open": "^8.4.0",
     "pascal-case": "^3.1.2",
     "plop": "^3.1.1",
     "prettier": "^2.8.2",

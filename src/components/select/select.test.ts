@@ -8,15 +8,31 @@ import type SlOption from '../option/option';
 import type SlSelect from './select';
 
 describe('<sl-select>', () => {
-  it('should pass accessibility tests', async () => {
-    const el = await fixture<SlSelect>(html`
-      <sl-select label="Select one">
-        <sl-option value="option-1">Option 1</sl-option>
-        <sl-option value="option-2">Option 2</sl-option>
-        <sl-option value="option-3">Option 3</sl-option>
-      </sl-select>
-    `);
-    await expect(el).to.be.accessible();
+  describe('accessibility', () => {
+    it('should pass accessibility tests when closed', async () => {
+      const select = await fixture<SlSelect>(html`
+        <sl-select label="Select one">
+          <sl-option value="option-1">Option 1</sl-option>
+          <sl-option value="option-2">Option 2</sl-option>
+          <sl-option value="option-3">Option 3</sl-option>
+        </sl-select>
+      `);
+      await expect(select).to.be.accessible();
+    });
+
+    it('should pass accessibility tests when open', async () => {
+      const select = await fixture<SlSelect>(html`
+        <sl-select label="Select one">
+          <sl-option value="option-1">Option 1</sl-option>
+          <sl-option value="option-2">Option 2</sl-option>
+          <sl-option value="option-3">Option 3</sl-option>
+        </sl-select>
+      `);
+
+      await select.show();
+
+      await expect(select).to.be.accessible();
+    });
   });
 
   it('should be disabled with the disabled attribute', async () => {
@@ -161,6 +177,32 @@ describe('<sl-select>', () => {
       el.value = 'option-2';
 
       await el.updateComplete;
+    });
+
+    it('should emit sl-change and sl-input with the correct validation message when the value changes', async () => {
+      const el = await fixture<SlSelect>(html`
+        <sl-select required>
+          <sl-option value="option-1">Option 1</sl-option>
+          <sl-option value="option-2">Option 2</sl-option>
+          <sl-option value="option-3">Option 3</sl-option>
+        </sl-select>
+      `);
+      const option2 = el.querySelectorAll('sl-option')[1];
+      const handler = sinon.spy((event: CustomEvent) => {
+        if (el.validationMessage) {
+          expect.fail(`Validation message should be empty when ${event.type} is emitted and a value is set`);
+        }
+      });
+
+      el.addEventListener('sl-change', handler);
+      el.addEventListener('sl-input', handler);
+
+      await clickOnElement(el);
+      await aTimeout(500);
+      await clickOnElement(option2);
+      await el.updateComplete;
+
+      expect(handler).to.be.calledTwice;
     });
   });
 

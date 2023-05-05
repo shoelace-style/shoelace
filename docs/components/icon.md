@@ -588,7 +588,7 @@ Icons in this library are licensed under the [Apache 2.0 License](https://github
 </div>
 ```
 
-## Tabler Icons
+### Tabler Icons
 
 This will register the [Tabler Icons](https://tabler-icons.io/) library using the jsDelivr CDN. This library features over 1,950 open source icons.
 

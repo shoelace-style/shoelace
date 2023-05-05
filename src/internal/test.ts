@@ -50,6 +50,7 @@ export async function clickOnElement(
   await sendMouse({ type: 'click', position: [clickX, clickY] });
 }
 
+/** A testing utility that moves the mouse onto an element. */
 export async function moveMouseOnElement(
   /** The element to click */
   el: Element,
