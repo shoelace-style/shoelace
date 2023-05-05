@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.0
+
+- Updated to upstream [2.4.0](/resources/changelog)
+- Docs redesign (courtesy of Sara H)
+- Improved Font Awesome documentation
+- A couple additional commits from upstream/next including:
+  - Buttons allow variable height children
+  - Documentation of radio button sizing
+
 ## 1.1.1
 
 - Increase padding for details

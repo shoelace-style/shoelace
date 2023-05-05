@@ -146,6 +146,22 @@ The size of [Radios](/components/radio) and [Radio Buttons](/components/radio-bu
 </script>
 ```
 
+```pug slim
+sl-radio-group.radio-group-size[label="Select an option" size="medium" value="medium"]
+  sl-radio[value="small"]
+    | Small
+  sl-radio[value="medium"]
+    | Medium
+  sl-radio[value="large"]
+    | Large
+
+javascript
+  const radioGroup = document.querySelector('.radio-group-size');
+  radioGroup.addEventListener('sl-change', () => {
+    radioGroup.size = radioGroup.value;
+  });
+```
+
 ```jsx react
 import { useState } from 'react';
 import { SlRadio, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';

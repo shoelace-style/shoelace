@@ -37,6 +37,20 @@
 </sl-carousel>
 ```
 
+```pug slim
+sl-carousel pagination="true" navigation="true" mouse-dragging="true" loop="true"
+  sl-carousel-item
+    img alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)" src="/assets/examples/carousel/mountains.jpg"
+  sl-carousel-item
+    img alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)" src="/assets/examples/carousel/waterfall.jpg"
+  sl-carousel-item
+    img alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)" src="/assets/examples/carousel/sunset.jpg"
+  sl-carousel-item
+    img alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)" src="/assets/examples/carousel/field.jpg"
+  sl-carousel-item
+    img alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)" src="/assets/examples/carousel/valley.jpg"
+```
+
 ```jsx react
 import { SlCarousel, SlCarouselItem } from '@teamshares/shoelace/dist/react';
 
@@ -119,6 +133,20 @@ Use the `pagination` attribute to show the total number of slides and the curren
 </sl-carousel>
 ```
 
+```pug slim
+sl-carousel pagination="true"
+  sl-carousel-item
+    img alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)" src="/assets/examples/carousel/mountains.jpg"
+  sl-carousel-item
+    img alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)" src="/assets/examples/carousel/waterfall.jpg"
+  sl-carousel-item
+    img alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)" src="/assets/examples/carousel/sunset.jpg"
+  sl-carousel-item
+    img alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)" src="/assets/examples/carousel/field.jpg"
+  sl-carousel-item
+    img alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)" src="/assets/examples/carousel/valley.jpg"
+```
+
 ```jsx react
 import { SlCarousel, SlCarouselItem } from '@teamshares/shoelace/dist/react';
 
@@ -195,6 +223,20 @@ Use the `navigation` attribute to show previous and next buttons.
     />
   </sl-carousel-item>
 </sl-carousel>
+```
+
+```pug slim
+sl-carousel navigation="true"
+  sl-carousel-item
+    img alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)" src="/assets/examples/carousel/mountains.jpg"
+  sl-carousel-item
+    img alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)" src="/assets/examples/carousel/waterfall.jpg"
+  sl-carousel-item
+    img alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)" src="/assets/examples/carousel/sunset.jpg"
+  sl-carousel-item
+    img alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)" src="/assets/examples/carousel/field.jpg"
+  sl-carousel-item
+    img alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)" src="/assets/examples/carousel/valley.jpg"
 ```
 
 ```jsx react
@@ -275,6 +317,20 @@ By default, the carousel will not advanced beyond the first and last slides. You
 </sl-carousel>
 ```
 
+```pug slim
+sl-carousel loop="true" navigation="true" pagination="true"
+  sl-carousel-item
+    img alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)" src="/assets/examples/carousel/mountains.jpg"
+  sl-carousel-item
+    img alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)" src="/assets/examples/carousel/waterfall.jpg"
+  sl-carousel-item
+    img alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)" src="/assets/examples/carousel/sunset.jpg"
+  sl-carousel-item
+    img alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)" src="/assets/examples/carousel/field.jpg"
+  sl-carousel-item
+    img alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)" src="/assets/examples/carousel/valley.jpg"
+```
+
 ```jsx react
 import { SlCarousel, SlCarouselItem } from '@teamshares/shoelace/dist/react';
 
@@ -351,6 +407,20 @@ The carousel will automatically advance when the `autoplay` attribute is used. T
     />
   </sl-carousel-item>
 </sl-carousel>
+```
+
+```pug slim
+sl-carousel autoplay="true" loop="true" pagination="true"
+  sl-carousel-item
+    img alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)" src="/assets/examples/carousel/mountains.jpg"
+  sl-carousel-item
+    img alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)" src="/assets/examples/carousel/waterfall.jpg"
+  sl-carousel-item
+    img alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)" src="/assets/examples/carousel/sunset.jpg"
+  sl-carousel-item
+    img alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)" src="/assets/examples/carousel/field.jpg"
+  sl-carousel-item
+    img alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)" src="/assets/examples/carousel/valley.jpg"
 ```
 
 ```jsx react
@@ -449,6 +519,32 @@ This example is best demonstrated using a mouse. Try clicking and dragging the s
 </script>
 ```
 
+```pug slim
+div class="mouse-dragging"
+  sl-carousel pagination="true"
+    sl-carousel-item
+      img alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)" src="/assets/examples/carousel/mountains.jpg"
+    sl-carousel-item
+      img alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)" src="/assets/examples/carousel/waterfall.jpg"
+    sl-carousel-item
+      img alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)" src="/assets/examples/carousel/sunset.jpg"
+    sl-carousel-item
+      img alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)" src="/assets/examples/carousel/field.jpg"
+    sl-carousel-item
+      img alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)" src="/assets/examples/carousel/valley.jpg"
+  sl-divider
+  sl-switch Enable mouse dragging
+
+javascript
+  const container = document.querySelector(.mouse-dragging);
+  const carousel = container.querySelector(sl-carousel);
+  const toggle = container.querySelector(sl-switch);
+
+  toggle.addEventListener(sl-change, () => {
+    carousel.toggleAttribute(mouse-dragging, toggle.checked);
+  });
+```
+
 ```jsx react
 import { useState } from 'react';
 import { SlCarousel, SlCarouselItem, SlDivider, SlSwitch } from '@teamshares/shoelace/dist/react';
@@ -514,6 +610,16 @@ The `slides-per-view` attribute makes it possible to display multiple slides at 
   <sl-carousel-item style="background: var(--sl-color-blue-200);">Slide 5</sl-carousel-item>
   <sl-carousel-item style="background: var(--sl-color-violet-200);">Slide 6</sl-carousel-item>
 </sl-carousel>
+```
+
+```pug slim
+sl-carousel navigation="true" pagination="true" slides-per-page="2" slides-per-move="2"
+  sl-carousel-item style="background: var(--sl-color-red-200);" Slide 1
+  sl-carousel-item style="background: var(--sl-color-orange-200);" Slide 2
+  sl-carousel-item style="background: var(--sl-color-yellow-200);" Slide 3
+  sl-carousel-item style="background: var(--sl-color-green-200);" Slide 4
+  sl-carousel-item style="background: var(--sl-color-blue-200);" Slide 5
+  sl-carousel-item style="background: var(--sl-color-violet-200);" Slide 6
 ```
 
 ```jsx react
@@ -601,6 +707,65 @@ The content of the carousel can be changed by adding or removing carousel items.
     dynamicRemove.addEventListener('click', removeSlide);
   })();
 </script>
+```
+
+```pug slim
+sl-carousel class="dynamic-carousel" pagination="true" navigation="true"
+  sl-carousel-item style="background: var(--sl-color-red-200)" Slide 1
+  sl-carousel-item style="background: var(--sl-color-orange-200)" Slide 2
+  sl-carousel-item style="background: var(--sl-color-yellow-200)" Slide 3
+div class="carousel-options"
+  sl-button#dynamic-add Add slide
+  sl-button#dynamic-remove Remove slide
+
+css
+  .dynamic-carousel {
+    --aspect-ratio: 3 / 2;
+  }
+  .dynamic-carousel ~ .carousel-options {
+    display: flex;
+    justify-content: center;
+    gap: var(--sl-spacing-x-small);
+    margin-top: var(--sl-spacing-large);
+  }
+  .dynamic-carousel sl-carousel-item {
+    flex: 0 0 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--sl-font-size-2x-large);
+  }
+
+javascript
+  (() => {
+    const dynamicCarousel = document.querySelector(.dynamic-carousel);
+    const dynamicAdd = document.querySelector(#dynamic-add);
+    const dynamicRemove = document.querySelector(#dynamic-remove);
+    const colors = [red, orange, yellow, green, blue, violet];
+    let colorIndex = 2;
+
+    const addSlide = () => {
+      const slide = document.createElement(sl-carousel-item);
+      const color = colors[++colorIndex % colors.length];
+      slide.innerText = `Slide ${dynamicCarousel.children.length + 1}`;
+      slide.style.setProperty(background, `var(--sl-color-${color}-200)`);
+      dynamicCarousel.appendChild(slide);
+      dynamicRemove.disabled = false;
+    };
+
+    const removeSlide = () => {
+      const slide = dynamicCarousel.children[dynamicCarousel.children.length - 1];
+      const numSlides = dynamicCarousel.querySelectorAll(sl-carousel-item).length;
+      if (numSlides > 1) {
+        slide.remove();
+        colorIndex--;
+      }
+      dynamicRemove.disabled = numSlides - 1 <= 1;
+    };
+
+    dynamicAdd.addEventListener(click, addSlide);
+    dynamicRemove.addEventListener(click, removeSlide);
+  })();
 ```
 
 ```jsx react
@@ -716,6 +881,35 @@ Setting the `orientation` attribute to `vertical` will render the carousel in a 
     display: flex;
   }
 </style>
+```
+
+```pug slim
+sl-carousel class="vertical" pagination="true" orientation="vertical"
+  sl-carousel-item
+    img alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)" src="/assets/examples/carousel/mountains.jpg"
+  sl-carousel-item
+    img alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)" src="/assets/examples/carousel/waterfall.jpg"
+  sl-carousel-item
+    img alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)" src="/assets/examples/carousel/sunset.jpg"
+  sl-carousel-item
+    img alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)" src="/assets/examples/carousel/field.jpg"
+  sl-carousel-item
+    img alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)" src="/assets/examples/carousel/valley.jpg"
+
+css
+  .vertical {
+    max-height: 400px;
+  }
+  .vertical::part(base) {
+    grid-template-areas: slides slides pagination;
+  }
+  .vertical::part(pagination) {
+    flex-direction: column;
+  }
+  .vertical::part(navigation) {
+    transform: rotate(90deg);
+    display: flex;
+  }
 ```
 
 ```jsx react
@@ -837,6 +1031,35 @@ Use the `--aspect-ratio` custom property to customize the size of the carousel's
 </script>
 ```
 
+```pug slim
+sl-carousel class="aspect-ratio" navigation="true" pagination="true" style="--aspect-ratio: 3/2;"
+  sl-carousel-item
+    img alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)" src="/assets/examples/carousel/mountains.jpg"
+  sl-carousel-item
+    img alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)" src="/assets/examples/carousel/waterfall.jpg"
+  sl-carousel-item
+    img alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)" src="/assets/examples/carousel/sunset.jpg"
+  sl-carousel-item
+    img alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)" src="/assets/examples/carousel/field.jpg"
+  sl-carousel-item
+    img alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)" src="/assets/examples/carousel/valley.jpg"
+sl-divider
+sl-select label="Aspect ratio" name="aspect" value="3/2"
+  sl-option value="1/1" 1/1
+  sl-option value="3/2" 3/2
+  sl-option value="16/9" 16/9
+
+javascript
+  (() => {
+    const carousel = document.querySelector(sl-carousel.aspect-ratio);
+    const aspectRatio = document.querySelector(sl-select[name=aspect]);
+
+    aspectRatio.addEventListener(sl-change, () => {
+      carousel.style.setProperty(--aspect-ratio, aspectRatio.value);
+    });
+  })();
+```
+
 ```jsx react
 import { useState } from 'react';
 import { SlCarousel, SlCarouselItem, SlDivider, SlSelect, SlOption } from '@teamshares/shoelace/dist/react';
@@ -935,6 +1158,20 @@ Use the `--scroll-hint` custom property to add inline padding in horizontal caro
     />
   </sl-carousel-item>
 </sl-carousel>
+```
+
+```pug slim
+sl-carousel class="scroll-hint" pagination="true" style="--scroll-hint: 10%;"
+  sl-carousel-item
+    img alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)" src="/assets/examples/carousel/mountains.jpg"
+  sl-carousel-item
+    img alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)" src="/assets/examples/carousel/waterfall.jpg"
+  sl-carousel-item
+    img alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)" src="/assets/examples/carousel/sunset.jpg"
+  sl-carousel-item
+    img alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)" src="/assets/examples/carousel/field.jpg"
+  sl-carousel-item
+    img alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)" src="/assets/examples/carousel/valley.jpg"
 ```
 
 ```jsx react
@@ -1096,6 +1333,90 @@ The carousel has a robust API that makes it possible to extend and customize. Th
     });
   }
 </script>
+```
+
+```pug slim
+sl-carousel class="carousel-thumbnails" navigation="true" loop="true"
+  sl-carousel-item
+    img alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)" src="/assets/examples/carousel/mountains.jpg"
+  sl-carousel-item
+    img alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)" src="/assets/examples/carousel/waterfall.jpg"
+  sl-carousel-item
+    img alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)" src="/assets/examples/carousel/sunset.jpg"
+  sl-carousel-item
+    img alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)" src="/assets/examples/carousel/field.jpg"
+  sl-carousel-item
+    img alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)" src="/assets/examples/carousel/valley.jpg"
+div class="thumbnails"
+  div class="thumbnails__scroller"
+    img alt="Thumbnail by 1" class="thumbnails__image active" src="/assets/examples/carousel/mountains.jpg"
+    img alt="Thumbnail by 2" class="thumbnails__image" src="/assets/examples/carousel/waterfall.jpg"
+    img alt="Thumbnail by 3" class="thumbnails__image" src="/assets/examples/carousel/sunset.jpg"
+    img alt="Thumbnail by 4" class="thumbnails__image" src="/assets/examples/carousel/field.jpg"
+    img alt="Thumbnail by 5" class="thumbnails__image" src="/assets/examples/carousel/valley.jpg"
+
+css
+  .carousel-thumbnails {
+    --slide-aspect-ratio: 3 / 2;
+  }
+  .thumbnails {
+    display: flex;
+    justify-content: center;
+  }
+  .thumbnails__scroller {
+    display: flex;
+    gap: var(--sl-spacing-small);
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    scroll-padding: var(--sl-spacing-small);
+  }
+  .thumbnails__scroller::-webkit-scrollbar {
+    display: none;
+  }
+  .thumbnails__image {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+
+    opacity: 0.3;
+    will-change: opacity;
+    transition: 250ms opacity;
+
+    cursor: pointer;
+  }
+  .thumbnails__image.active {
+    opacity: 1;
+  }
+
+javascript
+  (() => {
+    const carousel = document.querySelector(.carousel-thumbnails);
+    const scroller = document.querySelector(.thumbnails__scroller);
+    const thumbnails = document.querySelectorAll(.thumbnails__image);
+
+    scroller.addEventListener(click, e => {
+      const target = e.target;
+
+      if (target.matches(.thumbnails__image)) {
+        const index = [...thumbnails].indexOf(target);
+        carousel.goToSlide(index);
+      }
+    });
+
+    carousel.addEventListener(sl-slide-change, e => {
+      const slideIndex = e.detail.index;
+
+      [...thumbnails].forEach((thumb, i) => {
+        thumb.classList.toggle(active, i === slideIndex);
+        if (i === slideIndex) {
+          thumb.scrollIntoView({
+            block: nearest
+          });
+        }
+      });
+    });
+  })();
 ```
 
 ```jsx react
