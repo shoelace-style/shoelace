@@ -173,7 +173,7 @@ The event has a payload with `phase` and `value` properties. The `phase` propert
 
 ```jsx react
 import { useState } from 'react';
-import { SlRating } from '@shoelace-style/shoelace/dist/react';
+import { SlRating } from '@teamshares/shoelace/dist/react';
 
 const terms = ['No rating', 'Terrible', 'Bad', 'OK', 'Good', 'Excellent'];
 const css = `

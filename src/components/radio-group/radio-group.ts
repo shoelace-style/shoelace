@@ -71,6 +71,9 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
   /** The current value of the radio group, submitted as a name/value pair with form data. */
   @property({ reflect: true }) value = '';
 
+  /** The radio group's size. This size will be applied to all child radios and radio buttons. */
+  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
+
   /**
    * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
    * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
@@ -196,40 +199,58 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     }
   }
 
-  private handleSlotChange() {
-    const radios = this.getAllRadios();
-
-    radios.forEach(radio => (radio.checked = radio.value === this.value));
-
-    this.hasButtonGroup = radios.some(radio => radio.tagName.toLowerCase() === 'sl-radio-button');
-
-    if (!radios.some(radio => radio.checked)) {
-      if (this.hasButtonGroup) {
-        const buttonRadio = radios[0].shadowRoot!.querySelector('button')!;
-        buttonRadio.tabIndex = 0;
-      } else {
-        radios[0].tabIndex = 0;
-      }
-    }
-
-    if (this.hasButtonGroup) {
-      const buttonGroup = this.shadowRoot?.querySelector('sl-button-group');
-
-      if (buttonGroup) {
-        buttonGroup.disableRole = true;
-      }
-    }
-  }
-
   private handleInvalid(event: Event) {
     this.formControlController.setValidity(false);
     this.formControlController.emitInvalidEvent(event);
+  }
+
+  private syncRadios() {
+    if (customElements.get('sl-radio') || customElements.get('sl-radio-button')) {
+      const radios = this.getAllRadios();
+
+      // Sync the checked state and size
+      radios.forEach(radio => {
+        radio.checked = radio.value === this.value;
+        radio.size = this.size;
+      });
+
+      this.hasButtonGroup = radios.some(radio => radio.tagName.toLowerCase() === 'sl-radio-button');
+
+      if (!radios.some(radio => radio.checked)) {
+        if (this.hasButtonGroup) {
+          const buttonRadio = radios[0].shadowRoot?.querySelector('button');
+
+          if (buttonRadio) {
+            buttonRadio.tabIndex = 0;
+          }
+        } else {
+          radios[0].tabIndex = 0;
+        }
+      }
+
+      if (this.hasButtonGroup) {
+        const buttonGroup = this.shadowRoot?.querySelector('sl-button-group');
+
+        if (buttonGroup) {
+          buttonGroup.disableRole = true;
+        }
+      }
+    } else {
+      // Rerun this handler when <sl-radio> or <sl-radio-button> is registered
+      customElements.whenDefined('sl-radio').then(() => this.syncRadios());
+      customElements.whenDefined('sl-radio-button').then(() => this.syncRadios());
+    }
   }
 
   private updateCheckedRadio() {
     const radios = this.getAllRadios();
     radios.forEach(radio => (radio.checked = radio.value === this.value));
     this.formControlController.setValidity(this.validity.valid);
+  }
+
+  @watch('size', { waitUntilFirstUpdate: true })
+  handleSizeChange() {
+    this.syncRadios();
   }
 
   @watch('value')
@@ -252,12 +273,9 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     return true;
   }
 
-  /** Sets a custom validation message. Pass an empty string to restore validity. */
-  setCustomValidity(message = '') {
-    this.customValidityMessage = message;
-    this.errorMessage = message;
-    this.validationInput.setCustomValidity(message);
-    this.formControlController.updateValidity();
+  /** Gets the associated form, if one exists. */
+  getForm(): HTMLFormElement | null {
+    return this.formControlController.getForm();
   }
 
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
@@ -279,6 +297,14 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     return isValid;
   }
 
+  /** Sets a custom validation message. Pass an empty string to restore validity. */
+  setCustomValidity(message = '') {
+    this.customValidityMessage = message;
+    this.errorMessage = message;
+    this.validationInput.setCustomValidity(message);
+    this.formControlController.updateValidity();
+  }
+
   render() {
     const hasLabelSlot = this.hasSlotController.test('label');
     const hasHelpTextSlot = this.hasSlotController.test('help-text');
@@ -289,7 +315,7 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
       <slot
         @click=${this.handleRadioClick}
         @keydown=${this.handleKeyDown}
-        @slotchange=${this.handleSlotChange}
+        @slotchange=${this.syncRadios}
         role="presentation"
       ></slot>
     `;
@@ -299,7 +325,9 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
         part="form-control"
         class=${classMap({
           'form-control': true,
-          'form-control--medium': true,
+          'form-control--small': this.size === 'small',
+          'form-control--medium': this.size === 'medium',
+          'form-control--large': this.size === 'large',
           'form-control--radio-group': true,
           'form-control--has-label': hasLabel,
           'form-control--has-help-text': hasHelpText

@@ -29,7 +29,10 @@ sl-icon name="academic-cap"
       <sl-option value="all">All icons</sl-option>
     </sl-select>
   </div>
-  <div class="icon-list"></div>
+  <br/>
+  <sl-details open="true" summary="Icon results">
+    <div class="icon-list"></div>
+  </sl-details>
   <input type="text" class="icon-copy-input" aria-hidden="true" tabindex="-1">
 </div>
 
@@ -41,7 +44,31 @@ Teamshares has enabled the free version Font Awesome's icons, with plans to add 
 sl-icon library="fa-free" name="user"
 ```
 
-For the time being, you can use the name of the icon without a prefix, e.g. `face-smile`. Search the Font Awesome site via the form input below.
+For stroke-based icons, you can use the name of the icon without a prefix, e.g. `face-smile`. Solid icons require an `fas-` prefix. Note that some icons only exist in one style.
+
+```html preview
+<sl-icon library="fa-free" name="face-smile"></sl-icon>
+<sl-icon library="fa-free" name="fas-face-smile"></sl-icon>
+<sl-icon library="fa-free" name="user"></sl-icon>
+<sl-icon library="fa-free" name="fas-user"></sl-icon>
+<sl-icon library="fa-free" name="fas-users"></sl-icon>
+```
+
+```pug slim
+sl-icon library="fa-free" name="face-smile"
+sl-icon library="fa-free" name="fas-face-smile"
+sl-icon library="fa-free" name="user"
+sl-icon library="fa-free" name="fas-user"
+sl-icon library="fa-free" name="fas-users"
+```
+
+```jsx react
+import { SlIcon } from '@teamshares/shoelace/dist/react';
+
+const App = () => <SlIcon library="fa-free" name="face-smile" label="Add to favorites" />;
+```
+
+Search the Font Awesome site via the form input below (will open a popup window).
 
 <div class="fa-search">
   <sl-input class="fa-icon-search-input" placeholder="Search Font Awesome Free Icons" clearable>
@@ -50,22 +77,8 @@ For the time being, you can use the name of the icon without a prefix, e.g. `fac
   <sl-button class="fa-icon-search-button">
     Search
     <sl-icon name="arrow-top-right-on-square" slot="suffix">
-</sl-button>
+  </sl-button>
 </div>
-
-```html preview
-<sl-icon library="fa-free" name="face-smile"></sl-icon>
-```
-
-```pug slim
-sl-icon library="fa-free" name="face-smile"
-```
-
-```jsx react
-import { SlIcon } from '@teamshares/shoelace/dist/react';
-
-const App = () => <SlIcon library="fa-free" name="face-smile" label="Add to favorites" />;
-```
 
 ## Examples
 
@@ -588,7 +601,7 @@ Icons in this library are licensed under the [Apache 2.0 License](https://github
 </div>
 ```
 
-## Tabler Icons
+### Tabler Icons
 
 This will register the [Tabler Icons](https://tabler-icons.io/) library using the jsDelivr CDN. This library features over 1,950 open source icons.
 
@@ -778,7 +791,19 @@ If you want to change the icons Shoelace uses internally, you can register an ic
       const onFaSearch = () => {
         const query = faIconSearchInput.value;
         if (query) {
-          window.open(`https://fontawesome.com/search?q=${query}&o=r&m=free`)
+          const searchPopup = window.open(`https://fontawesome.com/search?q=${query}&o=r&m=free`, 'fontAwesomeSearch', 'popup');
+          if (!searchPopup) {
+            const alert = Object.assign(document.createElement('sl-alert'), {
+              variant: 'warning',
+              closable: true,
+              duration: 5000,
+              innerHTML: `
+                <sl-icon name="exclamation-triangle-solid" slot="icon"></sl-icon>
+                Please enable popups on this page to see the Font Awesome search results.
+              `
+              });
+            document.body.append(alert);
+          } 
         }
       }
 

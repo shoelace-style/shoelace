@@ -281,6 +281,11 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
     return this.input.checkValidity();
   }
 
+  /** Gets the associated form, if one exists. */
+  getForm(): HTMLFormElement | null {
+    return this.formControlController.getForm();
+  }
+
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
   reportValidity() {
     return this.input.reportValidity();

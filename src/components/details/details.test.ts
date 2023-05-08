@@ -2,8 +2,24 @@
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import sinon from 'sinon';
 import type SlDetails from './details';
+import type SlHideEvent from '../../events/sl-hide';
+import type SlShowEvent from '../../events/sl-show';
 
 describe('<sl-details>', () => {
+  describe('accessibility', () => {
+    it('should be accessible when closed', async () => {
+      const details = await fixture<SlDetails>(html`<sl-details summary="Test"> Test text </sl-details>`);
+
+      await expect(details).to.be.accessible();
+    });
+
+    it('should be accessible when open', async () => {
+      const details = await fixture<SlDetails>(html`<sl-details open summary="Test">Test text</sl-details>`);
+
+      await expect(details).to.be.accessible();
+    });
+  });
+
   it('should be visible with the open attribute', async () => {
     const el = await fixture<SlDetails>(html`
       <sl-details open>
@@ -134,7 +150,7 @@ describe('<sl-details>', () => {
         consequat.
       </sl-details>
     `);
-    const showHandler = sinon.spy((event: CustomEvent) => event.preventDefault());
+    const showHandler = sinon.spy((event: SlShowEvent) => event.preventDefault());
 
     el.addEventListener('sl-show', showHandler);
     el.open = true;
@@ -153,7 +169,7 @@ describe('<sl-details>', () => {
         consequat.
       </sl-details>
     `);
-    const hideHandler = sinon.spy((event: CustomEvent) => event.preventDefault());
+    const hideHandler = sinon.spy((event: SlHideEvent) => event.preventDefault());
 
     el.addEventListener('sl-hide', hideHandler);
     el.open = false;

@@ -332,8 +332,9 @@
       version.classList.add('sidebar-version');
       version.textContent = `Version ${metadata.package.version} `;
       const upstreamLink = document.createElement('a');
+      upstreamLink.className = 'sidebar-version-link';
       upstreamLink.href = `https://shoelace.style/resources/changelog?id=_${metadata.package.upstreamVersion}`;
-      upstreamLink.textContent = `(Shoelace upstream: ${metadata.package.upstreamVersion})`;
+      upstreamLink.textContent = `(Shoelace: ${metadata.package.upstreamVersion})`;
       version.appendChild(upstreamLink);
       target.appendChild(version);
 
@@ -439,6 +440,9 @@
           /* prettier-ignore */
           result += `
             ## Importing
+
+            If you're using the autoloader or the traditional loader, you can ignore this section. Otherwise, feel free to
+            use any of the following snippets to [cherry pick](getting-started/installation#cherry-picking) this component.
 
             <sl-tab-group>
             <sl-tab slot="nav" panel="script">Script</sl-tab>

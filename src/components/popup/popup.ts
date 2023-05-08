@@ -1,7 +1,8 @@
-import { arrow, autoUpdate, computePosition, flip, offset, shift, size } from '@floating-ui/dom';
+import { arrow, autoUpdate, computePosition, flip, offset, platform, shift, size } from '@floating-ui/dom';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
+import { offsetParent } from 'composed-offset-position';
 import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './popup.styles';
 import type { CSSResultGroup } from 'lit';
@@ -76,8 +77,8 @@ export default class SlPopup extends ShoelaceElement {
     | 'left-end' = 'top';
 
   /**
-   * Determines how the popup is positioned. The `absolute` strategy works well in most cases, but if
-   * overflow is clipped, using a `fixed` position strategy can often workaround it.
+   * Determines how the popup is positioned. The `absolute` strategy works well in most cases, but if overflow is
+   * clipped, using a `fixed` position strategy can often workaround it.
    */
   @property({ reflect: true }) strategy: 'absolute' | 'fixed' = 'absolute';
 
@@ -365,10 +366,24 @@ export default class SlPopup extends ShoelaceElement {
       );
     }
 
+    //
+    // Use custom positioning logic if the strategy is absolute. Otherwise, fall back to the default logic.
+    //
+    // More info: https://github.com/shoelace-style/shoelace/issues/1135
+    //
+    const getOffsetParent =
+      this.strategy === 'absolute'
+        ? (element: Element) => platform.getOffsetParent(element, offsetParent)
+        : platform.getOffsetParent;
+
     computePosition(this.anchorEl, this.popup, {
       placement: this.placement,
       middleware,
-      strategy: this.strategy
+      strategy: this.strategy,
+      platform: {
+        ...platform,
+        getOffsetParent
+      }
     }).then(({ x, y, middlewareData, placement }) => {
       //
       // Even though we have our own localization utility, it uses different heuristics to determine RTL. Because of

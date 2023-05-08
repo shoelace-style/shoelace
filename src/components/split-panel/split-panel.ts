@@ -249,17 +249,21 @@ export default class SlSplitPanel extends ShoelaceElement {
     return html`
       <slot name="start" part="panel start" class="start"></slot>
 
-      <slot
-        name="divider"
+      <div
         part="divider"
         class="divider"
         tabindex=${ifDefined(this.disabled ? undefined : '0')}
         role="separator"
+        aria-valuenow=${this.position}
+        aria-valuemin="0"
+        aria-valuemax="100"
         aria-label=${this.localize.term('resize')}
         @keydown=${this.handleKeyDown}
         @mousedown=${this.handleDrag}
         @touchstart=${this.handleDrag}
-      ></slot>
+      >
+        <slot name="divider"></slot>
+      </div>
 
       <slot name="end" part="panel end" class="end"></slot>
     `;

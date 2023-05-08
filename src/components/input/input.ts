@@ -14,18 +14,6 @@ import styles from './input.styles';
 import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element';
 
-//
-// It's currently impossible to hide Firefox's built-in clear icon when using <input type="date|time">, so we need this
-// check to apply a clip-path to hide it. I know, I know…user agent sniffing is nasty but, if it fails, we only see a
-// redundant clear icon so nothing important is breaking. The benefits outweigh the costs for this one. See the
-// discussion at: https://github.com/shoelace-style/shoelace/pull/794
-//
-// Also note that we do the Chromium check first to prevent Chrome from logging a console notice as described here:
-// https://github.com/shoelace-style/shoelace/issues/855
-//
-const isChromium = navigator.userAgentData?.brands.some(b => b.brand.includes('Chromium'));
-const isFirefox = isChromium ? false : navigator.userAgent.includes('Firefox');
-
 /**
  * @summary Inputs collect data from the user.
  * @documentation https://shoelace.style/components/input
@@ -156,10 +144,10 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   @property({ type: Number }) maxlength: number;
 
   /** The input's minimum value. Only applies to date and number input types. */
-  @property({ type: Number }) min: number;
+  @property() min: number | string;
 
   /** The input's maximum value. Only applies to date and number input types. */
-  @property({ type: Number }) max: number;
+  @property() max: number | string;
 
   /**
    * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
@@ -202,13 +190,20 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
    */
   @property() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
+  //
+  // NOTE: We use an in-memory input for these getters/setters instead of the one in the template because the properties
+  // can be set before the component is rendered.
+  //
+
   /** Gets or sets the current value as a `Date` object. Returns `null` if the value can't be converted. */
   get valueAsDate() {
-    return this.input?.valueAsDate ?? null;
+    const input = document.createElement('input');
+    input.type = 'date';
+    input.value = this.value;
+    return input.valueAsDate;
   }
 
   set valueAsDate(newValue: Date | null) {
-    // We use an in-memory input instead of the one in the template because the property can be set before render
     const input = document.createElement('input');
     input.type = 'date';
     input.valueAsDate = newValue;
@@ -217,11 +212,13 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
 
   /** Gets or sets the current value as a number. Returns `NaN` if the value can't be converted. */
   get valueAsNumber() {
-    return this.input?.valueAsNumber ?? parseFloat(this.value);
+    const input = document.createElement('input');
+    input.type = 'number';
+    input.value = this.value;
+    return input.valueAsNumber;
   }
 
   set valueAsNumber(newValue: number) {
-    // We use an in-memory input instead of the one in the template because the property can be set before render
     const input = document.createElement('input');
     input.type = 'number';
     input.valueAsNumber = newValue;
@@ -389,6 +386,11 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
     return this.input.checkValidity();
   }
 
+  /** Gets the associated form, if one exists. */
+  getForm(): HTMLFormElement | null {
+    return this.formControlController.getForm();
+  }
+
   /** Checks for validity and shows the browser's validation message if the control is invalid. */
   reportValidity() {
     return this.input.reportValidity();
@@ -447,8 +449,7 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
               'input--disabled': this.disabled,
               'input--focused': this.hasFocus,
               'input--empty': !this.value,
-              'input--no-spin-buttons': this.noSpinButtons,
-              'input--is-firefox': isFirefox
+              'input--no-spin-buttons': this.noSpinButtons
             })}
           >
             <slot name="prefix" part="prefix" class="input__prefix"></slot>
@@ -469,9 +470,9 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
               max=${ifDefined(this.max)}
               step=${ifDefined(this.step as number)}
               .value=${live(this.value)}
-              autocapitalize=${ifDefined(this.type === 'password' ? 'off' : this.autocapitalize)}
-              autocomplete=${ifDefined(this.type === 'password' ? 'off' : this.autocomplete)}
-              autocorrect=${ifDefined(this.type === 'password' ? 'off' : this.autocorrect)}
+              autocapitalize=${ifDefined(this.autocapitalize)}
+              autocomplete=${ifDefined(this.autocomplete)}
+              autocorrect=${ifDefined(this.autocorrect)}
               ?autofocus=${this.autofocus}
               spellcheck=${this.spellcheck}
               pattern=${ifDefined(this.pattern)}

@@ -1,6 +1,8 @@
 import { elementUpdated, expect, fixture, html, oneEvent } from '@open-wc/testing';
 import { registerIconLibrary } from '../../../dist/shoelace.js';
+import type SlErrorEvent from '../../events/sl-error';
 import type SlIcon from './icon';
+import type SlLoadEvent from '../../events/sl-load';
 
 const testLibraryIcons = {
   'test-icon1': `
@@ -46,7 +48,7 @@ describe('<sl-icon>', () => {
 
     it('renders pre-loaded system icons and emits sl-load event', async () => {
       const el = await fixture<SlIcon>(html` <sl-icon library="system"></sl-icon> `);
-      const listener = oneEvent(el, 'sl-load') as Promise<CustomEvent>;
+      const listener = oneEvent(el, 'sl-load') as Promise<SlLoadEvent>;
 
       el.name = 'check';
       const ev = await listener;
@@ -93,6 +95,7 @@ describe('<sl-icon>', () => {
       await elementUpdated(el);
 
       expect(el.shadowRoot?.querySelector('svg')).to.exist;
+      expect(el.shadowRoot?.querySelector('svg')?.part.contains('svg')).to.be.true;
       expect(el.shadowRoot?.querySelector('svg')?.getAttribute('id')).to.equal(fakeId);
     });
   });
@@ -100,7 +103,7 @@ describe('<sl-icon>', () => {
   describe('new library', () => {
     it('renders icons from the new library and emits sl-load event', async () => {
       const el = await fixture<SlIcon>(html` <sl-icon library="test-library"></sl-icon> `);
-      const listener = oneEvent(el, 'sl-load') as Promise<CustomEvent>;
+      const listener = oneEvent(el, 'sl-load') as Promise<SlLoadEvent>;
 
       el.name = 'test-icon1';
       const ev = await listener;
@@ -129,7 +132,7 @@ describe('<sl-icon>', () => {
 
     it('emits sl-error when the file cant be retrieved', async () => {
       const el = await fixture<SlIcon>(html` <sl-icon library="test-library"></sl-icon> `);
-      const listener = oneEvent(el, 'sl-error') as Promise<CustomEvent>;
+      const listener = oneEvent(el, 'sl-error') as Promise<SlErrorEvent>;
 
       el.name = 'bad-request';
       const ev = await listener;
@@ -141,7 +144,7 @@ describe('<sl-icon>', () => {
 
     it("emits sl-error when there isn't an svg element in the registered icon", async () => {
       const el = await fixture<SlIcon>(html` <sl-icon library="test-library"></sl-icon> `);
-      const listener = oneEvent(el, 'sl-error') as Promise<CustomEvent>;
+      const listener = oneEvent(el, 'sl-error') as Promise<SlErrorEvent>;
 
       el.name = 'bad-icon';
       const ev = await listener;

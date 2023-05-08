@@ -6,17 +6,21 @@ const translation: Translation = {
   $name: 'فارسی',
   $dir: 'rtl',
 
+  carousel: 'چرخ فلک',
   clearEntry: 'پاک کردن ورودی',
   close: 'بستن',
   copy: 'رونوشت',
+  currentValue: 'مقدار فعلی',
+  goToSlide: (slide, count) => `رفتن به اسلاید ${slide} از ${count}`,
+  hidePassword: 'پنهان کردن رمز',
+  loading: 'بارگذاری',
+  nextSlide: 'اسلاید بعدی',
   numOptionsSelected: num => {
     if (num === 0) return 'هیچ گزینه ای انتخاب نشده است';
     if (num === 1) return '1 گزینه انتخاب شده است';
     return `${num} گزینه انتخاب شده است`;
   },
-  currentValue: 'مقدار فعلی',
-  hidePassword: 'پنهان کردن رمز',
-  loading: 'بارگذاری',
+  previousSlide: 'اسلاید قبلی',
   progress: 'پیشرفت',
   remove: 'حذف',
   resize: 'تغییر اندازه',
@@ -24,6 +28,7 @@ const translation: Translation = {
   scrollToStart: 'پیمایش به ابتدا',
   selectAColorFromTheScreen: 'انتخاب یک رنگ از صفحه نمایش',
   showPassword: 'نمایش رمز',
+  slideNum: slide => `اسلاید ${slide}`,
   toggleColorFormat: 'تغییر قالب رنگ'
 };
 

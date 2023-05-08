@@ -54,7 +54,7 @@ function syncCheckboxes(changedTreeItem: SlTreeItem, initialSync = false) {
  * @status stable
  * @since 2.0
  *
- * @event {{ selection: TreeItem[] }} sl-selection-change - Emitted when a tree item is selected or deselected.
+ * @event {{ selection: SlTreeItem[] }} sl-selection-change - Emitted when a tree item is selected or deselected.
  *
  * @slot - The default slot.
  * @slot expand-icon - The icon to show when the tree item is expanded. Works best with `<sl-icon>`.
@@ -90,6 +90,7 @@ export default class SlTree extends ShoelaceElement {
   private lastFocusedItem: SlTreeItem;
   private readonly localize = new LocalizeController(this);
   private mutationObserver: MutationObserver;
+  private clickTarget: SlTreeItem | null = null;
 
   async connectedCallback() {
     super.connectedCallback();
@@ -292,13 +293,20 @@ export default class SlTree extends ShoelaceElement {
   }
 
   private handleClick(event: Event) {
-    const target = event.target as HTMLElement;
+    const target = event.target as SlTreeItem;
     const treeItem = target.closest('sl-tree-item')!;
     const isExpandButton = event
       .composedPath()
       .some((el: HTMLElement) => el?.classList?.contains('tree-item__expand-button'));
 
-    if (!treeItem || treeItem.disabled) {
+    //
+    // Don't Do anything if there's no tree item, if it's disabled, or if the click doesn't match the initial target
+    // from mousedown. The latter case prevents the user from starting a click on one item and ending it on another,
+    // causing the parent node to collapse.
+    //
+    // See https://github.com/shoelace-style/shoelace/issues/1082
+    //
+    if (!treeItem || treeItem.disabled || target !== this.clickTarget) {
       return;
     }
 
@@ -307,6 +315,11 @@ export default class SlTree extends ShoelaceElement {
     } else {
       this.selectItem(treeItem);
     }
+  }
+
+  handleMouseDown(event: MouseEvent) {
+    // Record the click target so we know which item the click initially targeted
+    this.clickTarget = event.target as SlTreeItem;
   }
 
   private handleFocusOut(event: FocusEvent) {
@@ -392,7 +405,13 @@ export default class SlTree extends ShoelaceElement {
 
   render() {
     return html`
-      <div part="base" class="tree" @click=${this.handleClick} @keydown=${this.handleKeyDown}>
+      <div
+        part="base"
+        class="tree"
+        @click=${this.handleClick}
+        @keydown=${this.handleKeyDown}
+        @mousedown=${this.handleMouseDown}
+      >
         <slot @slotchange=${this.handleSlotChange}></slot>
         <slot name="expand-icon" hidden aria-hidden="true"> </slot>
         <slot name="collapse-icon" hidden aria-hidden="true"> </slot>

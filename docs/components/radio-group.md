@@ -126,6 +126,69 @@ const App = () => (
 );
 ```
 
+### Sizing Options
+
+The size of [Radios](/components/radio) and [Radio Buttons](/components/radio-buttons) will be determined by the Radio Group's `size` attribute.
+
+```html preview
+<sl-radio-group label="Select an option" size="medium" value="medium" class="radio-group-size">
+  <sl-radio value="small">Small</sl-radio>
+  <sl-radio value="medium">Medium</sl-radio>
+  <sl-radio value="large">Large</sl-radio>
+</sl-radio-group>
+
+<script>
+  const radioGroup = document.querySelector('.radio-group-size');
+
+  radioGroup.addEventListener('sl-change', () => {
+    radioGroup.size = radioGroup.value;
+  });
+</script>
+```
+
+```pug slim
+sl-radio-group.radio-group-size[label="Select an option" size="medium" value="medium"]
+  sl-radio[value="small"]
+    | Small
+  sl-radio[value="medium"]
+    | Medium
+  sl-radio[value="large"]
+    | Large
+
+javascript
+  const radioGroup = document.querySelector('.radio-group-size');
+  radioGroup.addEventListener('sl-change', () => {
+    radioGroup.size = radioGroup.value;
+  });
+```
+
+```jsx react
+import { useState } from 'react';
+import { SlRadio, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => {
+  const [size, setSize] = useState('medium');
+
+  return (
+    <>
+      <SlRadioGroup
+        label="Select an option"
+        size={size}
+        value={size}
+        class="radio-group-size"
+        onSlChange={event => setSize(event.target.value)}
+      >
+        <SlRadio value="small">Small</SlRadio>
+        <SlRadio value="medium">Medium</SlRadio>
+        <SlRadio value="large">Large</SlRadio>
+      </SlRadioGroup>
+    </>
+  );
+};
+```
+
+?> [Radios](/components/radio) and [Radio Buttons](/components/radio-button) also have a `size` attribute. This can be useful in certain compositions, but it will be ignored when used inside of a Radio Group.
+
 ### Validation
 
 Setting the `required` attribute to make selecting an option mandatory. If a value has not been selected, it will prevent the form from submitting and display an error message.
@@ -222,7 +285,7 @@ Use the `setCustomValidity()` method to set a custom validation message. This wi
   const errorMessage = 'You must choose the last option';
 
   // Set initial validity as soon as the element is defined
-  customElements.whenDefined('sl-radio-group').then(() => {
+  customElements.whenDefined('sl-radio').then(() => {
     radioGroup.setCustomValidity(errorMessage);
   });
 
