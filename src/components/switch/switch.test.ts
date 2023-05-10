@@ -262,5 +262,65 @@ describe('<sl-switch>', () => {
     });
   });
 
+  it('should not jump the page to the bottom when focusing a switch at the bottom of an element with overflow: auto;', async () => {
+    // https://github.com/shoelace-style/shoelace/issues/1169
+    const el = await fixture<HTMLDivElement>(html`
+      <div style="display: flex; flex-direction: column; overflow: auto; max-height: 400px;">
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+        <sl-switch>Switch</sl-switch>
+      </div>
+      ;
+    `);
+
+    const switches = el.querySelectorAll<SlSwitch>('sl-switch');
+    const lastSwitch = switches[switches.length - 1];
+
+    expect(window.scrollY).to.equal(0);
+    // Without these 2 timeouts, tests will pass unexpectedly in Safari.
+    await aTimeout(10);
+    lastSwitch.focus();
+    await aTimeout(10);
+    expect(window.scrollY).to.equal(0);
+  });
+
   runFormControlBaseTests('sl-switch');
 });
