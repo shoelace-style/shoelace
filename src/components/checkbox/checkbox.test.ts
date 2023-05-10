@@ -279,14 +279,7 @@ describe('<sl-checkbox>', () => {
       // https://github.com/shoelace-style/shoelace/issues/1169
       const el = await fixture<HTMLDivElement>(html`
         <div
-          style="
-            display: flex;
-            flex-direction: column;
-            overflow: auto;
-            max-height: 200px;
-            gap: 8px;
-            padding: 8px;
-          "
+          style="display: flex; flex-direction: column; overflow: auto; max-height: 200px;"
         >
           <sl-checkbox>Checkbox</sl-checkbox>
           <sl-checkbox>Checkbox</sl-checkbox>
@@ -297,7 +290,6 @@ describe('<sl-checkbox>', () => {
           <sl-checkbox>Checkbox</sl-checkbox>
           <sl-checkbox>Checkbox</sl-checkbox>
           <sl-checkbox>Checkbox</sl-checkbox>
-
           <sl-checkbox>Checkbox</sl-checkbox>
           <sl-checkbox>Checkbox</sl-checkbox>
           <sl-checkbox>Checkbox</sl-checkbox>
@@ -306,7 +298,14 @@ describe('<sl-checkbox>', () => {
           <sl-checkbox>Checkbox</sl-checkbox>
           <sl-checkbox>Checkbox</sl-checkbox>
           <sl-checkbox>Checkbox</sl-checkbox>
-
+          <sl-checkbox>Checkbox</sl-checkbox>
+          <sl-checkbox>Checkbox</sl-checkbox>
+          <sl-checkbox>Checkbox</sl-checkbox>
+          <sl-checkbox>Checkbox</sl-checkbox>
+          <sl-checkbox>Checkbox</sl-checkbox>
+          <sl-checkbox>Checkbox</sl-checkbox>
+          <sl-checkbox>Checkbox</sl-checkbox>
+          <sl-checkbox>Checkbox</sl-checkbox>
           <sl-checkbox>Checkbox</sl-checkbox>
           <sl-checkbox>Checkbox</sl-checkbox>
           <sl-checkbox>Checkbox</sl-checkbox>
