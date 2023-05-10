@@ -1,5 +1,5 @@
-import { clickOnElement } from '../../internal/test';
 import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
+import { clickOnElement } from '../../internal/test';
 import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
@@ -278,9 +278,7 @@ describe('<sl-checkbox>', () => {
     it('should not jump the page to the bottom when focusing a checkbox at the bottom of an element with overflow: auto;', async () => {
       // https://github.com/shoelace-style/shoelace/issues/1169
       const el = await fixture<HTMLDivElement>(html`
-        <div
-          style="display: flex; flex-direction: column; overflow: auto; max-height: 400px; gap: 8px;"
-        >
+        <div style="display: flex; flex-direction: column; overflow: auto; max-height: 400px; gap: 8px;">
           <sl-checkbox>Checkbox</sl-checkbox>
           <sl-checkbox>Checkbox</sl-checkbox>
           <sl-checkbox>Checkbox</sl-checkbox>

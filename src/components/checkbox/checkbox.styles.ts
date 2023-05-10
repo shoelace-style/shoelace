@@ -9,6 +9,7 @@ export default css`
   }
 
   .checkbox {
+    position: relative;
     display: inline-flex;
     align-items: flex-start;
     font-family: var(--sl-input-font-family);
@@ -35,6 +36,7 @@ export default css`
 
   .checkbox__control {
     flex: 0 0 auto;
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
