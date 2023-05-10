@@ -279,7 +279,7 @@ describe('<sl-checkbox>', () => {
       // https://github.com/shoelace-style/shoelace/issues/1169
       const el = await fixture<HTMLDivElement>(html`
         <div
-          style="display: flex; flex-direction: column; overflow: auto; max-height: 200px;"
+          style="display: flex; flex-direction: column; overflow: auto; max-height: 400px; gap: 8px;"
         >
           <sl-checkbox>Checkbox</sl-checkbox>
           <sl-checkbox>Checkbox</sl-checkbox>

@@ -33,7 +33,6 @@ export default css`
   }
 
   .switch {
-    position: relative;
     display: inline-flex;
     align-items: center;
     font-family: var(--sl-input-font-family);
@@ -46,7 +45,6 @@ export default css`
 
   .switch__control {
     flex: 0 0 auto;
-    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
