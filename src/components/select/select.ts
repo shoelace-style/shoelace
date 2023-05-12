@@ -757,6 +757,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
               ${this.multiple
                 ? html`
                     <div part="tags" class="select__tags">
+                      <slot name="tags">
                       ${this.selectedOptions.map((option, index) => {
                         if (index < this.maxOptionsVisible || this.maxOptionsVisible <= 0) {
                           return html`
@@ -782,6 +783,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
                           return null;
                         }
                       })}
+                      </slot>
                     </div>
                   `
                 : ''}
