@@ -32,6 +32,7 @@ import type SlRemoveEvent from '../../events/sl-remove';
  * @dependency sl-tag
  *
  * @slot - The listbox options. Must be `<sl-option>` elements. You can use `<sl-divider>` to group items visually.
+ * @slot tags - When using multiple, custom elements to use in lieu of the default tags.
  * @slot label - The input's label. Alternatively, you can use the `label` attribute.
  * @slot prefix - Used to prepend a presentational icon or similar element to the combobox.
  * @slot clear-icon - An icon to use in lieu of the default clear icon.
