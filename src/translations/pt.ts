@@ -25,10 +25,10 @@ const translation: Translation = {
   remove: 'Remover',
   resize: 'Mudar o tamanho',
   scrollToEnd: 'Rolar até o final',
-  scrollToStart: 'Rolar até o começo',
+  scrollToStart: 'Rolar até o início',
   selectAColorFromTheScreen: 'Selecionar uma cor da tela',
-  showPassword: 'Mostrar senhaShow password',
-  slideNum: slide => `Diapositivo ${slide}`,
+  showPassword: 'Mostrar senha',
+  slideNum: slide => `Slide ${slide}`,
   toggleColorFormat: 'Trocar o formato de cor'
 };
 
