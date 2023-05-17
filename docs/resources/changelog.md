@@ -14,6 +14,9 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Improved `<sl-button>` so it can accept children of variable heights [#1317](https://github.com/shoelace-style/shoelace/pull/1317)
 - Improved the docs to more clearly explain sizing radios and radio buttons
 - Improved the performance of `<sl-rating>` by partially rendering unseen icons [#1310](https://github.com/shoelace-style/shoelace/pull/1310)
+- Improved the Portuguese translation [#1336](https://github.com/shoelace-style/shoelace/pull/1336)
+- Improved the German translation [#1339](https://github.com/shoelace-style/shoelace/pull/1339)
+- Improved the autoloader so it watches `<html>` instead of `<body>` since the latter gets replaced by some frameworks [#1338](https://github.com/shoelace-style/shoelace/pull/1338)
 
 ## 2.4.0
 
