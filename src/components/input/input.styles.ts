@@ -95,7 +95,7 @@ export default css`
     height: 100%;
     color: var(--sl-input-color);
     border: none;
-    background: none;
+    background: inherit;
     box-shadow: none;
     padding: 0;
     margin: 0;
