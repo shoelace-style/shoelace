@@ -148,7 +148,7 @@ export default class SlTree extends ShoelaceElement {
 
   // Initializes new items by setting the `selectable` property and the expanded/collapsed icons if any
   private initTreeItem = (item: SlTreeItem) => {
-    item.selectable = this.selection === ('multiple' || 'any');
+    item.selectable = this.isSelectionMultiple;
 
     ['expand', 'collapse']
       .filter(status => !!this.querySelector(`[slot="${status}-icon"]`))
