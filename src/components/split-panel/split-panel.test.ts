@@ -18,6 +18,12 @@ const getPanelWidth = (splitPanel: SlSplitPanel, testid: string) => {
   return width;
 };
 
+const getPanelHeight = (splitPanel: SlSplitPanel, testid: string) => {
+  const panel = getPanel(splitPanel, testid);
+  const { height } = panel.getBoundingClientRect();
+  return height;
+};
+
 const getDivider = (splitPanel: SlSplitPanel): Element => {
   const divider = splitPanel.shadowRoot?.querySelector('[part="divider"]');
   expect(divider).not.to.be.null;
@@ -147,6 +153,105 @@ describe('<sl-split-panel>', () => {
       const divider = getDivider(splitPanel);
 
       await dragElement(divider, -30);
+
+      const positionInPixelsAfterDrag = splitPanel.positionInPixels;
+      expect(positionInPixelsAfterDrag).to.be.equal(positionInPixels - 40);
+    });
+  });
+
+  describe('panel sizing vertical', () => {
+    it('has two evenly sized panels by default', async () => {
+      const splitPanel = await fixture<SlSplitPanel>(html`<sl-split-panel vertical style="height: 400px;">
+        <div slot="start" data-testid="start-panel">Start</div>
+        <div slot="end" data-testid="end-panel">End</div>
+      </sl-split-panel>`);
+
+      const startPanelHeight = getPanelHeight(splitPanel, 'start-panel');
+      const endPanelHeight = getPanelHeight(splitPanel, 'end-panel');
+
+      expect(startPanelHeight).to.be.equal(endPanelHeight);
+    });
+
+    it('changes the sizing of the panels based on the position attribute', async () => {
+      const splitPanel = await fixture<SlSplitPanel>(html`<sl-split-panel position="25" vertical style="height: 400px;">
+        <div slot="start" data-testid="start-panel">Start</div>
+        <div slot="end" data-testid="end-panel">End</div>
+      </sl-split-panel>`);
+
+      const startPanelHeight = getPanelHeight(splitPanel, 'start-panel');
+      const endPanelHeight = getPanelHeight(splitPanel, 'end-panel');
+
+      expect(startPanelHeight * 3).to.be.equal(endPanelHeight - DIVIDER_WIDTH_IN_PX);
+    });
+
+    it('updates the position in pixels to the correct result', async () => {
+      const splitPanel = await fixture<SlSplitPanel>(html`<sl-split-panel position="25" vertical style="height: 400px;">
+        <div slot="start" data-testid="start-panel">Start</div>
+        <div slot="end" data-testid="end-panel">End</div>
+      </sl-split-panel>`);
+
+      splitPanel.position = 10;
+
+      const startPanelHeight = getPanelHeight(splitPanel, 'start-panel');
+
+      expect(startPanelHeight).to.be.equal(splitPanel.positionInPixels - DIVIDER_WIDTH_IN_PX / 2);
+    });
+
+    it('emits the sl-reposition	event on position change ', async () => {
+      const splitPanel = await fixture<SlSplitPanel>(html`<sl-split-panel vertical style="height: 400px;">
+        <div slot="start">Start</div>
+        <div slot="end">End</div>
+      </sl-split-panel>`);
+
+      const repositionPromise = oneEvent(splitPanel, 'sl-reposition');
+      splitPanel.position = 10;
+      return repositionPromise;
+    });
+
+    it('can be resized using the mouse ', async () => {
+      const splitPanel = await fixture<SlSplitPanel>(html`<sl-split-panel vertical style="height: 400px;">
+        <div slot="start">Start</div>
+        <div slot="end">End</div>
+      </sl-split-panel>`);
+
+      const positionInPixels = splitPanel.positionInPixels;
+
+      const divider = getDivider(splitPanel);
+
+      await dragElement(divider, 0, -30);
+
+      const positionInPixelsAfterDrag = splitPanel.positionInPixels;
+      expect(positionInPixelsAfterDrag).to.be.equal(positionInPixels - 30);
+    });
+
+    it('cannot be resized if disabled', async () => {
+      const splitPanel = await fixture<SlSplitPanel>(html`<sl-split-panel disabled vertical style="height: 400px;">
+        <div slot="start">Start</div>
+        <div slot="end">End</div>
+      </sl-split-panel>`);
+
+      const positionInPixels = splitPanel.positionInPixels;
+
+      const divider = getDivider(splitPanel);
+
+      await dragElement(divider, 0, -30);
+
+      const positionInPixelsAfterDrag = splitPanel.positionInPixels;
+      expect(positionInPixelsAfterDrag).to.be.equal(positionInPixels);
+    });
+
+    it('snaps to predefined positions', async () => {
+      const splitPanel = await fixture<SlSplitPanel>(html`<sl-split-panel vertical style="height: 400px;">
+        <div slot="start">Start</div>
+        <div slot="end">End</div>
+      </sl-split-panel>`);
+
+      const positionInPixels = splitPanel.positionInPixels;
+      splitPanel.snap = `${positionInPixels - 40}px`;
+
+      const divider = getDivider(splitPanel);
+
+      await dragElement(divider, 0, -30);
 
       const positionInPixelsAfterDrag = splitPanel.positionInPixels;
       expect(positionInPixelsAfterDrag).to.be.equal(positionInPixels - 40);
