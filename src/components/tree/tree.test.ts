@@ -329,6 +329,24 @@ describe('<sl-tree>', () => {
           expect(el.selectedItems.length).to.eq(6);
         });
       });
+
+      describe('and selection is "any"', () => {
+        it('should toggle the selection on the tree item', async () => {
+          // Arrange
+          el.selection = 'any';
+          const node = el.children[1] as SlTreeItem;
+          node.focus();
+          await el.updateComplete;
+
+          // Act
+          await sendKeys({ press: 'Enter' });
+          await sendKeys({ press: 'ArrowRight' });
+          await sendKeys({ press: 'Enter' });
+
+          // Assert
+          expect(el.selectedItems.length).to.eq(6);
+        });
+      });
     });
 
     describe('when Space is pressed', () => {

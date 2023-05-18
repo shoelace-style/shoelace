@@ -1,5 +1,5 @@
 import { clamp } from '../../internal/math';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize';
 import { watch } from '../../internal/watch';
@@ -16,8 +16,13 @@ function syncCheckboxes(changedTreeItem: SlTreeItem, initialSync = false) {
       const allChecked = children.every(item => item.selected);
       const allUnchecked = children.every(item => !item.selected && !item.indeterminate);
 
-      treeItem.selected = allChecked;
-      treeItem.indeterminate = !allChecked && !allUnchecked;
+      const tree = treeItem.closest('sl-tree')!;
+      if (tree.selection === 'any') {
+        treeItem.selected ||= allChecked || !allUnchecked;
+      } else {
+        treeItem.selected = allChecked;
+        treeItem.indeterminate = !allChecked && !allUnchecked;
+      }
     }
   }
 
@@ -73,6 +78,8 @@ function syncCheckboxes(changedTreeItem: SlTreeItem, initialSync = false) {
 export default class SlTree extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
+  @state() isSelectionMultiple = false;
+
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
   @query('slot[name=expand-icon]') expandedIconSlot: HTMLSlotElement;
   @query('slot[name=collapse-icon]') collapsedIconSlot: HTMLSlotElement;
@@ -81,7 +88,7 @@ export default class SlTree extends ShoelaceElement {
    * The selection behavior of the tree. Single selection allows only one node to be selected at a time. Multiple
    * displays checkboxes and allows more than one node to be selected. Leaf allows only leaf nodes to be selected.
    */
-  @property() selection: 'single' | 'multiple' | 'leaf' = 'single';
+  @property() selection: 'single' | 'multiple' | 'leaf' | 'any' = 'single';
 
   //
   // A collection of all the items in the tree, in the order they appear. The collection is live, meaning it is
@@ -141,7 +148,7 @@ export default class SlTree extends ShoelaceElement {
 
   // Initializes new items by setting the `selectable` property and the expanded/collapsed icons if any
   private initTreeItem = (item: SlTreeItem) => {
-    item.selectable = this.selection === 'multiple';
+    item.selectable = this.selection === ('multiple' || 'any');
 
     ['expand', 'collapse']
       .filter(status => !!this.querySelector(`[slot="${status}-icon"]`))
@@ -177,8 +184,8 @@ export default class SlTree extends ShoelaceElement {
   private syncTreeItems(selectedItem: SlTreeItem) {
     const items = this.getAllTreeItems();
 
-    if (this.selection === 'multiple') {
-      syncCheckboxes(selectedItem);
+    if (this.isSelectionMultiple) {
+      syncCheckboxes.call(this, selectedItem);
     } else {
       for (const item of items) {
         if (item !== selectedItem) {
@@ -191,7 +198,7 @@ export default class SlTree extends ShoelaceElement {
   private selectItem(selectedItem: SlTreeItem) {
     const previousSelection = [...this.selectedItems];
 
-    if (this.selection === 'multiple') {
+    if (this.isSelectionMultiple) {
       selectedItem.selected = !selectedItem.selected;
       if (selectedItem.lazy) {
         selectedItem.expanded = true;
@@ -310,7 +317,7 @@ export default class SlTree extends ShoelaceElement {
       return;
     }
 
-    if (this.selection === 'multiple' && isExpandButton) {
+    if (this.isSelectionMultiple && isExpandButton) {
       treeItem.expanded = !treeItem.expanded;
     } else {
       this.selectItem(treeItem);
@@ -358,20 +365,21 @@ export default class SlTree extends ShoelaceElement {
 
   @watch('selection')
   async handleSelectionChange() {
-    const isSelectionMultiple = this.selection === 'multiple';
+    this.isSelectionMultiple = ['multiple', 'any'].includes(this.selection);
+
     const items = this.getAllTreeItems();
 
-    this.setAttribute('aria-multiselectable', isSelectionMultiple ? 'true' : 'false');
+    this.setAttribute('aria-multiselectable', this.isSelectionMultiple ? 'true' : 'false');
 
     for (const item of items) {
-      item.selectable = isSelectionMultiple;
+      item.selectable = this.isSelectionMultiple;
     }
 
-    if (isSelectionMultiple) {
+    if (this.isSelectionMultiple) {
       await this.updateComplete;
 
       [...this.querySelectorAll(':scope > sl-tree-item')].forEach((treeItem: SlTreeItem) =>
-        syncCheckboxes(treeItem, true)
+        syncCheckboxes.call(this, treeItem, true)
       );
     }
   }
