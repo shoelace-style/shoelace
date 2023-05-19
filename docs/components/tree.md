@@ -76,12 +76,14 @@ The `selection` attribute lets you change the selection behavior of the tree.
 - Use `single` to allow the selection of a single item (default).
 - Use `multiple` to allow the selection of multiple items.
 - Use `leaf` to only allow leaf nodes to be selected.
+- Use `any` to allow the selection of parent items without the need for child nodes to be selected.
 
 ```html preview
 <sl-select id="selection-mode" value="single" label="Selection">
   <sl-option value="single">Single</sl-option>
   <sl-option value="multiple">Multiple</sl-option>
   <sl-option value="leaf">Leaf</sl-option>
+  <sl-option value="any">Any</sl-option>
 </sl-select>
 
 <br />
