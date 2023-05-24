@@ -10,10 +10,30 @@ To add Shoelace to your Angular app, install the package from npm.
 npm install @shoelace-style/shoelace
 ```
 
-Next, [include a theme](/getting-started/themes) and set the [base path](/getting-started/installation#setting-the-base-path) for icons and other assets. In this example, we'll import the light theme and use the CDN as a base path.
+Next, [include a theme](/getting-started/themes) into your project. In this example, we'll import the light theme and use the CDN as a base path.
+
+Include the theme into your `angular.json` config.
+
+```json
+...
+"styles": [
+  "src/app/theme/styles.scss",
+  "@shoelace-style/shoelace/dist/themes/light.css"
+],
+...
+```
+
+OR
+include it into your `styles.scss`.
+
+```scss
+@use "@shoelace-style/shoelace/dist/themes/light.css";
+...
+```
+
+After that set the [base path](/getting-started/installation#setting-the-base-path) in your `AppModule` for icons and other assets.
 
 ```jsx
-import '@shoelace-style/shoelace/dist/themes/light.css';
 import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path';
 
 setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/');
@@ -30,6 +50,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppComponent } from './app.component';
+
+import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path';
+
+setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/');
 
 @NgModule({
   declarations: [AppComponent],
@@ -48,7 +72,8 @@ import { SlDrawer } from '@shoelace-style/shoelace';
 
 @Component({
   selector: 'app-drawer-example',
-  template: '<div id="page"><button (click)="showDrawer()">Show drawer</button><sl-drawer #drawer label="Drawer" class="drawer-focus" style="--size: 50vw"><p>Drawer content</p></sl-drawer></div>'
+  template: '<div id="page"><button (click)="showDrawer()">Show drawer</button><sl-drawer #drawer label="Drawer" class="drawer-focus" style="--size: 50vw"><p>Drawer content</p></sl-drawer></div>',
+  providers: [SlDrawer]
 })
 export class DrawerExampleComponent implements OnInit {
 
