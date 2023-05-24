@@ -250,8 +250,8 @@ export default class SlTabGroup extends ShoelaceElement {
       this.activeTab = tab;
 
       // Sync active tab and panel
-      this.tabs.map(el => (el.active = el === this.activeTab));
-      this.panels.map(el => (el.active = el.name === this.activeTab?.panel));
+      this.tabs.forEach(el => (el.active = el === this.activeTab));
+      this.panels.forEach(el => (el.active = el.name === this.activeTab?.panel));
       this.syncIndicator();
 
       if (['top', 'bottom'].includes(this.placement)) {
