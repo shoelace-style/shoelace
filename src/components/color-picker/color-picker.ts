@@ -140,7 +140,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
   @property({ type: Boolean, reflect: true }) inline = false;
 
   /** Determines the size of the color picker's trigger. This has no effect on inline color pickers. */
-  @property() size: 'small' | 'medium' | 'large' = 'medium';
+  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Removes the button that lets users toggle between format.   */
   @property({ attribute: 'no-format-toggle', type: Boolean }) noFormatToggle = false;

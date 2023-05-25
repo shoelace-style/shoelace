@@ -108,7 +108,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   @defaultValue() defaultValue: string | string[] = '';
 
   /** The select's size. */
-  @property() size: 'small' | 'medium' | 'large' = 'medium';
+  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Placeholder text to show as a hint when the select is empty. */
   @property() placeholder = '';
