@@ -203,7 +203,6 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
           .disabled=${this.disabled}
           .required=${this.required}
           role="switch"
-          aria-checked=${this.checked ? 'true' : 'false'}
           @click=${this.handleClick}
           @input=${this.handleInput}
           @invalid=${this.handleInvalid}
