@@ -75,7 +75,10 @@ Here are how it works in different environments:
 
 #### Copying Icon files with a Rake task
 
-TODO: 🚧 Write a bit more about why a rake task is recommended.
+If you are not using the `shoelace-rails` gem, you can manually copy the icon files to the `public/assets` directory.
+One way to do this is to use a rake task and add it as a dependency to the `assets:precompile` task. Most rails
+deployment processes run the `rake assets:precompile` task as of part deply, which means that the icon files will be
+copied automatically.
 
 ```ruby
 # Rakefile
@@ -90,8 +93,6 @@ end
 
 Rake::Task["assets:precompile"].enhance(["shoelace:icons:copy"])
 ```
-
-TODO: 🚧 Write a bit more about copy plugins.
 
 Now you can start using Shoelace components with Rails!
 
