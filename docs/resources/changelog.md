@@ -19,6 +19,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Improved the Portuguese translation [#1336](https://github.com/shoelace-style/shoelace/pull/1336)
 - Improved the German translation [#1339](https://github.com/shoelace-style/shoelace/pull/1339)
 - Improved the autoloader so it watches `<html>` instead of `<body>` since the latter gets replaced by some frameworks [#1338](https://github.com/shoelace-style/shoelace/pull/1338)
+- Improved the Rails documentation [#1258](https://github.com/shoelace-style/shoelace/pull/1258)
 
 ## 2.4.0
 
