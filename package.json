@@ -23,7 +23,8 @@
     "./dist/translations/*": "./dist/translations/*"
   },
   "files": [
-    "dist"
+    "dist",
+    "cdn"
   ],
   "keywords": [
     "web components",

@@ -21,32 +21,31 @@ const { bundle, copydir, dir, serve, types } = commandLineArgs([
 const outdir = dir;
 const cdnDir = 'cdn';
 
-deleteSync(outdir);
-deleteSync(cdnDir);
-fs.mkdirSync(outdir, { recursive: true });
-fs.mkdirSync(cdnDir, { recursive: true });
+const outputDirectories = [
+  cdnDir,
+  outdir
+]
+
+outputDirectories.forEach((dir) => {
+  deleteSync(dir)
+  fs.mkdirSync(dir, { recursive: true });
+})
 
 (async () => {
   try {
-    execSync(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
-    execSync(`node scripts/make-search.js --outdir "${outdir}"`, { stdio: 'inherit' });
-    execSync(`node scripts/make-react.js --outdir "${outdir}"`, { stdio: 'inherit' });
-    execSync(`node scripts/make-web-types.js --outdir "${outdir}"`, { stdio: 'inherit' });
-    execSync(`node scripts/make-themes.js --outdir "${outdir}"`, { stdio: 'inherit' });
-    execSync(`node scripts/make-icons.js --outdir "${outdir}"`, { stdio: 'inherit' });
+    outputDirectories.forEach((dir) => {
+      execSync(`node scripts/make-metadata.js --outdir "${dir}"`, { stdio: 'inherit' });
+      execSync(`node scripts/make-search.js --outdir "${dir}"`, { stdio: 'inherit' });
+      execSync(`node scripts/make-react.js --outdir "${dir}"`, { stdio: 'inherit' });
+      execSync(`node scripts/make-web-types.js --outdir "${dir}"`, { stdio: 'inherit' });
+      execSync(`node scripts/make-themes.js --outdir "${dir}"`, { stdio: 'inherit' });
+      execSync(`node scripts/make-icons.js --outdir "${dir}"`, { stdio: 'inherit' });
 
-    execSync(`node scripts/make-metadata.js --outdir "${cdnDir}"`, { stdio: 'inherit' });
-    execSync(`node scripts/make-search.js --outdir "${cdnDir}"`, { stdio: 'inherit' });
-    execSync(`node scripts/make-react.js --outdir "${cdnDir}"`, { stdio: 'inherit' });
-    execSync(`node scripts/make-web-types.js --outdir "${cdnDir}"`, { stdio: 'inherit' });
-    execSync(`node scripts/make-themes.js --outdir "${cdnDir}"`, { stdio: 'inherit' });
-    execSync(`node scripts/make-icons.js --outdir "${cdnDir}"`, { stdio: 'inherit' });
-
-    if (types) {
-      console.log('Running the TypeScript compiler...');
-      execSync(`tsc --project ./tsconfig.prod.json --outdir "${outdir}"`, { stdio: 'inherit' });
-      execSync(`tsc --project ./tsconfig.prod.json --outdir "${cdnDir}"`, { stdio: 'inherit' });
-    }
+      if (types) {
+        console.log('Running the TypeScript compiler...');
+        execSync(`tsc --project ./tsconfig.prod.json --outdir "${dir}"`, { stdio: 'inherit' });
+      }
+    })
   } catch (err) {
     console.error(chalk.red(err));
     process.exit(1);
@@ -122,7 +121,7 @@ fs.mkdirSync(cdnDir, { recursive: true });
     copy(cdnDir, copydir);
   }
 
-  console.log(chalk.green(`The build has been generated at ${outdir} 📦\n`));
+  console.log(chalk.green(`The build has been generated to: ${outputDirectories.join(", ")} 📦\n`));
 
   // Dev server
   if (serve) {
@@ -183,8 +182,9 @@ fs.mkdirSync(cdnDir, { recursive: true });
           .then(() => {
             // Rebuild stylesheets when a theme file changes
             if (/^src\/themes/.test(filename)) {
-              execSync(`node scripts/make-themes.js --outdir "${outdir}"`, { stdio: 'inherit' });
-              execSync(`node scripts/make-themes.js --outdir "${cdnDir}"`, { stdio: 'inherit' });
+              outputDirectories.forEach((dir) => {
+                execSync(`node scripts/make-themes.js --outdir "${dir}"`, { stdio: 'inherit' });
+              })
             }
           })
           .then(() => {
@@ -193,8 +193,9 @@ fs.mkdirSync(cdnDir, { recursive: true });
               return;
             }
 
-            execSync(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
-            execSync(`node scripts/make-metadata.js --outdir "${cdnDir}"`, { stdio: 'inherit' });
+            outputDirectories.forEach((dir) => {
+              execSync(`node scripts/make-metadata.js --outdir "${dir}"`, { stdio: 'inherit' });
+            })
           })
           .then(() => {
             bs.reload();
@@ -206,8 +207,10 @@ fs.mkdirSync(cdnDir, { recursive: true });
     // Reload without rebuilding when the docs change
     bs.watch(['docs/**/*.md']).on('change', filename => {
       console.log(`Docs file changed - ${filename}`);
-      execSync(`node scripts/make-search.js --outdir "${outdir}"`, { stdio: 'inherit' });
-      execSync(`node scripts/make-search.js --outdir "${cdnDir}"`, { stdio: 'inherit' });
+
+      outputDirectories.forEach((dir) => {
+        execSync(`node scripts/make-search.js --outdir "${dir}"`, { stdio: 'inherit' });
+      })
       bs.reload();
     });
   }
