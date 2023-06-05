@@ -31,7 +31,7 @@ outputDirectories.forEach((dir) => {
   fs.mkdirSync(dir, { recursive: true });
 })
 
-(async () => {
+;(async () => {
   try {
     outputDirectories.forEach((dir) => {
       execSync(`node scripts/make-metadata.js --outdir "${dir}"`, { stdio: 'inherit' });
