@@ -1,11 +1,9 @@
-import browserSync from 'browser-sync';
 import chalk from 'chalk';
 import { execSync } from 'child_process';
 import commandLineArgs from 'command-line-args';
 import { deleteSync } from 'del';
 import esbuild from 'esbuild';
 import fs from 'fs';
-import getPort, { portNumbers } from 'get-port';
 import { globby } from 'globby';
 import copy from 'recursive-copy';
 
@@ -96,87 +94,12 @@ fs.mkdirSync(outdir, { recursive: true });
 
   console.log(chalk.green(`The build has been generated at ${outdir} 📦\n`));
 
-  // Dev server
   if (serve) {
-    const bs = browserSync.create();
-    const port = await getPort({
-      port: portNumbers(4000, 4999)
-    });
-
-    // Make sure docs/dist is empty since we're serving it virtually
-    deleteSync('docs/dist');
-
-    const browserSyncConfig = {
-      startPath: '/',
-      port,
-      logLevel: 'silent',
-      logPrefix: '[shoelace]',
-      logFileChanges: true,
-      notify: false,
-      single: true,
-      ghostMode: false,
-      server: {
-        baseDir: 'docs',
-        routes: {
-          '/dist': './dist'
-        }
-      },
-      //
-      // Suppress Chrome's document.write() warning
-      //
-      // More info: https://github.com/BrowserSync/browser-sync/issues/1600)
-      //
-      snippetOptions: {
-        rule: {
-          match: /<\/head>/u,
-          fn: (snippet, match) => {
-            const {
-              groups: { src }
-            } = /src='(?<src>[^']+)'/u.exec(snippet);
-            return `<script src="${src}" async></script>${match}`;
-          }
-        }
-      }
-    };
-
-    // Launch browser sync
-    bs.init(browserSyncConfig, () => {
-      const url = `http://localhost:${port}`;
-      console.log(chalk.cyan(`Launched the Shoelace dev server at ${url} 🥾\n`));
-    });
-
-    // Rebuild and reload when source files change
-    bs.watch(['src/**/!(*.test).*']).on('change', async filename => {
-      console.log(`Source file changed - ${filename}`);
-      buildResult
-        // Rebuild and reload
-        .rebuild()
-        .then(() => {
-          // Rebuild stylesheets when a theme file changes
-          if (/^src\/themes/.test(filename)) {
-            execSync(`node scripts/make-themes.js --outdir "${outdir}"`, { stdio: 'inherit' });
-          }
-        })
-        .then(() => {
-          // Skip metadata when styles are changed
-          if (/(\.css|\.styles\.ts)$/.test(filename)) {
-            return;
-          }
-
-          execSync(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
-        })
-        .then(() => {
-          bs.reload();
-        })
-        .catch(err => console.error(chalk.red(err)));
-    });
-
-    // Reload without rebuilding when the docs change
-    bs.watch(['docs/**/*.md']).on('change', filename => {
-      console.log(`Docs file changed - ${filename}`);
-      execSync(`node scripts/make-search.js --outdir "${outdir}"`, { stdio: 'inherit' });
-      bs.reload();
-    });
+    // Dev
+    execSync('npx @11ty/eleventy --serve --incremental', { stdio: 'inherit', cwd: 'docs' });
+  } else {
+    // Build
+    execSync('npx @11ty/eleventy', { stdio: 'inherit', cwd: 'docs' });
   }
 
   // Cleanup on exit

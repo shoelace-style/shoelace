@@ -1,5 +1,6 @@
 .DS_Store
 .cache
+_site
 docs/dist
 docs/search.json
 dist
