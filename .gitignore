@@ -1,9 +1,7 @@
-.DS_Store
-.cache
 _site
-docs/dist
-docs/search.json
-docs/assets/images/sprite.svg
+.cache
+.DS_Store
 dist
+docs/assets/images/sprite.svg
 node_modules
 src/react

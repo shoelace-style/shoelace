@@ -1,23 +1,30 @@
-import { spawn, execSync } from 'child_process';
-import getPort, { portNumbers } from 'get-port';
-import { globby } from 'globby';
 import { deleteSync } from 'del';
+import { globby } from 'globby';
+import { execSync, spawn } from 'child_process';
 import browserSync from 'browser-sync';
 import chalk from 'chalk';
+import chokidar from 'chokidar';
 import commandLineArgs from 'command-line-args';
+import copy from 'recursive-copy';
 import esbuild from 'esbuild';
 import fs from 'fs';
-import copy from 'recursive-copy';
+import getPort, { portNumbers } from 'get-port';
 
 const abortController = new AbortController();
 const abortSignal = abortController.signal;
 
-function buildTheDocs({ watch = false }) {
+function buildTheDocs(watch = false) {
+  deleteSync('./_site');
+
   if (!watch) {
-    return execSync('npx @11ty/eleventy', { stdio: 'inherit', cwd: 'docs' });
+    return execSync('npx @11ty/eleventy --quiet', { stdio: 'inherit', cwd: 'docs' });
   }
 
-  return spawn('npx', ['@11ty/eleventy', '--watch', '--incremental'], { stdio: 'inherit', cwd: 'docs', signal: abortSignal });
+  return spawn('npx', ['@11ty/eleventy', '--watch', '--incremental', '--quiet'], {
+    stdio: 'inherit',
+    cwd: 'docs',
+    signal: abortSignal
+  });
 }
 
 const { bundle, copydir, dir, serve, types } = commandLineArgs([
@@ -33,7 +40,7 @@ const outdir = dir;
 deleteSync(outdir);
 fs.mkdirSync(outdir, { recursive: true });
 
-;(async () => {
+(async () => {
   try {
     execSync(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-react.js --outdir "${outdir}"`, { stdio: 'inherit' });
@@ -104,80 +111,84 @@ fs.mkdirSync(outdir, { recursive: true });
     copy(outdir, copydir);
   }
 
-  console.log(chalk.green(`The build has been generated at ${outdir} 📦\n`));
-
   if (serve) {
-    // Dev
-    buildTheDocs({ watch: true });
+    // Build it with --watch and --incremental
+    buildTheDocs(true);
 
-    const bs = browserSync.create();
-    const port = await getPort({
-      port: portNumbers(4000, 4999)
-    });
+    // Wait for the search index to appear before launching the browser. This file is generated during eleventy.after,
+    // so it's usually the last one to appear.
+    const watcher = chokidar.watch('./_site', { persistent: true });
+    watcher.on('add', async filename => {
+      if (filename.endsWith('search.json')) {
+        watcher.close();
 
-    const browserSyncConfig = {
-      startPath: '/',
-      port,
-      logLevel: 'silent',
-      logPrefix: '[shoelace]',
-      logFileChanges: true,
-      notify: false,
-      single: true,
-      ghostMode: false,
-      server: {
-        baseDir: '_site',
-        routes: {
-          '/dist': './dist'
-        }
+        const bs = browserSync.create();
+        const port = await getPort({
+          port: portNumbers(4000, 4999)
+        });
+
+        const browserSyncConfig = {
+          startPath: '/',
+          port,
+          logLevel: 'silent',
+          logPrefix: '[shoelace]',
+          logFileChanges: true,
+          notify: false,
+          single: true,
+          ghostMode: false,
+          server: {
+            baseDir: '_site',
+            routes: {
+              '/dist': './dist'
+            }
+          }
+        };
+
+        // Launch browser sync
+        bs.init(browserSyncConfig, () => {
+          const url = `http://localhost:${port}`;
+          console.log(chalk.cyan(`Launched the Shoelace dev server at ${url} 🥾\n`));
+        });
+
+        // Rebuild and reload when source files change
+        bs.watch(['src/**/!(*.test).*']).on('change', async filename => {
+          buildResult
+            // Rebuild and reload
+            .rebuild()
+            .then(() => {
+              // Rebuild stylesheets when a theme file changes
+              if (/^src\/themes/.test(filename)) {
+                execSync(`node scripts/make-themes.js --outdir "${outdir}"`, { stdio: 'inherit' });
+              }
+            })
+            .then(() => {
+              // Skip metadata when styles are changed
+              if (/(\.css|\.styles\.ts)$/.test(filename)) {
+                return;
+              }
+
+              execSync(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
+            })
+            .then(() => bs.reload())
+            .catch(err => console.error(chalk.red(err)));
+        });
+
+        // Reload without rebuilding when the docs change
+        bs.watch(['_site/**/*.*']).on('change', () => {
+          bs.reload();
+        });
       }
-    };
-
-    // Launch browser sync
-    bs.init(browserSyncConfig, () => {
-      const url = `http://localhost:${port}`;
-      console.log(chalk.cyan(`Launched the Shoelace dev server at ${url} 🥾\n`));
     });
+  }
 
-    // Rebuild and reload when source files change
-    bs.watch(['src/**/!(*.test).*']).on('change', async filename => {
-      console.log(`Source file changed - ${filename}`);
-
-      buildResult
-        // Rebuild and reload
-        .rebuild()
-        .then(() => {
-          // Rebuild stylesheets when a theme file changes
-          if (/^src\/themes/.test(filename)) {
-            execSync(`node scripts/make-themes.js --outdir "${outdir}"`, { stdio: 'inherit' });
-          }
-        })
-        .then(() => {
-          // Skip metadata when styles are changed
-          if (/(\.css|\.styles\.ts)$/.test(filename)) {
-            return;
-          }
-
-          execSync(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
-        })
-        .then(() => bs.reload())
-        .catch(err => console.error(chalk.red(err)));
-    });
-
-    // Reload without rebuilding when the docs change
-    bs.watch(['_site/**/*.*']).on('change', async (filename) => {
-      console.log(`File changed - ${filename}`);
-
-      // TODO: I tried writing a debounce here, but it wasnt working -.-
-      bs.reload()
-    });
-  } else {
-    // Prod build
+  // Prod build
+  if (!serve) {
     buildTheDocs();
   }
 
   // Cleanup on exit
   process.on('SIGTERM', () => {
-    buildResult.rebuild.dispose()
+    buildResult.rebuild.dispose();
     abortController.abort(); // Stops the child process
   });
 })();

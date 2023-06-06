@@ -26,7 +26,6 @@ module.exports = function (doc, options) {
     const adjacentPre = pre.nextElementSibling?.tagName.toLowerCase() === 'pre' ? pre.nextElementSibling : null;
     const reactCode = adjacentPre?.querySelector('code[class$="react"]');
     const sourceGroupId = `code-preview-source-group-${count}`;
-    const toggleId = `code-preview-toggle-${count}`;
     const isExpanded = code.getAttribute('class').includes(':expanded');
     const noCodePen = code.getAttribute('class').includes(':no-codepen');
 
@@ -137,17 +136,3 @@ module.exports = function (doc, options) {
 
   return doc;
 };
-
-function getAdjacentExample(name, pre) {
-  let currentPre = pre.nextElementSibling;
-
-  while (currentPre?.tagName.toLowerCase() === 'pre') {
-    if (currentPre?.getAttribute('class').indexOf(name) > -1) {
-      return currentPre;
-    }
-
-    currentPre = currentPre.nextElementSibling;
-  }
-
-  return null;
-}

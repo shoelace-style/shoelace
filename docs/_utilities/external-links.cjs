@@ -9,7 +9,7 @@ module.exports = function (doc, options) {
     className: 'external-link', // the class name to add to links
     noopener: true, // sets rel="noopener"
     noreferrer: true, // sets rel="noreferrer"
-    ignore: link => false, // callback function to filter links that should be ignored
+    ignore: () => false, // callback function to filter links that should be ignored
     within: 'body', // element that contains the target links
     target: '', // sets the target attribute
     ...options
