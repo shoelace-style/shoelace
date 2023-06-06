@@ -10,7 +10,7 @@ const metadata = JSON.parse(fs.readFileSync(path.join(outdir, 'custom-elements.j
 
 console.log('Generating search index for documentation');
 
-(async () => {
+;(async () => {
   function getHeadings(markdown, maxLevel = 6) {
     const headings = [];
     const lines = markdown.split('\n');

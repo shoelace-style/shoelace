@@ -1,4 +1,4 @@
-import { execSync } from 'child_process';
+import { spawn, execSync } from 'child_process';
 import getPort, { portNumbers } from 'get-port';
 import { globby } from 'globby';
 import { deleteSync } from 'del';
@@ -9,8 +9,15 @@ import esbuild from 'esbuild';
 import fs from 'fs';
 import copy from 'recursive-copy';
 
-function buildTheDocs() {
-  execSync('npx @11ty/eleventy', { stdio: 'inherit', cwd: 'docs' });
+const abortController = new AbortController();
+const abortSignal = abortController.signal;
+
+function buildTheDocs({ watch = false }) {
+  if (!watch) {
+    return execSync('npx @11ty/eleventy', { stdio: 'inherit', cwd: 'docs' });
+  }
+
+  return spawn('npx', ['@11ty/eleventy', '--watch', '--incremental'], { stdio: 'inherit', cwd: 'docs', signal: abortSignal });
 }
 
 const { bundle, copydir, dir, serve, types } = commandLineArgs([
@@ -26,10 +33,9 @@ const outdir = dir;
 deleteSync(outdir);
 fs.mkdirSync(outdir, { recursive: true });
 
-(async () => {
+;(async () => {
   try {
     execSync(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
-    execSync(`node scripts/make-search.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-react.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-web-types.js --outdir "${outdir}"`, { stdio: 'inherit' });
     execSync(`node scripts/make-themes.js --outdir "${outdir}"`, { stdio: 'inherit' });
@@ -102,7 +108,7 @@ fs.mkdirSync(outdir, { recursive: true });
 
   if (serve) {
     // Dev
-    buildTheDocs();
+    buildTheDocs({ watch: true });
 
     const bs = browserSync.create();
     const port = await getPort({
@@ -135,6 +141,7 @@ fs.mkdirSync(outdir, { recursive: true });
     // Rebuild and reload when source files change
     bs.watch(['src/**/!(*.test).*']).on('change', async filename => {
       console.log(`Source file changed - ${filename}`);
+
       buildResult
         // Rebuild and reload
         .rebuild()
@@ -157,11 +164,11 @@ fs.mkdirSync(outdir, { recursive: true });
     });
 
     // Reload without rebuilding when the docs change
-    bs.watch(['docs/**/*']).on('change', filename => {
+    bs.watch(['_site/**/*.*']).on('change', async (filename) => {
       console.log(`File changed - ${filename}`);
-      execSync(`node scripts/make-search.js --outdir "${outdir}"`, { stdio: 'inherit' });
-      buildTheDocs();
-      bs.reload();
+
+      // TODO: I tried writing a debounce here, but it wasnt working -.-
+      bs.reload()
     });
   } else {
     // Prod build
@@ -169,5 +176,8 @@ fs.mkdirSync(outdir, { recursive: true });
   }
 
   // Cleanup on exit
-  process.on('SIGTERM', () => buildResult.rebuild.dispose());
+  process.on('SIGTERM', () => {
+    buildResult.rebuild.dispose()
+    abortController.abort(); // Stops the child process
+  });
 })();

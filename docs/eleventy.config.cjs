@@ -21,6 +21,12 @@ const assetsDir = 'assets';
 const allComponents = getAllComponents();
 let hasBuiltSearchIndex = false;
 
+function benchmark (callback) {
+  const time = performance.now()
+  callback()
+  return performance.now() - time
+}
+
 module.exports = function (eleventyConfig) {
   //
   // Global data
@@ -104,6 +110,19 @@ module.exports = function (eleventyConfig) {
   //
   // Transforms
   //
+
+  let transformTimers = {
+    activeLinks: 0,
+    anchorHeadings: 0,
+    tableOfContents: 0,
+    codePreviews: 0,
+    externalLinks: 0,
+    highlightCodeBlock: 0,
+    scrollingTables: 0,
+    copyCodeButtons: 0,
+    typography: 0,
+    prettier: 0,
+  }
   eleventyConfig.addTransform('html-transform', function (content) {
     // Parse the template and get a Document object
     const doc = new JSDOM(content, {
@@ -113,28 +132,57 @@ module.exports = function (eleventyConfig) {
     }).window.document;
 
     // DOM transforms
-    activeLinks(doc, { pathname: this.page.url });
-    anchorHeadings(doc, {
-      within: '#content .content__body',
-      levels: ['h2', 'h3', 'h4', 'h5']
-    });
-    tableOfContents(doc, {
-      levels: ['h2', 'h3'],
-      container: '#content .content__toc > ul',
-      within: '#content .content__body'
-    });
-    codePreviews(doc);
-    externalLinks(doc, { target: '_blank' });
-    highlightCodeBlocks(doc);
-    scrollingTables(doc);
-    copyCodeButtons(doc); // must be after codePreviews + highlightCodeBlocks
-    typography(doc, '#content');
+    transformTimers.activeLinks += benchmark(() => {
+      activeLinks(doc, { pathname: this.page.url });
+    })
+
+    transformTimers.anchorHeadings += benchmark(() => {
+      anchorHeadings(doc, {
+        within: '#content .content__body',
+        levels: ['h2', 'h3', 'h4', 'h5']
+      });
+    })
+
+    transformTimers.tableOfContents += benchmark(() => {
+      tableOfContents(doc, {
+        levels: ['h2', 'h3'],
+        container: '#content .content__toc > ul',
+        within: '#content .content__body'
+      });
+    })
+
+
+    transformTimers.codePreviews += benchmark(() => {
+      codePreviews(doc);
+    })
+
+    transformTimers.externalLinks += benchmark(() => {
+      externalLinks(doc, { target: '_blank' });
+    })
+
+    transformTimers.highlightCodeBlock += benchmark(() => {
+      highlightCodeBlocks(doc);
+    })
+
+    transformTimers.scrollingTables += benchmark(() => {
+      scrollingTables(doc);
+    })
+
+    transformTimers.copyCodeButtons += benchmark(() => {
+      copyCodeButtons(doc); // must be after codePreviews + highlightCodeBlocks
+    })
+
+    transformTimers.typography += benchmark(() => {
+      typography(doc, '#content');
+    })
 
     // Serialize the Document object to an HTML string and prepend the doctype
     content = `<!DOCTYPE html>\n${doc.documentElement.outerHTML}`;
 
     // String transforms
-    content = prettier(content);
+    transformTimers.prettier += benchmark(() => {
+      content = prettier(content);
+    })
 
     return content;
   });
@@ -191,6 +239,13 @@ module.exports = function (eleventyConfig) {
     fs.writeFileSync(searchIndexFilename, JSON.stringify({ searchIndex, map }), 'utf-8');
 
     hasBuiltSearchIndex = true;
+    let totalTime = 0
+    Object.entries(transformTimers).forEach(([k,v]) => {
+      const rounded = Math.ceil(v)
+      console.log(k + ": " + rounded + "ms")
+      totalTime += rounded
+    })
+    console.log("Total transform time: " + totalTime + "ms")
   });
 
   //
@@ -199,7 +254,9 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.setServerOptions({
     domDiff: false, // disable dom diffing so custom elements don't break on reload,
     port: 4000, // if port 4000 is taken, 11ty will use the next one available
-    watch: [] // additional files to watch that will trigger server updates (array of paths or globs)
+    watch: [
+      "dist/**/*.*"
+    ] // additional files to watch that will trigger server updates (array of paths or globs)
   });
 
   //
