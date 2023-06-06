@@ -21,19 +21,15 @@ const { bundle, copydir, dir, serve, types } = commandLineArgs([
 const outdir = dir;
 const cdnDir = 'cdn';
 
-const outputDirectories = [
-  cdnDir,
-  outdir
-]
+const outputDirectories = [cdnDir, outdir];
 
-outputDirectories.forEach((dir) => {
-  deleteSync(dir)
+outputDirectories.forEach(dir => {
+  deleteSync(dir);
   fs.mkdirSync(dir, { recursive: true });
-})
-
-;(async () => {
+});
+(async () => {
   try {
-    outputDirectories.forEach((dir) => {
+    outputDirectories.forEach(dir => {
       execSync(`node scripts/make-metadata.js --outdir "${dir}"`, { stdio: 'inherit' });
       execSync(`node scripts/make-search.js --outdir "${dir}"`, { stdio: 'inherit' });
       execSync(`node scripts/make-react.js --outdir "${dir}"`, { stdio: 'inherit' });
@@ -45,7 +41,7 @@ outputDirectories.forEach((dir) => {
         console.log('Running the TypeScript compiler...');
         execSync(`tsc --project ./tsconfig.prod.json --outdir "${dir}"`, { stdio: 'inherit' });
       }
-    })
+    });
   } catch (err) {
     console.error(chalk.red(err));
     process.exit(1);
@@ -121,7 +117,7 @@ outputDirectories.forEach((dir) => {
     copy(cdnDir, copydir);
   }
 
-  console.log(chalk.green(`The build has been generated to: ${outputDirectories.join(", ")} 📦\n`));
+  console.log(chalk.green(`The build has been generated to: ${outputDirectories.join(', ')} 📦\n`));
 
   // Dev server
   if (serve) {
@@ -182,9 +178,9 @@ outputDirectories.forEach((dir) => {
           .then(() => {
             // Rebuild stylesheets when a theme file changes
             if (/^src\/themes/.test(filename)) {
-              outputDirectories.forEach((dir) => {
+              outputDirectories.forEach(dir => {
                 execSync(`node scripts/make-themes.js --outdir "${dir}"`, { stdio: 'inherit' });
-              })
+              });
             }
           })
           .then(() => {
@@ -193,9 +189,9 @@ outputDirectories.forEach((dir) => {
               return;
             }
 
-            outputDirectories.forEach((dir) => {
+            outputDirectories.forEach(dir => {
               execSync(`node scripts/make-metadata.js --outdir "${dir}"`, { stdio: 'inherit' });
-            })
+            });
           })
           .then(() => {
             bs.reload();
@@ -208,9 +204,9 @@ outputDirectories.forEach((dir) => {
     bs.watch(['docs/**/*.md']).on('change', filename => {
       console.log(`Docs file changed - ${filename}`);
 
-      outputDirectories.forEach((dir) => {
+      outputDirectories.forEach(dir => {
         execSync(`node scripts/make-search.js --outdir "${dir}"`, { stdio: 'inherit' });
-      })
+      });
       bs.reload();
     });
   }
