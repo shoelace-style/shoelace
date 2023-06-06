@@ -3,6 +3,7 @@
 _site
 docs/dist
 docs/search.json
+docs/assets/images/sprite.svg
 dist
 node_modules
 src/react

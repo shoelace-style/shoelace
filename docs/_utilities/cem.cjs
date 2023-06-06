@@ -1,7 +1,4 @@
-//
-// TODO - switch to local dist
-//
-const customElementsManifest = require('@shoelace-style/shoelace/dist/custom-elements.json');
+const customElementsManifest = require('../../dist/custom-elements.json');
 
 //
 // Export it here so we can import it elsewhere and use the same version
@@ -42,17 +39,17 @@ module.exports.getAllComponents = function () {
   });
 
   // Build dependency graphs
-  allComponents.map(component => {
+  allComponents.forEach(component => {
     const dependencies = [];
 
     // Recursively fetch sub-dependencies
     function getDependencies(tag) {
-      const component = allComponents.find(c => c.tagName === tag);
-      if (!component || !Array.isArray(component.dependencies)) {
+      const cmp = allComponents.find(c => c.tagName === tag);
+      if (!cmp || !Array.isArray(component.dependencies)) {
         return;
       }
 
-      component.dependencies?.forEach(dependentTag => {
+      cmp.dependencies?.forEach(dependentTag => {
         if (!dependencies.includes(dependentTag)) {
           dependencies.push(dependentTag);
         }

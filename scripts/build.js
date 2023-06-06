@@ -1,11 +1,17 @@
-import chalk from 'chalk';
 import { execSync } from 'child_process';
-import commandLineArgs from 'command-line-args';
+import getPort, { portNumbers } from 'get-port';
+import { globby } from 'globby';
 import { deleteSync } from 'del';
+import browserSync from 'browser-sync';
+import chalk from 'chalk';
+import commandLineArgs from 'command-line-args';
 import esbuild from 'esbuild';
 import fs from 'fs';
-import { globby } from 'globby';
 import copy from 'recursive-copy';
+
+function buildTheDocs() {
+  execSync('npx @11ty/eleventy', { stdio: 'inherit', cwd: 'docs' });
+}
 
 const { bundle, copydir, dir, serve, types } = commandLineArgs([
   { name: 'bundle', type: Boolean },
@@ -96,10 +102,70 @@ fs.mkdirSync(outdir, { recursive: true });
 
   if (serve) {
     // Dev
-    execSync('npx @11ty/eleventy --serve --incremental', { stdio: 'inherit', cwd: 'docs' });
+    buildTheDocs();
+
+    const bs = browserSync.create();
+    const port = await getPort({
+      port: portNumbers(4000, 4999)
+    });
+
+    const browserSyncConfig = {
+      startPath: '/',
+      port,
+      logLevel: 'silent',
+      logPrefix: '[shoelace]',
+      logFileChanges: true,
+      notify: false,
+      single: true,
+      ghostMode: false,
+      server: {
+        baseDir: '_site',
+        routes: {
+          '/dist': './dist'
+        }
+      }
+    };
+
+    // Launch browser sync
+    bs.init(browserSyncConfig, () => {
+      const url = `http://localhost:${port}`;
+      console.log(chalk.cyan(`Launched the Shoelace dev server at ${url} 🥾\n`));
+    });
+
+    // Rebuild and reload when source files change
+    bs.watch(['src/**/!(*.test).*']).on('change', async filename => {
+      console.log(`Source file changed - ${filename}`);
+      buildResult
+        // Rebuild and reload
+        .rebuild()
+        .then(() => {
+          // Rebuild stylesheets when a theme file changes
+          if (/^src\/themes/.test(filename)) {
+            execSync(`node scripts/make-themes.js --outdir "${outdir}"`, { stdio: 'inherit' });
+          }
+        })
+        .then(() => {
+          // Skip metadata when styles are changed
+          if (/(\.css|\.styles\.ts)$/.test(filename)) {
+            return;
+          }
+
+          execSync(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
+        })
+        .then(() => bs.reload())
+        .catch(err => console.error(chalk.red(err)));
+    });
+
+    // Reload without rebuilding when the docs change
+    bs.watch(['docs/**/*']).on('change', filename => {
+      console.log(`File changed - ${filename}`);
+      execSync(`node scripts/make-search.js --outdir "${outdir}"`, { stdio: 'inherit' });
+      buildTheDocs();
+      bs.reload();
+    });
   } else {
-    // Build
-    execSync('npx @11ty/eleventy', { stdio: 'inherit', cwd: 'docs' });
+    // Prod build
+    buildTheDocs();
   }
 
   // Cleanup on exit

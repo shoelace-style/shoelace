@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html 
-  lang="en" 
+<html
+  lang="en"
   data-layout="{{ layout }}"
   data-shoelace-version="{{ meta.version }}"
 >
@@ -31,9 +31,9 @@
     <meta property="og:image" content="{{ assetUrl(meta.image, true) }}" />
 
     {# Shoelace #}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.4.0/dist/themes/light.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.4.0/dist/themes/dark.css" />
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.4.0/dist/shoelace-autoloader.js"></script>
+    <link rel="stylesheet" href="/dist/themes/light.css" />
+    <link rel="stylesheet" href="/dist/themes/dark.css" />
+    <script type="module" src="/dist/shoelace-autoloader.js"></script>
 
     {# Set the initial theme and menu states here to prevent flashing #}
     <script>
@@ -101,7 +101,7 @@
         </sl-button>
         <sl-button size="small" class="repo-button repo-button--twitter" href="https://twitter.com/shoelace_style" target="_blank">
           <sl-icon slot="prefix" name="twitter"></sl-icon> Follow
-        </sl-button>        
+        </sl-button>
       </div>
 
       <button class="search-box" type="button" title="Press / to search" aria-label="Search" data-plugin="search">
@@ -125,7 +125,7 @@
             </ul>
           </div>
         {% endif %}
-        
+
         <div class="content__body">
           {% block content %}
             {{ content | safe }}

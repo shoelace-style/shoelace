@@ -40,7 +40,7 @@ let numIcons = 0;
     await Promise.all([
       copy(`${srcPath}/icons`, iconDir),
       copy(`${srcPath}/LICENSE.md`, path.join(iconDir, 'LICENSE.md')),
-      copy(`${srcPath}/bootstrap-icons.svg`, './docs/assets/icons/sprite.svg', { overwrite: true })
+      copy(`${srcPath}/bootstrap-icons.svg`, './docs/assets/images/sprite.svg', { overwrite: true })
     ]);
 
     // Generate metadata

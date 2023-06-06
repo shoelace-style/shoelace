@@ -685,7 +685,7 @@ If you want to change the icons Shoelace uses internally, you can register an ic
         item.setAttribute('data-terms', [i.name, i.title, ...(i.tags || []), ...(i.categories || [])].join(' '));
         item.innerHTML = `
           <svg width="1em" height="1em" fill="currentColor">
-            <use xlink:href="/assets/icons/sprite.svg#${i.name}"></use>
+            <use xlink:href="/assets/images/sprite.svg#${i.name}"></use>
           </svg>      
         `;
         list.appendChild(item);
