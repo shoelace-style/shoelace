@@ -59,7 +59,7 @@ function CustomEls({ URL }) {
       setBasePath(`${URL}/static/static`);
 
       // This imports all components
-      import('@shoelace-style/shoelace/dist/shoelace');
+      import('@shoelace-style/shoelace/dist/react');
       // If you're wanting to selectively import components, replace this line with your own definitions
 
       // import("@shoelace-style/shoelace/dist/components/button/button");
