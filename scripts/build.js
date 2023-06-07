@@ -36,7 +36,8 @@ async function buildTheDocs(watch = false) {
 
   return spawnCallback('npx', ['@11ty/eleventy', '--watch', '--incremental', '--quiet'], {
     stdio: 'pipe',
-    cwd: 'docs'
+    cwd: 'docs',
+    shell: true
   });
 }
 
