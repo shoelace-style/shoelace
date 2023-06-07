@@ -150,7 +150,7 @@ module.exports = function (eleventyConfig) {
 
     const map = {};
     const searchIndexFilename = path.join(eleventyConfig.dir.output, assetsDir, 'search.json');
-    const lunrInput = '../node_modules/lunr/lunr.min.js';
+    const lunrInput = path.resolve('../node_modules/lunr/lunr.min.js');
     const lunrOutput = path.join(eleventyConfig.dir.output, assetsDir, 'scripts/lunr.js');
     const searchIndex = lunr(function () {
       // The search index uses these field names extensively, so shortening them can save some serious bytes. The
@@ -188,6 +188,7 @@ module.exports = function (eleventyConfig) {
     });
 
     // Copy the Lunr search client and write the index
+    fs.mkdirSync(path.dirname(lunrOutput), { recursive: true });
     fs.copyFileSync(lunrInput, lunrOutput);
     fs.writeFileSync(searchIndexFilename, JSON.stringify({ searchIndex, map }), 'utf-8');
 

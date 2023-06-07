@@ -16,8 +16,6 @@ const filesToEmbed = globbySync('./src/themes/**/_*.css');
 const themesDir = path.join(outdir, 'themes');
 const embeds = {};
 
-console.log('Generating stylesheets');
-
 mkdirSync(themesDir, { recursive: true });
 
 try {

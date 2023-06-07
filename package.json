@@ -74,7 +74,7 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^2.0.1",
-    "@custom-elements-manifest/analyzer": "^0.6.8",
+    "@custom-elements-manifest/analyzer": "^0.8.3",
     "@open-wc/testing": "^3.1.7",
     "@types/mocha": "^10.0.1",
     "@types/react": "^18.0.26",
@@ -119,6 +119,7 @@
     "markdown-it-mark": "^3.0.1",
     "markdown-it-replace-it": "^1.0.0",
     "npm-check-updates": "^16.6.2",
+    "ora": "^6.3.1",
     "pascal-case": "^3.1.2",
     "plop": "^3.1.1",
     "prettier": "^2.8.8",
