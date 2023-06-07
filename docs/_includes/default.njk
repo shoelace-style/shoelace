@@ -11,6 +11,9 @@
     <meta name="description" content="{{ meta.description }}" />
     <title>{{ meta.title }}</title>
 
+    {# Opt out of Turbo caching #}
+    <meta name="turbo-cache-control">
+
     {# Stylesheets #}
     <link rel="stylesheet" href="{{ assetUrl('styles/docs.css') }}" />
     <link rel="stylesheet" href="{{ assetUrl('styles/code-previews.css') }}" />
@@ -43,6 +46,9 @@
         document.documentElement.classList.toggle('sl-theme-dark', theme === 'dark' || (!theme && prefersDark));
       })();
     </script>
+
+    {# Turbo + Scroll positioning #}
+    <script type="module" src="{{ assetUrl('scripts/turbo.js') }}"></script>
   </head>
   <body>
     <a id="skip-to-main" class="visually-hidden" href="#main-content" data-smooth-link="false">
@@ -82,7 +88,7 @@
       </button>
     </div>
 
-    <aside id="sidebar">
+    <aside id="sidebar" data-preserve-scroll data-turbo-permanent>
       <header>
         <a href="/">
           <img src="{{ assetUrl('images/wordmark.svg') }}" alt="Shoelace" />

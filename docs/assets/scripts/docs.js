@@ -45,7 +45,7 @@
 
   // Close when clicking outside of the sidebar
   document.addEventListener('mousedown', event => {
-    if (isSidebarOpen() & !event.target.closest('#sidebar, #menu-toggle')) {
+    if (isSidebarOpen() & !event.target?.closest('#sidebar, #menu-toggle')) {
       event.stopImmediatePropagation();
       toggleSidebar();
     }
