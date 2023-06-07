@@ -150,7 +150,8 @@ module.exports = function (eleventyConfig) {
 
     const map = {};
     const searchIndexFilename = path.join(eleventyConfig.dir.output, assetsDir, 'search.json');
-    const lunrFilename = path.join(eleventyConfig.dir.output, assetsDir, 'scripts/lunr.js');
+    const lunrInput = '../node_modules/lunr/lunr.min.js';
+    const lunrOutput = path.join(eleventyConfig.dir.output, assetsDir, 'scripts/lunr.js');
     const searchIndex = lunr(function () {
       // The search index uses these field names extensively, so shortening them can save some serious bytes. The
       // initial index file went from 468 KB => 401 KB by using single-character names!
@@ -187,7 +188,7 @@ module.exports = function (eleventyConfig) {
     });
 
     // Copy the Lunr search client and write the index
-    fs.copyFileSync('../node_modules/lunr/lunr.min.js', lunrFilename);
+    fs.copyFileSync(lunrInput, lunrOutput);
     fs.writeFileSync(searchIndexFilename, JSON.stringify({ searchIndex, map }), 'utf-8');
 
     hasBuiltSearchIndex = true;
