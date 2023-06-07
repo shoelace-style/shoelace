@@ -134,7 +134,7 @@ fs.mkdirSync(outdir, { recursive: true });
           logPrefix: '[shoelace]',
           logFileChanges: true,
           notify: false,
-          single: true,
+          single: false,
           ghostMode: false,
           server: {
             baseDir: '_site',
