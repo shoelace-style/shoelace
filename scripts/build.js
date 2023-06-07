@@ -13,19 +13,17 @@ import ora from 'ora';
 import util from 'util';
 
 const execPromise = util.promisify(exec);
-
-const outdir = 'dist';
-const sitedir = '_site';
-const spinner = ora({ hideCursor: false }).start();
-let childProcess;
-let buildResult;
-
 const { bundle, copydir, dir, serve, types } = commandLineArgs([
   { name: 'bundle', type: Boolean },
   { name: 'copydir', type: String },
   { name: 'serve', type: Boolean },
   { name: 'types', type: Boolean }
 ]);
+const outdir = 'dist';
+const sitedir = '_site';
+const spinner = ora({ hideCursor: false }).start();
+let childProcess;
+let buildResult;
 
 //
 // Runs 11ty and builds the docs. The returned promise resolves after the initial publish has completed. The child
