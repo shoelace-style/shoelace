@@ -16,7 +16,7 @@ const exec = util.promisify(execCallback);
 const spawn = util.promisify(spawnCallback);
 
 const outdir = 'dist';
-const spinner = ora().start();
+const spinner = ora({ hideCursor: false }).start();
 let childProcess;
 let buildResult;
 
