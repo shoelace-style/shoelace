@@ -1,5 +1,5 @@
 import { deleteAsync } from 'del';
-import { exec as execCallback, spawn } from 'child_process';
+import { exec, spawn } from 'child_process';
 import { globby } from 'globby';
 import browserSync from 'browser-sync';
 import chalk from 'chalk';
@@ -12,9 +12,10 @@ import getPort, { portNumbers } from 'get-port';
 import ora from 'ora';
 import util from 'util';
 
-const exec = util.promisify(execCallback);
+const execPromise = util.promisify(exec);
 
 const outdir = 'dist';
+const sitedir = '_site';
 const spinner = ora({ hideCursor: false }).start();
 let childProcess;
 let buildResult;
@@ -31,11 +32,9 @@ const { bundle, copydir, dir, serve, types } = commandLineArgs([
 // process and an array of strings containing any output are included in the resolved promise.
 //
 async function buildTheDocs(watch = false) {
-  await deleteAsync('_site');
-
   return new Promise((resolve, reject) => {
     const args = ['@11ty/eleventy', '--quiet'];
-    const watcher = chokidar.watch('_site', { persistent: true });
+    const watcher = chokidar.watch(sitedir, { persistent: true });
     const output = [];
 
     if (watch) {
@@ -148,32 +147,32 @@ async function nextTask(label, action) {
 }
 
 await nextTask('Cleaning up the previous build', async () => {
-  await deleteAsync(outdir);
+  await Promise.all([deleteAsync(outdir), deleteAsync(sitedir)]);
   await fs.mkdir(outdir, { recursive: true });
 });
 
 await nextTask('Generating component metadata', () => {
-  return exec(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
+  return execPromise(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
 });
 
 await nextTask('Wrapping components for React', () => {
-  return exec(`node scripts/make-react.js --outdir "${outdir}"`, { stdio: 'inherit' });
+  return execPromise(`node scripts/make-react.js --outdir "${outdir}"`, { stdio: 'inherit' });
 });
 
 await nextTask('Generating Web Types', () => {
-  return exec(`node scripts/make-web-types.js --outdir "${outdir}"`, { stdio: 'inherit' });
+  return execPromise(`node scripts/make-web-types.js --outdir "${outdir}"`, { stdio: 'inherit' });
 });
 
 await nextTask('Generating themes', () => {
-  return exec(`node scripts/make-themes.js --outdir "${outdir}"`, { stdio: 'inherit' });
+  return execPromise(`node scripts/make-themes.js --outdir "${outdir}"`, { stdio: 'inherit' });
 });
 
 await nextTask('Packaging up icons', () => {
-  return exec(`node scripts/make-icons.js --outdir "${outdir}"`, { stdio: 'inherit' });
+  return execPromise(`node scripts/make-icons.js --outdir "${outdir}"`, { stdio: 'inherit' });
 });
 
 await nextTask('Running the TypeScript compiler', () => {
-  return exec(`tsc --project ./tsconfig.prod.json --outdir "${outdir}"`, { stdio: 'inherit' });
+  return execPromise(`tsc --project ./tsconfig.prod.json --outdir "${outdir}"`, { stdio: 'inherit' });
 });
 
 await nextTask('Building source files', async () => {
@@ -210,7 +209,7 @@ if (serve) {
     single: false,
     ghostMode: false,
     server: {
-      baseDir: '_site',
+      baseDir: sitedir,
       routes: {
         '/dist': './dist'
       }
@@ -244,12 +243,12 @@ if (serve) {
 
       // Rebuild stylesheets when a theme file changes
       if (isTheme) {
-        await exec(`node scripts/make-themes.js --outdir "${outdir}"`, { stdio: 'inherit' });
+        await execPromise(`node scripts/make-themes.js --outdir "${outdir}"`, { stdio: 'inherit' });
       }
 
       // Rebuild metadata (but not when styles are changed)
       if (!isStylesheet) {
-        await exec(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
+        await execPromise(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
       }
 
       bs.reload();
@@ -259,7 +258,7 @@ if (serve) {
   });
 
   // Reload without rebuilding when the docs change
-  bs.watch(['_site/**/*.*']).on('change', filename => {
+  bs.watch([`${sitedir}/**/*.*`]).on('change', filename => {
     bs.reload();
   });
 }
