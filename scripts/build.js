@@ -16,9 +16,8 @@ const exec = util.promisify(execCallback);
 const spawn = util.promisify(spawnCallback);
 
 const outdir = 'dist';
-const abortController = new AbortController();
-const abortSignal = abortController.signal;
 const spinner = ora().start();
+let childProcess;
 let buildResult;
 
 const { bundle, copydir, dir, serve, types } = commandLineArgs([
@@ -32,13 +31,12 @@ async function buildTheDocs(watch = false) {
   await deleteAsync('_site');
 
   if (!watch) {
-    return execCallback('npx @11ty/eleventy --quiet', { stdio: 'inherit', cwd: 'docs', signal: abortSignal });
+    return execCallback('npx @11ty/eleventy --quiet', { stdio: 'inherit', cwd: 'docs' });
   }
 
   return spawnCallback('npx', ['@11ty/eleventy', '--watch', '--incremental', '--quiet'], {
     stdio: 'pipe',
-    cwd: 'docs',
-    signal: abortSignal
+    cwd: 'docs'
   });
 }
 
@@ -90,7 +88,12 @@ async function buildTheSource() {
 
 function handleCleanup() {
   buildResult.rebuild.dispose();
-  abortController.abort(); // Stops the child process
+
+  if (childProcess) {
+    childProcess.kill('SIGINT');
+  }
+
+  process.exit();
 }
 
 async function nextTask(label, action) {
@@ -157,10 +160,10 @@ if (serve) {
   // eleventy.after, so it appears after the docs are fully published. This is kinda hacky, but here we are.
   // Kick off the Eleventy dev server with --watch and --incremental
   await nextTask('Building docs', async () => {
-    const child = await buildTheDocs(true);
+    childProcess = await buildTheDocs(true);
 
     // Store Eleventy's output for later
-    child.stdout.on('data', data => {
+    childProcess.stdout.on('data', data => {
       if (hasBuilt) {
         console.log(data.toString());
       } else {
