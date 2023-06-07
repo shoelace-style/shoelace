@@ -7,4 +7,4 @@ import commandLineArgs from 'command-line-args';
 
 const { outdir } = commandLineArgs({ name: 'outdir', type: String });
 
-await execSync(`cem analyze --litelement --outdir "${outdir}"`, { stdio: 'inherit' });
+execSync(`cem analyze --litelement --outdir "${outdir}"`, { stdio: 'inherit' });
