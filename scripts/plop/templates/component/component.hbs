@@ -32,10 +32,9 @@ export default class {{ properCase tag }} extends ShoelaceElement {
   /** An example attribute. */
   @property() attr = 'example';
 
-  @watch('someProperty')
-  doSomething() {
-    // Example event
-    this.emit('sl-event-name');
+  @watch('example')
+  handleExampleChange() {
+    // do something
   }
 
   render() {
