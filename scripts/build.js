@@ -1,5 +1,5 @@
 import { deleteAsync } from 'del';
-import { exec as execCallback, spawn as spawnCallback } from 'child_process';
+import { exec as execCallback, spawn } from 'child_process';
 import { globby } from 'globby';
 import browserSync from 'browser-sync';
 import chalk from 'chalk';
@@ -13,7 +13,6 @@ import ora from 'ora';
 import util from 'util';
 
 const exec = util.promisify(execCallback);
-const spawn = util.promisify(spawnCallback);
 
 const outdir = 'dist';
 const spinner = ora({ hideCursor: false }).start();
@@ -27,22 +26,52 @@ const { bundle, copydir, dir, serve, types } = commandLineArgs([
   { name: 'types', type: Boolean }
 ]);
 
+//
+// Runs 11ty and builds the docs. The returned promise resolves after the initial publish has completed. The child
+// process and an array of strings containing any output are included in the resolved promise.
+//
 async function buildTheDocs(watch = false) {
   await deleteAsync('_site');
 
-  if (!watch) {
-    return execCallback('npx @11ty/eleventy --quiet', { stdio: 'inherit', cwd: 'docs' });
-  }
+  return new Promise((resolve, reject) => {
+    const args = ['@11ty/eleventy', '--quiet'];
+    const watcher = chokidar.watch('_site', { persistent: true });
+    const output = [];
 
-  return spawnCallback('npx', ['@11ty/eleventy', '--watch', '--incremental', '--quiet'], {
-    stdio: 'pipe',
-    cwd: 'docs',
-    shell: true
+    if (watch) {
+      args.push('--watch');
+      args.push('--incremental');
+    }
+
+    const child = spawn('npx', args, {
+      stdio: 'pipe',
+      cwd: 'docs',
+      shell: true // for Windows
+    });
+
+    child.stdout.on('data', data => {
+      output.push(data.toString());
+    });
+
+    // Spin up Eleventy and wait for the search index to appear before proceeding. The search index is generated during
+    // eleventy.after, so it appears only after the docs are fully published. This is a hacky way to detect when the
+    // initial publish is complete, but here we are.
+    watcher.on('add', async filename => {
+      if (filename.endsWith('search.json')) {
+        await watcher.close();
+
+        resolve({ child, output });
+      }
+    });
   });
 }
 
+//
+// Builds the source with esbuild.
+//
 async function buildTheSource() {
   const alwaysExternal = ['@lit-labs/react', 'react'];
+
   return await esbuild.build({
     format: 'esm',
     target: 'es2017',
@@ -87,6 +116,9 @@ async function buildTheSource() {
   });
 }
 
+//
+// Called on SIGINT or SIGTERM to cleanup the build and child processes.
+//
 function handleCleanup() {
   buildResult.rebuild.dispose();
 
@@ -97,6 +129,9 @@ function handleCleanup() {
   process.exit();
 }
 
+//
+// Helper function to draw a spinner while tasks run.
+//
 async function nextTask(label, action) {
   spinner.text = label;
   spinner.start();
@@ -142,11 +177,11 @@ await nextTask('Running the TypeScript compiler', () => {
 });
 
 await nextTask('Building source files', async () => {
-  return (buildResult = await buildTheSource());
+  buildResult = await buildTheSource();
 });
 
-// Copy the build output to an additional directory
 if (copydir) {
+  // Copy the build output to an additional directory
   await nextTask(`Copying the build to "${copydir}"`, async () => {
     await deleteAsync(copydir);
     await copy(outdir, copydir);
@@ -154,33 +189,13 @@ if (copydir) {
 }
 
 if (serve) {
-  const deferredOutput = [];
-  let hasBuilt = false;
+  let result;
 
   // Spin up Eleventy and Wait for the search index to appear before proceeding. The search index is generated during
   // eleventy.after, so it appears after the docs are fully published. This is kinda hacky, but here we are.
   // Kick off the Eleventy dev server with --watch and --incremental
   await nextTask('Building docs', async () => {
-    childProcess = await buildTheDocs(true);
-
-    // Store Eleventy's output for later
-    childProcess.stdout.on('data', data => {
-      if (hasBuilt) {
-        console.log(data.toString());
-      } else {
-        deferredOutput.push(data.toString());
-      }
-    });
-
-    return new Promise(resolve => {
-      const watcher = chokidar.watch('_site', { persistent: true });
-      watcher.on('add', async filename => {
-        if (filename.endsWith('search.json')) {
-          await watcher.close();
-          resolve();
-        }
-      });
-    });
+    result = await buildTheDocs(true);
   });
 
   const bs = browserSync.create();
@@ -205,28 +220,37 @@ if (serve) {
   // Launch browser sync
   bs.init(browserSyncConfig, () => {
     const url = `http://localhost:${port}`;
-    console.log(chalk.cyan(`\n🥾 The dev server is available at ${url}\n`));
-    console.log(deferredOutput.join('\n'));
-    hasBuilt = true;
+    console.log(chalk.cyan(`\n🥾 The dev server is available at ${url}`));
+
+    // Log deferred output
+    if (result.output.length > 0) {
+      console.log('\n' + result.output.join('\n'));
+    }
+
+    // Log output that comes later on
+    result.child.stdout.on('data', data => {
+      console.log(data.toString());
+    });
   });
 
   // Rebuild and reload when source files change
   bs.watch(['src/**/!(*.test).*']).on('change', async filename => {
     try {
-      // Rebuild and reload
+      const isTheme = /^src\/themes/.test(filename);
+      const isStylesheet = /(\.css|\.styles\.ts)$/.test(filename);
+
+      // Rebuild the source
       await buildResult.rebuild();
 
       // Rebuild stylesheets when a theme file changes
-      if (/^src\/themes/.test(filename)) {
+      if (isTheme) {
         await exec(`node scripts/make-themes.js --outdir "${outdir}"`, { stdio: 'inherit' });
       }
 
-      // Skip metadata when styles are changed
-      if (/(\.css|\.styles\.ts)$/.test(filename)) {
-        return;
+      // Rebuild metadata (but not when styles are changed)
+      if (!isStylesheet) {
+        await exec(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
       }
-
-      await exec(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
 
       bs.reload();
     } catch (err) {
@@ -242,9 +266,16 @@ if (serve) {
 
 // Prod build
 if (!serve) {
-  await nextTask('Building the docs', () => {
-    return buildTheDocs();
+  let result;
+
+  await nextTask('Building the docs', async () => {
+    result = await buildTheDocs();
   });
+
+  // Log deferred output
+  if (result.output.length > 0) {
+    console.log('\n' + result.output.join('\n'));
+  }
 }
 
 // Cleanup on exit
