@@ -161,7 +161,7 @@ module.exports = function (eleventyConfig) {
       this.field('c'); // content
 
       results.forEach((result, index) => {
-        const url = path.join('/', path.relative(eleventyConfig.dir.output, result.outputPath));
+        const url = path.join('/', path.relative(eleventyConfig.dir.output, result.outputPath)).replace(/\\/g, '/');
         const doc = new JSDOM(result.content, {
           // We must set a default URL so links are parsed with a hostname. Let's use a bogus TLD so we can easily
           // identify which ones are internal and which ones are external.
