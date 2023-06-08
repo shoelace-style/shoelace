@@ -190,7 +190,8 @@
 // Table of Contents scrollspy
 //
 (() => {
-  const links = [...document.querySelectorAll('.content__toc a')];
+  // This will be stale if its not a function.
+  const getLinks = () => [...document.querySelectorAll('.content__toc a')];
   const linkTargets = new WeakMap();
   const visibleTargets = new WeakSet();
   const observer = new IntersectionObserver(handleIntersect, { rootMargin: '0px 0px' });
@@ -210,6 +211,7 @@
   }
 
   function updateActiveLinks() {
+    const links = getLinks()
     // Find the first visible target and activate the respective link
     links.find(link => {
       const target = linkTargets.get(link);
@@ -224,13 +226,20 @@
   }
 
   // Observe link targets
-  links.forEach(link => {
-    const hash = link.hash.slice(1);
-    const target = hash ? document.querySelector(`.content__body #${hash}`) : null;
+  function observeLinks () {
+    getLinks().forEach(link => {
+      const hash = link.hash.slice(1);
+      const target = hash ? document.querySelector(`.content__body #${hash}`) : null;
 
-    if (target) {
-      linkTargets.set(link, target);
-      observer.observe(target);
-    }
-  });
+      if (target) {
+        linkTargets.set(link, target);
+        observer.observe(target);
+      }
+    });
+  }
+
+  observeLinks()
+
+  document.addEventListener("turbo:load", updateActiveLinks)
+  document.addEventListener("turbo:load", observeLinks)
 })();
