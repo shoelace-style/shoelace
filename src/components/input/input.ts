@@ -173,6 +173,9 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   /** Used to customize the label or icon of the Enter key on virtual keyboards. */
   @property() enterkeyhint: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
 
+  /** Adds currency symbol and abbreviation */
+  @property({ attribute: 'currency', type: String }) currency = null;
+
   /** Enables spell checking on the input. */
   @property({
     type: Boolean,
@@ -247,6 +250,11 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   private handleChange() {
     this.value = this.input.value;
     this.emit('sl-change');
+  }
+
+  private handleCurrencyInput() {
+    const numberWithCommas = this.input.value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    this.input.value = numberWithCommas;
   }
 
   private handleClearClick(event: MouseEvent) {
@@ -452,7 +460,19 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
               'input--no-spin-buttons': this.noSpinButtons
             })}
           >
-            <slot name="prefix" part="prefix" class="input__prefix"></slot>
+            <slot
+              name="prefix"
+              part="prefix"
+              class="${classMap({
+                'input__prefix': true,
+                'input__prefix--currency': !!this.currency,
+                'input__prefix--small': this.size === 'small',
+                'input__prefix--medium': this.size === 'medium',
+                'input__prefix--large': this.size === 'large'
+              })}">
+              ${ this.currency === "usd" ? "$" : "" }
+            </slot>
+
             <input
               part="input"
               id="input"
@@ -480,7 +500,7 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
               inputmode=${ifDefined(this.inputmode)}
               aria-describedby="help-text"
               @change=${this.handleChange}
-              @input=${this.handleInput}
+              @input=${this.currency === 'usd' ? this.handleCurrencyInput : this.handleInput}
               @invalid=${this.handleInvalid}
               @keydown=${this.handleKeyDown}
               @focus=${this.handleFocus}
@@ -532,7 +552,18 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
                 : ''
             }
 
-            <slot name="suffix" part="suffix" class="input__suffix"></slot>
+            <slot
+              name="suffix"
+              part="suffix"
+              class="${classMap({
+                'input__suffix': true,
+                'input__suffix--currency': !!this.currency,
+                'input__suffix--small': this.size === 'small',
+                'input__suffix--medium': this.size === 'medium',
+                'input__suffix--large': this.size === 'large'
+              })}">
+              ${ this.currency === "usd" ? "USD" : "" }
+            </slot>
           </div>
         </div>
 
@@ -556,3 +587,8 @@ declare global {
     'sl-input': SlInput;
   }
 }
+
+
+
+
+

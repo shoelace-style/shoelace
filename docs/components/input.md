@@ -33,7 +33,7 @@ sl-input label="What is your name?"
 ```
 
 ```jsx react
-import { SlIcon, SlInput } from '@teamshares/shoelace/dist/react';
+import { SlInput } from '@teamshares/shoelace/dist/react';
 
 const App = () => <SlInput label="What is your name?" />;
 ```
@@ -305,6 +305,25 @@ const App = () => (
   </>
 );
 ```
+
+### Currency
+
+Has the `prefix` of `$` and `suffix` of `USD`.
+
+```html preview
+<sl-input currency="usd"></sl-input>
+```
+
+```pug slim
+sl-input currency="usd"
+```
+
+```jsx react
+import { SlInput } from '@teamshares/shoelace/dist/react';
+
+const App = () => <SlInput currency="usd" />;
+```
+
 
 ### Customizing Label Position
 

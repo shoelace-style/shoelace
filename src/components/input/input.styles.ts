@@ -291,4 +291,32 @@ export default css`
   .input--no-spin-buttons input[type='number'] {
     -moz-appearance: textfield;
   }
+
+  /*
+   * Currency
+   */
+
+  .input__prefix--currency.input__prefix--small {
+    margin-left: var(--sl-spacing-small);
+  }
+
+  .input__prefix--currency.input__prefix--medium {
+    margin-left: var(--sl-spacing-medium);
+  }
+
+  .input__prefix--currency.input__prefix--large {
+    margin-left: var(--sl-spacing-large);
+  }
+
+  .input__suffix--currency.input__suffix--small {
+    margin-right: var(--sl-spacing-small);
+  }
+
+  .input__suffix--currency.input__suffix--medium {
+    margin-right: var(--sl-spacing-medium);
+  }
+
+  .input__suffix--currency.input__suffix--large {
+    margin-right: var(--sl-spacing-large);
+  }
 `;
