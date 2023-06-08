@@ -273,6 +273,8 @@ if (!serve) {
   if (result.output.length > 0) {
     console.log('\n' + result.output.join('\n'));
   }
+
+  process.exit();
 }
 
 // Cleanup on exit
