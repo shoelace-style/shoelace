@@ -21,21 +21,29 @@ module.exports = function (doc, options) {
   within.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(heading => {
     const hasAnchor = heading.querySelector('a');
     const anchor = doc.createElement('a');
-    const slug = createSlug(heading.textContent ?? '') ?? '';
-    let id = slug;
+    let id = heading.textContent ?? '';
     let suffix = 0;
-
-    // If we can't generate a slug, skip this heading
-    if (!slug) return;
 
     // Skip heading levels we don't care about
     if (!options.levels?.includes(heading.tagName.toLowerCase())) {
       return;
     }
 
-    // Ensure the id is unique
+    // Convert dots to underscores
+    id = id.replace(/\./g, '_');
+
+    // Turn it into a slug
+    id = createSlug(id);
+
+    // Make sure it starts with a letter
+    if (!/^[a-z]/i.test(id)) {
+      id = `id_${id}`;
+    }
+
+    // Make sure the id is unique
+    const originalId = id;
     while (doc.getElementById(id) !== null) {
-      id = `${slug}-${++suffix}`;
+      id = `${originalId}-${++suffix}`;
     }
 
     if (hasAnchor || !id) return;
