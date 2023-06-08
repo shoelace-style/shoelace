@@ -48,7 +48,11 @@
     </script>
 
     {# Turbo + Scroll positioning #}
-    <script type="module" src="{{ assetUrl('scripts/turbo.js') }}"></script>
+    <script src="{{ assetUrl('scripts/turbo.js') }}" type="module"></script>
+    <script src="{{ assetUrl('scripts/docs.js') }}" defer></script>
+    <script src="{{ assetUrl('scripts/code-previews.js') }}" defer></script>
+    <script src="{{ assetUrl('scripts/lunr.js') }}" defer></script>
+    <script src="{{ assetUrl('scripts/search.js') }}" defer></script>
   </head>
   <body>
     <a id="skip-to-main" class="visually-hidden" href="#main-content" data-smooth-link="false">
@@ -139,11 +143,5 @@
         </div>
       </article>
     </main>
-
-    {# Scripts #}
-    <script src="{{ assetUrl('scripts/docs.js') }}"></script>
-    <script src="{{ assetUrl('scripts/code-previews.js') }}"></script>
-    <script src="{{ assetUrl('scripts/lunr.js') }}"></script>
-    <script src="{{ assetUrl('scripts/search.js') }}"></script>
   </body>
 </html>
