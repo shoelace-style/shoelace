@@ -23,4 +23,4 @@ module.exports = function (content, options) {
   };
 
   return format(content, options);
-}
+};
