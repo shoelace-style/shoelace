@@ -204,40 +204,57 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     this.formControlController.emitInvalidEvent(event);
   }
 
-  private syncRadios() {
-    if (customElements.get('sl-radio') || customElements.get('sl-radio-button')) {
-      const radios = this.getAllRadios();
+  private async syncRadioElements() {
+    const radios = this.getAllRadios();
 
+    await Promise.all(
       // Sync the checked state and size
-      radios.forEach(radio => {
+      radios.map(async radio => {
+        await radio.updateComplete;
         radio.checked = radio.value === this.value;
         radio.size = this.size;
-      });
+      })
+    );
 
-      this.hasButtonGroup = radios.some(radio => radio.tagName.toLowerCase() === 'sl-radio-button');
+    this.hasButtonGroup = radios.some(radio => radio.tagName.toLowerCase() === 'sl-radio-button');
 
-      if (!radios.some(radio => radio.checked)) {
-        if (this.hasButtonGroup) {
-          const buttonRadio = radios[0].shadowRoot?.querySelector('button');
-
-          if (buttonRadio) {
-            buttonRadio.tabIndex = 0;
-          }
-        } else {
-          radios[0].tabIndex = 0;
-        }
-      }
-
+    if (!radios.some(radio => radio.checked)) {
       if (this.hasButtonGroup) {
-        const buttonGroup = this.shadowRoot?.querySelector('sl-button-group');
+        const buttonRadio = radios[0].shadowRoot?.querySelector('button');
 
-        if (buttonGroup) {
-          buttonGroup.disableRole = true;
+        if (buttonRadio) {
+          buttonRadio.tabIndex = 0;
         }
+      } else {
+        radios[0].tabIndex = 0;
       }
+    }
+
+    if (this.hasButtonGroup) {
+      const buttonGroup = this.shadowRoot?.querySelector('sl-button-group');
+
+      if (buttonGroup) {
+        buttonGroup.disableRole = true;
+      }
+    }
+  }
+
+  private syncRadios() {
+    if (customElements.get('sl-radio') && customElements.get('sl-radio-button')) {
+      this.syncRadioElements();
+      return;
+    }
+
+    if (customElements.get('sl-radio')) {
+      this.syncRadioElements();
+    } else {
+      customElements.whenDefined('sl-radio').then(() => this.syncRadios());
+    }
+
+    if (customElements.get('sl-radio-button')) {
+      this.syncRadioElements();
     } else {
       // Rerun this handler when <sl-radio> or <sl-radio-button> is registered
-      customElements.whenDefined('sl-radio').then(() => this.syncRadios());
       customElements.whenDefined('sl-radio-button').then(() => this.syncRadios());
     }
   }
