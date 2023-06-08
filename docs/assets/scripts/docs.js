@@ -243,3 +243,20 @@
   document.addEventListener('turbo:load', updateActiveLinks);
   document.addEventListener('turbo:load', observeLinks);
 })();
+
+//
+// Show custom versions in the sidebar
+//
+(() => {
+  function updateVersion() {
+    const el = document.querySelector('.sidebar-version');
+    if (!el) return;
+
+    if (location.hostname === 'next.shoelace.style') el.textContent = 'Next';
+    if (location.hostname === 'localhost') el.textContent = 'Development';
+  }
+
+  updateVersion();
+
+  document.addEventListener('turbo:load', updateVersion);
+})();
