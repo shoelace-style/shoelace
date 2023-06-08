@@ -190,6 +190,7 @@ if (copydir) {
   });
 }
 
+// Launch the dev server
 if (serve) {
   let result;
 
@@ -266,7 +267,7 @@ if (serve) {
   });
 }
 
-// Prod build
+// Build for production
 if (!serve) {
   let result;
 
