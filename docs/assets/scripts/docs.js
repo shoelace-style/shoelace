@@ -211,7 +211,7 @@
   }
 
   function updateActiveLinks() {
-    const links = getLinks()
+    const links = getLinks();
     // Find the first visible target and activate the respective link
     links.find(link => {
       const target = linkTargets.get(link);
@@ -226,7 +226,7 @@
   }
 
   // Observe link targets
-  function observeLinks () {
+  function observeLinks() {
     getLinks().forEach(link => {
       const hash = link.hash.slice(1);
       const target = hash ? document.querySelector(`.content__body #${hash}`) : null;
@@ -238,8 +238,8 @@
     });
   }
 
-  observeLinks()
+  observeLinks();
 
-  document.addEventListener("turbo:load", updateActiveLinks)
-  document.addEventListener("turbo:load", observeLinks)
+  document.addEventListener('turbo:load', updateActiveLinks);
+  document.addEventListener('turbo:load', observeLinks);
 })();
