@@ -3,7 +3,6 @@ import { exec, spawn } from 'child_process';
 import { globby } from 'globby';
 import browserSync from 'browser-sync';
 import chalk from 'chalk';
-import chokidar from 'chokidar';
 import commandLineArgs from 'command-line-args';
 import copy from 'recursive-copy';
 import esbuild from 'esbuild';
@@ -32,7 +31,6 @@ let buildResult;
 async function buildTheDocs(watch = false) {
   return new Promise((resolve, reject) => {
     const args = ['@11ty/eleventy', '--quiet'];
-    const watcher = chokidar.watch(sitedir, { persistent: true });
     const output = [];
 
     if (watch) {
@@ -50,15 +48,8 @@ async function buildTheDocs(watch = false) {
       output.push(data.toString());
     });
 
-    // Spin up Eleventy and wait for the search index to appear before proceeding. The search index is generated during
-    // eleventy.after, so it appears only after the docs are fully published. This is a hacky way to detect when the
-    // initial publish is complete, but here we are.
-    watcher.on('add', async filename => {
-      if (filename.endsWith('search.json')) {
-        await watcher.close();
-
-        resolve({ child, output });
-      }
+    child.on('close', () => {
+      resolve({ child, output });
     });
   });
 }
@@ -273,8 +264,6 @@ if (!serve) {
   if (result.output.length > 0) {
     console.log('\n' + result.output.join('\n'));
   }
-
-  process.exit();
 }
 
 // Cleanup on exit
