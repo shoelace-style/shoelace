@@ -11,7 +11,6 @@ import getPort, { portNumbers } from 'get-port';
 import ora from 'ora';
 import util from 'util';
 
-const execPromise = util.promisify(exec);
 const { bundle, copydir, dir, serve, types } = commandLineArgs([
   { name: 'bundle', type: Boolean },
   { name: 'copydir', type: String },
@@ -21,6 +20,7 @@ const { bundle, copydir, dir, serve, types } = commandLineArgs([
 const outdir = 'dist';
 const sitedir = '_site';
 const spinner = ora({ hideCursor: false }).start();
+const execPromise = util.promisify(exec);
 let childProcess;
 let buildResult;
 
@@ -143,6 +143,8 @@ async function nextTask(label, action) {
   } catch (err) {
     spinner.stop();
     console.error(`${chalk.red('✘')} ${err}`);
+    if (err.stdout) console.error(chalk.red(err.stdout));
+    if (err.stderr) console.error(chalk.red(err.stderr));
     process.exit(1);
   }
 }
