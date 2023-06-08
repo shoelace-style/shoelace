@@ -394,7 +394,7 @@ describe('when the value changes', () => {
     // await aTimeout(1)
     //
     // expect(radioGroup.querySelector("sl-radio")?.getAttribute("aria-checked")).to.equal("true")
-  })
+  });
 
   runFormControlBaseTests('sl-radio-group');
 });
