@@ -76,24 +76,28 @@
   //
   // Resizing previews
   //
-  [...document.querySelectorAll('.code-preview__preview')].forEach(preview => {
-    const resizer = preview.querySelector('.code-preview__resizer');
-    let startX;
-    let startWidth;
+  document.addEventListener('mousedown', handleResizerDrag);
+  document.addEventListener('touchstart', handleResizerDrag, { passive: true });
 
-    function dragStart(event) {
-      startX = event.changedTouches ? event.changedTouches[0].pageX : event.clientX;
-      startWidth = parseInt(document.defaultView.getComputedStyle(preview).width, 10);
-      preview.classList.add('code-preview__preview--dragging');
-      event.preventDefault();
-      document.documentElement.addEventListener('mousemove', dragMove);
-      document.documentElement.addEventListener('touchmove', dragMove);
-      document.documentElement.addEventListener('mouseup', dragStop);
-      document.documentElement.addEventListener('touchend', dragStop);
-    }
+  function handleResizerDrag(event) {
+    const resizer = event.target.closest('.code-preview__resizer');
+    const preview = event.target.closest('.code-preview__preview');
+
+    if (!resizer || !preview) return;
+
+    let startX = event.changedTouches ? event.changedTouches[0].pageX : event.clientX;
+    let startWidth = parseInt(document.defaultView.getComputedStyle(preview).width, 10);
+
+    event.preventDefault();
+    preview.classList.add('code-preview__preview--dragging');
+    document.documentElement.addEventListener('mousemove', dragMove);
+    document.documentElement.addEventListener('touchmove', dragMove);
+    document.documentElement.addEventListener('mouseup', dragStop);
+    document.documentElement.addEventListener('touchend', dragStop);
 
     function dragMove(event) {
-      setWidth(startWidth + (event.changedTouches ? event.changedTouches[0].pageX : event.pageX) - startX);
+      const width = startWidth + (event.changedTouches ? event.changedTouches[0].pageX : event.pageX) - startX;
+      preview.style.width = `${width}px`;
     }
 
     function dragStop() {
@@ -103,14 +107,7 @@
       document.documentElement.removeEventListener('mouseup', dragStop);
       document.documentElement.removeEventListener('touchend', dragStop);
     }
-
-    function setWidth(width) {
-      preview.style.width = `${width}px`;
-    }
-
-    resizer.addEventListener('mousedown', dragStart);
-    resizer.addEventListener('touchstart', dragStart, { passive: true });
-  }, false);
+  }
 
   //
   // Toggle source mode
