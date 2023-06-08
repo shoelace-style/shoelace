@@ -1338,8 +1338,6 @@ The component API remains the same except for the changes noted below. Thanks fo
 - Fixed a bug where tabbing into slotted elements closes `<sl-dropdown>` when used in a shadow root [#223]
 - Fixed a bug where scroll anchoring caused undesirable scrolling when `<sl-details>` are grouped
 
-### Why did event names change?
-
 Shoelace events were updated to use a lowercase, kebab-style naming convention. Instead of event names such as `slChange` and `slAfterShow`, you'll need to use `sl-change` and `sl-after-show` now.
 
 This change was necessary to address a critical issue in frameworks that use DOM templates with declarative event bindings such as `<sl-button @slChange="handler">`. Due to HTML's case-insensitivity, browsers translate attribute names to lowercase, turning `@slChange` into `@slchange`, making it impossible to listen to `slChange`.
