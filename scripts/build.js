@@ -29,7 +29,8 @@ let buildResult;
 // process and an array of strings containing any output are included in the resolved promise.
 //
 async function buildTheDocs(watch = false) {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
+    const afterSignal = '[eleventy.after]';
     const args = ['@11ty/eleventy', '--quiet'];
     const output = [];
 
@@ -45,12 +46,23 @@ async function buildTheDocs(watch = false) {
     });
 
     child.stdout.on('data', data => {
+      if (data.includes(afterSignal)) return; // don't log the signal
       output.push(data.toString());
     });
 
-    child.on('close', () => {
-      resolve({ child, output });
-    });
+    if (watch) {
+      // The process doesn't terminate in watch mode so, before resolving, we listen for a known signal in stdout that
+      // tells us when the first build completes.
+      child.stdout.on('data', data => {
+        if (data.includes(afterSignal)) {
+          resolve({ child, output });
+        }
+      });
+    } else {
+      child.on('close', () => {
+        resolve({ child, output });
+      });
+    }
   });
 }
 

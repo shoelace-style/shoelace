@@ -196,6 +196,13 @@ module.exports = function (eleventyConfig) {
   });
 
   //
+  // Send a signal to stdout that let's the build know we've reached this point
+  //
+  eleventyConfig.on('eleventy.after', () => {
+    console.log('[eleventy.after]');
+  });
+
+  //
   // Dev server options (see https://www.11ty.dev/docs/dev-server/#options)
   //
   eleventyConfig.setServerOptions({
