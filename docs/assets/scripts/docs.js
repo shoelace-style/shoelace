@@ -6,12 +6,16 @@
 // offscreen or not. Then, on resize/transition we make sure to update the attribute accordingly.
 //
 (() => {
+  function getSidebar() {
+    return document.getElementById('sidebar');
+  }
+
   function isSidebarOpen() {
     return document.documentElement.classList.contains('sidebar-open');
   }
 
   function isSidebarVisible() {
-    return sidebar.getBoundingClientRect().x >= 0;
+    return getSidebar().getBoundingClientRect().x >= 0;
   }
 
   function toggleSidebar(force) {
@@ -20,20 +24,36 @@
   }
 
   function updateInert() {
-    sidebar.inert = !isSidebarVisible();
+    getSidebar().inert = !isSidebarVisible();
   }
-
-  const menuToggle = document.getElementById('menu-toggle');
-  const sidebar = document.getElementById('sidebar');
 
   // Toggle the menu
-  if (menuToggle) {
-    menuToggle.addEventListener('click', toggleSidebar);
-  }
+  document.addEventListener('click', event => {
+    const menuToggle = event.target.closest('#menu-toggle');
+    console.log(event.target, menuToggle);
+    if (!menuToggle) return;
+    toggleSidebar();
+  });
 
   // Update the sidebar's inert state when the window resizes and when the sidebar transitions
   window.addEventListener('resize', () => toggleSidebar(false));
-  sidebar.addEventListener('transitionend', updateInert);
+
+  document.addEventListener('transitionend', event => {
+    const sidebar = event.target.closest('#sidebar');
+    if (!sidebar) return;
+    updateInert();
+  });
+
+  // Close when a menu item is selected on mobile
+  document.addEventListener('click', event => {
+    const sidebar = event.target.closest('#sidebar');
+    const link = event.target.closest('a');
+    if (!sidebar || !link) return;
+
+    if (isSidebarOpen()) {
+      toggleSidebar();
+    }
+  });
 
   // Close when open and escape is pressed
   document.addEventListener('keydown', event => {
@@ -65,11 +85,11 @@
   }
 
   // Toggle the theme
-  const themeToggle = document.getElementById('theme-toggle');
-
-  if (themeToggle) {
-    themeToggle.addEventListener('click', toggleTheme);
-  }
+  document.addEventListener('click', event => {
+    const themeToggle = event.target.closest('#theme-toggle');
+    if (!themeToggle) return;
+    toggleTheme();
+  });
 
   // Toggle with backslash
   document.addEventListener('keydown', event => {
