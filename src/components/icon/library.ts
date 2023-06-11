@@ -4,10 +4,12 @@ import type SlIcon from '../icon/icon';
 
 export type IconLibraryResolver = (name: string) => string;
 export type IconLibraryMutator = (svg: SVGElement) => void;
+export type IconLibrarySymbolSprite = 'external' | 'inline';
 export interface IconLibrary {
   name: string;
   resolver: IconLibraryResolver;
   mutator?: IconLibraryMutator;
+  svgSymbolSprite?: IconLibrarySymbolSprite;
 }
 
 let registry: IconLibrary[] = [defaultLibrary, systemLibrary];
@@ -31,13 +33,14 @@ export function getIconLibrary(name?: string) {
 /** Adds an icon library to the registry, or overrides an existing one. */
 export function registerIconLibrary(
   name: string,
-  options: { resolver: IconLibraryResolver; mutator?: IconLibraryMutator }
+  options: { resolver: IconLibraryResolver; mutator?: IconLibraryMutator; svgSymbolSprite?: IconLibrarySymbolSprite }
 ) {
   unregisterIconLibrary(name);
   registry.push({
     name,
     resolver: options.resolver,
-    mutator: options.mutator
+    mutator: options.mutator,
+    svgSymbolSprite: options.svgSymbolSprite
   });
 
   // Redraw watched icons
