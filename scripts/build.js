@@ -11,18 +11,19 @@ import getPort, { portNumbers } from 'get-port';
 import ora from 'ora';
 import util from 'util';
 
-const { bundle, copydir, dir, serve, types } = commandLineArgs([
-  { name: 'bundle', type: Boolean },
+const { copydir, serve } = commandLineArgs([
   { name: 'copydir', type: String },
   { name: 'serve', type: Boolean },
-  { name: 'types', type: Boolean }
 ]);
 const outdir = 'dist';
+const cdndir = 'cdn'
 const sitedir = '_site';
 const spinner = ora({ hideCursor: false }).start();
 const execPromise = util.promisify(exec);
 let childProcess;
-let buildResult;
+let buildResults;
+
+const bundleDirectories = [cdndir, outdir]
 
 //
 // Runs 11ty and builds the docs. The returned promise resolves after the initial publish has completed. The child
@@ -72,7 +73,15 @@ async function buildTheDocs(watch = false) {
 async function buildTheSource() {
   const alwaysExternal = ['@lit-labs/react', 'react'];
 
-  return await esbuild.build({
+  const packageJSON = await fs.readFile("./package.json")
+  const dependencies = [
+    ...Object.keys(packageJSON.dependencies || {}),
+    ...Object.keys(packageJSON.peerDependencies || {})
+  ]
+
+  const allExternal = [...alwaysExternal, ...dependencies]
+
+  const cdnConfig = {
     format: 'esm',
     target: 'es2017',
     entryPoints: [
@@ -94,7 +103,7 @@ async function buildTheSource() {
       // React wrappers
       ...(await globby('./src/react/**/*.ts'))
     ],
-    outdir,
+    outdir: cdndir,
     chunkNames: 'chunks/[name].[hash]',
     incremental: serve,
     define: {
@@ -108,19 +117,29 @@ async function buildTheSource() {
     //
     // We never bundle React or @lit-labs/react though!
     //
-    external: bundle
-      ? alwaysExternal
-      : [...alwaysExternal, '@floating-ui/dom', '@shoelace-style/animations', 'lit', 'qr-creator'],
+    external: alwaysExternal,
     splitting: true,
     plugins: []
-  });
+  }
+
+  const npmConfig = {
+    ...cdnConfig,
+    external: allExternal,
+    outdir
+  }
+
+
+  return await Promise.all([
+    esbuild.build(cdnConfig),
+    esbuild.build(npmConfig)
+  ])
 }
 
 //
 // Called on SIGINT or SIGTERM to cleanup the build and child processes.
 //
 function handleCleanup() {
-  buildResult.rebuild.dispose();
+  buildResults.forEach((result) => result.rebuild.dispose());
 
   if (childProcess) {
     childProcess.kill('SIGINT');
@@ -150,12 +169,16 @@ async function nextTask(label, action) {
 }
 
 await nextTask('Cleaning up the previous build', async () => {
-  await Promise.all([deleteAsync(outdir), deleteAsync(sitedir)]);
+  await Promise.all([deleteAsync(sitedir), ...bundleDirectories.map((dir) => deleteAsync(dir))]);
   await fs.mkdir(outdir, { recursive: true });
 });
 
 await nextTask('Generating component metadata', () => {
-  return execPromise(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
+  return Promise.all(
+    bundleDirectories.map((dir) => {
+      return execPromise(`node scripts/make-metadata.js --outdir "${dir}"`, { stdio: 'inherit' })
+    })
+  )
 });
 
 await nextTask('Wrapping components for React', () => {
@@ -178,17 +201,23 @@ await nextTask('Running the TypeScript compiler', () => {
   return execPromise(`tsc --project ./tsconfig.prod.json --outdir "${outdir}"`, { stdio: 'inherit' });
 });
 
-await nextTask('Building source files', async () => {
-  buildResult = await buildTheSource();
+// Copy the above steps to the CDN directory directly so we dont need to twice the work for nothing.
+await nextTask(`Copying Web Types, Themes, Icons, and TS Types to "${cdndir}"`, async () => {
+  await deleteAsync(cdndir);
+  await copy(outdir, cdndir);
 });
 
-if (copydir) {
-  // Copy the build output to an additional directory
-  await nextTask(`Copying the build to "${copydir}"`, async () => {
-    await deleteAsync(copydir);
-    await copy(outdir, copydir);
-  });
-}
+await nextTask('Building source files', async () => {
+  buildResults = await buildTheSource();
+});
+
+// Copy the build output to the documentation dist directory
+await nextTask(`Copying the build to "${sitedir}"`, async () => {
+  await deleteAsync(sitedir);
+
+  // We copy the CDN build because that has everything bundled.
+  await copy(cdndir, sitedir);
+});
 
 // Launch the dev server
 if (serve) {
@@ -243,16 +272,20 @@ if (serve) {
       const isStylesheet = /(\.css|\.styles\.ts)$/.test(filename);
 
       // Rebuild the source
-      await buildResult.rebuild();
+      await Promise.all([buildResults.map((result) => result.rebuild())]);
 
       // Rebuild stylesheets when a theme file changes
       if (isTheme) {
-        await execPromise(`node scripts/make-themes.js --outdir "${outdir}"`, { stdio: 'inherit' });
+        await Promise.all(bundleDirectories.map((dir) => {
+          execPromise(`node scripts/make-themes.js --outdir "${dir}"`, { stdio: 'inherit' });
+        }))
       }
 
       // Rebuild metadata (but not when styles are changed)
       if (!isStylesheet) {
-        await execPromise(`node scripts/make-metadata.js --outdir "${outdir}"`, { stdio: 'inherit' });
+        await Promise.all(bundleDirectories.map((dir) => {
+          return execPromise(`node scripts/make-metadata.js --outdir "${dir}"`, { stdio: 'inherit' });
+        }))
       }
 
       bs.reload();
