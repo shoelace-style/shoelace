@@ -634,6 +634,29 @@ This example will load the same set of icons from the jsDelivr CDN instead of yo
 </script>
 ```
 
+### SVG Sprites
+
+To improve performance you can use a SVG sprites to avoid multiple trips for each SVG.
+
+For now we only support referencing external URLs, meaning that we don't inline and cache the result. Make sure you have the right cache headers to avoid extra requests in production.
+
+```html:preview
+<script type="module">
+  import { registerIconLibrary } from '/dist/utilities/icon-library.js';
+
+  registerIconLibrary('sprite', {
+    resolver: name => `/assets/images/sprite.svg#${name}`,
+    mutator: svg => svg.setAttribute('fill', 'currentColor'),
+    svgSymbolSprite: 'external'
+  });
+</script>
+
+<div style="font-size: 24px;">
+  <sl-icon library="sprite" name="clock"></sl-icon>
+  <sl-icon library="sprite" name="speedometer"></sl-icon>
+</div>
+```
+
 ### Customizing the System Library
 
 The system library contains only the icons used internally by Shoelace components. Unlike the default icon library, the system library does not rely on physical assets. Instead, its icons are hard-coded as data URIs into the resolver to ensure their availability.
