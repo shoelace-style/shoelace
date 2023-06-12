@@ -35,7 +35,7 @@ export default class SlIcon extends ShoelaceElement {
     let fileData: Response;
 
     if (library?.svgSymbolSprite) {
-      return html`<svg @load=${() => this.emit('sl-load')} @error=${() => this.emit('sl-error')} part="base">
+      return html`<svg @load=${() => this.emit('sl-load')} @error=${() => this.emit('sl-error')} part="svg">
         <use href="${url}"></use>
       </svg>`;
     }

@@ -1,4 +1,4 @@
-import { elementUpdated, expect, fixture, html, oneEvent } from '@open-wc/testing';
+import { aTimeout, elementUpdated, expect, fixture, html, oneEvent } from '@open-wc/testing';
 import { registerIconLibrary } from '../../../dist/shoelace.js';
 import type SlErrorEvent from '../../events/sl-error';
 import type SlIcon from './icon';
@@ -154,4 +154,40 @@ describe('<sl-icon>', () => {
       expect(ev).to.exist;
     });
   });
+
+  describe('svg spritesheets', () => {
+    it("Should properly grab an SVG and render it from bootstrap icons", async () => {
+      registerIconLibrary('sprite', {
+        resolver: name => `/docs/assets/images/sprite.svg#${name}`,
+        mutator: svg => svg.setAttribute('fill', 'currentColor'),
+        svgSymbolSprite: 'external'
+      });
+
+      const el = await fixture<SlIcon>(html`<sl-icon name="arrow-left" library="sprite"></sl-icon>`);
+
+      await elementUpdated(el)
+
+      expect(el.shadowRoot?.querySelector("svg[part='svg']")).to.not.be.null
+      expect(el.shadowRoot?.querySelector(`use[href='/docs/assets/images/sprite.svg#arrow-left']`)).to.not.be.null
+    })
+
+    it("Should produce an error if the icon doesn't exist.", async () => {
+      registerIconLibrary('sprite', {
+        resolver: name => `/docs/assets/images/sprite.svg#${name}`,
+        mutator: svg => svg.setAttribute('fill', 'currentColor'),
+        svgSymbolSprite: 'external'
+      });
+
+      const el = await fixture<SlIcon>(html`<sl-icon library="sprite"></sl-icon>`);
+
+      const listener = oneEvent(el, 'sl-error') as Promise<SlErrorEvent>;
+
+      el.name = 'bad-icon';
+      const ev = await listener;
+      await elementUpdated(el);
+
+      expect(el.shadowRoot?.querySelector('svg')).to.be.null;
+      expect(ev).to.exist;
+    })
+  })
 });
