@@ -72,14 +72,11 @@ async function buildTheDocs(watch = false) {
 //
 async function buildTheSource() {
   const alwaysExternal = ['@lit-labs/react', 'react'];
-
   const packageJSON = await fs.readFile('./package.json');
   const dependencies = [
     ...Object.keys(packageJSON.dependencies || {}),
     ...Object.keys(packageJSON.peerDependencies || {})
   ];
-
-  const allExternal = [...alwaysExternal, ...dependencies];
 
   const cdnConfig = {
     format: 'esm',
@@ -124,7 +121,7 @@ async function buildTheSource() {
 
   const npmConfig = {
     ...cdnConfig,
-    external: allExternal,
+    bundle: false,
     outdir
   };
 
