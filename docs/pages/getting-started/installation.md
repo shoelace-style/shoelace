@@ -22,8 +22,8 @@ While convenient, autoloading may lead to a [Flash of Undefined Custom Elements]
 
 <!-- prettier-ignore -->
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/light.css" />
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace-autoloader.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/cdn/themes/light.css" />
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/cdn/shoelace-autoloader.js"></script>
 ```
 
 </sl-tab-panel>
@@ -33,8 +33,8 @@ While convenient, autoloading may lead to a [Flash of Undefined Custom Elements]
 The traditional CDN loader registers all Shoelace elements up front. Note that, if you're only using a handful of components, it will be much more efficient to stick with the autoloader. However, you can also [cherry pick](#cherry-picking) components if you want to load specific ones up front.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/light.css" />
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/shoelace.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/cdn/themes/light.css" />
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/cdn/shoelace.js"></script>
 ```
 
 </sl-tab-panel>
@@ -45,7 +45,7 @@ The traditional CDN loader registers all Shoelace elements up front. Note that, 
 The code above will load the light theme. If you want to use the [dark theme](/getting-started/themes#dark-theme) instead, update the stylesheet as shown below and add `<html class="sl-theme-dark">` to your page.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/dark.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/cdn/themes/dark.css" />
 ```
 
 ### Light & Dark Theme
@@ -56,21 +56,21 @@ If you want to load the light or dark theme based on the user's `prefers-color-s
 <link
   rel="stylesheet"
   media="(prefers-color-scheme:light)"
-  href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/light.css"
+  href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/cdn/themes/light.css"
 />
 <link
   rel="stylesheet"
   media="(prefers-color-scheme:dark)"
-  href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/dist/themes/dark.css"
+  href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/cdn/themes/dark.css"
   onload="document.documentElement.classList.add('sl-theme-dark');"
 />
 ```
 
 Now you can [start using Shoelace!](/getting-started/usage)
 
-## Local Installation
+## NPM installation
 
-If you don't want to use the CDN, you can install Shoelace locally with the following command.
+If you don't want to use the CDN, you can install Shoelace from NPM with the following command.
 
 ```bash
 npm install @shoelace-style/shoelace
@@ -110,20 +110,26 @@ However, if you're [cherry picking](#cherry-picking) or [bundling](#bundling) Sh
 ```
 
 :::tip
-The library also exports a `getBasePath()` method you can use to reference assets.
+When setting a basePath, and easy way to check if it was down properly is by checking if an icon exists.
+
+For example, if I set the basePath to `/dist`, I should be able to go to:
+
+`https://<my-site>/dist/assets/icons/arrow-left.svg` and the browser should show me the SVG.
+
+Shoelace also exports a `getBasePath()` method you can use to reference assets.
 :::
 
 ## Cherry Picking
 
-Cherry picking can be done from [the CDN](#cdn-installation-easiest) or your [local installation](#local-installation). This approach will load only the components you need up front, while limiting the number of files the browser has to download. The disadvantage is that you need to import each individual component.
+Cherry picking can be done from [the CDN](#cdn-installation-easiest) or from [NPM](#npm-installation). This approach will load only the components you need up front, while limiting the number of files the browser has to download. The disadvantage is that you need to import each individual component.
 
 Here's an example that loads only the button component. Again, if you're not using a module resolver, you'll need to adjust the path to point to the folder Shoelace is in.
 
 ```html
-<link rel="stylesheet" href="/path/to/shoelace/dist/themes/light.css" />
+<link rel="stylesheet" href="/path/to/shoelace/cdn/themes/light.css" />
 
 <script type="module" data-shoelace="/path/to/shoelace/dist">
-  import '@shoelace-style/shoelace/dist/components/button/button.js';
+  import '@shoelace-style/shoelace/cdn/components/button/button.js';
 
   // <sl-button> is ready to use!
 </script>
@@ -173,3 +179,19 @@ setBasePath('/path/to/shoelace/dist');
 :::warning
 Component modules include side effects for registration purposes. Because of this, importing directly from `@shoelace-style/shoelace` may result in a larger bundle size than necessary. For optimal tree shaking, always cherry pick, i.e. import components and utilities from their respective files, as shown above.
 :::
+
+## The difference between CDN and NPM
+
+You'll notice above that the CDN links all start with `/cdn/<path>` and imports using NPM use `/dist/<path>`.
+The `/cdn` files use a different bundle from `/dist`. `/cdn` files come "prebundled" which means all dependencies are
+inlined so you do not need to worry about loading any additional libraries. `/dist` does **NOT** prebundle dependencies
+allowing for your bundler of choice to more efficiently deduplicate dependencies resulting in smaller overall bundles
+and greater code sharing.
+
+TLDR:
+
+- `@shoelace-style/shoelace/cdn` is for CDN
+- `@shoelace-style/shoelace/dist` is for NPM
+
+This change was introduced in `v2.5.0` to address issues around installations from NPM
+loading multiple versions of libraries such as the Lit  web component library which Shoelace uses internally.

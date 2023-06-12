@@ -39,15 +39,15 @@
     {% if component.summary %}
       {{ component.summary | markdownInline | safe }}
     {% endif %}
-  </p>  
-  
+  </p>
+
   {# Markdown content #}
   {{ content | safe }}
 
   {# Importing #}
   <h2>Importing</h2>
   <p>
-    If you're using the autoloader or the traditional loader, you can ignore this section. Otherwise, feel free to use 
+    If you're using the autoloader or the traditional loader, you can ignore this section. Otherwise, feel free to use
     any of the following snippets to <a href="/getting-started/installation#cherry-picking">cherry pick</a> this component.
   </p>
 
@@ -59,18 +59,18 @@
 
     <sl-tab-panel name="script">
       <p>
-        To import this component from <a href="https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace">the CDN</a> 
+        To import this component from <a href="https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace">the CDN</a>
         using a script tag:
       </p>
-      <pre><code class="language-html">&lt;script type=&quot;module&quot; src=&quot;https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@{{ meta.version }}/dist/{{ component.path }}&quot;&gt;&lt;/script&gt;</code></pre>
+      <pre><code class="language-html">&lt;script type=&quot;module&quot; src=&quot;https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@{{ meta.version }}/cdn/{{ component.path }}&quot;&gt;&lt;/script&gt;</code></pre>
     </sl-tab-panel>
 
     <sl-tab-panel name="import">
       <p>
-        To import this component from <a href="https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace">the CDN</a> 
+        To import this component from <a href="https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace">the CDN</a>
         using a JavaScript import:
       </p>
-      <pre><code class="language-js">import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@{{ meta.version }}/dist/{{ component.path }}';</code></pre>
+      <pre><code class="language-js">import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@{{ meta.version }}/cdn/{{ component.path }}';</code></pre>
     </sl-tab-panel>
 
     <sl-tab-panel name="bundler">
@@ -337,7 +337,7 @@
     <h2>Dependencies</h2>
 
     <p>This component automatically imports the following dependencies.</p>
-    
+
     <ul>
       {% for dependency in component.dependencies %}
         <li><code>&lt;{{ dependency }}&gt;</code></li>
