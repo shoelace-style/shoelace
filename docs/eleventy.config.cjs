@@ -16,8 +16,11 @@ const tableOfContents = require('./_utilities/table-of-contents.cjs');
 const prettier = require('./_utilities/prettier.cjs');
 const scrollingTables = require('./_utilities/scrolling-tables.cjs');
 const typography = require('./_utilities/typography.cjs');
+const replacer = require('./_utilities/replacer.cjs');
 
 const assetsDir = 'assets';
+const cdndir =  'cdn'
+const npmdir = 'dist'
 const allComponents = getAllComponents();
 let hasBuiltSearchIndex = false;
 
@@ -33,7 +36,9 @@ module.exports = function (eleventyConfig) {
     description: 'A forward-thinking library of web components.',
     image: 'images/og-image.png',
     version: customElementsManifest.package.version,
-    components: allComponents
+    components: allComponents,
+    cdndir,
+    npmdir
   });
 
   //
@@ -129,6 +134,11 @@ module.exports = function (eleventyConfig) {
     scrollingTables(doc);
     copyCodeButtons(doc); // must be after codePreviews + highlightCodeBlocks
     typography(doc, '#content');
+    replacer(doc, [
+      {pattern: "%VERSION%", replacement: customElementsManifest.package.version},
+      {pattern: "%CDNDIR%", replacement: cdndir},
+      {pattern: "%NPMDIR%", replacement: npmdir}
+    ])
 
     // Serialize the Document object to an HTML string and prepend the doctype
     content = `<!DOCTYPE html>\n${doc.documentElement.outerHTML}`;

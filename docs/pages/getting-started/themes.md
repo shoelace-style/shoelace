@@ -11,7 +11,7 @@ Shoelace is designed to be highly customizable through pure CSS. Out of the box,
 A theme is nothing more than a stylesheet that uses the Shoelace API to define design tokens and apply custom styles to components. To create a theme, you will need a decent understanding of CSS, including [CSS Custom Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) and the [`::part` selector](https://developer.mozilla.org/en-US/docs/Web/CSS/::part).
 
 :::tip
-For component developers, built-in themes are also available as JavaScript modules that export [Lit CSSResult](https://lit.dev/docs/api/styles/#CSSResult) objects. You can find them in `dist/themes/*.styles.js`.
+For component developers, built-in themes are also available as JavaScript modules that export [Lit CSSResult](https://lit.dev/docs/api/styles/#CSSResult) objects. You can find them in `%NPMDIR%/themes/*.styles.js`.
 :::
 
 ## Theme Basics
@@ -34,7 +34,7 @@ To activate a theme, import it and apply the theme's class to the `<html>` eleme
 ```html
 <html class="sl-theme-dark">
   <head>
-    <link rel="stylesheet" href="path/to/shoelace/dist/themes/dark.css" />
+    <link rel="stylesheet" href="path/to/shoelace/%NPMDIR%/themes/dark.css" />
   </head>
 
   <body>
@@ -54,8 +54,8 @@ You can activate themes on various containers throughout the page. This example 
 ```html
 <html>
   <head>
-    <link rel="stylesheet" href="path/to/shoelace/dist/themes/light.css" />
-    <link rel="stylesheet" href="path/to/shoelace/dist/themes/dark.css" />
+    <link rel="stylesheet" href="path/to/shoelace/%NPMDIR%/themes/light.css" />
+    <link rel="stylesheet" href="path/to/shoelace/%NPMDIR%/themes/dark.css" />
   </head>
 
   <body>
@@ -127,7 +127,7 @@ The dark theme works by taking the light theme's [color tokens](/tokens/color) a
 To install the dark theme, add the following to the `<head>` section of your page.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/cdn/themes/dark.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/dark.css" />
 ```
 
 To activate the theme, apply the `sl-theme-dark` class to the `<html>` element.

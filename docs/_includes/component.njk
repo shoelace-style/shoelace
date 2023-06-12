@@ -62,7 +62,7 @@
         To import this component from <a href="https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace">the CDN</a>
         using a script tag:
       </p>
-      <pre><code class="language-html">&lt;script type=&quot;module&quot; src=&quot;https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@{{ meta.version }}/cdn/{{ component.path }}&quot;&gt;&lt;/script&gt;</code></pre>
+      <pre><code class="language-html">&lt;script type=&quot;module&quot; src=&quot;https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@{{ meta.version }}/{{ meta.cdndir }}/{{ component.path }}&quot;&gt;&lt;/script&gt;</code></pre>
     </sl-tab-panel>
 
     <sl-tab-panel name="import">
@@ -70,21 +70,21 @@
         To import this component from <a href="https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace">the CDN</a>
         using a JavaScript import:
       </p>
-      <pre><code class="language-js">import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@{{ meta.version }}/cdn/{{ component.path }}';</code></pre>
+      <pre><code class="language-js">import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@{{ meta.version }}/{{ meta.cdndir }}/{{ component.path }}';</code></pre>
     </sl-tab-panel>
 
     <sl-tab-panel name="bundler">
       <p>
         To import this component using <a href="{{ rootUrl('/getting-started/installation#bundling') }}">a bundler</a>:
       </p>
-      <pre><code class="language-js">import '@shoelace-style/shoelace/dist/{{ component.path }}';</code></pre>
+      <pre><code class="language-js">import '@shoelace-style/shoelace/{{ meta.npmdir }}/{{ component.path }}';</code></pre>
     </sl-tab-panel>
 
     <sl-tab-panel name="react">
       <p>
         To import this component as a <a href="/frameworks/react">React component</a>:
       </p>
-      <pre><code class="language-js">import { {{ component.name }} } from '@shoelace-style/shoelace/dist/react';</code></pre>
+      <pre><code class="language-js">import { {{ component.name }} } from '@shoelace-style/shoelace/{{ meta.npmdir }}/react';</code></pre>
     </sl-tab-panel>
   </sl-tab-group>
 

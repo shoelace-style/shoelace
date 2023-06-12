@@ -20,14 +20,14 @@ Next, [include a theme](/getting-started/themes) and set the [base path](/gettin
 
 ```jsx
 // App.jsx
-import '@shoelace-style/shoelace/dist/themes/light.css';
-import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path';
+import '@shoelace-style/shoelace/%NPMDIR%/themes/light.css';
+import { setBasePath } from '@shoelace-style/shoelace/%NPMDIR%/utilities/base-path';
 
-setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/cdn/');
+setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/');
 ```
 
 :::tip
-If you'd rather not use the CDN for assets, you can create a [build task](https://webpack.js.org/plugins/copy-webpack-plugin/) that copies `node_modules/@shoelace-style/shoelace/dist/assets` into your app's `public` directory. Then you can point the base path to that folder instead.
+If you'd rather not use the CDN for assets, you can create a [build task](https://webpack.js.org/plugins/copy-webpack-plugin/) that copies `node_modules/@shoelace-style/shoelace/%NPMDIR%/assets` into your app's `public` directory. Then you can point the base path to that folder instead.
 :::
 
 Now you can start using components!
@@ -39,7 +39,7 @@ Now you can start using components!
 Every Shoelace component is available to import as a React component. Note that we're importing the `<SlButton>` _React component_ instead of the `<sl-button>` _custom element_ in the example below.
 
 ```jsx
-import { SlButton } from '@shoelace-style/shoelace/dist/react';
+import { SlButton } from '@shoelace-style/shoelace/%NPMDIR%/react';
 
 const MyComponent = () => <SlButton variant="primary">Click me</SlButton>;
 
@@ -56,7 +56,7 @@ Here's how you can bind the input's value to a state variable.
 
 ```jsx
 import { useState } from 'react';
-import { SlInput } from '@shoelace-style/shoelace/dist/react';
+import { SlInput } from '@shoelace-style/shoelace/%NPMDIR%/react';
 
 function MyComponent() {
   const [value, setValue] = useState('');
@@ -71,8 +71,8 @@ If you're using TypeScript, it's important to note that `event.target` will be a
 
 ```tsx
 import { useState } from 'react';
-import { SlInput } from '@shoelace-style/shoelace/dist/react';
-import type SlInputElement from '@shoelace-style/shoelace/dist/components/input/input';
+import { SlInput } from '@shoelace-style/shoelace/%NPMDIR%/react';
+import type SlInputElement from '@shoelace-style/shoelace/%NPMDIR%/components/input/input';
 
 function MyComponent() {
   const [value, setValue] = useState('');

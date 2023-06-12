@@ -22,8 +22,8 @@ While convenient, autoloading may lead to a [Flash of Undefined Custom Elements]
 
 <!-- prettier-ignore -->
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/cdn/themes/light.css" />
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/cdn/shoelace-autoloader.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/light.css" />
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/shoelace-autoloader.js"></script>
 ```
 
 </sl-tab-panel>
@@ -33,8 +33,8 @@ While convenient, autoloading may lead to a [Flash of Undefined Custom Elements]
 The traditional CDN loader registers all Shoelace elements up front. Note that, if you're only using a handful of components, it will be much more efficient to stick with the autoloader. However, you can also [cherry pick](#cherry-picking) components if you want to load specific ones up front.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/cdn/themes/light.css" />
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/cdn/shoelace.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/light.css" />
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/shoelace.js"></script>
 ```
 
 </sl-tab-panel>
@@ -45,7 +45,7 @@ The traditional CDN loader registers all Shoelace elements up front. Note that, 
 The code above will load the light theme. If you want to use the [dark theme](/getting-started/themes#dark-theme) instead, update the stylesheet as shown below and add `<html class="sl-theme-dark">` to your page.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/cdn/themes/dark.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/dark.css" />
 ```
 
 ### Light & Dark Theme
@@ -56,12 +56,12 @@ If you want to load the light or dark theme based on the user's `prefers-color-s
 <link
   rel="stylesheet"
   media="(prefers-color-scheme:light)"
-  href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/cdn/themes/light.css"
+  href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/light.css"
 />
 <link
   rel="stylesheet"
   media="(prefers-color-scheme:dark)"
-  href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/cdn/themes/dark.css"
+  href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/dark.css"
   onload="document.documentElement.classList.add('sl-theme-dark');"
 />
 ```
@@ -81,8 +81,8 @@ It's up to you to make the source files available to your app. One way to do thi
 Once you've done that, add the following tags to your page. Make sure to update `href` and `src` so they point to the route you created.
 
 ```html
-<link rel="stylesheet" href="/shoelace/dist/themes/light.css" />
-<script type="module" src="/shoelace/dist/shoelace.js"></script>
+<link rel="stylesheet" href="/shoelace/%NPMDIR%/themes/light.css" />
+<script type="module" src="/shoelace/%NPMDIR%/shoelace.js"></script>
 ```
 
 Alternatively, [you can use a bundler](#bundling).
@@ -99,13 +99,13 @@ However, if you're [cherry picking](#cherry-picking) or [bundling](#bundling) Sh
 
 ```html
 <!-- Option 1: the data-shoelace attribute -->
-<script src="bundle.js" data-shoelace="/path/to/shoelace/dist"></script>
+<script src="bundle.js" data-shoelace="/path/to/shoelace/%NPMDIR%"></script>
 
 <!-- Option 2: the setBasePath() method -->
 <script src="bundle.js"></script>
 <script type="module">
-  import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.js';
-  setBasePath('/path/to/shoelace/dist');
+  import { setBasePath } from '@shoelace-style/shoelace/%NPMDIR%/utilities/base-path.js';
+  setBasePath('/path/to/shoelace/%NPMDIR%');
 </script>
 ```
 
@@ -126,10 +126,10 @@ Cherry picking can be done from [the CDN](#cdn-installation-easiest) or from [NP
 Here's an example that loads only the button component. Again, if you're not using a module resolver, you'll need to adjust the path to point to the folder Shoelace is in.
 
 ```html
-<link rel="stylesheet" href="/path/to/shoelace/cdn/themes/light.css" />
+<link rel="stylesheet" href="/path/to/shoelace/%NPMDIR%/themes/light.css" />
 
-<script type="module" data-shoelace="/path/to/shoelace/dist">
-  import '@shoelace-style/shoelace/cdn/components/button/button.js';
+<script type="module" data-shoelace="/path/to/shoelace/%NPMDIR%">
+  import '@shoelace-style/shoelace/%NPMDIR%/components/button/button.js';
 
   // <sl-button> is ready to use!
 </script>
@@ -163,15 +163,15 @@ Now it's time to configure your bundler. Configurations vary for each tool, but 
 Once your bundler is configured, you'll be able to import Shoelace components and utilities.
 
 ```js
-import '@shoelace-style/shoelace/dist/themes/light.css';
-import '@shoelace-style/shoelace/dist/components/button/button.js';
-import '@shoelace-style/shoelace/dist/components/icon/icon.js';
-import '@shoelace-style/shoelace/dist/components/input/input.js';
-import '@shoelace-style/shoelace/dist/components/rating/rating.js';
-import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.js';
+import '@shoelace-style/shoelace/%NPMDIR%/themes/light.css';
+import '@shoelace-style/shoelace/%NPMDIR%/components/button/button.js';
+import '@shoelace-style/shoelace/%NPMDIR%/components/icon/icon.js';
+import '@shoelace-style/shoelace/%NPMDIR%/components/input/input.js';
+import '@shoelace-style/shoelace/%NPMDIR%/components/rating/rating.js';
+import { setBasePath } from '@shoelace-style/shoelace/%NPMDIR%/utilities/base-path.js';
 
 // Set the base path to the folder you copied Shoelace's assets to
-setBasePath('/path/to/shoelace/dist');
+setBasePath('/path/to/shoelace/%NPMDIR%
 
 // <sl-button>, <sl-icon>, <sl-input>, and <sl-rating> are ready to use!
 ```
@@ -182,16 +182,16 @@ Component modules include side effects for registration purposes. Because of thi
 
 ## The difference between CDN and NPM
 
-You'll notice above that the CDN links all start with `/cdn/<path>` and imports using NPM use `/dist/<path>`.
-The `/cdn` files use a different bundle from `/dist`. `/cdn` files come "prebundled" which means all dependencies are
-inlined so you do not need to worry about loading any additional libraries. `/dist` does **NOT** prebundle dependencies
+You'll notice above that the CDN links all start with `/%CDNDIR%/<path>` and imports using NPM use `/%NPMDIR%/<path>`.
+The `/%CDNDIR%` files use a different bundle from `/%NPMDIR%`. `/%CDNDIR%` files come "pre-bundled" which means all dependencies are
+inlined so you do not need to worry about loading any additional libraries. `/%NPMDIR%` does **NOT** pre-bundle dependencies
 allowing for your bundler of choice to more efficiently deduplicate dependencies resulting in smaller overall bundles
 and greater code sharing.
 
 TLDR:
 
-- `@shoelace-style/shoelace/cdn` is for CDN
-- `@shoelace-style/shoelace/dist` is for NPM
+- `@shoelace-style/shoelace/%CDNDIR%` is for CDN
+- `@shoelace-style/shoelace/%NPMDIR%` is for NPM
 
 This change was introduced in `v2.5.0` to address issues around installations from NPM
 loading multiple versions of libraries such as the Lit  web component library which Shoelace uses internally.
