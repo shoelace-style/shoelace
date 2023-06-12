@@ -267,7 +267,7 @@ hr {
   margin: calc(var(--docs-content-vertical-spacing) * 2) 0;
 }
 
-/* Blockquotes */
+/* Block quotes */
 blockquote {
   position: relative;
   font-family: var(--sl-font-serif);
