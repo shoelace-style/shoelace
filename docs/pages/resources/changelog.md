@@ -20,6 +20,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug where changing the size of `<sl-radio-group>` wouldn't update the size of child elements
 - Fixed a bug in `<sl-select>` and `<sl-color-picker>` where the `size` attribute wasn't being reflected [#1318](https://github.com/shoelace-style/shoelace/issues/1348)
 - Fixed a bug in `<sl-radio-group>` where `<sl-radio>` would not get checked if `<sl-radio-group>` was defined first. [#1364](https://github.com/shoelace-style/shoelace/pull/1364/)
+- Fixed a bug in `<sl-input>` that caused date pickers to look filled in even when empty in Safari [#1341](https://github.com/shoelace-style/shoelace/pull/1341)
 - Improved `<sl-button>` so it can accept children of variable heights [#1317](https://github.com/shoelace-style/shoelace/pull/1317)
 - Improved the docs to more clearly explain sizing radios and radio buttons
 - Improved the performance of `<sl-rating>` by partially rendering unseen icons [#1310](https://github.com/shoelace-style/shoelace/pull/1310)
@@ -27,6 +28,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Improved the German translation [#1339](https://github.com/shoelace-style/shoelace/pull/1339)
 - Improved the autoloader so it watches `<html>` instead of `<body>` since the latter gets replaced by some frameworks [#1338](https://github.com/shoelace-style/shoelace/pull/1338)
 - Improved the Rails documentation [#1258](https://github.com/shoelace-style/shoelace/pull/1258)
+- Replaced Docsify with Eleventy to generate a static HTML version of the docs
 
 ## 2.4.0
 
