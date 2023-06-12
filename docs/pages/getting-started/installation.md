@@ -32,15 +32,10 @@ While convenient, autoloading may lead to a [Flash of Undefined Custom Elements]
 
 The traditional CDN loader registers all Shoelace elements up front. Note that, if you're only using a handful of components, it will be much more efficient to stick with the autoloader. However, you can also [cherry pick](#cherry-picking) components if you want to load specific ones up front.
 
+<!-- prettier-ignore -->
 ```html
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/light.css"
-/>
-<script
-  type="module"
-  src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/shoelace.js"
-></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/light.css" />
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/shoelace.js" ></script>
 ```
 
 </sl-tab-panel>
@@ -50,11 +45,9 @@ The traditional CDN loader registers all Shoelace elements up front. Note that, 
 
 The code above will load the light theme. If you want to use the [dark theme](/getting-started/themes#dark-theme) instead, update the stylesheet as shown below and add `<html class="sl-theme-dark">` to your page.
 
+<!-- prettier-ignore -->
 ```html
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/dark.css"
-/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/dark.css" />
 ```
 
 ### Light & Dark Theme
@@ -77,9 +70,9 @@ If you want to load the light or dark theme based on the user's `prefers-color-s
 
 Now you can [start using Shoelace!](/getting-started/usage)
 
-## NPM installation
+## npm installation
 
-If you don't want to use the CDN, you can install Shoelace from NPM with the following command.
+If you don't want to use the CDN, you can install Shoelace from npm with the following command.
 
 ```bash
 npm install @shoelace-style/shoelace
@@ -130,7 +123,7 @@ Shoelace also exports a `getBasePath()` method you can use to reference assets.
 
 ## Cherry Picking
 
-Cherry picking can be done from [the CDN](#cdn-installation-easiest) or from [NPM](#npm-installation). This approach will load only the components you need up front, while limiting the number of files the browser has to download. The disadvantage is that you need to import each individual component.
+Cherry picking can be done from [the CDN](#cdn-installation-easiest) or from [npm](#npm-installation). This approach will load only the components you need up front, while limiting the number of files the browser has to download. The disadvantage is that you need to import each individual component.
 
 Here's an example that loads only the button component. Again, if you're not using a module resolver, you'll need to adjust the path to point to the folder Shoelace is in.
 
@@ -189,18 +182,13 @@ setBasePath('/path/to/shoelace/%NPMDIR%
 Component modules include side effects for registration purposes. Because of this, importing directly from `@shoelace-style/shoelace` may result in a larger bundle size than necessary. For optimal tree shaking, always cherry pick, i.e. import components and utilities from their respective files, as shown above.
 :::
 
-## The difference between CDN and NPM
+## The difference between CDN and npm
 
-You'll notice above that the CDN links all start with `/%CDNDIR%/<path>` and imports using NPM use `/%NPMDIR%/<path>`.
-The `/%CDNDIR%` files use a different bundle from `/%NPMDIR%`. `/%CDNDIR%` files come "pre-bundled" which means all dependencies are
-inlined so you do not need to worry about loading any additional libraries. `/%NPMDIR%` does **NOT** pre-bundle dependencies
-allowing for your bundler of choice to more efficiently deduplicate dependencies resulting in smaller overall bundles
-and greater code sharing.
+You'll notice that the CDN links all start with `/%CDNDIR%/<path>` and npm imports use `/%NPMDIR%/<path>`. The `/%CDNDIR%` files are bundled separately from the `/%NPMDIR%` files. The `/%CDNDIR%` files come pre-bundled, which means all dependencies are inlined so you do not need to worry about loading additional libraries. The `/%NPMDIR%` files **DO NOT** come pre-bundled, allowing your bundler of choice to more efficiently deduplicate dependencies, resulting in smaller bundles and optimal code sharing.
 
-TLDR:
+TL;DR:
 
-- `@shoelace-style/shoelace/%CDNDIR%` is for CDN
-- `@shoelace-style/shoelace/%NPMDIR%` is for NPM
+- `@shoelace-style/shoelace/%CDNDIR%` is for CDN users
+- `@shoelace-style/shoelace/%NPMDIR%` is for npm users
 
-This change was introduced in `v2.5.0` to address issues around installations from NPM
-loading multiple versions of libraries such as the Lit web component library which Shoelace uses internally.
+This change was introduced in `v2.5.0` to address issues around installations from npm loading multiple versions of libraries (such as the Lit) that Shoelace uses internally.
