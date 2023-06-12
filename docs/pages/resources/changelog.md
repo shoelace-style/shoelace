@@ -14,7 +14,16 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
-- Added a `cdn/` path for bundled dependencies. Imports for NPM users will remain the same. [#1369](https://github.com/shoelace-style/shoelace/pull/1369)
+This release [unbundles Lit](https://github.com/shoelace-style/shoelace/issues/559) (and other dependencies) from Shoelace. There are now two distributions for the project:
+
+1. `cdn/` – a bundled, CDN-ready distribution
+2. `dist/` – an unbundled, npm-ready distribution
+
+:::warning
+If you're a CDN user, you must update your path to point to `cdn/` instead of `dist/`. You can copy and paste the latest paths from the [installation page](/getting-started/installation).
+:::
+
+- Added a `cdn/` distribution for bundled dependencies (imports for npm users remain the same) [#1369](https://github.com/shoelace-style/shoelace/pull/1369)
 - Added the `checkbox` part and related exported parts to `<sl-tree-item>` so you can target it with CSS [#1318](https://github.com/shoelace-style/shoelace/discussions/1318)
 - Added the `submenu-icon` part to `<sl-menu-item>` (submenus have not been implemented yet, but this part is required to allow customizations)
 - Added tests for `<sl-split-panel>` [#1343](https://github.com/shoelace-style/shoelace/pull/1343)
