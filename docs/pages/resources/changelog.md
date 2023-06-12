@@ -14,6 +14,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- Added a `cdn/` path for bundled dependencies. Imports for NPM users will remain the same. [#1369](https://github.com/shoelace-style/shoelace/pull/1369)
 - Added the `checkbox` part and related exported parts to `<sl-tree-item>` so you can target it with CSS [#1318](https://github.com/shoelace-style/shoelace/discussions/1318)
 - Added the `submenu-icon` part to `<sl-menu-item>` (submenus have not been implemented yet, but this part is required to allow customizations)
 - Added tests for `<sl-split-panel>` [#1343](https://github.com/shoelace-style/shoelace/pull/1343)
