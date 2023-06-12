@@ -19,8 +19,8 @@ const typography = require('./_utilities/typography.cjs');
 const replacer = require('./_utilities/replacer.cjs');
 
 const assetsDir = 'assets';
-const cdndir =  'cdn'
-const npmdir = 'dist'
+const cdndir = 'cdn';
+const npmdir = 'dist';
 const allComponents = getAllComponents();
 let hasBuiltSearchIndex = false;
 
@@ -135,10 +135,10 @@ module.exports = function (eleventyConfig) {
     copyCodeButtons(doc); // must be after codePreviews + highlightCodeBlocks
     typography(doc, '#content');
     replacer(doc, [
-      {pattern: "%VERSION%", replacement: customElementsManifest.package.version},
-      {pattern: "%CDNDIR%", replacement: cdndir},
-      {pattern: "%NPMDIR%", replacement: npmdir}
-    ])
+      { pattern: '%VERSION%', replacement: customElementsManifest.package.version },
+      { pattern: '%CDNDIR%', replacement: cdndir },
+      { pattern: '%NPMDIR%', replacement: npmdir }
+    ]);
 
     // Serialize the Document object to an HTML string and prepend the doctype
     content = `<!DOCTYPE html>\n${doc.documentElement.outerHTML}`;

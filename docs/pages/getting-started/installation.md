@@ -33,8 +33,14 @@ While convenient, autoloading may lead to a [Flash of Undefined Custom Elements]
 The traditional CDN loader registers all Shoelace elements up front. Note that, if you're only using a handful of components, it will be much more efficient to stick with the autoloader. However, you can also [cherry pick](#cherry-picking) components if you want to load specific ones up front.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/light.css" />
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/shoelace.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/light.css"
+/>
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/shoelace.js"
+></script>
 ```
 
 </sl-tab-panel>
@@ -45,7 +51,10 @@ The traditional CDN loader registers all Shoelace elements up front. Note that, 
 The code above will load the light theme. If you want to use the [dark theme](/getting-started/themes#dark-theme) instead, update the stylesheet as shown below and add `<html class="sl-theme-dark">` to your page.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/dark.css" />
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/dark.css"
+/>
 ```
 
 ### Light & Dark Theme
@@ -194,4 +203,4 @@ TLDR:
 - `@shoelace-style/shoelace/%NPMDIR%` is for NPM
 
 This change was introduced in `v2.5.0` to address issues around installations from NPM
-loading multiple versions of libraries such as the Lit  web component library which Shoelace uses internally.
+loading multiple versions of libraries such as the Lit web component library which Shoelace uses internally.

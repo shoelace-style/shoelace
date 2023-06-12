@@ -127,7 +127,10 @@ The dark theme works by taking the light theme's [color tokens](/tokens/color) a
 To install the dark theme, add the following to the `<head>` section of your page.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/dark.css" />
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/dark.css"
+/>
 ```
 
 To activate the theme, apply the `sl-theme-dark` class to the `<html>` element.

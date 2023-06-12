@@ -8,13 +8,12 @@
  * @typedef {Array<Replacement>} Replacements
  */
 
-
 /**
  * @param {Document} content
  * @param {Replacements} replacements
  */
 module.exports = function (content, replacements) {
-  replacements.forEach((replacement) => {
-    content.body.innerHTML = content.body.innerHTML.replaceAll(replacement.pattern, replacement.replacement)
-  })
-}
+  replacements.forEach(replacement => {
+    content.body.innerHTML = content.body.innerHTML.replaceAll(replacement.pattern, replacement.replacement);
+  });
+};
