@@ -11,10 +11,7 @@ import getPort, { portNumbers } from 'get-port';
 import ora from 'ora';
 import util from 'util';
 
-const { copydir, serve } = commandLineArgs([
-  { name: 'copydir', type: String },
-  { name: 'serve', type: Boolean }
-]);
+const { serve } = commandLineArgs([{ name: 'serve', type: Boolean }]);
 const outdir = 'dist';
 const cdndir = 'cdn';
 const sitedir = '_site';
@@ -205,7 +202,7 @@ await nextTask('Building source files', async () => {
   buildResults = await buildTheSource();
 });
 
-// Copy the build output to the documentation dist directory
+// Copy the CDN build to the docs
 await nextTask(`Copying the build to "${sitedir}"`, async () => {
   await deleteAsync(sitedir);
 
@@ -238,7 +235,7 @@ if (serve) {
     server: {
       baseDir: sitedir,
       routes: {
-        '/dist': './dist'
+        '/cdn': './cdn'
       }
     }
   };
