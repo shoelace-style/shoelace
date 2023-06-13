@@ -1,3 +1,4 @@
+import '../../../dist/shoelace.js';
 import { clickOnElement } from '../../internal/test';
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';

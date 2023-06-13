@@ -16,7 +16,7 @@ export default {
   plugins: [
     esbuildPlugin({
       ts: true,
-      target: 'auto'
+      target: 'es2020'
     })
   ],
   browsers: [
@@ -28,8 +28,10 @@ export default {
     <html lang="en-US">
       <head></head>
       <body>
-        <link rel="stylesheet" href="cdn/themes/light.css">
-        <script type="module" src="cdn/shoelace.js"></script>
+        <link rel="stylesheet" href="dist/themes/light.css">
+        <script>
+          window.process = {env: { NODE_ENV: "production" }}
+        </script>
         <script type="module" src="${testFramework}"></script>
       </body>
     </html>

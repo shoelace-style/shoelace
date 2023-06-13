@@ -62,6 +62,7 @@ export { default as SlVisuallyHidden } from './components/visually-hidden/visual
 export * from './utilities/animation';
 export * from './utilities/base-path';
 export * from './utilities/icon-library';
+export * from './utilities/form';
 
 // Events
 export * from './events/events';
