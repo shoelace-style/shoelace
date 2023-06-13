@@ -135,7 +135,7 @@ async function buildTheSource() {
 // Called on SIGINT or SIGTERM to cleanup the build and child processes.
 //
 function handleCleanup() {
-  buildResults.forEach(result => result.rebuild.dispose());
+  buildResults.forEach(result => result.dispose());
 
   if (childProcess) {
     childProcess.kill('SIGINT');
