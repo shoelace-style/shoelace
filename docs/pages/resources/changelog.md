@@ -39,8 +39,9 @@ If you're a CDN user, you must update your path to point to `cdn/` instead of `d
 - Improved the autoloader so it watches `<html>` instead of `<body>` since the latter gets replaced by some frameworks [#1338](https://github.com/shoelace-style/shoelace/pull/1338)
 - Improved the Rails documentation [#1258](https://github.com/shoelace-style/shoelace/pull/1258)
 - Replaced Docsify with Eleventy to generate a static HTML version of the docs
-- Updated TypeScript to 5.1.3
 - Updated esbuild to 0.18.2
+- Updated Lit to 2.7.5
+- Updated TypeScript to 5.1.3
 
 ## 2.4.0
 

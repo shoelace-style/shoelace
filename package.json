@@ -70,7 +70,7 @@
     "@shoelace-style/animations": "^1.1.0",
     "@shoelace-style/localize": "^3.1.1",
     "composed-offset-position": "^0.0.4",
-    "lit": "^2.6.1",
+    "lit": "^2.7.5",
     "qr-creator": "^1.0.0"
   },
   "devDependencies": {
