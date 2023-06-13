@@ -125,7 +125,9 @@ async function buildTheSource() {
 
   if (serve) {
     // Use the context API to allow incremental dev builds
-    return await Promise.all([esbuild.context(cdnConfig), esbuild.context(npmConfig)]);
+    const contexts = await Promise.all([esbuild.context(cdnConfig), esbuild.context(npmConfig)]);
+    await Promise.all(contexts.map(context => context.rebuild()));
+    return contexts;
   } else {
     // Use the standard API for production builds
     return await Promise.all([esbuild.build(cdnConfig), esbuild.build(npmConfig)]);
@@ -208,13 +210,15 @@ await nextTask('Building source files', async () => {
   buildResults = await buildTheSource();
 });
 
-// Copy the CDN build to the docs
-await nextTask(`Copying the build to "${sitedir}"`, async () => {
-  await deleteAsync(sitedir);
+// Copy the CDN build to the docs (prod only; we use a virtual directory in dev)
+if (!serve) {
+  await nextTask(`Copying the build to "${sitedir}"`, async () => {
+    await deleteAsync(sitedir);
 
-  // We copy the CDN build because that has everything bundled.
-  await copy(cdndir, path.join(sitedir, 'cdn'));
-});
+    // We copy the CDN build because that has everything bundled.
+    await copy(cdndir, path.join(sitedir, 'cdn'));
+  });
+}
 
 // Launch the dev server
 if (serve) {
