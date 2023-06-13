@@ -75,7 +75,7 @@ export default class SlDrawer extends ShoelaceElement {
 
   private readonly hasSlotController = new HasSlotController(this, 'footer');
   private readonly localize = new LocalizeController(this);
-  private modal: Modal;
+  private modal = new Modal(this);
   private originalTrigger: HTMLElement | null;
 
   @query('.drawer') drawer: HTMLElement;
@@ -108,12 +108,6 @@ export default class SlDrawer extends ShoelaceElement {
    * accessible way for users to dismiss the drawer.
    */
   @property({ attribute: 'no-header', type: Boolean, reflect: true }) noHeader = false;
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
-    this.modal = new Modal(this);
-  }
 
   firstUpdated() {
     this.drawer.hidden = !this.open;
@@ -156,12 +150,12 @@ export default class SlDrawer extends ShoelaceElement {
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
-  private handleDocumentKeyDown(event: KeyboardEvent) {
+  private handleDocumentKeyDown = (event: KeyboardEvent) => {
     if (this.open && !this.contained && event.key === 'Escape') {
       event.stopPropagation();
       this.requestClose('keyboard');
     }
-  }
+  };
 
   @watch('open', { waitUntilFirstUpdate: true })
   async handleOpenChange() {

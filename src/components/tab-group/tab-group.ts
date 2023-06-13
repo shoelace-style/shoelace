@@ -70,7 +70,7 @@ export default class SlTabGroup extends ShoelaceElement {
   @property({ attribute: 'no-scroll-controls', type: Boolean }) noScrollControls = false;
 
   connectedCallback() {
-    const whenAllDefined = Promise.allSettled([
+    const whenAllDefined = Promise.all([
       customElements.whenDefined('sl-tab'),
       customElements.whenDefined('sl-tab-panel')
     ]);

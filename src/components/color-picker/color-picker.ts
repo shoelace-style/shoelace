@@ -190,18 +190,10 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     return this.input.validationMessage;
   }
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.handleFocusIn = this.handleFocusIn.bind(this);
-    this.handleFocusOut = this.handleFocusOut.bind(this);
+  constructor() {
+    super();
     this.addEventListener('focusin', this.handleFocusIn);
     this.addEventListener('focusout', this.handleFocusOut);
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.removeEventListener('focusin', this.handleFocusIn);
-    this.removeEventListener('focusout', this.handleFocusOut);
   }
 
   firstUpdated() {
@@ -222,15 +214,15 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     });
   }
 
-  private handleFocusIn() {
+  private handleFocusIn = () => {
     this.hasFocus = true;
     this.emit('sl-focus');
-  }
+  };
 
-  private handleFocusOut() {
+  private handleFocusOut = () => {
     this.hasFocus = false;
     this.emit('sl-blur');
-  }
+  };
 
   private handleFormatToggle() {
     const formats = ['hex', 'rgb', 'hsl', 'hsv'];
