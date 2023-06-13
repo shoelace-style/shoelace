@@ -1,6 +1,6 @@
 import '../icon/icon';
 import { AutoplayController } from './autoplay-controller';
-import { clamp } from 'src/internal/math';
+import { clamp } from '../../internal/math';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';

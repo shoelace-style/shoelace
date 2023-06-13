@@ -10,7 +10,7 @@ import { getAnimation, setDefaultAnimation } from '../../utilities/animation-reg
 import { HasSlotController } from '../../internal/slot';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize';
-import { scrollIntoView } from 'src/internal/scroll';
+import { scrollIntoView } from '../../internal/scroll';
 import { waitForEvent } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import ShoelaceElement from '../../internal/shoelace-element';
