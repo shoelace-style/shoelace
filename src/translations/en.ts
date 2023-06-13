@@ -1,4 +1,4 @@
-import { registerTranslation } from '../utilities/localize';
+import { registerTranslation } from '@shoelace-style/localize';
 import type { Translation } from '../utilities/localize';
 
 const translation: Translation = {

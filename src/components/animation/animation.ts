@@ -78,7 +78,7 @@ export default class SlAnimation extends ShoelaceElement {
   @property({ attribute: 'playback-rate', type: Number }) playbackRate = 1;
 
   /** Gets and sets the current animation time. */
-  get currentTime(): number {
+  get currentTime(): CSSNumberish {
     return this.animation?.currentTime ?? 0;
   }
 

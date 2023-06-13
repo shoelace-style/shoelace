@@ -5,3 +5,4 @@ dist
 docs/assets/images/sprite.svg
 node_modules
 src/react
+cdn

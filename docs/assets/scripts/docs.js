@@ -30,7 +30,6 @@
   // Toggle the menu
   document.addEventListener('click', event => {
     const menuToggle = event.target.closest('#menu-toggle');
-    console.log(event.target, menuToggle);
     if (!menuToggle) return;
     toggleSidebar();
   });

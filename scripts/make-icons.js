@@ -23,7 +23,7 @@ const url = `https://github.com/twbs/icons/archive/v${version}.zip`;
 try {
   await fs.stat(`${srcPath}/LICENSE.md`);
 } catch {
-  // Download the source from GitHub (since not everything is published to NPM)
+  // Download the source from GitHub (since not everything is published to npm)
   await download(url, './.cache/icons', { extract: true });
 }
 

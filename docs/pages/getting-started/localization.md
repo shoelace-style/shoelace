@@ -28,8 +28,8 @@ Shoelace ships with a number of translations. The default is English (US), which
 
 The location of translations depends on how you're consuming Shoelace.
 
-- If you're using the CDN, [import them from the CDN](https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace?path=dist%2Ftranslations)
-- If you're using a bundler, import them from `@shoelace-style/shoelace/dist/translations/[lang].js`
+- If you're using the CDN, [import them from the CDN](https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace?path=%CDNDIR%%2Ftranslations)
+- If you're using a bundler, import them from `@shoelace-style/shoelace/%NPMDIR%/translations/[lang].js`
 
 You do not need to load translations up front. You can import them dynamically even after updating the `lang` attribute. Once a translation is registered, localized components will update automatically.
 
