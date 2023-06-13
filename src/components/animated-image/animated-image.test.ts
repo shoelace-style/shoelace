@@ -1,3 +1,4 @@
+import "../../../dist/shoelace.js"
 import { clickOnElement } from '../../internal/test';
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import type SlAnimatedImage from './animated-image';

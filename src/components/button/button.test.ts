@@ -1,3 +1,4 @@
+import "../../../dist/shoelace.js"
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
 import sinon from 'sinon';

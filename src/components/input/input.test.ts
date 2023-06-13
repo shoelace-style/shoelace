@@ -1,6 +1,7 @@
 // eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
+import { getFormControls, serialize } from "../../../dist/shoelace.js"
 import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
-import { getFormControls, serialize } from '../../utilities/form';
+// import { getFormControls, serialize } from '../../utilities/form';
 import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
 import { sendKeys } from '@web/test-runner-commands'; // must come from the same module
 import sinon from 'sinon';

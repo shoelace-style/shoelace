@@ -1,5 +1,5 @@
 import { elementUpdated, expect, fixture, html, oneEvent } from '@open-wc/testing';
-import { registerIconLibrary } from '../../shoelace';
+import { registerIconLibrary } from '../../../dist/shoelace.js';
 import type SlErrorEvent from '../../events/sl-error';
 import type SlIcon from './icon';
 import type SlLoadEvent from '../../events/sl-load';
