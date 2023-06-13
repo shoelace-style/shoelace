@@ -28,8 +28,8 @@ export default {
     <html lang="en-US">
       <head></head>
       <body>
-        <link rel="stylesheet" href="dist/themes/light.css">
-        <script type="module" src="dist/shoelace.js"></script>
+        <link rel="stylesheet" href="cdn/themes/light.css">
+        <script type="module" src="cdn/shoelace.js"></script>
         <script type="module" src="${testFramework}"></script>
       </body>
     </html>

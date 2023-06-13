@@ -180,7 +180,7 @@
       // HTML templates
       if (!isReact) {
         htmlTemplate =
-          `<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${shoelaceVersion}/dist/shoelace.js"></script>\n` +
+          `<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${shoelaceVersion}/%CDNDIR%/shoelace.js"></script>\n` +
           `\n${htmlExample}`;
         jsTemplate = '';
       }
@@ -191,10 +191,10 @@
         jsTemplate =
           `import React from 'https://cdn.skypack.dev/react@${reactVersion}';\n` +
           `import ReactDOM from 'https://cdn.skypack.dev/react-dom@${reactVersion}';\n` +
-          `import { setBasePath } from 'https://cdn.skypack.dev/@shoelace-style/shoelace@${shoelaceVersion}/dist/utilities/base-path';\n` +
+          `import { setBasePath } from 'https://cdn.skypack.dev/@shoelace-style/shoelace@${shoelaceVersion}/%CDNDIR%/utilities/base-path';\n` +
           `\n` +
           `// Set the base path for Shoelace assets\n` +
-          `setBasePath('https://cdn.skypack.dev/@shoelace-style/shoelace@${shoelaceVersion}/dist/')\n` +
+          `setBasePath('https://cdn.skypack.dev/@shoelace-style/shoelace@${shoelaceVersion}/%NPMDIR%/')\n` +
           `\n${convertModuleLinks(reactExample)}\n` +
           `\n` +
           `ReactDOM.render(<App />, document.getElementById('root'));`;
@@ -202,7 +202,7 @@
 
       // CSS templates
       cssTemplate =
-        `@import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${shoelaceVersion}/dist/themes/${
+        `@import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${shoelaceVersion}/%CDNDIR%/themes/${
           isDark ? 'dark' : 'light'
         }.css';\n` +
         '\n' +
