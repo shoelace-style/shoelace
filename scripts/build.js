@@ -10,6 +10,7 @@ import fs from 'fs/promises';
 import getPort, { portNumbers } from 'get-port';
 import ora from 'ora';
 import util from 'util';
+import * as path from 'path';
 
 const { serve } = commandLineArgs([{ name: 'serve', type: Boolean }]);
 const outdir = 'dist';
@@ -212,7 +213,7 @@ await nextTask(`Copying the build to "${sitedir}"`, async () => {
   await deleteAsync(sitedir);
 
   // We copy the CDN build because that has everything bundled.
-  await copy(cdndir, sitedir);
+  await copy(cdndir, path.join(sitedir, 'cdn'));
 });
 
 // Launch the dev server
