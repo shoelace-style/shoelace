@@ -182,7 +182,7 @@ describe('<sl-input>', () => {
 
     it('should serialize its name and value with JSON', async () => {
       const form = await fixture<HTMLFormElement>(html` <form><sl-input name="a" value="1"></sl-input></form> `);
-      const json = serialize(form) as { a: "1" };
+      const json = serialize(form) as { a: '1' };
       expect(json.a).to.equal('1');
     });
 
