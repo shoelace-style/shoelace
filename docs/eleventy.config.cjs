@@ -218,7 +218,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.setServerOptions({
     domDiff: false, // disable dom diffing so custom elements don't break on reload,
     port: 4000, // if port 4000 is taken, 11ty will use the next one available
-    watch: ['dist/**/*'] // additional files to watch that will trigger server updates (array of paths or globs)
+    watch: ['cdn/**/*'] // additional files to watch that will trigger server updates (array of paths or globs)
   });
 
   //
