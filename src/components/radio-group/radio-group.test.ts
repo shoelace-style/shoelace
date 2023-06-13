@@ -1,4 +1,4 @@
-import "../../../dist/shoelace.js"
+import '../../../dist/shoelace.js';
 import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { clickOnElement } from '../../internal/test';
 import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';

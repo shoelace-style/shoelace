@@ -1,4 +1,4 @@
-import "../../../dist/shoelace.js"
+import '../../../dist/shoelace.js';
 import { aTimeout, expect, fixture, html, oneEvent } from '@open-wc/testing';
 import type SlAnimation from './animation';
 
