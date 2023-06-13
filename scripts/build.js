@@ -99,7 +99,6 @@ async function buildTheSource() {
     ],
     outdir: cdndir,
     chunkNames: 'chunks/[name].[hash]',
-    incremental: serve,
     define: {
       // Floating UI requires this to be set
       'process.env.NODE_ENV': '"production"'
@@ -123,7 +122,13 @@ async function buildTheSource() {
     outdir
   };
 
-  return await Promise.all([esbuild.build(cdnConfig), esbuild.build(npmConfig)]);
+  if (serve) {
+    // Use the context API to allow incremental dev builds
+    return await Promise.all([esbuild.context(cdnConfig), esbuild.context(npmConfig)]);
+  } else {
+    // Use the standard API for production builds
+    return await Promise.all([esbuild.build(cdnConfig), esbuild.build(npmConfig)]);
+  }
 }
 
 //
