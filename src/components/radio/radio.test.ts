@@ -1,3 +1,4 @@
+import '../../../dist/shoelace.js';
 import { expect, fixture, html } from '@open-wc/testing';
 import type SlRadio from './radio';
 import type SlRadioGroup from '../radio-group/radio-group';

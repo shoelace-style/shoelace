@@ -1,3 +1,4 @@
+import '../../../dist/shoelace.js';
 import { dragElement } from '../../internal/test';
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import { queryByTestId } from '../../internal/test/data-testid-helpers';
