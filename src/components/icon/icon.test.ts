@@ -159,8 +159,8 @@ describe('<sl-icon>', () => {
     /* eslint-disable For some reason ESLint wants to fail in CI here, but works locally. */
     it('Should properly grab an SVG and render it from bootstrap icons', async () => {
       registerIconLibrary('sprite', {
-        resolver: (name) => `/docs/assets/images/sprite.svg#${name}`,
-        mutator: (svg) => svg.setAttribute('fill', 'currentColor'),
+        resolver: name => `/docs/assets/images/sprite.svg#${name}`,
+        mutator: svg => svg.setAttribute('fill', 'currentColor'),
         spriteSheet: true
       });
 
