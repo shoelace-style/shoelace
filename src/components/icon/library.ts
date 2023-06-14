@@ -30,10 +30,7 @@ export function getIconLibrary(name?: string) {
 }
 
 /** Adds an icon library to the registry, or overrides an existing one. */
-export function registerIconLibrary(
-  name: string,
-  options: Omit<IconLibrary, "name">
-) {
+export function registerIconLibrary(name: string, options: Omit<IconLibrary, 'name'>) {
   unregisterIconLibrary(name);
   registry.push({
     name,

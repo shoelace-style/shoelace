@@ -643,7 +643,6 @@ within the sprite sheet using hash selector.
 As always, make sure to benchmark these changes. When using HTTP/2, it may in fact be more bandwidth-friendly
 to use multiple small requests instead of 1 large sprite sheet.
 
-
 :::danger
 When using sprite sheets, the `"sl-load"` and `"sl-error"` events will not fire.
 
