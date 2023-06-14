@@ -637,10 +637,19 @@ This example will load the same set of icons from the jsDelivr CDN instead of yo
 ### SVG Sprites
 
 To improve performance you can use a SVG sprites to avoid multiple trips for each SVG.
+The browser will load the sprite sheet once and then you reference the particular SVG
+within the sprite sheet using hash selector.
+
+As always, make sure to benchmark these changes. When using HTTP/2, it may in fact be more bandwidth-friendly
+to use multiple small requests instead of 1 large sprite sheet.
+
 
 :::danger
+When using sprite sheets, the `"sl-load"` and `"sl-error"` events will not fire.
+
 For security reasons, browsers may apply the same-origin policy on `<use>` elements located in the `<sl-icon>` shadow dom and
 may refuse to load a cross-origin URL. There is currently no defined way to set a cross-origin policy for `<use>` elements.
+For this reason, sprite sheets should only be used if you're self-hosting them.
 :::
 
 ```html:preview
