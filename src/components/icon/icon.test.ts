@@ -179,8 +179,8 @@ describe('<sl-icon>', () => {
       // Theres no way to really test that the icon rendered properly. We just gotta trust the browser to do it's thing :)
       // However, we can check the <use> size. It should be greater than 0x0 if loaded properly.
       const rect = use?.getBoundingClientRect();
-      expect(rect?.width).to.equal(0);
-      expect(rect?.width).to.equal(0);
+      expect(rect?.width).to.be.greaterThan(0);
+      expect(rect?.width).to.be.greaterThan(0);
     });
 
     it('Should render nothing if the sprite hash is wrong', async () => {
