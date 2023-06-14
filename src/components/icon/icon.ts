@@ -24,6 +24,7 @@ const iconCache = new Map<string, Promise<SVGResult>>();
  * @event sl-error - Emitted when the icon fails to load due to an error. When using `spriteSheet: true` this will not emit.
  *
  * @csspart svg - The internal SVG element.
+ * @csspart use - The <use> element generated when using `spriteSheet: true`
  */
 @customElement('sl-icon')
 export default class SlIcon extends ShoelaceElement {
@@ -39,9 +40,11 @@ export default class SlIcon extends ShoelaceElement {
       return html`<svg
         part="svg"
         ${''/* You're probably wondering why theres no "load" / "error" event here.
-        Well, long story short, they don't actually work with <use> sprite sheets. */}
+        Well, long story short, they don't actually work with <use> sprite sheets.
+        Despite the fact it seems like they should: https://svgwg.org/svg2-draft/interact.html#ErrorEvent
+        */}
       >
-        <use href="${url}"></use>
+        <use part="use" href="${url}"></use>
       </svg>`;
     }
 

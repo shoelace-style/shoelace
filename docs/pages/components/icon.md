@@ -638,7 +638,10 @@ This example will load the same set of icons from the jsDelivr CDN instead of yo
 
 To improve performance you can use a SVG sprites to avoid multiple trips for each SVG.
 
-For now we only support referencing external URLs, meaning that we don't inline and cache the result. Make sure you have the right cache headers to avoid extra requests in production.
+:::danger
+For security reasons, browsers may apply the same-origin policy on `<use>` elements located in the `<sl-icon>` shadow dom and
+may refuse to load a cross-origin URL. There is currently no defined way to set a cross-origin policy for `<use>` elements.
+:::
 
 ```html:preview
 <script type="module">
