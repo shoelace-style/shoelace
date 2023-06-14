@@ -156,7 +156,8 @@ describe('<sl-icon>', () => {
   });
 
   describe('svg spritesheets', () => {
-    /* eslint-disable For some reason ESLint wants to fail in CI here, but works locally. */
+    //  For some reason ESLint wants to fail in CI here, but works locally.
+    /* eslint-disable */
     it('Should properly grab an SVG and render it from bootstrap icons', async () => {
       registerIconLibrary('sprite', {
         resolver: name => `/docs/assets/images/sprite.svg#${name}`,
