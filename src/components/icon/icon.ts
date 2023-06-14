@@ -1,11 +1,12 @@
-import { html } from 'lit';
-import type { CSSResultGroup, HTMLTemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { getIconLibrary, type IconLibrary, unwatchIcon, watchIcon } from './library';
+import { html } from 'lit';
 import { isTemplateResult } from 'lit/directive-helpers.js';
 import { watch } from '../../internal/watch';
 import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './icon.styles';
+
+import type { CSSResultGroup, HTMLTemplateResult } from 'lit';
 
 const CACHEABLE_ERROR = Symbol();
 const RETRYABLE_ERROR = Symbol();
