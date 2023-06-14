@@ -40,12 +40,9 @@ export default class SlIcon extends ShoelaceElement {
     if (library?.spriteSheet) {
       return html`<svg
         part="svg"
-        ${
-          '' /* You're probably wondering why theres no "load" / "error" event here.
-        Well, long story short, they don't actually work with <use> sprite sheets.
-        Despite the fact it seems like they should: https://svgwg.org/svg2-draft/interact.html#ErrorEvent
-        */
-        }
+        ${'' /* In testing, these dont seem to actually do anything. */}
+        @error=${() => this.emit('sl-error')}
+        @load=${() => this.emit('sl-load')}
       >
         <use part="use" href="${url}"></use>
       </svg>`;
