@@ -647,7 +647,7 @@ For now we only support referencing external URLs, meaning that we don't inline 
   registerIconLibrary('sprite', {
     resolver: name => `/assets/images/sprite.svg#${name}`,
     mutator: svg => svg.setAttribute('fill', 'currentColor'),
-    svgSymbolSprite: 'external'
+    spriteSheet: true
   });
 </script>
 
@@ -689,7 +689,7 @@ If you want to change the icons Shoelace uses internally, you can register an ic
   }
 
   fetch('/dist/assets/icons/icons.json')
-    .then(res => res.json())  
+    .then(res => res.json())
     .then(icons => {
       const container = document.querySelector('.icon-search');
       const input = container.querySelector('sl-input');
@@ -708,12 +708,12 @@ If you want to change the icons Shoelace uses internally, you can register an ic
         item.setAttribute('data-terms', [i.name, i.title, ...(i.tags || []), ...(i.categories || [])].join(' '));
         item.innerHTML = `
           <svg width="1em" height="1em" fill="currentColor">
-            <use xlink:href="/assets/images/sprite.svg#${i.name}"></use>
-          </svg>      
+            <use href="/assets/images/sprite.svg#${i.name}"></use>
+          </svg>
         `;
         list.appendChild(item);
 
-        // Wrap it with a tooltip the first time the mouse lands on it. We do this instead of baking them into the DOM 
+        // Wrap it with a tooltip the first time the mouse lands on it. We do this instead of baking them into the DOM
         // to improve this page's performance. See: https://github.com/shoelace-style/shoelace/issues/1122
         item.addEventListener('mouseover', () => wrapWithTooltip(item), { once: true });
 
@@ -856,6 +856,6 @@ If you want to change the icons Shoelace uses internally, you can register an ic
   @media screen and (max-width: 500px) {
     .icon-list {
       grid-template-columns: repeat(4, 1fr);
-    }    
+    }
   }
 </style>

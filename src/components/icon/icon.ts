@@ -1,4 +1,5 @@
-import { type CSSResultGroup, html, type HTMLTemplateResult } from 'lit';
+import { html } from 'lit';
+import type { CSSResultGroup, HTMLTemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { getIconLibrary, type IconLibrary, unwatchIcon, watchIcon } from './library';
 import { isTemplateResult } from 'lit/directive-helpers.js';
@@ -19,8 +20,8 @@ const iconCache = new Map<string, Promise<SVGResult>>();
  * @status stable
  * @since 2.0
  *
- * @event sl-load - Emitted when the icon has loaded.
- * @event sl-error - Emitted when the icon fails to load due to an error.
+ * @event sl-load - Emitted when the icon has loaded. When using `spriteSheet: true` this will not emit.
+ * @event sl-error - Emitted when the icon fails to load due to an error. When using `spriteSheet: true` this will not emit.
  *
  * @csspart svg - The internal SVG element.
  */
@@ -34,8 +35,12 @@ export default class SlIcon extends ShoelaceElement {
   private async resolveIcon(url: string, library?: IconLibrary): Promise<SVGResult> {
     let fileData: Response;
 
-    if (library?.svgSymbolSprite) {
-      return html`<svg @load=${() => this.emit('sl-load')} @error=${() => this.emit('sl-error')} part="svg">
+    if (library?.spriteSheet) {
+      return html`<svg
+        part="svg"
+        ${''/* You're probably wondering why theres no "load" / "error" event here.
+        Well, long story short, they don't actually work with <use> sprite sheets. */}
+      >
         <use href="${url}"></use>
       </svg>`;
     }
