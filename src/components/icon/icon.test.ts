@@ -158,8 +158,12 @@ describe('<sl-icon>', () => {
   describe('svg spritesheets', () => {
     it('Should properly grab an SVG and render it from bootstrap icons', async () => {
       registerIconLibrary('sprite', {
-        resolver (name) { return `/docs/assets/images/sprite.svg#${name}` },
-        mutator (svg) { return svg.setAttribute('fill', 'currentColor') },
+        resolver(name) {
+          return `/docs/assets/images/sprite.svg#${name}`;
+        },
+        mutator(svg) {
+          return svg.setAttribute('fill', 'currentColor');
+        },
         spriteSheet: true
       });
 
@@ -208,8 +212,12 @@ describe('<sl-icon>', () => {
     // Once we figure out how to emit errors / loading perhaps we can actually test this?
     it.skip("Should produce an error if the icon doesn't exist.", async () => {
       registerIconLibrary('sprite', {
-        resolver (name) { return `/docs/assets/images/sprite.svg#${name}` },
-        mutator (svg) { return svg.setAttribute('fill', 'currentColor') },
+        resolver(name) {
+          return `/docs/assets/images/sprite.svg#${name}`;
+        },
+        mutator(svg) {
+          return svg.setAttribute('fill', 'currentColor');
+        },
         spriteSheet: true
       });
 
