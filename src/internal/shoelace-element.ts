@@ -68,7 +68,9 @@ export default class ShoelaceElement extends ScopedElementsMixin(LitElement) {
   @property() dir: string;
   @property() lang: string;
 
-  static scopedElements: Record<string, typeof LitElement>;
+  static get scopedElements (): Record<string, typeof LitElement>  {
+    return {}
+  };
 
   /** Emits a custom event with more convenient defaults. */
   emit<T extends string & keyof EventTypesWithoutRequiredDetail>(
