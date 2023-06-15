@@ -1,5 +1,5 @@
-import { property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
+import { property, query, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch';
 import ShoelaceElement from '../../internal/shoelace-element';
 import SlIcon from '../icon/icon';
@@ -27,9 +27,9 @@ import type { CSSResultGroup } from 'lit';
  */
 export default class SlAnimatedImage extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
-  static get scopedElements () {
-    return { 'sl-icon': SlIcon }
-  };
+  static get scopedElements() {
+    return { 'sl-icon': SlIcon };
+  }
 
   @query('.animated-image__animated') animatedImage: HTMLImageElement;
 
