@@ -132,7 +132,7 @@ export default class SlCarousel extends ShoelaceElement {
 
   protected firstUpdated(): void {
     this.initializeSlides();
-    this.mutationObserver = new MutationObserver(this.handleSlotChange.bind(this));
+    this.mutationObserver = new MutationObserver(this.handleSlotChange);
     this.mutationObserver.observe(this, { childList: true, subtree: false });
   }
 
@@ -211,7 +211,7 @@ export default class SlCarousel extends ShoelaceElement {
     }
   }
 
-  private handleSlotChange(mutations: MutationRecord[]) {
+  private handleSlotChange = (mutations: MutationRecord[]) => {
     const needsInitialization = mutations.some(mutation =>
       [...mutation.addedNodes, ...mutation.removedNodes].some(
         node => SlCarouselItem.isCarouselItem(node) && !(node as HTMLElement).hasAttribute('data-clone')
@@ -223,7 +223,7 @@ export default class SlCarousel extends ShoelaceElement {
       this.initializeSlides();
     }
     this.requestUpdate();
-  }
+  };
 
   @watch('loop', { waitUntilFirstUpdate: true })
   @watch('slidesPerPage', { waitUntilFirstUpdate: true })
