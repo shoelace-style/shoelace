@@ -67,11 +67,13 @@
     "@ctrl/tinycolor": "^3.5.0",
     "@floating-ui/dom": "^1.2.1",
     "@lit-labs/react": "^1.1.1",
+    "@open-wc/scoped-elements": "^2.2.0",
     "@shoelace-style/animations": "^1.1.0",
     "@shoelace-style/localize": "^3.1.1",
     "composed-offset-position": "^0.0.4",
     "lit": "^2.7.5",
-    "qr-creator": "^1.0.0"
+    "qr-creator": "^1.0.0",
+    "web-component-define": "^2.0.10"
   },
   "devDependencies": {
     "@11ty/eleventy": "^2.0.1",

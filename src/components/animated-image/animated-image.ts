@@ -5,6 +5,7 @@ import { watch } from '../../internal/watch';
 import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './animated-image.styles';
 import type { CSSResultGroup } from 'lit';
+import SlIcon from '../icon/icon';
 
 /**
  * @summary A component for displaying animated GIFs and WEBPs that play and pause on interaction.
@@ -28,6 +29,9 @@ import type { CSSResultGroup } from 'lit';
 @customElement('sl-animated-image')
 export default class SlAnimatedImage extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
+  static scopedElements = {
+    'sl-icon': SlIcon
+  }
 
   @query('.animated-image__animated') animatedImage: HTMLImageElement;
 

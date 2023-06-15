@@ -1,5 +1,6 @@
 import { LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
+import { ScopedElementsMixin } from "@open-wc/scoped-elements"
 
 // Match event type name strings that are registered on GlobalEventHandlersEventMap...
 type EventTypeRequiresDetail<T> = T extends keyof GlobalEventHandlersEventMap
@@ -62,10 +63,12 @@ type GetCustomEventType<T> = T extends keyof GlobalEventHandlersEventMap
 // `keyof ValidEventTypeMap` is equivalent to `keyof GlobalEventHandlersEventMap` but gives a nicer error message
 type ValidEventTypeMap = EventTypesWithRequiredDetail | EventTypesWithoutRequiredDetail;
 
-export default class ShoelaceElement extends LitElement {
+export default class ShoelaceElement extends ScopedElementsMixin(LitElement) {
   // Make localization attributes reactive
   @property() dir: string;
   @property() lang: string;
+
+  static scopedElements: Record<string, typeof LitElement>
 
   /** Emits a custom event with more convenient defaults. */
   emit<T extends string & keyof EventTypesWithoutRequiredDetail>(
