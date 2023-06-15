@@ -50,8 +50,8 @@
 
   const shoelaceVersion = document.documentElement.getAttribute('data-shoelace-version');
   const reactVersion = '18.2.0';
-  const cdndir = "cdn"
-  const npmdir = "dist"
+  const cdndir = 'cdn';
+  const npmdir = 'dist';
   let flavor = getFlavor();
   let count = 1;
 
