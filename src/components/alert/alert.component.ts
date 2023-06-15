@@ -1,17 +1,16 @@
-import '../icon-button/icon-button';
 import { animateTo, stopAnimations } from '../../internal/animate';
 import { classMap } from 'lit/directives/class-map.js';
-import { property, query } from 'lit/decorators.js';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
 import { HasSlotController } from '../../internal/slot';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize';
+import { property, query } from 'lit/decorators.js';
 import { waitForEvent } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import ShoelaceElement from '../../internal/shoelace-element';
+import SlIconButton from '../icon-button/icon-button';
 import styles from './alert.styles';
 import type { CSSResultGroup } from 'lit';
-import SlIconButton from '../icon-button/icon-button';
 
 const toastStack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
 
@@ -43,10 +42,10 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
 export default class SlAlert extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
-  static get scopedElements () {
+  static get scopedElements() {
     return {
       'sl-icon-button': SlIconButton
-    }
+    };
   }
 
   private autoHideTimeout: number;

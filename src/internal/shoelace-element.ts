@@ -1,6 +1,6 @@
 import { LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
-import { ScopedElementsMixin } from "@open-wc/scoped-elements"
+import { ScopedElementsMixin } from '@open-wc/scoped-elements';
 
 // Match event type name strings that are registered on GlobalEventHandlersEventMap...
 type EventTypeRequiresDetail<T> = T extends keyof GlobalEventHandlersEventMap
@@ -68,7 +68,7 @@ export default class ShoelaceElement extends ScopedElementsMixin(LitElement) {
   @property() dir: string;
   @property() lang: string;
 
-  static scopedElements: Record<string, typeof LitElement>
+  static scopedElements: Record<string, typeof LitElement>;
 
   /** Emits a custom event with more convenient defaults. */
   emit<T extends string & keyof EventTypesWithoutRequiredDetail>(
