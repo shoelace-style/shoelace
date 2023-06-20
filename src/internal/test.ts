@@ -65,3 +65,19 @@ export async function moveMouseOnElement(
 
   await sendMouse({ type: 'move', position: [clickX, clickY] });
 }
+
+/** A testing utility that drags an element with the mouse. */
+export async function dragElement(
+  /** The element to drag */
+  el: Element,
+  /** The horizontal distance to drag in pixels */
+  deltaX = 0,
+  /** The vertical distance to drag in pixels */
+  deltaY = 0
+): Promise<void> {
+  await moveMouseOnElement(el);
+  await sendMouse({ type: 'down' });
+  const { clickX, clickY } = determineMousePosition(el, 'center', deltaX, deltaY);
+  await sendMouse({ type: 'move', position: [clickX, clickY] });
+  await sendMouse({ type: 'up' });
+}

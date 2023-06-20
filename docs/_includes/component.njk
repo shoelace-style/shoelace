@@ -1,0 +1,347 @@
+{% extends "default.njk" %}
+
+{# Find the component based on the `tag` front matter #}
+{% set component = getComponent('sl-' + page.fileSlug) %}
+
+{% block content %}
+  {# Determine the badge variant #}
+  {% if component.status == 'stable' %}
+    {% set badgeVariant = 'primary' %}
+  {% elseif component.status == 'experimental' %}
+    {% set badgeVariant = 'warning' %}
+  {% elseif component.status == 'planned' %}
+    {% set badgeVariant = 'neutral' %}
+  {% elseif component.status == 'deprecated' %}
+    {% set badgeVariant = 'danger' %}
+  {% else %}
+    {% set badgeVariant = 'neutral' %}
+  {% endif %}
+
+  {# Header #}
+  <header class="component-header">
+    <h1>{{ component.name | classNameToComponentName }}</h1>
+
+    <div class="component-header__tag">
+      <code>&lt;{{ component.tagName }}&gt; | {{ component.name }}</code>
+    </div>
+
+    <div class="component-header__info">
+      <sl-badge variant="neutral" pill>
+        Since {{component.since or '?' }}
+      </sl-badge>
+      <sl-badge variant="{{ badgeVariant }}" pill style="text-transform: capitalize;">
+        {{ component.status }}
+      </sl-badge>
+    </div>
+  </header>
+
+  <p class="component-summary">
+    {% if component.summary %}
+      {{ component.summary | markdownInline | safe }}
+    {% endif %}
+  </p>
+
+  {# Markdown content #}
+  {{ content | safe }}
+
+  {# Importing #}
+  <h2>Importing</h2>
+  <p>
+    If you're using the autoloader or the traditional loader, you can ignore this section. Otherwise, feel free to use
+    any of the following snippets to <a href="/getting-started/installation#cherry-picking">cherry pick</a> this component.
+  </p>
+
+  <sl-tab-group>
+    <sl-tab slot="nav" panel="script">Script</sl-tab>
+    <sl-tab slot="nav" panel="import">Import</sl-tab>
+    <sl-tab slot="nav" panel="bundler">Bundler</sl-tab>
+    <sl-tab slot="nav" panel="react">React</sl-tab>
+
+    <sl-tab-panel name="script">
+      <p>
+        To import this component from <a href="https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace">the CDN</a>
+        using a script tag:
+      </p>
+      <pre><code class="language-html">&lt;script type=&quot;module&quot; src=&quot;https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@{{ meta.version }}/{{ meta.cdndir }}/{{ component.path }}&quot;&gt;&lt;/script&gt;</code></pre>
+    </sl-tab-panel>
+
+    <sl-tab-panel name="import">
+      <p>
+        To import this component from <a href="https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace">the CDN</a>
+        using a JavaScript import:
+      </p>
+      <pre><code class="language-js">import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@{{ meta.version }}/{{ meta.cdndir }}/{{ component.path }}';</code></pre>
+    </sl-tab-panel>
+
+    <sl-tab-panel name="bundler">
+      <p>
+        To import this component using <a href="{{ rootUrl('/getting-started/installation#bundling') }}">a bundler</a>:
+      </p>
+      <pre><code class="language-js">import '@shoelace-style/shoelace/{{ meta.npmdir }}/{{ component.path }}';</code></pre>
+    </sl-tab-panel>
+
+    <sl-tab-panel name="react">
+      <p>
+        To import this component as a <a href="/frameworks/react">React component</a>:
+      </p>
+      <pre><code class="language-js">import { {{ component.name }} } from '@shoelace-style/shoelace/{{ meta.npmdir }}/react';</code></pre>
+    </sl-tab-panel>
+  </sl-tab-group>
+
+  {# Slots #}
+  {% if component.slots.length %}
+    <h2>Slots</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th class="table-name">Name</th>
+          <th class="table-description">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for slot in component.slots %}
+          <tr>
+            <td class="nowrap">
+              {% if slot.name %}
+                <code>{{ slot.name }}</code>
+              {% else %}
+                (default)
+              {% endif %}
+            </td>
+            <td>{{ slot.description | markdownInline | safe }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <p><em>Learn more about <a href="{{ rootUrl('/getting-started/usage#slots') }}">using slots</a>.</em></p>
+  {% endif %}
+
+  {# Properties #}
+  {% if component.properties.length %}
+    <h2>Properties</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th class="table-name">Name</th>
+          <th class="table-description">Description</th>
+          <th class="table-reflects">Reflects</th>
+          <th class="table-type">Type</th>
+          <th class="table-default">Default</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for prop in component.properties %}
+          <tr>
+            <td>
+              <code class="nowrap">{{ prop.name }}</code>
+              {% if prop.attribute != prop.name %}
+                <br>
+                <sl-tooltip content="This attribute is different from its property">
+                  <small>
+                    <code class="nowrap">
+                      {{ prop.attribute }}
+                    </code>
+                  </small>
+                </sl-tooltip>
+              {% endif %}
+            </td>
+            <td>
+              {{ prop.description | markdownInline | safe }}
+            </td>
+            <td style="text-align: center;">
+              {% if prop.reflects %}
+                <sl-icon label="yes" name="check-lg"></sl-icon>
+              {% endif %}
+            </td>
+            <td>
+              {% if prop.type.text %}
+                <code>{{ prop.type.text | markdownInline | safe }}</code>
+              {% else %}
+                -
+              {% endif %}
+            </td>
+            <td>
+              {% if prop.default %}
+                <code>{{ prop.default | markdownInline | safe }}</code>
+              {% else %}
+                -
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+        <tr>
+          <td class="nowrap"><code>updateComplete</code></td>
+          <td>
+            A read-only promise that resolves when the component has
+            <a href="/getting-started/usage?id=component-rendering-and-updating">finished updating</a>.
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><em>Learn more about <a href="{{ rootUrl('/getting-started/usage#properties') }}">attributes and properties</a>.</em></p>
+  {% endif %}
+
+  {# Events #}
+  {% if component.events.length %}
+    <h2>Events</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th class="table-name" data-flavor="html">Name</th>
+          <th class="table-name" data-flavor="react">React Event</th>
+          <th class="table-description">Description</th>
+          <th class="table-event-detail">Event Detail</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for event in component.events %}
+          <tr>
+            <td data-flavor="html"><code class="nowrap">{{ event.name }}</code></td>
+            <td data-flavor="react"><code class="nowrap">{{ event.reactName }}</code></td>
+            <td>{{ event.description | markdownInline | safe }}</td>
+            <td>
+              {% if event.type.text %}
+                <code>{{ event.type.text }}</code>
+              {% else %}
+                -
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <p><em>Learn more about <a href="{{ rootUrl('/getting-started/usage#events') }}">events</a>.</em></p>
+  {% endif %}
+
+  {# Methods #}
+  {% if component.methods.length %}
+    <h2>Methods</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th class="table-name">Name</th>
+          <th class="table-description">Description</th>
+          <th class="table-arguments">Arguments</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for method in component.methods %}
+          <tr>
+            <td class="nowrap"><code>{{ method.name }}()</code></td>
+            <td>{{ method.description | markdownInline | safe }}</td>
+            <td>
+              {% if method.parameters.length %}
+                <code>
+                  {% for param in method.parameters %}
+                    {{ param.name }}: {{ param.type.text }}{% if not loop.last %},{% endif %}
+                  {% endfor %}
+                </code>
+              {% else %}
+                -
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <p><em>Learn more about <a href="{{ rootUrl('/getting-started/usage#methods') }}">methods</a>.</em></p>
+  {% endif %}
+
+  {# Custom Properties #}
+  {% if component.cssProperties.length %}
+    <h2>Custom Properties</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th class="table-name">Name</th>
+          <th class="table-description">Description</th>
+          <th class="table-default">Default</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for cssProperty in component.cssProperties %}
+          <tr>
+            <td class="nowrap"><code>{{ cssProperty.name }}</code></td>
+            <td>{{ cssProperty.description | markdownInline | safe }}</td>
+            <td>{{ cssProperty.default }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <p><em>Learn more about <a href="{{ rootUrl('/getting-started/usage#custom-properties') }}">customizing CSS custom properties</a>.</em></p>
+  {% endif %}
+
+  {# CSS Parts #}
+  {% if component.cssParts.length %}
+    <h2>Parts</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th class="table-name">Name</th>
+          <th class="table-description">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for cssPart in component.cssParts %}
+          <tr>
+            <td class="nowrap"><code>{{ cssPart.name }}</code></td>
+            <td>{{ cssPart.description | markdownInline | safe }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <p><em>Learn more about <a href="{{ rootUrl('/getting-started/usage#component-parts') }}">customizing CSS parts</a>.</em></p>
+  {% endif %}
+
+  {# Animations #}
+  {% if component.animations.length %}
+    <h2>Animations</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th class="table-name">Name</th>
+          <th class="table-description">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for animation in component.animations %}
+          <tr>
+            <td class="nowrap"><code>{{ animation.name }}</code></td>
+            <td>{{ animation.description | markdownInline | safe }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <p><em>Learn more about <a href="{{ rootUrl('/getting-started/usage#animations') }}">customizing animations</a>.</em></p>
+  {% endif %}
+
+  {# Dependencies #}
+  {% if component.dependencies.length %}
+    <h2>Dependencies</h2>
+
+    <p>This component automatically imports the following dependencies.</p>
+
+    <ul>
+      {% for dependency in component.dependencies %}
+        <li><code>&lt;{{ dependency }}&gt;</code></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

@@ -1,3 +1,4 @@
+import '../../../dist/shoelace.js';
 import { expect, fixture, html } from '@open-wc/testing';
 import type SlFormatNumber from './format-number';
 

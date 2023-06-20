@@ -1,3 +1,4 @@
+import '../../../dist/shoelace.js';
 import { aTimeout, expect, fixture, html, waitUntil } from '@open-wc/testing';
 import sinon from 'sinon';
 import type SlInclude from './include';

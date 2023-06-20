@@ -343,22 +343,25 @@ export default css`
    */
 
   .button--small {
+    height: auto;
+    min-height: var(--sl-input-height-small);
     font-size: var(--sl-button-font-size-small);
-    height: var(--sl-input-height-small);
     line-height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
     border-radius: var(--sl-input-border-radius-small);
   }
 
   .button--medium {
+    height: auto;
+    min-height: var(--sl-input-height-medium);
     font-size: var(--sl-button-font-size-medium);
-    height: var(--sl-input-height-medium);
     line-height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
     border-radius: var(--sl-input-border-radius-medium);
   }
 
   .button--large {
+    height: auto;
+    min-height: var(--sl-input-height-large);
     font-size: var(--sl-button-font-size-large);
-    height: var(--sl-input-height-large);
     line-height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
     border-radius: var(--sl-input-border-radius-large);
   }

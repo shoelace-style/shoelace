@@ -17,10 +17,6 @@ fs.mkdirSync(reactDir, { recursive: true });
 
 // Fetch component metadata
 const metadata = JSON.parse(fs.readFileSync(path.join(outdir, 'custom-elements.json'), 'utf8'));
-
-// Wrap components
-console.log('Wrapping components for React...');
-
 const components = getAllComponents(metadata);
 const index = [];
 
@@ -60,5 +56,3 @@ components.map(component => {
 
 // Generate the index file
 fs.writeFileSync(path.join(reactDir, 'index.ts'), index.join('\n'), 'utf8');
-
-console.log(chalk.cyan(`\nComponents have been wrapped for React! 📦\n`));

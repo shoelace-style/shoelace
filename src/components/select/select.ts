@@ -10,7 +10,7 @@ import { getAnimation, setDefaultAnimation } from '../../utilities/animation-reg
 import { HasSlotController } from '../../internal/slot';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize';
-import { scrollIntoView } from 'src/internal/scroll';
+import { scrollIntoView } from '../../internal/scroll';
 import { waitForEvent } from '../../internal/event';
 import { watch } from '../../internal/watch';
 import ShoelaceElement from '../../internal/shoelace-element';
@@ -108,7 +108,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   @defaultValue() defaultValue: string | string[] = '';
 
   /** The select's size. */
-  @property() size: 'small' | 'medium' | 'large' = 'medium';
+  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Placeholder text to show as a hint when the select is empty. */
   @property() placeholder = '';
@@ -180,9 +180,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
   connectedCallback() {
     super.connectedCallback();
-    this.handleDocumentFocusIn = this.handleDocumentFocusIn.bind(this);
-    this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
-    this.handleDocumentMouseDown = this.handleDocumentMouseDown.bind(this);
 
     // Because this is a form control, it shouldn't be opened initially
     this.open = false;
@@ -211,15 +208,15 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     this.emit('sl-blur');
   }
 
-  private handleDocumentFocusIn(event: KeyboardEvent) {
+  private handleDocumentFocusIn = (event: KeyboardEvent) => {
     // Close when focusing out of the select
     const path = event.composedPath();
     if (this && !path.includes(this)) {
       this.hide();
     }
-  }
+  };
 
-  private handleDocumentKeyDown(event: KeyboardEvent) {
+  private handleDocumentKeyDown = (event: KeyboardEvent) => {
     const target = event.target as HTMLElement;
     const isClearButton = target.closest('.select__clear') !== null;
     const isIconButton = target.closest('sl-icon-button') !== null;
@@ -346,15 +343,15 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
         }
       }
     }
-  }
+  };
 
-  private handleDocumentMouseDown(event: MouseEvent) {
+  private handleDocumentMouseDown = (event: MouseEvent) => {
     // Close when clicking outside of the select
     const path = event.composedPath();
     if (this && !path.includes(this)) {
       this.hide();
     }
-  }
+  };
 
   private handleLabelClick() {
     this.displayInput.focus();

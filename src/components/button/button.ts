@@ -167,15 +167,9 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
     return '';
   }
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.handleHostClick = this.handleHostClick.bind(this);
+  constructor() {
+    super();
     this.addEventListener('click', this.handleHostClick);
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.removeEventListener('click', this.handleHostClick);
   }
 
   firstUpdated() {
@@ -204,13 +198,13 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
     }
   }
 
-  private handleHostClick(event: MouseEvent) {
+  private handleHostClick = (event: MouseEvent) => {
     // Prevent the click event from being emitted when the button is disabled or loading
     if (this.disabled || this.loading) {
       event.preventDefault();
       event.stopImmediatePropagation();
     }
-  }
+  };
 
   private handleInvalid(event: Event) {
     this.formControlController.setValidity(false);

@@ -30,6 +30,7 @@ export { default as SlMenu } from './components/menu/menu';
 export { default as SlMenuItem } from './components/menu-item/menu-item';
 export { default as SlMenuLabel } from './components/menu-label/menu-label';
 export { default as SlMutationObserver } from './components/mutation-observer/mutation-observer';
+export { default as SlOption } from './components/option/option';
 export { default as SlPopup } from './components/popup/popup';
 export { default as SlProgressBar } from './components/progress-bar/progress-bar';
 export { default as SlProgressRing } from './components/progress-ring/progress-ring';
@@ -55,13 +56,13 @@ export { default as SlTooltip } from './components/tooltip/tooltip';
 export { default as SlTree } from './components/tree/tree';
 export { default as SlTreeItem } from './components/tree-item/tree-item';
 export { default as SlVisuallyHidden } from './components/visually-hidden/visually-hidden';
-export { default as SlOption } from './components/option/option';
 /* plop:component */
 
 // Utilities
 export * from './utilities/animation';
 export * from './utilities/base-path';
 export * from './utilities/icon-library';
+export * from './utilities/form';
 
 // Events
 export * from './events/events';

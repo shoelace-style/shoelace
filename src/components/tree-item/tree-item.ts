@@ -47,6 +47,14 @@ import type { CSSResultGroup, PropertyValueMap } from 'lit';
  * @csspart expand-button - The container that wraps the tree item's expand button and spinner.
  * @csspart label - The tree item's label.
  * @csspart children - The container that wraps the tree item's nested children.
+ * @csspart checkbox - The checkbox that shows when using multiselect.
+ * @csspart checkbox__base - The checkbox's exported `base` part.
+ * @csspart checkbox__control - The checkbox's exported `control` part.
+ * @csspart checkbox__control--checked - The checkbox's exported `control--checked` part.
+ * @csspart checkbox__control--indeterminate - The checkbox's exported `control--indeterminate` part.
+ * @csspart checkbox__checked-icon - The checkbox's exported `checked-icon` part.
+ * @csspart checkbox__indeterminate-icon - The checkbox's exported `indeterminate-icon` part.
+ * @csspart checkbox__label - The checkbox's exported `label` part.
  */
 @customElement('sl-tree-item')
 export default class SlTreeItem extends ShoelaceElement {
@@ -258,11 +266,21 @@ export default class SlTreeItem extends ShoelaceElement {
             () =>
               html`
                 <sl-checkbox
-                  tabindex="-1"
+                  part="checkbox"
+                  exportparts="
+                    base:checkbox__base,
+                    control:checkbox__control,
+                    control--checked:checkbox__control--checked,
+                    control--indeterminate:checkbox__control--indeterminate,
+                    checked-icon:checkbox__checked-icon,
+                    indeterminate-icon:checkbox__indeterminate-icon,
+                    label:checkbox__label
+                  "
                   class="tree-item__checkbox"
                   ?disabled="${this.disabled}"
                   ?checked="${live(this.selected)}"
                   ?indeterminate="${this.indeterminate}"
+                  tabindex="-1"
                 ></sl-checkbox>
               `
           )}

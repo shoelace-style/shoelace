@@ -140,7 +140,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
   @property({ type: Boolean, reflect: true }) inline = false;
 
   /** Determines the size of the color picker's trigger. This has no effect on inline color pickers. */
-  @property() size: 'small' | 'medium' | 'large' = 'medium';
+  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Removes the button that lets users toggle between format.   */
   @property({ attribute: 'no-format-toggle', type: Boolean }) noFormatToggle = false;
@@ -190,18 +190,10 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     return this.input.validationMessage;
   }
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.handleFocusIn = this.handleFocusIn.bind(this);
-    this.handleFocusOut = this.handleFocusOut.bind(this);
+  constructor() {
+    super();
     this.addEventListener('focusin', this.handleFocusIn);
     this.addEventListener('focusout', this.handleFocusOut);
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.removeEventListener('focusin', this.handleFocusIn);
-    this.removeEventListener('focusout', this.handleFocusOut);
   }
 
   firstUpdated() {
@@ -222,15 +214,15 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     });
   }
 
-  private handleFocusIn() {
+  private handleFocusIn = () => {
     this.hasFocus = true;
     this.emit('sl-focus');
-  }
+  };
 
-  private handleFocusOut() {
+  private handleFocusOut = () => {
     this.hasFocus = false;
     this.emit('sl-blur');
-  }
+  };
 
   private handleFormatToggle() {
     const formats = ['hex', 'rgb', 'hsl', 'hsv'];

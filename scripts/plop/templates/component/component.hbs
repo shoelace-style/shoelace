@@ -1,8 +1,8 @@
-import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import ShoelaceElement from '../../internal/shoelace-element';
-import { watch } from '../../internal/watch';
+import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize';
+import { watch } from '../../internal/watch';
+import ShoelaceElement from '../../internal/shoelace-element';
 import styles from './{{ tagWithoutPrefix tag }}.styles';
 import type { CSSResultGroup } from 'lit';
 
@@ -32,10 +32,9 @@ export default class {{ properCase tag }} extends ShoelaceElement {
   /** An example attribute. */
   @property() attr = 'example';
 
-  @watch('someProperty')
-  doSomething() {
-    // Example event
-    this.emit('sl-event-name');
+  @watch('example')
+  handleExampleChange() {
+    // do something
   }
 
   render() {

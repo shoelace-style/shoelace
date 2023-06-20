@@ -45,47 +45,33 @@ export default class SlRadio extends ShoelaceElement {
   /** Disables the radio. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
-
-    this.setInitialAttributes();
-    this.addEventListeners();
-  }
-
-  disconnectedCallback() {
-    this.removeEventListeners();
-  }
-
-  private addEventListeners() {
+  constructor() {
+    super();
     this.addEventListener('blur', this.handleBlur);
     this.addEventListener('click', this.handleClick);
     this.addEventListener('focus', this.handleFocus);
   }
 
-  private removeEventListeners() {
-    this.removeEventListener('blur', this.handleBlur);
-    this.removeEventListener('click', this.handleClick);
-    this.removeEventListener('focus', this.handleFocus);
+  connectedCallback() {
+    super.connectedCallback();
+    this.setInitialAttributes();
   }
 
-  private handleBlur() {
+  private handleBlur = () => {
     this.hasFocus = false;
     this.emit('sl-blur');
-  }
+  };
 
-  private handleClick() {
+  private handleClick = () => {
     if (!this.disabled) {
       this.checked = true;
     }
-  }
+  };
 
-  private handleFocus() {
+  private handleFocus = () => {
     this.hasFocus = true;
     this.emit('sl-focus');
-  }
+  };
 
   private setInitialAttributes() {
     this.setAttribute('role', 'radio');

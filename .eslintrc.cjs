@@ -97,6 +97,12 @@ module.exports = {
       }
     },
     {
+      files: ['**/*.cjs'],
+      env: {
+        node: true
+      }
+    },
+    {
       extends: ['plugin:chai-expect/recommended', 'plugin:chai-friendly/recommended'],
       files: ['*.test.ts'],
       rules: {

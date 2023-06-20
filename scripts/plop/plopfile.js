@@ -47,14 +47,8 @@ export default function (plop) {
       },
       {
         type: 'add',
-        path: '../../docs/components/{{ tagWithoutPrefix tag }}.md',
+        path: '../../docs/pages/components/{{ tagWithoutPrefix tag }}.md',
         templateFile: 'templates/component/docs.hbs'
-      },
-      {
-        type: 'modify',
-        path: '../../docs/_sidebar.md',
-        pattern: /<!--plop:component-->/,
-        template: `- [{{ tagToTitle tag }}](/components/{{ tagWithoutPrefix tag }})\n  <!--plop:component-->`
       },
       {
         type: 'modify',
