@@ -33,6 +33,7 @@ If you're a CDN user, you must update your path to point to `cdn/` instead of `d
 - Fixed a bug in `<sl-radio-group>` where `<sl-radio>` would not get checked if `<sl-radio-group>` was defined first. [#1364](https://github.com/shoelace-style/shoelace/pull/1364/)
 - Fixed a bug in `<sl-input>` that caused date pickers to look filled in even when empty in Safari [#1341](https://github.com/shoelace-style/shoelace/pull/1341)
 - Fixed a bug in `<sl-radio-group>` that sometimes caused dual scrollbars in containers that overflowed [#1380](https://github.com/shoelace-style/shoelace/issues/1380)
+- Fixed a bug in `<sl-carousel>` not loading the English language pack automatically. [#1384](https://github.com/shoelace-style/shoelace/pull/1384)
 - Improved `<sl-button>` so it can accept children of variable heights [#1317](https://github.com/shoelace-style/shoelace/pull/1317)
 - Improved the docs to more clearly explain sizing radios and radio buttons
 - Improved the performance of `<sl-rating>` by partially rendering unseen icons [#1310](https://github.com/shoelace-style/shoelace/pull/1310)

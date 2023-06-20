@@ -4,7 +4,7 @@ import { clamp } from '../../internal/math';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
-import { LocalizeController } from '@shoelace-style/localize';
+import { LocalizeController } from '../../utilities/localize';
 import { map } from 'lit/directives/map.js';
 import { prefersReducedMotion } from '../../internal/animate';
 import { range } from 'lit/directives/range.js';
