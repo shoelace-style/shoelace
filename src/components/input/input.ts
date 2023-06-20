@@ -212,7 +212,7 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   /** Gets or sets the current value as a number. Returns `NaN` if the value can't be converted. */
   get valueAsNumber() {
     this.__numberInput.value = this.value;
-    return this.input?.valueAsNumber || this.__dateInput.valueAsNumber;
+    return this.input?.valueAsNumber || this.__numberInput.valueAsNumber;
   }
 
   set valueAsNumber(newValue: number) {
