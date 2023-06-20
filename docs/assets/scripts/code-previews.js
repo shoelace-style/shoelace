@@ -246,4 +246,4 @@ function run () {
 }
 
 run()
-document.addEventListener("turbo:load", run)
+document.addEventListener('turbo:load', run)
