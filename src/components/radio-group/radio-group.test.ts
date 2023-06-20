@@ -366,6 +366,23 @@ describe('when the value changes', () => {
     await radioGroup.updateComplete;
   });
 
+  it('should relatively position content to prevent visually hidden scroll bugs', async () => {
+    //
+    // See https://github.com/shoelace-style/shoelace/issues/1380
+    //
+    const radioGroup = await fixture<SlRadioGroup>(html`
+      <sl-radio-group value="1">
+        <sl-radio id="radio-1" value="1"></sl-radio>
+      </sl-radio-group>
+    `);
+
+    const formControl = radioGroup.shadowRoot!.querySelector('.form-control')!;
+    const visuallyHidden = radioGroup.shadowRoot!.querySelector('.visually-hidden')!;
+
+    expect(getComputedStyle(formControl).position).to.equal('relative');
+    expect(getComputedStyle(visuallyHidden).position).to.equal('absolute');
+  });
+
   /**
    * @see https://github.com/shoelace-style/shoelace/issues/1361
    * This isn't really possible to test right now due to importing "shoelace.js" which

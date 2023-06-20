@@ -98,23 +98,20 @@ export default class SlTooltip extends ShoelaceElement {
    */
   @property({ type: Boolean }) hoist = false;
 
+  constructor() {
+    super();
+    // TODO (justinfagnani): does this need to be done in firstUpdated for some
+    // reason? If so, document why in a comment.
+    this.addEventListener('blur', this.handleBlur, true);
+    this.addEventListener('focus', this.handleFocus, true);
+    this.addEventListener('click', this.handleClick);
+    this.addEventListener('keydown', this.handleKeyDown);
+    this.addEventListener('mouseover', this.handleMouseOver);
+    this.addEventListener('mouseout', this.handleMouseOut);
+  }
+
   connectedCallback() {
     super.connectedCallback();
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleMouseOver = this.handleMouseOver.bind(this);
-    this.handleMouseOut = this.handleMouseOut.bind(this);
-
-    this.updateComplete.then(() => {
-      this.addEventListener('blur', this.handleBlur, true);
-      this.addEventListener('focus', this.handleFocus, true);
-      this.addEventListener('click', this.handleClick);
-      this.addEventListener('keydown', this.handleKeyDown);
-      this.addEventListener('mouseover', this.handleMouseOver);
-      this.addEventListener('mouseout', this.handleMouseOut);
-    });
   }
 
   firstUpdated() {
@@ -127,23 +124,13 @@ export default class SlTooltip extends ShoelaceElement {
     }
   }
 
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.removeEventListener('blur', this.handleBlur, true);
-    this.removeEventListener('focus', this.handleFocus, true);
-    this.removeEventListener('click', this.handleClick);
-    this.removeEventListener('keydown', this.handleKeyDown);
-    this.removeEventListener('mouseover', this.handleMouseOver);
-    this.removeEventListener('mouseout', this.handleMouseOut);
-  }
-
-  private handleBlur() {
+  private handleBlur = () => {
     if (this.hasTrigger('focus')) {
       this.hide();
     }
-  }
+  };
 
-  private handleClick() {
+  private handleClick = () => {
     if (this.hasTrigger('click')) {
       if (this.open) {
         this.hide();
@@ -151,37 +138,37 @@ export default class SlTooltip extends ShoelaceElement {
         this.show();
       }
     }
-  }
+  };
 
-  private handleFocus() {
+  private handleFocus = () => {
     if (this.hasTrigger('focus')) {
       this.show();
     }
-  }
+  };
 
-  private handleKeyDown(event: KeyboardEvent) {
+  private handleKeyDown = (event: KeyboardEvent) => {
     // Pressing escape when the target element has focus should dismiss the tooltip
     if (this.open && event.key === 'Escape') {
       event.stopPropagation();
       this.hide();
     }
-  }
+  };
 
-  private handleMouseOver() {
+  private handleMouseOver = () => {
     if (this.hasTrigger('hover')) {
       const delay = parseDuration(getComputedStyle(this).getPropertyValue('--show-delay'));
       clearTimeout(this.hoverTimeout);
       this.hoverTimeout = window.setTimeout(() => this.show(), delay);
     }
-  }
+  };
 
-  private handleMouseOut() {
+  private handleMouseOut = () => {
     if (this.hasTrigger('hover')) {
       const delay = parseDuration(getComputedStyle(this).getPropertyValue('--hide-delay'));
       clearTimeout(this.hoverTimeout);
       this.hoverTimeout = window.setTimeout(() => this.hide(), delay);
     }
-  }
+  };
 
   private hasTrigger(triggerType: string) {
     const triggers = this.trigger.split(' ');
