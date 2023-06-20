@@ -6,12 +6,62 @@ Teamshare's version of Shoelace comes bundled with 292 icons courtesy of [Heroic
 
 ?> Depending on how you're loading Shoelace, you may need to copy icon assets and/or [set the base path](getting-started/installation#setting-the-base-path) so Shoelace knows where to load them from. Otherwise, icons may not appear and you'll see 404 Not Found errors in the dev console.
 
+## Font Awesome
+
+Teamshares has a Font Awesome Pro license. Use Font Awesome icons in Shoelace by setting `sl-icon`'s `library` attribute to `fa`:
+
+```html
+sl-icon library="fa" name="user"
+```
+
+For stroke-based icons, you can use the name of the icon without a prefix, e.g. `face-smile`. Prefixes are required for the other sets:
+
+- Solid: `fas-` prefix.
+- Duotone: `fad-` prefix.
+- Brands: `fab-` prefix (for social media icons, etc.)
+
+Note that some icons only exist in one style.
+
+```html preview
+<li>Regular: <sl-icon library="fa" name="user"></sl-icon></li>
+<li>Solid: <sl-icon library="fa" name="fas-user"></sl-icon></li>
+<li>Duotone: <sl-icon library="fa" name="fad-user"></sl-icon></li>
+<li>Brands: <sl-icon library="fa" name="fab-apple"></sl-icon></li>
+```
+
+```pug slim
+sl-icon library="fa" name="user"
+sl-icon library="fa" name="fas-user"
+sl-icon library="fa" name="fad-user"
+sl-icon library="fa" name="fab-apple"
+```
+
+```jsx react
+import { SlIcon } from '@teamshares/shoelace/dist/react';
+
+const App = () => <SlIcon library="fa" name="face-smile" label="Add to favorites" />;
+```
+
+Search the Font Awesome site via the form input below (will open a popup window).
+
+<div class="fa-search">
+  <sl-input class="fa-icon-search-input" placeholder="Search Font Awesome Icons" clearable>
+    <sl-icon slot="prefix" name="magnifying-glass"></sl-icon>
+  </sl-input>
+  <sl-button class="fa-icon-search-button">
+    Search
+    <sl-icon name="arrow-top-right-on-square" slot="suffix">
+  </sl-button>
+</div>
+
 ## Default Icons
 
 All available icons in the `default` icon library (Heroicons) are shown below. Click or tap on any icon to copy its name, then you can use it in your HTML like this.
 
 ```html preview
 <sl-icon name="academic-cap"></sl-icon>
+<br />
+<sl-icon library="fa" name="fas-thumbs-up"></sl-icon>
 ```
 
 ```pug slim
@@ -34,50 +84,6 @@ sl-icon name="academic-cap"
     <div class="icon-list"></div>
   </sl-details>
   <input type="text" class="icon-copy-input" aria-hidden="true" tabindex="-1">
-</div>
-
-## Font Awesome
-
-Teamshares has enabled the free version Font Awesome's icons, with plans to add the pro version soon. Use Font Awesome Free icons by setting `sl-icon`'s `library` attribute to `fa-free`.
-
-```html
-sl-icon library="fa-free" name="user"
-```
-
-For stroke-based icons, you can use the name of the icon without a prefix, e.g. `face-smile`. Solid icons require an `fas-` prefix. Note that some icons only exist in one style.
-
-```html preview
-<sl-icon library="fa-free" name="face-smile"></sl-icon>
-<sl-icon library="fa-free" name="fas-face-smile"></sl-icon>
-<sl-icon library="fa-free" name="user"></sl-icon>
-<sl-icon library="fa-free" name="fas-user"></sl-icon>
-<sl-icon library="fa-free" name="fas-users"></sl-icon>
-```
-
-```pug slim
-sl-icon library="fa-free" name="face-smile"
-sl-icon library="fa-free" name="fas-face-smile"
-sl-icon library="fa-free" name="user"
-sl-icon library="fa-free" name="fas-user"
-sl-icon library="fa-free" name="fas-users"
-```
-
-```jsx react
-import { SlIcon } from '@teamshares/shoelace/dist/react';
-
-const App = () => <SlIcon library="fa-free" name="face-smile" label="Add to favorites" />;
-```
-
-Search the Font Awesome site via the form input below (will open a popup window).
-
-<div class="fa-search">
-  <sl-input class="fa-icon-search-input" placeholder="Search Font Awesome Free Icons" clearable>
-    <sl-icon slot="prefix" name="magnifying-glass"></sl-icon>
-  </sl-input>
-  <sl-button class="fa-icon-search-button">
-    Search
-    <sl-icon name="arrow-top-right-on-square" slot="suffix">
-  </sl-button>
 </div>
 
 ## Examples
@@ -791,7 +797,8 @@ If you want to change the icons Shoelace uses internally, you can register an ic
       const onFaSearch = () => {
         const query = faIconSearchInput.value;
         if (query) {
-          const searchPopup = window.open(`https://fontawesome.com/search?q=${query}&o=r&m=free`, 'fontAwesomeSearch', 'popup');
+          // Current params: classic (not sharp), solid, outline, duotone, light, ordered alphabetically
+          const searchPopup = window.open(`https://fontawesome.com/search?q=${query}&o=a&s=solid%2Cregular%2Cduotone%2Clight&f=classic`, 'fontAwesomeSearch', 'popup');
           if (!searchPopup) {
             const alert = Object.assign(document.createElement('sl-alert'), {
               variant: 'warning',
@@ -803,7 +810,7 @@ If you want to change the icons Shoelace uses internally, you can register an ic
               `
               });
             document.body.append(alert);
-          } 
+          }
         }
       }
 
