@@ -63,6 +63,9 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   @state() private hasFocus = false;
   @property() title = ''; // make reactive to pass through
 
+  private __numberInput = Object.assign(document.createElement('input'), { type: 'number' });
+  private __dateInput = Object.assign(document.createElement('input'), { type: 'date' });
+
   /**
    * The type of input. Works the same as a native `<input>` element, but only a subset of types are supported. Defaults
    * to `text`.
@@ -197,32 +200,24 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
 
   /** Gets or sets the current value as a `Date` object. Returns `null` if the value can't be converted. */
   get valueAsDate() {
-    const input = document.createElement('input');
-    input.type = 'date';
-    input.value = this.value;
-    return input.valueAsDate;
+    this.__dateInput.value = this.value;
+    return this.input?.valueAsDate || this.__dateInput.valueAsDate;
   }
 
   set valueAsDate(newValue: Date | null) {
-    const input = document.createElement('input');
-    input.type = 'date';
-    input.valueAsDate = newValue;
-    this.value = input.value;
+    this.__dateInput.valueAsDate = newValue;
+    this.value = this.__dateInput.value;
   }
 
   /** Gets or sets the current value as a number. Returns `NaN` if the value can't be converted. */
   get valueAsNumber() {
-    const input = document.createElement('input');
-    input.type = 'number';
-    input.value = this.value;
-    return input.valueAsNumber;
+    this.__numberInput.value = this.value;
+    return this.input?.valueAsNumber || this.__numberInput.valueAsNumber;
   }
 
   set valueAsNumber(newValue: number) {
-    const input = document.createElement('input');
-    input.type = 'number';
-    input.valueAsNumber = newValue;
-    this.value = input.value;
+    this.__numberInput.valueAsNumber = newValue;
+    this.value = this.__numberInput.value;
   }
 
   /** Gets the validity state object */
