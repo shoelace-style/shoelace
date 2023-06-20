@@ -26,11 +26,14 @@ If you're a CDN user, you must update your path to point to `cdn/` instead of `d
 - Added a `cdn/` distribution for bundled dependencies (imports for npm users remain the same) [#1369](https://github.com/shoelace-style/shoelace/pull/1369)
 - Added the `checkbox` part and related exported parts to `<sl-tree-item>` so you can target it with CSS [#1318](https://github.com/shoelace-style/shoelace/discussions/1318)
 - Added the `submenu-icon` part to `<sl-menu-item>` (submenus have not been implemented yet, but this part is required to allow customizations)
+- Added the ability to use Sprite Sheets when using `<sl-icon>` via a custom resolver.
 - Added tests for `<sl-split-panel>` [#1343](https://github.com/shoelace-style/shoelace/pull/1343)
 - Fixed a bug where changing the size of `<sl-radio-group>` wouldn't update the size of child elements
 - Fixed a bug in `<sl-select>` and `<sl-color-picker>` where the `size` attribute wasn't being reflected [#1318](https://github.com/shoelace-style/shoelace/issues/1348)
 - Fixed a bug in `<sl-radio-group>` where `<sl-radio>` would not get checked if `<sl-radio-group>` was defined first. [#1364](https://github.com/shoelace-style/shoelace/pull/1364/)
 - Fixed a bug in `<sl-input>` that caused date pickers to look filled in even when empty in Safari [#1341](https://github.com/shoelace-style/shoelace/pull/1341)
+- Fixed a bug in `<sl-radio-group>` that sometimes caused dual scrollbars in containers that overflowed [#1380](https://github.com/shoelace-style/shoelace/issues/1380)
+- Fixed a bug in `<sl-carousel>` not loading the English language pack automatically. [#1384](https://github.com/shoelace-style/shoelace/pull/1384)
 - Improved `<sl-button>` so it can accept children of variable heights [#1317](https://github.com/shoelace-style/shoelace/pull/1317)
 - Improved the docs to more clearly explain sizing radios and radio buttons
 - Improved the performance of `<sl-rating>` by partially rendering unseen icons [#1310](https://github.com/shoelace-style/shoelace/pull/1310)

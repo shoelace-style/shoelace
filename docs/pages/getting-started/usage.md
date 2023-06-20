@@ -108,9 +108,9 @@ Custom elements cannot have self-closing tags. Similar to `<script>` and `<texta
 
 ## Differences from Native Elements
 
-You might expect similarly named elements to share the same API as native HTML elements. This is not always the case. Shoelace components **are not** designed to be one-to-one replacements for their HTML counterparts.
+You might expect similarly named elements to share the same API as native HTML elements, but this is not always the case. Shoelace components **are not** designed to be one-to-one replacements for their HTML counterparts. While they usually share the same API, there may be subtle differences.
 
-For example, `<button>` and `<sl-button>` both have a `type` attribute, but it does different things. The former controls whether the button submits a form and the latter controls the button's appearance.
+For example, `<button>` and `<sl-button>` both have a `type` attribute, but the native one defaults to `submit` while the Shoelace one defaults to `button` since this is a better default for most users.
 
 :::tip
 **Don't make assumptions about a component's API!** To prevent unexpected behaviors, please take the time to review the documentation and make sure you understand what each attribute, property, method, and event is intended to do.
