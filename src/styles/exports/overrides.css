@@ -69,11 +69,21 @@
 }
 
 sl-input[type],
+sl-input[type]:focus,
 sl-input[multiple],
+sl-input[multiple]:focus,
 sl-input textarea,
-sl-input select sl-input {
+sl-input textarea:focus,
+sl-input select sl-input,
+sl-input select sl-input:focus {
   border-width: 0;
   padding: initial;
+  outline: none;
+  --tw-ring-color: transparent;
+  --tw-ring-offset-shadow: none;
+  --tw-ring-shadow: none;
+  box-shadow: none;
+  border-color: initial;
 }
 
 sl-icon[type] {
