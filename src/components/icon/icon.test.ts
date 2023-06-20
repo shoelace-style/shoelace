@@ -199,14 +199,14 @@ describe('<sl-icon>', () => {
       const svg = el.shadowRoot?.querySelector("svg[part='svg']");
       const use = svg?.querySelector('use');
 
-      // Theres no way to really test that the icon rendered properly. We just gotta trust the browser to do it's thing :)
+      // TODO: Theres no way to really test that the icon rendered properly. We just gotta trust the browser to do it's thing :)
       // However, we can check the <use> size. If it never loaded, it should be 0x0. Ideally, we could have error tracking...
       const rect = use?.getBoundingClientRect();
       expect(rect?.width).to.equal(0);
       expect(rect?.width).to.equal(0);
     });
 
-    // <use> svg icons don't emit a "load" or "error"...if we can figure out how to get the event to emit errors.
+    // TODO: <use> svg icons don't emit a "load" or "error" event...if we can figure out how to get the event to emit errors.
     // Once we figure out how to emit errors / loading perhaps we can actually test this?
     it.skip("Should produce an error if the icon doesn't exist.", async () => {
       registerIconLibrary('sprite', {

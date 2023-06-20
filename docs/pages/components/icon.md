@@ -634,40 +634,6 @@ This example will load the same set of icons from the jsDelivr CDN instead of yo
 </script>
 ```
 
-### SVG Sprites
-
-To improve performance you can use a SVG sprites to avoid multiple trips for each SVG.
-The browser will load the sprite sheet once and then you reference the particular SVG
-within the sprite sheet using hash selector.
-
-As always, make sure to benchmark these changes. When using HTTP/2, it may in fact be more bandwidth-friendly
-to use multiple small requests instead of 1 large sprite sheet.
-
-:::danger
-When using sprite sheets, the `"sl-load"` and `"sl-error"` events will not fire.
-
-For security reasons, browsers may apply the same-origin policy on `<use>` elements located in the `<sl-icon>` shadow dom and
-may refuse to load a cross-origin URL. There is currently no defined way to set a cross-origin policy for `<use>` elements.
-For this reason, sprite sheets should only be used if you're self-hosting them.
-:::
-
-```html:preview
-<script type="module">
-  import { registerIconLibrary } from '/dist/utilities/icon-library.js';
-
-  registerIconLibrary('sprite', {
-    resolver: name => `/assets/images/sprite.svg#${name}`,
-    mutator: svg => svg.setAttribute('fill', 'currentColor'),
-    spriteSheet: true
-  });
-</script>
-
-<div style="font-size: 24px;">
-  <sl-icon library="sprite" name="clock"></sl-icon>
-  <sl-icon library="sprite" name="speedometer"></sl-icon>
-</div>
-```
-
 ### Customizing the System Library
 
 The system library contains only the icons used internally by Shoelace components. Unlike the default icon library, the system library does not rely on physical assets. Instead, its icons are hard-coded as data URIs into the resolver to ensure their availability.
@@ -870,3 +836,36 @@ If you want to change the icons Shoelace uses internally, you can register an ic
     }
   }
 </style>
+
+### Customize the default library to use SVG sprites
+
+To improve performance you can use a SVG sprites to avoid multiple trips for each SVG. The browser will load the sprite sheet once and then you reference the particular SVG within the sprite sheet using hash selector.
+
+As always, make sure to benchmark these changes. When using HTTP/2, it may in fact be more bandwidth-friendly to use multiple small requests instead of 1 large sprite sheet.
+
+:::danger
+When using sprite sheets, the `sl-load` and `sl-error` events will not fire.
+:::
+
+:::danger
+For security reasons, browsers may apply the same-origin policy on `<use>` elements located in the `<sl-icon>` shadow dom and
+may refuse to load a cross-origin URL. There is currently no defined way to set a cross-origin policy for `<use>` elements.
+For this reason, sprite sheets should only be used if you're self-hosting them.
+:::
+
+```html:preview
+<script type="module">
+  import { registerIconLibrary } from '/dist/utilities/icon-library.js';
+
+  registerIconLibrary('sprite', {
+    resolver: name => `/assets/images/sprite.svg#${name}`,
+    mutator: svg => svg.setAttribute('fill', 'currentColor'),
+    spriteSheet: true
+  });
+</script>
+
+<div style="font-size: 24px;">
+  <sl-icon library="sprite" name="clock"></sl-icon>
+  <sl-icon library="sprite" name="speedometer"></sl-icon>
+</div>
+```

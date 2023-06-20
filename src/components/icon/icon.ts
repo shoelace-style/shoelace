@@ -38,12 +38,7 @@ export default class SlIcon extends ShoelaceElement {
     let fileData: Response;
 
     if (library?.spriteSheet) {
-      return html`<svg
-        part="svg"
-        ${'' /* In testing, these dont seem to actually do anything. */}
-        @error=${() => this.emit('sl-error')}
-        @load=${() => this.emit('sl-load')}
-      >
+      return html`<svg part="svg">
         <use part="use" href="${url}"></use>
       </svg>`;
     }
@@ -149,7 +144,7 @@ export default class SlIcon extends ShoelaceElement {
       iconCache.set(url, iconResolver);
     }
 
-    // If we haven't render yet, early exit. This avoids unnecessary work due to watching multiple props
+    // If we haven't rendered yet, exit early. This avoids unnecessary work due to watching multiple props.
     if (!this.initialRender) {
       return;
     }
