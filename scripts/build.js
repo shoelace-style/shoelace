@@ -70,11 +70,6 @@ async function buildTheDocs(watch = false) {
 //
 async function buildTheSource() {
   const alwaysExternal = ['@lit-labs/react', 'react'];
-  const packageJSON = await fs.readFile('./package.json');
-  const dependencies = [
-    ...Object.keys(packageJSON.dependencies || {}),
-    ...Object.keys(packageJSON.peerDependencies || {})
-  ];
 
   const cdnConfig = {
     format: 'esm',
@@ -215,8 +210,9 @@ if (!serve) {
   await nextTask(`Copying the build to "${sitedir}"`, async () => {
     await deleteAsync(sitedir);
 
-    // We copy the CDN build because that has everything bundled.
-    await copy(cdndir, path.join(sitedir, 'cdn'));
+    // We copy the CDN build because that has everything bundled. Yes this looks weird.
+    // But if we do "/cdn" it requires changes all the docs to do /cdn instead of /dist.
+    await copy(cdndir, path.join(sitedir, 'dist'));
   });
 }
 
@@ -245,7 +241,7 @@ if (serve) {
     server: {
       baseDir: sitedir,
       routes: {
-        '/cdn': './cdn'
+        '/dist': './cdn'
       }
     }
   };

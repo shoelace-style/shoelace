@@ -26,6 +26,7 @@ If you're a CDN user, you must update your path to point to `cdn/` instead of `d
 - Added a `cdn/` distribution for bundled dependencies (imports for npm users remain the same) [#1369](https://github.com/shoelace-style/shoelace/pull/1369)
 - Added the `checkbox` part and related exported parts to `<sl-tree-item>` so you can target it with CSS [#1318](https://github.com/shoelace-style/shoelace/discussions/1318)
 - Added the `submenu-icon` part to `<sl-menu-item>` (submenus have not been implemented yet, but this part is required to allow customizations)
+- Added the ability to use Sprite Sheets when using `<sl-icon>` via a custom resolver.
 - Added tests for `<sl-split-panel>` [#1343](https://github.com/shoelace-style/shoelace/pull/1343)
 - Fixed a bug where changing the size of `<sl-radio-group>` wouldn't update the size of child elements
 - Fixed a bug in `<sl-select>` and `<sl-color-picker>` where the `size` attribute wasn't being reflected [#1318](https://github.com/shoelace-style/shoelace/issues/1348)
