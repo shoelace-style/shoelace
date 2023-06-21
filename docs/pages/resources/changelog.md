@@ -12,6 +12,10 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## Next
+
+- Fixed a regression that caused slotted styles to not work in `<sl-select>` [#1387](https://github.com/shoelace-style/shoelace/issues/1387)
+
 ## 2.5.0
 
 This release [unbundles Lit](https://github.com/shoelace-style/shoelace/issues/559) (and other dependencies) from Shoelace. There are now two distributions for the project:
