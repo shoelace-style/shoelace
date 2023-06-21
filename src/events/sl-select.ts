@@ -1,4 +1,4 @@
-import type SlMenuItem from '../components/menu-item/menu-item';
+import type SlMenuItem from '../components/menu-item/menu-item.js';
 
 type SlSelectEvent = CustomEvent<{ item: SlMenuItem }>;
 

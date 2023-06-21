@@ -1,6 +1,6 @@
 import '../../../dist/shoelace.js';
 import { elementUpdated, expect, fixture, html } from '@open-wc/testing';
-import type SlFormatBytes from './format-bytes';
+import type SlFormatBytes from './format-bytes.js';
 
 describe('<sl-format-bytes>', () => {
   describe('defaults ', () => {

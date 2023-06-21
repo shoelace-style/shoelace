@@ -49,7 +49,7 @@ components.map(component => {
     })
   );
 
-  index.push(`export { default as ${component.name} } from './${tagWithoutPrefix}';`);
+  index.push(`export { default as ${component.name} } from './${tagWithoutPrefix}/index.js';`);
 
   fs.writeFileSync(componentFile, source, 'utf8');
 });

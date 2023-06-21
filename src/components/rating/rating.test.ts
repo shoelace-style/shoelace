@@ -1,9 +1,9 @@
 import '../../../dist/shoelace.js';
-import { clickOnElement } from '../../internal/test';
+import { clickOnElement } from '../../internal/test.js';
 import { expect, fixture, html } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-import type SlRating from './rating';
+import type SlRating from './rating.js';
 
 describe('<sl-rating>', () => {
   it('should pass accessibility tests', async () => {

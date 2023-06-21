@@ -1,9 +1,9 @@
-import '../icon/icon';
+import '../icon/icon.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
-import { watch } from '../../internal/watch';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './animated-image.styles';
+import { watch } from '../../internal/watch.js';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './animated-image.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**

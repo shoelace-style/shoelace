@@ -1,6 +1,6 @@
 import '../../../dist/shoelace.js';
 import { aTimeout, expect, fixture, html } from '@open-wc/testing';
-import type SlTabPanel from './tab-panel';
+import type SlTabPanel from './tab-panel.js';
 
 describe('<sl-tab-panel>', () => {
   it('passes accessibility test', async () => {

@@ -1,10 +1,10 @@
 import { customElement, property, state } from 'lit/decorators.js';
-import { getIconLibrary, type IconLibrary, unwatchIcon, watchIcon } from './library';
+import { getIconLibrary, type IconLibrary, unwatchIcon, watchIcon } from './library.js';
 import { html } from 'lit';
 import { isTemplateResult } from 'lit/directive-helpers.js';
-import { watch } from '../../internal/watch';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './icon.styles';
+import { watch } from '../../internal/watch.js';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './icon.styles.js';
 
 import type { CSSResultGroup, HTMLTemplateResult } from 'lit';
 

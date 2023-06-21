@@ -1,6 +1,6 @@
 import '../../../dist/shoelace.js';
 import { expect, fixture, html } from '@open-wc/testing';
-import type SlSkeleton from './skeleton';
+import type SlSkeleton from './skeleton.js';
 
 describe('<sl-skeleton>', () => {
   it('should render default skeleton', async () => {

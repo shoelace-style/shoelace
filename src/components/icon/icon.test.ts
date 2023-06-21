@@ -1,8 +1,8 @@
 import { aTimeout, elementUpdated, expect, fixture, html, oneEvent } from '@open-wc/testing';
 import { registerIconLibrary } from '../../../dist/shoelace.js';
-import type SlErrorEvent from '../../events/sl-error';
-import type SlIcon from './icon';
-import type SlLoadEvent from '../../events/sl-load';
+import type SlErrorEvent from '../../events/sl-error.js';
+import type SlIcon from './icon.js';
+import type SlLoadEvent from '../../events/sl-load.js';
 
 const testLibraryIcons = {
   'test-icon1': `

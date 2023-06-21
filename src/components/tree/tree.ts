@@ -1,11 +1,11 @@
-import { clamp } from '../../internal/math';
+import { clamp } from '../../internal/math.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize';
-import { watch } from '../../internal/watch';
-import ShoelaceElement from '../../internal/shoelace-element';
-import SlTreeItem from '../tree-item/tree-item';
-import styles from './tree.styles';
+import { LocalizeController } from '../../utilities/localize.js';
+import { watch } from '../../internal/watch.js';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import SlTreeItem from '../tree-item/tree-item.js';
+import styles from './tree.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 function syncCheckboxes(changedTreeItem: SlTreeItem, initialSync = false) {

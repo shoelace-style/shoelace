@@ -1,14 +1,14 @@
-import '../icon/icon';
-import { clamp } from '../../internal/math';
+import '../icon/icon.js';
+import { clamp } from '../../internal/math.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query } from 'lit/decorators.js';
-import { drag } from '../../internal/drag';
+import { drag } from '../../internal/drag.js';
 import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize';
+import { LocalizeController } from '../../utilities/localize.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import { watch } from '../../internal/watch';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './image-comparer.styles';
+import { watch } from '../../internal/watch.js';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './image-comparer.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**

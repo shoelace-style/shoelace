@@ -1,7 +1,7 @@
 import '../../../dist/shoelace.js';
 import { expect, fixture, html } from '@open-wc/testing';
-import type SlRadio from './radio';
-import type SlRadioGroup from '../radio-group/radio-group';
+import type SlRadio from './radio.js';
+import type SlRadioGroup from '../radio-group/radio-group.js';
 
 describe('<sl-radio>', () => {
   it('should not get checked when disabled', async () => {

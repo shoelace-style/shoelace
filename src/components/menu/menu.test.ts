@@ -1,11 +1,11 @@
 import '../../../dist/shoelace.js';
-import { clickOnElement } from '../../internal/test';
+import { clickOnElement } from '../../internal/test.js';
 import { expect, fixture } from '@open-wc/testing';
 import { html } from 'lit';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-import type SlMenu from './menu';
-import type SlSelectEvent from '../../events/sl-select';
+import type SlMenu from './menu.js';
+import type SlSelectEvent from '../../events/sl-select.js';
 
 describe('<sl-menu>', () => {
   it('emits sl-select with the correct event detail when clicking an item', async () => {

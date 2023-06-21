@@ -1,6 +1,6 @@
 import '../../../dist/shoelace.js';
 import { expect, fixture, html } from '@open-wc/testing';
-import type SlProgressRing from './progress-ring';
+import type SlProgressRing from './progress-ring.js';
 
 describe('<sl-progress-ring>', () => {
   let el: SlProgressRing;

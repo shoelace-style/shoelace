@@ -1,7 +1,7 @@
 import '../../../dist/shoelace.js';
 import { expect, fixture, html } from '@open-wc/testing';
 import sinon from 'sinon';
-import type SlImageComparer from './image-comparer';
+import type SlImageComparer from './image-comparer.js';
 
 describe('<sl-image-comparer>', () => {
   it('should render a basic before/after', async () => {
