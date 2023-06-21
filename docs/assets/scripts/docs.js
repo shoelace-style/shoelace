@@ -74,21 +74,55 @@
 })();
 
 //
-// Theme switcher
+// Theme selector
 //
 (() => {
-  function toggleTheme() {
-    const isDark = !document.documentElement.classList.contains('sl-theme-dark');
-    document.documentElement.classList.toggle('sl-theme-dark', isDark);
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  function getTheme() {
+    return localStorage.getItem('theme') || 'auto';
   }
 
-  // Toggle the theme
-  document.addEventListener('click', event => {
-    const themeToggle = event.target.closest('#theme-toggle');
-    if (!themeToggle) return;
-    toggleTheme();
+  function isDark() {
+    if (theme === 'auto') {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    return theme === 'dark';
+  }
+
+  function setTheme(newTheme) {
+    theme = newTheme;
+    localStorage.setItem('theme', theme);
+
+    // Update the UI
+    updateSelection();
+
+    // Toggle the dark mode class
+    document.documentElement.classList.toggle('sl-theme-dark', isDark());
+  }
+
+  function updateSelection() {
+    const menu = document.querySelector('#theme-selector sl-menu');
+    if (!menu) return;
+    [...menu.querySelectorAll('sl-menu-item')].map(item => (item.checked = item.getAttribute('value') === theme));
+  }
+
+  let theme = getTheme();
+
+  // Selection is not preserved when changing page, so update when opening dropdown
+  document.addEventListener('sl-show', event => {
+    const themeSelector = event.target.closest('#theme-selector');
+    if (!themeSelector) return;
+    updateSelection();
   });
+
+  // Listen for selections
+  document.addEventListener('sl-select', event => {
+    const menu = event.target.closest('#theme-selector sl-menu');
+    if (!menu) return;
+    setTheme(event.detail.item.value);
+  });
+
+  // Update the theme when the preference changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => setTheme(theme));
 
   // Toggle with backslash
   document.addEventListener('keydown', event => {
@@ -97,9 +131,12 @@
       !event.composedPath().some(el => ['input', 'textarea'].includes(el?.tagName?.toLowerCase()))
     ) {
       event.preventDefault();
-      toggleTheme();
+      setTheme(isDark() ? 'light' : 'dark');
     }
   });
+
+  // Set the initial theme and sync the UI
+  setTheme(theme);
 })();
 
 //

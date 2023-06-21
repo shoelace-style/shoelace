@@ -1054,6 +1054,31 @@ html.sidebar-open #menu-toggle {
   transition: 250ms scale ease;
 }
 
+#theme-selector:not(:defined) {
+  /* Hide when not defined to prevent extra wide icon toolbar while loading */
+  display: none;
+}
+#theme-selector sl-menu {
+  /* Set an initial size to prevent width being initally too small when first opening on small screen width */
+  width: 140px;
+}
+#theme-selector sl-button {
+  transition: 250ms scale ease;
+}
+#theme-selector sl-button::part(base) {
+  color: var(--sl-color-neutral-0);
+}
+#theme-selector sl-button::part(label) {
+  display: flex;
+  padding: 0.5rem;
+}
+#theme-selector sl-icon {
+  font-size: 1.25rem;
+}
+.sl-theme-dark #theme-selector sl-button::part(base) {
+  color: var(--sl-color-neutral-1000);
+}
+
 .sl-theme-dark #icon-toolbar {
   background: var(--sl-color-neutral-200);
 }
@@ -1064,7 +1089,8 @@ html.sidebar-open #menu-toggle {
 }
 
 #icon-toolbar button:hover,
-#icon-toolbar a:hover {
+#icon-toolbar a:hover,
+#theme-selector sl-button:hover {
   scale: 1.1;
 }
 
@@ -1083,6 +1109,10 @@ html.sidebar-open #menu-toggle {
   #icon-toolbar a {
     font-size: 1rem;
     padding: 0.5rem;
+  }
+
+  #theme-selector sl-icon {
+    font-size: 1rem;
   }
 }
 
