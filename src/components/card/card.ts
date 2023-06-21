@@ -1,9 +1,9 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement } from 'lit/decorators.js';
-import { HasSlotController } from '../../internal/slot';
+import { HasSlotController } from '../../internal/slot.js';
 import { html } from 'lit';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './card.styles';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './card.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**

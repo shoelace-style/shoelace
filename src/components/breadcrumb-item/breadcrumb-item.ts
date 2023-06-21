@@ -1,10 +1,10 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property } from 'lit/decorators.js';
-import { HasSlotController } from '../../internal/slot';
+import { HasSlotController } from '../../internal/slot.js';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './breadcrumb-item.styles';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './breadcrumb-item.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**

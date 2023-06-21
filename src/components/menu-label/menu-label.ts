@@ -1,7 +1,7 @@
 import { customElement } from 'lit/decorators.js';
 import { html } from 'lit';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './menu-label.styles';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './menu-label.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**

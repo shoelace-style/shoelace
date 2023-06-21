@@ -1,7 +1,7 @@
 import { customElement, property } from 'lit/decorators.js';
 import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize';
-import ShoelaceElement from '../../internal/shoelace-element';
+import { LocalizeController } from '../../utilities/localize.js';
+import ShoelaceElement from '../../internal/shoelace-element.js';
 
 /**
  * @summary Formats a date/time using the specified locale and options.

@@ -185,6 +185,17 @@ module.exports = {
         ]
       }
     ],
+    'import/extensions': [
+      'error',
+      'always',
+      {
+        ignorePackages: true,
+        pattern: {
+          js: 'always',
+          ts: 'never'
+        }
+      }
+    ],
     'import/no-duplicates': 'warn',
     'sort-imports-es6-autofix/sort-imports-es6': [
       2,

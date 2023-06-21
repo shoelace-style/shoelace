@@ -1,17 +1,17 @@
-import '../checkbox/checkbox';
-import '../icon/icon';
-import '../spinner/spinner';
-import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '../../internal/animate';
+import '../checkbox/checkbox.js';
+import '../icon/icon.js';
+import '../spinner/spinner.js';
+import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '../../internal/animate.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
+import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
 import { html } from 'lit';
 import { live } from 'lit/directives/live.js';
-import { LocalizeController } from '../../utilities/localize';
-import { watch } from '../../internal/watch';
+import { LocalizeController } from '../../utilities/localize.js';
+import { watch } from '../../internal/watch.js';
 import { when } from 'lit/directives/when.js';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './tree-item.styles';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './tree-item.styles.js';
 import type { CSSResultGroup, PropertyValueMap } from 'lit';
 
 /**
