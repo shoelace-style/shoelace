@@ -14,7 +14,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
-- Fixed a bug in `valueAsDate` where it would always set `type="date"` for the underlying `<input>` element. It now falls back to the native browser implementation for the in-memory input. This may cause unexpected behavior if you're using `valueAsDate` on any input elements that aren't `type="date"`.
+- Fixed a bug in `valueAsDate` on `<sl-input>` where it would always set `type="date"` for the underlying `<input>` element. It now falls back to the native browser implementation for the in-memory input. This may cause unexpected behavior if you're using `valueAsDate` on any input elements that aren't `type="date"`.
 
 ## 2.5.1
 
