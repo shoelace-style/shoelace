@@ -82,16 +82,15 @@
 
       {# Theme selector #}
       <sl-dropdown id="theme-selector" placement="bottom-end">
-        <sl-button size="small" variant="text" slot="trigger" caret>
+        <sl-button slot="trigger" size="small" variant="text" caret title="Press \ to toggle">
           <sl-icon class="only-light" name="sun-fill"></sl-icon>
           <sl-icon class="only-dark" name="moon-fill"></sl-icon>
         </sl-button>
         <sl-menu>
-          <sl-menu-label>Toggle <kbd>\</kbd></sl-menu-label>
           <sl-menu-item type="checkbox" value="light">Light</sl-menu-item>
           <sl-menu-item type="checkbox" value="dark">Dark</sl-menu-item>
           <sl-divider></sl-divider>
-          <sl-menu-item type="checkbox" value="auto">Auto</sl-menu-item>
+          <sl-menu-item type="checkbox" value="auto">System</sl-menu-item>
         </sl-menu>
       </sl-dropdown>
     </div>
