@@ -12,7 +12,7 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
-## Next
+## 2.5.1
 
 - Fixed missing extensions from imports that broke with TypeScript 5 [#1391]
 - Fixed a regression that caused slotted styles to not work in `<sl-select>` [#1387]
