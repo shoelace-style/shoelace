@@ -202,13 +202,13 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
    * Gets or sets the current value as a `Date` object. Returns `null` if the value can't be converted. This will use the native `<input type="{{type}}">` implementation and may result in an error.
    */
   get valueAsDate() {
-    this.__dateInput.type = this.type
+    this.__dateInput.type = this.type;
     this.__dateInput.value = this.value;
     return this.input?.valueAsDate || this.__dateInput.valueAsDate;
   }
 
   set valueAsDate(newValue: Date | null) {
-    this.__dateInput.type = this.type
+    this.__dateInput.type = this.type;
     this.__dateInput.valueAsDate = newValue;
     this.value = this.__dateInput.value;
   }
