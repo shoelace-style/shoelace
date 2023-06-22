@@ -1,4 +1,4 @@
-import { getBasePath } from './utilities/base-path';
+import { getBasePath } from './utilities/base-path.js';
 
 const observer = new MutationObserver(mutations => {
   for (const { addedNodes } of mutations) {

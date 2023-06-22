@@ -1,9 +1,9 @@
-import { animations } from './animations';
+import { animations } from './animations.js';
 import { customElement, property, queryAsync } from 'lit/decorators.js';
 import { html } from 'lit';
-import { watch } from '../../internal/watch';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './animation.styles';
+import { watch } from '../../internal/watch.js';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './animation.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**

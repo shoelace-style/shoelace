@@ -1,4 +1,4 @@
-import { formCollections } from '../internal/form';
+import { formCollections } from '../internal/form.js';
 
 /**
  * Serializes a form and returns a plain object. If a form control with the same name appears more than once, the

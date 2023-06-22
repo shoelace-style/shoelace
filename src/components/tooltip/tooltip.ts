@@ -1,16 +1,16 @@
-import '../popup/popup';
-import { animateTo, parseDuration, stopAnimations } from '../../internal/animate';
+import '../popup/popup.js';
+import { animateTo, parseDuration, stopAnimations } from '../../internal/animate.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query } from 'lit/decorators.js';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
+import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
 import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize';
-import { waitForEvent } from '../../internal/event';
-import { watch } from '../../internal/watch';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './tooltip.styles';
+import { LocalizeController } from '../../utilities/localize.js';
+import { waitForEvent } from '../../internal/event.js';
+import { watch } from '../../internal/watch.js';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './tooltip.styles.js';
 import type { CSSResultGroup } from 'lit';
-import type SlPopup from '../popup/popup';
+import type SlPopup from '../popup/popup.js';
 
 /**
  * @summary Tooltips display additional information based on a specific action.

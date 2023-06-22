@@ -1,8 +1,8 @@
 import '../../../dist/shoelace.js';
-import { clickOnElement } from '../../internal/test';
+import { clickOnElement } from '../../internal/test.js';
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import sinon from 'sinon';
-import type SlCarousel from './carousel';
+import type SlCarousel from './carousel.js';
 
 describe('<sl-carousel>', () => {
   it('should render a carousel with default configuration', async () => {

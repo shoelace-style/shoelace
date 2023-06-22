@@ -1,11 +1,11 @@
-import '../icon/icon';
+import '../icon/icon.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query } from 'lit/decorators.js';
-import { getTextContent } from '../../internal/slot';
+import { getTextContent } from '../../internal/slot.js';
 import { html } from 'lit';
-import { watch } from '../../internal/watch';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './menu-item.styles';
+import { watch } from '../../internal/watch.js';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './menu-item.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**

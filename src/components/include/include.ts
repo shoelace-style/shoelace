@@ -1,9 +1,9 @@
 import { customElement, property } from 'lit/decorators.js';
 import { html } from 'lit';
-import { requestInclude } from './request';
-import { watch } from '../../internal/watch';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './include.styles';
+import { requestInclude } from './request.js';
+import { watch } from '../../internal/watch.js';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './include.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**
