@@ -1,4 +1,4 @@
-(() => {
+function run() {
   function convertModuleLinks(html) {
     html = html
       .replace(/@shoelace-style\/shoelace/g, `https://cdn.skypack.dev/@shoelace-style/shoelace@${shoelaceVersion}`)
@@ -243,4 +243,7 @@
       form.remove();
     }
   });
-})();
+}
+
+run();
+document.addEventListener('turbo:load', run);

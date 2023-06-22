@@ -1,15 +1,15 @@
-import '../icon-button/icon-button';
+import '../icon-button/icon-button.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize';
-import { scrollIntoView } from '../../internal/scroll';
-import { watch } from '../../internal/watch';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './tab-group.styles';
+import { LocalizeController } from '../../utilities/localize.js';
+import { scrollIntoView } from '../../internal/scroll.js';
+import { watch } from '../../internal/watch.js';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './tab-group.styles.js';
 import type { CSSResultGroup } from 'lit';
-import type SlTab from '../tab/tab';
-import type SlTabPanel from '../tab-panel/tab-panel';
+import type SlTab from '../tab/tab.js';
+import type SlTabPanel from '../tab-panel/tab-panel.js';
 
 /**
  * @summary Tab groups organize content into a container that shows one section at a time.

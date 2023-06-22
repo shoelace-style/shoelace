@@ -1,10 +1,10 @@
 import '../../../dist/shoelace.js';
 import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
-import { clickOnElement } from '../../internal/test';
-import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
+import { clickOnElement } from '../../internal/test.js';
+import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests.js';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-import type SlCheckbox from './checkbox';
+import type SlCheckbox from './checkbox.js';
 
 describe('<sl-checkbox>', () => {
   it('should pass accessibility tests', async () => {

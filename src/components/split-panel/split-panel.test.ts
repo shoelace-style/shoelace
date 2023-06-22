@@ -1,9 +1,9 @@
 import '../../../dist/shoelace.js';
-import { dragElement } from '../../internal/test';
+import { dragElement } from '../../internal/test.js';
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
-import { queryByTestId } from '../../internal/test/data-testid-helpers';
+import { queryByTestId } from '../../internal/test/data-testid-helpers.js';
 import { resetMouse } from '@web/test-runner-commands';
-import type SlSplitPanel from './split-panel';
+import type SlSplitPanel from './split-panel.js';
 
 const DIVIDER_WIDTH_IN_PX = 4;
 

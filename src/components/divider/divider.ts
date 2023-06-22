@@ -1,7 +1,7 @@
 import { customElement, property } from 'lit/decorators.js';
-import { watch } from '../../internal/watch';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './divider.styles';
+import { watch } from '../../internal/watch.js';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './divider.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**

@@ -2,10 +2,10 @@ import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property } from 'lit/decorators.js';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { LocalizeController } from '../../utilities/localize';
+import { LocalizeController } from '../../utilities/localize.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './progress-bar.styles';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './progress-bar.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**

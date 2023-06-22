@@ -1,8 +1,8 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property } from 'lit/decorators.js';
 import { html } from 'lit';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './badge.styles';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './badge.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**
