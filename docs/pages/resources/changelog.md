@@ -14,7 +14,9 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
-- Fixed a regression that caused slotted styles to not work in `<sl-select>` [#1387](https://github.com/shoelace-style/shoelace/issues/1387)
+- Fixed missing extensions from imports that broke with TypeScript 5 [#1391]
+- Fixed a regression that caused slotted styles to not work in `<sl-select>` [#1387]
+- Reimplemented the theme switcher so it supports light, dark, and system (auto) in the docs [#1395]
 
 ## 2.5.0
 
@@ -27,24 +29,24 @@ This release [unbundles Lit](https://github.com/shoelace-style/shoelace/issues/5
 If you're a CDN user, you must update your path to point to `cdn/` instead of `dist/`. You can copy and paste the latest paths from the [installation page](/getting-started/installation).
 :::
 
-- Added a `cdn/` distribution for bundled dependencies (imports for npm users remain the same) [#1369](https://github.com/shoelace-style/shoelace/pull/1369)
-- Added the `checkbox` part and related exported parts to `<sl-tree-item>` so you can target it with CSS [#1318](https://github.com/shoelace-style/shoelace/discussions/1318)
+- Added a `cdn/` distribution for bundled dependencies (imports for npm users remain the same) [#1369]
+- Added the `checkbox` part and related exported parts to `<sl-tree-item>` so you can target it with CSS [#1318]
 - Added the `submenu-icon` part to `<sl-menu-item>` (submenus have not been implemented yet, but this part is required to allow customizations)
 - Added the ability to use Sprite Sheets when using `<sl-icon>` via a custom resolver.
-- Added tests for `<sl-split-panel>` [#1343](https://github.com/shoelace-style/shoelace/pull/1343)
+- Added tests for `<sl-split-panel>` [#1343]
 - Fixed a bug where changing the size of `<sl-radio-group>` wouldn't update the size of child elements
-- Fixed a bug in `<sl-select>` and `<sl-color-picker>` where the `size` attribute wasn't being reflected [#1318](https://github.com/shoelace-style/shoelace/issues/1348)
-- Fixed a bug in `<sl-radio-group>` where `<sl-radio>` would not get checked if `<sl-radio-group>` was defined first. [#1364](https://github.com/shoelace-style/shoelace/pull/1364/)
-- Fixed a bug in `<sl-input>` that caused date pickers to look filled in even when empty in Safari [#1341](https://github.com/shoelace-style/shoelace/pull/1341)
-- Fixed a bug in `<sl-radio-group>` that sometimes caused dual scrollbars in containers that overflowed [#1380](https://github.com/shoelace-style/shoelace/issues/1380)
-- Fixed a bug in `<sl-carousel>` not loading the English language pack automatically. [#1384](https://github.com/shoelace-style/shoelace/pull/1384)
-- Improved `<sl-button>` so it can accept children of variable heights [#1317](https://github.com/shoelace-style/shoelace/pull/1317)
+- Fixed a bug in `<sl-select>` and `<sl-color-picker>` where the `size` attribute wasn't being reflected [#1318]
+- Fixed a bug in `<sl-radio-group>` where `<sl-radio>` would not get checked if `<sl-radio-group>` was defined first. [#1364]
+- Fixed a bug in `<sl-input>` that caused date pickers to look filled in even when empty in Safari [#1341]
+- Fixed a bug in `<sl-radio-group>` that sometimes caused dual scrollbars in containers that overflowed [#1380]
+- Fixed a bug in `<sl-carousel>` not loading the English language pack automatically. [#1384]
+- Improved `<sl-button>` so it can accept children of variable heights [#1317]
 - Improved the docs to more clearly explain sizing radios and radio buttons
-- Improved the performance of `<sl-rating>` by partially rendering unseen icons [#1310](https://github.com/shoelace-style/shoelace/pull/1310)
-- Improved the Portuguese translation [#1336](https://github.com/shoelace-style/shoelace/pull/1336)
-- Improved the German translation [#1339](https://github.com/shoelace-style/shoelace/pull/1339)
-- Improved the autoloader so it watches `<html>` instead of `<body>` since the latter gets replaced by some frameworks [#1338](https://github.com/shoelace-style/shoelace/pull/1338)
-- Improved the Rails documentation [#1258](https://github.com/shoelace-style/shoelace/pull/1258)
+- Improved the performance of `<sl-rating>` by partially rendering unseen icons [#1310]
+- Improved the Portuguese translation [#1336]
+- Improved the German translation [#1339]
+- Improved the autoloader so it watches `<html>` instead of `<body>` since the latter gets replaced by some frameworks [#1338]
+- Improved the Rails documentation [#1258]
 - Replaced Docsify with Eleventy to generate a static HTML version of the docs
 - Updated esbuild to 0.18.2
 - Updated Lit to 2.7.5
