@@ -1,14 +1,14 @@
-import '../icon/icon';
-import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '../../internal/animate';
+import '../icon/icon.js';
+import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '../../internal/animate.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query } from 'lit/decorators.js';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
+import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
 import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize';
-import { waitForEvent } from '../../internal/event';
-import { watch } from '../../internal/watch';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './details.styles';
+import { LocalizeController } from '../../utilities/localize.js';
+import { waitForEvent } from '../../internal/event.js';
+import { watch } from '../../internal/watch.js';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './details.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**

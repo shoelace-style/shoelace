@@ -1,16 +1,16 @@
 import '../../../dist/shoelace.js';
 import { aTimeout, elementUpdated, expect, fixture, oneEvent, waitUntil } from '@open-wc/testing';
-import { clickOnElement } from '../../internal/test';
+import { clickOnElement } from '../../internal/test.js';
 import { html } from 'lit';
-import { isElementVisibleFromOverflow } from '../../internal/test/element-visible-overflow';
-import { queryByTestId } from '../../internal/test/data-testid-helpers';
+import { isElementVisibleFromOverflow } from '../../internal/test/element-visible-overflow.js';
+import { queryByTestId } from '../../internal/test/data-testid-helpers.js';
 import { sendKeys } from '@web/test-runner-commands';
-import { waitForScrollingToEnd } from '../../internal/test/wait-for-scrolling';
+import { waitForScrollingToEnd } from '../../internal/test/wait-for-scrolling.js';
 import type { HTMLTemplateResult } from 'lit';
-import type SlTab from '../tab/tab';
-import type SlTabGroup from './tab-group';
-import type SlTabPanel from '../tab-panel/tab-panel';
-import type SlTabShowEvent from '../../events/sl-tab-show';
+import type SlTab from '../tab/tab.js';
+import type SlTabGroup from './tab-group.js';
+import type SlTabPanel from '../tab-panel/tab-panel.js';
+import type SlTabShowEvent from '../../events/sl-tab-show.js';
 
 interface ClientRectangles {
   body?: DOMRect;

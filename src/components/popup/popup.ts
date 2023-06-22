@@ -3,8 +3,8 @@ import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { offsetParent } from 'composed-offset-position';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './popup.styles';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './popup.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**

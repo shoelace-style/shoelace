@@ -1,6 +1,6 @@
-import { debounce } from '../../internal/debounce';
-import { prefersReducedMotion } from '../../internal/animate';
-import { waitForEvent } from '../../internal/event';
+import { debounce } from '../../internal/debounce.js';
+import { prefersReducedMotion } from '../../internal/animate.js';
+import { waitForEvent } from '../../internal/event.js';
 import type { ReactiveController, ReactiveElement } from 'lit';
 
 interface ScrollHost extends ReactiveElement {

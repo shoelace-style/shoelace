@@ -1,6 +1,6 @@
 import '../../../dist/shoelace.js';
 import { expect, fixture, html } from '@open-wc/testing';
-import type SlBadge from './badge';
+import type SlBadge from './badge.js';
 
 describe('<sl-badge>', () => {
   let el: SlBadge;

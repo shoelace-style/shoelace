@@ -1,18 +1,18 @@
-import '../icon-button/icon-button';
-import { animateTo, stopAnimations } from '../../internal/animate';
+import '../icon-button/icon-button.js';
+import { animateTo, stopAnimations } from '../../internal/animate.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query } from 'lit/decorators.js';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
-import { HasSlotController } from '../../internal/slot';
+import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
+import { HasSlotController } from '../../internal/slot.js';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { LocalizeController } from '../../utilities/localize';
-import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
-import { waitForEvent } from '../../internal/event';
-import { watch } from '../../internal/watch';
-import Modal from '../../internal/modal';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './dialog.styles';
+import { LocalizeController } from '../../utilities/localize.js';
+import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll.js';
+import { waitForEvent } from '../../internal/event.js';
+import { watch } from '../../internal/watch.js';
+import Modal from '../../internal/modal.js';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './dialog.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**

@@ -1,4 +1,4 @@
-import type { IconLibrary } from './library';
+import type { IconLibrary } from './library.js';
 
 //
 // System icons are a separate library to ensure they're always available, regardless of how the default icon library is
