@@ -23,7 +23,7 @@ function isTabbable(el: HTMLElement) {
   }
 
   // Elements that are hidden have no offsetParent and are not tabbable
-  if (el.offsetParent === null) {
+  if (el.offsetParent == null) {
     return false;
   }
 
@@ -69,7 +69,7 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
   const allElements: HTMLElement[] = [];
 
   function walk(el: HTMLElement | ShadowRoot) {
-    if (el instanceof HTMLElement) {
+    if (el instanceof Element) {
       allElements.push(el);
 
       if (el.shadowRoot !== null && el.shadowRoot.mode === 'open') {
@@ -77,11 +77,16 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
       }
     }
 
-    [...el.children].forEach((e: HTMLElement) => walk(e));
+    ;[...el.children].forEach((e: HTMLElement) => walk(e));
   }
 
   // Collect all elements including the root
   walk(root);
 
-  return [...new Set(allElements.filter(isTabbable))];
+  return allElements.filter(isTabbable).sort((a,b) => {
+    // Make sure we sort by tabindex.
+    const aTabindex = Number(a.getAttribute("tabindex")) || 0
+    const bTabindex = Number(b.getAttribute("tabindex")) || 0
+    return (bTabindex - aTabindex)
+  });
 }

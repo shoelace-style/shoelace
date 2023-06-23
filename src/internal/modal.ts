@@ -37,7 +37,7 @@ export default class Modal {
   checkFocus() {
     if (this.isActive()) {
       const tabbableElements = getTabbableElements(this.element);
-      if (!this.element.matches(':focus-within')) {
+      if (!(this.element.matches(":focus-within"))) {
         const start = tabbableElements[0];
         const end = tabbableElements[tabbableElements.length - 1];
         const target = this.tabDirection === 'forward' ? start : end;
@@ -71,7 +71,6 @@ export default class Modal {
 
     const tabbableElements = getTabbableElements(this.element);
     const start = tabbableElements[0];
-    // const end = tabbableElements[tabbableElements.length - 1]
     let focusIndex = this.currentFocusIndex;
 
     if (focusIndex === -1) {
@@ -80,9 +79,6 @@ export default class Modal {
       return;
     }
 
-    // This looks interesting right?
-    // Well, in Chrome / Edge if you have a dialog inside of a shadow root it will
-    // jump to the "address bar" on Shift+Tab. This prevents that.
     const addition = this.tabDirection === 'forward' ? 1 : -1;
 
     if (focusIndex + addition >= tabbableElements.length) {
