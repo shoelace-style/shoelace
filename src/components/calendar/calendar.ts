@@ -1,12 +1,12 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property } from 'lit/decorators.js';
-import { generateCalendarGrid, getAllDayNames, getMonthName, isSameDay } from '../../internal/calendar';
-import { HasSlotController } from '../../internal/slot';
+import { generateCalendarGrid, getAllDayNames, getMonthName, isSameDay } from '../../internal/calendar.js';
+import { HasSlotController } from '../../internal/slot.js';
 import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize';
-import { partMap } from '../../internal/part-map';
-import { watch } from '../../internal/watch';
-import ShoelaceElement from '../../internal/shoelace-element';
+import { LocalizeController } from '../../utilities/localize.js';
+import { partMap } from '../../internal/part-map.js';
+import { watch } from '../../internal/watch.js';
+import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './calendar.styles';
 import type { CSSResultGroup, TemplateResult } from 'lit';
 
@@ -24,7 +24,7 @@ export interface RenderDayOptions {
  *
  * @dependency sl-example
  *
- * @event sl-month-change - Emitted when the month changes.
+ * @event sl-change - Emitted when the date changes.
  *
  * @slot footer - Optional content to place in the calendar's footer.
  *
@@ -98,7 +98,7 @@ export default class SlCalendar extends ShoelaceElement {
   @watch('month')
   @watch('year')
   handleMonthChange() {
-    this.emit(this, 'sl-month-change');
+    this.emit('sl-change');
   }
 
   render() {

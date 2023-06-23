@@ -1,8 +1,9 @@
-# Calendar
-
-[component-header:sl-calendar]
-
-Calendar shows a monthly view of the Gregorian calendar, optionally allowing users to interact with dates.
+---
+meta:
+  title: Calendar
+  description: Calendar shows a monthly view of the Gregorian calendar, optionally allowing users to interact with dates.
+layout: component
+---
 
 ```html:preview
 <sl-calendar></sl-calendar>
