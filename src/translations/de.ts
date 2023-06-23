@@ -1,5 +1,5 @@
-import { registerTranslation } from '../utilities/localize';
-import type { Translation } from '../utilities/localize';
+import { registerTranslation } from '../utilities/localize.js';
+import type { Translation } from '../utilities/localize.js';
 
 const translation: Translation = {
   $code: 'de',
@@ -28,7 +28,7 @@ const translation: Translation = {
   scrollToStart: 'Zum Anfang scrollen',
   selectAColorFromTheScreen: 'Wähle eine Farbe vom Bildschirm',
   showPassword: 'Passwort anzeigen',
-  slideNum: slide => `Gleiten ${slide}`,
+  slideNum: slide => `Folie ${slide}`,
   toggleColorFormat: 'Farbformat umschalten'
 };
 

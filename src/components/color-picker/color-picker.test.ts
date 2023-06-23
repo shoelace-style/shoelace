@@ -1,10 +1,11 @@
+import '../../../dist/shoelace.js';
 import { aTimeout, expect, fixture, html, oneEvent } from '@open-wc/testing';
-import { clickOnElement } from '../../internal/test';
-import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
+import { clickOnElement } from '../../internal/test.js';
+import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests.js';
 import { sendKeys } from '@web/test-runner-commands';
-import { serialize } from '../../utilities/form';
+import { serialize } from '../../utilities/form.js';
 import sinon from 'sinon';
-import type SlColorPicker from './color-picker';
+import type SlColorPicker from './color-picker.js';
 
 describe('<sl-color-picker>', () => {
   describe('when the value changes', () => {

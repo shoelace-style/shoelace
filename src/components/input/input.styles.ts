@@ -1,6 +1,6 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles';
-import formControlStyles from '../../styles/form-control.styles';
+import componentStyles from '../../styles/component.styles.js';
+import formControlStyles from '../../styles/form-control.styles.js';
 
 export default css`
   ${componentStyles}
@@ -95,7 +95,7 @@ export default css`
     height: 100%;
     color: var(--sl-input-color);
     border: none;
-    background: none;
+    background: inherit;
     box-shadow: none;
     padding: 0;
     margin: 0;

@@ -1,0 +1,65 @@
+<ul>
+  <li>
+    <h2>Getting Started</h2>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/getting-started/installation">Installation</a></li>
+      <li><a href="/getting-started/usage">Usage</a></li>
+      <li><a href="/getting-started/themes">Themes</a></li>
+      <li><a href="/getting-started/customizing">Customizing</a></li>
+      <li><a href="/getting-started/form-controls">Form Controls</a></li>
+      <li><a href="/getting-started/localization">Localization</a></li>
+    </ul>
+  </li>
+  <li>
+    <h2>Frameworks</h2>
+    <ul>
+      <li><a href="/frameworks/react">React</a></li>
+      <li><a href="/frameworks/vue">Vue</a></li>
+      <li><a href="/frameworks/angular">Angular</a></li>
+    </ul>
+  </li>
+  <li>
+    <h2>Resources</h2>
+    <ul>
+      <li><a href="/resources/community">Community</a></li>
+      <li><a href="https://github.com/shoelace-style/shoelace/discussions">Help &amp; Support</a></li>
+      <li><a href="/resources/accessibility">Accessibility</a></li>
+      <li><a href="/resources/contributing">Contributing</a></li>
+      <li><a href="/resources/changelog">Changelog</a></li>
+    </ul>
+  </li>
+  <li>
+    <h2>Components</h2>
+    <ul>
+      {% for component in meta.components %}
+        <li>
+          <a href="/components/{{ component.tagName | removeSlPrefix }}">
+            {{ component.name | classNameToComponentName }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </li>  
+  <li>
+    <h2>Design Tokens</h2>
+    <ul>
+      <li><a href="/tokens/typography">Typography</a></li>
+      <li><a href="/tokens/color">Color</a></li>
+      <li><a href="/tokens/spacing">Spacing</a></li>
+      <li><a href="/tokens/elevation">Elevation</a></li>
+      <li><a href="/tokens/border-radius">Border Radius</a></li>
+      <li><a href="/tokens/transition">Transition</a></li>
+      <li><a href="/tokens/z-index">Z-index</a></li>
+      <li><a href="/tokens/more">More</a></li>
+    </ul>
+  </li>
+  <li>
+    <h2>Tutorials</h2>
+    <ul>
+      <li><a href="/tutorials/integrating-with-laravel">Integrating with Laravel</a></li>
+      <li><a href="/tutorials/integrating-with-nextjs">Integrating with NextJS</a></li>
+      <li><a href="/tutorials/integrating-with-rails">Integrating with Rails</a></li>
+    </ul>
+  </li>
+</ul>

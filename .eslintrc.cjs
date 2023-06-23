@@ -97,6 +97,12 @@ module.exports = {
       }
     },
     {
+      files: ['**/*.cjs'],
+      env: {
+        node: true
+      }
+    },
+    {
       extends: ['plugin:chai-expect/recommended', 'plugin:chai-friendly/recommended'],
       files: ['*.test.ts'],
       rules: {
@@ -177,6 +183,17 @@ module.exports = {
             message: 'Import from the source file instead.'
           }
         ]
+      }
+    ],
+    'import/extensions': [
+      'error',
+      'always',
+      {
+        ignorePackages: true,
+        pattern: {
+          js: 'always',
+          ts: 'never'
+        }
       }
     ],
     'import/no-duplicates': 'warn',

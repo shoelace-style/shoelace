@@ -1,11 +1,12 @@
+import '../../../dist/shoelace.js';
 import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
-import { clickOnElement } from '../../internal/test';
-import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
+import { clickOnElement } from '../../internal/test.js';
+import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests.js';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-import type SlChangeEvent from '../../events/sl-change';
-import type SlRadio from '../radio/radio';
-import type SlRadioGroup from './radio-group';
+import type SlChangeEvent from '../../events/sl-change.js';
+import type SlRadio from '../radio/radio.js';
+import type SlRadioGroup from './radio-group.js';
 
 describe('<sl-radio-group>', () => {
   describe('validation tests', () => {
@@ -278,6 +279,25 @@ describe('when a size is applied', () => {
     expect(radio1.size).to.equal('large');
     expect(radio2.size).to.equal('large');
   });
+
+  it('should update the size of all radio buttons when size changes', async () => {
+    const radioGroup = await fixture<SlRadioGroup>(html`
+      <sl-radio-group size="small">
+        <sl-radio-button id="radio-1" value="1"></sl-radio-button>
+        <sl-radio-button id="radio-2" value="2"></sl-radio-button>
+      </sl-radio-group>
+    `);
+    const [radio1, radio2] = radioGroup.querySelectorAll('sl-radio-button')!;
+
+    expect(radio1.size).to.equal('small');
+    expect(radio2.size).to.equal('small');
+
+    radioGroup.size = 'large';
+    await radioGroup.updateComplete;
+
+    expect(radio1.size).to.equal('large');
+    expect(radio2.size).to.equal('large');
+  });
 });
 
 describe('when the value changes', () => {
@@ -344,6 +364,54 @@ describe('when the value changes', () => {
     radioGroup.addEventListener('sl-input', () => expect.fail('sl-input should not be emitted'));
     radioGroup.value = '2';
     await radioGroup.updateComplete;
+  });
+
+  it('should relatively position content to prevent visually hidden scroll bugs', async () => {
+    //
+    // See https://github.com/shoelace-style/shoelace/issues/1380
+    //
+    const radioGroup = await fixture<SlRadioGroup>(html`
+      <sl-radio-group value="1">
+        <sl-radio id="radio-1" value="1"></sl-radio>
+      </sl-radio-group>
+    `);
+
+    const formControl = radioGroup.shadowRoot!.querySelector('.form-control')!;
+    const visuallyHidden = radioGroup.shadowRoot!.querySelector('.visually-hidden')!;
+
+    expect(getComputedStyle(formControl).position).to.equal('relative');
+    expect(getComputedStyle(visuallyHidden).position).to.equal('absolute');
+  });
+
+  /**
+   * @see https://github.com/shoelace-style/shoelace/issues/1361
+   * This isn't really possible to test right now due to importing "shoelace.js" which
+   * auto-defines all of our components up front. This should be tested if we ever split
+   * to non-auto-defining components and not auto-defining for tests.
+   */
+  it.skip('should sync up radios and radio buttons if defined after radio group', async () => {
+    // customElements.define("sl-radio-group", SlRadioGroup)
+    //
+    // const radioGroup = await fixture<SlRadioGroup>(html`
+    //   <sl-radio-group value="1">
+    //     <sl-radio id="radio-1" value="1"></sl-radio>
+    //     <sl-radio id="radio-2" value="2"></sl-radio>
+    //   </sl-radio-group>
+    // `);
+    //
+    // await aTimeout(1)
+    //
+    // customElements.define("sl-radio-button", SlRadioButton)
+    //
+    // expect(radioGroup.querySelector("sl-radio")?.getAttribute("aria-checked")).to.equal("false")
+    //
+    // await aTimeout(1)
+    //
+    // customElements.define("sl-radio", SlRadio)
+    //
+    // await aTimeout(1)
+    //
+    // expect(radioGroup.querySelector("sl-radio")?.getAttribute("aria-checked")).to.equal("true")
   });
 
   runFormControlBaseTests('sl-radio-group');

@@ -1,5 +1,5 @@
-import { registerTranslation } from '../utilities/localize';
-import type { Translation } from '../utilities/localize';
+import { registerTranslation } from '../utilities/localize.js';
+import type { Translation } from '../utilities/localize.js';
 
 const translation: Translation = {
   $code: 'pt',
@@ -25,10 +25,10 @@ const translation: Translation = {
   remove: 'Remover',
   resize: 'Mudar o tamanho',
   scrollToEnd: 'Rolar até o final',
-  scrollToStart: 'Rolar até o começo',
+  scrollToStart: 'Rolar até o início',
   selectAColorFromTheScreen: 'Selecionar uma cor da tela',
-  showPassword: 'Mostrar senhaShow password',
-  slideNum: slide => `Diapositivo ${slide}`,
+  showPassword: 'Mostrar senha',
+  slideNum: slide => `Slide ${slide}`,
   toggleColorFormat: 'Trocar o formato de cor'
 };
 

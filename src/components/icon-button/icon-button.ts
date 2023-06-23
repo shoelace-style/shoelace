@@ -1,10 +1,10 @@
-import '../icon/icon';
+import '../icon/icon.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { html, literal } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './icon-button.styles';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './icon-button.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**

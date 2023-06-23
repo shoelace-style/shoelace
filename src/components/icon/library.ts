@@ -1,6 +1,6 @@
-import defaultLibrary from './library.default';
-import systemLibrary from './library.system';
-import type SlIcon from '../icon/icon';
+import defaultLibrary from './library.default.js';
+import systemLibrary from './library.system.js';
+import type SlIcon from '../icon/icon.js';
 
 export type IconLibraryResolver = (name: string) => string;
 export type IconLibraryMutator = (svg: SVGElement) => void;
@@ -8,6 +8,7 @@ export interface IconLibrary {
   name: string;
   resolver: IconLibraryResolver;
   mutator?: IconLibraryMutator;
+  spriteSheet?: boolean;
 }
 
 let registry: IconLibrary[] = [defaultLibrary, systemLibrary];
@@ -29,15 +30,13 @@ export function getIconLibrary(name?: string) {
 }
 
 /** Adds an icon library to the registry, or overrides an existing one. */
-export function registerIconLibrary(
-  name: string,
-  options: { resolver: IconLibraryResolver; mutator?: IconLibraryMutator }
-) {
+export function registerIconLibrary(name: string, options: Omit<IconLibrary, 'name'>) {
   unregisterIconLibrary(name);
   registry.push({
     name,
     resolver: options.resolver,
-    mutator: options.mutator
+    mutator: options.mutator,
+    spriteSheet: options.spriteSheet
   });
 
   // Redraw watched icons

@@ -1,16 +1,16 @@
-import '../icon/icon';
+import '../icon/icon.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { defaultValue } from '../../internal/default-value';
-import { FormControlController } from '../../internal/form';
+import { defaultValue } from '../../internal/default-value.js';
+import { FormControlController } from '../../internal/form.js';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import { watch } from '../../internal/watch';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './checkbox.styles';
+import { watch } from '../../internal/watch.js';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './checkbox.styles.js';
 import type { CSSResultGroup } from 'lit';
-import type { ShoelaceFormControl } from '../../internal/shoelace-element';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
 
 /**
  * @summary Checkboxes allow the user to toggle an option on or off.

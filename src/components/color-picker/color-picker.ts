@@ -1,29 +1,29 @@
-import '../button-group/button-group';
-import '../button/button';
-import '../dropdown/dropdown';
-import '../icon/icon';
-import '../input/input';
-import '../visually-hidden/visually-hidden';
-import { clamp } from '../../internal/math';
+import '../button-group/button-group.js';
+import '../button/button.js';
+import '../dropdown/dropdown.js';
+import '../icon/icon.js';
+import '../input/input.js';
+import '../visually-hidden/visually-hidden.js';
+import { clamp } from '../../internal/math.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { defaultValue } from '../../internal/default-value';
-import { drag } from '../../internal/drag';
-import { FormControlController } from '../../internal/form';
+import { defaultValue } from '../../internal/default-value.js';
+import { drag } from '../../internal/drag.js';
+import { FormControlController } from '../../internal/form.js';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { LocalizeController } from '../../utilities/localize';
+import { LocalizeController } from '../../utilities/localize.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { TinyColor } from '@ctrl/tinycolor';
-import { watch } from '../../internal/watch';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './color-picker.styles';
+import { watch } from '../../internal/watch.js';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './color-picker.styles.js';
 import type { CSSResultGroup } from 'lit';
-import type { ShoelaceFormControl } from '../../internal/shoelace-element';
-import type SlChangeEvent from '../../events/sl-change';
-import type SlDropdown from '../dropdown/dropdown';
-import type SlInput from '../input/input';
-import type SlInputEvent from '../../events/sl-input';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
+import type SlChangeEvent from '../../events/sl-change.js';
+import type SlDropdown from '../dropdown/dropdown.js';
+import type SlInput from '../input/input.js';
+import type SlInputEvent from '../../events/sl-input.js';
 
 const hasEyeDropper = 'EyeDropper' in window;
 
@@ -140,7 +140,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
   @property({ type: Boolean, reflect: true }) inline = false;
 
   /** Determines the size of the color picker's trigger. This has no effect on inline color pickers. */
-  @property() size: 'small' | 'medium' | 'large' = 'medium';
+  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Removes the button that lets users toggle between format.   */
   @property({ attribute: 'no-format-toggle', type: Boolean }) noFormatToggle = false;
@@ -190,18 +190,10 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     return this.input.validationMessage;
   }
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.handleFocusIn = this.handleFocusIn.bind(this);
-    this.handleFocusOut = this.handleFocusOut.bind(this);
+  constructor() {
+    super();
     this.addEventListener('focusin', this.handleFocusIn);
     this.addEventListener('focusout', this.handleFocusOut);
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.removeEventListener('focusin', this.handleFocusIn);
-    this.removeEventListener('focusout', this.handleFocusOut);
   }
 
   firstUpdated() {
@@ -222,15 +214,15 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     });
   }
 
-  private handleFocusIn() {
+  private handleFocusIn = () => {
     this.hasFocus = true;
     this.emit('sl-focus');
-  }
+  };
 
-  private handleFocusOut() {
+  private handleFocusOut = () => {
     this.hasFocus = false;
     this.emit('sl-blur');
-  }
+  };
 
   private handleFormatToggle() {
     const formats = ['hex', 'rgb', 'hsl', 'hsv'];

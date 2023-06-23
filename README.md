@@ -51,9 +51,7 @@ Once you've cloned the repo, run the following command.
 npm start
 ```
 
-This will spin up the Shoelace dev server. After the initial build, a browser will open automatically. There is currently no hot module reloading (HMR), as browser's don't provide a way to reregister custom elements, but most changes to the source will reload the browser automatically.
-
-The documentation is powered by Docsify, which uses raw markdown files to generate pages. As such, no static files are built for the docs.
+This will spin up the dev server. After the initial build, a browser will open automatically. There is currently no hot module reloading (HMR), as browser's don't provide a way to reregister custom elements, but most changes to the source will reload the browser automatically.
 
 ### Building
 

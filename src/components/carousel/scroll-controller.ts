@@ -1,6 +1,6 @@
-import { debounce } from 'src/internal/debounce';
-import { prefersReducedMotion } from 'src/internal/animate';
-import { waitForEvent } from 'src/internal/event';
+import { debounce } from '../../internal/debounce.js';
+import { prefersReducedMotion } from '../../internal/animate.js';
+import { waitForEvent } from '../../internal/event.js';
 import type { ReactiveController, ReactiveElement } from 'lit';
 
 interface ScrollHost extends ReactiveElement {
@@ -20,16 +20,7 @@ export class ScrollController<T extends ScrollHost> implements ReactiveControlle
 
   constructor(host: T) {
     this.host = host;
-
     host.addController(this);
-
-    this.handleScroll = this.handleScroll.bind(this);
-    this.handlePointerDown = this.handlePointerDown.bind(this);
-    this.handlePointerMove = this.handlePointerMove.bind(this);
-    this.handlePointerUp = this.handlePointerUp.bind(this);
-    this.handlePointerUp = this.handlePointerUp.bind(this);
-    this.handleTouchStart = this.handleTouchStart.bind(this);
-    this.handleTouchEnd = this.handleTouchEnd.bind(this);
   }
 
   async hostConnected() {
@@ -58,13 +49,13 @@ export class ScrollController<T extends ScrollHost> implements ReactiveControlle
     scrollContainer.removeEventListener('touchend', this.handleTouchEnd);
   }
 
-  handleScroll() {
+  handleScroll = () => {
     if (!this.scrolling) {
       this.scrolling = true;
       this.host.requestUpdate();
     }
     this.handleScrollEnd();
-  }
+  };
 
   @debounce(100)
   handleScrollEnd() {
@@ -84,7 +75,7 @@ export class ScrollController<T extends ScrollHost> implements ReactiveControlle
     }
   }
 
-  handlePointerDown(event: PointerEvent) {
+  handlePointerDown = (event: PointerEvent) => {
     if (event.pointerType === 'touch') {
       return;
     }
@@ -97,9 +88,9 @@ export class ScrollController<T extends ScrollHost> implements ReactiveControlle
 
       this.host.scrollContainer.addEventListener('pointermove', this.handlePointerMove);
     }
-  }
+  };
 
-  handlePointerMove(event: PointerEvent) {
+  handlePointerMove = (event: PointerEvent) => {
     const scrollContainer = this.host.scrollContainer;
 
     const hasMoved = !!event.movementX || !!event.movementY;
@@ -111,28 +102,28 @@ export class ScrollController<T extends ScrollHost> implements ReactiveControlle
       // Ignore pointers that we are not tracking
       this.handleDrag(event);
     }
-  }
+  };
 
-  handlePointerUp(event: PointerEvent) {
+  handlePointerUp = (event: PointerEvent) => {
     this.pointers.delete(event.pointerId);
     this.host.scrollContainer.releasePointerCapture(event.pointerId);
 
     if (this.pointers.size === 0) {
       this.handleDragEnd();
     }
-  }
+  };
 
-  handleTouchEnd(event: TouchEvent) {
+  handleTouchEnd = (event: TouchEvent) => {
     for (const touch of event.changedTouches) {
       this.pointers.delete(touch.identifier);
     }
-  }
+  };
 
-  handleTouchStart(event: TouchEvent) {
+  handleTouchStart = (event: TouchEvent) => {
     for (const touch of event.touches) {
       this.pointers.add(touch.identifier);
     }
-  }
+  };
 
   handleDragStart() {
     const host = this.host;

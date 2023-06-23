@@ -1,5 +1,6 @@
+import '../../../dist/shoelace.js';
 import { expect, fixture, html } from '@open-wc/testing';
-import type SlCard from './card';
+import type SlCard from './card.js';
 
 describe('<sl-card>', () => {
   let el: SlCard;

@@ -1,9 +1,9 @@
-import { animations } from './animations';
+import { animations } from './animations.js';
 import { customElement, property, queryAsync } from 'lit/decorators.js';
 import { html } from 'lit';
-import { watch } from '../../internal/watch';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './animation.styles';
+import { watch } from '../../internal/watch.js';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './animation.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**
@@ -78,7 +78,7 @@ export default class SlAnimation extends ShoelaceElement {
   @property({ attribute: 'playback-rate', type: Number }) playbackRate = 1;
 
   /** Gets and sets the current animation time. */
-  get currentTime(): number {
+  get currentTime(): CSSNumberish {
     return this.animation?.currentTime ?? 0;
   }
 
@@ -91,8 +91,6 @@ export default class SlAnimation extends ShoelaceElement {
   connectedCallback() {
     super.connectedCallback();
     this.createAnimation();
-    this.handleAnimationCancel = this.handleAnimationCancel.bind(this);
-    this.handleAnimationFinish = this.handleAnimationFinish.bind(this);
   }
 
   disconnectedCallback() {
@@ -100,17 +98,17 @@ export default class SlAnimation extends ShoelaceElement {
     this.destroyAnimation();
   }
 
-  private handleAnimationFinish() {
+  private handleAnimationFinish = () => {
     this.play = false;
     this.hasStarted = false;
     this.emit('sl-finish');
-  }
+  };
 
-  private handleAnimationCancel() {
+  private handleAnimationCancel = () => {
     this.play = false;
     this.hasStarted = false;
     this.emit('sl-cancel');
-  }
+  };
 
   private handleSlotChange() {
     this.destroyAnimation();

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  data-layout="{{ layout }}"
+  data-shoelace-version="{{ meta.version }}"
+>
+  <head>
+    {# Metadata #}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="{{ meta.description }}" />
+    <title>{{ meta.title }}</title>
+
+    {# Opt out of Turbo caching #}
+    <meta name="turbo-cache-control">
+
+    {# Stylesheets #}
+    <link rel="stylesheet" href="{{ assetUrl('styles/docs.css') }}" />
+    <link rel="stylesheet" href="{{ assetUrl('styles/code-previews.css') }}" />
+    <link rel="stylesheet" href="{{ assetUrl('styles/search.css') }}" />
+
+    {# Favicons #}
+    <link rel="icon" href="{{ assetUrl('images/logo.svg') }}" type="image/x-icon" />
+
+    {# Twitter Cards #}
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="shoelace_style" />
+    <meta name="twitter:image" content="{{ assetUrl(meta.image, true) }}" />
+
+    {# OpenGraph #}
+    <meta property="og:url" content="{{ rootUrl(page.url, true) }}" />
+    <meta property="og:title" content="{{ meta.title }}" />
+    <meta property="og:description" content="{{ meta.description }}" />
+    <meta property="og:image" content="{{ assetUrl(meta.image, true) }}" />
+
+    {# Shoelace #}
+    <link rel="stylesheet" href="/dist/themes/light.css" />
+    <link rel="stylesheet" href="/dist/themes/dark.css" />
+    <script type="module" src="/dist/shoelace-autoloader.js"></script>
+
+    {# Set the initial theme and menu states here to prevent flashing #}
+    <script>
+      (() => {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = localStorage.getItem('theme') || 'auto';
+        document.documentElement.classList.toggle('sl-theme-dark', theme === 'dark' || (theme === 'auto' && prefersDark));
+      })();
+    </script>
+
+    {# Turbo + Scroll positioning #}
+    <script src="{{ assetUrl('scripts/turbo.js') }}" type="module"></script>
+    <script src="{{ assetUrl('scripts/docs.js') }}" defer></script>
+    <script src="{{ assetUrl('scripts/code-previews.js') }}" defer></script>
+    <script src="{{ assetUrl('scripts/lunr.js') }}" defer></script>
+    <script src="{{ assetUrl('scripts/search.js') }}" defer></script>
+  </head>
+  <body>
+    <a id="skip-to-main" class="visually-hidden" href="#main-content" data-smooth-link="false">
+      Skip to main content
+    </a>
+
+    {# Menu toggle #}
+    <button id="menu-toggle" type="button" aria-label="Menu">
+      <svg width="148" height="148" viewBox="0 0 148 148" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="currentColor" stroke-width="18" fill="none" fill-rule="evenodd" stroke-linecap="round">
+          <path d="M9.5 125.5h129M9.5 74.5h129M9.5 23.5h129"></path>
+        </g>
+      </svg>
+    </button>
+
+    {# Icon toolbar #}
+    <div id="icon-toolbar">
+      {# GitHub #}
+      <a href="https://github.com/shoelace-style/shoelace" title="View Shoelace on GitHub">
+        <sl-icon name="github"></sl-icon>
+      </a>
+
+      {# Twitter #}
+      <a href="https://twitter.com/shoelace_style" title="Follow Shoelace on Twitter">
+        <sl-icon name="twitter"></sl-icon>
+      </a>
+
+      {# Theme selector #}
+      <sl-dropdown id="theme-selector" placement="bottom-end">
+        <sl-button slot="trigger" size="small" variant="text" caret title="Press \ to toggle">
+          <sl-icon class="only-light" name="sun-fill"></sl-icon>
+          <sl-icon class="only-dark" name="moon-fill"></sl-icon>
+        </sl-button>
+        <sl-menu>
+          <sl-menu-item type="checkbox" value="light">Light</sl-menu-item>
+          <sl-menu-item type="checkbox" value="dark">Dark</sl-menu-item>
+          <sl-divider></sl-divider>
+          <sl-menu-item type="checkbox" value="auto">System</sl-menu-item>
+        </sl-menu>
+      </sl-dropdown>
+    </div>
+
+    <aside id="sidebar" data-preserve-scroll>
+      <header>
+        <a href="/">
+          <img src="{{ assetUrl('images/wordmark.svg') }}" alt="Shoelace" />
+        </a>
+        <div class="sidebar-version">
+          {{ meta.version }}
+        </div>
+      </header>
+
+      <div class="sidebar-buttons">
+        <sl-button size="small" class="repo-button repo-button--sponsor" href="https://github.com/sponsors/claviska" target="_blank">
+          <sl-icon slot="prefix" name="heart"></sl-icon> Sponsor
+        </sl-button>
+        <sl-button size="small" class="repo-button repo-button--github" href="https://github.com/shoelace-style/shoelace" target="_blank">
+          <sl-icon slot="prefix" name="github"></sl-icon> Code
+        </sl-button>
+        <sl-button size="small" class="repo-button repo-button--twitter" href="https://twitter.com/shoelace_style" target="_blank">
+          <sl-icon slot="prefix" name="twitter"></sl-icon> Follow
+        </sl-button>
+      </div>
+
+      <button class="search-box" type="button" title="Press / to search" aria-label="Search" data-plugin="search">
+        <sl-icon name="search"></sl-icon>
+        <span>Search</span>
+      </button>
+
+      <nav>
+        {% include 'sidebar.njk' %}
+      </nav>
+    </aside>
+
+    {# Content #}
+    <main>
+      <a id="main-content"></a>
+      <article id="content" class="content{% if toc %} content--with-toc{% endif %}">
+        {% if toc %}
+          <div class="content__toc">
+            <ul>
+              <li class="top"><a href="#">{{ meta.title }}</a></li>
+            </ul>
+          </div>
+        {% endif %}
+
+        <div class="content__body">
+          {% block content %}
+            {{ content | safe }}
+          {% endblock %}
+        </div>
+      </article>
+    </main>
+  </body>
+</html>
