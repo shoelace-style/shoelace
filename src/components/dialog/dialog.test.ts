@@ -1,7 +1,7 @@
 import '../../../dist/shoelace.js';
 // cspell:dictionaries lorem-ipsum
-import { LitElement } from "lit"
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+import { LitElement } from 'lit';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlDialog from './dialog';
@@ -151,8 +151,8 @@ describe('<sl-dialog>', () => {
   // https://github.com/shoelace-style/shoelace/issues/1382
   it('should properly cycle through tabbable elements when sl-dialog is used in a shadowRoot', async () => {
     class AContainer extends LitElement {
-      get dialog () {
-        return this.shadowRoot?.querySelector("sl-dialog")
+      get dialog() {
+        return this.shadowRoot?.querySelector('sl-dialog');
       }
 
       openDialog() {
@@ -174,17 +174,17 @@ describe('<sl-dialog>', () => {
       }
     }
 
-    window.customElements.define("a-container", AContainer);
+    window.customElements.define('a-container', AContainer);
 
     const testCase = await fixture(html`
       <a-container></a-container>
 
       <p>
-      Open the dialog, then use <kbd>Tab</kbd> to cycle through the inputs. Focus should be trapped, but it reaches things outside the dialog.
+        Open the dialog, then use <kbd>Tab</kbd> to cycle through the inputs. Focus should be trapped, but it reaches
+        things outside the dialog.
       </p>
-    `)
+    `);
 
-
-    testCase.querySelector<AContainer>("a-container")?.openDialog()
-  })
+    testCase.querySelector<AContainer>('a-container')?.openDialog();
+  });
 });

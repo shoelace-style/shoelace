@@ -23,7 +23,7 @@ function isTabbable(el: HTMLElement) {
   }
 
   // Elements that are hidden have no offsetParent and are not tabbable
-  if (el.offsetParent == null) {
+  if (el.offsetParent === null) {
     return false;
   }
 
@@ -56,7 +56,7 @@ function isTabbable(el: HTMLElement) {
  * element because it short-circuits after finding the first and last ones.
  */
 export function getTabbableBoundary(root: HTMLElement | ShadowRoot) {
-  const tabbableElements = getTabbableElements(root)
+  const tabbableElements = getTabbableElements(root);
 
   // Find the first and last tabbable elements
   const start = tabbableElements[0] ?? null;
@@ -65,7 +65,7 @@ export function getTabbableBoundary(root: HTMLElement | ShadowRoot) {
   return { start, end };
 }
 
-export function getTabbableElements (root: HTMLElement | ShadowRoot) {
+export function getTabbableElements(root: HTMLElement | ShadowRoot) {
   const allElements: HTMLElement[] = [];
 
   function walk(el: HTMLElement | ShadowRoot) {
@@ -83,5 +83,5 @@ export function getTabbableElements (root: HTMLElement | ShadowRoot) {
   // Collect all elements including the root
   walk(root);
 
-  return [...new Set(allElements.filter(isTabbable))]
+  return [...new Set(allElements.filter(isTabbable))];
 }

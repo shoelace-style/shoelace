@@ -104,7 +104,7 @@ export default class SlDialog extends ShoelaceElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.modal.deactivate()
+    this.modal.deactivate();
     unlockBodyScrolling(this);
   }
 
@@ -293,8 +293,9 @@ export default class SlDialog extends ShoelaceElement {
                 </header>
               `
             : ''}
-
-          ${'' /* The tabindex="-1" is here because the body is technically scrollable if overflowing. However, if there's no focusable elements inside, you won't actually be able to scroll it via keyboard. */}
+          ${
+            '' /* The tabindex="-1" is here because the body is technically scrollable if overflowing. However, if there's no focusable elements inside, you won't actually be able to scroll it via keyboard. */
+          }
           <slot part="body" class="dialog__body" tabindex="-1"></slot>
 
           <footer part="footer" class="dialog__footer">

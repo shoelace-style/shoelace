@@ -1,13 +1,11 @@
-import {
-  getTabbableElements
-} from './tabbable.js';
+import { getTabbableElements } from './tabbable.js';
 
 let activeModals: HTMLElement[] = [];
 
 export default class Modal {
   element: HTMLElement;
   tabDirection: 'forward' | 'backward' = 'forward';
-  currentFocus: HTMLElement | null
+  currentFocus: HTMLElement | null;
 
   constructor(element: HTMLElement) {
     this.element = element;
@@ -25,7 +23,7 @@ export default class Modal {
 
   deactivate() {
     activeModals = activeModals.filter(modal => modal !== this.element);
-    this.currentFocus = null
+    this.currentFocus = null;
     document.removeEventListener('focusin', this.handleFocusIn);
     document.removeEventListener('keydown', this.handleKeyDown);
     document.removeEventListener('keyup', this.handleKeyUp);
@@ -38,14 +36,14 @@ export default class Modal {
 
   checkFocus() {
     if (this.isActive()) {
-      const tabbableElements = getTabbableElements(this.element)
-      if (!this.element.matches(":focus-within")) {
-        const start = tabbableElements[0]
-        const end = tabbableElements[tabbableElements.length - 1]
-        const target = this.tabDirection === "forward" ? start : end
+      const tabbableElements = getTabbableElements(this.element);
+      if (!this.element.matches(':focus-within')) {
+        const start = tabbableElements[0];
+        const end = tabbableElements[tabbableElements.length - 1];
+        const target = this.tabDirection === 'forward' ? start : end;
 
         if (typeof target?.focus === 'function') {
-          this.currentFocus = target
+          this.currentFocus = target;
           target.focus({ preventScroll: true });
         }
       }
@@ -56,12 +54,12 @@ export default class Modal {
     this.checkFocus();
   }
 
-  get currentFocusIndex () {
-    return getTabbableElements(this.element).findIndex((el) => el === this.currentFocus)
+  get currentFocusIndex() {
+    return getTabbableElements(this.element).findIndex(el => el === this.currentFocus);
   }
 
   handleKeyDown(event: KeyboardEvent) {
-    if (event.key !== "Tab") return
+    if (event.key !== 'Tab') return;
 
     if (event.shiftKey) {
       this.tabDirection = 'backward';
@@ -69,34 +67,34 @@ export default class Modal {
       this.tabDirection = 'forward';
     }
 
-    event.preventDefault()
+    event.preventDefault();
 
-    const tabbableElements = getTabbableElements(this.element)
+    const tabbableElements = getTabbableElements(this.element);
     const start = tabbableElements[0];
     // const end = tabbableElements[tabbableElements.length - 1]
-    let focusIndex = this.currentFocusIndex
+    let focusIndex = this.currentFocusIndex;
 
     if (focusIndex === -1) {
-      this.currentFocus = start
-      this.currentFocus.focus({ preventScroll: true })
-      return
+      this.currentFocus = start;
+      this.currentFocus.focus({ preventScroll: true });
+      return;
     }
 
     // This looks interesting right?
     // Well, in Chrome / Edge if you have a dialog inside of a shadow root it will
     // jump to the "address bar" on Shift+Tab. This prevents that.
-    let addition = this.tabDirection === 'forward' ? 1 : -1;
+    const addition = this.tabDirection === 'forward' ? 1 : -1;
 
     if (focusIndex + addition >= tabbableElements.length) {
-      focusIndex = 0
+      focusIndex = 0;
     } else if (this.currentFocusIndex + addition < 0) {
-      focusIndex = tabbableElements.length - 1
+      focusIndex = tabbableElements.length - 1;
     } else {
-      focusIndex += addition
+      focusIndex += addition;
     }
 
-    this.currentFocus = tabbableElements[focusIndex]
-    this.currentFocus?.focus({ preventScroll: true })
+    this.currentFocus = tabbableElements[focusIndex];
+    this.currentFocus?.focus({ preventScroll: true });
   }
 
   handleKeyUp() {
