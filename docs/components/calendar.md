@@ -4,7 +4,7 @@
 
 Calendar shows a monthly view of the Gregorian calendar, optionally allowing users to interact with dates.
 
-```html preview
+```html:preview
 <sl-calendar></sl-calendar>
 ```
 
@@ -14,7 +14,7 @@ Calendar shows a monthly view of the Gregorian calendar, optionally allowing use
 
 Month and day labels can be customized using the `month-labels` and `day-labels` attributes. Note that month names are localized automatically based on the component's `lang` attribute, falling back to the document language.
 
-```html preview
+```html:preview
 <sl-calendar month-labels="short" day-labels="narrow"></sl-calendar>
 ```
 
@@ -22,7 +22,7 @@ Month and day labels can be customized using the `month-labels` and `day-labels`
 
 By default, only dates in the target month are shown. You can fill the grid with adjacent dates using the `show-adjacent-dates` attribute.
 
-```html preview
+```html:preview
 <sl-calendar show-adjacent-dates></sl-calendar>
 ```
 
@@ -30,7 +30,7 @@ By default, only dates in the target month are shown. You can fill the grid with
 
 One or more dates can be selected by setting the `selectedDates` property. An array of dates is accepted and the selection does not have to be continuous.
 
-```html preview
+```html:preview
 <sl-calendar class="calendar-selection"></sl-calendar>
 
 <script>
@@ -51,7 +51,7 @@ One or more dates can be selected by setting the `selectedDates` property. An ar
 
 To add a border, set the `--border-width` custom property. You can further customize the border with `--border-color` and `--border-radius`.
 
-```html preview
+```html:preview
 <sl-calendar style="--border-width: 1px;"></sl-calendar>
 ```
 
@@ -59,7 +59,7 @@ To add a border, set the `--border-width` custom property. You can further custo
 
 By default, the calendar will use the document's locale. You can use the `lang` attribute to change this.
 
-```html preview
+```html:preview
 <sl-calendar lang="es"></sl-calendar>
 ```
 

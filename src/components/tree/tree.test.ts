@@ -1,9 +1,10 @@
+import '../../../dist/shoelace.js';
 import { aTimeout, expect, fixture, html, triggerBlurFor, triggerFocusFor } from '@open-wc/testing';
-import { clickOnElement } from '../../internal/test';
+import { clickOnElement } from '../../internal/test.js';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-import type SlTree from './tree';
-import type SlTreeItem from '../tree-item/tree-item';
+import type SlTree from './tree.js';
+import type SlTreeItem from '../tree-item/tree-item.js';
 
 describe('<sl-tree>', () => {
   let el: SlTree;

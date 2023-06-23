@@ -1,11 +1,11 @@
-import { clamp } from '../../internal/math';
+import { clamp } from '../../internal/math.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize';
-import { watch } from '../../internal/watch';
-import ShoelaceElement from '../../internal/shoelace-element';
-import SlTreeItem from '../tree-item/tree-item';
-import styles from './tree.styles';
+import { LocalizeController } from '../../utilities/localize.js';
+import { watch } from '../../internal/watch.js';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import SlTreeItem from '../tree-item/tree-item.js';
+import styles from './tree.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 function syncCheckboxes(changedTreeItem: SlTreeItem, initialSync = false) {
@@ -92,18 +92,18 @@ export default class SlTree extends ShoelaceElement {
   private mutationObserver: MutationObserver;
   private clickTarget: SlTreeItem | null = null;
 
-  async connectedCallback() {
-    super.connectedCallback();
-    this.handleTreeChanged = this.handleTreeChanged.bind(this);
-    this.handleFocusIn = this.handleFocusIn.bind(this);
-    this.handleFocusOut = this.handleFocusOut.bind(this);
-
-    this.setAttribute('role', 'tree');
-    this.setAttribute('tabindex', '0');
-
+  constructor() {
+    super();
     this.addEventListener('focusin', this.handleFocusIn);
     this.addEventListener('focusout', this.handleFocusOut);
     this.addEventListener('sl-lazy-change', this.handleSlotChange);
+  }
+
+  async connectedCallback() {
+    super.connectedCallback();
+
+    this.setAttribute('role', 'tree');
+    this.setAttribute('tabindex', '0');
 
     await this.updateComplete;
 
@@ -115,10 +115,6 @@ export default class SlTree extends ShoelaceElement {
     super.disconnectedCallback();
 
     this.mutationObserver.disconnect();
-
-    this.removeEventListener('focusin', this.handleFocusIn);
-    this.removeEventListener('focusout', this.handleFocusOut);
-    this.removeEventListener('sl-lazy-change', this.handleSlotChange);
   }
 
   // Generates a clone of the expand icon element to use for each tree item
@@ -160,7 +156,7 @@ export default class SlTree extends ShoelaceElement {
       });
   };
 
-  private handleTreeChanged(mutations: MutationRecord[]) {
+  private handleTreeChanged = (mutations: MutationRecord[]) => {
     for (const mutation of mutations) {
       const addedNodes: SlTreeItem[] = [...mutation.addedNodes].filter(SlTreeItem.isTreeItem) as SlTreeItem[];
       const removedNodes = [...mutation.removedNodes].filter(SlTreeItem.isTreeItem) as SlTreeItem[];
@@ -172,7 +168,7 @@ export default class SlTree extends ShoelaceElement {
         this.focusItem(this.getFocusableItems()[0]);
       }
     }
-  }
+  };
 
   private syncTreeItems(selectedItem: SlTreeItem) {
     const items = this.getAllTreeItems();
@@ -322,16 +318,16 @@ export default class SlTree extends ShoelaceElement {
     this.clickTarget = event.target as SlTreeItem;
   }
 
-  private handleFocusOut(event: FocusEvent) {
+  private handleFocusOut = (event: FocusEvent) => {
     const relatedTarget = event.relatedTarget as HTMLElement;
 
     // If the element that got the focus is not in the tree
     if (!relatedTarget || !this.contains(relatedTarget)) {
       this.tabIndex = 0;
     }
-  }
+  };
 
-  private handleFocusIn(event: FocusEvent) {
+  private handleFocusIn = (event: FocusEvent) => {
     const target = event.target as SlTreeItem;
 
     // If the tree has been focused, move the focus to the last focused item
@@ -349,7 +345,7 @@ export default class SlTree extends ShoelaceElement {
 
       target.tabIndex = 0;
     }
-  }
+  };
 
   private handleSlotChange() {
     const items = this.getAllTreeItems();

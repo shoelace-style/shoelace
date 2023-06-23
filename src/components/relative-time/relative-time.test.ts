@@ -1,7 +1,8 @@
+import '../../../dist/shoelace.js';
 import { expect, fixture, html } from '@open-wc/testing';
 import { LocalizeController } from '@shoelace-style/localize';
 import sinon from 'sinon';
-import type SlRelativeTime from './relative-time';
+import type SlRelativeTime from './relative-time.js';
 
 interface SlRelativeTimeTestCase {
   date: Date;

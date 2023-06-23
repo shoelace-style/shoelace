@@ -1,18 +1,18 @@
-import '../icon-button/icon-button';
-import { animateTo, stopAnimations } from '../../internal/animate';
+import '../icon-button/icon-button.js';
+import { animateTo, stopAnimations } from '../../internal/animate.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query } from 'lit/decorators.js';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry';
-import { HasSlotController } from '../../internal/slot';
+import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
+import { HasSlotController } from '../../internal/slot.js';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { LocalizeController } from '../../utilities/localize';
-import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll';
-import { waitForEvent } from '../../internal/event';
-import { watch } from '../../internal/watch';
-import Modal from '../../internal/modal';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './dialog.styles';
+import { LocalizeController } from '../../utilities/localize.js';
+import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll.js';
+import { waitForEvent } from '../../internal/event.js';
+import { watch } from '../../internal/watch.js';
+import Modal from '../../internal/modal.js';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './dialog.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**
@@ -67,7 +67,7 @@ export default class SlDialog extends ShoelaceElement {
 
   private readonly hasSlotController = new HasSlotController(this, 'footer');
   private readonly localize = new LocalizeController(this);
-  private modal: Modal;
+  private modal = new Modal(this);
   private originalTrigger: HTMLElement | null;
 
   @query('.dialog') dialog: HTMLElement;
@@ -91,12 +91,6 @@ export default class SlDialog extends ShoelaceElement {
    * accessible way for users to dismiss the dialog.
    */
   @property({ attribute: 'no-header', type: Boolean, reflect: true }) noHeader = false;
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
-    this.modal = new Modal(this);
-  }
 
   firstUpdated() {
     this.dialog.hidden = !this.open;
@@ -136,12 +130,12 @@ export default class SlDialog extends ShoelaceElement {
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
-  private handleDocumentKeyDown(event: KeyboardEvent) {
+  private handleDocumentKeyDown = (event: KeyboardEvent) => {
     if (this.open && event.key === 'Escape') {
       event.stopPropagation();
       this.requestClose('keyboard');
     }
-  }
+  };
 
   @watch('open', { waitUntilFirstUpdate: true })
   async handleOpenChange() {

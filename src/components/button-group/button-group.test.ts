@@ -1,5 +1,6 @@
+import '../../../dist/shoelace.js';
 import { elementUpdated, expect, fixture, html } from '@open-wc/testing';
-import type SlButtonGroup from './button-group';
+import type SlButtonGroup from './button-group.js';
 
 describe('<sl-button-group>', () => {
   describe('defaults ', () => {

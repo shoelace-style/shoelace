@@ -1,18 +1,18 @@
-import '../icon/icon';
+import '../icon/icon.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { defaultValue } from '../../internal/default-value';
-import { FormControlController } from '../../internal/form';
-import { HasSlotController } from '../../internal/slot';
+import { defaultValue } from '../../internal/default-value.js';
+import { FormControlController } from '../../internal/form.js';
+import { HasSlotController } from '../../internal/slot.js';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import { LocalizeController } from '../../utilities/localize';
-import { watch } from '../../internal/watch';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './input.styles';
+import { LocalizeController } from '../../utilities/localize.js';
+import { watch } from '../../internal/watch.js';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './input.styles.js';
 import type { CSSResultGroup } from 'lit';
-import type { ShoelaceFormControl } from '../../internal/shoelace-element';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
 
 /**
  * @summary Inputs collect data from the user.
@@ -62,6 +62,9 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
 
   @state() private hasFocus = false;
   @property() title = ''; // make reactive to pass through
+
+  private __numberInput = Object.assign(document.createElement('input'), { type: 'number' });
+  private __dateInput = Object.assign(document.createElement('input'), { type: 'date' });
 
   /**
    * The type of input. Works the same as a native `<input>` element, but only a subset of types are supported. Defaults
@@ -197,32 +200,24 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
 
   /** Gets or sets the current value as a `Date` object. Returns `null` if the value can't be converted. */
   get valueAsDate() {
-    const input = document.createElement('input');
-    input.type = 'date';
-    input.value = this.value;
-    return input.valueAsDate;
+    this.__dateInput.value = this.value;
+    return this.input?.valueAsDate || this.__dateInput.valueAsDate;
   }
 
   set valueAsDate(newValue: Date | null) {
-    const input = document.createElement('input');
-    input.type = 'date';
-    input.valueAsDate = newValue;
-    this.value = input.value;
+    this.__dateInput.valueAsDate = newValue;
+    this.value = this.__dateInput.value;
   }
 
   /** Gets or sets the current value as a number. Returns `NaN` if the value can't be converted. */
   get valueAsNumber() {
-    const input = document.createElement('input');
-    input.type = 'number';
-    input.value = this.value;
-    return input.valueAsNumber;
+    this.__numberInput.value = this.value;
+    return this.input?.valueAsNumber || this.__numberInput.valueAsNumber;
   }
 
   set valueAsNumber(newValue: number) {
-    const input = document.createElement('input');
-    input.type = 'number';
-    input.valueAsNumber = newValue;
-    this.value = input.value;
+    this.__numberInput.valueAsNumber = newValue;
+    this.value = this.__numberInput.value;
   }
 
   /** Gets the validity state object */

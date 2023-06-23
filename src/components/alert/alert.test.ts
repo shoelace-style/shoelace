@@ -1,10 +1,11 @@
+import '../../../dist/shoelace.js';
 import { aTimeout, expect, fixture, html, oneEvent } from '@open-wc/testing';
-import { clickOnElement, moveMouseOnElement } from '../../internal/test';
-import { queryByTestId } from '../../internal/test/data-testid-helpers';
+import { clickOnElement, moveMouseOnElement } from '../../internal/test.js';
+import { queryByTestId } from '../../internal/test/data-testid-helpers.js';
 import { resetMouse } from '@web/test-runner-commands';
 import sinon from 'sinon';
-import type SlAlert from './alert';
-import type SlIconButton from '../icon-button/icon-button';
+import type SlAlert from './alert.js';
+import type SlIconButton from '../icon-button/icon-button.js';
 
 const getAlertContainer = (alert: SlAlert): HTMLElement => {
   return alert.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;

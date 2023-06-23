@@ -1,5 +1,6 @@
+import '../../../dist/shoelace.js';
 import { aTimeout, expect, fixture, html, oneEvent } from '@open-wc/testing';
-import type SlAnimation from './animation';
+import type SlAnimation from './animation.js';
 
 describe('<sl-animation>', () => {
   const boxToAnimate = html`<div style="width: 10px; height: 10px;" data-testid="animated-box"></div>`;

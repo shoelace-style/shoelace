@@ -1,6 +1,6 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles';
-import formControlStyles from '../../styles/form-control.styles';
+import componentStyles from '../../styles/component.styles.js';
+import formControlStyles from '../../styles/form-control.styles.js';
 
 export default css`
   ${componentStyles}
@@ -11,6 +11,7 @@ export default css`
   }
 
   .form-control {
+    position: relative;
     border: none;
     padding: 0;
     margin: 0;

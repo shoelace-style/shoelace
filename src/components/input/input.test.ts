@@ -1,9 +1,8 @@
 // eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
-import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
-import { getFormControls } from '../../../dist/utilities/form.js';
-import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
+import { elementUpdated, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
+import { getFormControls, serialize } from '../../../dist/shoelace.js';
+import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests.js';
 import { sendKeys } from '@web/test-runner-commands'; // must come from the same module
-import { serialize } from '../../utilities/form';
 import sinon from 'sinon';
 import type SlInput from './input';
 
@@ -67,21 +66,69 @@ describe('<sl-input>', () => {
 
   describe('value methods', () => {
     it('should set the value as a date when using valueAsDate', async () => {
-      const el = await fixture<SlInput>(html` <sl-input type="date"></sl-input> `);
+      const el = document.createElement(`sl-input`);
+      el.type = 'date';
       const today = new Date();
 
       el.valueAsDate = today;
 
+      // Test before we render in the dom
       expect(el.value).to.equal(today.toISOString().split('T')[0]);
+      expect(el.valueAsDate.toISOString().split('T')[0]).to.equal(today.toISOString().split('T')[0]);
+
+      document.body.appendChild(el);
+
+      await elementUpdated(el);
+
+      // Update valueAsDate after we render to make sure it reflects properly
+      el.valueAsDate = null;
+
+      await elementUpdated(el);
+
+      expect(el.value).to.equal('');
+      expect(el.valueAsDate).to.equal(null);
+
+      // Update again with a real date to make sure it works
+      el.valueAsDate = today;
+
+      await elementUpdated(el);
+
+      expect(el.value).to.equal(today.toISOString().split('T')[0]);
+      expect(el.valueAsDate.toISOString().split('T')[0]).to.equal(today.toISOString().split('T')[0]);
+
+      el.remove();
     });
 
     it('should set the value as a number when using valueAsNumber', async () => {
-      const el = await fixture<SlInput>(html` <sl-input type="number"></sl-input> `);
+      const el = document.createElement(`sl-input`);
+      el.type = 'number';
       const num = 12345;
 
       el.valueAsNumber = num;
 
       expect(el.value).to.equal(num.toString());
+      expect(el.valueAsNumber).to.equal(num);
+
+      document.body.appendChild(el);
+
+      await elementUpdated(el);
+
+      // Wait for render, then update the value
+      const otherNum = 4567;
+      el.valueAsNumber = otherNum;
+
+      await elementUpdated(el);
+
+      expect(el.value).to.equal(otherNum.toString());
+      expect(el.valueAsNumber).to.equal(otherNum);
+
+      // Re-set valueAsNumber and make sure it updates.
+      el.valueAsNumber = num;
+      await elementUpdated(el);
+      expect(el.value).to.equal(num.toString());
+      expect(el.valueAsNumber).to.equal(num);
+
+      el.remove();
     });
   });
 
@@ -183,7 +230,7 @@ describe('<sl-input>', () => {
 
     it('should serialize its name and value with JSON', async () => {
       const form = await fixture<HTMLFormElement>(html` <form><sl-input name="a" value="1"></sl-input></form> `);
-      const json = serialize(form);
+      const json = serialize(form) as { a: '1' };
       expect(json.a).to.equal('1');
     });
 

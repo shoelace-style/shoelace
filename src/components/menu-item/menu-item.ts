@@ -1,11 +1,11 @@
-import '../icon/icon';
+import '../icon/icon.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query } from 'lit/decorators.js';
-import { getTextContent } from '../../internal/slot';
+import { getTextContent } from '../../internal/slot.js';
 import { html } from 'lit';
-import { watch } from '../../internal/watch';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './menu-item.styles';
+import { watch } from '../../internal/watch.js';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './menu-item.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**
@@ -25,6 +25,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart prefix - The prefix container.
  * @csspart label - The menu item label.
  * @csspart suffix - The suffix container.
+ * @csspart submenu-icon - The submenu icon, visible only when the menu item has a submenu (not yet implemented).
  */
 @customElement('sl-menu-item')
 export default class SlMenuItem extends ShoelaceElement {
@@ -47,15 +48,9 @@ export default class SlMenuItem extends ShoelaceElement {
   /** Draws the menu item in a disabled state, preventing selection. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.handleHostClick = this.handleHostClick.bind(this);
+  constructor() {
+    super();
     this.addEventListener('click', this.handleHostClick);
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.removeEventListener('click', this.handleHostClick);
   }
 
   private handleDefaultSlotChange() {
@@ -74,13 +69,13 @@ export default class SlMenuItem extends ShoelaceElement {
     }
   }
 
-  private handleHostClick(event: MouseEvent) {
+  private handleHostClick = (event: MouseEvent) => {
     // Prevent the click event from being emitted when the button is disabled or loading
     if (this.disabled) {
       event.preventDefault();
       event.stopImmediatePropagation();
     }
-  }
+  };
 
   @watch('checked')
   handleCheckedChange() {
@@ -141,7 +136,7 @@ export default class SlMenuItem extends ShoelaceElement {
 
         <slot name="suffix" part="suffix" class="menu-item__suffix"></slot>
 
-        <span class="menu-item__chevron">
+        <span part="submenu-icon" class="menu-item__chevron">
           <sl-icon name="chevron-right" library="system" aria-hidden="true"></sl-icon>
         </span>
       </div>

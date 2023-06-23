@@ -1,14 +1,14 @@
-import '../icon/icon';
-import { clamp } from '../../internal/math';
+import '../icon/icon.js';
+import { clamp } from '../../internal/math.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, eventOptions, property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize';
+import { LocalizeController } from '../../utilities/localize.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { watch } from '../../internal/watch';
-import ShoelaceElement from '../../internal/shoelace-element';
-import styles from './rating.styles';
+import { watch } from '../../internal/watch.js';
+import ShoelaceElement from '../../internal/shoelace-element.js';
+import styles from './rating.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**
@@ -249,43 +249,54 @@ export default class SlRating extends ShoelaceElement {
         @mousemove=${this.handleMouseMove}
         @touchmove=${this.handleTouchMove}
       >
-        <span class="rating__symbols rating__symbols--inactive">
+        <span class="rating__symbols">
           ${counter.map(index => {
-            // Users can click the current value to clear the rating. When this happens, we set this.isHovering to
-            // false to prevent the hover state from confusing them as they move the mouse out of the control. This
-            // extra mouseenter will reinstate it if they happen to mouse over an adjacent symbol.
+            if (displayValue > index && displayValue < index + 1) {
+              // Users can click the current value to clear the rating. When this happens, we set this.isHovering to
+              // false to prevent the hover state from confusing them as they move the mouse out of the control. This
+              // extra mouseenter will reinstate it if they happen to mouse over an adjacent symbol.
+              return html`
+                <span
+                  class=${classMap({
+                    rating__symbol: true,
+                    'rating__partial-symbol-container': true,
+                    'rating__symbol--hover': this.isHovering && Math.ceil(displayValue) === index + 1
+                  })}
+                  role="presentation"
+                  @mouseenter=${this.handleMouseEnter}
+                >
+                  <div
+                    style=${styleMap({
+                      clipPath: isRtl
+                        ? `inset(0 ${(displayValue - index) * 100}% 0 0)`
+                        : `inset(0 0 0 ${(displayValue - index) * 100}%)`
+                    })}
+                  >
+                    ${unsafeHTML(this.getSymbol(index + 1))}
+                  </div>
+                  <div
+                    class="rating__partial--filled"
+                    style=${styleMap({
+                      clipPath: isRtl
+                        ? `inset(0 0 0 ${100 - (displayValue - index) * 100}%)`
+                        : `inset(0 ${100 - (displayValue - index) * 100}% 0 0)`
+                    })}
+                  >
+                    ${unsafeHTML(this.getSymbol(index + 1))}
+                  </div>
+                </span>
+              `;
+            }
+
             return html`
               <span
                 class=${classMap({
                   rating__symbol: true,
-                  'rating__symbol--hover': this.isHovering && Math.ceil(displayValue) === index + 1
+                  'rating__symbol--hover': this.isHovering && Math.ceil(displayValue) === index + 1,
+                  'rating__symbol--active': displayValue >= index + 1
                 })}
                 role="presentation"
                 @mouseenter=${this.handleMouseEnter}
-              >
-                ${unsafeHTML(this.getSymbol(index + 1))}
-              </span>
-            `;
-          })}
-        </span>
-
-        <span class="rating__symbols rating__symbols--indicator">
-          ${counter.map(index => {
-            return html`
-              <span
-                class=${classMap({
-                  rating__symbol: true,
-                  'rating__symbol--hover': this.isHovering && Math.ceil(displayValue) === index + 1
-                })}
-                style=${styleMap({
-                  clipPath:
-                    displayValue > index + 1
-                      ? 'none'
-                      : isRtl
-                      ? `inset(0 0 0 ${100 - ((displayValue - index) / 1) * 100}%)`
-                      : `inset(0 ${100 - ((displayValue - index) / 1) * 100}% 0 0)`
-                })}
-                role="presentation"
               >
                 ${unsafeHTML(this.getSymbol(index + 1))}
               </span>

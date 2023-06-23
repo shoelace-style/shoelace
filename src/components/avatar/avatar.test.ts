@@ -1,5 +1,6 @@
+import '../../../dist/shoelace.js';
 import { aTimeout, expect, fixture, html, waitUntil } from '@open-wc/testing';
-import type SlAvatar from './avatar';
+import type SlAvatar from './avatar.js';
 
 // The default avatar background just misses AA contrast, but the next step up is way too dark. Since avatars aren't
 // used to display text, we're going to relax this rule.

@@ -1,6 +1,6 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles';
-import formControlStyles from '../../styles/form-control.styles';
+import componentStyles from '../../styles/component.styles.js';
+import formControlStyles from '../../styles/form-control.styles.js';
 
 export default css`
   ${componentStyles}
@@ -311,11 +311,11 @@ export default css`
     max-height: var(--auto-size-available-height);
   }
 
-  .select__listbox::slotted(sl-divider) {
+  .select__listbox ::slotted(sl-divider) {
     --spacing: var(--sl-spacing-x-small);
   }
 
-  .select__listbox::slotted(small) {
+  .select__listbox ::slotted(small) {
     font-size: var(--sl-font-size-small);
     font-weight: var(--sl-font-weight-semibold);
     color: var(--sl-color-neutral-500);

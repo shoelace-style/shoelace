@@ -1,6 +1,7 @@
-import { clickOnElement } from '../../internal/test';
+import '../../../dist/shoelace.js';
+import { clickOnElement } from '../../internal/test.js';
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
-import type SlAnimatedImage from './animated-image';
+import type SlAnimatedImage from './animated-image.js';
 
 describe('<sl-animated-image>', () => {
   it('should render a component', async () => {
