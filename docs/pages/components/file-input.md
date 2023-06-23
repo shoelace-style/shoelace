@@ -1,10 +1,11 @@
-# File Input
+---
+meta:
+  title: File Input
+  description: A description of the component goes here.
+layout: component
+---
 
-[component-header:sl-file-input]
-
-A description of the component goes here.
-
-```html preview
+```html:preview
 <form id="upload-form">
   <sl-file-input label="Upload a file" help-text="Select some files" name="myfiles" multiple></sl-file-input>
 
