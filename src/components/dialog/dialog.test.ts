@@ -1,5 +1,6 @@
 import '../../../dist/shoelace.js';
 // cspell:dictionaries lorem-ipsum
+import { LitElement } from "lit"
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
@@ -146,4 +147,44 @@ describe('<sl-dialog>', () => {
 
     expect(el.open).to.be.false;
   });
+
+  // https://github.com/shoelace-style/shoelace/issues/1382
+  it('should properly cycle through tabbable elements when sl-dialog is used in a shadowRoot', async () => {
+    class AContainer extends LitElement {
+      get dialog () {
+        return this.shadowRoot?.querySelector("sl-dialog")
+      }
+
+      openDialog() {
+        this.dialog?.show();
+      }
+
+      render() {
+        return html`
+          <h1>Dialog Example</h1>
+          <sl-dialog label="Dialog" class="dialog-overview">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            <br/>
+            <input type="checkbox">A</input>
+            <input type="checkbox">B</input>
+          </sl-dialog>
+
+          <sl-button @click=${this.openDialog}>Open Dialog</sl-button>
+        `;
+      }
+    }
+
+    window.customElements.define("a-container", AContainer);
+
+    const testCase = await fixture(html`
+      <a-container></a-container>
+
+      <p>
+      Open the dialog, then use <kbd>Tab</kbd> to cycle through the inputs. Focus should be trapped, but it reaches things outside the dialog.
+      </p>
+    `)
+
+
+    testCase.querySelector<AContainer>("a-container")?.openDialog()
+  })
 });
