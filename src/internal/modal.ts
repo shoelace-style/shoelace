@@ -91,6 +91,8 @@ export default class Modal {
 
     this.currentFocus = tabbableElements[focusIndex];
     this.currentFocus?.focus({ preventScroll: true });
+
+    window.setTimeout(() => this.checkFocus())
   }
 
   handleKeyUp() {

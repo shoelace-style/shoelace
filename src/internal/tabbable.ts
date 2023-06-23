@@ -1,3 +1,5 @@
+import { offsetParent } from "composed-offset-position";
+
 /** Determines if the specified element is tabbable using heuristics inspired by https://github.com/focus-trap/tabbable */
 function isTabbable(el: HTMLElement) {
   const tag = el.tagName.toLowerCase();
@@ -23,7 +25,8 @@ function isTabbable(el: HTMLElement) {
   }
 
   // Elements that are hidden have no offsetParent and are not tabbable
-  if (el.offsetParent == null) {
+  // offsetParent polyfill is added because otherwise it misses elements in Safari.
+  if (el.offsetParent === null && offsetParent(el) === null) {
     return false;
   }
 
@@ -83,10 +86,12 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
   // Collect all elements including the root
   walk(root);
 
-  return allElements.filter(isTabbable).sort((a,b) => {
-    // Make sure we sort by tabindex.
-    const aTabindex = Number(a.getAttribute("tabindex")) || 0
-    const bTabindex = Number(b.getAttribute("tabindex")) || 0
-    return (bTabindex - aTabindex)
-  });
+  return allElements
+    .filter(isTabbable)
+    .sort((a,b) => {
+      // Make sure we sort by tabindex.
+      const aTabindex = Number(a.getAttribute("tabindex")) || 0
+      const bTabindex = Number(b.getAttribute("tabindex")) || 0
+      return (bTabindex - aTabindex)
+    });
 }
