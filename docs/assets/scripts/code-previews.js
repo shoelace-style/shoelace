@@ -1,4 +1,4 @@
-function run() {
+(() => {
   function convertModuleLinks(html) {
     html = html
       .replace(/@shoelace-style\/shoelace/g, `https://cdn.skypack.dev/@shoelace-style/shoelace@${shoelaceVersion}`)
@@ -48,6 +48,22 @@ function run() {
     document.documentElement.classList.toggle('flavor-react', flavor === 'react');
   }
 
+  function syncFlavor() {
+    setFlavor(getFlavor());
+
+    document.querySelectorAll('.code-preview__button--html').forEach(preview => {
+      if (flavor === 'html') {
+        preview.classList.add('code-preview__button--selected');
+      }
+    });
+
+    document.querySelectorAll('.code-preview__button--react').forEach(preview => {
+      if (flavor === 'react') {
+        preview.classList.add('code-preview__button--selected');
+      }
+    });
+  }
+
   const shoelaceVersion = document.documentElement.getAttribute('data-shoelace-version');
   const reactVersion = '18.2.0';
   const cdndir = 'cdn';
@@ -61,19 +77,7 @@ function run() {
   }
 
   // Sync flavor UI on page load
-  setFlavor(getFlavor());
-
-  document.querySelectorAll('.code-preview__button--html').forEach(preview => {
-    if (flavor === 'html') {
-      preview.classList.add('code-preview__button--selected');
-    }
-  });
-
-  document.querySelectorAll('.code-preview__button--react').forEach(preview => {
-    if (flavor === 'react') {
-      preview.classList.add('code-preview__button--selected');
-    }
-  });
+  syncFlavor();
 
   //
   // Resizing previews
@@ -147,12 +151,8 @@ function run() {
   });
 
   function toggleSource(codeBlock, force) {
-    const toggle = codeBlock.querySelector('.code-preview__toggle');
-
-    if (toggle) {
-      codeBlock.classList.toggle('code-preview--expanded', force === undefined ? undefined : force);
-      event.target.setAttribute('aria-expanded', codeBlock.classList.contains('code-preview--expanded'));
-    }
+    codeBlock.classList.toggle('code-preview--expanded', force);
+    event.target.setAttribute('aria-expanded', codeBlock.classList.contains('code-preview--expanded'));
   }
 
   //
@@ -243,7 +243,7 @@ function run() {
       form.remove();
     }
   });
-}
 
-run();
-document.addEventListener('turbo:load', run);
+  // Set the initial flavor
+  window.addEventListener('turbo:load', syncFlavor);
+})();
