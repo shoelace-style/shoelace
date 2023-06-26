@@ -84,7 +84,7 @@ If we use `useEffect` instead of `useLayoutEffect`, the initial render will occu
 :::
 
 :::tip
-This will import all Shoelace components for convenience. To selectively import components, refer to the [Using webpack](/getting-started/installation?id=using-webpack) section of the docs.
+This will import all Shoelace components for convenience. To selectively import components, refer to the [Using webpack](/getting-started/installation#using-webpack) section of the docs.
 :::
 
 You may be wondering where the `URL` property is coming from. We'll address that in the next few sections.
