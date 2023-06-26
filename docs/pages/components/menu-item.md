@@ -22,6 +22,20 @@ layout: component
     Suffix Icon
     <sl-icon slot="suffix" name="heart"></sl-icon>
   </sl-menu-item>
+  <sl-divider></sl-divider>
+  <sl-menu-item>
+    Submenu
+    <sl-menu slot="submenu">
+      <sl-menu-item>Submenu Option 1</sl-menu-item>
+      <sl-menu-item>Submenu Option 2</sl-menu-item>
+      <sl-menu-item>
+        Submenu Option 3
+        <sl-menu slot="submenu">
+          <sl-menu-item>Sub-submenu Option 1</sl-menu-item>
+        </sl-menu>
+      </sl-menu-item>
+    </sl-menu>
+  </sl-menu-item>
 </sl-menu>
 ```
 
@@ -169,6 +183,60 @@ const App = () => (
       Check Spelling
     </SlMenuItem>
     <SlMenuItem type="checkbox">Word Wrap</SlMenuItem>
+  </SlMenu>
+);
+```
+
+{% endraw %}
+
+### Submenus
+
+The `submenu` slot can be used to specify nested menus, which are rendered by leveraging the [popup](/components/popup) component.
+
+```html:preview
+<sl-menu style="max-width: 200px;">
+  <sl-menu-item>
+    Submenu
+    <sl-menu slot="submenu">
+      <sl-menu-item>Submenu Option 1</sl-menu-item>
+      <sl-menu-item>Submenu Option 2</sl-menu-item>
+      <sl-menu-item>
+        Submenu Option 3
+        <sl-menu slot="submenu">
+          <sl-menu-item>Sub-submenu Option 1</sl-menu-item>
+        </sl-menu>
+      </sl-menu-item>
+    </sl-menu>
+  </sl-menu-item>
+  <sl-menu-item disabled>
+    Disabled Submenu
+    <sl-menu slot="submenu">
+      <sl-menu-item>Disabled Submenu Option 1</sl-menu-item>
+    </sl-menu>
+  </sl-menu-item>
+</sl-menu>
+```
+
+{% raw %}
+
+```jsx:react
+import { SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlMenu style={{ maxWidth: '200px' }}>
+    <SlMenuItem>
+      Submenu
+      <SlMenu slot="submenu">
+        <SlMenuItem>Submenu Option 1</SlMenuItem>
+        <SlMenuItem>Submenu Option 2</SlMenuItem>
+        <SlMenuItem>
+          Submenu Option 3
+          <SlMenu slot="submenu">
+            <SlMenuItem>Sub-submenu Option 1</SlMenuItem>
+          </SlMenu>
+        </SlMenuItem>
+      </SlMenu>
+    </SlMenuItem>
   </SlMenu>
 );
 ```

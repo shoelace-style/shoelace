@@ -70,4 +70,40 @@ describe('<sl-menu-item>', () => {
 
     expect(getComputedStyle(item1).display).to.equal('none');
   });
+
+  it('should not render a sl-popup if the slot="submenu" attribute is missing, but the slot should exist in the component and be hidden.', async () => {
+    const menu = await fixture<SlMenuItem>(html`
+      <sl-menu>
+        <sl-menu-item>
+          Item 1
+          <sl-menu>
+            <sl-menu-item> Nested Item 1 </sl-menu-item>
+          </sl-menu>
+        </sl-menu-item>
+      </sl-menu>
+    `);
+
+    const menuItem: HTMLElement = menu.querySelector('sl-menu-item')!;
+    expect(menuItem.shadowRoot!.querySelector('sl-popup')).to.be.null;
+    const submenuSlot: HTMLElement = menuItem.shadowRoot!.querySelector('slot[name="submenu"]')!;
+    expect(submenuSlot.hidden).to.be.true;
+  });
+
+  it('should render an sl-popup if the slot="submenu" attribute is present', async () => {
+    const menu = await fixture<SlMenuItem>(html`
+      <sl-menu>
+        <sl-menu-item id="test">
+          Item 1
+          <sl-menu slot="submenu">
+            <sl-menu-item> Nested Item 1 </sl-menu-item>
+          </sl-menu>
+        </sl-menu-item>
+      </sl-menu>
+    `);
+
+    const menuItem = menu.querySelector('sl-menu-item')!;
+    expect(menuItem.shadowRoot!.querySelector('sl-popup')).to.be.not.null;
+    const submenuSlot: HTMLElement = menuItem.shadowRoot!.querySelector('slot[name="submenu"]')!;
+    expect(submenuSlot.hidden).to.be.false;
+  });
 });
