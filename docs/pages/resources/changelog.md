@@ -1140,12 +1140,12 @@ The most elegant solution I found was to use the [Web Animations API](https://de
 
 ## 2.0.0-beta.34
 
-This release changes the way components are registered if you're [cherry picking](/getting-started/installation?id=cherry-picking) or [using a bundler](/getting-started/installation?id=bundling). This recommendation came from the LitElement team and simplifies Shoelace's dependency graph. It also eliminates the need to call a `register()` function before using each component.
+This release changes the way components are registered if you're [cherry picking](/getting-started/installation#cherry-picking) or [using a bundler](/getting-started/installation#bundling). This recommendation came from the LitElement team and simplifies Shoelace's dependency graph. It also eliminates the need to call a `register()` function before using each component.
 
 From now on, importing a component will register it automatically. The caveat is that bundlers may not tree shake the library properly if you import from `@shoelace-style/shoelace`, so the recommendation is to import components and utilities from their corresponding files instead.
 
 - 🚨 BREAKING: removed `all.shoelace.js` (use `shoelace.js` instead)
-- 🚨 BREAKING: component modules now have a side effect, so bundlers may not tree shake properly when importing from `@shoelace-style/shoelace` (see the [installation page](/getting-started/installation?id=bundling) for more details and how to update)
+- 🚨 BREAKING: component modules now have a side effect, so bundlers may not tree shake properly when importing from `@shoelace-style/shoelace` (see the [installation page](/getting-started/installation#bundling) for more details and how to update)
 - Added `sl-clear` event to `<sl-select>`
 - Fixed a bug where dynamically changing menu items in `<sl-select>` would cause the display label to be blank [#374]
 - Fixed a bug where setting the `value` attribute or property on `<sl-input>` and `<sl-textarea>` would trigger validation too soon
