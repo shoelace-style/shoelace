@@ -37,7 +37,7 @@ The next step is to import Shoelace's default theme (stylesheet) in `app/javascr
 @import '@shoelace-style/shoelace/dist/themes/dark'; // Optional dark theme
 ```
 
-Fore more details about themes, please refer to [Theme Basics](/getting-started/themes?id=theme-basics).
+Fore more details about themes, please refer to [Theme Basics](/getting-started/themes#theme-basics).
 
 ### Importing Required Scripts
 
