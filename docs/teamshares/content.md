@@ -41,13 +41,13 @@
     <p>Use sentence case for all headings and labels, including labels for UI elements like buttons.</p>
     <div class="grid-cards-2-col">
       <sl-alert class="do-dont" variant="success" open>
-        <sl-icon slot="icon" name="check-circle-solid"></sl-icon>
+        <sl-icon slot="icon" library="fa" name="fas-circle-check"></sl-icon>
         <div class="ts-heading-8">Do</div>
         <div><sl-button>Edit cap table</sl-button></div>
         <div><sl-tag>In progress</sl-tag></div>
       </sl-alert>
       <sl-alert class="do-dont" variant="danger" open>
-        <sl-icon slot="icon" name="x-circle-solid"></sl-icon>
+        <sl-icon slot="icon" library="fa" name="fas-circle-xmark"></sl-icon>
         <div class="ts-heading-8">Don’t</div>
         <div><sl-button>Edit Cap Table</sl-button></div>
         <div><sl-tag>In Progress</sl-tag></div>
@@ -58,12 +58,12 @@
     <p>Use curly (<code>“”</code>) instead of straight (<code>""</code>) versions of quotation marks and apostrophes.</p>
     <div class="grid-cards-2-col">
       <sl-alert class="do-dont" variant="success" open>
-        <sl-icon slot="icon" name="check-circle-solid"></sl-icon>
+        <sl-icon slot="icon" library="fa" name="fas-circle-check"></sl-icon>
         <div class="ts-heading-8">Do</div>
         <div class="ts-body-large">Welcome! We’re glad you’re here.</div>
       </sl-alert>
       <sl-alert class="do-dont" variant="danger" open>
-        <sl-icon slot="icon" name="x-circle-solid"></sl-icon>
+        <sl-icon slot="icon" library="fa" name="fas-circle-xmark"></sl-icon>
         <div class="ts-heading-8">Don’t</div>
         <div class="ts-body-large">Welcome! We're glad you're here.</div>
       </sl-alert>
