@@ -31,22 +31,22 @@ export default css`
   }
 
   .badge--success {
-    background-color: var(--sl-color-success-600);
+    background-color: var(--sl-color-success-700);
     color: var(--sl-color-neutral-0);
   }
 
   .badge--neutral {
-    background-color: var(--sl-color-neutral-600);
+    background-color: var(--sl-color-neutral-700);
     color: var(--sl-color-neutral-0);
   }
 
   .badge--warning {
-    background-color: var(--sl-color-warning-600);
+    background-color: var(--sl-color-warning-800);
     color: var(--sl-color-neutral-0);
   }
 
   .badge--danger {
-    background-color: var(--sl-color-danger-600);
+    background-color: var(--sl-color-danger-700);
     color: var(--sl-color-neutral-0);
   }
 
