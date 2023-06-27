@@ -388,7 +388,7 @@ strong {
 /* Sidebar */
 .sidebar {
   background-color: var(--sl-color-neutral-0);
-  border-right: solid 1px var(--sl-color-neutral-200);
+  border-right: solid 1px var(--sl-color-neutral-300);
 }
 
 .sidebar .app-name {
@@ -472,6 +472,7 @@ strong {
 .sidebar-nav li.collapse > a,
 .sidebar-nav li.active > a {
   color: var(--sl-color-primary-700);
+  font-weight: var(--sl-font-weight-semibold);
 }
 
 .sidebar-nav li > a:hover {
@@ -479,7 +480,7 @@ strong {
 }
 
 .sidebar li > p {
-  font-weight: var(--sl-font-weight-bold);
+  font-weight: var(--ts-font-semibold);
   border-bottom: solid 1px var(--sl-color-neutral-300);
   margin: 0 0.75rem 0.5rem 0;
   padding: 0 0 0.5rem 0;
@@ -496,6 +497,7 @@ strong {
 }
 
 .sidebar ul ul ul li {
+  font-size: var(--ts-font-sm);
   list-style: disc;
   margin-left: 1.5rem;
 }
@@ -742,7 +744,7 @@ sl-alert.do-dont::part(message) {
 .markdown-section h5,
 .markdown-section h6 {
   font-weight: var(--sl-font-weight-normal);
-  margin: 0 0 1em 0;
+  margin: 2em 0 1em;
 }
 
 .markdown-section h1 {
@@ -758,13 +760,17 @@ sl-alert.do-dont::part(message) {
 }
 
 .markdown-section h2 {
-  font-size: var(--sl-font-size-x-large);
   border-bottom: solid 1px var(--sl-color-neutral-300);
-  margin-top: 2rem;
+  font-size: var(--sl-font-size-x-large);
+  font-weight: var(--ts-font-bold);
+  /* 700 */
+  margin-top: 3rem;
 }
 
 .markdown-section h3 {
   font-size: var(--sl-font-size-large);
+  font-weight: var(--ts-font-medium);
+  /* 500 */
 }
 
 .markdown-section h4 {
@@ -956,6 +962,7 @@ kbd,
   border-left: solid 4px transparent;
   border-radius: var(--sl-border-radius-medium);
   padding-left: 1.5rem;
+  margin-left: 12px;
 }
 
 .markdown-section p.tip:before,
@@ -1022,16 +1029,16 @@ kbd,
 }
 
 .component-header__summary {
+  color: var(--sl-color-neutral-700);
   font-size: var(--sl-font-size-large);
   line-height: 1.6;
-  border-top: solid 1px var(--sl-color-neutral-200);
-  margin-top: 2rem;
+  margin: 2rem 0;
 }
 
 .markdown-section .component-header__tag code {
   background: none;
   color: var(--sl-color-neutral-700);
-  font-size: var(--sl-font-size-large);
+  font-size: var(--sl-font-size-small);
   padding: 0;
   margin: 0;
 }
