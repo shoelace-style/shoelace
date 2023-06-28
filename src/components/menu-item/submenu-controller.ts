@@ -70,7 +70,6 @@ export class SubmenuController implements ReactiveController {
   };
 
   private handleMouseOut = () => {
-    console.log('mouseOut');
     if (this.popupRef.value && this.popupRef.value.active) {
       this.mouseOutTimer = window.setTimeout(() => {
         if (this.popupRef.value && this.popupRef.value.active) {
