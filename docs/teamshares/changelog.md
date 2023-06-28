@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.1
+
+- Fix focus issue on inputs caused by Tailwind
+- Use Font Awesome in doc sites
+
 ## 1.2.0
 
 - Updated to upstream [2.4.0](/resources/changelog)
