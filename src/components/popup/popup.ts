@@ -1,4 +1,4 @@
-import { arrow, autoUpdate, computePosition, flip, offset, platform, shift, size } from '@floating-ui/dom';
+import { arrow, autoPlacement, autoUpdate, computePosition, flip, offset, platform, shift, size } from '@floating-ui/dom';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
@@ -113,6 +113,11 @@ export default class SlPopup extends ShoelaceElement {
    * `flipFallbackPlacements` to further configure how the fallback placement is determined.
    */
   @property({ type: Boolean }) flip = false;
+
+  /**
+   * When set, placement of the popup will choose the placement that has the most space avaiable automatically.
+   */
+  @property({ attribute: 'auto-placement', type: Boolean }) autoPlacement = false;
 
   /**
    * If the preferred placement doesn't fit, popup will be tested in these fallback placements until one fits. Must be a
@@ -305,8 +310,14 @@ export default class SlPopup extends ShoelaceElement {
       this.popup.style.width = '';
       this.popup.style.height = '';
     }
+    
+    // Then we check for autoPlacement
+    if (this.autoPlacement) {
+      middleware.push(autoPlacement());
+    }
 
     // Then we flip
+    // TODO Don't do both
     if (this.flip) {
       middleware.push(
         flip({
