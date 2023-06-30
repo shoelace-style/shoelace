@@ -60,7 +60,6 @@ export default class SlMenuItem extends ShoelaceElement {
   constructor() {
     super();
     this.addEventListener('click', this.handleHostClick);
-    this.addEventListener('keydown', this.handleKeyDown);
     this.submenuController = new SubmenuController(this, this.hasSlotController, this.localize);
   }
 
@@ -87,28 +86,6 @@ export default class SlMenuItem extends ShoelaceElement {
       event.stopImmediatePropagation();
     }
   };
-  
-  private handleKeyDown(event: KeyboardEvent) {
-    console.log(`<menu-item ${this.id}> handleKeyDown: ${event.key}`);
-  }
-  
-/*
-    // Make a selection when pressing enter
-    if (event.key === 'Enter') {
-      event.preventDefault();
-
-      // Simulate a click to support @click handlers on menu items that also work with the keyboard
-      // item?.click();
-    }
-    
-    // Prevent scrolling when space is pressed
-    if (event.key === ' ') {
-      
-      event.preventDefault();
-    }
-  }
-*/
-
 
   @watch('checked')
   handleCheckedChange() {
@@ -134,13 +111,9 @@ export default class SlMenuItem extends ShoelaceElement {
 
   @watch('type')
   handleTypeChange() {
-    console.log(`handleTypeChange() ${this.getTextLabel()} : submenu? ${this.hasSlotController.test("submenu")}`);
     if (this.type === 'checkbox') {
       this.setAttribute('role', 'menuitemcheckbox');
       this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
-    } else if (this.hasSlotController.test('submenu')) {
-      this.setAttribute('role', 'menu');
-      this.removeAttribute('aria-checked');
     } else {
       this.setAttribute('role', 'menuitem');
       this.removeAttribute('aria-checked');

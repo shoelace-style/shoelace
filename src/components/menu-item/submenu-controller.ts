@@ -12,7 +12,6 @@ import type { ReactiveController, ReactiveControllerHost } from 'lit';
 export class SubmenuController implements ReactiveController {
   private host: ReactiveControllerHost & SlMenuItem;
   private popupRef: Ref<SlPopup> = createRef();
-
   private mouseOutTimer: number = -1;
   private isActive: boolean = false;
 
@@ -51,7 +50,6 @@ export class SubmenuController implements ReactiveController {
     if (!this.isActive) {
       this.host.addEventListener('mouseover', this.handleMouseOver);
       this.host.addEventListener('mouseout', this.handleMouseOut);
-      this.host.addEventListener('keydown', (event) => { this.handleKeyDown(event) });
       this.isActive = true;
     }
   }
@@ -60,7 +58,6 @@ export class SubmenuController implements ReactiveController {
     if (this.isActive) {
       this.host.removeEventListener('mouseover', this.handleMouseOver);
       this.host.removeEventListener('mouseout', this.handleMouseOut);
-      this.host.removeEventListener('keydown', this.handleKeyDown);
       this.isActive = false;
     }
   }
@@ -82,65 +79,6 @@ export class SubmenuController implements ReactiveController {
       }, 100);
     }
   };
-  
-  private isMenuItem(item: HTMLElement) {
-    return (
-      item.tagName.toLowerCase() === 'sl-menu-item' ||
-      ['menuitem', 'menuitemcheckbox', 'menuitemradio'].includes(item.getAttribute('role') ?? '')
-    );
-  }
-
-  /** @internal Gets all slotted menu items, ignoring dividers, headers, and other elements. */
-  getAllItems() {
-    const rr = this.host.renderRoot;
-    const slotQS : HTMLSlotElement = rr.querySelector("slot[name='submenu']") as HTMLSlotElement;
-    console.log(slotQS);
-    const aEs = slotQS.assignedElements({ flatten: true });
-    console.log(aEs[0]);
-    const menuItems = aEs.filter((el: HTMLElement) => {
-      if (el.inert || !this.isMenuItem(el)) {
-        return false;
-      }
-      return true;
-    }) as SlMenuItem[];
-    return [...menuItems];
-  }  
-
-/*
-    return [...this.host.renderRoot.querySelector("slot[name='submenu']").assignedElements({ flatten: true }).filter((el: HTMLElement) => {
-      if (el.inert || !this.isMenuItem(el)) {
-        return false;
-      }
-      return true;
-    }) as SlMenuItem[];
-  }
-  */
-
-  private handleKeyDown(event: KeyboardEvent) {
-    console.log(`submenuController.handleKeyDown: ${event.key}`);
-    switch(event.key) {
-      case "ArrowRight":
-        console.log("ArrowRight detected.");
-        //let items = this.getAllItems();
-        // find *a* menu-item
-        // let item = this.host.renderRoot.querySelector("sl-menu-item, [role='menuitem'], [role='menuitemcheckbox'], [role='menuitemradio']")
-        //let item = this.host.renderRoot.querySelector("sl-menu-item");
-        let item : HTMLSlotElement = this.host.renderRoot.querySelector("slot[name='submenu']") as HTMLSlotElement;
-        console.log(item);
-        console.log(item!.assignedElements()[0]);
-        console.log(item!.assignedElements()[0].querySelector("sl-menu-item"));
-        item!.assignedElements()[0].querySelector("sl-menu-item")!.focus();
-        break;
-    }
-  } 
-  
-  show() {
-   
-  }
-
-  hide() {
-
-  }
 
   renderSubmenu() {
     // Always render the slot. Conditionally render the outer sl-popup.
@@ -161,7 +99,6 @@ export class SubmenuController implements ReactiveController {
         placement=${isLtr ? 'right-start' : 'left-start'}
         anchor="anchor"
         flip
-        flip-fallback-strategy="best-fit"
         strategy="fixed"
       >
         <slot name="submenu"></slot>
