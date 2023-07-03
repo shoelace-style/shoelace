@@ -83,6 +83,25 @@ function MyComponent() {
 export default MyComponent;
 ```
 
+You can also import the event type for use in your callbacks, shown below.
+
+```tsx
+import { useCallback, useState } from 'react';
+import { SlInput, SlInputEvent } from '@shoelace-style/shoelace/%NPMDIR%/react';
+import type SlInputElement from '@shoelace-style/shoelace/%NPMDIR%/components/input/input';
+
+function MyComponent() {
+  const [value, setValue] = useState('');
+  const onInput = useCallback((event: SlInputEvent) => {
+    setValue(event.detail);
+  }, []);
+
+  return <SlInput value={value} onSlInput={event => setValue((event.target as SlInputElement).value)} />;
+}
+
+export default MyComponent;
+```
+
 ## Testing with Jest
 
 Testing with web components can be challenging if your test environment runs in a Node environment (i.e. it doesn't run in a real browser). Fortunately, [Jest](https://jestjs.io/) has made a number of strides to support web components and provide additional browser APIs. However, it's still not a complete replication of a browser environment.
