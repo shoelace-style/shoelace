@@ -58,7 +58,7 @@ export default class SlQrCode extends ShoelaceElement {
         radius: this.radius,
         ecLevel: this.errorCorrection,
         fill: this.fill,
-        background: null,
+        background: this.background,
         // We draw the canvas larger and scale its container down to avoid blurring on high-density displays
         size: this.size * 2
       },
