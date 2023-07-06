@@ -26,7 +26,6 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 - Fixed broken source buttons in the docs [#1401]
 
-
 ## 2.5.1
 
 - Fixed missing extensions from imports that broke with TypeScript 5 [#1391]
