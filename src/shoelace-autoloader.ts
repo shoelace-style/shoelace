@@ -45,9 +45,7 @@ function register(tagName: string): Promise<void> {
 
   // Register it
   return new Promise((resolve, reject) => {
-    import(path)
-      .then(() => resolve())
-      .catch(() => reject(new Error(`Unable to automatically load<${tagName}> from ${path}`)));
+    import(path).then(() => resolve()).catch(() => reject(new Error(`Unable to autoload <${tagName}> from ${path}`)));
   });
 }
 
