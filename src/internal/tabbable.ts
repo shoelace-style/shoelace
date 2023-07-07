@@ -1,4 +1,4 @@
-import { offsetParent } from "composed-offset-position";
+import { offsetParent } from 'composed-offset-position';
 
 /** Determines if the specified element is tabbable using heuristics inspired by https://github.com/focus-trap/tabbable */
 function isTabbable(el: HTMLElement) {
@@ -80,18 +80,16 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
       }
     }
 
-    ;[...el.children].forEach((e: HTMLElement) => walk(e));
+    [...el.children].forEach((e: HTMLElement) => walk(e));
   }
 
   // Collect all elements including the root
   walk(root);
 
-  return allElements
-    .filter(isTabbable)
-    .sort((a,b) => {
-      // Make sure we sort by tabindex.
-      const aTabindex = Number(a.getAttribute("tabindex")) || 0
-      const bTabindex = Number(b.getAttribute("tabindex")) || 0
-      return (bTabindex - aTabindex)
-    });
+  return allElements.filter(isTabbable).sort((a, b) => {
+    // Make sure we sort by tabindex.
+    const aTabindex = Number(a.getAttribute('tabindex')) || 0;
+    const bTabindex = Number(b.getAttribute('tabindex')) || 0;
+    return bTabindex - aTabindex;
+  });
 }

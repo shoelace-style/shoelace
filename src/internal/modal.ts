@@ -37,7 +37,7 @@ export default class Modal {
   checkFocus() {
     if (this.isActive()) {
       const tabbableElements = getTabbableElements(this.element);
-      if (!(this.element.matches(":focus-within"))) {
+      if (!this.element.matches(':focus-within')) {
         const start = tabbableElements[0];
         const end = tabbableElements[tabbableElements.length - 1];
         const target = this.tabDirection === 'forward' ? start : end;
@@ -92,7 +92,7 @@ export default class Modal {
     this.currentFocus = tabbableElements[focusIndex];
     this.currentFocus?.focus({ preventScroll: true });
 
-    setTimeout(() => this.checkFocus())
+    setTimeout(() => this.checkFocus());
   }
 
   handleKeyUp() {

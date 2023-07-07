@@ -5,7 +5,6 @@ import { LitElement } from 'lit';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlDialog from './dialog';
-import SlButton from '../button/button.js';
 
 describe('<sl-dialog>', () => {
   it('should be visible with the open attribute', async () => {
@@ -165,9 +164,9 @@ describe('<sl-dialog>', () => {
           <h1>Dialog Example</h1>
           <sl-dialog label="Dialog" class="dialog-overview">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            <br/>
-            <label><input type="checkbox">A</label>
-            <label><input type="checkbox">B</label>
+            <br />
+            <label><input type="checkbox" />A</label>
+            <label><input type="checkbox" />B</label>
             <button>Button</button>
           </sl-dialog>
 
@@ -176,7 +175,7 @@ describe('<sl-dialog>', () => {
       }
     }
 
-    if (!window.customElements.get("a-container")) {
+    if (!window.customElements.get('a-container')) {
       window.customElements.define('a-container', AContainer);
     }
 
@@ -191,60 +190,81 @@ describe('<sl-dialog>', () => {
       </div>
     `);
 
+    const container = testCase.querySelector('a-container');
 
-    const container = testCase.querySelector('a-container') as AContainer
+    if (!container) {
+      throw Error('Could not find <a-container> element.');
+    }
 
-    await elementUpdated(container)
+    await elementUpdated(container);
+    const dialog = container.shadowRoot?.querySelector('sl-dialog');
 
-    const dialog = container.shadowRoot?.querySelector("sl-dialog") as SlDialog
-    const closeButton = dialog.shadowRoot?.querySelector("sl-icon-button")
-    const checkbox1 = dialog.querySelector("input[type='checkbox']")
-    const checkbox2 = dialog.querySelectorAll("input[type='checkbox']")[1]
-    const button = dialog.querySelector("button")
+    if (!dialog) {
+      throw Error('Could not find <sl-dialog> element.');
+    }
 
+    const closeButton = dialog.shadowRoot?.querySelector('sl-icon-button');
+    const checkbox1 = dialog.querySelector("input[type='checkbox']");
+    const checkbox2 = dialog.querySelectorAll("input[type='checkbox']")[1];
+    const button = dialog.querySelector('button');
 
-    ;(container.shadowRoot?.querySelector("sl-button") as SlButton).click();
+    // Opens modal.
+    const openModalButton = container.shadowRoot?.querySelector('sl-button');
+
+    if (openModalButton) openModalButton.click();
 
     // Test tab cycling
-    await sendKeys({press: "Tab"})
+    await pressTab();
 
-    expect(container.shadowRoot?.activeElement).to.equal(dialog)
-    expect(dialog.shadowRoot?.activeElement).to.equal(closeButton)
+    expect(container.shadowRoot?.activeElement).to.equal(dialog);
+    expect(dialog.shadowRoot?.activeElement).to.equal(closeButton);
 
-    await sendKeys({ press: "Tab" })
-    expect(container.shadowRoot?.activeElement).to.equal(checkbox1)
+    await pressTab();
+    expect(container.shadowRoot?.activeElement).to.equal(checkbox1);
 
-    await sendKeys({ press: "Tab" })
-    expect(container.shadowRoot?.activeElement).to.equal(checkbox2)
+    await pressTab();
+    expect(container.shadowRoot?.activeElement).to.equal(checkbox2);
 
-    await sendKeys({ press: "Tab" })
-    expect(container.shadowRoot?.activeElement).to.equal(button)
+    await pressTab();
+    expect(container.shadowRoot?.activeElement).to.equal(button);
 
-    await sendKeys({ press: "Tab" })
-    expect(dialog.shadowRoot?.activeElement).to.equal(closeButton)
+    await pressTab();
+    expect(dialog.shadowRoot?.activeElement).to.equal(closeButton);
 
-    await sendKeys({ press: "Tab" })
-    expect(container.shadowRoot?.activeElement).to.equal(checkbox1)
+    await pressTab();
+    expect(container.shadowRoot?.activeElement).to.equal(checkbox1);
 
     // Test Shift+Tab cycling
-    await sendKeys({ down: "Shift" })
 
-    await sendKeys({ press: "Tab" })
-    expect(dialog.shadowRoot?.activeElement).to.equal(closeButton)
+    // I found these timeouts were needed for WebKit locally.
+    await aTimeout(10);
+    await sendKeys({ down: 'Shift' });
+    await aTimeout(10);
 
-    await sendKeys({ press: "Tab" })
-    expect(container.shadowRoot?.activeElement).to.equal(button)
+    await pressTab();
+    expect(dialog.shadowRoot?.activeElement).to.equal(closeButton);
 
-    await sendKeys({ press: "Tab" })
-    expect(container.shadowRoot?.activeElement).to.equal(checkbox2)
+    await pressTab();
+    expect(container.shadowRoot?.activeElement).to.equal(button);
 
-    await sendKeys({ press: "Tab" })
-    expect(container.shadowRoot?.activeElement).to.equal(checkbox1)
+    await pressTab();
+    expect(container.shadowRoot?.activeElement).to.equal(checkbox2);
 
-    await sendKeys({ press: "Tab" })
-    expect(dialog.shadowRoot?.activeElement).to.equal(closeButton)
+    await pressTab();
+    expect(container.shadowRoot?.activeElement).to.equal(checkbox1);
+
+    await pressTab();
+    expect(dialog.shadowRoot?.activeElement).to.equal(closeButton);
 
     // End shift+tab cycling
-    await sendKeys({ up: "Shift" })
+    await sendKeys({ up: 'Shift' });
   });
 });
+
+// We wait 50ms just to give the browser some time to figure out the current focus.
+// 50 was the magic number I found locally :shrug:
+async function pressTab() {
+  await aTimeout(50);
+  await sendKeys({ press: 'Tab' });
+  await aTimeout(50);
+}
