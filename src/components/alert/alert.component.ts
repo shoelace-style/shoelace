@@ -1,4 +1,4 @@
-import '../icon-button/icon-button.js';
+import SlIcon from '../icon-button/icon-button.component.js';
 import { animateTo, stopAnimations } from '../../internal/animate.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query } from 'lit/decorators.js';
@@ -43,6 +43,7 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
 @customElement('sl-alert')
 export default class SlAlert extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
+  static scopedElements = { 'sl-icon': SlIcon }
 
   private autoHideTimeout: number;
   private readonly hasSlotController = new HasSlotController(this, 'icon', 'suffix');
