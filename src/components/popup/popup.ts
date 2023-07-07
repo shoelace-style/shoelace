@@ -35,11 +35,16 @@ import type { CSSResultGroup } from 'lit';
  *  popup can be before overflowing. Useful for positioning child elements that need to overflow. This property is only
  *  available when using `auto-size`.
  */
+
+export interface VirtualElement {
+  getBoundingClientRect: () => DOMRect;
+}
+
 @customElement('sl-popup')
 export default class SlPopup extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
-  private anchorEl: Element | null;
+  private anchorEl: Element | VirtualElement | null;
   private cleanup: ReturnType<typeof autoUpdate> | undefined;
 
   /** A reference to the internal popup container. Useful for animating and styling the popup with JavaScript. */
@@ -50,7 +55,9 @@ export default class SlPopup extends ShoelaceElement {
    * The element the popup will be anchored to. If the anchor lives outside of the popup, you can provide its `id` or a
    * reference to it here. If the anchor lives inside the popup, use the `anchor` slot instead.
    */
-  @property() anchor: Element | string;
+  @property() anchor: Element | string | undefined;
+
+  @property({ attribute: 'virtual-anchor', type: Object }) virtualAnchor: VirtualElement | undefined;
 
   /**
    * Activates the positioning logic and shows the popup. When this attribute is removed, the positioning logic is torn
@@ -206,7 +213,7 @@ export default class SlPopup extends ShoelaceElement {
     }
 
     // Update the anchor when anchor changes
-    if (changedProps.has('anchor')) {
+    if (changedProps.has('anchor') || changedProps.has('virtualAnchor')) {
       this.handleAnchorChange();
     }
 
@@ -220,7 +227,9 @@ export default class SlPopup extends ShoelaceElement {
   private async handleAnchorChange() {
     await this.stop();
 
-    if (this.anchor && typeof this.anchor === 'string') {
+    if (this.virtualAnchor) {
+      this.anchorEl = this.virtualAnchor;
+    } else if (this.anchor && typeof this.anchor === 'string') {
       // Locate the anchor by id
       const root = this.getRootNode() as Document | ShadowRoot;
       this.anchorEl = root.getElementById(this.anchor);
