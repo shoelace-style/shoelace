@@ -5,6 +5,7 @@ import { LitElement } from 'lit';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlDialog from './dialog';
+import SlButton from '../button/button.js';
 
 describe('<sl-dialog>', () => {
   it('should be visible with the open attribute', async () => {
@@ -165,8 +166,9 @@ describe('<sl-dialog>', () => {
           <sl-dialog label="Dialog" class="dialog-overview">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             <br/>
-            <input type="checkbox">A</input>
-            <input type="checkbox">B</input>
+            <label><input type="checkbox">A</label>
+            <label><input type="checkbox">B</label>
+            <button>Button</button>
           </sl-dialog>
 
           <sl-button @click=${this.openDialog}>Open Dialog</sl-button>
@@ -195,20 +197,54 @@ describe('<sl-dialog>', () => {
     await elementUpdated(container)
 
     const dialog = container.shadowRoot?.querySelector("sl-dialog") as SlDialog
+    const closeButton = dialog.shadowRoot?.querySelector("sl-icon-button")
+    const checkbox1 = dialog.querySelector("input[type='checkbox']")
+    const checkbox2 = dialog.querySelectorAll("input[type='checkbox']")[1]
+    const button = dialog.querySelector("button")
 
-    container.openDialog();
 
-    await aTimeout(10)
-    await sendKeys({down: "Tab"})
-    await sendKeys({up: "Tab"})
-    await aTimeout(10)
+    ;(container.shadowRoot?.querySelector("sl-button") as SlButton).click();
+
+    // Test tab cycling
+    await sendKeys({press: "Tab"})
 
     expect(container.shadowRoot?.activeElement).to.equal(dialog)
+    expect(dialog.shadowRoot?.activeElement).to.equal(closeButton)
 
-    expect(dialog.shadowRoot?.activeElement).to.equal(dialog.shadowRoot?.querySelector("sl-icon-button"))
-    //
-    // await sendKeys({ press: "Tab" })
-    //
-    // expect(container.shadowRoot?.activeElement).to.equal(container.shadowRoot?.querySelector("sl-dialog"))
+    await sendKeys({ press: "Tab" })
+    expect(container.shadowRoot?.activeElement).to.equal(checkbox1)
+
+    await sendKeys({ press: "Tab" })
+    expect(container.shadowRoot?.activeElement).to.equal(checkbox2)
+
+    await sendKeys({ press: "Tab" })
+    expect(container.shadowRoot?.activeElement).to.equal(button)
+
+    await sendKeys({ press: "Tab" })
+    expect(dialog.shadowRoot?.activeElement).to.equal(closeButton)
+
+    await sendKeys({ press: "Tab" })
+    expect(container.shadowRoot?.activeElement).to.equal(checkbox1)
+
+    // Test Shift+Tab cycling
+    await sendKeys({ down: "Shift" })
+
+    await sendKeys({ press: "Tab" })
+    expect(dialog.shadowRoot?.activeElement).to.equal(closeButton)
+
+    await sendKeys({ press: "Tab" })
+    expect(container.shadowRoot?.activeElement).to.equal(button)
+
+    await sendKeys({ press: "Tab" })
+    expect(container.shadowRoot?.activeElement).to.equal(checkbox2)
+
+    await sendKeys({ press: "Tab" })
+    expect(container.shadowRoot?.activeElement).to.equal(checkbox1)
+
+    await sendKeys({ press: "Tab" })
+    expect(dialog.shadowRoot?.activeElement).to.equal(closeButton)
+
+    // End shift+tab cycling
+    await sendKeys({ up: "Shift" })
   });
 });
