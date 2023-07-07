@@ -55,12 +55,22 @@ export default class SlMenuItem extends ShoelaceElement {
 
   private readonly localize = new LocalizeController(this);
   private readonly hasSlotController = new HasSlotController(this, 'submenu');
-  private submenuController: SubmenuController;
+  private submenuController: SubmenuController = new SubmenuController(this, this.hasSlotController, this.localize);
 
   constructor() {
     super();
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
     this.addEventListener('click', this.handleHostClick);
-    this.submenuController = new SubmenuController(this, this.hasSlotController, this.localize);
+    this.addEventListener('mouseover', this.handleMouseOver);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('click', this.handleHostClick);
+    this.removeEventListener('mouseover', this.handleMouseOver);
   }
 
   private handleDefaultSlotChange() {
@@ -85,6 +95,11 @@ export default class SlMenuItem extends ShoelaceElement {
       event.preventDefault();
       event.stopImmediatePropagation();
     }
+  };
+
+  private handleMouseOver = (event: MouseEvent) => {
+    this.focus();
+    event.stopPropagation();
   };
 
   @watch('checked')
@@ -114,6 +129,9 @@ export default class SlMenuItem extends ShoelaceElement {
     if (this.type === 'checkbox') {
       this.setAttribute('role', 'menuitemcheckbox');
       this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
+    } else if (this.isSubmenu()) {
+      this.setAttribute('role', 'menuitem');
+      this.removeAttribute('aria-checked');
     } else {
       this.setAttribute('role', 'menuitem');
       this.removeAttribute('aria-checked');
@@ -123,6 +141,10 @@ export default class SlMenuItem extends ShoelaceElement {
   /** Returns a text label based on the contents of the menu item's default slot. */
   getTextLabel() {
     return getTextContent(this.defaultSlot);
+  }
+
+  isSubmenu() {
+    return this.hasSlotController.test('submenu');
   }
 
   render() {
@@ -136,8 +158,10 @@ export default class SlMenuItem extends ShoelaceElement {
           'menu-item': true,
           'menu-item--checked': this.checked,
           'menu-item--disabled': this.disabled,
-          'menu-item--has-submenu': this.hasSlotController.test('submenu')
+          'menu-item--has-submenu': this.isSubmenu()
         })}
+        ?aria-haspopup="${this.isSubmenu()}"
+        ?aria-expanded="${this.submenuController.isExpanded() ? true : false}"
       >
         <span part="checked-icon" class="menu-item__check">
           <sl-icon name="check" library="system" aria-hidden="true"></sl-icon>

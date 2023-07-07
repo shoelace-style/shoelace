@@ -55,18 +55,19 @@ export default class SlMenu extends ShoelaceElement {
     }
 
     // Prevent scrolling when space is pressed
-    if (event.key === ' ') {
+    else if (event.key === ' ') {
       event.preventDefault();
     }
 
     // Move the selection when pressing down or up
-    if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
+    else if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
       const items = this.getAllItems();
       const activeItem = this.getCurrentItem();
       let index = activeItem ? items.indexOf(activeItem) : 0;
 
       if (items.length > 0) {
         event.preventDefault();
+        event.stopPropagation();
 
         if (event.key === 'ArrowDown') {
           index++;
