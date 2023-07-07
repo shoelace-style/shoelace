@@ -92,6 +92,51 @@ export default class ShoelaceElement extends LitElement {
 
     return event as GetCustomEventType<T>;
   }
+
+  // @ts-expect-error
+  static version: string = shoelaceVersion
+
+  static define (name: string) {
+    define(name, this)
+  }
+
+  static scopedElements: Record<string, typeof ShoelaceElement> = {}
+
+  connectedCallback () {
+    super.connectedCallback()
+    Object.entries((this.constructor as typeof ShoelaceElement).scopedElements).forEach(([name, component]) => {
+      define(name, component)
+    })
+  }
+}
+
+function define (name: string, elementConstructor: CustomElementConstructor | typeof ShoelaceElement) {
+  const currentElementConstructor = window.customElements.get(name) as CustomElementConstructor | typeof ShoelaceElement
+
+  if (!currentElementConstructor) {
+    window.customElements.define(name, this)
+    return
+  }
+
+  let newVersion = " "
+  let existingVersion = " "
+
+  if ("version" in elementConstructor) {
+    newVersion += "v" + elementConstructor.version
+  }
+
+  if ("version" in currentElementConstructor) {
+    existingVersion += "v" + currentElementConstructor.version
+  }
+
+  if ((newVersion && existingVersion) && newVersion === existingVersion) {
+    // If versions match, we don't need to warn anyone. Carry on.
+    return
+  }
+
+  const str = `Attempted to register <${name}>${newVersion}, but <${name}>${existingVersion} has already been defined.`
+
+  console.warn(str)
 }
 
 export interface ShoelaceFormControl extends ShoelaceElement {

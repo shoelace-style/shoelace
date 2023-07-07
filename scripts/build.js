@@ -11,6 +11,7 @@ import getPort, { portNumbers } from 'get-port';
 import ora from 'ora';
 import util from 'util';
 import * as path from 'path';
+import { readFileSync } from 'fs';
 
 const { serve } = commandLineArgs([{ name: 'serve', type: Boolean }]);
 const outdir = 'dist';
@@ -22,6 +23,7 @@ let childProcess;
 let buildResults;
 
 const bundleDirectories = [cdndir, outdir];
+const shoelaceVersion = JSON.stringify(JSON.parse(readFileSync(path.join(process.cwd(), "package.json")).toString()).version.toString())
 
 //
 // Runs 11ty and builds the docs. The returned promise resolves after the initial publish has completed. The child
@@ -97,7 +99,8 @@ async function buildTheSource() {
     chunkNames: 'chunks/[name].[hash]',
     define: {
       // Floating UI requires this to be set
-      'process.env.NODE_ENV': '"production"'
+      'process.env.NODE_ENV': '"production"',
+      'shoelaceVersion': shoelaceVersion,
     },
     bundle: true,
     //
@@ -108,7 +111,7 @@ async function buildTheSource() {
     //
     external: alwaysExternal,
     splitting: true,
-    plugins: []
+    plugins: [],
   };
 
   const npmConfig = {
