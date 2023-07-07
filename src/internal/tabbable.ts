@@ -25,7 +25,7 @@ function isTabbable(el: HTMLElement) {
   }
 
   // Elements that are hidden have no offsetParent and are not tabbable
-  // offsetParent polyfill is added because otherwise it misses elements in Safari.
+  // offsetParent() is added because otherwise it misses elements in Safari
   if (el.offsetParent === null && offsetParent(el) === null) {
     return false;
   }
