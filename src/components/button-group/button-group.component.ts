@@ -1,4 +1,4 @@
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './button-group.styles.js';
@@ -14,7 +14,6 @@ import type { CSSResultGroup } from 'lit';
  *
  * @csspart base - The component's base wrapper.
  */
-@customElement('sl-button-group')
 export default class SlButtonGroup extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 

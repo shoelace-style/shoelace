@@ -1,5 +1,5 @@
-import '../icon/icon.js';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import SlIcon from '../icon/icon.component.js';
+import { property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
@@ -25,9 +25,9 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --control-box-size - The size of the icon box.
  * @cssproperty --icon-size - The size of the play/pause icons.
  */
-@customElement('sl-animated-image')
 export default class SlAnimatedImage extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
+  static scopedElements = { 'sl-icon': SlIcon }
 
   @query('.animated-image__animated') animatedImage: HTMLImageElement;
 

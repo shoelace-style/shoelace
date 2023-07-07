@@ -1,4 +1,4 @@
-import '../icon/icon.js';
+import SlIcon from '../icon/icon.component.js';
 import { AutoplayController } from './autoplay-controller.js';
 import { clamp } from '../../internal/math.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -47,6 +47,7 @@ import type { CSSResultGroup } from 'lit';
 @customElement('sl-carousel')
 export default class SlCarousel extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
+  static scopedElements = { 'sl-icon': SlIcon }
 
   /** When set, allows the user to navigate the carousel in the same direction indefinitely. */
   @property({ type: Boolean, reflect: true }) loop = false;

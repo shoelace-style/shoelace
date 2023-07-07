@@ -114,7 +114,7 @@ function define (name: string, elementConstructor: CustomElementConstructor | ty
   const currentElementConstructor = window.customElements.get(name) as CustomElementConstructor | typeof ShoelaceElement
 
   if (!currentElementConstructor) {
-    window.customElements.define(name, this)
+    window.customElements.define(name, toAnonymousClass(this))
     return
   }
 
@@ -137,6 +137,12 @@ function define (name: string, elementConstructor: CustomElementConstructor | ty
   const str = `Attempted to register <${name}>${newVersion}, but <${name}>${existingVersion} has already been defined.`
 
   console.warn(str)
+}
+
+type Constructable<T = any> = { new (...args: any[]): T }
+
+function toAnonymousClass<T extends Constructable> (ctor: T): Constructable<T> {
+  return class extends ctor {}
 }
 
 export interface ShoelaceFormControl extends ShoelaceElement {
@@ -167,3 +173,4 @@ export interface ShoelaceFormControl extends ShoelaceElement {
   reportValidity: () => boolean;
   setCustomValidity: (message: string) => void;
 }
+

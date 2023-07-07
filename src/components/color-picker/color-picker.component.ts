@@ -1,9 +1,9 @@
-import '../button-group/button-group.js';
-import '../button/button.js';
-import '../dropdown/dropdown.js';
-import '../icon/icon.js';
-import '../input/input.js';
-import '../visually-hidden/visually-hidden.js';
+import SlButtonGroup from '../button-group/button-group.component.js';
+import SlButton from '../button/button.component.js';
+import SlDropdown from '../dropdown/dropdown.component.js';
+import SlIcon from '../icon/icon.component.js';
+import SlInput from '../input/input.component.js';
+import SlVisuallyHidden from '../visually-hidden/visually-hidden.component.js';
 import { clamp } from '../../internal/math.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
@@ -21,8 +21,6 @@ import styles from './color-picker.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
 import type SlChangeEvent from '../../events/sl-change.js';
-import type SlDropdown from '../dropdown/dropdown.js';
-import type SlInput from '../input/input.js';
 import type SlInputEvent from '../../events/sl-input.js';
 
 const hasEyeDropper = 'EyeDropper' in window;
@@ -94,6 +92,15 @@ declare const EyeDropper: EyeDropperConstructor;
 @customElement('sl-color-picker')
 export default class SlColorPicker extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
+
+  static scopedElements = {
+    'button-group': SlButtonGroup,
+    'button': SlButton,
+    'dropdown': SlDropdown,
+    'icon': SlIcon,
+    'input': SlInput,
+    'visually-hidden': SlVisuallyHidden
+  }
 
   private readonly formControlController = new FormControlController(this);
   private isSafeValue = false;

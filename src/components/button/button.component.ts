@@ -1,7 +1,7 @@
-import '../icon/icon.js';
-import '../spinner/spinner.js';
+import SlIcon from '../icon/icon.component.js';
+import SlSpinner from '../spinner/spinner.component.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { FormControlController, validValidityState } from '../../internal/form.js';
 import { HasSlotController } from '../../internal/slot.js';
 import { html, literal } from 'lit/static-html.js';
@@ -36,9 +36,12 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  * @csspart suffix - The container that wraps the suffix.
  * @csspart caret - The button's caret icon, an `<sl-icon>` element.
  */
-@customElement('sl-button')
 export default class SlButton extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
+  static scopedElements = {
+    'sl-icon': SlIcon,
+    'sl-spinner': SlSpinner
+  }
 
   private readonly formControlController = new FormControlController(this, {
     form: input => {

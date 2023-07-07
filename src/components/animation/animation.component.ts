@@ -1,5 +1,5 @@
 import { animations } from './animations.js';
-import { customElement, property, queryAsync } from 'lit/decorators.js';
+import { property, queryAsync } from 'lit/decorators.js';
 import { html } from 'lit';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
@@ -19,7 +19,6 @@ import type { CSSResultGroup } from 'lit';
  * @slot - The element to animate. Avoid slotting in more than one element, as subsequent ones will be ignored. To
  *  animate multiple elements, either wrap them in a single container or use multiple `<sl-animation>` elements.
  */
-@customElement('sl-animation')
 export default class SlAnimation extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 

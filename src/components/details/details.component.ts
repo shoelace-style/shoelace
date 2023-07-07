@@ -1,7 +1,7 @@
-import '../icon/icon.js';
+import SlIcon from '../icon/icon.js';
 import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '../../internal/animate.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
@@ -38,9 +38,12 @@ import type { CSSResultGroup } from 'lit';
  * @animation details.show - The animation to use when showing details. You can use `height: auto` with this animation.
  * @animation details.hide - The animation to use when hiding details. You can use `height: auto` with this animation.
  */
-@customElement('sl-details')
 export default class SlDetails extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
+
+  static scopedElements = {
+    'sl-icon': SlIcon
+  }
 
   private readonly localize = new LocalizeController(this);
 

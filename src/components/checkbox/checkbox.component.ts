@@ -1,6 +1,6 @@
-import '../icon/icon.js';
+import SlIcon from '../icon/icon.component.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { defaultValue } from '../../internal/default-value.js';
 import { FormControlController } from '../../internal/form.js';
 import { html } from 'lit';
@@ -36,9 +36,9 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  * @csspart indeterminate-icon - The indeterminate icon, an `<sl-icon>` element.
  * @csspart label - The container that wraps the checkbox's label.
  */
-@customElement('sl-checkbox')
 export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
+  static scopedElements = { 'sl-icon': SlIcon }
 
   private readonly formControlController = new FormControlController(this, {
     value: (control: SlCheckbox) => (control.checked ? control.value || 'on' : undefined),

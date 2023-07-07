@@ -1,5 +1,5 @@
-import '../icon/icon.js';
-import { customElement, property, query } from 'lit/decorators.js';
+import SlIcon from '../icon/icon.component.js';
+import { property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
@@ -20,9 +20,9 @@ import type SlBreadcrumbItem from '../breadcrumb-item/breadcrumb-item.js';
  *
  * @csspart base - The component's base wrapper.
  */
-@customElement('sl-breadcrumb')
 export default class SlBreadcrumb extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
+  static scopedElements = { 'sl-icon': SlIcon }
 
   private readonly localize = new LocalizeController(this);
   private separatorDir = this.localize.dir();
