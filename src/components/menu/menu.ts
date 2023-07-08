@@ -45,18 +45,13 @@ export default class SlMenu extends ShoelaceElement {
   }
 
   private handleKeyDown(event: KeyboardEvent) {
-    // Make a selection when pressing enter
-    if (event.key === 'Enter') {
+    // Make a selection when pressing enter or space
+    if (event.key === 'Enter' || event.key === ' ') {
       const item = this.getCurrentItem();
       event.preventDefault();
 
       // Simulate a click to support @click handlers on menu items that also work with the keyboard
       item?.click();
-    }
-
-    // Prevent scrolling when space is pressed
-    else if (event.key === ' ') {
-      event.preventDefault();
     }
 
     // Move the selection when pressing down or up

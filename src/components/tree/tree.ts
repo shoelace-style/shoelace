@@ -159,14 +159,8 @@ export default class SlTree extends ShoelaceElement {
   private handleTreeChanged = (mutations: MutationRecord[]) => {
     for (const mutation of mutations) {
       const addedNodes: SlTreeItem[] = [...mutation.addedNodes].filter(SlTreeItem.isTreeItem) as SlTreeItem[];
-      const removedNodes = [...mutation.removedNodes].filter(SlTreeItem.isTreeItem) as SlTreeItem[];
 
       addedNodes.forEach(this.initTreeItem);
-
-      // If the focused item has been removed form the DOM, move the focus to the first focusable item
-      if (removedNodes.includes(this.lastFocusedItem)) {
-        this.focusItem(this.getFocusableItems()[0]);
-      }
     }
   };
 

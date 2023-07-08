@@ -5,7 +5,7 @@ import { playwrightLauncher } from '@web/test-runner-playwright';
 export default {
   rootDir: '.',
   files: 'src/**/*.test.ts', // "default" group
-  concurrentBrowsers: 1,
+  concurrentBrowsers: 3,
   nodeResolve: true,
   testFramework: {
     config: {

@@ -12,10 +12,20 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## Next
+
+- Added tests for `<sl-qr-code>` [#1416]
+- Added support for pressing [[Space]] to select/toggle selected `<sl-menu-item>` elements [#1429]
+- Fixed a bug in focus trapping of modal elements like `<sl-dialog>`. We now manually handle focus ordering as well as added `offsetParent()` check for tabbable boundaries in Safari. Test cases added for `<sl-dialog>` inside a shadowRoot [#1403]
+- Fixed a bug in `valueAsDate` on `<sl-input>` where it would always set `type="date"` for the underlying `<input>` element. It now falls back to the native browser implementation for the in-memory input. This may cause unexpected behavior if you're using `valueAsDate` on any input elements that aren't `type="date"`. [#1399]
+- Fixed a bug in `<sl-qr-code>` where the `background` attribute was never passed to the QR code [#1416]
+- Fixed a bug in `<sl-dropdown>` where aria attributes were incorrectly applied to the default `<slot>` causing Lighthouse errors [#1417]
+- Fixed a bug in `<sl-carousel>` that caused navigation to work incorrectly in some case [#1420]
+- Fixed a bug in `<sl-tree>` that caused focus to be stolen when removing focused tree items [#1430]
+
 ## 2.5.2
 
 - Fixed broken source buttons in the docs [#1401]
-- Fixed broken links in the docs [#1407]
 
 ## 2.5.1
 
