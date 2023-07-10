@@ -93,12 +93,12 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
   static styles: CSSResultGroup = styles;
 
   static scopedElements = {
-    'button-group': SlButtonGroup,
-    'button': SlButton,
-    'dropdown': SlDropdown,
-    'icon': SlIcon,
-    'input': SlInput,
-    'visually-hidden': SlVisuallyHidden
+    'sl-button-group': SlButtonGroup,
+    'sl-button': SlButton,
+    'sl-dropdown': SlDropdown,
+    'sl-icon': SlIcon,
+    'sl-input': SlInput,
+    'sl-visually-hidden': SlVisuallyHidden
   }
 
   private readonly formControlController = new FormControlController(this);
