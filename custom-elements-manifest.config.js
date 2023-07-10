@@ -3,6 +3,7 @@ import { parse } from 'comment-parser';
 import { pascalCase } from 'pascal-case';
 import commandLineArgs from 'command-line-args';
 import fs from 'fs';
+import * as path from 'path'
 
 const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 const { name, description, version, author, homepage, license } = packageData;
@@ -26,7 +27,7 @@ function replace(string, terms) {
 }
 
 export default {
-  globs: ['src/components/**/*.ts'],
+  globs: ['src/components/**/*.component.ts'],
   exclude: ['**/*.styles.ts', '**/*.test.ts'],
   plugins: [
     // Append package data
@@ -36,7 +37,23 @@ export default {
         customElementsManifest.package = { name, description, version, author, homepage, license };
       }
     },
+    // Infer tag names
+    {
+      name: "shoelace-infer-tag-names",
+      analyzePhase({ ts, node, moduleDoc }) {
+        switch (node.kind) {
+          case ts.SyntaxKind.ClassDeclaration: {
+            const className = node.name.getText();
+            const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
 
+            const importPath = moduleDoc.path
+            const tagName = path.basename(importPath, ".component.ts")
+
+            classDoc.tagName = tagName
+          }
+        }
+      }
+    },
     // Parse custom jsDoc tags
     {
       name: 'shoelace-custom-tags',
@@ -140,6 +157,7 @@ export default {
             { from: /\.(t|j)sx?$/, to: '.js' } // Convert .ts to .js
           ];
 
+          console.log(mod.path)
           mod.path = replace(mod.path, terms);
 
           for (const ex of mod.exports ?? []) {

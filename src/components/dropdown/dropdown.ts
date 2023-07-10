@@ -1,4 +1,4 @@
-import Dropdown from './dropdown.component';
-export * from './dropdown.component'
+import Dropdown from './dropdown.component.js';
+export * from './dropdown.component.js'
 export default Dropdown;
 Dropdown.define("dropdown");

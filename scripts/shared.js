@@ -4,13 +4,11 @@ export function getAllComponents(metadata) {
 
   metadata.modules.map(module => {
     module.declarations?.map(declaration => {
-      if (declaration.customElement) {
-        const component = declaration;
-        const path = module.path;
+      const component = declaration;
+      const path = module.path;
 
-        if (component) {
-          allComponents.push(Object.assign(component, { path }));
-        }
+      if (component) {
+        allComponents.push(Object.assign(component, { path }));
       }
     });
   });

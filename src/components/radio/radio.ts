@@ -1,4 +1,4 @@
-import Radio from './radio.component';
-export * from './radio.component'
+import Radio from './radio.component.js';;
+export * from './radio.component.js';
 export default Radio;
 Radio.define("radio");
