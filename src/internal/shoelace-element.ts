@@ -94,7 +94,7 @@ export default class ShoelaceElement extends LitElement {
   }
 
   // @ts-expect-error
-  static version: string = shoelaceVersion
+  static version: string = typeof shoelaceVersion !== "undefined" ? shoelaceVersion : ""
 
   static define (name: string) {
     define(name, this)
@@ -114,7 +114,8 @@ function define (name: string, elementConstructor: CustomElementConstructor | ty
   const currentElementConstructor = window.customElements.get(name) as CustomElementConstructor | typeof ShoelaceElement
 
   if (!currentElementConstructor) {
-    window.customElements.define(name, toAnonymousClass(this))
+    // @ts-expect-error
+    window.customElements.define(name, toAnonymousClass(elementConstructor))
     return
   }
 

@@ -1,4 +1,4 @@
-import Icon from './icon.component';
-export * from './icon.component'
-export default Icon;
-Icon.define("icon");
+import SlIcon from './icon.component.js';
+export * from './icon.component.js'
+export default SlIcon;
+SlIcon.define("sl-icon");

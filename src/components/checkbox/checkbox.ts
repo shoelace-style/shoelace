@@ -1,4 +1,4 @@
-import Checkbox from './checkbox.component';
-export * from './checkbox.component'
-export default Checkbox;
-Checkbox.define("checkbox");
+import SlCheckbox from './checkbox.component.js';
+export * from './checkbox.component.js'
+export default SlCheckbox;
+SlCheckbox.define("sl-checkbox");

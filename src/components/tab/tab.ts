@@ -1,4 +1,4 @@
-import Tab from './tab.component';
-export * from './tab.component'
-export default Tab;
-Tab.define("tab");
+import SlTab from './tab.component.js';
+export * from './tab.component.js'
+export default SlTab;
+SlTab.define("sl-tab");

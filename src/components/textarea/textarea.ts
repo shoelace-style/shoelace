@@ -1,4 +1,4 @@
-import Textarea from './textarea.component';
-export * from './textarea.component'
-export default Textarea;
-Textarea.define("textarea");
+import SlTextarea from './textarea.component.js';
+export * from './textarea.component.js'
+export default SlTextarea;
+SlTextarea.define("sl-textarea");

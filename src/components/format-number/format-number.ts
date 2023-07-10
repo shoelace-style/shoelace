@@ -1,4 +1,4 @@
-import FormatNumber from './format-number.component.js';;
+import SlFormatNumber from './format-number.component.js';;
 export * from './format-number.component.js';
-export default FormatNumber;
-FormatNumber.define("format-number");
+export default SlFormatNumber;
+SlFormatNumber.define("sl-format-number");

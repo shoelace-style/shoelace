@@ -1,4 +1,4 @@
-import SplitPanel from './split-panel.component.js';;
+import SlSplitPanel from './split-panel.component.js';
 export * from './split-panel.component.js';
-export default SplitPanel;
-SplitPanel.define("split-panel");
+export default SlSplitPanel;
+SlSplitPanel.define("sl-split-panel");

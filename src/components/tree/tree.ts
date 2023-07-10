@@ -1,4 +1,4 @@
-import Tree from './tree.component.js';
+import SlTree from './tree.component.js';
 export * from './tree.component.js'
-export default Tree;
-Tree.define("tree");
+export default SlTree;
+SlTree.define("sl-tree");

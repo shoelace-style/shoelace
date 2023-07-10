@@ -1,4 +1,4 @@
-import TreeItem from './tree-item.component';
-export * from './tree-item.component'
-export default TreeItem;
-TreeItem.define("tree-item");
+import SlTreeItem from './tree-item.component.js';
+export * from './tree-item.component.js'
+export default SlTreeItem;
+SlTreeItem.define("sl-tree-item");

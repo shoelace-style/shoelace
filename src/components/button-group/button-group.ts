@@ -1,4 +1,4 @@
-import ButtonGroup from './button-group.component';
-export * from './button-group.component'
-export default ButtonGroup;
-ButtonGroup.define("button-group");
+import SlButtonGroup from './button-group.component.js';
+export * from './button-group.component.js'
+export default SlButtonGroup;
+SlButtonGroup.define("sl-button-group");

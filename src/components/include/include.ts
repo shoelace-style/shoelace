@@ -1,4 +1,4 @@
-import Include from './include.component';
-export * from './include.component'
-export default Include;
-Include.define("include");
+import SlInclude from './include.component.js';
+export * from './include.component.js'
+export default SlInclude;
+SlInclude.define("sl-include");

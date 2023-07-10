@@ -1,4 +1,4 @@
-import Breadcrumb from './breadcrumb.component';
-export * from './breadcrumb.component'
-export default Breadcrumb;
-Breadcrumb.define("breadcrumb");
+import SlBreadcrumb from './breadcrumb.component.js';
+export * from './breadcrumb.component.js'
+export default SlBreadcrumb;
+SlBreadcrumb.define("sl-breadcrumb");

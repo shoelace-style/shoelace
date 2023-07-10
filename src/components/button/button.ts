@@ -1,4 +1,4 @@
-import Button from './button.component';
-export * from './button.component'
-export default Button;
-Button.define("button");
+import SlButton from './button.component.js';
+export * from './button.component.js'
+export default SlButton;
+SlButton.define("sl-button");

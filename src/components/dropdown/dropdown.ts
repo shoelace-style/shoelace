@@ -1,4 +1,4 @@
-import Dropdown from './dropdown.component.js';
+import SlDropdown from './dropdown.component.js';
 export * from './dropdown.component.js'
-export default Dropdown;
-Dropdown.define("dropdown");
+export default SlDropdown;
+SlDropdown.define("sl-dropdown");

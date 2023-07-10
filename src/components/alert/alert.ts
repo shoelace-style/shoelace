@@ -1,4 +1,4 @@
-import Alert from './alert.component.js';
+import SlAlert from './alert.component.js';
 export * from './alert.component.js'
-export default Alert;
-Alert.define("alert");
+export default SlAlert;
+SlAlert.define("sl-alert");

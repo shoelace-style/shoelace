@@ -1,4 +1,4 @@
-import Rating from './rating.component.js';
+import SlRating from './rating.component.js';
 export * from './rating.component.js';
-export default Rating;
-Rating.define("rating");
+export default SlRating;
+SlRating.define("sl-rating");

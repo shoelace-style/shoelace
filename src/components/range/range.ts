@@ -1,4 +1,4 @@
-import Range from './range.component';
-export * from './range.component'
-export default Range;
-Range.define("range");
+import SlRange from './range.component.js';
+export * from './range.component.js'
+export default SlRange;
+SlRange.define("sl-range");

@@ -1,4 +1,4 @@
-import ColorPicker from './color-picker.component';
-export * from './color-picker.component'
-export default ColorPicker;
-ColorPicker.define("color-picker");
+import SlColorPicker from './color-picker.component.js';
+export * from './color-picker.component.js'
+export default SlColorPicker;
+SlColorPicker.define("sl-color-picker");

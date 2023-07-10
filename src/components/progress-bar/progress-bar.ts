@@ -1,4 +1,4 @@
-import ProgressBar from './progress-bar.component';
-export * from './progress-bar.component'
-export default ProgressBar;
-ProgressBar.define("progress-bar");
+import SlProgressBar from './progress-bar.component.js';
+export * from './progress-bar.component.js'
+export default SlProgressBar;
+SlProgressBar.define("progress-bar");

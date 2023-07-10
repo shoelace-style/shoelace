@@ -1,4 +1,4 @@
-import Option from './option.component';
-export * from './option.component'
-export default Option;
-Option.define("option");
+import SlOption from './option.component.js';
+export * from './option.component.js'
+export default SlOption;
+SlOption.define("sl-option");

@@ -1,4 +1,4 @@
-import Menu from './menu.component';
-export * from './menu.component'
-export default Menu;
-Menu.define("menu");
+import SlMenu from './menu.component.js';
+export * from './menu.component.js'
+export default SlMenu;
+SlMenu.define("sl-menu");

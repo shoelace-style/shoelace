@@ -1,4 +1,4 @@
-import RelativeTime from './relative-time.component';
-export * from './relative-time.component'
-export default RelativeTime;
-RelativeTime.define("relative-time");
+import SlRelativeTime from './relative-time.component.js';
+export * from './relative-time.component.js'
+export default SlRelativeTime;
+SlRelativeTime.define("sl-relative-time");

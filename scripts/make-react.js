@@ -25,6 +25,7 @@ components.map(component => {
   const componentDir = path.join(reactDir, tagWithoutPrefix);
   const componentFile = path.join(componentDir, 'index.ts');
   const importPath = component.path;
+  console.log({ importPath })
   const events = (component.events || []).map(event => `${event.reactName}: '${event.name}'`).join(',\n');
 
   fs.mkdirSync(componentDir, { recursive: true });

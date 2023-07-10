@@ -1,4 +1,4 @@
-import ProgressRing from './progress-ring.component';
-export * from './progress-ring.component'
-export default ProgressRing;
-ProgressRing.define("progress-ring");
+import SlProgressRing from './progress-ring.component.js';
+export * from './progress-ring.component.js'
+export default SlProgressRing;
+SlProgressRing.define("sl-progress-ring");

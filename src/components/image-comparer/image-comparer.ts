@@ -1,4 +1,4 @@
-import ImageComparer from './image-comparer.component';
-export * from './image-comparer.component'
-export default ImageComparer;
-ImageComparer.define("image-comparer");
+import SlImageComparer from './image-comparer.component.js';
+export * from './image-comparer.component.js'
+export default SlImageComparer;
+SlImageComparer.define("sl-image-comparer");

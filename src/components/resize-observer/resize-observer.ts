@@ -1,4 +1,4 @@
-import ResizeObserver from './resize-observer.component';
-export * from './resize-observer.component'
-export default ResizeObserver;
-ResizeObserver.define("resize-observer");
+import SlResizeObserver from './resize-observer.component.js';
+export * from './resize-observer.component.js'
+export default SlResizeObserver;
+SlResizeObserver.define("sl-resize-observer");

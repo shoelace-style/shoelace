@@ -1,4 +1,4 @@
-import RadioGroup from './radio-group.component';
-export * from './radio-group.component'
-export default RadioGroup;
-RadioGroup.define("radio-group");
+import SlRadioGroup from './radio-group.component.js';
+export * from './radio-group.component.js'
+export default SlRadioGroup;
+SlRadioGroup.define("sl-radio-group");

@@ -1,4 +1,4 @@
-import Badge from './badge.component';
-export * from './badge.component'
-export default Badge;
-Badge.define("badge");
+import SlBadge from './badge.component.js';
+export * from './badge.component.js'
+export default SlBadge;
+SlBadge.define("sl-badge");

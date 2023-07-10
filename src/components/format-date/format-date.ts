@@ -1,4 +1,4 @@
-import FormatDate from './format-date.component.js';;
+import SlFormatDate from './format-date.component.js';;
 export * from './format-date.component.js';
-export default FormatDate;
-FormatDate.define("format-date");
+export default SlFormatDate;
+SlFormatDate.define("sl-format-date");

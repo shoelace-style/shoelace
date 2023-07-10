@@ -1,4 +1,4 @@
-import AnimatedImage from './animated-image.component.js';
+import SlAnimatedImage from './animated-image.component.js';
 export * from './animated-image.component.js'
-export default AnimatedImage;
-AnimatedImage.define("animated-image");
+export default SlAnimatedImage;
+SlAnimatedImage.define("sl-animated-image");

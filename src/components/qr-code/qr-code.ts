@@ -1,4 +1,4 @@
-import QrCode from './qr-code.component';
-export * from './qr-code.component'
-export default QrCode;
-QrCode.define("qr-code");
+import SlQrCode from './qr-code.component.js';
+export * from './qr-code.component.js'
+export default SlQrCode;
+SlQrCode.define("sl-qr-code");

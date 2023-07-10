@@ -1,4 +1,4 @@
-import IconButton from './icon-button.component';
-export * from './icon-button.component'
-export default IconButton;
-IconButton.define("icon-button");
+import SlIconButton from './icon-button.component.js';
+export * from './icon-button.component.js'
+export default SlIconButton;
+SlIconButton.define("sl-icon-button");

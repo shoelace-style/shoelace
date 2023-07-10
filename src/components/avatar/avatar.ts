@@ -1,4 +1,4 @@
-import Avatar from './avatar.component';
-export * from './avatar.component'
-export default Avatar;
-Avatar.define("avatar");
+import SlAvatar from './avatar.component.js';
+export * from './avatar.component.js'
+export default SlAvatar;
+SlAvatar.define("sl-avatar");

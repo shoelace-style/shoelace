@@ -1,4 +1,4 @@
-import Tag from './tag.component';
-export * from './tag.component'
-export default Tag;
-Tag.define("tag");
+import SlTag from './tag.component.js';
+export * from './tag.component.js'
+export default SlTag;
+SlTag.define("sl-tag");

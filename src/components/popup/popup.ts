@@ -1,4 +1,4 @@
-import Popup from './popup.component.js';;
+import SlPopup from './popup.component.js';
 export * from './popup.component.js';
-export default Popup;
-Popup.define("popup");
+export default SlPopup;
+SlPopup.define("sl-popup");

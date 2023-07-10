@@ -1,4 +1,4 @@
-import Dialog from './dialog.component';
-export * from './dialog.component'
-export default Dialog;
-Dialog.define("dialog");
+import SlDialog from './dialog.component.js';
+export * from './dialog.component.js'
+export default SlDialog;
+SlDialog.define("sl-dialog");

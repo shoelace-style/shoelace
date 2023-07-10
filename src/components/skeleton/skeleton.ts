@@ -1,4 +1,4 @@
-import Skeleton from './skeleton.component';
-export * from './skeleton.component'
-export default Skeleton;
-Skeleton.define("skeleton");
+import SlSkeleton from './skeleton.component.js';
+export * from './skeleton.component.js'
+export default SlSkeleton;
+SlSkeleton.define("sl-skeleton");

@@ -1,4 +1,4 @@
-import CarouselItem from './carousel-item.component';
-export * from './carousel-item.component'
-export default CarouselItem;
-CarouselItem.define("carousel-item");
+import SlCarouselItem from './carousel-item.component.js';
+export * from './carousel-item.component.js'
+export default SlCarouselItem;
+SlCarouselItem.define("sl-carousel-item");

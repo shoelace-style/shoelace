@@ -1,4 +1,4 @@
-import Divider from './divider.component';
-export * from './divider.component'
-export default Divider;
-Divider.define("divider");
+import SlDivider from './divider.component.js';
+export * from './divider.component.js'
+export default SlDivider;
+SlDivider.define("sl-divider");
