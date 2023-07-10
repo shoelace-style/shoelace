@@ -1,6 +1,6 @@
-import '../button-group/button-group.js';
+import SlButtonGroup from '../button-group/button-group.component.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import {
   customErrorValidityState,
   FormControlController,
@@ -40,9 +40,9 @@ import type SlRadioButton from '../radio-button/radio-button.js';
  * @csspart button-group - The button group that wraps radio buttons.
  * @csspart button-group__base - The button group's `base` part.
  */
-@customElement('sl-radio-group')
 export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
+  static scopedElements = { 'sl-button-group': SlButtonGroup }
 
   protected readonly formControlController = new FormControlController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');

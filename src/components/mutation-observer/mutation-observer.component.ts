@@ -1,4 +1,4 @@
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { html } from 'lit';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
@@ -15,7 +15,6 @@ import type { CSSResultGroup } from 'lit';
  *
  * @slot - The content to watch for mutations.
  */
-@customElement('sl-mutation-observer')
 export default class SlMutationObserver extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 

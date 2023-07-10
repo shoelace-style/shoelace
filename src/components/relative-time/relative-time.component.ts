@@ -1,4 +1,4 @@
-import { customElement, property, state } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
@@ -24,7 +24,6 @@ const availableUnits: UnitConfig[] = [
  * @status stable
  * @since 2.0
  */
-@customElement('sl-relative-time')
 export default class SlRelativeTime extends ShoelaceElement {
   private readonly localize = new LocalizeController(this);
   private updateTimeout: number;

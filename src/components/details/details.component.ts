@@ -1,4 +1,4 @@
-import SlIcon from '../icon/icon.js';
+import SlIcon from '../icon/icon.component.js';
 import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '../../internal/animate.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { property, query } from 'lit/decorators.js';

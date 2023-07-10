@@ -1,7 +1,7 @@
-import '../icon/icon.js';
+import SlIcon from '../icon/icon.component.js';
 import { clamp } from '../../internal/math.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { drag } from '../../internal/drag.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
@@ -34,9 +34,9 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --divider-width - The width of the dividing line.
  * @cssproperty --handle-size - The size of the compare handle.
  */
-@customElement('sl-image-comparer')
 export default class SlImageComparer extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
+  static scopedElements = { 'sl-icon': SlIcon }
 
   private readonly localize = new LocalizeController(this);
 

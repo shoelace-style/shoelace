@@ -1,4 +1,4 @@
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './divider.styles.js';
@@ -14,7 +14,6 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --width - The width of the divider.
  * @cssproperty --spacing - The spacing of the divider.
  */
-@customElement('sl-divider')
 export default class SlDivider extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 

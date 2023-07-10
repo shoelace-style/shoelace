@@ -1,10 +1,10 @@
 import { clamp } from '../../internal/math.js';
-import { customElement, property, query } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
-import SlTreeItem from '../tree-item/tree-item.js';
+import SlTreeItem from '../tree-item/tree-item.component.js';
 import styles from './tree.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -69,7 +69,6 @@ function syncCheckboxes(changedTreeItem: SlTreeItem, initialSync = false) {
  * @cssproperty [--indent-guide-style=solid] - The style of the indentation line, e.g. solid, dotted, dashed.
  * @cssproperty [--indent-guide-width=0] - The width of the indentation line.
  */
-@customElement('sl-tree')
 export default class SlTree extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 

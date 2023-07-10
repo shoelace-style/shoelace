@@ -1,6 +1,6 @@
-import '../icon-button/icon-button.js';
+import SlIconButton from '../icon-button/icon-button.component.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
 import { scrollIntoView } from '../../internal/scroll.js';
@@ -39,9 +39,10 @@ import type SlTabPanel from '../tab-panel/tab-panel.js';
  * @cssproperty --track-color - The color of the indicator's track (the line that separates tabs from panels).
  * @cssproperty --track-width - The width of the indicator's track (the line that separates tabs from panels).
  */
-@customElement('sl-tab-group')
 export default class SlTabGroup extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
+  static scopedElements = { 'sl-icon-button': SlIconButton }
+
   private readonly localize = new LocalizeController(this);
 
   private activeTab?: SlTab;

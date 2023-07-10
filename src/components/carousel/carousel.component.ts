@@ -2,7 +2,7 @@ import SlIcon from '../icon/icon.component.js';
 import { AutoplayController } from './autoplay-controller.js';
 import { clamp } from '../../internal/math.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
 import { map } from 'lit/directives/map.js';
@@ -44,7 +44,6 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --scroll-hint - The amount of padding to apply to the scroll area, allowing adjacent slides to become
  *  partially visible as a scroll hint.
  */
-@customElement('sl-carousel')
 export default class SlCarousel extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
   static scopedElements = { 'sl-icon': SlIcon }

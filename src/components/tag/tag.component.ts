@@ -1,6 +1,6 @@
-import '../icon-button/icon-button.js';
+import SlIconButton from '../icon-button/icon-button.component.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
@@ -24,9 +24,10 @@ import type { CSSResultGroup } from 'lit';
  * @csspart remove-button - The tag's remove button, an `<sl-icon-button>`.
  * @csspart remove-button__base - The remove button's exported `base` part.
  */
-@customElement('sl-tag')
 export default class SlTag extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
+  static scopedElements = { 'sl-icon-button': SlIconButton }
+
   private readonly localize = new LocalizeController(this);
 
   /** The tag's theme variant. */

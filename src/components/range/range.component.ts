@@ -1,5 +1,5 @@
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, eventOptions, property, query, state } from 'lit/decorators.js';
+import { eventOptions, property, query, state } from 'lit/decorators.js';
 import { defaultValue } from '../../internal/default-value.js';
 import { FormControlController } from '../../internal/form.js';
 import { HasSlotController } from '../../internal/slot.js';
@@ -43,7 +43,6 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  * @cssproperty --track-height - The height of the track.
  * @cssproperty --track-active-offset - The point of origin of the active track.
  */
-@customElement('sl-range')
 export default class SlRange extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 

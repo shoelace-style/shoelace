@@ -1,7 +1,7 @@
-import '../icon/icon.js';
+import SlIcon from '../icon/icon.component.js';
 import { clamp } from '../../internal/math.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, eventOptions, property, query, state } from 'lit/decorators.js';
+import { eventOptions, property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
 import { styleMap } from 'lit/directives/style-map.js';
@@ -31,9 +31,9 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --symbol-size - The size of symbols.
  * @cssproperty --symbol-spacing - The spacing to use around symbols.
  */
-@customElement('sl-rating')
 export default class SlRating extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
+  static scopedElements = { 'sl-icon': SlIcon }
 
   private readonly localize = new LocalizeController(this);
 

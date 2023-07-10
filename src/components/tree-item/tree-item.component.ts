@@ -1,9 +1,9 @@
-import '../checkbox/checkbox.js';
-import '../icon/icon.js';
-import '../spinner/spinner.js';
+import SlCheckbox from '../checkbox/checkbox.component.js';
+import SlIcon from '../icon/icon.component.js';
+import SlSpinner from '../spinner/spinner.component.js';
 import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '../../internal/animate.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
 import { html } from 'lit';
 import { live } from 'lit/directives/live.js';
@@ -56,9 +56,13 @@ import type { CSSResultGroup, PropertyValueMap } from 'lit';
  * @csspart checkbox__indeterminate-icon - The checkbox's exported `indeterminate-icon` part.
  * @csspart checkbox__label - The checkbox's exported `label` part.
  */
-@customElement('sl-tree-item')
 export default class SlTreeItem extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
+  static scopedElements = {
+    'sl-checkbox': SlCheckbox,
+    'sl-icon': SlIcon,
+    'sl-spinner': SlSpinner,
+  }
 
   static isTreeItem(node: Node) {
     return node instanceof Element && node.getAttribute('role') === 'treeitem';

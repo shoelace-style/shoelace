@@ -1,4 +1,4 @@
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { html } from 'lit';
 import { requestInclude } from './request.js';
 import { watch } from '../../internal/watch.js';
@@ -15,7 +15,6 @@ import type { CSSResultGroup } from 'lit';
  * @event sl-load - Emitted when the included file is loaded.
  * @event {{ status: number }} sl-error - Emitted when the included file fails to load due to an error.
  */
-@customElement('sl-include')
 export default class SlInclude extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 

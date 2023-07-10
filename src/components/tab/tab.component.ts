@@ -1,6 +1,6 @@
-import '../icon-button/icon-button.js';
+import SlIconButton from '../icon-button/icon-button.component.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
 import { watch } from '../../internal/watch.js';
@@ -26,9 +26,10 @@ let id = 0;
  * @csspart close-button - The close button, an `<sl-icon-button>`.
  * @csspart close-button__base - The close button's exported `base` part.
  */
-@customElement('sl-tab')
 export default class SlTab extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
+  static scopedElements = { 'sl-icon-button': SlIconButton }
+
   private readonly localize = new LocalizeController(this);
 
   private readonly attrId = ++id;

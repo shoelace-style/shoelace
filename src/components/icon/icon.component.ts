@@ -1,4 +1,4 @@
-import { customElement, property, state } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { getIconLibrary, type IconLibrary, unwatchIcon, watchIcon } from './library.js';
 import { html } from 'lit';
 import { isTemplateResult } from 'lit/directive-helpers.js';
@@ -27,7 +27,6 @@ const iconCache = new Map<string, Promise<SVGResult>>();
  * @csspart svg - The internal SVG element.
  * @csspart use - The <use> element generated when using `spriteSheet: true`
  */
-@customElement('sl-icon')
 export default class SlIcon extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 

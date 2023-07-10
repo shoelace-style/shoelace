@@ -1,4 +1,4 @@
-import { customElement, property, query } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
 import { watch } from '../../internal/watch.js';
@@ -15,7 +15,6 @@ import type { CSSResultGroup } from 'lit';
  *
  * @csspart base - The component's base wrapper.
  */
-@customElement('sl-qr-code')
 export default class SlQrCode extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 

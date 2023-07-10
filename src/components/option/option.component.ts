@@ -1,6 +1,6 @@
-import '../icon/icon.js';
+import SlIcon from '../icon/icon.component.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
 import { watch } from '../../internal/watch.js';
@@ -26,9 +26,9 @@ import type { CSSResultGroup } from 'lit';
  * @csspart prefix - The container that wraps the prefix.
  * @csspart suffix - The container that wraps the suffix.
  */
-@customElement('sl-option')
 export default class SlOption extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
+  static scopedElements = { 'sl-icon': SlIcon }
 
   private cachedTextLabel: string;
   // @ts-expect-error - Controller is currently unused

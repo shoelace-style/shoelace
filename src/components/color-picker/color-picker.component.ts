@@ -6,7 +6,7 @@ import SlInput from '../input/input.component.js';
 import SlVisuallyHidden from '../visually-hidden/visually-hidden.component.js';
 import { clamp } from '../../internal/math.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { defaultValue } from '../../internal/default-value.js';
 import { drag } from '../../internal/drag.js';
 import { FormControlController } from '../../internal/form.js';
@@ -89,7 +89,6 @@ declare const EyeDropper: EyeDropperConstructor;
  * @cssproperty --slider-handle-size - The diameter of the slider's handle.
  * @cssproperty --swatch-size - The size of each predefined color swatch.
  */
-@customElement('sl-color-picker')
 export default class SlColorPicker extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 

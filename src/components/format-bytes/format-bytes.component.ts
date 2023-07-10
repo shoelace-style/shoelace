@@ -1,4 +1,4 @@
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { LocalizeController } from '../../utilities/localize.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 
@@ -8,7 +8,6 @@ import ShoelaceElement from '../../internal/shoelace-element.js';
  * @status stable
  * @since 2.0
  */
-@customElement('sl-format-bytes')
 export default class SlFormatBytes extends ShoelaceElement {
   private readonly localize = new LocalizeController(this);
 

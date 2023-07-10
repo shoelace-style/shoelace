@@ -1,6 +1,6 @@
-import '../icon/icon.js';
+import SlIcon from '../icon/icon.component.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { getTextContent } from '../../internal/slot.js';
 import { html } from 'lit';
 import { watch } from '../../internal/watch.js';
@@ -27,9 +27,9 @@ import type { CSSResultGroup } from 'lit';
  * @csspart suffix - The suffix container.
  * @csspart submenu-icon - The submenu icon, visible only when the menu item has a submenu (not yet implemented).
  */
-@customElement('sl-menu-item')
 export default class SlMenuItem extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
+  static scopedElements = { 'sl-icon': SlIcon }
 
   private cachedTextLabel: string;
 

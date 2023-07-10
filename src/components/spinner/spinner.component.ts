@@ -1,4 +1,3 @@
-import { customElement } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
@@ -18,7 +17,6 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --indicator-color - The color of the spinner's indicator.
  * @cssproperty --speed - The time it takes for the spinner to complete one animation cycle.
  */
-@customElement('sl-spinner')
 export default class SlSpinner extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 

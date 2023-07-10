@@ -1,5 +1,5 @@
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { defaultValue } from '../../internal/default-value.js';
 import { FormControlController } from '../../internal/form.js';
 import { html } from 'lit';
@@ -34,7 +34,6 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  * @cssproperty --height - The height of the switch.
  * @cssproperty --thumb-size - The size of the thumb.
  */
-@customElement('sl-switch')
 export default class SlSwitch extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 

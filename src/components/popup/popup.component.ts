@@ -1,6 +1,6 @@
 import { arrow, autoUpdate, computePosition, flip, offset, platform, shift, size } from '@floating-ui/dom';
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { offsetParent } from 'composed-offset-position';
 import ShoelaceElement from '../../internal/shoelace-element.js';
@@ -35,7 +35,6 @@ import type { CSSResultGroup } from 'lit';
  *  popup can be before overflowing. Useful for positioning child elements that need to overflow. This property is only
  *  available when using `auto-size`.
  */
-@customElement('sl-popup')
 export default class SlPopup extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 

@@ -1,4 +1,4 @@
-import { customElement, query } from 'lit/decorators.js';
+import { query } from 'lit/decorators.js';
 import { html } from 'lit';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './menu.styles.js';
@@ -18,7 +18,6 @@ export interface MenuSelectEventDetail {
  *
  * @event {{ item: SlMenuItem }} sl-select - Emitted when a menu item is selected.
  */
-@customElement('sl-menu')
 export default class SlMenu extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 

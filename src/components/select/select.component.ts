@@ -1,9 +1,9 @@
-import '../icon/icon.js';
-import '../popup/popup.js';
-import '../tag/tag.js';
+import SlIcon from '../icon/icon.component.js';
+import SlPopup from '../popup/popup.component.js';
+import SlTag from '../tag/tag.component.js';
 import { animateTo, stopAnimations } from '../../internal/animate.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { defaultValue } from '../../internal/default-value.js';
 import { FormControlController } from '../../internal/form.js';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
@@ -18,7 +18,6 @@ import styles from './select.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
 import type SlOption from '../option/option.js';
-import type SlPopup from '../popup/popup.js';
 import type SlRemoveEvent from '../../events/sl-remove.js';
 
 /**
@@ -66,9 +65,13 @@ import type SlRemoveEvent from '../../events/sl-remove.js';
  * @csspart clear-button - The clear button.
  * @csspart expand-icon - The container that wraps the expand icon.
  */
-@customElement('sl-select')
 export default class SlSelect extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
+  static scopedElements = {
+    'sl-icon': SlIcon,
+    'sl-popup': SlPopup,
+    'sl-tag': SlTag,
+  }
 
   private readonly formControlController = new FormControlController(this, {
     assumeInteractionOn: ['sl-blur', 'sl-input']

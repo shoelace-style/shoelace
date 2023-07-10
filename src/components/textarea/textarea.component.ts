@@ -1,5 +1,5 @@
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { defaultValue } from '../../internal/default-value.js';
 import { FormControlController } from '../../internal/form.js';
 import { HasSlotController } from '../../internal/slot.js';
@@ -34,7 +34,6 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  * @csspart base - The component's base wrapper.
  * @csspart textarea - The internal `<textarea>` control.
  */
-@customElement('sl-textarea')
 export default class SlTextarea extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 

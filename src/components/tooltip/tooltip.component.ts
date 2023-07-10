@@ -1,7 +1,7 @@
-import '../popup/popup.js';
+import SlPopup from '../popup/popup.component.js';
 import { animateTo, parseDuration, stopAnimations } from '../../internal/animate.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
@@ -10,7 +10,6 @@ import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './tooltip.styles.js';
 import type { CSSResultGroup } from 'lit';
-import type SlPopup from '../popup/popup.js';
 
 /**
  * @summary Tooltips display additional information based on a specific action.
@@ -40,9 +39,9 @@ import type SlPopup from '../popup/popup.js';
  * @animation tooltip.show - The animation to use when showing the tooltip.
  * @animation tooltip.hide - The animation to use when hiding the tooltip.
  */
-@customElement('sl-tooltip')
 export default class SlTooltip extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
+  static scopedElements = { 'sl-popup': SlPopup }
 
   private hoverTimeout: number;
   private readonly localize = new LocalizeController(this);
