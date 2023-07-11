@@ -6,13 +6,13 @@ meta:
 
 # Customizing
 
-Shoelace components can be customized at a high level through design tokens. This gives you control over theme colors and general styling. For more advanced customizations, you can make use of component parts and custom properties to target individual components.
+Shoelace components can be customized at a high level through design tokens. This gives you control over theme colors and general styling. For more advanced customizations, you can make use of CSS parts and custom properties to target individual components.
 
 ## Design Tokens
 
 Shoelace makes use of several design tokens to provide a consistent appearance across components. You can customize them and use them in your own application with pure CSS — no preprocessor required.
 
-Design tokens offer a high-level way to customize the library with minimal effort. There are no component-specific variables, however, as design tokens are intended to be generic and highly reusable. To customize an individual component, refer to the section entitled [Component Parts](#component-parts).
+Design tokens offer a high-level way to customize the library with minimal effort. There are no component-specific variables, however, as design tokens are intended to be generic and highly reusable. To customize an individual component, refer to the section entitled [CSS Parts](#css-parts).
 
 Design tokens are accessed through CSS custom properties that are defined in your theme. Because design tokens live at the page level, they're prefixed with `--sl-` to avoid collisions with other libraries.
 
@@ -37,9 +37,9 @@ To customize a design token, simply override it in your stylesheet using a `:roo
 
 Many design tokens are described further along in this documentation. For a complete list, refer to `src/themes/light.css` in the project's [source code](https://github.com/shoelace-style/shoelace/blob/current/src/themes/light.css).
 
-## Component Parts
+## CSS Parts
 
-Whereas design tokens offer a high-level way to customize the library, component parts offer a low-level way to customize individual components. Again, this is done with pure CSS — no preprocessor required.
+Whereas design tokens offer a high-level way to customize the library, CSS parts offer a low-level way to customize individual components. Again, this is done with pure CSS — no preprocessor required.
 
 Shoelace components use a [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) to encapsulate their styles and behaviors. As a result, you can't simply target their internals with the usual CSS selectors. Instead, components expose "parts" that can be targeted with the [CSS part selector](https://developer.mozilla.org/en-US/docs/Web/CSS/::part), or `::part()`.
 
@@ -76,7 +76,7 @@ At first glance, this approach might seem a bit verbose or even limiting, but it
 
 - Customizations can be made to components with explicit selectors, such as `::part(icon)`, rather than implicit selectors, such as `.button > div > span + .icon`, that are much more fragile.
 
-- The internal structure of a component will likely change as it evolves. By exposing component parts through an API, the internals can be reworked without fear of breaking customizations as long as its parts remain intact.
+- The internal structure of a component will likely change as it evolves. By exposing CSS parts through an API, the internals can be reworked without fear of breaking customizations as long as its parts remain intact.
 
 - It encourages us to think more about how components are designed and how customizations should be allowed before users can take advantage of them. Once we opt a part into the component's API, it's guaranteed to be supported and can't be removed until a major version of the library is released.
 
