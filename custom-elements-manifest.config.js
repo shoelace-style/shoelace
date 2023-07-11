@@ -47,7 +47,7 @@ export default {
             const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
 
             const importPath = moduleDoc.path
-            const tagName = path.basename(importPath, ".component.ts")
+            const tagName = "sl-" + path.basename(importPath, ".component.ts")
 
             classDoc.tagName = tagName
           }
