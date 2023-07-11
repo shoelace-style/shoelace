@@ -101,7 +101,7 @@
     "eslint-plugin-chai-friendly": "^0.7.2",
     "eslint-plugin-import": "^2.27.4",
     "eslint-plugin-lit": "^1.8.2",
-    "eslint-plugin-lit-a11y": "^2.3.0",
+    "eslint-plugin-lit-a11y": "^4.1.0",
     "eslint-plugin-markdown": "^3.0.0",
     "eslint-plugin-sort-imports-es6-autofix": "^0.6.0",
     "eslint-plugin-wc": "^1.4.0",
