@@ -57,6 +57,9 @@ export class SubmenuController implements ReactiveController {
       this.host.addEventListener('focusout', this.handleFocusOut);
       this.isConnected = true;
     }
+
+    // The popup does not seem to get wired when the host is
+    // connected, so manage its listeners separately.
     if (!this.isPopupConnected) {
       if (this.popupRef.value) {
         this.popupRef.value.addEventListener('mouseover', this.handlePopupMouseover);
@@ -118,10 +121,8 @@ export class SubmenuController implements ReactiveController {
         }
 
         // Menus
-        //let firstMenuItem: HTMLElement | null = null;
         let menuItems: NodeListOf<Element> | null = null;
         for (var elt of submenuSlot.assignedElements()) {
-          //firstMenuItem = elt.querySelector("sl-menu-item, [role^='menuitem']");
           menuItems = elt.querySelectorAll("sl-menu-item, [role^='menuitem']");
           if (menuItems.length !== 0) {
             break;

@@ -129,9 +129,6 @@ export default class SlMenuItem extends ShoelaceElement {
     if (this.type === 'checkbox') {
       this.setAttribute('role', 'menuitemcheckbox');
       this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
-    } else if (this.isSubmenu()) {
-      this.setAttribute('role', 'menuitem');
-      this.removeAttribute('aria-checked');
     } else {
       this.setAttribute('role', 'menuitem');
       this.removeAttribute('aria-checked');
