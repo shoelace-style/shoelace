@@ -409,8 +409,8 @@ export default class SlTree extends ShoelaceElement {
         @mousedown=${this.handleMouseDown}
       >
         <slot @slotchange=${this.handleSlotChange}></slot>
-        <slot name="expand-icon" hidden aria-hidden="true"> </slot>
-        <slot name="collapse-icon" hidden aria-hidden="true"> </slot>
+        <span hidden aria-hidden="true"><slot name="expand-icon"></slot></span>
+        <span hidden aria-hidden="true"><slot name="collapse-icon"></slot></span>
       </div>
     `;
   }
