@@ -40,6 +40,10 @@ export interface VirtualElement {
   getBoundingClientRect: () => DOMRect;
 }
 
+function isVirtualElement(e: unknown): e is VirtualElement {
+  return e !== null && typeof e === 'object' && 'getBoundingClientRect' in e;
+}
+
 @customElement('sl-popup')
 export default class SlPopup extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
@@ -52,12 +56,10 @@ export default class SlPopup extends ShoelaceElement {
   @query('.popup__arrow') private arrowEl: HTMLElement;
 
   /**
-   * The element the popup will be anchored to. If the anchor lives outside of the popup, you can provide its `id` or a
-   * reference to it here. If the anchor lives inside the popup, use the `anchor` slot instead.
+   * The element the popup will be anchored to. If the anchor lives outside of the popup, you can provide the anchor element `id`, or an
+   * dom element reference, or a VirtualElement.  If the anchor lives inside the popup, use the `anchor` slot instead.
    */
-  @property() anchor: Element | string | undefined;
-
-  @property({ attribute: 'virtual-anchor', type: Object }) virtualAnchor: VirtualElement | undefined;
+  @property() anchor: Element | string | VirtualElement;
 
   /**
    * Activates the positioning logic and shows the popup. When this attribute is removed, the positioning logic is torn
@@ -213,7 +215,7 @@ export default class SlPopup extends ShoelaceElement {
     }
 
     // Update the anchor when anchor changes
-    if (changedProps.has('anchor') || changedProps.has('virtualAnchor')) {
+    if (changedProps.has('anchor')) {
       this.handleAnchorChange();
     }
 
@@ -227,13 +229,11 @@ export default class SlPopup extends ShoelaceElement {
   private async handleAnchorChange() {
     await this.stop();
 
-    if (this.virtualAnchor) {
-      this.anchorEl = this.virtualAnchor;
-    } else if (this.anchor && typeof this.anchor === 'string') {
+    if (this.anchor && typeof this.anchor === 'string') {
       // Locate the anchor by id
       const root = this.getRootNode() as Document | ShadowRoot;
       this.anchorEl = root.getElementById(this.anchor);
-    } else if (this.anchor instanceof Element) {
+    } else if (this.anchor instanceof Element || isVirtualElement(this.anchor)) {
       // Use the anchor's reference
       this.anchorEl = this.anchor;
     } else {
