@@ -98,7 +98,8 @@ export default class SlOption extends ShoelaceElement {
       this.value = String(this.value);
     }
 
-    if (this.value.includes(' ')) {
+    // @ts-ignore
+    if (this.parentElement?.multiple && this.value.includes(' ')) {
       console.error(`Option values cannot include a space. All spaces have been replaced with underscores.`, this);
       this.value = this.value.replace(/ /g, '_');
     }
