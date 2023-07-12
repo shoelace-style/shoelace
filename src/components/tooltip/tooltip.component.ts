@@ -240,6 +240,12 @@ export default class SlTooltip extends ShoelaceElement {
     return waitForEvent(this, 'sl-after-hide');
   }
 
+  //
+  // NOTE: Tooltip is a bit unique in that we're using aria-live instead of aria-labelledby to trick screen readers into
+  // announcing the content. It works really well, but it violates an accessibility rule. We're also adding the
+  // aria-describedby attribute to a slot, which is required by <sl-popup> to correctly locate the first assigned
+  // element, otherwise positioning is incorrect.
+  //
   render() {
     return html`
       <sl-popup
@@ -260,18 +266,13 @@ export default class SlTooltip extends ShoelaceElement {
         shift
         arrow
       >
+        ${'' /* eslint-disable-next-line lit-a11y/no-aria-slot */}
         <slot slot="anchor" aria-describedby="tooltip"></slot>
 
-        <slot
-          name="content"
-          part="body"
-          id="tooltip"
-          class="tooltip__body"
-          role="tooltip"
-          aria-live=${this.open ? 'polite' : 'off'}
-        >
-          ${this.content}
-        </slot>
+        ${'' /* eslint-disable-next-line lit-a11y/accessible-name */}
+        <div part="body" id="tooltip" class="tooltip__body" role="tooltip" aria-live=${this.open ? 'polite' : 'off'}>
+          <slot name="content">${this.content}</slot>
+        </div>
       </sl-popup>
     `;
   }
@@ -298,3 +299,4 @@ declare global {
     'sl-tooltip': SlTooltip;
   }
 }
+

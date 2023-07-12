@@ -29,7 +29,7 @@ export default class SlBadge extends ShoelaceElement {
 
   render() {
     return html`
-      <slot
+      <span
         part="base"
         class=${classMap({
           badge: true,
@@ -42,7 +42,9 @@ export default class SlBadge extends ShoelaceElement {
           'badge--pulse': this.pulse
         })}
         role="status"
-      ></slot>
+      >
+        <slot></slot>
+      </span>
     `;
   }
 }

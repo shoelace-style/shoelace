@@ -18,6 +18,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Added `displayName` to React Wrappers for better debugging. []
 - Split auto-defining routes and non-auto-defining routes for Components. []
 - Fixed React Treeshaking by introducing `sideEffects` key in `package.json`. []
+- Fixed a bug in `<sl-tree>` where it was auto-defining `<sl-tree-item>`. []
 - Added tests for `<sl-qr-code>` [#1416]
 - Added support for pressing [[Space]] to select/toggle selected `<sl-menu-item>` elements [#1429]
 - Fixed a bug in focus trapping of modal elements like `<sl-dialog>`. We now manually handle focus ordering as well as added `offsetParent()` check for tabbable boundaries in Safari. Test cases added for `<sl-dialog>` inside a shadowRoot [#1403]
@@ -25,7 +26,9 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-qr-code>` where the `background` attribute was never passed to the QR code [#1416]
 - Fixed a bug in `<sl-dropdown>` where aria attributes were incorrectly applied to the default `<slot>` causing Lighthouse errors [#1417]
 - Fixed a bug in `<sl-carousel>` that caused navigation to work incorrectly in some case [#1420]
+- Fixed a number of slots that incorrectly had aria- and/or role attributes directly on them [#1422]
 - Fixed a bug in `<sl-tree>` that caused focus to be stolen when removing focused tree items [#1430]
+- Updated ESLint and related plugins to the latest versions
 
 ## 2.5.2
 

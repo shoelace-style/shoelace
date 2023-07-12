@@ -17,7 +17,7 @@ import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './select.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
-import type SlOption from '../option/option.js';
+import type SlOption from '../option/option.component.js';
 import type SlRemoveEvent from '../../events/sl-remove.js';
 
 /**
@@ -838,15 +838,14 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
           </sl-popup>
         </div>
 
-        <slot
-          name="help-text"
+        <div
           part="form-control-help-text"
           id="help-text"
           class="form-control__help-text"
           aria-hidden=${hasHelpText ? 'false' : 'true'}
         >
-          ${this.helpText}
-        </slot>
+          <slot name="help-text">${this.helpText}</slot>
+        </div>
       </div>
     `;
   }
@@ -873,3 +872,4 @@ declare global {
     'sl-select': SlSelect;
   }
 }
+

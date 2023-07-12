@@ -67,7 +67,7 @@ export default class SlButtonGroup extends ShoelaceElement {
   render() {
     // eslint-disable-next-line lit-a11y/mouse-events-have-key-events
     return html`
-      <slot
+      <div
         part="base"
         class="button-group"
         role="${this.disableRole ? 'presentation' : 'group'}"
@@ -76,8 +76,9 @@ export default class SlButtonGroup extends ShoelaceElement {
         @focusin=${this.handleFocus}
         @mouseover=${this.handleMouseOver}
         @mouseout=${this.handleMouseOut}
-        @slotchange=${this.handleSlotChange}
-      ></slot>
+      >
+        <slot @slotchange=${this.handleSlotChange}></slot>
+      </div>
     `;
   }
 }
@@ -94,3 +95,4 @@ declare global {
     'sl-button-group': SlButtonGroup;
   }
 }
+

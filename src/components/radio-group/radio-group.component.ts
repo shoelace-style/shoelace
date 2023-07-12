@@ -329,12 +329,9 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
 
     const defaultSlot = html`
-      <slot
-        @click=${this.handleRadioClick}
-        @keydown=${this.handleKeyDown}
-        @slotchange=${this.syncRadios}
-        role="presentation"
-      ></slot>
+      <span @click=${this.handleRadioClick} @keydown=${this.handleKeyDown} role="presentation">
+        <slot @slotchange=${this.syncRadios}></slot>
+      </span>
     `;
 
     return html`
@@ -388,15 +385,14 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
             : defaultSlot}
         </div>
 
-        <slot
-          name="help-text"
+        <div
           part="form-control-help-text"
           id="help-text"
           class="form-control__help-text"
           aria-hidden=${hasHelpText ? 'false' : 'true'}
         >
-          ${this.helpText}
-        </slot>
+          <slot name="help-text">${this.helpText}</slot>
+        </div>
       </fieldset>
     `;
     /* eslint-enable lit-a11y/click-events-have-key-events */
@@ -408,3 +404,4 @@ declare global {
     'sl-radio-group': SlRadioGroup;
   }
 }
+

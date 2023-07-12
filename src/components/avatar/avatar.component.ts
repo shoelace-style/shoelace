@@ -26,7 +26,9 @@ import type { CSSResultGroup } from 'lit';
  */
 export default class SlAvatar extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
-  static scopedElements = { 'sl-icon': SlIcon }
+  static scopedElements = {
+    'sl-icon': SlIcon
+  }
 
   @state() private hasError = false;
 
@@ -69,9 +71,11 @@ export default class SlAvatar extends ShoelaceElement {
       avatarWithoutImage = html`<div part="initials" class="avatar__initials">${this.initials}</div>`;
     } else {
       avatarWithoutImage = html`
-        <slot name="icon" part="icon" class="avatar__icon" aria-hidden="true">
-          <sl-icon name="person-fill" library="system"></sl-icon>
-        </slot>
+        <div part="icon" class="avatar__icon" aria-hidden="true">
+          <slot name="icon">
+            <sl-icon name="person-fill" library="system"></sl-icon>
+          </slot>
+        </div>
       `;
     }
 
@@ -98,3 +102,4 @@ declare global {
     'sl-avatar': SlAvatar;
   }
 }
+
