@@ -90,9 +90,11 @@ export default class SlBreadcrumb extends ShoelaceElement {
         <slot @slotchange=${this.handleSlotChange}></slot>
       </nav>
 
-      <slot name="separator" hidden aria-hidden="true">
-        <sl-icon name=${this.localize.dir() === 'rtl' ? 'chevron-left' : 'chevron-right'} library="system"></sl-icon>
-      </slot>
+      <span hidden aria-hidden="true">
+        <slot name="separator">
+          <sl-icon name=${this.localize.dir() === 'rtl' ? 'chevron-left' : 'chevron-right'} library="system"></sl-icon>
+        </slot>
+      </span>
     `;
   }
 }

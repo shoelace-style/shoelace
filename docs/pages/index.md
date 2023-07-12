@@ -19,8 +19,7 @@ toc: false
 - First-class [React support](/frameworks/react) ⚛️
 - Built-in localization 💬
 - Open source 😸
-
-Designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
+- [More awesome than ever](https://blog.fontawesome.com/shoelace-joins-font-awesome/) ![Awesome emoji](/assets/images/awesome.svg)
 
 </div>
 <div class="splash-end">
@@ -105,23 +104,7 @@ If you need to support IE11 or pre-Chromium Edge, this library isn't for you. Al
 
 ## License
 
-Shoelace is designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska). It's available under the terms of the MIT license.
-
-Designing, developing, and supporting this library requires a lot of time, effort, and skill. If you're using this software to make a profit, I respectfully ask that you help [fund its development](https://github.com/sponsors/claviska) by becoming a sponsor.
-
-👇 Your support is very much appreciated! 👇
-
-<sl-button class="repo-button repo-button--sponsor" href="https://github.com/sponsors/claviska" target="_blank">
-  <sl-icon slot="prefix" name="heart"></sl-icon> Become a sponsor
-</sl-button>
-
-<sl-button class="repo-button repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" target="_blank">
-  <sl-icon slot="prefix" name="github"></sl-icon> Star
-</sl-button>
-
-<sl-button class="repo-button repo-button--twitter" href="https://twitter.com/shoelace_style" target="_blank">
-  <sl-icon slot="prefix" name="twitter"></sl-icon> Follow
-</sl-button>
+Shoelace was created in New Hampshire by [Cory LaViska](https://twitter.com/claviska). It's available under the terms of the [MIT license](https://github.com/shoelace-style/shoelace/blob/next/LICENSE.md).
 
 ## Attribution
 

@@ -141,7 +141,7 @@ export default class SlCarousel extends ShoelaceElement {
   }
 
   private getCurrentPage() {
-    return Math.floor(this.activeSlide / this.slidesPerPage);
+    return Math.ceil(this.activeSlide / this.slidesPerPage);
   }
 
   private getSlides({ excludeClones = true }: { excludeClones?: boolean } = {}) {
@@ -325,7 +325,15 @@ export default class SlCarousel extends ShoelaceElement {
    * @param behavior - The behavior used for scrolling.
    */
   previous(behavior: ScrollBehavior = 'smooth') {
-    this.goToSlide(this.activeSlide - this.slidesPerMove, behavior);
+    let previousIndex = this.activeSlide || this.activeSlide - this.slidesPerMove;
+    let canSnap = false;
+
+    while (!canSnap && previousIndex > 0) {
+      previousIndex -= 1;
+      canSnap = Math.abs(previousIndex - this.slidesPerMove) % this.slidesPerMove === 0;
+    }
+
+    this.goToSlide(previousIndex, behavior);
   }
 
   /**

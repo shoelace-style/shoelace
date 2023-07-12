@@ -288,13 +288,9 @@ export default class SlTreeItem extends ShoelaceElement {
           <slot class="tree-item__label" part="label"></slot>
         </div>
 
-        <slot
-          name="children"
-          class="tree-item__children"
-          part="children"
-          role="group"
-          @slotchange="${this.handleChildrenSlotChange}"
-        ></slot>
+        <div class="tree-item__children" part="children" role="group">
+          <slot name="children" @slotchange="${this.handleChildrenSlotChange}"></slot>
+        </div>
       </div>
     `;
   }

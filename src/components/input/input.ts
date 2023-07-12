@@ -198,13 +198,17 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   // can be set before the component is rendered.
   //
 
-  /** Gets or sets the current value as a `Date` object. Returns `null` if the value can't be converted. */
+  /**
+   * Gets or sets the current value as a `Date` object. Returns `null` if the value can't be converted. This will use the native `<input type="{{type}}">` implementation and may result in an error.
+   */
   get valueAsDate() {
+    this.__dateInput.type = this.type;
     this.__dateInput.value = this.value;
     return this.input?.valueAsDate || this.__dateInput.valueAsDate;
   }
 
   set valueAsDate(newValue: Date | null) {
+    this.__dateInput.type = this.type;
     this.__dateInput.valueAsDate = newValue;
     this.value = this.__dateInput.value;
   }
@@ -447,7 +451,10 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
               'input--no-spin-buttons': this.noSpinButtons
             })}
           >
-            <slot name="prefix" part="prefix" class="input__prefix"></slot>
+            <span part="prefix" class="input__prefix">
+              <slot name="prefix"></slot>
+            </span>
+
             <input
               part="input"
               id="input"
@@ -482,64 +489,60 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
               @blur=${this.handleBlur}
             />
 
-            ${
-              hasClearIcon
-                ? html`
-                    <button
-                      part="clear-button"
-                      class="input__clear"
-                      type="button"
-                      aria-label=${this.localize.term('clearEntry')}
-                      @click=${this.handleClearClick}
-                      tabindex="-1"
-                    >
-                      <slot name="clear-icon">
-                        <sl-icon name="x-circle-fill" library="system"></sl-icon>
-                      </slot>
-                    </button>
-                  `
-                : ''
-            }
-            ${
-              this.passwordToggle && !this.disabled
-                ? html`
-                    <button
-                      part="password-toggle-button"
-                      class="input__password-toggle"
-                      type="button"
-                      aria-label=${this.localize.term(this.passwordVisible ? 'hidePassword' : 'showPassword')}
-                      @click=${this.handlePasswordToggle}
-                      tabindex="-1"
-                    >
-                      ${this.passwordVisible
-                        ? html`
-                            <slot name="show-password-icon">
-                              <sl-icon name="eye-slash" library="system"></sl-icon>
-                            </slot>
-                          `
-                        : html`
-                            <slot name="hide-password-icon">
-                              <sl-icon name="eye" library="system"></sl-icon>
-                            </slot>
-                          `}
-                    </button>
-                  `
-                : ''
-            }
+            ${hasClearIcon
+              ? html`
+                  <button
+                    part="clear-button"
+                    class="input__clear"
+                    type="button"
+                    aria-label=${this.localize.term('clearEntry')}
+                    @click=${this.handleClearClick}
+                    tabindex="-1"
+                  >
+                    <slot name="clear-icon">
+                      <sl-icon name="x-circle-fill" library="system"></sl-icon>
+                    </slot>
+                  </button>
+                `
+              : ''}
+            ${this.passwordToggle && !this.disabled
+              ? html`
+                  <button
+                    part="password-toggle-button"
+                    class="input__password-toggle"
+                    type="button"
+                    aria-label=${this.localize.term(this.passwordVisible ? 'hidePassword' : 'showPassword')}
+                    @click=${this.handlePasswordToggle}
+                    tabindex="-1"
+                  >
+                    ${this.passwordVisible
+                      ? html`
+                          <slot name="show-password-icon">
+                            <sl-icon name="eye-slash" library="system"></sl-icon>
+                          </slot>
+                        `
+                      : html`
+                          <slot name="hide-password-icon">
+                            <sl-icon name="eye" library="system"></sl-icon>
+                          </slot>
+                        `}
+                  </button>
+                `
+              : ''}
 
-            <slot name="suffix" part="suffix" class="input__suffix"></slot>
+            <span part="suffix" class="input__suffix">
+              <slot name="suffix"></slot>
+            </span>
           </div>
         </div>
 
-        <slot
-          name="help-text"
+        <div
           part="form-control-help-text"
           id="help-text"
           class="form-control__help-text"
           aria-hidden=${hasHelpText ? 'false' : 'true'}
         >
-          ${this.helpText}
-        </slot>
+          <slot name="help-text">${this.helpText}</slot>
         </div>
       </div>
     `;
