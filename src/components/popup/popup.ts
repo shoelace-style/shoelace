@@ -56,8 +56,9 @@ export default class SlPopup extends ShoelaceElement {
   @query('.popup__arrow') private arrowEl: HTMLElement;
 
   /**
-   * The element the popup will be anchored to. If the anchor lives outside of the popup, you can provide the anchor element `id`, or an
-   * dom element reference, or a VirtualElement.  If the anchor lives inside the popup, use the `anchor` slot instead.
+   * The element the popup will be anchored to. If the anchor lives outside of the popup, you can provide the anchor
+   * element `id`, a DOM element reference, or a `VirtualElement`. If the anchor lives inside the popup, use the
+   * `anchor` slot instead.
    */
   @property() anchor: Element | string | VirtualElement;
 
