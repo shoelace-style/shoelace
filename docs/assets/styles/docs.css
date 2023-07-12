@@ -1203,6 +1203,12 @@ html.sidebar-open #menu-toggle {
   font-weight: var(--sl-font-weight-normal);
 }
 
+.splash li img {
+  width: 1em;
+  height: 1em;
+  vertical-align: -2px;
+}
+
 .splash-end {
   display: flex;
   align-items: flex-end;
@@ -1249,19 +1255,6 @@ html.sidebar-open #menu-toggle {
   }
 }
 
-/* Repo buttons */
-.repo-button--sponsor sl-icon {
-  color: var(--sl-color-pink-600);
-}
-
-.repo-button--github sl-icon {
-  color: var(--sl-color-neutral-700);
-}
-
-.repo-button--twitter sl-icon {
-  color: var(--sl-color-sky-500);
-}
-
 /* Component headers */
 .component-header h1 {
   margin-bottom: 0;
@@ -1291,12 +1284,22 @@ html.sidebar-open #menu-toggle {
 }
 
 /* Repo buttons */
-.repo-button--sponsor sl-icon {
-  color: var(--sl-color-pink-600);
+.sidebar-buttons {
+  display: flex;
+  gap: 0.125rem;
+  justify-content: space-between;
+}
+
+.sidebar-buttons .repo-button {
+  flex: 1 1 auto;
 }
 
 .repo-button--github sl-icon {
   color: var(--sl-color-neutral-700);
+}
+
+.repo-button--star sl-icon {
+  color: var(--sl-color-yellow-500);
 }
 
 .repo-button--twitter sl-icon {

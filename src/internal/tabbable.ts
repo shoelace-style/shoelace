@@ -1,3 +1,5 @@
+import { offsetParent } from 'composed-offset-position';
+
 /** Determines if the specified element is tabbable using heuristics inspired by https://github.com/focus-trap/tabbable */
 function isTabbable(el: HTMLElement) {
   const tag = el.tagName.toLowerCase();
@@ -23,7 +25,8 @@ function isTabbable(el: HTMLElement) {
   }
 
   // Elements that are hidden have no offsetParent and are not tabbable
-  if (el.offsetParent === null) {
+  // offsetParent() is added because otherwise it misses elements in Safari
+  if (el.offsetParent === null && offsetParent(el) === null) {
     return false;
   }
 
@@ -56,10 +59,20 @@ function isTabbable(el: HTMLElement) {
  * element because it short-circuits after finding the first and last ones.
  */
 export function getTabbableBoundary(root: HTMLElement | ShadowRoot) {
+  const tabbableElements = getTabbableElements(root);
+
+  // Find the first and last tabbable elements
+  const start = tabbableElements[0] ?? null;
+  const end = tabbableElements[tabbableElements.length - 1] ?? null;
+
+  return { start, end };
+}
+
+export function getTabbableElements(root: HTMLElement | ShadowRoot) {
   const allElements: HTMLElement[] = [];
 
   function walk(el: HTMLElement | ShadowRoot) {
-    if (el instanceof HTMLElement) {
+    if (el instanceof Element) {
       allElements.push(el);
 
       if (el.shadowRoot !== null && el.shadowRoot.mode === 'open') {
@@ -73,9 +86,10 @@ export function getTabbableBoundary(root: HTMLElement | ShadowRoot) {
   // Collect all elements including the root
   walk(root);
 
-  // Find the first and last tabbable elements
-  const start = allElements.find(el => isTabbable(el)) ?? null;
-  const end = allElements.reverse().find(el => isTabbable(el)) ?? null;
-
-  return { start, end };
+  return allElements.filter(isTabbable).sort((a, b) => {
+    // Make sure we sort by tabindex.
+    const aTabindex = Number(a.getAttribute('tabindex')) || 0;
+    const bTabindex = Number(b.getAttribute('tabindex')) || 0;
+    return bTabindex - aTabindex;
+  });
 }

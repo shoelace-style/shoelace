@@ -14,6 +14,19 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- Added tests for `<sl-qr-code>` [#1416]
+- Added support for pressing [[Space]] to select/toggle selected `<sl-menu-item>` elements [#1429]
+- Fixed a bug in focus trapping of modal elements like `<sl-dialog>`. We now manually handle focus ordering as well as added `offsetParent()` check for tabbable boundaries in Safari. Test cases added for `<sl-dialog>` inside a shadowRoot [#1403]
+- Fixed a bug in `valueAsDate` on `<sl-input>` where it would always set `type="date"` for the underlying `<input>` element. It now falls back to the native browser implementation for the in-memory input. This may cause unexpected behavior if you're using `valueAsDate` on any input elements that aren't `type="date"`. [#1399]
+- Fixed a bug in `<sl-qr-code>` where the `background` attribute was never passed to the QR code [#1416]
+- Fixed a bug in `<sl-dropdown>` where aria attributes were incorrectly applied to the default `<slot>` causing Lighthouse errors [#1417]
+- Fixed a bug in `<sl-carousel>` that caused navigation to work incorrectly in some case [#1420]
+- Fixed a number of slots that incorrectly had aria- and/or role attributes directly on them [#1422]
+- Fixed a bug in `<sl-tree>` that caused focus to be stolen when removing focused tree items [#1430]
+- Updated ESLint and related plugins to the latest versions
+
+## 2.5.2
+
 - Fixed broken source buttons in the docs [#1401]
 
 ## 2.5.1
@@ -1140,12 +1153,12 @@ The most elegant solution I found was to use the [Web Animations API](https://de
 
 ## 2.0.0-beta.34
 
-This release changes the way components are registered if you're [cherry picking](/getting-started/installation?id=cherry-picking) or [using a bundler](/getting-started/installation?id=bundling). This recommendation came from the LitElement team and simplifies Shoelace's dependency graph. It also eliminates the need to call a `register()` function before using each component.
+This release changes the way components are registered if you're [cherry picking](/getting-started/installation#cherry-picking) or [using a bundler](/getting-started/installation#bundling). This recommendation came from the LitElement team and simplifies Shoelace's dependency graph. It also eliminates the need to call a `register()` function before using each component.
 
 From now on, importing a component will register it automatically. The caveat is that bundlers may not tree shake the library properly if you import from `@shoelace-style/shoelace`, so the recommendation is to import components and utilities from their corresponding files instead.
 
 - 🚨 BREAKING: removed `all.shoelace.js` (use `shoelace.js` instead)
-- 🚨 BREAKING: component modules now have a side effect, so bundlers may not tree shake properly when importing from `@shoelace-style/shoelace` (see the [installation page](/getting-started/installation?id=bundling) for more details and how to update)
+- 🚨 BREAKING: component modules now have a side effect, so bundlers may not tree shake properly when importing from `@shoelace-style/shoelace` (see the [installation page](/getting-started/installation#bundling) for more details and how to update)
 - Added `sl-clear` event to `<sl-select>`
 - Fixed a bug where dynamically changing menu items in `<sl-select>` would cause the display label to be blank [#374]
 - Fixed a bug where setting the `value` attribute or property on `<sl-input>` and `<sl-textarea>` would trigger validation too soon

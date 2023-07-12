@@ -411,12 +411,9 @@ export default class SlDropdown extends ShoelaceElement {
           @slotchange=${this.handleTriggerSlotChange}
         ></slot>
 
-        <slot
-          part="panel"
-          class="dropdown__panel"
-          aria-hidden=${this.open ? 'false' : 'true'}
-          aria-labelledby="dropdown"
-        ></slot>
+        <div aria-hidden=${this.open ? 'false' : 'true'} aria-labelledby="dropdown">
+          <slot part="panel" class="dropdown__panel"></slot>
+        </div>
       </sl-popup>
     `;
   }

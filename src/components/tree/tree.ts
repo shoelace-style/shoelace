@@ -159,14 +159,8 @@ export default class SlTree extends ShoelaceElement {
   private handleTreeChanged = (mutations: MutationRecord[]) => {
     for (const mutation of mutations) {
       const addedNodes: SlTreeItem[] = [...mutation.addedNodes].filter(SlTreeItem.isTreeItem) as SlTreeItem[];
-      const removedNodes = [...mutation.removedNodes].filter(SlTreeItem.isTreeItem) as SlTreeItem[];
 
       addedNodes.forEach(this.initTreeItem);
-
-      // If the focused item has been removed form the DOM, move the focus to the first focusable item
-      if (removedNodes.includes(this.lastFocusedItem)) {
-        this.focusItem(this.getFocusableItems()[0]);
-      }
     }
   };
 
@@ -409,8 +403,8 @@ export default class SlTree extends ShoelaceElement {
         @mousedown=${this.handleMouseDown}
       >
         <slot @slotchange=${this.handleSlotChange}></slot>
-        <slot name="expand-icon" hidden aria-hidden="true"> </slot>
-        <slot name="collapse-icon" hidden aria-hidden="true"> </slot>
+        <span hidden aria-hidden="true"><slot name="expand-icon"></slot></span>
+        <span hidden aria-hidden="true"><slot name="collapse-icon"></slot></span>
       </div>
     `;
   }

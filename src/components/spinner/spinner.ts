@@ -26,7 +26,7 @@ export default class SlSpinner extends ShoelaceElement {
 
   render() {
     return html`
-      <svg part="base" class="spinner" role="progressbar" aria-valuetext=${this.localize.term('loading')}>
+      <svg part="base" class="spinner" role="progressbar" aria-label=${this.localize.term('loading')}>
         <circle class="spinner__track"></circle>
         <circle class="spinner__indicator"></circle>
       </svg>

@@ -506,7 +506,7 @@ const App = () => {
 
 ### Multiple Slides Per View
 
-The `slides-per-view` attribute makes it possible to display multiple slides at a time. You can also use the `slides-per-move` attribute to advance more than once slide at a time, if desired.
+The `slides-per-page` attribute makes it possible to display multiple slides at a time. You can also use the `slides-per-move` attribute to advance more than once slide at a time, if desired.
 
 ```html:preview
 <sl-carousel navigation pagination slides-per-page="2" slides-per-move="2">
