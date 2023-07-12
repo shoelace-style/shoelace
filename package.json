@@ -16,8 +16,7 @@
     "./dist/translations/**/*.*",
     "./src/translations/**/*.*",
     "// COMMENT: This monstrosity below isn't perfect, but its like 99% to get bundlers to recognize 'thing.component.ts' as having no side effects. Example: https://regexr.com/7grof",
-    "./dist/components/**/*((?<!(\\.component|\\.styles))).js",
-    "./dist/react/button/index.js"
+    "./dist/components/**/*((?<!(\\.component|\\.styles)))\\.js"
   ],
   "exports": {
     ".": {

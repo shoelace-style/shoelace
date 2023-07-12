@@ -14,6 +14,10 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- Added JSDOC comments to React Wrappers for better documentation when hovering a component. []
+- Added `displayName` to React Wrappers for better debugging. []
+- Split auto-defining routes and non-auto-defining routes for Components. []
+- Fixed React Treeshaking by introducing `sideEffects` key in `package.json`. []
 - Added tests for `<sl-qr-code>` [#1416]
 - Added support for pressing [[Space]] to select/toggle selected `<sl-menu-item>` elements [#1429]
 - Fixed a bug in focus trapping of modal elements like `<sl-dialog>`. We now manually handle focus ordering as well as added `offsetParent()` check for tabbable boundaries in Safari. Test cases added for `<sl-dialog>` inside a shadowRoot [#1403]
