@@ -37,7 +37,7 @@ export default {
         customElementsManifest.package = { name, description, version, author, homepage, license };
       }
     },
-    // Infer tag names
+    // Infer tag names because we no longer use @customElement decorators.
     {
       name: "shoelace-infer-tag-names",
       analyzePhase({ ts, node, moduleDoc }) {
@@ -47,9 +47,19 @@ export default {
             const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
 
             const importPath = moduleDoc.path
+
+            // This is kind of a best guess at components. "thing.component.ts"
+            if (!importPath.endsWith(".component.ts")) {
+              return
+            }
+
             const tagName = "sl-" + path.basename(importPath, ".component.ts")
 
+
             classDoc.tagName = tagName
+
+            // This used to be set to true by @customElement
+            classDoc.customElement = true
           }
         }
       }
@@ -74,6 +84,9 @@ export default {
                 }
               });
             });
+
+            // This is what allows us to map JSDOC comments to ReactWrappers.
+            classDoc["jsDoc"] = node.jsDoc.map((jsDoc) => jsDoc.getFullText()).join("\n")
 
             const parsed = parse(`${customComments}\n */`);
             parsed[0].tags?.forEach(t => {
@@ -157,7 +170,6 @@ export default {
             { from: /\.(t|j)sx?$/, to: '.js' } // Convert .ts to .js
           ];
 
-          console.log(mod.path)
           mod.path = replace(mod.path, terms);
 
           for (const ex of mod.exports ?? []) {

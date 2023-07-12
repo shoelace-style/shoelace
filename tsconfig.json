@@ -23,7 +23,7 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "useDefineForClassFields": false, /* See https://lit.dev/docs/components/properties/#avoiding-issues-with-class-fields */
-    "removeComments": true,
+    "removeComments": false,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "useUnknownInCatchVariables": true,
