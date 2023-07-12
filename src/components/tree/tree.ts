@@ -87,7 +87,7 @@ export default class SlTree extends ShoelaceElement {
   // A collection of all the items in the tree, in the order they appear. The collection is live, meaning it is
   // automatically updated when the underlying document is changed.
   //
-  private lastFocusedItem: SlTreeItem;
+  private lastFocusedItem: SlTreeItem | null;
   private readonly localize = new LocalizeController(this);
   private mutationObserver: MutationObserver;
   private clickTarget: SlTreeItem | null = null;
@@ -159,8 +159,13 @@ export default class SlTree extends ShoelaceElement {
   private handleTreeChanged = (mutations: MutationRecord[]) => {
     for (const mutation of mutations) {
       const addedNodes: SlTreeItem[] = [...mutation.addedNodes].filter(SlTreeItem.isTreeItem) as SlTreeItem[];
+      const removedNodes = [...mutation.removedNodes].filter(SlTreeItem.isTreeItem) as SlTreeItem[];
 
       addedNodes.forEach(this.initTreeItem);
+
+      if (this.lastFocusedItem && removedNodes.includes(this.lastFocusedItem)) {
+        this.lastFocusedItem = null;
+      }
     }
   };
 
