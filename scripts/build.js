@@ -23,9 +23,8 @@ let childProcess;
 let buildResults;
 
 const bundleDirectories = [cdndir, outdir];
-const shoelaceVersion = JSON.stringify(
-  JSON.parse(readFileSync(path.join(process.cwd(), 'package.json')).toString()).version.toString()
-);
+let packageData = JSON.parse(readFileSync(path.join(process.cwd(), 'package.json')).toString())
+const shoelaceVersion = JSON.stringify(packageData.version.toString());
 
 //
 // Runs 11ty and builds the docs. The returned promise resolves after the initial publish has completed. The child

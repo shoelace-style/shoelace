@@ -122,15 +122,15 @@ function define(name: string, elementConstructor: CustomElementConstructor | typ
     return;
   }
 
-  let newVersion = ' ';
-  let existingVersion = ' ';
+  let newVersion = '';
+  let existingVersion = '';
 
   if ('version' in elementConstructor) {
-    newVersion += 'v' + elementConstructor.version;
+    newVersion += ' v' + elementConstructor.version;
   }
 
   if ('version' in currentElementConstructor) {
-    existingVersion += 'v' + currentElementConstructor.version;
+    existingVersion += ' v' + currentElementConstructor.version;
   }
 
   if (newVersion && existingVersion && newVersion === existingVersion) {
@@ -138,9 +138,7 @@ function define(name: string, elementConstructor: CustomElementConstructor | typ
     return;
   }
 
-  const str = `Attempted to register <${name}>${newVersion}, but <${name}>${existingVersion} has already been defined.`;
-
-  console.warn(str);
+  console.warn(`Attempted to register <${name}>${newVersion}, but <${name}>${existingVersion} has already been defined.`);
 }
 
 /* eslint-disable */

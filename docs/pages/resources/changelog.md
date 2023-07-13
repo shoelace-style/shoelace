@@ -14,13 +14,14 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
-- Added JSDOC comments to React Wrappers for better documentation when hovering a component. []
-- Added `displayName` to React Wrappers for better debugging. []
-- Split auto-defining routes and non-auto-defining routes for Components. []
-- Fixed React Treeshaking by introducing `sideEffects` key in `package.json`. []
-- Fixed a bug in `<sl-tree>` where it was auto-defining `<sl-tree-item>`. []
+- Added JSDoc comments to React Wrappers for better documentation when hovering a component. [#1450]
+- Added `displayName` to React Wrappers for better debugging. [#1450]
+- Added non-auto-registering routes for Components to fix a number of issues around auto-registration. [#1450]
+- Added a console warning if you attempt to register the same Shoelace component twice. [#1450]
 - Added tests for `<sl-qr-code>` [#1416]
 - Added support for pressing [[Space]] to select/toggle selected `<sl-menu-item>` elements [#1429]
+- Fixed React component treeshaking by introducing `sideEffects` key in `package.json`. [#1450]
+- Fixed a bug in `<sl-tree>` where it was auto-defining `<sl-tree-item>`. [#1450]
 - Fixed a bug in focus trapping of modal elements like `<sl-dialog>`. We now manually handle focus ordering as well as added `offsetParent()` check for tabbable boundaries in Safari. Test cases added for `<sl-dialog>` inside a shadowRoot [#1403]
 - Fixed a bug in `valueAsDate` on `<sl-input>` where it would always set `type="date"` for the underlying `<input>` element. It now falls back to the native browser implementation for the in-memory input. This may cause unexpected behavior if you're using `valueAsDate` on any input elements that aren't `type="date"`. [#1399]
 - Fixed a bug in `<sl-qr-code>` where the `background` attribute was never passed to the QR code [#1416]
