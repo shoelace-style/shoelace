@@ -1,21 +1,22 @@
 import '../popup/popup.js';
 
-import { createRef, ref, Ref } from 'lit/directives/ref.js';
-import { HasSlotController } from '../../internal/slot.js';
-import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize.js';
-import SlMenuItem from './menu-item.js';
-import SlPopup from '../popup/popup.js';
+import { createRef, ref, type Ref } from 'lit/directives/ref.js';
 import type { ReactiveController, ReactiveControllerHost } from 'lit';
+
+import { type HasSlotController } from '../../internal/slot.js';
+import { html } from 'lit';
+import { type LocalizeController } from '../../utilities/localize.js';
+import type SlMenuItem from './menu-item.js';
+import type SlPopup from '../popup/popup.js';
 
 /** A reactive controller to manage the registration of event listeners for submenus. */
 export class SubmenuController implements ReactiveController {
   private host: ReactiveControllerHost & SlMenuItem;
   private popupRef: Ref<SlPopup> = createRef();
 
-  private isConnected: boolean = false;
-  private isPopupConnected: boolean = false;
-  private skidding: number = 0;
+  private isConnected = false;
+  private isPopupConnected = false;
+  private skidding = 0;
 
   private readonly hasSlotController: HasSlotController;
   private readonly localize: LocalizeController;
@@ -84,11 +85,59 @@ export class SubmenuController implements ReactiveController {
     }
   }
 
-  private handleMouseOver = (_: MouseEvent) => {
+  private handleMouseOver = () => {
     if (this.hasSlotController.test('submenu')) {
       this.enableSubmenu();
     }
   };
+
+  private handleSubmenuEntry(event: KeyboardEvent) {
+    // Pass focus to the first menu-item in the submenu.
+    const submenuSlot: HTMLSlotElement | null = this.host.renderRoot.querySelector("slot[name='submenu']");
+
+    // Missing slot
+    if (!submenuSlot) {
+      console.error('Cannot activate a submenu if no corresponding menuitem can be found.', this);
+      return;
+    }
+
+    // Menus
+    let menuItems: NodeListOf<Element> | null = null;
+    for (const elt of submenuSlot.assignedElements()) {
+      menuItems = elt.querySelectorAll("sl-menu-item, [role^='menuitem']");
+      if (menuItems.length !== 0) {
+        break;
+      }
+    }
+
+    if (!menuItems || menuItems.length === 0) {
+      return;
+    }
+
+    menuItems[0].setAttribute('tabindex', '0');
+    for (let i = 1; i !== menuItems.length; ++i) {
+      menuItems[i].setAttribute('tabindex', '-1');
+    }
+
+    // Open the submenu (if not open), and set focus to first menuitem.
+    if (this.popupRef.value) {
+      event.preventDefault();
+      event.stopPropagation();
+      if (this.popupRef.value.active) {
+        if (menuItems[0] instanceof HTMLElement) {
+          menuItems[0].focus();
+        }
+      } else {
+        this.enableSubmenu();
+        this.host.updateComplete.then(() => {
+          if (menuItems![0] instanceof HTMLElement) {
+            menuItems![0].focus();
+          }
+        });
+        this.host.requestUpdate();
+      }
+    }
+  }
 
   /** Focus on the first menu-item of a submenu. */
   private handleKeyDown = (event: KeyboardEvent) => {
@@ -109,55 +158,8 @@ export class SubmenuController implements ReactiveController {
       case 'ArrowRight':
       case 'Enter':
       case ' ':
-        // Pass focus to the first menu-item in the submenu.
-        const submenuSlot: HTMLSlotElement = this.host.renderRoot.querySelector(
-          "slot[name='submenu']"
-        ) as HTMLSlotElement;
-
-        // Missing slot
-        if (!submenuSlot) {
-          console.error('Cannot activate a submenu if no corresponding menuitem can be found.', this);
-          return;
-        }
-
-        // Menus
-        let menuItems: NodeListOf<Element> | null = null;
-        for (var elt of submenuSlot.assignedElements()) {
-          menuItems = elt.querySelectorAll("sl-menu-item, [role^='menuitem']");
-          if (menuItems.length !== 0) {
-            break;
-          }
-        }
-
-        if (!menuItems || menuItems.length === 0) {
-          return;
-        }
-
-        menuItems[0].setAttribute('tabindex', '0');
-        for (var i = 1; i !== menuItems.length; ++i) {
-          menuItems[i].setAttribute('tabindex', '-1');
-        }
-
-        // Open the submenu (if not open), and set focus to first menuitem.
-        if (this.popupRef.value) {
-          event.preventDefault();
-          event.stopPropagation();
-          if (this.popupRef.value.active) {
-            if (menuItems[0] instanceof HTMLElement) {
-              menuItems[0].focus();
-            }
-          } else {
-            this.enableSubmenu();
-            this.host.updateComplete.then(() => {
-              if (menuItems![0] instanceof HTMLElement) {
-                menuItems![0].focus();
-              }
-            });
-            this.host.requestUpdate();
-          }
-        }
+        this.handleSubmenuEntry(event);
         break;
-
       default:
         break;
     }
@@ -203,15 +205,15 @@ export class SubmenuController implements ReactiveController {
   /** Calculate the space the top of a menu takes-up, for aligning the popup menu-item with the activating element. */
   private updateSkidding(): void {
     // .computedStyleMap() not always available.
-    if (!this.host.parentElement || !this.host.parentElement.computedStyleMap) {
+    if (!this.host.parentElement?.computedStyleMap) {
       return;
     }
-    const styleMap: StylePropertyMapReadOnly = this.host.parentElement!.computedStyleMap();
+    const styleMap: StylePropertyMapReadOnly = this.host.parentElement.computedStyleMap();
     const attrs: string[] = ['padding-top', 'border-top-width', 'margin-top'];
 
     const skidding = attrs.reduce((accum, attr) => {
       const styleValue: CSSStyleValue = styleMap.get(attr) ?? new CSSUnitValue(0, 'px');
-      const unitValue = styleValue instanceof CSSUnitValue ? (styleValue as CSSUnitValue) : new CSSUnitValue(0, 'px');
+      const unitValue = styleValue instanceof CSSUnitValue ? styleValue : new CSSUnitValue(0, 'px');
       const pxValue = unitValue.to('px');
       return accum - pxValue.value;
     }, 0);

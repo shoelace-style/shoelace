@@ -3,7 +3,7 @@ import { SubmenuController } from './submenu-controller.js';
 
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query } from 'lit/decorators.js';
-import { HasSlotController, getTextContent } from '../../internal/slot.js';
+import { getTextContent, HasSlotController } from '../../internal/slot.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
 import { watch } from '../../internal/watch.js';
