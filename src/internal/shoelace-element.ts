@@ -93,9 +93,10 @@ export default class ShoelaceElement extends LitElement {
     return event as GetCustomEventType<T>;
   }
 
+  /* eslint-disable */
   // @ts-expect-error this gets injected
-  /* eslint-disable-next-line */
   static version: string = typeof shoelaceVersion !== 'undefined' ? shoelaceVersion : '';
+  /* eslint-disable */
 
   static define(name: string) {
     define(name, this);
@@ -117,7 +118,7 @@ function define(name: string, elementConstructor: CustomElementConstructor | typ
     | typeof ShoelaceElement;
 
   if (!currentElementConstructor) {
-    window.customElements.define(name, toAnonymousClass(elementConstructor) as CustomElementConstructor);
+    window.customElements.define(name, toAnonymousClass(elementConstructor) as unknown as CustomElementConstructor);
     return;
   }
 
