@@ -23,7 +23,9 @@ let childProcess;
 let buildResults;
 
 const bundleDirectories = [cdndir, outdir];
-const shoelaceVersion = JSON.stringify(JSON.parse(readFileSync(path.join(process.cwd(), "package.json")).toString()).version.toString())
+const shoelaceVersion = JSON.stringify(
+  JSON.parse(readFileSync(path.join(process.cwd(), 'package.json')).toString()).version.toString()
+);
 
 //
 // Runs 11ty and builds the docs. The returned promise resolves after the initial publish has completed. The child
@@ -100,7 +102,7 @@ async function buildTheSource() {
     define: {
       // Floating UI requires this to be set
       'process.env.NODE_ENV': '"production"',
-      'shoelaceVersion': shoelaceVersion,
+      shoelaceVersion: shoelaceVersion
     },
     bundle: true,
     //
@@ -111,7 +113,7 @@ async function buildTheSource() {
     //
     external: alwaysExternal,
     splitting: true,
-    plugins: [],
+    plugins: []
   };
 
   const npmConfig = {

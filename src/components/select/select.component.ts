@@ -1,19 +1,19 @@
-import SlIcon from '../icon/icon.component.js';
-import SlPopup from '../popup/popup.component.js';
-import SlTag from '../tag/tag.component.js';
 import { animateTo, stopAnimations } from '../../internal/animate.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { property, query, state } from 'lit/decorators.js';
 import { defaultValue } from '../../internal/default-value.js';
 import { FormControlController } from '../../internal/form.js';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
 import { HasSlotController } from '../../internal/slot.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
+import { property, query, state } from 'lit/decorators.js';
 import { scrollIntoView } from '../../internal/scroll.js';
 import { waitForEvent } from '../../internal/event.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
+import SlIcon from '../icon/icon.component.js';
+import SlPopup from '../popup/popup.component.js';
+import SlTag from '../tag/tag.component.js';
 import styles from './select.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
@@ -70,8 +70,8 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   static scopedElements = {
     'sl-icon': SlIcon,
     'sl-popup': SlPopup,
-    'sl-tag': SlTag,
-  }
+    'sl-tag': SlTag
+  };
 
   private readonly formControlController = new FormControlController(this, {
     assumeInteractionOn: ['sl-blur', 'sl-input']
@@ -872,4 +872,3 @@ declare global {
     'sl-select': SlSelect;
   }
 }
-

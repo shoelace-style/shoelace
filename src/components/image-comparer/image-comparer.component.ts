@@ -1,13 +1,13 @@
-import SlIcon from '../icon/icon.js';
 import { clamp } from '../../internal/math.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { property, query } from 'lit/decorators.js';
 import { drag } from '../../internal/drag.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
+import { property, query } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
+import SlIcon from '../icon/icon.js';
 import styles from './image-comparer.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -36,7 +36,7 @@ import type { CSSResultGroup } from 'lit';
  */
 export default class SlImageComparer extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
-  static scopedElement = { 'sl-icon': SlIcon }
+  static scopedElement = { 'sl-icon': SlIcon };
 
   private readonly localize = new LocalizeController(this);
 
@@ -157,4 +157,3 @@ declare global {
     'sl-image-comparer': SlImageComparer;
   }
 }
-

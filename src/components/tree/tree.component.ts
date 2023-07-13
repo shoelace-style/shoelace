@@ -1,7 +1,7 @@
 import { clamp } from '../../internal/math.js';
-import { property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
+import { property, query } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import SlTreeItem from '../tree-item/tree-item.component.js';
@@ -419,4 +419,3 @@ declare global {
     'sl-tree': SlTree;
   }
 }
-

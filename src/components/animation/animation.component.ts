@@ -1,6 +1,6 @@
 import { animations } from './animations.js';
-import { property, queryAsync } from 'lit/decorators.js';
 import { html } from 'lit';
+import { property, queryAsync } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './animation.styles.js';

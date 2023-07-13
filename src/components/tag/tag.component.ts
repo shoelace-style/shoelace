@@ -1,9 +1,9 @@
-import SlIconButton from '../icon-button/icon-button.component.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { property } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
+import { property } from 'lit/decorators.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
+import SlIconButton from '../icon-button/icon-button.component.js';
 import styles from './tag.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -26,7 +26,7 @@ import type { CSSResultGroup } from 'lit';
  */
 export default class SlTag extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
-  static scopedElements = { 'sl-icon-button': SlIconButton }
+  static scopedElements = { 'sl-icon-button': SlIconButton };
 
   private readonly localize = new LocalizeController(this);
 

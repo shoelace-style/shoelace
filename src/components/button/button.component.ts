@@ -1,14 +1,14 @@
-import SlIcon from '../icon/icon.component.js';
-import SlSpinner from '../spinner/spinner.component.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { property, query, state } from 'lit/decorators.js';
 import { FormControlController, validValidityState } from '../../internal/form.js';
 import { HasSlotController } from '../../internal/slot.js';
 import { html, literal } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LocalizeController } from '../../utilities/localize.js';
+import { property, query, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
+import SlIcon from '../icon/icon.component.js';
+import SlSpinner from '../spinner/spinner.component.js';
 import styles from './button.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
@@ -41,7 +41,7 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
   static scopedElements = {
     'sl-icon': SlIcon,
     'sl-spinner': SlSpinner
-  }
+  };
 
   private readonly formControlController = new FormControlController(this, {
     form: input => {

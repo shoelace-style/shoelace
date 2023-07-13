@@ -1,10 +1,10 @@
-import SlIconButton from '../icon-button/icon-button.component.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
+import { property, query } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
+import SlIconButton from '../icon-button/icon-button.component.js';
 import styles from './tab.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -28,7 +28,7 @@ let id = 0;
  */
 export default class SlTab extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
-  static scopedElements = { 'sl-icon-button': SlIconButton }
+  static scopedElements = { 'sl-icon-button': SlIconButton };
 
   private readonly localize = new LocalizeController(this);
 

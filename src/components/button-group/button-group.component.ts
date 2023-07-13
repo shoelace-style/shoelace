@@ -1,5 +1,5 @@
-import { property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
+import { property, query, state } from 'lit/decorators.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './button-group.styles.js';
 import type { CSSResultGroup } from 'lit';
@@ -95,4 +95,3 @@ declare global {
     'sl-button-group': SlButtonGroup;
   }
 }
-

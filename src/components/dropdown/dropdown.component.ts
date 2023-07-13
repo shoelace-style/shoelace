@@ -1,14 +1,14 @@
-import SlPopup from '../popup/popup.component.js';
 import { animateTo, stopAnimations } from '../../internal/animate.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { property, query } from 'lit/decorators.js';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
 import { getTabbableBoundary } from '../../internal/tabbable.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
+import { property, query } from 'lit/decorators.js';
 import { waitForEvent } from '../../internal/event.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
+import SlPopup from '../popup/popup.component.js';
 import styles from './dropdown.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type SlButton from '../button/button.js';
@@ -41,7 +41,7 @@ import type SlSelectEvent from '../../events/sl-select.js';
  */
 export default class SlDropdown extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
-  static scopedElements = { 'sl-popup': SlPopup }
+  static scopedElements = { 'sl-popup': SlPopup };
 
   @query('.dropdown') popup: SlPopup;
   @query('.dropdown__trigger') trigger: HTMLSlotElement;

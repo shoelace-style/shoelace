@@ -1,9 +1,9 @@
-import SlIcon from '../icon/icon.component.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { property, state } from 'lit/decorators.js';
 import { html } from 'lit';
+import { property, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
+import SlIcon from '../icon/icon.component.js';
 import styles from './avatar.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -28,7 +28,7 @@ export default class SlAvatar extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
   static scopedElements = {
     'sl-icon': SlIcon
-  }
+  };
 
   @state() private hasError = false;
 
@@ -102,4 +102,3 @@ declare global {
     'sl-avatar': SlAvatar;
   }
 }
-

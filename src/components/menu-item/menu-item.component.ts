@@ -1,10 +1,10 @@
-import SlIcon from '../icon/icon.component.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { property, query } from 'lit/decorators.js';
 import { getTextContent } from '../../internal/slot.js';
 import { html } from 'lit';
+import { property, query } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
+import SlIcon from '../icon/icon.component.js';
 import styles from './menu-item.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -29,7 +29,7 @@ import type { CSSResultGroup } from 'lit';
  */
 export default class SlMenuItem extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
-  static scopedElements = { 'sl-icon': SlIcon }
+  static scopedElements = { 'sl-icon': SlIcon };
 
   private cachedTextLabel: string;
 

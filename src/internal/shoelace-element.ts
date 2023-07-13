@@ -93,57 +93,63 @@ export default class ShoelaceElement extends LitElement {
     return event as GetCustomEventType<T>;
   }
 
-  // @ts-expect-error
-  static version: string = typeof shoelaceVersion !== "undefined" ? shoelaceVersion : ""
+  // @ts-expect-error this gets injected
+  /* eslint-disable-next-line */
+  static version: string = typeof shoelaceVersion !== 'undefined' ? shoelaceVersion : '';
 
-  static define (name: string) {
-    define(name, this)
+  static define(name: string) {
+    define(name, this);
   }
 
-  static scopedElements: Record<string, typeof ShoelaceElement> = {}
+  static scopedElements: Record<string, typeof ShoelaceElement> = {};
 
-  connectedCallback () {
-    super.connectedCallback()
+  connectedCallback() {
+    super.connectedCallback();
     Object.entries((this.constructor as typeof ShoelaceElement).scopedElements).forEach(([name, component]) => {
-      define(name, component)
-    })
+      define(name, component);
+    });
   }
 }
 
-function define (name: string, elementConstructor: CustomElementConstructor | typeof ShoelaceElement) {
-  const currentElementConstructor = window.customElements.get(name) as CustomElementConstructor | typeof ShoelaceElement
+function define(name: string, elementConstructor: CustomElementConstructor | typeof ShoelaceElement) {
+  const currentElementConstructor = window.customElements.get(name) as
+    | CustomElementConstructor
+    | typeof ShoelaceElement;
 
   if (!currentElementConstructor) {
-    // @ts-expect-error
-    window.customElements.define(name, toAnonymousClass(elementConstructor))
-    return
+    window.customElements.define(name, toAnonymousClass(elementConstructor) as CustomElementConstructor);
+    return;
   }
 
-  let newVersion = " "
-  let existingVersion = " "
+  let newVersion = ' ';
+  let existingVersion = ' ';
 
-  if ("version" in elementConstructor) {
-    newVersion += "v" + elementConstructor.version
+  if ('version' in elementConstructor) {
+    newVersion += 'v' + elementConstructor.version;
   }
 
-  if ("version" in currentElementConstructor) {
-    existingVersion += "v" + currentElementConstructor.version
+  if ('version' in currentElementConstructor) {
+    existingVersion += 'v' + currentElementConstructor.version;
   }
 
-  if ((newVersion && existingVersion) && newVersion === existingVersion) {
+  if (newVersion && existingVersion && newVersion === existingVersion) {
     // If versions match, we don't need to warn anyone. Carry on.
-    return
+    return;
   }
 
-  const str = `Attempted to register <${name}>${newVersion}, but <${name}>${existingVersion} has already been defined.`
+  const str = `Attempted to register <${name}>${newVersion}, but <${name}>${existingVersion} has already been defined.`;
 
-  console.warn(str)
+  console.warn(str);
 }
 
-type Constructable<T = any> = { new (...args: any[]): T }
+/* eslint-disable */
+interface Constructable<T = any> {
+  new (...args: any[]): T;
+}
+/* eslint-enable */
 
-function toAnonymousClass<T extends Constructable> (ctor: T): Constructable<T> {
-  return class extends ctor {}
+function toAnonymousClass<T extends Constructable>(ctor: T): Constructable<T> {
+  return class extends ctor {};
 }
 
 export interface ShoelaceFormControl extends ShoelaceElement {
@@ -174,4 +180,3 @@ export interface ShoelaceFormControl extends ShoelaceElement {
   reportValidity: () => boolean;
   setCustomValidity: (message: string) => void;
 }
-

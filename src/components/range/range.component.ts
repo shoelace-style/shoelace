@@ -1,6 +1,6 @@
 import { classMap } from 'lit/directives/class-map.js';
-import { eventOptions, property, query, state } from 'lit/decorators.js';
 import { defaultValue } from '../../internal/default-value.js';
+import { eventOptions, property, query, state } from 'lit/decorators.js';
 import { FormControlController } from '../../internal/form.js';
 import { HasSlotController } from '../../internal/slot.js';
 import { html } from 'lit';

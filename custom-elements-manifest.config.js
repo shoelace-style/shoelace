@@ -3,7 +3,7 @@ import { parse } from 'comment-parser';
 import { pascalCase } from 'pascal-case';
 import commandLineArgs from 'command-line-args';
 import fs from 'fs';
-import * as path from 'path'
+import * as path from 'path';
 
 const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 const { name, description, version, author, homepage, license } = packageData;
@@ -39,27 +39,26 @@ export default {
     },
     // Infer tag names because we no longer use @customElement decorators.
     {
-      name: "shoelace-infer-tag-names",
+      name: 'shoelace-infer-tag-names',
       analyzePhase({ ts, node, moduleDoc }) {
         switch (node.kind) {
           case ts.SyntaxKind.ClassDeclaration: {
             const className = node.name.getText();
             const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
 
-            const importPath = moduleDoc.path
+            const importPath = moduleDoc.path;
 
             // This is kind of a best guess at components. "thing.component.ts"
-            if (!importPath.endsWith(".component.ts")) {
-              return
+            if (!importPath.endsWith('.component.ts')) {
+              return;
             }
 
-            const tagName = "sl-" + path.basename(importPath, ".component.ts")
+            const tagName = 'sl-' + path.basename(importPath, '.component.ts');
 
-
-            classDoc.tagName = tagName
+            classDoc.tagName = tagName;
 
             // This used to be set to true by @customElement
-            classDoc.customElement = true
+            classDoc.customElement = true;
           }
         }
       }
@@ -86,7 +85,7 @@ export default {
             });
 
             // This is what allows us to map JSDOC comments to ReactWrappers.
-            classDoc["jsDoc"] = node.jsDoc.map((jsDoc) => jsDoc.getFullText()).join("\n")
+            classDoc['jsDoc'] = node.jsDoc.map(jsDoc => jsDoc.getFullText()).join('\n');
 
             const parsed = parse(`${customComments}\n */`);
             parsed[0].tags?.forEach(t => {

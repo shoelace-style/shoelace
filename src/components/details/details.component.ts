@@ -1,13 +1,13 @@
-import SlIcon from '../icon/icon.component.js';
 import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '../../internal/animate.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { property, query } from 'lit/decorators.js';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
+import { property, query } from 'lit/decorators.js';
 import { waitForEvent } from '../../internal/event.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
+import SlIcon from '../icon/icon.component.js';
 import styles from './details.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -43,7 +43,7 @@ export default class SlDetails extends ShoelaceElement {
 
   static scopedElements = {
     'sl-icon': SlIcon
-  }
+  };
 
   private readonly localize = new LocalizeController(this);
 

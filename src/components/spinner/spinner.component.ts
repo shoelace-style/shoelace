@@ -37,4 +37,3 @@ declare global {
     'sl-spinner': SlSpinner;
   }
 }
-

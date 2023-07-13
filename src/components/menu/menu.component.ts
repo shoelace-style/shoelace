@@ -1,5 +1,5 @@
-import { query } from 'lit/decorators.js';
 import { html } from 'lit';
+import { query } from 'lit/decorators.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './menu.styles.js';
 import type { CSSResultGroup } from 'lit';

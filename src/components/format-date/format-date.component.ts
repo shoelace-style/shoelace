@@ -1,6 +1,6 @@
-import { property } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
+import { property } from 'lit/decorators.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 
 /**

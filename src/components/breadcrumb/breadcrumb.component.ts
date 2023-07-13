@@ -1,8 +1,8 @@
-import SlIcon from '../icon/icon.component.js';
-import { property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
+import { property, query } from 'lit/decorators.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
+import SlIcon from '../icon/icon.component.js';
 import styles from './breadcrumb.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type SlBreadcrumbItem from '../breadcrumb-item/breadcrumb-item.js';
@@ -22,7 +22,7 @@ import type SlBreadcrumbItem from '../breadcrumb-item/breadcrumb-item.js';
  */
 export default class SlBreadcrumb extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
-  static scopedElements = { 'sl-icon': SlIcon }
+  static scopedElements = { 'sl-icon': SlIcon };
 
   private readonly localize = new LocalizeController(this);
   private separatorDir = this.localize.dir();
@@ -90,9 +90,11 @@ export default class SlBreadcrumb extends ShoelaceElement {
         <slot @slotchange=${this.handleSlotChange}></slot>
       </nav>
 
-      <slot name="separator" hidden aria-hidden="true">
-        <sl-icon name=${this.localize.dir() === 'rtl' ? 'chevron-left' : 'chevron-right'} library="system"></sl-icon>
-      </slot>
+      <span hidden aria-hidden="true">
+        <slot name="separator">
+          <sl-icon name=${this.localize.dir() === 'rtl' ? 'chevron-left' : 'chevron-right'} library="system"></sl-icon>
+        </slot>
+      </span>
     `;
   }
 }

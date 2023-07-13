@@ -1,9 +1,9 @@
 import { clamp } from '../../internal/math.js';
-import { property, query } from 'lit/decorators.js';
 import { drag } from '../../internal/drag.js';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LocalizeController } from '../../utilities/localize.js';
+import { property, query } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './split-panel.styles.js';

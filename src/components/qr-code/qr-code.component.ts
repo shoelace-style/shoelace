@@ -1,5 +1,5 @@
-import { property, query } from 'lit/decorators.js';
 import { html } from 'lit';
+import { property, query } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { watch } from '../../internal/watch.js';
 import QrCreator from 'qr-creator';

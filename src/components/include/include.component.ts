@@ -1,5 +1,5 @@
-import { property } from 'lit/decorators.js';
 import { html } from 'lit';
+import { property } from 'lit/decorators.js';
 import { requestInclude } from './request.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';

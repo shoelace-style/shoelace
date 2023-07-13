@@ -1,17 +1,17 @@
-import SlIcon from '../icon/icon.component.js';
 import { AutoplayController } from './autoplay-controller.js';
 import { clamp } from '../../internal/math.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
 import { map } from 'lit/directives/map.js';
 import { prefersReducedMotion } from '../../internal/animate.js';
+import { property, query, state } from 'lit/decorators.js';
 import { range } from 'lit/directives/range.js';
 import { ScrollController } from './scroll-controller.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import SlCarouselItem from '../carousel-item/carousel-item.js';
+import SlIcon from '../icon/icon.component.js';
 import styles from './carousel.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -46,7 +46,7 @@ import type { CSSResultGroup } from 'lit';
  */
 export default class SlCarousel extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
-  static scopedElements = { 'sl-icon': SlIcon }
+  static scopedElements = { 'sl-icon': SlIcon };
 
   /** When set, allows the user to navigate the carousel in the same direction indefinitely. */
   @property({ type: Boolean, reflect: true }) loop = false;

@@ -1,22 +1,22 @@
-import SlButtonGroup from '../button-group/button-group.component.js';
-import SlButton from '../button/button.component.js';
-import SlDropdown from '../dropdown/dropdown.component.js';
-import SlIcon from '../icon/icon.component.js';
-import SlInput from '../input/input.component.js';
-import SlVisuallyHidden from '../visually-hidden/visually-hidden.component.js';
 import { clamp } from '../../internal/math.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { property, query, state } from 'lit/decorators.js';
 import { defaultValue } from '../../internal/default-value.js';
 import { drag } from '../../internal/drag.js';
 import { FormControlController } from '../../internal/form.js';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LocalizeController } from '../../utilities/localize.js';
+import { property, query, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { TinyColor } from '@ctrl/tinycolor';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
+import SlButton from '../button/button.component.js';
+import SlButtonGroup from '../button-group/button-group.component.js';
+import SlDropdown from '../dropdown/dropdown.component.js';
+import SlIcon from '../icon/icon.component.js';
+import SlInput from '../input/input.component.js';
+import SlVisuallyHidden from '../visually-hidden/visually-hidden.component.js';
 import styles from './color-picker.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
@@ -99,7 +99,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     'sl-icon': SlIcon,
     'sl-input': SlInput,
     'sl-visually-hidden': SlVisuallyHidden
-  }
+  };
 
   private readonly formControlController = new FormControlController(this);
   private isSafeValue = false;

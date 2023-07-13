@@ -1,13 +1,13 @@
-import SlIcon from '../icon/icon.component.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { property, query, state } from 'lit/decorators.js';
 import { defaultValue } from '../../internal/default-value.js';
 import { FormControlController } from '../../internal/form.js';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
+import { property, query, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
+import SlIcon from '../icon/icon.component.js';
 import styles from './checkbox.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
@@ -38,7 +38,7 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  */
 export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
-  static scopedElements = { 'sl-icon': SlIcon }
+  static scopedElements = { 'sl-icon': SlIcon };
 
   private readonly formControlController = new FormControlController(this, {
     value: (control: SlCheckbox) => (control.checked ? control.value || 'on' : undefined),

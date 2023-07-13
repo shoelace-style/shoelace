@@ -1,10 +1,10 @@
-import SlIcon from '../icon/icon.component.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
+import { property, query, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
+import SlIcon from '../icon/icon.component.js';
 import styles from './option.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -28,7 +28,7 @@ import type { CSSResultGroup } from 'lit';
  */
 export default class SlOption extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
-  static scopedElements = { 'sl-icon': SlIcon }
+  static scopedElements = { 'sl-icon': SlIcon };
 
   private cachedTextLabel: string;
   // @ts-expect-error - Controller is currently unused

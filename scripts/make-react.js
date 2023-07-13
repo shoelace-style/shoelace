@@ -36,7 +36,7 @@ components.map(component => {
 
   fs.mkdirSync(componentDir, { recursive: true });
 
-  const jsDoc = component.jsDoc
+  const jsDoc = component.jsDoc;
 
   const source = prettier.format(
     `

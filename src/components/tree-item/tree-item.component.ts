@@ -1,16 +1,16 @@
-import SlCheckbox from '../checkbox/checkbox.component.js';
-import SlIcon from '../icon/icon.component.js';
-import SlSpinner from '../spinner/spinner.component.js';
 import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '../../internal/animate.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { property, query, state } from 'lit/decorators.js';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
 import { html } from 'lit';
 import { live } from 'lit/directives/live.js';
 import { LocalizeController } from '../../utilities/localize.js';
+import { property, query, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import { when } from 'lit/directives/when.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
+import SlCheckbox from '../checkbox/checkbox.component.js';
+import SlIcon from '../icon/icon.component.js';
+import SlSpinner from '../spinner/spinner.component.js';
 import styles from './tree-item.styles.js';
 import type { CSSResultGroup, PropertyValueMap } from 'lit';
 
@@ -61,8 +61,8 @@ export default class SlTreeItem extends ShoelaceElement {
   static scopedElements = {
     'sl-checkbox': SlCheckbox,
     'sl-icon': SlIcon,
-    'sl-spinner': SlSpinner,
-  }
+    'sl-spinner': SlSpinner
+  };
 
   static isTreeItem(node: Node) {
     return node instanceof Element && node.getAttribute('role') === 'treeitem';
@@ -321,4 +321,3 @@ declare global {
     'sl-tree-item': SlTreeItem;
   }
 }
-

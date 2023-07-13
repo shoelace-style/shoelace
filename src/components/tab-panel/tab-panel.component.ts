@@ -1,6 +1,6 @@
 import { classMap } from 'lit/directives/class-map.js';
-import { property } from 'lit/decorators.js';
 import { html } from 'lit';
+import { property } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './tab-panel.styles.js';

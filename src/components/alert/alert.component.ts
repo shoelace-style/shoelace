@@ -1,14 +1,14 @@
-import SlIconButton from '../icon-button/icon-button.component.js';
 import { animateTo, stopAnimations } from '../../internal/animate.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { property, query } from 'lit/decorators.js';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
 import { HasSlotController } from '../../internal/slot.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
+import { property, query } from 'lit/decorators.js';
 import { waitForEvent } from '../../internal/event.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
+import SlIconButton from '../icon-button/icon-button.component.js';
 import styles from './alert.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -41,7 +41,7 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
  */
 export default class SlAlert extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
-  static scopedElements = { 'sl-icon-button': SlIconButton }
+  static scopedElements = { 'sl-icon-button': SlIconButton };
 
   private autoHideTimeout: number;
   private readonly hasSlotController = new HasSlotController(this, 'icon', 'suffix');
@@ -245,4 +245,3 @@ declare global {
     'sl-alert': SlAlert;
   }
 }
-

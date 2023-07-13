@@ -1,6 +1,4 @@
-import SlButtonGroup from '../button-group/button-group.component.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { property, query, state } from 'lit/decorators.js';
 import {
   customErrorValidityState,
   FormControlController,
@@ -9,8 +7,10 @@ import {
 } from '../../internal/form.js';
 import { HasSlotController } from '../../internal/slot.js';
 import { html } from 'lit';
+import { property, query, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
+import SlButtonGroup from '../button-group/button-group.component.js';
 import styles from './radio-group.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
@@ -42,7 +42,7 @@ import type SlRadioButton from '../radio-button/radio-button.js';
  */
 export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
-  static scopedElements = { 'sl-button-group': SlButtonGroup }
+  static scopedElements = { 'sl-button-group': SlButtonGroup };
 
   protected readonly formControlController = new FormControlController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
@@ -404,4 +404,3 @@ declare global {
     'sl-radio-group': SlRadioGroup;
   }
 }
-

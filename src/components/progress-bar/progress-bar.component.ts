@@ -1,8 +1,8 @@
 import { classMap } from 'lit/directives/class-map.js';
-import { property } from 'lit/decorators.js';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LocalizeController } from '../../utilities/localize.js';
+import { property } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './progress-bar.styles.js';
