@@ -12,6 +12,7 @@ import ora from 'ora';
 import util from 'util';
 import * as path from 'path';
 import { readFileSync } from 'fs';
+import { replace } from 'esbuild-plugin-replace';
 
 const { serve } = commandLineArgs([{ name: 'serve', type: Boolean }]);
 const outdir = 'dist';
@@ -25,6 +26,8 @@ let buildResults;
 const bundleDirectories = [cdndir, outdir];
 let packageData = JSON.parse(readFileSync(path.join(process.cwd(), 'package.json')).toString());
 const shoelaceVersion = JSON.stringify(packageData.version.toString());
+
+console.log(shoelaceVersion)
 
 //
 // Runs 11ty and builds the docs. The returned promise resolves after the initial publish has completed. The child
@@ -101,7 +104,6 @@ async function buildTheSource() {
     define: {
       // Floating UI requires this to be set
       'process.env.NODE_ENV': '"production"',
-      shoelaceVersion: shoelaceVersion
     },
     bundle: true,
     //
@@ -112,12 +114,16 @@ async function buildTheSource() {
     //
     external: alwaysExternal,
     splitting: true,
-    plugins: []
+    plugins: [
+      replace({
+        '__SHOELACE_VERSION__': shoelaceVersion
+      })
+    ]
   };
 
   const npmConfig = {
     ...cdnConfig,
-    bundle: false,
+    bundle: true,
     external: undefined,
     outdir
   };

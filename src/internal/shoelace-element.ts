@@ -94,9 +94,9 @@ export default class ShoelaceElement extends LitElement {
   }
 
   /* eslint-disable */
-  // @ts-expect-error this gets injected
-  static version: string = typeof shoelaceVersion !== 'undefined' ? shoelaceVersion : '';
-  /* eslint-disable */
+  // @ts-expect-error This is auto-injected at build time.
+  static version = __SHOELACE_VERSION__
+  /* eslint-enable */
 
   static define(name: string) {
     define(name, this);

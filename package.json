@@ -106,6 +106,7 @@
     "del": "^7.0.0",
     "download": "^8.0.0",
     "esbuild": "^0.18.2",
+    "esbuild-plugin-replace": "^1.4.0",
     "eslint": "^8.44.0",
     "eslint-plugin-chai-expect": "^3.0.0",
     "eslint-plugin-chai-friendly": "^0.7.2",
