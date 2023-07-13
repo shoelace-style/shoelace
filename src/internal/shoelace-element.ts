@@ -138,7 +138,9 @@ function define(name: string, elementConstructor: CustomElementConstructor | typ
     return;
   }
 
-  console.warn(`Attempted to register <${name}>${newVersion}, but <${name}>${existingVersion} has already been defined.`);
+  console.warn(
+    `Attempted to register <${name}>${newVersion}, but <${name}>${existingVersion} has already been defined.`
+  );
 }
 
 /* eslint-disable */
