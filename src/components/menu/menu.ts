@@ -1,9 +1,9 @@
 import { customElement, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import ShoelaceElement from '../../internal/shoelace-element.js';
+import SlMenuItem from '../menu-item/menu-item.js';
 import styles from './menu.styles.js';
 import type { CSSResultGroup } from 'lit';
-import type SlMenuItem from '../menu-item/menu-item.js';
 export interface MenuSelectEventDetail {
   item: SlMenuItem;
 }
@@ -30,12 +30,11 @@ export default class SlMenu extends ShoelaceElement {
   }
 
   private handleClick(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    const item = target.closest('sl-menu-item');
-
-    if (!item || item.disabled || item.inert) {
+    if (!(event.target instanceof SlMenuItem)) {
       return;
     }
+
+    const item: SlMenuItem = event.target;
 
     if (item.type === 'checkbox') {
       item.checked = !item.checked;

@@ -166,18 +166,25 @@ export class SubmenuController implements ReactiveController {
   };
 
   private handleClick = (event: MouseEvent) => {
-    // Clicking on the item which heads the menu does nothing.
+    // Clicking on the item which heads the menu does nothing,
+    // otherwise hide submenu and propagate.
     if (event.target === this.host) {
       event.preventDefault();
       event.stopPropagation();
+    } else if (
+      event.target instanceof Element &&
+      (event.target.tagName === 'sl-menu-item' || event.target.role?.startsWith('menuitem'))
+    ) {
+      this.disableSubmenu();
     }
   };
 
   /** Close this submenu on focus outside of the parent or any descendents. */
   private handleFocusOut = (event: FocusEvent) => {
-    if (!event.relatedTarget || (event.relatedTarget instanceof Element && !this.host.contains(event.relatedTarget))) {
-      this.disableSubmenu();
+    if (event.relatedTarget && event.relatedTarget instanceof Element && this.host.contains(event.relatedTarget)) {
+      return;
     }
+    this.disableSubmenu();
   };
 
   /** Prevent the parent menu-item from getting focus on mouse movement on the submenu. */
