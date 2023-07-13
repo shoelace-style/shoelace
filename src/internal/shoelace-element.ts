@@ -122,24 +122,25 @@ function define(name: string, elementConstructor: CustomElementConstructor | typ
     return;
   }
 
-  let newVersion = '';
-  let existingVersion = '';
+  let newVersion = ' (unknown version)';
+  let existingVersion = newVersion;
 
   if ('version' in elementConstructor) {
-    newVersion += ' v' + elementConstructor.version;
+    newVersion = ' v' + elementConstructor.version;
   }
 
   if ('version' in currentElementConstructor) {
-    existingVersion += ' v' + currentElementConstructor.version;
+    existingVersion = ' v' + currentElementConstructor.version;
   }
 
+  // Need to make sure we're not working with null or empty strings before doing version comparisons.
   if (newVersion && existingVersion && newVersion === existingVersion) {
     // If versions match, we don't need to warn anyone. Carry on.
     return;
   }
 
   console.warn(
-    `Attempted to register <${name}>${newVersion}, but <${name}>${existingVersion} has already been defined.`
+    `Attempted to register <${name}>${newVersion}, but <${name}>${existingVersion} has already been registered.`
   );
 }
 
