@@ -125,11 +125,11 @@ function define(name: string, elementConstructor: CustomElementConstructor | typ
   let newVersion = ' (unknown version)';
   let existingVersion = newVersion;
 
-  if ('version' in elementConstructor) {
+  if ('version' in elementConstructor && elementConstructor.version) {
     newVersion = ' v' + elementConstructor.version;
   }
 
-  if ('version' in currentElementConstructor) {
+  if ('version' in currentElementConstructor && currentElementConstructor.version) {
     existingVersion = ' v' + currentElementConstructor.version;
   }
 
