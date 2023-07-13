@@ -48,6 +48,7 @@ export default class SlMenu extends ShoelaceElement {
     if (event.key === 'Enter' || event.key === ' ') {
       const item = this.getCurrentItem();
       event.preventDefault();
+      event.stopPropagation();
 
       // Simulate a click to support @click handlers on menu items that also work with the keyboard
       item?.click();
