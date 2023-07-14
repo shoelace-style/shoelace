@@ -14,12 +14,15 @@ export class SubmenuController implements ReactiveController {
   private host: ReactiveControllerHost & SlMenuItem;
   private popupRef: Ref<SlPopup> = createRef();
 
+  private enableSubmenuTimer = -1;
   private isConnected = false;
   private isPopupConnected = false;
   private skidding = 0;
 
   private readonly hasSlotController: HasSlotController;
   private readonly localize: LocalizeController;
+  private readonly submenuDistance = -4;
+  private readonly submenuOpenDelay = 100;
 
   constructor(
     host: ReactiveControllerHost & SlMenuItem,
@@ -128,7 +131,7 @@ export class SubmenuController implements ReactiveController {
           menuItems[0].focus();
         }
       } else {
-        this.enableSubmenu();
+        this.enableSubmenu(false);
         this.host.updateComplete.then(() => {
           if (menuItems![0] instanceof HTMLElement) {
             menuItems![0].focus();
@@ -201,11 +204,21 @@ export class SubmenuController implements ReactiveController {
     }
   }
 
-  private enableSubmenu() {
-    this.setSubmenuState(true);
+  /** Show the submenu. Supports disabling the opening delay (e.g. for
+   * keyboard events that want to set the focus to the newly opened
+   * menu). */
+  private enableSubmenu(delay = true) {
+    if (delay) {
+      this.enableSubmenuTimer = window.setTimeout(() => {
+        this.setSubmenuState(true);
+      }, this.submenuOpenDelay);
+    } else {
+      this.setSubmenuState(true);
+    }
   }
 
   private disableSubmenu() {
+    clearTimeout(this.enableSubmenuTimer);
     this.setSubmenuState(false);
   }
 
@@ -244,6 +257,7 @@ export class SubmenuController implements ReactiveController {
       <style>
         ::part(popup) {
           z-index: var(--sl-z-index-dropdown);
+          box-shadow: var(--sl-shadow-large);
         }
       </style>
       <sl-popup
@@ -253,6 +267,7 @@ export class SubmenuController implements ReactiveController {
         flip
         flip-fallback-strategy="best-fit"
         skidding="${this.skidding}"
+        distance="${this.submenuDistance}"
         strategy="fixed"
       >
         <slot name="submenu"></slot>

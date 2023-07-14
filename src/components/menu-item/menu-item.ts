@@ -171,6 +171,7 @@ export default class SlMenuItem extends ShoelaceElement {
         <slot name="suffix" part="suffix" class="menu-item__suffix"></slot>
 
         <span part="submenu-icon" class="menu-item__chevron">
+          &nbsp;&nbsp;&nbsp;
           <sl-icon name=${isLtr ? 'chevron-right' : 'chevron-left'} library="system" aria-hidden="true"></sl-icon>
         </span>
 
