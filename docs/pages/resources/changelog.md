@@ -20,6 +20,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Added a console warning if you attempt to register the same Shoelace component twice. [#1450]
 - Added tests for `<sl-qr-code>` [#1416]
 - Added support for pressing [[Space]] to select/toggle selected `<sl-menu-item>` elements [#1429]
+- Added support for virtual elements in `<sl-popup>` [#1449]
 - Fixed React component treeshaking by introducing `sideEffects` key in `package.json`. [#1450]
 - Fixed a bug in `<sl-tree>` where it was auto-defining `<sl-tree-item>`. [#1450]
 - Fixed a bug in focus trapping of modal elements like `<sl-dialog>`. We now manually handle focus ordering as well as added `offsetParent()` check for tabbable boundaries in Safari. Test cases added for `<sl-dialog>` inside a shadowRoot [#1403]

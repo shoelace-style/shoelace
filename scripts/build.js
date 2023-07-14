@@ -273,13 +273,16 @@ if (serve) {
   });
 
   // Rebuild and reload when source files change
-  bs.watch(['src/**/!(*.test).*']).on('change', async filename => {
+  bs.watch('src/**/!(*.test).*').on('change', async filename => {
+    console.log('updated file: ', filename);
+
     try {
       const isTheme = /^src\/themes/.test(filename);
       const isStylesheet = /(\.css|\.styles\.ts)$/.test(filename);
 
       // Rebuild the source
-      await Promise.all([buildResults.map(result => result.rebuild())]);
+      const rebuildResults = buildResults.map(result => result.rebuild());
+      await Promise.all(rebuildResults);
 
       // Rebuild stylesheets when a theme file changes
       if (isTheme) {

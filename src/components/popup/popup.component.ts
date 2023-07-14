@@ -1,8 +1,8 @@
 import { arrow, autoUpdate, computePosition, flip, offset, platform, shift, size } from '@floating-ui/dom';
 import { classMap } from 'lit/directives/class-map.js';
+import { property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { offsetParent } from 'composed-offset-position';
-import { property, query } from 'lit/decorators.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './popup.styles.js';
 import type { CSSResultGroup } from 'lit';
@@ -35,10 +35,19 @@ import type { CSSResultGroup } from 'lit';
  *  popup can be before overflowing. Useful for positioning child elements that need to overflow. This property is only
  *  available when using `auto-size`.
  */
+
+export interface VirtualElement {
+  getBoundingClientRect: () => DOMRect;
+}
+
+function isVirtualElement(e: unknown): e is VirtualElement {
+  return e !== null && typeof e === 'object' && 'getBoundingClientRect' in e;
+}
+
 export default class SlPopup extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
-  private anchorEl: Element | null;
+  private anchorEl: Element | VirtualElement | null;
   private cleanup: ReturnType<typeof autoUpdate> | undefined;
 
   /** A reference to the internal popup container. Useful for animating and styling the popup with JavaScript. */
@@ -46,10 +55,11 @@ export default class SlPopup extends ShoelaceElement {
   @query('.popup__arrow') private arrowEl: HTMLElement;
 
   /**
-   * The element the popup will be anchored to. If the anchor lives outside of the popup, you can provide its `id` or a
-   * reference to it here. If the anchor lives inside the popup, use the `anchor` slot instead.
+   * The element the popup will be anchored to. If the anchor lives outside of the popup, you can provide the anchor
+   * element `id`, a DOM element reference, or a `VirtualElement`. If the anchor lives inside the popup, use the
+   * `anchor` slot instead.
    */
-  @property() anchor: Element | string;
+  @property() anchor: Element | string | VirtualElement;
 
   /**
    * Activates the positioning logic and shows the popup. When this attribute is removed, the positioning logic is torn
@@ -223,7 +233,7 @@ export default class SlPopup extends ShoelaceElement {
       // Locate the anchor by id
       const root = this.getRootNode() as Document | ShadowRoot;
       this.anchorEl = root.getElementById(this.anchor);
-    } else if (this.anchor instanceof Element) {
+    } else if (this.anchor instanceof Element || isVirtualElement(this.anchor)) {
       // Use the anchor's reference
       this.anchorEl = this.anchor;
     } else {
@@ -468,3 +478,4 @@ declare global {
     'sl-popup': SlPopup;
   }
 }
+
