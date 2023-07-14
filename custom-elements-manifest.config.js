@@ -85,7 +85,7 @@ export default {
             });
 
             // This is what allows us to map JSDOC comments to ReactWrappers.
-            classDoc['jsDoc'] = node.jsDoc.map(jsDoc => jsDoc.getFullText()).join('\n');
+            classDoc['jsDoc'] = node.jsDoc?.map(jsDoc => jsDoc.getFullText()).join('\n');
 
             const parsed = parse(`${customComments}\n */`);
             parsed[0].tags?.forEach(t => {
