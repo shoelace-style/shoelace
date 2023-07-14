@@ -7,7 +7,7 @@ import { property, query } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
-import SlIcon from '../icon/icon.js';
+import SlIcon from '../icon/icon.component.js';
 import styles from './image-comparer.styles.js';
 import type { CSSResultGroup } from 'lit';
 

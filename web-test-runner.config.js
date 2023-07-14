@@ -17,7 +17,8 @@ export default {
     esbuildPlugin({
       ts: true,
       target: 'es2020'
-    })
+    }),
+    OpenNewTab()
   ],
   browsers: [
     playwrightLauncher({ product: 'chromium' }),

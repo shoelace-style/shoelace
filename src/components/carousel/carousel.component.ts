@@ -10,7 +10,7 @@ import { range } from 'lit/directives/range.js';
 import { ScrollController } from './scroll-controller.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
-import SlCarouselItem from '../carousel-item/carousel-item.js';
+import SlCarouselItem from '../carousel-item/carousel-item.component.js';
 import SlIcon from '../icon/icon.component.js';
 import styles from './carousel.styles.js';
 import type { CSSResultGroup } from 'lit';
