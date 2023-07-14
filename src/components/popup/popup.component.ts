@@ -1,8 +1,8 @@
 import { arrow, autoUpdate, computePosition, flip, offset, platform, shift, size } from '@floating-ui/dom';
 import { classMap } from 'lit/directives/class-map.js';
-import { property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { offsetParent } from 'composed-offset-position';
+import { property, query } from 'lit/decorators.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './popup.styles.js';
 import type { CSSResultGroup } from 'lit';
@@ -478,4 +478,3 @@ declare global {
     'sl-popup': SlPopup;
   }
 }
-

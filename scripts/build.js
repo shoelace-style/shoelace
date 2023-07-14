@@ -27,8 +27,6 @@ const bundleDirectories = [cdndir, outdir];
 let packageData = JSON.parse(readFileSync(path.join(process.cwd(), 'package.json')).toString());
 const shoelaceVersion = JSON.stringify(packageData.version.toString());
 
-console.log(shoelaceVersion)
-
 //
 // Runs 11ty and builds the docs. The returned promise resolves after the initial publish has completed. The child
 // process and an array of strings containing any output are included in the resolved promise.
@@ -103,7 +101,7 @@ async function buildTheSource() {
     chunkNames: 'chunks/[name].[hash]',
     define: {
       // Floating UI requires this to be set
-      'process.env.NODE_ENV': '"production"',
+      'process.env.NODE_ENV': '"production"'
     },
     bundle: true,
     //
@@ -116,7 +114,7 @@ async function buildTheSource() {
     splitting: true,
     plugins: [
       replace({
-        '__SHOELACE_VERSION__': shoelaceVersion
+        __SHOELACE_VERSION__: shoelaceVersion
       })
     ]
   };
