@@ -7,8 +7,11 @@ import SlButton from '../../dist/components/button/button.component.js';
 // @ts-expect-error Isn't written in TS.
 import { getAllComponents } from '../../scripts/shared.js';
 import Sinon from 'sinon';
+import ShoelaceElement from './shoelace-element.js';
 
 const getMetadata = () => readFile({ path: '../../dist/custom-elements.json' }) as unknown as Promise<string>;
+
+let counter = 0
 
 // These tests all run in the same tab so they pollute the global custom element registry.
 // Some tests use this stub to be able to just test registration.
@@ -23,9 +26,14 @@ function stubCustomElements() {
     apply(target, thisArg, argumentsList) {
       const [str, ctor] = argumentsList as Parameters<CustomElementRegistry['define']>;
 
-      if (!map.get(str)) {
-        target.apply(thisArg, [str, class extends ctor {}]);
+      if (map.get(str)) {
+        return
       }
+
+      // Assign it a random string so it doesnt pollute globally.
+      const randomTagName = str + "-" + counter.toString();
+      counter++;
+      target.apply(thisArg, [randomTagName, ctor]);
 
       map.set(str, ctor);
     }
@@ -79,16 +87,23 @@ it('Should not provide a console warning if versions match', () => {
 });
 
 it('Should register scopedElements when the element is constructed the first time', () => {
-  expect(Boolean(window.customElements.get('sl-icon'))).to.be.false;
+  class MyElement extends ShoelaceElement {
+    static scopedElements = { 'sl-button': SlButton }
+    static version = "random-version"
+  }
 
-  SlButton.define('sl-button');
+  expect(Boolean(window.customElements.get('sl-button'))).to.be.false;
 
-  // this should be false until the constructor is called via createElement()
-  expect(Boolean(window.customElements.get('sl-icon'))).to.be.false;
+  MyElement.define('sl-element');
 
-  document.createElement('sl-button');
+  // this should be false until the constructor is called via new
+  expect(Boolean(window.customElements.get('sl-button'))).to.be.false;
 
-  expect(Boolean(window.customElements.get('sl-icon'))).to.be.true;
+  // We can call it directly since we know its registered.
+  new (window.customElements.get("sl-element"))
+
+  // sl-icon is a dependency
+  expect(Boolean(window.customElements.get('sl-button'))).to.be.true;
 });
 
 // This looks funky here. This grabs all of our components and tests for side effects.
