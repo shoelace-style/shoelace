@@ -25,7 +25,7 @@ function stubCustomElements () {
   //   .callThrough()
 
   const stub = Sinon.stub(window.customElements, "define").callsFake((str: string, ctor: CustomElementConstructor) => {
-    stub.callThrough().withArgs(str + "-" + counter, class extends ctor {})
+    stub.withArgs(str + "-" + counter, class extends ctor {}).callThrough()
     counter++
     map.set(str, ctor)
   })
