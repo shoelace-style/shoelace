@@ -22,26 +22,18 @@ function stubCustomElements() {
     return map.get(str);
   });
 
-  const proxy = new Proxy(window.customElements.define, {
-    apply(target, thisArg, argumentsList) {
-      const [str, ctor] = argumentsList as Parameters<CustomElementRegistry['define']>;
-
-      if (map.get(str)) {
-        return
-      }
-
-      // Assign it a random string so it doesnt pollute globally.
-      const randomTagName = str + "-" + counter.toString();
-      counter++;
-      target.apply(thisArg, [randomTagName, ctor]);
-
-      map.set(str, ctor);
+  const stub = Sinon.stub(window.customElements, "define")
+  stub.callsFake((str, ctor) => {
+    if (map.get(str)) {
+      return
     }
-  });
-  Object.defineProperty(window.customElements, 'define', {
-    value: proxy,
-    configurable: true
-  });
+
+    // Assign it a random string so it doesnt pollute globally.
+    const randomTagName = str + "-" + counter.toString();
+    counter++;
+    stub.wrappedMethod.apply(window.customElements, [randomTagName, ctor]);
+    map.set(str, ctor);
+  })
 }
 
 beforeEach(() => {
