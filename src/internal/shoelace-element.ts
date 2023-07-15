@@ -118,7 +118,7 @@ function define(name: string, elementConstructor: CustomElementConstructor | typ
     | typeof ShoelaceElement;
 
   if (!currentElementConstructor) {
-    window.customElements.define(name, toAnonymousClass(elementConstructor) as unknown as CustomElementConstructor);
+    window.customElements.define(name, class extends elementConstructor {} as unknown as CustomElementConstructor);
     return;
   }
 

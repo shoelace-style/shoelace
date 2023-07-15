@@ -10,26 +10,36 @@ import Sinon from 'sinon';
 
 const getMetadata = () => readFile({ path: '../../dist/custom-elements.json' }) as unknown as Promise<string>
 
-// This is a hacky way to give us unique strings without generating a UUID or something.
-let counter = 1
-
-// These tests all run in the same tab so they pollute the custom element registry.
+// These tests all run in the same tab so they pollute the global custom element registry.
 // Some tests use this stub to be able to just test registration.
 function stubCustomElements () {
   const map = new Map<string, CustomElementConstructor>()
+
   Sinon.stub(window.customElements, "get").callsFake((str) => {
     return map.get(str)
   })
 
-  // const originalDefine = Sinon.stub(window.customElements, "define")
-  //   .callThrough()
+  const proxy = new Proxy(window.customElements.define, {
+    apply (target, thisArg, argumentsList) {
+      let [str, ctor] = argumentsList
 
-  const stub = Sinon.stub(window.customElements, "define").callsFake((str: string, ctor: CustomElementConstructor) => {
-    stub.withArgs(str + "-" + counter, class extends ctor {}).callThrough()
-    counter++
-    map.set(str, ctor)
+      if (!map.get(str)) {
+        target.apply(thisArg, [str, class extends ctor {}]);
+      }
+
+      map.set(str, ctor)
+    }
+  })
+  Object.defineProperty(window.customElements, "define", {
+    value: proxy,
+    configurable: true
   })
 }
+
+beforeEach(() => {
+  Sinon.restore()
+  stubCustomElements()
+})
 
 it("Should provide a console warning if attempting to register the same tag twice", async () => {
   class MyButton extends SlButton {
@@ -68,6 +78,11 @@ it("Should register scopedElements when the element is constructed the first tim
 
   SlButton.define("sl-button")
 
+  // this should be false until the constructor is called via createElement()
+  expect(Boolean(window.customElements.get("sl-icon"))).to.be.false
+
+  document.createElement("sl-button")
+
   expect(Boolean(window.customElements.get("sl-icon"))).to.be.true
 })
 
@@ -97,9 +112,4 @@ before(async () => {
       expect(registeredTags.length).to.equal(0, errorMessage)
     })
   })
-})
-
-beforeEach(() => {
-  Sinon.restore()
-  stubCustomElements()
 })
