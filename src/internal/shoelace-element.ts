@@ -104,8 +104,8 @@ export default class ShoelaceElement extends LitElement {
 
   static scopedElements: Record<string, typeof ShoelaceElement> = {};
 
-  constructor () {
-    super()
+  constructor() {
+    super();
     Object.entries((this.constructor as typeof ShoelaceElement).scopedElements).forEach(([name, component]) => {
       define(name, component);
     });
@@ -142,16 +142,6 @@ function define(name: string, elementConstructor: CustomElementConstructor | typ
   console.warn(
     `Attempted to register <${name}>${newVersion}, but <${name}>${existingVersion} has already been registered.`
   );
-}
-
-/* eslint-disable */
-interface Constructable<T = any> {
-  new (...args: any[]): T;
-}
-/* eslint-enable */
-
-function toAnonymousClass<T extends Constructable>(ctor: T): Constructable<T> {
-  return class extends ctor {};
 }
 
 export interface ShoelaceFormControl extends ShoelaceElement {
