@@ -94,7 +94,6 @@ it('Should register scopedElements when the element is constructed the first tim
   // We can call it directly since we know its registered.
   new (window.customElements.get("sl-element"))
 
-  // sl-icon is a dependency
   expect(Boolean(window.customElements.get('sl-button'))).to.be.true;
 });
 
