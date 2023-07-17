@@ -117,7 +117,7 @@ An easy way to make sure the base path is configured properly is to check if [ic
 
 ### Referencing Assets
 
-Most of the magic behind assets is handled internally by Shoelace, but if you need to reference the base path for any reasons, the same module exports a function called `getBasePath()`. An optional string argument can be passed, allowing you to get the full path to any asset.
+Most of the magic behind assets is handled internally by Shoelace, but if you need to reference the base path for any reason, the same module exports a function called `getBasePath()`. An optional string argument can be passed, allowing you to get the full path to any asset.
 
 ```html
 <script type="module">
