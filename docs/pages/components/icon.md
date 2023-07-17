@@ -8,7 +8,7 @@ layout: component
 Shoelace comes bundled with over 1,500 icons courtesy of the [Bootstrap Icons](https://icons.getbootstrap.com/) project. These icons are part of the `default` icon library. If you prefer, you can register [custom icon libraries](#icon-libraries) as well.
 
 :::tip
-Depending on how you're loading Shoelace, you may need to copy icon assets and/or [set the base path](getting-started/installation#setting-the-base-path) so Shoelace knows where to load them from. Otherwise, icons may not appear and you'll see 404 Not Found errors in the dev console.
+Depending on how you're loading Shoelace, you may need to copy icon assets and/or [set the base path](/getting-started/installation/#setting-the-base-path) so Shoelace knows where to load them from. Otherwise, icons may not appear and you'll see 404 Not Found errors in the dev console.
 :::
 
 ## Default Icons
