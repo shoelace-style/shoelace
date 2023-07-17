@@ -9,13 +9,13 @@ layout: component
 <sl-split-panel>
   <div
     slot="start"
-    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
   >
     Start
   </div>
   <div
     slot="end"
-    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
   >
     End
   </div>
@@ -69,13 +69,13 @@ To set the initial position, use the `position` attribute. If no position is pro
 <sl-split-panel position="75">
   <div
     slot="start"
-    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
   >
     Start
   </div>
   <div
     slot="end"
-    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
   >
     End
   </div>
@@ -90,13 +90,13 @@ To set the initial position in pixels instead of a percentage, use the `position
 <sl-split-panel position-in-pixels="150">
   <div
     slot="start"
-    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
   >
     Start
   </div>
   <div
     slot="end"
-    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
   >
     End
   </div>
@@ -148,13 +148,13 @@ Add the `vertical` attribute to render the split panel in a vertical orientation
 <sl-split-panel vertical style="height: 400px;">
   <div
     slot="start"
-    style="height: 100%; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    style="height: 100%; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
   >
     Start
   </div>
   <div
     slot="end"
-    style="height: 100%; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    style="height: 100%; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
   >
     End
   </div>
@@ -207,13 +207,13 @@ To snap panels at specific positions while dragging, add the `snap` attribute wi
   <sl-split-panel snap="100px 50%">
     <div
       slot="start"
-      style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+      style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
     >
       Start
     </div>
     <div
       slot="end"
-      style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+      style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
     >
       End
     </div>
@@ -328,13 +328,13 @@ Add the `disabled` attribute to prevent the divider from being repositioned.
 <sl-split-panel disabled>
   <div
     slot="start"
-    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
   >
     Start
   </div>
   <div
     slot="end"
-    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
   >
     End
   </div>
@@ -389,13 +389,13 @@ Try resizing the example below with each option and notice how the panels respon
   <sl-split-panel>
     <div
       slot="start"
-      style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+      style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
     >
       Start
     </div>
     <div
       slot="end"
-      style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+      style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
     >
       End
     </div>
@@ -482,13 +482,13 @@ This examples demonstrates how you can ensure both panels are at least 150px usi
 <sl-split-panel style="--min: 150px; --max: calc(100% - 150px);">
   <div
     slot="start"
-    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
   >
     Start
   </div>
   <div
     slot="end"
-    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
   >
     End
   </div>
@@ -540,7 +540,7 @@ Create complex layouts that can be repositioned independently by nesting split p
 <sl-split-panel>
   <div
     slot="start"
-    style="height: 400px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    style="height: 400px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden"
   >
     Start
   </div>
@@ -548,13 +548,13 @@ Create complex layouts that can be repositioned independently by nesting split p
     <sl-split-panel vertical style="height: 400px;">
       <div
         slot="start"
-        style="height: 100%; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+        style="height: 100%; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden"
       >
         Top
       </div>
       <div
         slot="end"
-        style="height: 100%; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+        style="height: 100%; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden"
       >
         Bottom
       </div>
@@ -625,13 +625,13 @@ You can target the `divider` part to apply CSS properties to the divider. To add
   <sl-icon slot="divider" name="grip-vertical"></sl-icon>
   <div
     slot="start"
-    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
   >
     Start
   </div>
   <div
     slot="end"
-    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+    style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
   >
     End
   </div>
@@ -684,13 +684,13 @@ Here's a more elaborate example that changes the divider's color and width and a
     <sl-icon slot="divider" name="grip-vertical"></sl-icon>
     <div
       slot="start"
-      style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+      style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
     >
       Start
     </div>
     <div
       slot="end"
-      style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center;"
+      style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
     >
       End
     </div>
