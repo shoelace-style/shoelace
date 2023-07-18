@@ -151,7 +151,12 @@ export default class SlDrawer extends ShoelaceElement {
   }
 
   private handleDocumentKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'Escape' && this.modal.isActive() && this.open && !this.contained) {
+    // Contained drawers aren't modal and don't response to the escape key
+    if (!this.contained) {
+      return;
+    }
+
+    if (event.key === 'Escape' && this.modal.isActive() && this.open) {
       event.stopImmediatePropagation();
       this.requestClose('keyboard');
     }
