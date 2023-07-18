@@ -120,6 +120,10 @@ export default class SlDrawer extends ShoelaceElement {
         lockBodyScrolling(this);
       }
     }
+    // If there is an autofocus element, let it take focuse normally, otherwise focus the panel.
+    if (!this.querySelector('[autofocus]')) {
+      this.panel.focus({ preventScroll: true });
+    }
   }
 
   disconnectedCallback() {
@@ -143,11 +147,11 @@ export default class SlDrawer extends ShoelaceElement {
   }
 
   private addOpenListeners() {
-    this.addEventListener('keydown', this.handleKeyDown);
+    this.drawer.addEventListener('keydown', this.handleKeyDown);
   }
 
   private removeOpenListeners() {
-    this.removeEventListener('keydown', this.handleKeyDown);
+    this.drawer.removeEventListener('keydown', this.handleKeyDown);
   }
 
   private handleKeyDown = (event: KeyboardEvent) => {
