@@ -6,12 +6,12 @@ import SlButton from '../../dist/components/button/button.component.js';
 
 // @ts-expect-error Isn't written in TS.
 import { getAllComponents } from '../../scripts/shared.js';
-import Sinon from 'sinon';
 import ShoelaceElement from './shoelace-element.js';
+import Sinon from 'sinon';
 
 const getMetadata = () => readFile({ path: '../../dist/custom-elements.json' }) as unknown as Promise<string>;
 
-let counter = 0
+let counter = 0;
 
 // These tests all run in the same tab so they pollute the global custom element registry.
 // Some tests use this stub to be able to just test registration.
@@ -22,18 +22,18 @@ function stubCustomElements() {
     return map.get(str);
   });
 
-  const stub = Sinon.stub(window.customElements, "define")
+  const stub = Sinon.stub(window.customElements, 'define');
   stub.callsFake((str, ctor) => {
     if (map.get(str)) {
-      return
+      return;
     }
 
     // Assign it a random string so it doesnt pollute globally.
-    const randomTagName = str + "-" + counter.toString();
+    const randomTagName = str + '-' + counter.toString();
     counter++;
     stub.wrappedMethod.apply(window.customElements, [randomTagName, ctor]);
     map.set(str, ctor);
-  })
+  });
 }
 
 beforeEach(() => {
@@ -80,8 +80,8 @@ it('Should not provide a console warning if versions match', () => {
 
 it('Should register dependencies when the element is constructed the first time', () => {
   class MyElement extends ShoelaceElement {
-    static dependencies = { 'sl-button': SlButton }
-    static version = "random-version"
+    static dependencies = { 'sl-button': SlButton };
+    static version = 'random-version';
   }
 
   expect(Boolean(window.customElements.get('sl-button'))).to.be.false;
@@ -92,7 +92,10 @@ it('Should register dependencies when the element is constructed the first time'
   expect(Boolean(window.customElements.get('sl-button'))).to.be.false;
 
   // We can call it directly since we know its registered.
-  new (window.customElements.get("sl-element"))
+  /* eslint-disable */
+  // @ts-expect-error If its undefined, error.
+  new (window.customElements.get('sl-element'))();
+  /* eslint-enable */
 
   expect(Boolean(window.customElements.get('sl-button'))).to.be.true;
 });
