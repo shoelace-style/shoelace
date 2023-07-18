@@ -155,7 +155,7 @@ describe('<sl-icon>', () => {
     });
   });
 
-  describe('svg spritesheets', () => {
+  describe('svg sprite sheets', () => {
     //  For some reason ESLint wants to fail in CI here, but works locally.
     /* eslint-disable */
     it('Should properly grab an SVG and render it from bootstrap icons', async () => {
@@ -192,7 +192,7 @@ describe('<sl-icon>', () => {
         spriteSheet: true
       });
 
-      const el = await fixture<SlIcon>(html`<sl-icon name="non-existant" library="sprite"></sl-icon>`);
+      const el = await fixture<SlIcon>(html`<sl-icon name="non-existent" library="sprite"></sl-icon>`);
 
       await elementUpdated(el);
 
