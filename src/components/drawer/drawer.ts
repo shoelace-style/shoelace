@@ -143,14 +143,14 @@ export default class SlDrawer extends ShoelaceElement {
   }
 
   private addOpenListeners() {
-    document.addEventListener('keydown', this.handleDocumentKeyDown);
+    this.addEventListener('keydown', this.handleKeyDown);
   }
 
   private removeOpenListeners() {
-    document.removeEventListener('keydown', this.handleDocumentKeyDown);
+    this.removeEventListener('keydown', this.handleKeyDown);
   }
 
-  private handleDocumentKeyDown = (event: KeyboardEvent) => {
+  private handleKeyDown = (event: KeyboardEvent) => {
     if (this.open && !this.contained && event.key === 'Escape') {
       event.stopPropagation();
       this.requestClose('keyboard');
@@ -307,6 +307,7 @@ export default class SlDrawer extends ShoelaceElement {
           'drawer--rtl': this.localize.dir() === 'rtl',
           'drawer--has-footer': this.hasSlotController.test('footer')
         })}
+        @keydown=${this.handleKeyDown}
       >
         <div part="overlay" class="drawer__overlay" @click=${() => this.requestClose('overlay')} tabindex="-1"></div>
 
