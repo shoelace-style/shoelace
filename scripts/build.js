@@ -264,7 +264,7 @@ if (serve) {
 
   // Rebuild and reload when source files change
   bs.watch('src/**/!(*.test).*').on('change', async filename => {
-    console.log('updated file: ', filename);
+    console.log('[build] File changed: ', filename);
 
     try {
       const isTheme = /^src\/themes/.test(filename);
