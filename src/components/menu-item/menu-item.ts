@@ -48,11 +48,6 @@ export default class SlMenuItem extends ShoelaceElement {
   /** Draws the menu item in a disabled state, preventing selection. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  constructor() {
-    super();
-    this.addEventListener('click', this.handleHostClick);
-  }
-
   private handleDefaultSlotChange() {
     const textLabel = this.getTextLabel();
 
@@ -68,14 +63,6 @@ export default class SlMenuItem extends ShoelaceElement {
       this.emit('slotchange', { bubbles: true, composed: false, cancelable: false });
     }
   }
-
-  private handleHostClick = (event: MouseEvent) => {
-    // Prevent the click event from being emitted when the button is disabled or loading
-    if (this.disabled) {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-    }
-  };
 
   @watch('checked')
   handleCheckedChange() {
