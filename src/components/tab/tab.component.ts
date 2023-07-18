@@ -28,7 +28,7 @@ let id = 0;
  */
 export default class SlTab extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
-  static scopedElements = { 'sl-icon-button': SlIconButton };
+  static dependencies = { 'sl-icon-button': SlIconButton };
 
   private readonly localize = new LocalizeController(this);
 

@@ -102,11 +102,11 @@ export default class ShoelaceElement extends LitElement {
     define(name, this);
   }
 
-  static scopedElements: Record<string, typeof ShoelaceElement> = {};
+  static dependencies: Record<string, typeof ShoelaceElement> = {};
 
   constructor() {
     super();
-    Object.entries((this.constructor as typeof ShoelaceElement).scopedElements).forEach(([name, component]) => {
+    Object.entries((this.constructor as typeof ShoelaceElement).dependencies).forEach(([name, component]) => {
       define(name, component);
     });
   }

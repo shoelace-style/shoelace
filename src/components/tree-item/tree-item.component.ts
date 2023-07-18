@@ -58,7 +58,7 @@ import type { CSSResultGroup, PropertyValueMap } from 'lit';
  */
 export default class SlTreeItem extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
-  static scopedElements = {
+  static dependencies = {
     'sl-checkbox': SlCheckbox,
     'sl-icon': SlIcon,
     'sl-spinner': SlSpinner

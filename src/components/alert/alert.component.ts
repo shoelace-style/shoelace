@@ -41,7 +41,7 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
  */
 export default class SlAlert extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
-  static scopedElements = { 'sl-icon-button': SlIconButton };
+  static dependencies = { 'sl-icon-button': SlIconButton };
 
   private autoHideTimeout: number;
   private readonly hasSlotController = new HasSlotController(this, 'icon', 'suffix');

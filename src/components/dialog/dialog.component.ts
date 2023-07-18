@@ -63,7 +63,7 @@ import type { CSSResultGroup } from 'lit';
  */
 export default class SlDialog extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
-  static scopedElements = { 'sl-icon-button': SlIconButton };
+  static dependencies = { 'sl-icon-button': SlIconButton };
 
   private readonly hasSlotController = new HasSlotController(this, 'footer');
   private readonly localize = new LocalizeController(this);

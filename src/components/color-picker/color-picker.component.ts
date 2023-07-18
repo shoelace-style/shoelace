@@ -92,7 +92,7 @@ declare const EyeDropper: EyeDropperConstructor;
 export default class SlColorPicker extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
 
-  static scopedElements = {
+  static dependencies = {
     'sl-button-group': SlButtonGroup,
     'sl-button': SlButton,
     'sl-dropdown': SlDropdown,

@@ -50,7 +50,7 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  */
 export default class SlInput extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
-  static scopedElements = { 'sl-icon': SlIcon };
+  static dependencies = { 'sl-icon': SlIcon };
 
   private readonly formControlController = new FormControlController(this, {
     assumeInteractionOn: ['sl-blur', 'sl-input']

@@ -38,7 +38,7 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  */
 export default class SlButton extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
-  static scopedElements = {
+  static dependencies = {
     'sl-icon': SlIcon,
     'sl-spinner': SlSpinner
   };

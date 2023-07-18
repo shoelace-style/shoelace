@@ -27,7 +27,7 @@ import type { CSSResultGroup } from 'lit';
  */
 export default class SlAnimatedImage extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
-  static scopedElements = { 'sl-icon': SlIcon };
+  static dependencies = { 'sl-icon': SlIcon };
 
   @query('.animated-image__animated') animatedImage: HTMLImageElement;
 

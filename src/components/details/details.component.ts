@@ -41,7 +41,7 @@ import type { CSSResultGroup } from 'lit';
 export default class SlDetails extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
-  static scopedElements = {
+  static dependencies = {
     'sl-icon': SlIcon
   };
 

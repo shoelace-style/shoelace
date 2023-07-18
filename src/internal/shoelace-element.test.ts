@@ -78,9 +78,9 @@ it('Should not provide a console warning if versions match', () => {
   expect(stub).not.called;
 });
 
-it('Should register scopedElements when the element is constructed the first time', () => {
+it('Should register dependencies when the element is constructed the first time', () => {
   class MyElement extends ShoelaceElement {
-    static scopedElements = { 'sl-button': SlButton }
+    static dependencies = { 'sl-button': SlButton }
     static version = "random-version"
   }
 

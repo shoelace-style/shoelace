@@ -22,7 +22,7 @@ import type { CSSResultGroup } from 'lit';
  */
 export default class SlIconButton extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
-  static scopedElements = { 'sl-icon': SlIcon };
+  static dependencies = { 'sl-icon': SlIcon };
 
   @query('.icon-button') button: HTMLButtonElement | HTMLLinkElement;
 

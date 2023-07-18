@@ -67,7 +67,7 @@ import type SlRemoveEvent from '../../events/sl-remove.js';
  */
 export default class SlSelect extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
-  static scopedElements = {
+  static dependencies = {
     'sl-icon': SlIcon,
     'sl-popup': SlPopup,
     'sl-tag': SlTag

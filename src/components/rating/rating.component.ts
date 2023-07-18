@@ -33,7 +33,7 @@ import type { CSSResultGroup } from 'lit';
  */
 export default class SlRating extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
-  static scopedElements = { 'sl-icon': SlIcon };
+  static dependencies = { 'sl-icon': SlIcon };
 
   private readonly localize = new LocalizeController(this);
 

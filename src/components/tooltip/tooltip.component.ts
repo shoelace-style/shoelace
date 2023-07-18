@@ -41,7 +41,7 @@ import type { CSSResultGroup } from 'lit';
  */
 export default class SlTooltip extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
-  static scopedElements = { 'sl-popup': SlPopup };
+  static dependencies = { 'sl-popup': SlPopup };
 
   private hoverTimeout: number;
   private readonly localize = new LocalizeController(this);

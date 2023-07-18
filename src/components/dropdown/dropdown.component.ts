@@ -41,7 +41,7 @@ import type SlSelectEvent from '../../events/sl-select.js';
  */
 export default class SlDropdown extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
-  static scopedElements = { 'sl-popup': SlPopup };
+  static dependencies = { 'sl-popup': SlPopup };
 
   @query('.dropdown') popup: SlPopup;
   @query('.dropdown__trigger') trigger: HTMLSlotElement;

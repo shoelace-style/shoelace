@@ -22,7 +22,7 @@ import type SlBreadcrumbItem from '../breadcrumb-item/breadcrumb-item.js';
  */
 export default class SlBreadcrumb extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
-  static scopedElements = { 'sl-icon': SlIcon };
+  static dependencies = { 'sl-icon': SlIcon };
 
   private readonly localize = new LocalizeController(this);
   private separatorDir = this.localize.dir();

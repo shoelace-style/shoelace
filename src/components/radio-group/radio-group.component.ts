@@ -42,7 +42,7 @@ import type SlRadioButton from '../radio-button/radio-button.js';
  */
 export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
-  static scopedElements = { 'sl-button-group': SlButtonGroup };
+  static dependencies = { 'sl-button-group': SlButtonGroup };
 
   protected readonly formControlController = new FormControlController(this);
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
