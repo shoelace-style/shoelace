@@ -132,7 +132,7 @@ export default class SlDialog extends ShoelaceElement {
   }
 
   private handleDocumentKeyDown = (event: KeyboardEvent) => {
-    if (this.open && event.key === 'Escape') {
+    if (event.key === 'Escape' && this.modal.isActive() && this.open) {
       event.stopPropagation();
       this.requestClose('keyboard');
     }

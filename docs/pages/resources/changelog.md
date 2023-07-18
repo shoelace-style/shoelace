@@ -24,6 +24,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-carousel>` that caused navigation to work incorrectly in some case [#1420]
 - Fixed a number of slots that incorrectly had aria- and/or role attributes directly on them [#1422]
 - Fixed a bug in `<sl-tree>` that caused focus to be stolen when removing focused tree items [#1430]
+- Fixed a bug in `<sl-dialog>` and `<sl-drawer>` that caused nested modals to respond too eagerly to the [[Esc]] key [#1457]
 - Updated ESLint and related plugins to the latest versions
 
 ## 2.5.2

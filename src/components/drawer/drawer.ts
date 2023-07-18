@@ -151,8 +151,8 @@ export default class SlDrawer extends ShoelaceElement {
   }
 
   private handleDocumentKeyDown = (event: KeyboardEvent) => {
-    if (this.open && !this.contained && event.key === 'Escape') {
-      event.stopPropagation();
+    if (event.key === 'Escape' && this.modal.isActive() && this.open && !this.contained) {
+      event.stopImmediatePropagation();
       this.requestClose('keyboard');
     }
   };
