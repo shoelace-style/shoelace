@@ -317,7 +317,7 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
         ${
           this.caret ? html` <sl-icon part="caret" class="button__caret" library="system" name="caret"></sl-icon> ` : ''
         }
-        ${this.loading ? html`<sl-spinner></sl-spinner>` : ''}
+        ${this.loading ? html`<sl-spinner part="spinner"></sl-spinner>` : ''}
       </${tag}>
     `;
     /* eslint-enable lit/no-invalid-html */
