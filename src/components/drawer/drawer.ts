@@ -120,10 +120,6 @@ export default class SlDrawer extends ShoelaceElement {
         lockBodyScrolling(this);
       }
     }
-    // If there is an autofocus element, let it take focuse normally, otherwise focus the panel.
-    if (!this.querySelector('[autofocus]')) {
-      this.panel.focus({ preventScroll: true });
-    }
   }
 
   disconnectedCallback() {
@@ -147,14 +143,14 @@ export default class SlDrawer extends ShoelaceElement {
   }
 
   private addOpenListeners() {
-    this.drawer.addEventListener('keydown', this.handleKeyDown);
+    document.addEventListener('keydown', this.handleDocumentKeyDown);
   }
 
   private removeOpenListeners() {
-    this.drawer.removeEventListener('keydown', this.handleKeyDown);
+    document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
-  private handleKeyDown = (event: KeyboardEvent) => {
+  private handleDocumentKeyDown = (event: KeyboardEvent) => {
     if (this.open && !this.contained && event.key === 'Escape') {
       event.stopPropagation();
       this.requestClose('keyboard');
@@ -311,7 +307,6 @@ export default class SlDrawer extends ShoelaceElement {
           'drawer--rtl': this.localize.dir() === 'rtl',
           'drawer--has-footer': this.hasSlotController.test('footer')
         })}
-        @keydown=${this.handleKeyDown}
       >
         <div part="overlay" class="drawer__overlay" @click=${() => this.requestClose('overlay')} tabindex="-1"></div>
 
