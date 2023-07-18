@@ -1,11 +1,19 @@
 import { arrow, autoUpdate, computePosition, flip, offset, platform, shift, size } from '@floating-ui/dom';
 import { classMap } from 'lit/directives/class-map.js';
+import { property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { offsetParent } from 'composed-offset-position';
-import { property, query } from 'lit/decorators.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './popup.styles.js';
 import type { CSSResultGroup } from 'lit';
+
+export interface VirtualElement {
+  getBoundingClientRect: () => DOMRect;
+}
+
+function isVirtualElement(e: unknown): e is VirtualElement {
+  return e !== null && typeof e === 'object' && 'getBoundingClientRect' in e;
+}
 
 /**
  * @summary Popup is a utility that lets you declaratively anchor "popup" containers to another element.
@@ -35,15 +43,6 @@ import type { CSSResultGroup } from 'lit';
  *  popup can be before overflowing. Useful for positioning child elements that need to overflow. This property is only
  *  available when using `auto-size`.
  */
-
-export interface VirtualElement {
-  getBoundingClientRect: () => DOMRect;
-}
-
-function isVirtualElement(e: unknown): e is VirtualElement {
-  return e !== null && typeof e === 'object' && 'getBoundingClientRect' in e;
-}
-
 export default class SlPopup extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
@@ -478,3 +477,4 @@ declare global {
     'sl-popup': SlPopup;
   }
 }
+
