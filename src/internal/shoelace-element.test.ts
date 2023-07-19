@@ -6,7 +6,7 @@ import SlButton from '../../dist/components/button/button.component.js';
 
 // @ts-expect-error Isn't written in TS.
 import { getAllComponents } from '../../scripts/shared.js';
-import ShoelaceElement from './shoelace-element.js';
+import ShoelaceElement from '../../dist/internal/shoelace-element.js';
 import Sinon from 'sinon';
 
 const getMetadata = () => readFile({ path: '../../dist/custom-elements.json' }) as unknown as Promise<string>;
