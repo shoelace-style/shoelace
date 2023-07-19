@@ -35,6 +35,7 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  * @csspart label - The button's label.
  * @csspart suffix - The container that wraps the suffix.
  * @csspart caret - The button's caret icon, an `<sl-icon>` element.
+ * @csspart spinner - The spinner that shows when the button is in the loading state.
  */
 @customElement('sl-button')
 export default class SlButton extends ShoelaceElement implements ShoelaceFormControl {
