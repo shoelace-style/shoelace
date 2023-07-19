@@ -121,8 +121,8 @@ async function buildTheSource() {
 
   const npmConfig = {
     ...cdnConfig,
+    bundle: false,
     external: undefined,
-    packages: 'external',
     outdir
   };
 
