@@ -9,6 +9,7 @@
       "dom.Iterable",
       "es2020"
     ],
+    "emitDeclarationOnly": true,
     "declaration": true,
     "rootDir": ".",
     "strict": true,

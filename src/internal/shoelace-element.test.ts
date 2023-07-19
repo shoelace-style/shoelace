@@ -4,9 +4,14 @@ import { readFile } from '@web/test-runner-commands';
 
 import SlButton from '../../dist/components/button/button.component.js';
 
+// We don't use ShoelaceElement directly because it shouldn't exist in the final bundle.
+/* eslint-disable */
+const ShoelaceElement = Object.getPrototypeOf(SlButton);
+/* eslint-enable */
+
 // @ts-expect-error Isn't written in TS.
 import { getAllComponents } from '../../scripts/shared.js';
-import ShoelaceElement from '../../dist/internal/shoelace-element.js';
+
 import Sinon from 'sinon';
 
 const getMetadata = () => readFile({ path: '../../dist/custom-elements.json' }) as unknown as Promise<string>;
