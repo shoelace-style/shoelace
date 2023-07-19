@@ -85,12 +85,12 @@ it('Should not provide a console warning if versions match', () => {
 });
 
 it('Should register dependencies when the element is constructed the first time', () => {
-  // eslint-disable
+  /* eslint-disable */
   class MyElement extends ShoelaceElement {
     static dependencies = { 'sl-button': SlButton };
     static version = 'random-version';
   }
-  // eslint-enable
+  /* eslint-enable */
 
   expect(Boolean(window.customElements.get('sl-button'))).to.be.false;
 
