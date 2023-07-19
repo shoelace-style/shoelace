@@ -1,5 +1,4 @@
 import '../../../dist/shoelace.js';
-import { clickOnElement } from '../../internal/test.js';
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import sinon from 'sinon';
 import type SlMenuItem from './menu-item';
@@ -30,16 +29,6 @@ describe('<sl-menu-item>', () => {
   it('should render the correct aria attributes when disabled', async () => {
     const el = await fixture<SlMenuItem>(html` <sl-menu-item disabled>Test</sl-menu-item> `);
     expect(el.getAttribute('aria-disabled')).to.equal('true');
-  });
-
-  it('should not emit the click event when disabled', async () => {
-    const el = await fixture<SlMenuItem>(html` <sl-menu-item disabled>Test</sl-menu-item> `);
-    const clickHandler = sinon.spy();
-    el.addEventListener('click', clickHandler);
-    await clickOnElement(el);
-    await el.updateComplete;
-
-    expect(clickHandler).to.not.have.been.called;
   });
 
   it('should return a text label when calling getTextLabel()', async () => {

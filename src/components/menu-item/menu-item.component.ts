@@ -1,10 +1,10 @@
+import SlIcon from '../icon/icon.component.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { property, query } from 'lit/decorators.js';
 import { getTextContent } from '../../internal/slot.js';
 import { html } from 'lit';
-import { property, query } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
-import SlIcon from '../icon/icon.component.js';
 import styles from './menu-item.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -29,7 +29,7 @@ import type { CSSResultGroup } from 'lit';
  */
 export default class SlMenuItem extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
-  static dependencies = { 'sl-icon': SlIcon };
+  static dependencies = { 'sl-icon': SlIcon }
 
   private cachedTextLabel: string;
 
@@ -48,11 +48,6 @@ export default class SlMenuItem extends ShoelaceElement {
   /** Draws the menu item in a disabled state, preventing selection. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  constructor() {
-    super();
-    this.addEventListener('click', this.handleHostClick);
-  }
-
   private handleDefaultSlotChange() {
     const textLabel = this.getTextLabel();
 
@@ -68,14 +63,6 @@ export default class SlMenuItem extends ShoelaceElement {
       this.emit('slotchange', { bubbles: true, composed: false, cancelable: false });
     }
   }
-
-  private handleHostClick = (event: MouseEvent) => {
-    // Prevent the click event from being emitted when the button is disabled or loading
-    if (this.disabled) {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-    }
-  };
 
   @watch('checked')
   handleCheckedChange() {
@@ -149,3 +136,4 @@ declare global {
     'sl-menu-item': SlMenuItem;
   }
 }
+

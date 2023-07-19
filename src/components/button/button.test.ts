@@ -68,27 +68,6 @@ describe('<sl-button>', () => {
       const el = await fixture<SlButton>(html` <sl-button href="some/path" disabled>Button Label</sl-button> `);
       expect(el.shadowRoot!.querySelector('a[disabled]')).not.to.exist;
     });
-
-    it('should not bubble up clicks', async () => {
-      const button = await fixture<SlButton>(html` <sl-button disabled>Button Label</sl-button> `);
-      const handleClick = sinon.spy();
-      button.addEventListener('click', handleClick);
-      button.click();
-
-      expect(handleClick).not.to.have.been.called;
-
-      button.shadowRoot!.querySelector('button')!.click();
-      expect(handleClick).not.to.have.been.called;
-
-      const buttonLink = await fixture<SlButton>(html` <sl-button href="some/path" disabled>Button Label</sl-button> `);
-      buttonLink.addEventListener('click', handleClick);
-      buttonLink.click();
-
-      expect(handleClick).not.to.have.been.called;
-
-      buttonLink.shadowRoot!.querySelector('a')!.click();
-      expect(handleClick).not.to.have.been.called;
-    });
   });
 
   it('should have title if title attribute is set', async () => {
