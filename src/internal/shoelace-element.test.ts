@@ -61,7 +61,9 @@ it('Should provide a console warning if attempting to register the same tag twic
 
   expect(warning).to.match(
     new RegExp(
+      /* eslint-disable */
       `Attempted to register <sl-button> v${MyButton.version}, but <sl-button> v${SlButton.version} has already been registered`
+      /* eslint-enable */
     ),
     'i'
   );
@@ -90,7 +92,9 @@ it('Should register dependencies when the element is constructed the first time'
 
   expect(Boolean(window.customElements.get('sl-button'))).to.be.false;
 
+  // eslint-disable
   MyElement.define('sl-element');
+  // eslint-enable
 
   // this should be false until the constructor is called via new
   expect(Boolean(window.customElements.get('sl-button'))).to.be.false;
