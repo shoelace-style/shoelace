@@ -12,7 +12,7 @@ import ora from 'ora';
 import util from 'util';
 import * as path from 'path';
 import { readFileSync } from 'fs';
-import { replace } from "esbuild-plugin-replace"
+import { replace } from 'esbuild-plugin-replace';
 
 const { serve } = commandLineArgs([{ name: 'serve', type: Boolean }]);
 const outdir = 'dist';
