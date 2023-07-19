@@ -112,10 +112,12 @@ export default class ShoelaceElement extends LitElement {
   }
 }
 
-function define(name: string, elementConstructor: CustomElementConstructor | typeof ShoelaceElement, options: ElementDefinitionOptions = {}) {
-  const currentElementConstructor = customElements.get(name) as
-    | CustomElementConstructor
-    | typeof ShoelaceElement;
+function define(
+  name: string,
+  elementConstructor: CustomElementConstructor | typeof ShoelaceElement,
+  options: ElementDefinitionOptions = {}
+) {
+  const currentElementConstructor = customElements.get(name) as CustomElementConstructor | typeof ShoelaceElement;
 
   if (!currentElementConstructor) {
     customElements.define(name, class extends elementConstructor {} as unknown as CustomElementConstructor, options);
