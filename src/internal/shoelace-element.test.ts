@@ -49,9 +49,11 @@ it('Should provide a console warning if attempting to register the same tag twic
   const stub = Sinon.stub(console, 'warn');
 
   expect(Boolean(window.customElements.get('sl-button'))).to.be.false;
+  /* eslint-disable */
   SlButton.define('sl-button');
   expect(Boolean(window.customElements.get('sl-button'))).to.be.true;
   MyButton.define('sl-button');
+  /* eslint-enable */
 
   expect(stub).calledOnce;
 
@@ -70,10 +72,12 @@ it('Should not provide a console warning if versions match', () => {
 
   const stub = Sinon.stub(console, 'warn');
 
+  /* eslint-disable */
   expect(Boolean(window.customElements.get('sl-button'))).to.be.false;
   SlButton.define('sl-button');
   expect(Boolean(window.customElements.get('sl-button'))).to.be.true;
   MyButton.define('sl-button');
+  /* eslint-enable */
 
   expect(stub).not.called;
 });

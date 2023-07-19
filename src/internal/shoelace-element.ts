@@ -95,11 +95,11 @@ export default class ShoelaceElement extends LitElement {
 
   /* eslint-disable */
   // @ts-expect-error This is auto-injected at build time.
-  static version = typeof __SHOELACE_VERSION__ === 'undefined' ? '' : __SHOELACE_VERSION__;
+  static version = __SHOELACE_VERSION__;
   /* eslint-enable */
 
-  static define(name: string) {
-    define(name, this);
+  static define(name: string, ctor = this, options: ElementDefinitionOptions = {}) {
+    define(name, ctor, options);
   }
 
   static dependencies: Record<string, typeof ShoelaceElement> = {};
@@ -112,13 +112,13 @@ export default class ShoelaceElement extends LitElement {
   }
 }
 
-function define(name: string, elementConstructor: CustomElementConstructor | typeof ShoelaceElement) {
-  const currentElementConstructor = window.customElements.get(name) as
+function define(name: string, elementConstructor: CustomElementConstructor | typeof ShoelaceElement, options: ElementDefinitionOptions = {}) {
+  const currentElementConstructor = customElements.get(name) as
     | CustomElementConstructor
     | typeof ShoelaceElement;
 
   if (!currentElementConstructor) {
-    window.customElements.define(name, class extends elementConstructor {} as unknown as CustomElementConstructor);
+    customElements.define(name, class extends elementConstructor {} as unknown as CustomElementConstructor, options);
     return;
   }
 
