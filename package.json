@@ -9,6 +9,7 @@
   "web-types": "dist/web-types.json",
   "type": "module",
   "types": "dist/shoelace.d.ts",
+  "jsdelivr": "./cdn/shoelace-autoloader.js",
   "sideEffects": [
     "./dist/shoelace.js",
     "./dist/shoelace-autoloader.js",
