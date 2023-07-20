@@ -1,14 +1,14 @@
+import SlIcon from '../icon/icon.component.js';
+import SlSpinner from '../spinner/spinner.component.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { property, query, state } from 'lit/decorators.js';
 import { FormControlController, validValidityState } from '../../internal/form.js';
 import { HasSlotController } from '../../internal/slot.js';
 import { html, literal } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LocalizeController } from '../../utilities/localize.js';
-import { property, query, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
-import SlIcon from '../icon/icon.js';
-import SlSpinner from '../spinner/spinner.js';
 import styles from './button.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
@@ -35,13 +35,14 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  * @csspart label - The button's label.
  * @csspart suffix - The container that wraps the suffix.
  * @csspart caret - The button's caret icon, an `<sl-icon>` element.
+ * @csspart spinner - The spinner that shows when the button is in the loading state.
  */
 export default class SlButton extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = styles;
   static dependencies = {
     'sl-icon': SlIcon,
     'sl-spinner': SlSpinner
-  };
+  }
 
   private readonly formControlController = new FormControlController(this, {
     form: input => {
@@ -320,7 +321,7 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
         ${
           this.caret ? html` <sl-icon part="caret" class="button__caret" library="system" name="caret"></sl-icon> ` : ''
         }
-        ${this.loading ? html`<sl-spinner></sl-spinner>` : ''}
+        ${this.loading ? html`<sl-spinner part="spinner"></sl-spinner>` : ''}
       </${tag}>
     `;
     /* eslint-enable lit/no-invalid-html */
@@ -333,3 +334,4 @@ declare global {
     'sl-button': SlButton;
   }
 }
+

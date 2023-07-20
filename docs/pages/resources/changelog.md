@@ -21,6 +21,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Added tests for `<sl-qr-code>` [#1416]
 - Added support for pressing [[Space]] to select/toggle selected `<sl-menu-item>` elements [#1429]
 - Added support for virtual elements in `<sl-popup>` [#1449]
+- Added the `spinner` part to `<sl-button>` [#1460]
 - Added a `shoelace.js` and `shoelace-autoloader.js` to exportmaps. [#1450]
 - Fixed React component treeshaking by introducing `sideEffects` key in `package.json`. [#1450]
 - Fixed a bug in `<sl-tree>` where it was auto-defining `<sl-tree-item>`. [#1450]
