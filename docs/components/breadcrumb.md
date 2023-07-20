@@ -18,7 +18,7 @@ sl-breadcrumb
   sl-breadcrumb-item Catalog
   sl-breadcrumb-item Clothing
   sl-breadcrumb-item Women
-  sl-breadcrumb-item Shirts &amp;amp; Tops
+  sl-breadcrumb-item Shirts &amp; Tops
 ```
 
 ```jsx react

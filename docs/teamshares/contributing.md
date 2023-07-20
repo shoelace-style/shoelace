@@ -1,10 +1,38 @@
 # Contributing
 
-Want to contribute to the Teamshares design system? Shoelace is straightforward to install and run on your local machine.
+The Teamshares Design System is owned by all of us and relies on contributions from all the teams. Thank you in advance for your input!
+
+## Process
+
+Because the system is shared across all our apps, we need to make sure that any changes will work for all instances of the components. This involves a few steps:
+
+1. ### Design approval
+
+   Any changes or additions to the UX or visual appearance of a component must be approved by the design system designers.
+
+   **_If you're a designer_**, please seek approval within the design team before creating a ticket for engineering.
+
+   **_If you're an engineer or PM_**, please bring the change to the designer on your team to seek buy-in from the design team.
+
+   Bug fixes don't need approval unless they represent a change of appearance or behavior.
+
+1. ### Component audit
+
+   Before implementing the change, do a sanity check across the apps and make sure the change won't break any existing usage of the component. One easy way to find the usage is to do an org-wide search on GitHub for the component name. For very common components, such as buttons and inputs, this will turn up a lot of results, which is exactly why we need to be careful making changes to them. If you're only changing a specific usage of a component -- say, numeric inputs -- you should be able to filter the search results to find only those usages.
+
+1. ### Implementation
+
+   As much as possible, try to follow Shoelace's [conventions and best practices](/resources/contributing?id=best-practices), including test coverage. This will make it easier to maintain the library over time as we continue to pull in changes from upstream.
+
+1. ### Code review
+
+   Once you've made your changes and they're ready for feedback, make a PR and one of the core library maintainers will review the code to make sure it adheres to the [best practices](/resources/contributing?id=best-practices).
+
+   !> **Caution:** Don't accidentally open a PR against the upstream repository (Shoelace itself). Many Git tools, such as Github Desktop, will default to this behavior. Doing so will expose our codebase to anyone looking at the main Shoelace repository. While `@teamshares/shoelace` is technically public, it's best to keep things in-house.
 
 ## Installation
 
-If you have a new project and you want to start playing with our fork of Shoelace, you can add it to any page very easily via [linking from the CDN](/getting-started/installation?id=cdn-installation-easiest). If you're planning to contribute, you'll need to install and run it locally. Follow the "Local installation" instructions under [Installation](/getting-started/installation?id=local-installation).
+If you have a new project and you want to start playing with our fork of Shoelace, you can add it to any page very easily via [linking from the CDN](/getting-started/installation?id=cdn-installation-easiest). If you're planning to contribute, you'll need to install and run it locally. Shoelace is straightforward to install and run on your local machine. Follow the "Local installation" instructions under [Installation](/getting-started/installation?id=local-installation).
 
 Once you have Shoelace installed, running it locally is as simple as
 
@@ -18,7 +46,9 @@ Documentation is built directly into Shoelace, so you only need to update the ma
 
 Unless you're one of the core DS engineers, most of what you'll be doing in Shoelace will probably involve styling. Styles in Shoelace components are found in `src/components/[component].styles.ts`. Make sure that any styling changes you want to make have been approved by the design system designers and will work across all our apps.
 
-Once you're happy with your changes, you can push your changes up to a branch and make a PR for review. (If you don't know what this means or how to do it, you probably shouldn't be editing the code directly.) **Please _DO NOT_ push your changes directly into the `next` branch!**
+Once you're happy with your changes, you can push your changes up to a branch and make a PR for review. (If you don't know what this means or how to do it, you probably shouldn't be editing the code directly.)
+
+!> **Do not push your changes directly into the `next` branch!**
 
 ## Connecting to a local Teamshares app
 

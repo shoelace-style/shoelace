@@ -326,8 +326,9 @@
 
     if (button?.classList.contains('code-block__button--codepen')) {
       const codeBlock = button.closest('.code-block');
-      const htmlExample = codeBlock.querySelector('.code-block__source--html > pre > code')?.textContent;
+      // const htmlExample = codeBlock.querySelector('.code-block__source--html > pre > code')?.textContent;
       const reactExample = codeBlock.querySelector('.code-block__source--react > pre > code')?.textContent;
+      const slimExample = codeBlock.querySelector('.code-block__source--slim > pre > code')?.textContent;
       const isReact = flavor === 'react' && typeof reactExample === 'string';
       const theme = localStorage.getItem('theme');
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -346,7 +347,7 @@
       if (!isReact) {
         htmlTemplate =
           `<script type="module" src="https://cdn.jsdelivr.net/npm/@teamshares/shoelace@${version}/dist/shoelace.js"></script>\n` +
-          `\n${htmlExample}`;
+          `\n${slimExample}`;
         jsTemplate = '';
       }
 
@@ -386,13 +387,16 @@
         editors,
         head: `<meta name="viewport" content="width=device-width">`,
         html_classes: `sl-theme-${isDark ? 'dark' : 'light'}`,
-        css_external: ``,
-        js_external: ``,
+        html_pre_processor: isReact ? 'none' : 'slim',
+        css_external: `https://os.teamshares.com/assets/application-cd5dbca3027c43e480efd5a0efc734bb30fd761b.css`,
+        css_pre_processor: 'scss',
         js_module: true,
+        js_external: `https://cdn.jsdelivr.net/npm/@teamshares/shoelace@${version}/dist/shoelace.js`, // This doesn't appear to work, perhaps because it lacks type=module (even though module is true below)
         js_pre_processor: isReact ? 'babel' : 'none',
         html: htmlTemplate,
         css: cssTemplate,
-        js: jsTemplate
+        js: jsTemplate,
+        lang: isReact ? 'none' : 'slim'
       };
 
       const input = document.createElement('input');

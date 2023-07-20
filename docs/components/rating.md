@@ -132,7 +132,7 @@ Use the `sl-hover` event to detect when the user hovers over (or touch and drag)
 
 The event has a payload with `phase` and `value` properties. The `phase` property tells when hovering starts, moves to a new value, and ends. The `value` property tells what the rating's value would be if the user were to commit to the hovered value.
 
-```html preview skip
+```html preview
 <div class="detect-hover">
   <sl-rating label="Rating"></sl-rating>
   <span></span>
@@ -169,6 +169,43 @@ The event has a payload with `phase` and `value` properties. The `phase` propert
     display: none;
   }
 </style>
+```
+
+```pug slim
+.detect-hover
+  sl-rating label="Rating"
+  span
+
+javascript:
+  const rating = document.querySelector('.detect-hover > sl-rating');
+  const span = rating.nextElementSibling;
+  const terms = ['No rating', 'Terrible', 'Bad', 'OK', 'Good', 'Excellent'];
+
+  rating.addEventListener('sl-hover', event => {
+    span.textContent = terms[event.detail.value];
+
+    // Clear feedback when hovering stops
+    if (event.detail.phase === 'end') {
+      span.textContent = '';
+    }
+  });
+
+
+css:
+  .detect-hover span {
+    position: relative;
+    top: -4px;
+    left: 8px;
+    border-radius: var(--sl-border-radius-small);
+    background: var(--sl-color-neutral-900);
+    color: var(--sl-color-neutral-0);
+    text-align: center;
+    padding: 4px 6px;
+  }
+
+  .detect-hover span:empty {
+    display: none;
+  }
 ```
 
 ```jsx react
@@ -264,8 +301,8 @@ You can also use the `getSymbol` property to render different icons based on val
   const rating = document.querySelector('.rating-emojis');
 
   rating.getSymbol = value => {
-    const icons = ['emoji-angry', 'emoji-frown', 'emoji-expressionless', 'emoji-smile', 'emoji-laughing'];
-    return `<sl-icon name="${icons[value - 1]}" library="bootstrap"></sl-icon>`;
+    const icons = ['face-angry', 'face-frown', 'face-expressionless', 'face-smile', 'face-laugh'];
+    return `<sl-icon name="${icons[value - 1]}" library="fa"></sl-icon>`;
   };
 </script>
 ```
@@ -277,8 +314,8 @@ javascript:
   const rating = document.querySelector('.rating-emojis');
 
   rating.getSymbol = value => {
-    const icons = ['emoji-angry', 'emoji-frown', 'emoji-expressionless', 'emoji-smile', 'emoji-laughing'];
-    return `<sl-icon name="${icons[value - 1]}" library="bootstrap"></sl-icon>`;
+    const icons = ['face-angry', 'face-frown', 'face-expressionless', 'face-smile', 'face-laugh'];
+    return `<sl-icon name="${icons[value - 1]}" library="fa"></sl-icon>`;
   };
 ```
 
@@ -287,8 +324,8 @@ javascript:
 import { SlRating } from '@teamshares/shoelace/dist/react';
 
 function getSymbol(value) {
-  const icons = ['emoji-angry', 'emoji-frown', 'emoji-expressionless', 'emoji-smile', 'emoji-laughing'];
-  return `<sl-icon name="${icons[value - 1]}" library="bootstrap"></sl-icon>`;
+  const icons = ['face-angry', 'face-frown', 'face-expressionless', 'face-smile', 'face-laugh'];
+  return `<sl-icon name="${icons[value - 1]}" library="fa"></sl-icon>`;
 }
 
 const App = () => <SlRating label="Rating" getSymbol={getSymbol} />;
