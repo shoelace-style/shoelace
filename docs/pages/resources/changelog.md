@@ -27,6 +27,8 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-tree>` that caused focus to be stolen when removing focused tree items [#1430]
 - Fixed a bug in `<sl-dialog>` and `<sl-drawer>` that caused nested modals to respond too eagerly to the [[Esc]] key [#1457]
 - Updated ESLint and related plugins to the latest versions
+- Fixed a compatibility issue with `bootstrap-icons` that made `make-icons.js` always download and invalidate the cache.
+- Fixed hardcoded path to `bootstrap-icons` in `make-icons.js` to make shoelace useable in npm workspaces
 
 ## 2.5.2
 
