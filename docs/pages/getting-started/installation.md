@@ -196,6 +196,21 @@ setBasePath('/path/to/shoelace/%NPMDIR%
 Component modules include side effects for registration purposes. Because of this, importing directly from `@shoelace-style/shoelace` may result in a larger bundle size than necessary. For optimal tree shaking, always cherry pick, i.e. import components and utilities from their respective files, as shown above.
 :::
 
+### Avoiding side-effect imports
+
+By default, imports to components will auto-register themselves. This may not be ideal in all cases. To import just the component's class without auto-registering it's tag we can do the following:
+
+```diff
+- import SlButton from '@shoelace-style/shoelace/%NPMDIR%/components/button/button.js';
++ import SlButton from '@shoelace-style/shoelace/%NPMDIR%/components/button/button.component.js';
+```
+
+Notice how the import ends with `.component.js`. This is the current convention to convey the import does not register itself.
+
+:::danger
+While you can override the class or re-register the shoelace class under a different tag name, if you do so, many components won’t work as expected.
+:::
+
 ## The difference between CDN and npm
 
 You'll notice that the CDN links all start with `/%CDNDIR%/<path>` and npm imports use `/%NPMDIR%/<path>`. The `/%CDNDIR%` files are bundled separately from the `/%NPMDIR%` files. The `/%CDNDIR%` files come pre-bundled, which means all dependencies are inlined so you do not need to worry about loading additional libraries. The `/%NPMDIR%` files **DO NOT** come pre-bundled, allowing your bundler of choice to more efficiently deduplicate dependencies, resulting in smaller bundles and optimal code sharing.
