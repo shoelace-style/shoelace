@@ -36,6 +36,8 @@ components.map(component => {
 
   fs.mkdirSync(componentDir, { recursive: true });
 
+  const jsDoc = component.jsDoc || '';
+
   const source = prettier.format(
     `
       import * as React from 'react';
@@ -45,14 +47,32 @@ components.map(component => {
       ${eventNameImport}
       ${eventImports}
 
-      export default createComponent({
-        tagName: '${component.tagName}',
+      const tagName = '${component.tagName}'
+
+      const component = createComponent({
+        tagName,
         elementClass: Component,
         react: React,
         events: {
           ${events}
+        },
+        displayName: "${component.name}"
+      })
+
+      ${jsDoc}
+      class SlComponent extends React.Component<Parameters<typeof component>[0]> {
+        constructor (...args: Parameters<typeof component>) {
+          super(...args)
+          Component.define(tagName)
         }
-      });
+
+        render () {
+          const { children, ...props } = this.props
+          return React.createElement(component, props, children)
+        }
+      }
+
+      export default SlComponent;
     `,
     Object.assign(prettierConfig, {
       parser: 'babel-ts'

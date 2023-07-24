@@ -1,4 +1,4 @@
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
 import { watch } from '../../internal/watch.js';
@@ -23,7 +23,6 @@ import type { CSSResultGroup } from 'lit';
  *
  * @cssproperty --example - An example CSS custom property.
  */
-@customElement('{{ tag }}')
 export default class {{ properCase tag }} extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
