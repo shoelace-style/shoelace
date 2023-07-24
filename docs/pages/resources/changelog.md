@@ -35,6 +35,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-dialog>` and `<sl-drawer>` that caused nested modals to respond too eagerly to the [[Esc]] key [#1457]
 - Updated ESLint and related plugins to the latest versions
 - Changed the default entrypoint for jsDelivr to point to the autoloader. [#1450]
+- Added types to events emitted by React wrapped components
 
 ## 2.5.2
 
