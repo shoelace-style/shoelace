@@ -24,7 +24,7 @@ let childProcess;
 let buildResults;
 
 const bundleDirectories = [cdndir, outdir];
-let packageData = JSON.parse(readFileSync(path.join(process.cwd(), 'package.json')).toString());
+let packageData = JSON.parse(readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
 const shoelaceVersion = JSON.stringify(packageData.version.toString());
 
 //
