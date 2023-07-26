@@ -23,6 +23,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Added support for virtual elements in `<sl-popup>` [#1449]
 - Added the `spinner` part to `<sl-button>` [#1460]
 - Added a `shoelace.js` and `shoelace-autoloader.js` to exportmaps. [#1450]
+- Added types to events emitted by React wrapped components [#1419]
 - Fixed React component treeshaking by introducing `sideEffects` key in `package.json`. [#1450]
 - Fixed a bug in `<sl-tree>` where it was auto-defining `<sl-tree-item>`. [#1450]
 - Fixed a bug in focus trapping of modal elements like `<sl-dialog>`. We now manually handle focus ordering as well as added `offsetParent()` check for tabbable boundaries in Safari. Test cases added for `<sl-dialog>` inside a shadowRoot [#1403]
@@ -35,7 +36,6 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-dialog>` and `<sl-drawer>` that caused nested modals to respond too eagerly to the [[Esc]] key [#1457]
 - Updated ESLint and related plugins to the latest versions
 - Changed the default entrypoint for jsDelivr to point to the autoloader. [#1450]
-- Added types to events emitted by React wrapped components
 
 ## 2.5.2
 
