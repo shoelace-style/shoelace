@@ -28,6 +28,7 @@ import type { CSSResultGroup } from 'lit';
  * @slot label - The drawer's label. Alternatively, you can use the `label` attribute.
  * @slot header-actions - Optional actions to add to the header. Works best with `<sl-icon-button>`.
  * @slot footer - The drawer's footer, usually one or more buttons representing various options.
+ * @slot overlay - The drawer's overlay
  *
  * @event sl-show - Emitted when the drawer opens.
  * @event sl-after-show - Emitted after the drawer opens and all animations are complete.
@@ -313,7 +314,9 @@ export default class SlDrawer extends ShoelaceElement {
           'drawer--has-footer': this.hasSlotController.test('footer')
         })}
       >
-        <div part="overlay" class="drawer__overlay" @click=${() => this.requestClose('overlay')} tabindex="-1"></div>
+        <div part="overlay" class="drawer__overlay" @click=${() => this.requestClose('overlay')} tabindex="-1">
+            <slot name="overlay"></slot>
+        </div>
 
         <div
           part="panel"
