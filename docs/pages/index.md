@@ -19,8 +19,7 @@ toc: false
 - First-class [React support](/frameworks/react) ⚛️
 - Built-in localization 💬
 - Open source 😸
-
-Designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
+- [More awesome than ever](https://blog.fontawesome.com/shoelace-joins-font-awesome/) ![Awesome emoji](/assets/images/awesome.svg)
 
 </div>
 <div class="splash-end">
@@ -28,12 +27,16 @@ Designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
 </div>
 </div>
 
+<div class="badges">
+
 [![jsDelivr](https://data.jsdelivr.com/v1/package/npm/@shoelace-style/shoelace/badge)](https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace)
 [![npm](https://img.shields.io/npm/dw/@shoelace-style/shoelace?label=npm&style=flat-square)](https://www.npmjs.com/package/@shoelace-style/shoelace)
 [![License](https://img.shields.io/badge/license-MIT-232323.svg?style=flat-square)](https://github.com/shoelace-style/shoelace/blob/next/LICENSE.md)<br>
 [![Discord](https://img.shields.io/badge/Discord-Join%20the%20chat-5965f2.svg?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/mg8f26C)
 [![Twitter](https://img.shields.io/badge/Twitter-Follow-00acee.svg?style=flat-square&logo=twitter&logoColor=white)](https://twitter.com/shoelace_style)
 [![Sponsor](https://img.shields.io/badge/GitHub-Code-232323.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/shoelace-style/shoelace)
+
+</div>
 
 ## Quick Start
 
@@ -105,23 +108,7 @@ If you need to support IE11 or pre-Chromium Edge, this library isn't for you. Al
 
 ## License
 
-Shoelace is designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska). It's available under the terms of the MIT license.
-
-Designing, developing, and supporting this library requires a lot of time, effort, and skill. If you're using this software to make a profit, I respectfully ask that you help [fund its development](https://github.com/sponsors/claviska) by becoming a sponsor.
-
-👇 Your support is very much appreciated! 👇
-
-<sl-button class="repo-button repo-button--sponsor" href="https://github.com/sponsors/claviska" target="_blank">
-  <sl-icon slot="prefix" name="heart"></sl-icon> Become a sponsor
-</sl-button>
-
-<sl-button class="repo-button repo-button--github" href="https://github.com/shoelace-style/shoelace/stargazers" target="_blank">
-  <sl-icon slot="prefix" name="github"></sl-icon> Star
-</sl-button>
-
-<sl-button class="repo-button repo-button--twitter" href="https://twitter.com/shoelace_style" target="_blank">
-  <sl-icon slot="prefix" name="twitter"></sl-icon> Follow
-</sl-button>
+Shoelace was created in New Hampshire by [Cory LaViska](https://twitter.com/claviska). It's available under the terms of the [MIT license](https://github.com/shoelace-style/shoelace/blob/next/LICENSE.md).
 
 ## Attribution
 

@@ -984,7 +984,7 @@ const App = () => {
 
 By default, the popup is positioned using an absolute positioning strategy. However, if your anchor is fixed or exists within a container that has `overflow: auto|hidden`, the popup risks being clipped. To work around this, you can use a fixed positioning strategy by setting the `strategy` attribute to `fixed`.
 
-The fixed positioning strategy reduces jumpiness when the anchor is fixed and allows the popup to break out containers that clip. When using this strategy, it's important to note that the content will be positioned _relative to its containing block_, which is usually the viewport unless an ancestor uses a `transform`, `perspective`, or `filter`. [Refer to this page](https://developer.mozilla.org/en-US/docs/Web/CSS/position#fixed) for more details.
+The fixed positioning strategy reduces jumpiness when the anchor is fixed and allows the popup to break out containers that clip. When using this strategy, it's important to note that the content will be positioned relative to its [containing block](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#Identifying_the_containing_block), which is usually the viewport unless an ancestor uses a `transform`, `perspective`, or `filter`. [Refer to this page](https://developer.mozilla.org/en-US/docs/Web/CSS/position#fixed) for more details.
 
 In this example, you can see how the popup breaks out of the overflow container when it's fixed. The fixed positioning strategy tends to be less performant than absolute, so avoid using it unnecessarily.
 
@@ -1503,6 +1503,181 @@ const App = () => {
         <br />
         <SlSwitch checked={autoSize} onSlChange={event => setAutoSize(event.target.checked)}>
           Auto-size
+        </SlSwitch>
+      </div>
+
+      <style>{css}</style>
+    </>
+  );
+};
+```
+
+### Virtual Elements
+
+In most cases, popups are anchored to an actual element. Sometimes, it can be useful to anchor them to a non-element. To do this, you can pass a `VirtualElement` to the anchor property. A virtual element must contain a function called `getBoundingClientRect()` that returns a [`DOMRect`](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect) object as shown below.
+
+```ts
+const virtualElement = {
+  getBoundingClientRect() {
+    // ...
+    return { width, height, x, y, top, left, right, bottom };
+  }
+};
+```
+
+This example anchors a popup to the mouse cursor using a virtual element. As such, a mouse is required to properly view it.
+
+```html:preview
+<div class="popup-virtual-element">
+  <sl-popup placement="right-start">
+    <div class="circle"></div>
+  </sl-popup>
+
+  <sl-switch>Highlight mouse cursor</sl-switch>
+</div>
+
+<script>
+  const container = document.querySelector('.popup-virtual-element');
+  const popup = container.querySelector('sl-popup');
+  const circle = container.querySelector('.circle');
+  const enabled = container.querySelector('sl-switch');
+  let clientX = 0;
+  let clientY = 0;
+
+  // Set the virtual element as a property
+  popup.anchor = {
+    getBoundingClientRect() {
+      return {
+        width: 0,
+        height: 0,
+        x: clientX,
+        y: clientY,
+        top: clientY,
+        left: clientX,
+        right: clientX,
+        bottom: clientY
+      };
+    }
+  };
+
+  // Only activate the popup when the switch is checked
+  enabled.addEventListener('sl-change', () => {
+    popup.active = enabled.checked;
+  });
+
+  // Listen for the mouse to move
+  document.addEventListener('mousemove', handleMouseMove);
+
+  // Update the virtual element as the mouse moves
+  function handleMouseMove(event) {
+    clientX = event.clientX;
+    clientY = event.clientY;
+
+    // Reposition the popup when the virtual anchor moves
+    if (popup.active) {
+      popup.reposition();
+    }
+  }
+</script>
+
+<style>
+  /* If you need to set a z-index, set it on the popup part like this */
+  .popup-virtual-element sl-popup::part(popup) {
+    z-index: 1000;
+    pointer-events: none;
+  }
+
+  .popup-virtual-element .circle {
+    width: 100px;
+    height: 100px;
+    border: solid 4px var(--sl-color-primary-600);
+    border-radius: 50%;
+    translate: -50px -50px;
+    animation: 1s virtual-cursor infinite;
+  }
+
+  @keyframes virtual-cursor {
+    0% { scale: 1; }
+    50% { scale: 1.1; }
+  }
+</style>
+```
+
+```jsx:react
+import { useRef, useState } from 'react';
+import { SlPopup, SlSwitch } from '@shoelace-style/shoelace/dist/react';
+
+const css = `
+  /* If you need to set a z-index, set it on the popup part like this */
+  .popup-virtual-element sl-popup::part(popup) {
+    z-index: 1000;
+    pointer-events: none;
+  }
+
+  .popup-virtual-element .circle {
+    width: 100px;
+    height: 100px;
+    border: solid 4px var(--sl-color-primary-600);
+    border-radius: 50%;
+    translate: -50px -50px;
+    animation: 1s virtual-cursor infinite;
+  }
+
+  @keyframes virtual-cursor {
+    0% { scale: 1; }
+    50% { scale: 1.1; }
+  }
+`;
+
+const App = () => {
+  const [enabled, setEnabled] = useState(false);
+  const [clientX, setClientX] = useState(0);
+  const [clientY, setClientY] = useState(0);
+  const popup = useRef(null);
+  const circle = useRef(null);
+  const virtualElement = {
+    getBoundingClientRect() {
+      return {
+        width: 0,
+        height: 0,
+        x: clientX,
+        y: clientY,
+        top: clientY,
+        left: clientX,
+        right: clientX,
+        bottom: clientY
+      };
+    }
+  };
+
+  // Listen for the mouse to move
+  document.addEventListener('mousemove', handleMouseMove);
+
+  // Update the virtual element as the mouse moves
+  function handleMouseMove(event) {
+    setClientX(event.clientX);
+    setClientY(event.clientY);
+
+    // Reposition the popup when the virtual anchor moves
+    if (popup.active) {
+      popup.current.reposition();
+    }
+  }
+
+  return (
+    <>
+      <div className="popup-virtual-element">
+        <SlPopup
+          ref={popup}
+          placement="right-start"
+          active={enabled}
+          anchor={virtualElement}
+        >
+          <div ref={circle} className="circle" />
+        </SlPopup>
+
+        <SlSwitch checked={enabled} onSlChange={event => setEnabled(event.target.checked)}>
+          Highlight mouse cursor
         </SlSwitch>
       </div>
 

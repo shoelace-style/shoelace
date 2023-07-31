@@ -12,10 +12,35 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## 2.6.0
+
+- Added JSDoc comments to React Wrappers for better documentation when hovering a component. [#1450]
+- Added `displayName` to React Wrappers for better debugging. [#1450]
+- Added non-auto-registering routes for Components to fix a number of issues around auto-registration. [#1450]
+- Added a console warning if you attempt to register the same Shoelace component twice. [#1450]
+- Added tests for `<sl-qr-code>` [#1416]
+- Added support for pressing [[Space]] to select/toggle selected `<sl-menu-item>` elements [#1429]
+- Added support for virtual elements in `<sl-popup>` [#1449]
+- Added the `spinner` part to `<sl-button>` [#1460]
+- Added a `shoelace.js` and `shoelace-autoloader.js` to exportmaps. [#1450]
+- Added types to events emitted by React wrapped components [#1419]
+- Fixed React component treeshaking by introducing `sideEffects` key in `package.json`. [#1450]
+- Fixed a bug in `<sl-tree>` where it was auto-defining `<sl-tree-item>`. [#1450]
+- Fixed a bug in focus trapping of modal elements like `<sl-dialog>`. We now manually handle focus ordering as well as added `offsetParent()` check for tabbable boundaries in Safari. Test cases added for `<sl-dialog>` inside a shadowRoot [#1403]
+- Fixed a bug in `valueAsDate` on `<sl-input>` where it would always set `type="date"` for the underlying `<input>` element. It now falls back to the native browser implementation for the in-memory input. This may cause unexpected behavior if you're using `valueAsDate` on any input elements that aren't `type="date"`. [#1399]
+- Fixed a bug in `<sl-qr-code>` where the `background` attribute was never passed to the QR code [#1416]
+- Fixed a bug in `<sl-dropdown>` where aria attributes were incorrectly applied to the default `<slot>` causing Lighthouse errors [#1417]
+- Fixed a bug in `<sl-carousel>` that caused navigation to work incorrectly in some case [#1420]
+- Fixed a number of slots that incorrectly had aria- and/or role attributes directly on them [#1422]
+- Fixed a bug in `<sl-tree>` that caused focus to be stolen when removing focused tree items [#1430]
+- Fixed a bug in `<sl-dialog>` and `<sl-drawer>` that caused nested modals to respond too eagerly to the [[Esc]] key [#1457]
+- Improved `<sl-details>` to use `<details>` internally for better semantics and to enable search to find in supportive browsers when collapsed [#1470]
+- Updated ESLint and related plugins to the latest versions
+- Changed the default entrypoint for jsDelivr to point to the autoloader. [#1450]
+
 ## 2.5.2
 
 - Fixed broken source buttons in the docs [#1401]
-- Fixed broken links in the docs [#1407]
 
 ## 2.5.1
 

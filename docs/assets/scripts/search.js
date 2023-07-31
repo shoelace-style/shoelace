@@ -58,15 +58,15 @@
   const clearButton = siteSearch.querySelector('.search__clear-button');
   const results = siteSearch.querySelector('.search__results');
   const version = document.documentElement.getAttribute('data-shoelace-version');
-  const animationDuration = 150;
+  const key = `search_${version}`;
   const searchDebounce = 50;
+  const animationDuration = 150;
   let isShowing = false;
   let searchTimeout;
   let searchIndex;
   let map;
 
   const loadSearchIndex = new Promise(resolve => {
-    const key = `search_${version}`;
     const cache = localStorage.getItem(key);
     const wait = 'requestIdleCallback' in window ? requestIdleCallback : requestAnimationFrame;
 
@@ -284,7 +284,7 @@
         const a = document.createElement('a');
         const displayTitle = page.title ?? '';
         const displayDescription = page.description ?? '';
-        const displayUrl = page.url.replace(/^\//, '');
+        const displayUrl = page.url.replace(/^\//, '').replace(/\/$/, '');
         let icon = 'file-text';
 
         a.setAttribute('role', 'option');
@@ -354,6 +354,13 @@
     ) {
       event.preventDefault();
       show();
+    }
+  });
+
+  // Purge cache when we press CMD+CTRL+R
+  document.addEventListener('keydown', event => {
+    if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === 'r') {
+      localStorage.clear();
     }
   });
 

@@ -8,7 +8,6 @@ export class HasSlotController implements ReactiveController {
   constructor(host: ReactiveControllerHost & Element, ...slotNames: string[]) {
     (this.host = host).addController(this);
     this.slotNames = slotNames;
-    this.handleSlotChange = this.handleSlotChange.bind(this);
   }
 
   private hasDefaultSlot() {
@@ -52,13 +51,13 @@ export class HasSlotController implements ReactiveController {
     this.host.shadowRoot!.removeEventListener('slotchange', this.handleSlotChange);
   }
 
-  handleSlotChange(event: Event) {
+  private handleSlotChange = (event: Event) => {
     const slot = event.target as HTMLSlotElement;
 
     if ((this.slotNames.includes('[default]') && !slot.name) || (slot.name && this.slotNames.includes(slot.name))) {
       this.host.requestUpdate();
     }
-  }
+  };
 }
 
 /**

@@ -11,6 +11,8 @@ import getPort, { portNumbers } from 'get-port';
 import ora from 'ora';
 import util from 'util';
 import * as path from 'path';
+import { readFileSync } from 'fs';
+import { replace } from 'esbuild-plugin-replace';
 
 const { serve } = commandLineArgs([{ name: 'serve', type: Boolean }]);
 const outdir = 'dist';
@@ -22,6 +24,8 @@ let childProcess;
 let buildResults;
 
 const bundleDirectories = [cdndir, outdir];
+let packageData = JSON.parse(readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+const shoelaceVersion = JSON.stringify(packageData.version.toString());
 
 //
 // Runs 11ty and builds the docs. The returned promise resolves after the initial publish has completed. The child
@@ -108,13 +112,18 @@ async function buildTheSource() {
     //
     external: alwaysExternal,
     splitting: true,
-    plugins: []
+    plugins: [
+      replace({
+        __SHOELACE_VERSION__: shoelaceVersion
+      })
+    ]
   };
 
   const npmConfig = {
     ...cdnConfig,
-    bundle: false,
     external: undefined,
+    minify: false,
+    packages: 'external',
     outdir
   };
 
@@ -263,13 +272,16 @@ if (serve) {
   });
 
   // Rebuild and reload when source files change
-  bs.watch(['src/**/!(*.test).*']).on('change', async filename => {
+  bs.watch('src/**/!(*.test).*').on('change', async filename => {
+    console.log('[build] File changed: ', filename);
+
     try {
       const isTheme = /^src\/themes/.test(filename);
       const isStylesheet = /(\.css|\.styles\.ts)$/.test(filename);
 
       // Rebuild the source
-      await Promise.all([buildResults.map(result => result.rebuild())]);
+      const rebuildResults = buildResults.map(result => result.rebuild());
+      await Promise.all(rebuildResults);
 
       // Rebuild stylesheets when a theme file changes
       if (isTheme) {

@@ -28,7 +28,7 @@ export type { default as SlResizeEvent } from './sl-resize';
 export type { default as SlSelectEvent } from './sl-select';
 export type { default as SlSelectionChangeEvent } from './sl-selection-change';
 export type { default as SlShowEvent } from './sl-show';
-export type { default as SlSlideChange } from './sl-slide-change';
+export type { default as SlSlideChangeEvent } from './sl-slide-change';
 export type { default as SlStartEvent } from './sl-start';
 export type { default as SlTabHideEvent } from './sl-tab-hide';
 export type { default as SlTabShowEvent } from './sl-tab-show';
