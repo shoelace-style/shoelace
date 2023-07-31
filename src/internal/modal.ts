@@ -9,9 +9,6 @@ export default class Modal {
 
   constructor(element: HTMLElement) {
     this.element = element;
-    this.handleFocusIn = this.handleFocusIn.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleKeyUp = this.handleKeyUp.bind(this);
   }
 
   activate() {
@@ -50,15 +47,15 @@ export default class Modal {
     }
   }
 
-  handleFocusIn() {
+  private handleFocusIn = () => {
     this.checkFocus();
-  }
+  };
 
   get currentFocusIndex() {
     return getTabbableElements(this.element).findIndex(el => el === this.currentFocus);
   }
 
-  handleKeyDown(event: KeyboardEvent) {
+  handleKeyDown = (event: KeyboardEvent) => {
     if (event.key !== 'Tab') return;
 
     if (event.shiftKey) {
@@ -93,9 +90,9 @@ export default class Modal {
     this.currentFocus?.focus({ preventScroll: true });
 
     setTimeout(() => this.checkFocus());
-  }
+  };
 
-  handleKeyUp() {
+  private handleKeyUp = () => {
     this.tabDirection = 'forward';
-  }
+  };
 }

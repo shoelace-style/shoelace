@@ -112,14 +112,28 @@ However, if you're [cherry picking](#cherry-picking) or [bundling](#bundling) Sh
 ```
 
 :::tip
-When setting a basePath, and easy way to check if it was down properly is by checking if an icon exists.
-
-For example, if I set the basePath to `/dist`, I should be able to go to:
-
-`https://<my-site>/dist/assets/icons/arrow-left.svg` and the browser should show me the SVG.
-
-Shoelace also exports a `getBasePath()` method you can use to reference assets.
+An easy way to make sure the base path is configured properly is to check if [icons](/components/icon) are loading.
 :::
+
+### Referencing Assets
+
+Most of the magic behind assets is handled internally by Shoelace, but if you need to reference the base path for any reason, the same module exports a function called `getBasePath()`. An optional string argument can be passed, allowing you to get the full path to any asset.
+
+```html
+<script type="module">
+  import { getBasePath, setBasePath } from '@shoelace-style/shoelace/%NPMDIR%/utilities/base-path.js';
+
+  setBasePath('/path/to/assets');
+
+  // ...
+
+  // Get the base path, e.g. /path/to/assets
+  const basePath = getBasePath();
+
+  // Get the path to an asset, e.g. /path/to/assets/file.ext
+  const assetPath = getBasePath('file.ext');
+</script>
+```
 
 ## Cherry Picking
 
@@ -180,6 +194,21 @@ setBasePath('/path/to/shoelace/%NPMDIR%
 
 :::warning
 Component modules include side effects for registration purposes. Because of this, importing directly from `@shoelace-style/shoelace` may result in a larger bundle size than necessary. For optimal tree shaking, always cherry pick, i.e. import components and utilities from their respective files, as shown above.
+:::
+
+### Avoiding side-effect imports
+
+By default, imports to components will auto-register themselves. This may not be ideal in all cases. To import just the component's class without auto-registering it's tag we can do the following:
+
+```diff
+- import SlButton from '@shoelace-style/shoelace/%NPMDIR%/components/button/button.js';
++ import SlButton from '@shoelace-style/shoelace/%NPMDIR%/components/button/button.component.js';
+```
+
+Notice how the import ends with `.component.js`. This is the current convention to convey the import does not register itself.
+
+:::danger
+While you can override the class or re-register the shoelace class under a different tag name, if you do so, many components won’t work as expected.
 :::
 
 ## The difference between CDN and npm

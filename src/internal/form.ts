@@ -81,11 +81,6 @@ export class FormControlController implements ReactiveController {
       assumeInteractionOn: ['sl-input'],
       ...options
     };
-    this.handleFormData = this.handleFormData.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.handleFormReset = this.handleFormReset.bind(this);
-    this.reportFormValidity = this.reportFormValidity.bind(this);
-    this.handleInteraction = this.handleInteraction.bind(this);
   }
 
   hostConnected() {
@@ -175,7 +170,7 @@ export class FormControlController implements ReactiveController {
     this.form = undefined;
   }
 
-  private handleFormData(event: FormDataEvent) {
+  private handleFormData = (event: FormDataEvent) => {
     const disabled = this.options.disabled(this.host);
     const name = this.options.name(this.host);
     const value = this.options.value(this.host);
@@ -197,9 +192,9 @@ export class FormControlController implements ReactiveController {
         event.formData.append(name, (value as string | number | boolean).toString());
       }
     }
-  }
+  };
 
-  private handleFormSubmit(event: Event) {
+  private handleFormSubmit = (event: Event) => {
     const disabled = this.options.disabled(this.host);
     const reportValidity = this.options.reportValidity;
 
@@ -214,15 +209,15 @@ export class FormControlController implements ReactiveController {
       event.preventDefault();
       event.stopImmediatePropagation();
     }
-  }
+  };
 
-  private handleFormReset() {
+  private handleFormReset = () => {
     this.options.setValue(this.host, this.options.defaultValue(this.host));
     this.setUserInteracted(this.host, false);
     interactions.set(this.host, []);
-  }
+  };
 
-  private handleInteraction(event: Event) {
+  private handleInteraction = (event: Event) => {
     const emittedEvents = interactions.get(this.host)!;
 
     if (!emittedEvents.includes(event.type)) {
@@ -233,9 +228,9 @@ export class FormControlController implements ReactiveController {
     if (emittedEvents.length === this.options.assumeInteractionOn.length) {
       this.setUserInteracted(this.host, true);
     }
-  }
+  };
 
-  private reportFormValidity() {
+  private reportFormValidity = () => {
     //
     // Shoelace form controls work hard to act like regular form controls. They support the Constraint Validation API
     // and its associated methods such as setCustomValidity() and reportValidity(). However, the HTMLFormElement also
@@ -263,7 +258,7 @@ export class FormControlController implements ReactiveController {
     }
 
     return true;
-  }
+  };
 
   private setUserInteracted(el: ShoelaceFormControl, hasInteracted: boolean) {
     if (hasInteracted) {

@@ -155,7 +155,7 @@ describe('<sl-icon>', () => {
     });
   });
 
-  describe('svg spritesheets', () => {
+  describe('svg sprite sheets', () => {
     //  For some reason ESLint wants to fail in CI here, but works locally.
     /* eslint-disable */
     it('Should properly grab an SVG and render it from bootstrap icons', async () => {
@@ -175,8 +175,8 @@ describe('<sl-icon>', () => {
       expect(svg).to.be.instanceof(SVGElement);
       expect(use).to.be.instanceof(SVGUseElement);
 
-      // This is kind of hacky...but with no way to check "load", we just do a timeout :shrug:
-      await aTimeout(200);
+      // This is kind of hacky...but with no way to check "load", we just use a timeout
+      await aTimeout(1000);
 
       // Theres no way to really test that the icon rendered properly. We just gotta trust the browser to do it's thing :)
       // However, we can check the <use> size. It should be greater than 0x0 if loaded properly.
@@ -192,7 +192,7 @@ describe('<sl-icon>', () => {
         spriteSheet: true
       });
 
-      const el = await fixture<SlIcon>(html`<sl-icon name="non-existant" library="sprite"></sl-icon>`);
+      const el = await fixture<SlIcon>(html`<sl-icon name="non-existent" library="sprite"></sl-icon>`);
 
       await elementUpdated(el);
 
