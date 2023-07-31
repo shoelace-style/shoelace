@@ -31,20 +31,19 @@ describe('<sl-details>', () => {
     `);
     const body = el.shadowRoot!.querySelector<HTMLElement>('.details__body')!;
 
-    expect(body.hidden).to.be.false;
+    expect(parseInt(getComputedStyle(body).height)).to.be.greaterThan(0);
   });
 
   it('should not be visible without the open attribute', async () => {
     const el = await fixture<SlDetails>(html`
-      <sl-details>
+      <sl-details summary="click me">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
         magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
         consequat.
       </sl-details>
     `);
     const body = el.shadowRoot!.querySelector<HTMLElement>('.details__body')!;
-
-    expect(body.hidden).to.be.true;
+    expect(parseInt(getComputedStyle(body).height)).to.equal(0);
   });
 
   it('should emit sl-show and sl-after-show when calling show()', async () => {
@@ -55,7 +54,6 @@ describe('<sl-details>', () => {
         consequat.
       </sl-details>
     `);
-    const body = el.shadowRoot!.querySelector<HTMLElement>('.details__body')!;
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
 
@@ -68,7 +66,6 @@ describe('<sl-details>', () => {
 
     expect(showHandler).to.have.been.calledOnce;
     expect(afterShowHandler).to.have.been.calledOnce;
-    expect(body.hidden).to.be.false;
   });
 
   it('should emit sl-hide and sl-after-hide when calling hide()', async () => {
@@ -79,7 +76,6 @@ describe('<sl-details>', () => {
         consequat.
       </sl-details>
     `);
-    const body = el.shadowRoot!.querySelector<HTMLElement>('.details__body')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -92,7 +88,6 @@ describe('<sl-details>', () => {
 
     expect(hideHandler).to.have.been.calledOnce;
     expect(afterHideHandler).to.have.been.calledOnce;
-    expect(body.hidden).to.be.true;
   });
 
   it('should emit sl-show and sl-after-show when setting open = true', async () => {
@@ -127,7 +122,6 @@ describe('<sl-details>', () => {
         consequat.
       </sl-details>
     `);
-    const body = el.shadowRoot!.querySelector<HTMLElement>('.details__body')!;
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
@@ -140,7 +134,6 @@ describe('<sl-details>', () => {
 
     expect(hideHandler).to.have.been.calledOnce;
     expect(afterHideHandler).to.have.been.calledOnce;
-    expect(body.hidden).to.be.true;
   });
 
   it('should not open when preventing sl-show', async () => {

@@ -180,7 +180,10 @@ p {
 
 img {
   max-width: 100%;
-  border-radius: var(--docs-border-radius);
+}
+
+.badges img {
+  border-radius: var(--sl-border-radius-medium);
 }
 
 .callout img,

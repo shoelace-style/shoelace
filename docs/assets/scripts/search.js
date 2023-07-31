@@ -284,7 +284,7 @@
         const a = document.createElement('a');
         const displayTitle = page.title ?? '';
         const displayDescription = page.description ?? '';
-        const displayUrl = page.url.replace(/^\//, '');
+        const displayUrl = page.url.replace(/^\//, '').replace(/\/$/, '');
         let icon = 'file-text';
 
         a.setAttribute('role', 'option');

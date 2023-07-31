@@ -80,9 +80,20 @@ The form will not be submitted if a required field is incomplete.
 
 <script type="module">
   const form = document.querySelector('.input-validation-required');
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    alert('All fields are valid!');
+
+  // Wait for controls to be defined before attaching form listeners
+  await Promise.all([
+    customElements.whenDefined('sl-button'),
+    customElements.whenDefined('sl-checkbox'),
+    customElements.whenDefined('sl-input'),
+    customElements.whenDefined('sl-option'),
+    customElements.whenDefined('sl-select'),
+    customElements.whenDefined('sl-textarea')
+  ]).then(() => {
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      alert('All fields are valid!');
+    });
   });
 </script>
 ```
@@ -134,9 +145,16 @@ To restrict a value to a specific [pattern](https://developer.mozilla.org/en-US/
 
 <script type="module">
   const form = document.querySelector('.input-validation-pattern');
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    alert('All fields are valid!');
+
+  // Wait for controls to be defined before attaching form listeners
+  await Promise.all([
+    customElements.whenDefined('sl-button'),
+    customElements.whenDefined('sl-input')
+  ]).then(() => {
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      alert('All fields are valid!');
+    });
   });
 </script>
 ```
@@ -178,9 +196,16 @@ Some input types will automatically trigger constraints, such as `email` and `ur
 
 <script type="module">
   const form = document.querySelector('.input-validation-type');
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    alert('All fields are valid!');
+
+  // Wait for controls to be defined before attaching form listeners
+  await Promise.all([
+    customElements.whenDefined('sl-button'),
+    customElements.whenDefined('sl-input')
+  ]).then(() => {
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      alert('All fields are valid!');
+    });
   });
 </script>
 ```
@@ -224,17 +249,23 @@ To create a custom validation error, pass a non-empty string to the `setCustomVa
   const form = document.querySelector('.input-validation-custom');
   const input = form.querySelector('sl-input');
 
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    alert('All fields are valid!');
-  });
+  // Wait for controls to be defined before attaching form listeners
+  await Promise.all([
+    customElements.whenDefined('sl-button'),
+    customElements.whenDefined('sl-input')
+  ]).then(() => {
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      alert('All fields are valid!');
+    });
 
-  input.addEventListener('sl-input', () => {
-    if (input.value === 'shoelace') {
-      input.setCustomValidity('');
-    } else {
-      input.setCustomValidity("Hey, you're supposed to type 'shoelace' before submitting this!");
-    }
+    input.addEventListener('sl-input', () => {
+      if (input.value === 'shoelace') {
+        input.setCustomValidity('');
+      } else {
+        input.setCustomValidity("Hey, you're supposed to type 'shoelace' before submitting this!");
+      }
+    });
   });
 </script>
 ```
@@ -326,9 +357,19 @@ This example demonstrates custom validation styles using `data-user-invalid` and
 
 <script type="module">
   const form = document.querySelector('.validity-styles');
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    alert('All fields are valid!');
+
+  // Wait for controls to be defined before attaching form listeners
+  await Promise.all([
+    customElements.whenDefined('sl-button'),
+    customElements.whenDefined('sl-checkbox'),
+    customElements.whenDefined('sl-input'),
+    customElements.whenDefined('sl-option'),
+    customElements.whenDefined('sl-select')
+  ]).then(() => {
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      alert('All fields are valid!');
+    });
   });
 </script>
 
@@ -417,33 +458,39 @@ To disable the browser's error messages, you need to cancel the `sl-invalid` eve
   const form = document.querySelector('.inline-validation');
   const nameError = document.querySelector('#name-error');
 
-  // A form control is invalid
-  form.addEventListener(
-    'sl-invalid',
-    event => {
-      // Suppress the browser's constraint validation message
+  // Wait for controls to be defined before attaching form listeners
+  await Promise.all([
+    customElements.whenDefined('sl-button'),
+    customElements.whenDefined('sl-input')
+  ]).then(() => {
+    // A form control is invalid
+    form.addEventListener(
+      'sl-invalid',
+      event => {
+        // Suppress the browser's constraint validation message
+        event.preventDefault();
+
+        nameError.textContent = `Error: ${event.target.validationMessage}`;
+        nameError.hidden = false;
+
+        event.target.focus();
+      },
+      { capture: true } // you must use capture since sl-invalid doesn't bubble!
+    );
+
+    // Handle form submit
+    form.addEventListener('submit', event => {
       event.preventDefault();
+      nameError.hidden = true;
+      nameError.textContent = '';
+      setTimeout(() => alert('All fields are valid'), 50);
+    });
 
-      nameError.textContent = `Error: ${event.target.validationMessage}`;
-      nameError.hidden = false;
-
-      event.target.focus();
-    },
-    { capture: true } // you must use capture since sl-invalid doesn't bubble!
-  );
-
-  // Handle form submit
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    nameError.hidden = true;
-    nameError.textContent = '';
-    setTimeout(() => alert('All fields are valid'), 50);
-  });
-
-  // Handle form reset
-  form.addEventListener('reset', event => {
-    nameError.hidden = true;
-    nameError.textContent = '';
+    // Handle form reset
+    form.addEventListener('reset', event => {
+      nameError.hidden = true;
+      nameError.textContent = '';
+    });
   });
 </script>
 
