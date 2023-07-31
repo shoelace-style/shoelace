@@ -15,15 +15,23 @@ import type { CSSResultGroup, PropertyValueMap } from 'lit';
  *
  * @dependency sl-icon-button
  * @dependency sl-tooltip
+ *
+ * @slot - The content that gets clicked to copy.
+ * @slot copied - The content shown after a successful copy.
  */
 export default class SlClipboard extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
   static dependencies = { 'sl-tooltip': SlTooltip, 'sl-icon-button': SlIconButton };
 
   /**
-   * Indicates whether or not copy info is shown.
+   * Indicates whether or not copied info is shown.
    */
   @property({ type: Boolean, reflect: true }) copy = false;
+
+  /**
+   * Indicates whether or not copy error is shown.
+   */
+  @property({ type: Boolean }) copyError = false;
 
   /**
    * The value to copy.
@@ -36,11 +44,11 @@ export default class SlClipboard extends ShoelaceElement {
   @property({ type: String }) for = '';
 
   private handleClick() {
-    if (this.copy) return;
+    if (this.copy || this.copyError) return;
     this.__executeCopy();
   }
 
-  private __executeCopy() {
+  private async __executeCopy() {
     if (this.for) {
       const target = document.getElementById(this.for)!;
       if (target) {
@@ -48,9 +56,14 @@ export default class SlClipboard extends ShoelaceElement {
       }
     }
     if (this.value) {
-      navigator.clipboard.writeText(this.value);
-      this.copy = true;
-      setTimeout(() => (this.copy = false), 2000);
+      try {
+        await navigator.clipboard.writeText(this.value);
+        this.copy = true;
+        setTimeout(() => (this.copy = false), 2000);
+      } catch (error) {
+        this.copyError = true;
+        setTimeout(() => (this.copyError = false), 2000);
+      }
     }
   }
 
@@ -67,16 +80,25 @@ export default class SlClipboard extends ShoelaceElement {
         part="base"
         class=${classMap({
           clipboard: true,
-          'clipboard--copy': this.copy
+          'clipboard--copy': this.copy,
+          'clipboard--copy-error': this.copyError
         })}
       >
-        <sl-tooltip content=${this.copy ? 'Copied' : 'Copy'}>
-          <sl-icon-button
-            @click=${this.handleClick}
-            name=${this.copy ? 'file-earmark-check' : 'files'}
-            label=${this.copy ? 'Copied' : 'Copy'}
-          ></sl-icon-button>
-        </sl-tooltip>
+        <slot id="default" @click=${this.handleClick}>
+          <sl-tooltip content="Copy">
+            <sl-icon-button name="files" label="Copy"></sl-icon-button>
+          </sl-tooltip>
+        </slot>
+        <slot name="copied" @click=${this.handleClick}>
+          <sl-tooltip content="Copied">
+            <sl-icon-button class="green" name="file-earmark-check" label="Copied"></sl-icon-button>
+          </sl-tooltip>
+        </slot>
+        <slot name="copy-error" @click=${this.handleClick}>
+          <sl-tooltip content="Failed to copy">
+            <sl-icon-button class="red" name="file-earmark-x" label="Failed to copy"></sl-icon-button>
+          </sl-tooltip>
+        </slot>
       </div>
     `;
   }

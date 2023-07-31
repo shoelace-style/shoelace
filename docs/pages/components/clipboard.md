@@ -6,6 +6,53 @@ layout: component
 ---
 
 ```html:preview
+<p>Clicking the clipboard button will put "shoelace rocks" into your clipboard</p>
+<sl-clipboard value="shoelace rocks"></sl-clipboard>
+```
+
+```jsx:react
+import { SlClipboard } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <p>Clicking the clipboard button will put "shoelace rocks" into your clipboard</p>
+    <SlClipboard value="shoelace rocks"></SlClipboard>
+  </>
+);
+```
+
+## Examples
+
+### Use your own button
+
+```html:preview
+<sl-clipboard value="shoelace rocks">
+  <button type="button">Copy to clipboard</button>
+  <button slot="copied">copied</button>
+</sl-clipboard>
+<br>
+<sl-clipboard value="shoelace rocks">
+  <sl-button>Copy</sl-button>
+  <sl-button slot="copied">Copied</sl-button>
+</sl-clipboard>
+```
+
+```jsx:react
+import { SlClipboard } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <SlClipboard value="shoelace rocks">
+      <button type="button">Copy to clipboard</button>
+      <div slot="copied">copied</div>
+    </SlClipboard>
+  </>
+);
+```
+
+### Get the textValue from a different element
+
+```html:preview
 <div class="row">
   <dl>
     <dt>Phone Number</dt>
@@ -43,26 +90,6 @@ const App = () => (
     </div>
 
     <style>{css}</style>
-  </>
-);
-```
-
-## Examples
-
-### Providing directly a text value
-
-```html:preview
-<p>Clicking the clipboard button will put "shoelace rocks" into your clipboard</p>
-<sl-clipboard value="shoelace rocks"></sl-clipboard>
-```
-
-```jsx:react
-import { SlClipboard } from '@shoelace-style/shoelace/dist/react';
-
-const App = () => (
-  <>
-    <p>Clicking the clipboard button will put "shoelace rocks" into your clipboard</p>
-    <SlClipboard value="shoelace rocks"></SlClipboard>
   </>
 );
 ```
