@@ -34,6 +34,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a number of slots that incorrectly had aria- and/or role attributes directly on them [#1422]
 - Fixed a bug in `<sl-tree>` that caused focus to be stolen when removing focused tree items [#1430]
 - Fixed a bug in `<sl-dialog>` and `<sl-drawer>` that caused nested modals to respond too eagerly to the [[Esc]] key [#1457]
+- Improved `<sl-details>` to use `<details>` internally for better semantics and to enable search to find in supportive browsers when collapsed [#1470]
 - Updated ESLint and related plugins to the latest versions
 - Changed the default entrypoint for jsDelivr to point to the autoloader. [#1450]
 
