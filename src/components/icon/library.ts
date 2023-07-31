@@ -52,3 +52,5 @@ export function registerIconLibrary(
 export function unregisterIconLibrary(name: string) {
   registry = registry.filter(lib => lib.name !== name);
 }
+
+export { registerExternalLibraries } from './external';

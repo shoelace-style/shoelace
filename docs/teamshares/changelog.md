@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.2
+
+- Utilities now export a method to automatically register FontAwesome icon libraries
+- Slim template formatting for CodePen examples
+- Tokens and overrides included in CodePen examples
+- New export of tailwind theme to be consumed by shared-ui as part of config
+- CSS tokens generated automatically from the tailwind.js config
+
 ## 1.2.1
 
 - Fix focus issue on inputs caused by Tailwind
