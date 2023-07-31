@@ -47,10 +47,12 @@ export default class SlDetails extends ShoelaceElement {
 
   private readonly localize = new LocalizeController(this);
 
-  @query('.details') details: HTMLElement;
+  @query('.details') details: HTMLDetailsElement;
   @query('.details__header') header: HTMLElement;
   @query('.details__body') body: HTMLElement;
   @query('.details__expand-icon-slot') expandIconSlot: HTMLSlotElement;
+
+  detailsObserver: MutationObserver;
 
   /**
    * Indicates whether or not the details is open. You can toggle this attribute to show and hide the details, or you
@@ -65,11 +67,31 @@ export default class SlDetails extends ShoelaceElement {
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   firstUpdated() {
-    this.body.hidden = !this.open;
     this.body.style.height = this.open ? 'auto' : '0';
+    if (this.open) {
+      this.details.open = true;
+    }
+
+    this.detailsObserver = new MutationObserver(changes => {
+      for (const change of changes) {
+        if (change.type === 'attributes' && change.attributeName === 'open') {
+          if (this.details.open) {
+            this.show();
+          } else {
+            this.hide();
+          }
+        }
+      }
+    });
+    this.detailsObserver.observe(this.details, { attributes: true });
   }
 
-  private handleSummaryClick() {
+  disconnectedCallback() {
+    this.detailsObserver.disconnect();
+  }
+
+  private handleSummaryClick(ev: MouseEvent) {
+    ev.preventDefault();
     if (!this.disabled) {
       if (this.open) {
         this.hide();
@@ -106,15 +128,16 @@ export default class SlDetails extends ShoelaceElement {
   @watch('open', { waitUntilFirstUpdate: true })
   async handleOpenChange() {
     if (this.open) {
+      this.details.open = true;
       // Show
       const slShow = this.emit('sl-show', { cancelable: true });
       if (slShow.defaultPrevented) {
         this.open = false;
+        this.details.open = false;
         return;
       }
 
       await stopAnimations(this.body);
-      this.body.hidden = false;
 
       const { keyframes, options } = getAnimation(this, 'details.show', { dir: this.localize.dir() });
       await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
@@ -125,6 +148,7 @@ export default class SlDetails extends ShoelaceElement {
       // Hide
       const slHide = this.emit('sl-hide', { cancelable: true });
       if (slHide.defaultPrevented) {
+        this.details.open = true;
         this.open = true;
         return;
       }
@@ -133,9 +157,9 @@ export default class SlDetails extends ShoelaceElement {
 
       const { keyframes, options } = getAnimation(this, 'details.hide', { dir: this.localize.dir() });
       await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
-      this.body.hidden = true;
       this.body.style.height = 'auto';
 
+      this.details.open = false;
       this.emit('sl-after-hide');
     }
   }
@@ -164,7 +188,7 @@ export default class SlDetails extends ShoelaceElement {
     const isRtl = this.localize.dir() === 'rtl';
 
     return html`
-      <div
+      <details
         part="base"
         class=${classMap({
           details: true,
@@ -173,7 +197,7 @@ export default class SlDetails extends ShoelaceElement {
           'details--rtl': isRtl
         })}
       >
-        <div
+        <summary
           part="header"
           id="header"
           class="details__header"
@@ -195,12 +219,12 @@ export default class SlDetails extends ShoelaceElement {
               <sl-icon library="system" name=${isRtl ? 'chevron-left' : 'chevron-right'}></sl-icon>
             </slot>
           </span>
-        </div>
+        </summary>
 
         <div class="details__body" role="region" aria-labelledby="header">
           <slot part="content" id="content" class="details__content"></slot>
         </div>
-      </div>
+      </details>
     `;
   }
 }
