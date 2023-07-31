@@ -1,23 +1,12 @@
-# Shoelace
+# Teamshares / Shoelace
 
-A forward-thinking library of web components.
-
-- Works with all frameworks 🧩
-- Works with CDNs 🚛
-- Fully customizable with CSS 🎨
-- Includes an official dark theme 🌛
-- Built with accessibility in mind ♿️
-- Open source 😸
-
-Designed in New Hampshire by [Cory LaViska](https://twitter.com/claviska).
+A customized fork of [Shoelace](https://shoelace.style), an open-source web component library by Cory LaViska.
 
 ---
 
-Documentation: [shoelace.style](https://shoelace.style)
+Documentation: [design.teamshares.com](https://design.teamshares.com)
 
-Source: [github.com/shoelace-style/shoelace](https://github.com/shoelace-style/shoelace)
-
-Twitter: [@shoelace_style](https://twitter.com/shoelace_style)
+Source: [https://github.com/teamshares/shoelace](https://github.com/teamshares/shoelace)
 
 ---
 
