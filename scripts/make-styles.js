@@ -8,7 +8,6 @@ import { mkdirSync } from 'fs';
 import { globbySync } from 'globby';
 import path from 'path';
 import prettier from 'prettier';
-import stripComments from 'strip-css-comments';
 
 const { outdir } = commandLineArgs({ name: 'outdir', type: String });
 const files = globbySync('./src/styles/exports/**/*.css');
@@ -23,7 +22,7 @@ try {
   files.forEach(file => {
     let source = fs.readFileSync(file, 'utf8');
 
-    const css = prettier.format(stripComments(source), {
+    const css = prettier.format(source, {
       parser: 'css'
     });
 
@@ -34,4 +33,12 @@ try {
 } catch (err) {
   console.error(chalk.red('Error generating export stylesheets!'));
   console.error(err);
+}
+
+// Copy the tokens.json over
+try {
+  const tokenDistPath = path.join(outdir, 'styles', 'tokens.json');
+  fs.copyFileSync('./src/styles/tokens.json', tokenDistPath);
+} catch (err) {
+  console.error(chalk.red('Error writing tokens JSON file:'), err);
 }

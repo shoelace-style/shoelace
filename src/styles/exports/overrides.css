@@ -1,12 +1,12 @@
-/** ******************************** */
-/** ******************************** */
-/** Global Overrides                 */
-/** ******************************** */
-/** ******************************** */
+/** ************************************************************* */
+/** Global shoelace overrides                                     */
+/** ************************************************************* */
 
 :root,
 :host,
 .sl-theme-light {
+  /***** Shoelace variable overrides */
+
   --sl-font-mono: var(--ts-font-mono);
   --sl-font-sans: var(--ts-font-sans);
   --sl-font-serif: var(--ts-font-serif);
@@ -15,8 +15,8 @@
   /* Border radius */
   --sl-border-radius-small: var(--ts-border-radius-small);
   /* Because Menu component doesn't allow radius to be customized to another radius token */
-  --sl-border-radius-medium: var(--sl-border-radius-large);
   /* 8px  */
+  --sl-border-radius-medium: var(--sl-border-radius-large);
   /* Shadows */
   --sl-shadow-x-small: var(--ts-shadow-x-small);
   --sl-shadow-small: var(--ts-shadow-small);
@@ -58,15 +58,15 @@
   --sl-focus-ring: var(--sl-focus-ring-style) var(--sl-focus-ring-width) var(--sl-focus-ring-color);
   --sl-focus-ring-offset: 0;
   --sl-input-focus-ring-color: rgba(var(--ts-color-blue-500-rgb), 0.5);
-
-  /** *********************************** */
-  /** Override aggressive Tailwind resets */
-  /** *********************************** */
-
+  /* Panel (used in dropdown menu, popovers, etc.) */
   --sl-panel-background-color: var(--sl-color-neutral-0);
   --sl-panel-border-color: var(--sl-color-neutral-300);
   --sl-panel-border-width: 1px;
 }
+
+/** *********************************** */
+/** Override aggressive Tailwind resets */
+/** *********************************** */
 
 sl-input[type],
 sl-input[type]:focus,
@@ -114,15 +114,16 @@ sl-select[multiple]:focus {
   outline-offset: initial;
 }
 
-/** ******************************** */
-/** ******************************** */
-/** Component Overrides              */
-/** ******************************** */
-/** ******************************** */
+/** ************************************************************* */
+/** Shoelace component overrides                                  */
+/**                                                               */
+/** These overrides will eventually be deprecated in favor of     */
+/** modifying the styles in the components themselves             */
+/** ************************************************************* */
 
-/** ******************************** */
+/** ****************** */
 /** Alert */
-/** ******************************** */
+/** ****************** */
 
 sl-alert::part(message) {
   color: var(--ts-color-text-default);
@@ -194,9 +195,9 @@ sl-alert::part(close-button__base):active {
   color: var(--sl-color-neutral-900);
 }
 
-/** ******************************** */
+/** ****************** */
 /** Button */
-/** ******************************** */
+/** ****************** */
 
 :root,
 :host,
@@ -430,17 +431,17 @@ sl-button.no-gap {
   margin: 0;
 }
 
-/** ******************************** */
+/** ****************** */
 /** Card */
-/** ******************************** */
+/** ****************** */
 
 sl-card {
   --border-color: var(--sl-color-neutral-300);
 }
 
-/** ******************************** */
+/** ****************** */
 /* Checkbox & radio */
-/** ******************************** */
+/** ****************** */
 
 sl-checkbox::part(control) {
   border-radius: var(--ts-border-radius-x-small);
@@ -463,9 +464,9 @@ sl-radio::part(base) {
   margin-top: var(--sl-spacing-medium);
 }
 
-/** ******************************** */
+/** ****************** */
 /** Details */
-/** ******************************** */
+/** ****************** */
 
 sl-details::part(base) {
   border: 1px solid var(--sl-color-neutral-300);
@@ -481,9 +482,9 @@ sl-details.no-border::part(base) {
   border: 0;
 }
 
-/** ******************************** */
+/** ****************** */
 /** Dialog */
-/** ******************************** */
+/** ****************** */
 
 sl-dialog {
   --body-spacing: 0 16px;
@@ -617,33 +618,33 @@ sl-dialog.small::part(body) {
   }
 }
 
-/** ******************************** */
+/** ****************** */
 /** Divider */
-/** ******************************** */
+/** ****************** */
 
 sl-divider {
   --color: var(--sl-color-neutral-300);
 }
 
-/** ******************************** */
+/** ****************** */
 /** Drawer */
-/** ******************************** */
+/** ****************** */
 sl-drawer::part(panel) {
   border-radius: 0;
 }
 
-/** ******************************** */
+/** ****************** */
 /** Dropdown */
-/** ******************************** */
+/** ****************** */
 
 /* Prevent panel corners from peeking out past rounded edges. */
 sl-dropdown::part(panel) {
   overflow: hidden;
 }
 
-/** ******************************** */
+/** ****************** */
 /** Forms */
-/** ******************************** */
+/** ****************** */
 :root,
 :host,
 sl-theme {
@@ -707,9 +708,9 @@ sl-select::part(display-input) {
   color: var(--ts-color-text-default);
 }
 
-/** ******************************** */
+/** ****************** */
 /** Icon */
-/** ******************************** */
+/** ****************** */
 
 sl-icon.info::part(base) {
   color: var(--ts-color-text-info);
@@ -764,9 +765,9 @@ sl-dialog::part(close-button__base):active {
   color: var(--ts-color-text-default);
 }
 
-/** ******************************** */
+/** ****************** */
 /** Menu */
-/** ******************************** */
+/** ****************** */
 
 /* Menu panel styling */
 
@@ -831,9 +832,9 @@ sl-menu-label::part(base) {
   font-weight: var(--sl-font-weight-normal);
 }
 
-/** ******************************** */
+/** ****************** */
 /** Select */
-/** ******************************** */
+/** ****************** */
 
 /* Control gap between select & menu panel */
 sl-select::part(listbox) {
@@ -890,9 +891,9 @@ sl-select > small {
   font-weight: var(--sl-font-weight-semibold);
 }
 
-/** ******************************** */
+/** ****************** */
 /* Switch & range */
-/** ******************************** */
+/** ****************** */
 
 sl-switch[size='small'] {
   --height: calc(var(--sl-toggle-size-small) + 6px);
@@ -923,9 +924,9 @@ sl-range {
   --track-color-inactive: var(--sl-color-neutral-300);
 }
 
-/** ******************************** */
+/** ****************** */
 /** Tooltip */
-/** ******************************** */
+/** ****************** */
 
 :root,
 :host,
