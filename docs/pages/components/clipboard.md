@@ -102,6 +102,38 @@ const App = () => (
 );
 ```
 
+### Copy an input/textarea or link
+
+```html:preview
+<input type="text" value="input rocks" id="input-rocks">
+<sl-clipboard for="input-rocks"></sl-clipboard>
+<br>
+<textarea id="textarea-rocks">textarea
+rocks</textarea>
+<sl-clipboard for="textarea-rocks"></sl-clipboard>
+<br>
+<a href="https://shoelace.style/" id="link-rocks">Shoelace</a>
+<sl-clipboard for="link-rocks"></sl-clipboard>
+```
+
+```jsx:react
+import { SlClipboard } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <input type="text" value="input rocks" id="input-rocks">
+    <SlClipboard for="input-rocks"></SlClipboard>
+    <br>
+    <textarea id="textarea-rocks">textarea
+rocks</textarea>
+    <SlClipboard for="textarea-rocks"></SlClipboard>
+    <br>
+    <a href="https://shoelace.style/" id="link-rocks">Shoelace</a>
+    <SlClipboard for="input-rocks"></SlClipboard>
+  </>
+);
+```
+
 ### Error if copy fails
 
 For example if a `for` target element is not found or if not using `https`.
@@ -146,6 +178,52 @@ const App = () => (
     <SlClipboard value="shoelace rocks" reset-timeout="500"></SlClipboard>
   </>
 );
+```
+
+### Supports Shadow Dom
+
+```html:preview
+<sl-copy-demo-el></sl-copy-demo-el>
+
+<script>
+  customElements.define('sl-copy-demo-el', class extends HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({ mode: 'open' });
+    }
+
+    connectedCallback() {
+      this.shadowRoot.innerHTML = `
+        <p id="copy-me">copy me (inside shadow root)</p>
+        <sl-clipboard for="copy-me"></sl-clipboard>
+      `;
+    }
+  });
+</script>
+```
+
+```jsx:react
+import { SlClipboard } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <sl-copy-demo-el></sl-copy-demo-el>
+  </>
+);
+
+customElements.define('sl-copy-demo-el', class extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+  }
+
+  connectedCallback() {
+    this.shadowRoot.innerHTML = `
+      <p id="copy-me">copy me (inside shadow root)</p>
+      <sl-clipboard for="copy-me"></sl-clipboard>
+    `;
+  }
+});
 ```
 
 ## Disclaimer

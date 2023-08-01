@@ -49,9 +49,16 @@ export default class SlClipboard extends ShoelaceElement {
   /** Copies the clipboard */
   async copy() {
     if (this.for) {
-      const target = document.getElementById(this.for)!;
+      const root = this.getRootNode() as ShadowRoot | Document;
+      const target = 'getElementById' in root ? root.getElementById(this.for) : false;
       if (target) {
-        this.value = target.textContent || '';
+        if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) {
+          this.value = target.value;
+        } else if (target instanceof HTMLAnchorElement && target.hasAttribute('href')) {
+          this.value = target.href;
+        } else {
+          this.value = target.textContent || '';
+        }
       }
     }
     if (this.value) {
