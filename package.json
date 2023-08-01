@@ -13,8 +13,8 @@
   "sideEffects": [
     "./dist/shoelace.js",
     "./dist/shoelace-autoloader.js",
-    "./dist/components/**/*.js",
-    "./dist/chunks/**/*.js",
+    "./dist/components/**/*.*",
+    "./dist/chunks/**/*.*",
     "./dist/translations/**/*.*",
     "./src/translations/**/*.*",
     "*.css",
