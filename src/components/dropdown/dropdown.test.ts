@@ -162,7 +162,7 @@ describe('<sl-dropdown>', () => {
     expect(el.open).to.be.true;
   });
 
-  it('should open on arrow navigation', async () => {
+  it('should open on arrow down navigation', async () => {
     const el = await fixture<SlDropdown>(html`
       <sl-dropdown>
         <sl-button slot="trigger" caret>Toggle</sl-button>
@@ -173,12 +173,35 @@ describe('<sl-dropdown>', () => {
       </sl-dropdown>
     `);
     const trigger = el.querySelector('sl-button')!;
+    const firstMenuItem = el.querySelectorAll('sl-menu-item')[0];
 
     trigger.focus();
     await sendKeys({ press: 'ArrowDown' });
     await el.updateComplete;
 
     expect(el.open).to.be.true;
+    expect(document.activeElement).to.equal(firstMenuItem);
+  });
+
+  it('should open on arrow up navigation', async () => {
+    const el = await fixture<SlDropdown>(html`
+      <sl-dropdown>
+        <sl-button slot="trigger" caret>Toggle</sl-button>
+        <sl-menu>
+          <sl-menu-item>Item 1</sl-menu-item>
+          <sl-menu-item>Item 2</sl-menu-item>
+        </sl-menu>
+      </sl-dropdown>
+    `);
+    const trigger = el.querySelector('sl-button')!;
+    const secondMenuItem = el.querySelectorAll('sl-menu-item')[1];
+
+    trigger.focus();
+    await sendKeys({ press: 'ArrowUp' });
+    await el.updateComplete;
+
+    expect(el.open).to.be.true;
+    expect(document.activeElement).to.equal(secondMenuItem);
   });
 
   it('should navigate to first focusable item on arrow navigation', async () => {
