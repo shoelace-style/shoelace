@@ -56,6 +56,8 @@ export default class SlClipboard extends ShoelaceElement {
           this.value = target.value;
         } else if (target instanceof HTMLAnchorElement && target.hasAttribute('href')) {
           this.value = target.href;
+        } else if ('value' in target) {
+          this.value = String(target.value);
         } else {
           this.value = target.textContent || '';
         }

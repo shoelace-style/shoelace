@@ -108,12 +108,22 @@ const App = () => (
 <input type="text" value="input rocks" id="input-rocks">
 <sl-clipboard for="input-rocks"></sl-clipboard>
 <br>
+
 <textarea id="textarea-rocks">textarea
 rocks</textarea>
 <sl-clipboard for="textarea-rocks"></sl-clipboard>
 <br>
+
 <a href="https://shoelace.style/" id="link-rocks">Shoelace</a>
 <sl-clipboard for="link-rocks"></sl-clipboard>
+<br>
+
+<sl-input value="sl-input rocks" id="sl-input-rocks"></sl-input>
+<sl-clipboard for="sl-input-rocks"></sl-clipboard>
+<br>
+
+<sl-textarea value="sl-textarea rocks" id="sl-textarea-rocks"></sl-textarea>
+<sl-clipboard for="sl-textarea-rocks"></sl-clipboard>
 ```
 
 ```jsx:react
