@@ -167,7 +167,7 @@ export default {
           //
           const terms = [
             { from: /^src\//, to: '' }, // Strip the src/ prefix
-            { from: /\.(t|j)sx?$/, to: '.js' } // Convert .ts to .js
+            { from: /\.component.(t|j)sx?$/, to: '.js' } // Convert .ts to .js
           ];
 
           mod.path = replace(mod.path, terms);

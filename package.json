@@ -14,8 +14,10 @@
     "./dist/shoelace.js",
     "./dist/shoelace-autoloader.js",
     "./dist/components/**/*.js",
+    "./dist/chunks/**/*.js",
     "./dist/translations/**/*.*",
     "./src/translations/**/*.*",
+    "*.css",
     "// COMMENT: This monstrosity below isn't perfect, but its like 99% to get bundlers to recognize 'thing.component.ts' as having no side effects. Example: https://regexr.com/7grof",
     "./dist/components/**/*((?<!(\\.component|\\.styles)))\\.js"
   ],
