@@ -93,7 +93,7 @@ async function buildTheSource() {
       // Public utilities
       ...(await globby('./src/utilities/**/!(*.(style|test)).ts')),
       // Theme stylesheets
-      ...(await globby('./src/themes/**/!(*.test).ts')),
+      ...(await globby('./src/themes/**/!(*.test).ts'))
     ],
     outdir: cdndir,
     chunkNames: 'chunks/[name].[hash]',
@@ -132,23 +132,19 @@ async function buildTheSource() {
       ...(await globby('./src/react/**/*.ts'))
     ],
     outdir: 'dist/react',
-    chunkNames: 'react-chunks/[name].[hash]',
-  }
+    chunkNames: 'react-chunks/[name].[hash]'
+  };
 
-  const configs = [
-    cdnConfig,
-    npmConfig,
-    reactConfig
-  ]
+  const configs = [cdnConfig, npmConfig, reactConfig];
 
   if (serve) {
     // Use the context API to allow incremental dev builds
-    const contexts = await Promise.all(configs.map((config) => esbuild.context(config)));
+    const contexts = await Promise.all(configs.map(config => esbuild.context(config)));
     await Promise.all(contexts.map(context => context.rebuild()));
     return contexts;
   } else {
     // Use the standard API for production builds
-    return await Promise.all(configs.map((config) => esbuild.build(config)));
+    return await Promise.all(configs.map(config => esbuild.build(config)));
   }
 }
 
