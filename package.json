@@ -14,7 +14,6 @@
     "./dist/shoelace.js",
     "./dist/shoelace-autoloader.js",
     "./dist/components/**/*.js",
-    "./dist/components/**/*.js",
     "./dist/chunks/**/*.js",
     "./dist/translations/**/*.*",
     "./src/translations/**/*.*",
