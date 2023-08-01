@@ -24,7 +24,7 @@ components.map(component => {
   const tagWithoutPrefix = component.tagName.replace(/^sl-/, '');
   const componentDir = path.join(reactDir, tagWithoutPrefix);
   const componentFile = path.join(componentDir, 'index.ts');
-  const importPath = component.path;
+  const importPath = component.path.split(/\.js$/)[0] + ".component.js";
   const eventImports = (component.events || [])
     .map(event => `import { ${event.eventName} } from '../../../src/events/events';`)
     .join('\n');
