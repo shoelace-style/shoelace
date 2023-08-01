@@ -19,9 +19,9 @@ describe('<sl-clipboard>', () => {
     });
 
     it('should reset copyStatus after 2 seconds', async () => {
-      expect(el.copy).to.be.false;
-      await el.copy();
-      expect(el.copyStatus).to.equal('copied');
+      expect(el.copyStatus).to.equal('trigger');
+      await el.copy(); // this will result in an error as copy needs to always be called from a user action
+      expect(el.copyStatus).to.equal('error');
       await aTimeout(2100);
       expect(el.copyStatus).to.equal('trigger');
     });

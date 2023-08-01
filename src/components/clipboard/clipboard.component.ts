@@ -81,6 +81,7 @@ export default class SlClipboard extends ShoelaceElement {
     return html`
       <div
         part="base"
+        aria-live="polite"
         class=${classMap({
           clipboard: true,
           [`clipboard--${this.copyStatus}`]: true
