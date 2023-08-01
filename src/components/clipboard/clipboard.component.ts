@@ -5,7 +5,7 @@ import ShoelaceElement from '../../internal/shoelace-element.js';
 import SlIconButton from '../icon-button/icon-button.component.js';
 import SlTooltip from '../tooltip/tooltip.component.js';
 import styles from './clipboard.styles.js';
-import type { CSSResultGroup, PropertyValueMap } from 'lit';
+import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Enables you to save content into the clipboard providing visual feedback.
@@ -16,39 +16,38 @@ import type { CSSResultGroup, PropertyValueMap } from 'lit';
  * @dependency sl-icon-button
  * @dependency sl-tooltip
  *
+ * @event sl-copying - Event when copying starts.
+ * @event sl-copied - Event when copying finished.
+ *
  * @slot - The content that gets clicked to copy.
  * @slot copied - The content shown after a successful copy.
+ * @slot error - The content shown if an error occurs.
  */
 export default class SlClipboard extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
   static dependencies = { 'sl-tooltip': SlTooltip, 'sl-icon-button': SlIconButton };
 
   /**
-   * Indicates whether or not copied info is shown.
+   * Indicates the current status the copy action is in.
    */
-  @property({ type: Boolean, reflect: true }) copy = false;
+  @property({ type: String }) copyStatus: 'trigger' | 'copied' | 'error' = 'trigger';
 
-  /**
-   * Indicates whether or not copy error is shown.
-   */
-  @property({ type: Boolean }) copyError = false;
-
-  /**
-   * The value to copy.
-   */
+  /** Value to copy. */
   @property({ type: String }) value = '';
 
-  /**
-   * The id of the element to copy the test value from.
-   */
+  /** Id of the element to copy the text value from. */
   @property({ type: String }) for = '';
 
+  /** Duration in milliseconds to reset to the trigger state. */
+  @property({ type: Number, attribute: 'reset-timeout' }) resetTimeout = 2000;
+
   private handleClick() {
-    if (this.copy || this.copyError) return;
-    this.__executeCopy();
+    if (this.copyStatus === 'copied') return;
+    this.copy();
   }
 
-  private async __executeCopy() {
+  /** Copies the clipboard */
+  async copy() {
     if (this.for) {
       const target = document.getElementById(this.for)!;
       if (target) {
@@ -57,21 +56,18 @@ export default class SlClipboard extends ShoelaceElement {
     }
     if (this.value) {
       try {
+        this.emit('sl-copying');
         await navigator.clipboard.writeText(this.value);
-        this.copy = true;
-        setTimeout(() => (this.copy = false), 2000);
+        this.emit('sl-copied');
+        this.copyStatus = 'copied';
       } catch (error) {
-        this.copyError = true;
-        setTimeout(() => (this.copyError = false), 2000);
+        this.copyStatus = 'error';
       }
+    } else {
+      this.copyStatus = 'error';
     }
-  }
 
-  protected update(changedProperties: PropertyValueMap<SlClipboard> | Map<PropertyKey, unknown>): void {
-    super.update(changedProperties);
-    if (changedProperties.has('copy') && this.copy) {
-      this.__executeCopy();
-    }
+    setTimeout(() => (this.copyStatus = 'trigger'), this.resetTimeout);
   }
 
   render() {
@@ -80,8 +76,7 @@ export default class SlClipboard extends ShoelaceElement {
         part="base"
         class=${classMap({
           clipboard: true,
-          'clipboard--copy': this.copy,
-          'clipboard--copy-error': this.copyError
+          [`clipboard--${this.copyStatus}`]: true
         })}
       >
         <slot id="default" @click=${this.handleClick}>
@@ -94,7 +89,7 @@ export default class SlClipboard extends ShoelaceElement {
             <sl-icon-button class="green" name="file-earmark-check" label="Copied"></sl-icon-button>
           </sl-tooltip>
         </slot>
-        <slot name="copy-error" @click=${this.handleClick}>
+        <slot name="error" @click=${this.handleClick}>
           <sl-tooltip content="Failed to copy">
             <sl-icon-button class="red" name="file-earmark-x" label="Failed to copy"></sl-icon-button>
           </sl-tooltip>

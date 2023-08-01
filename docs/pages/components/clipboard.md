@@ -28,12 +28,14 @@ const App = () => (
 ```html:preview
 <sl-clipboard value="shoelace rocks">
   <button type="button">Copy to clipboard</button>
-  <button slot="copied">copied</button>
+  <button slot="copied">Copied</button>
+  <button slot="error">Error</button>
 </sl-clipboard>
 <br>
 <sl-clipboard value="shoelace rocks">
   <sl-button>Copy</sl-button>
   <sl-button slot="copied">Copied</sl-button>
+  <sl-button slot="error">Error</sl-button>
 </sl-clipboard>
 ```
 
@@ -45,6 +47,12 @@ const App = () => (
     <SlClipboard value="shoelace rocks">
       <button type="button">Copy to clipboard</button>
       <div slot="copied">copied</div>
+      <button slot="error">Error</button>
+    </SlClipboard>
+    <SlClipboard value="shoelace rocks">
+      <sl-button>Copy</sl-button>
+      <sl-button slot="copied">Copied</sl-button>
+      <sl-button slot="error">Error</sl-button>
     </SlClipboard>
   </>
 );
@@ -90,6 +98,52 @@ const App = () => (
     </div>
 
     <style>{css}</style>
+  </>
+);
+```
+
+### Error if copy fails
+
+For example if a `for` target element is not found or if not using `https`.
+An empty string value like `value=""` will also result in an error.
+
+```html:preview
+<sl-clipboard for="not-found"></sl-clipboard>
+<br>
+<sl-clipboard for="not-found">
+  <sl-button>Copy</sl-button>
+  <sl-button slot="copied">Copied</sl-button>
+  <sl-button slot="error">Error</sl-button>
+</sl-clipboard>
+```
+
+```jsx:react
+import { SlClipboard } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <SlClipboard for="not-found"></SlClipboard>
+    <SlClipboard for="not-found">
+      <sl-button>Copy</sl-button>
+      <sl-button slot="copied">Copied</sl-button>
+      <sl-button slot="error">Error</sl-button>
+    </SlClipboard>
+  </>
+);
+```
+
+### Change duration of reset to copy button
+
+```html:preview
+<sl-clipboard value="shoelace rocks" reset-timeout="500"></sl-clipboard>
+```
+
+```jsx:react
+import { SlClipboard } from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <SlClipboard value="shoelace rocks" reset-timeout="500"></SlClipboard>
   </>
 );
 ```

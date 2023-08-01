@@ -12,10 +12,10 @@ export default css`
   slot[name='copied'] {
     display: none;
   }
-  .clipboard--copy #default {
+  .clipboard--copied #default {
     display: none;
   }
-  .clipboard--copy slot[name='copied'] {
+  .clipboard--copied slot[name='copied'] {
     display: block;
   }
 
@@ -31,13 +31,13 @@ export default css`
   }
 
   /* failed to copy */
-  slot[name='copy-error'] {
+  slot[name='error'] {
     display: none;
   }
-  .clipboard--copy-error #default {
+  .clipboard--error #default {
     display: none;
   }
-  .clipboard--copy-error slot[name='copy-error'] {
+  .clipboard--error slot[name='error'] {
     display: block;
   }
 

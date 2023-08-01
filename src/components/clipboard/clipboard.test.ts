@@ -14,17 +14,16 @@ describe('<sl-clipboard>', () => {
       await expect(el).to.be.accessible();
     });
 
-    it('should initially not be in copy state', () => {
-      expect(el.copy).to.false;
+    it('should initially be in the trigger status', () => {
+      expect(el.copyStatus).to.equal('trigger');
     });
 
-    it('should reset copy state after 2 seconds', async () => {
+    it('should reset copyStatus after 2 seconds', async () => {
       expect(el.copy).to.be.false;
-      el.copy = true;
-      await aTimeout(1000);
-      expect(el.copy).to.be.true;
-      await aTimeout(1100);
-      expect(el.copy).to.be.false;
+      await el.copy();
+      expect(el.copyStatus).to.equal('copied');
+      await aTimeout(2100);
+      expect(el.copyStatus).to.equal('trigger');
     });
   });
 });
