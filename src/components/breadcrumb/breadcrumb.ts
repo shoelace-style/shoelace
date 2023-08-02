@@ -12,6 +12,7 @@ import type SlBreadcrumbItem from '../breadcrumb-item/breadcrumb-item';
  * @documentation https://shoelace.style/components/breadcrumb
  * @status stable
  * @since 2.0
+ * @pattern stable
  *
  * @slot - One or more breadcrumb items to display.
  * @slot separator - The separator to use between breadcrumb items. Works best with `<sl-icon>`.
@@ -91,7 +92,7 @@ export default class SlBreadcrumb extends ShoelaceElement {
       </nav>
 
       <slot name="separator" hidden aria-hidden="true">
-        <sl-icon name=${this.localize.dir() === 'rtl' ? 'chevron-left' : 'chevron-right'} library="system"></sl-icon>
+        <span>${this.localize.dir() === 'rtl' ? '\\' : '/' }</span>
       </slot>
     `;
   }
