@@ -12,7 +12,7 @@ import SlCheckbox from '../checkbox/checkbox.component.js';
 import SlIcon from '../icon/icon.component.js';
 import SlSpinner from '../spinner/spinner.component.js';
 import styles from './tree-item.styles.js';
-import type { CSSResultGroup, PropertyValues } from 'lit';
+import type { CSSResultGroup, PropertyValueMap } from 'lit';
 
 /**
  * @summary A tree item serves as a hierarchical node that lives inside a [tree](/components/tree).
@@ -139,7 +139,7 @@ export default class SlTreeItem extends ShoelaceElement {
     this.isLeaf = !this.lazy && this.getChildrenItems().length === 0;
   }
 
-  protected willUpdate(changedProperties: PropertyValues<SlTreeItem> | Map<PropertyKey, unknown>) {
+  protected willUpdate(changedProperties: PropertyValueMap<SlTreeItem> | Map<PropertyKey, unknown>) {
     if (changedProperties.has('selected') && !changedProperties.has('indeterminate')) {
       this.indeterminate = false;
     }
