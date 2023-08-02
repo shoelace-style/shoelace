@@ -1,13 +1,13 @@
 import '../../../dist/shoelace.js';
 import { aTimeout, expect, fixture, html } from '@open-wc/testing';
-import type SlClipboard from './clipboard.js';
+import type SlCopy from './copy.js';
 
-describe('<sl-clipboard>', () => {
-  let el: SlClipboard;
+describe('<sl-copy>', () => {
+  let el: SlCopy;
 
   describe('when provided no parameters', () => {
     before(async () => {
-      el = await fixture<SlClipboard>(html`<sl-clipboard value="something"></sl-clipboard> `);
+      el = await fixture<SlCopy>(html`<sl-copy value="something"></sl-copy> `);
     });
 
     it('should pass accessibility tests', async () => {

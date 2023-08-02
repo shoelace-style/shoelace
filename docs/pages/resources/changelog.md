@@ -12,6 +12,10 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## Next
+
+- Added the `<sl-copy>` component [[#1473]]
+
 ## 2.6.0
 
 - Added JSDoc comments to React Wrappers for better documentation when hovering a component. [#1450]
