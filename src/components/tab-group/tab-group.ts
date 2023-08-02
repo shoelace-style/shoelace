@@ -16,6 +16,8 @@ import type SlTabPanel from '../tab-panel/tab-panel';
  * @documentation https://shoelace.style/components/tab-group
  * @status stable
  * @since 2.0
+ * @pattern stable
+ * @figma draft
  *
  * @dependency sl-icon-button
  *
