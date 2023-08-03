@@ -87,7 +87,7 @@ const App = () => (
 
 ### Displaying Copy Errors
 
-Copy errors can occur if the value is an empty string, if the `for` attribute points to an id that doesn't exist, or if the browser rejects the operation. You can customize the error that's shown by populating the `error` slot with your own content.
+Copy errors can occur if the value is an empty string, if the `from` attribute points to an id that doesn't exist, or if the browser rejects the operation. You can customize the error that's shown by populating the `error` slot with your own content.
 
 ```html:preview
 <sl-copy from="not-found"></sl-copy>
