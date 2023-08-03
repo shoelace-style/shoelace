@@ -19,11 +19,14 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'sl
  * @documentation https://shoelace.style/components/alert
  * @status stable
  * @since 2.0
+ * @pattern stable
+ * @figma ready
  *
  * @dependency sl-icon-button
  *
  * @slot - The alert's main content.
  * @slot icon - An icon to show in the alert. Works best with `<sl-icon>`.
+ * @slot header - An optional bold header for the alert.
  *
  * @event sl-show - Emitted when the alert opens.
  * @event sl-after-show - Emitted after the alert opens and all animations are complete.
@@ -189,6 +192,7 @@ export default class SlAlert extends ShoelaceElement {
           'alert--open': this.open,
           'alert--closable': this.closable,
           'alert--has-icon': this.hasSlotController.test('icon'),
+          'alert--has-header': this.hasSlotController.test('header'),
           'alert--primary': this.variant === 'primary',
           'alert--success': this.variant === 'success',
           'alert--neutral': this.variant === 'neutral',
@@ -200,8 +204,10 @@ export default class SlAlert extends ShoelaceElement {
         @mousemove=${this.handleMouseMove}
       >
         <slot name="icon" part="icon" class="alert__icon"></slot>
-
-        <slot part="message" class="alert__message" aria-live="polite"></slot>
+        <div class="alert__message">
+          <slot name="header" part="header" class="alert__header"></slot>
+          <slot part="message" aria-live="polite"></slot>
+        </div>
 
         ${this.closable
           ? html`
