@@ -41,7 +41,8 @@ layout: component
 ```
 
 ```jsx:react
-import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
+import SlCarousel from '@shoelace-style/shoelace/dist/react/sl-carousel'
+import SlCarouselItem from '@shoelace-style/shoelace/dist/react/sl-carousel-item'
 
 const App = () => (
   <>
@@ -123,7 +124,8 @@ Use the `pagination` attribute to show the total number of slides and the curren
 ```
 
 ```jsx:react
-import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
+import SlCarousel from '@shoelace-style/shoelace/dist/react/sl-carousel'
+import SlCarouselItem from '@shoelace-style/shoelace/dist/react/sl-carousel-item'
 
 const App = () => (
   <SlCarousel pagination>
@@ -201,7 +203,8 @@ Use the `navigation` attribute to show previous and next buttons.
 ```
 
 ```jsx:react
-import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
+import SlCarousel from '@shoelace-style/shoelace/dist/react/sl-carousel'
+import SlCarouselItem from '@shoelace-style/shoelace/dist/react/sl-carousel-item'
 
 const App = () => (
   <SlCarousel navigation>
@@ -279,7 +282,8 @@ By default, the carousel will not advanced beyond the first and last slides. You
 ```
 
 ```jsx:react
-import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
+import SlCarousel from '@shoelace-style/shoelace/dist/react/sl-carousel'
+import SlCarouselItem from '@shoelace-style/shoelace/dist/react/sl-carousel-item'
 
 const App = () => (
   <SlCarousel loop navigation pagination>
@@ -357,7 +361,8 @@ The carousel will automatically advance when the `autoplay` attribute is used. T
 ```
 
 ```jsx:react
-import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
+import SlCarousel from '@shoelace-style/shoelace/dist/react/sl-carousel'
+import SlCarouselItem from '@shoelace-style/shoelace/dist/react/sl-carousel-item'
 
 const App = () => (
   <SlCarousel autoplay loop pagination>
@@ -454,7 +459,10 @@ This example is best demonstrated using a mouse. Try clicking and dragging the s
 
 ```jsx:react
 import { useState } from 'react';
-import { SlCarousel, SlCarouselItem, SlDivider, SlSwitch } from '@shoelace-style/shoelace/dist/react';
+import SlCarousel from '@shoelace-style/shoelace/dist/react/sl-carousel'
+import SlCarouselItem from '@shoelace-style/shoelace/dist/react/sl-carousel-item'
+import SlDivider from '@shoelace-style/shoelace/dist/react/sl-divider'
+import SlSwitch from '@shoelace-style/shoelace/dist/react/sl-switch'
 
 const App = () => {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -522,7 +530,8 @@ The `slides-per-page` attribute makes it possible to display multiple slides at 
 {% raw %}
 
 ```jsx:react
-import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
+import SlCarousel from '@shoelace-style/shoelace/dist/react/sl-carousel'
+import SlCarouselItem from '@shoelace-style/shoelace/dist/react/sl-carousel-item'
 
 const App = () => (
   <SlCarousel navigation pagination slidesPerPage={2} slidesPerMove={2}>
@@ -614,7 +623,8 @@ The content of the carousel can be changed by adding or removing carousel items.
 
 ```jsx:react
 import { useState } from 'react';
-import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
+import SlCarousel from '@shoelace-style/shoelace/dist/react/sl-carousel'
+import SlCarouselItem from '@shoelace-style/shoelace/dist/react/sl-carousel-item'
 
 const css = `
   .dynamic-carousel {
@@ -730,7 +740,8 @@ Setting the `orientation` attribute to `vertical` will render the carousel in a 
 ```
 
 ```jsx:react
-import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
+import SlCarousel from '@shoelace-style/shoelace/dist/react/sl-carousel'
+import SlCarouselItem from '@shoelace-style/shoelace/dist/react/sl-carousel-item'
 
 const css = `
   .vertical {
@@ -852,7 +863,11 @@ Use the `--aspect-ratio` custom property to customize the size of the carousel's
 
 ```jsx:react
 import { useState } from 'react';
-import { SlCarousel, SlCarouselItem, SlDivider, SlSelect, SlOption } from '@shoelace-style/shoelace/dist/react';
+import SlCarousel from '@shoelace-style/shoelace/dist/react/sl-carousel'
+import SlCarouselItem from '@shoelace-style/shoelace/dist/react/sl-carousel-item'
+import SlDivider from '@shoelace-style/shoelace/dist/react/sl-divider'
+import SlSelect from '@shoelace-style/shoelace/dist/react/sl-select'
+import SlOption from '@shoelace-style/shoelace/dist/react/sl-option'
 
 const App = () => {
   const [aspectRatio, setAspectRatio] = useState('3/2');
@@ -956,7 +971,10 @@ Use the `--scroll-hint` custom property to add inline padding in horizontal caro
 
 ```jsx:react
 import { useState } from 'react';
-import { SlCarousel, SlCarouselItem, SlDivider, SlRange } from '@shoelace-style/shoelace/dist/react';
+import SlCarousel from '@shoelace-style/shoelace/dist/react/sl-carousel'
+import SlCarouselItem from '@shoelace-style/shoelace/dist/react/sl-carousel-item'
+import SlDivider from '@shoelace-style/shoelace/dist/react/sl-divider'
+import SlRange from '@shoelace-style/shoelace/dist/react/sl-range'
 
 const App = () => (
   <>
@@ -1119,7 +1137,10 @@ The carousel has a robust API that makes it possible to extend and customize. Th
 
 ```jsx:react
 import { useRef } from 'react';
-import { SlCarousel, SlCarouselItem, SlDivider, SlRange } from '@shoelace-style/shoelace/dist/react';
+import SlCarousel from '@shoelace-style/shoelace/dist/react/sl-carousel'
+import SlCarouselItem from '@shoelace-style/shoelace/dist/react/sl-carousel-item'
+import SlDivider from '@shoelace-style/shoelace/dist/react/sl-divider'
+import SlRange from '@shoelace-style/shoelace/dist/react/sl-range'
 
 const css = `
   .carousel-thumbnails {
