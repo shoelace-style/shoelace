@@ -16,6 +16,8 @@ import type { CSSResultGroup } from 'lit';
  * @documentation https://shoelace.style/components/details
  * @status stable
  * @since 2.0
+ * @pattern stable
+ * @figma draft
  *
  * @dependency sl-icon
  *
@@ -60,6 +62,9 @@ export default class SlDetails extends ShoelaceElement {
 
   /** Disables the details so it can't be toggled. */
   @property({ type: Boolean, reflect: true }) disabled = false;
+
+  /** Option to add a box shadow to the details. Shadow matches card component shadow. */
+  @property({ type: Boolean, reflect: true }) shadow = false;
 
   firstUpdated() {
     this.body.hidden = !this.open;
@@ -167,7 +172,8 @@ export default class SlDetails extends ShoelaceElement {
           details: true,
           'details--open': this.open,
           'details--disabled': this.disabled,
-          'details--rtl': isRtl
+          'details--rtl': isRtl,
+          'details--shadow': this.shadow
         })}
       >
         <div
