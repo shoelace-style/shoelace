@@ -12,6 +12,8 @@ import type { CSSResultGroup } from 'lit';
  * @documentation https://shoelace.style/components/tag
  * @status stable
  * @since 2.0
+ * @pattern stable
+ * @figma draft
  *
  * @dependency sl-icon-button
  *
@@ -30,7 +32,7 @@ export default class SlTag extends ShoelaceElement {
   private readonly localize = new LocalizeController(this);
 
   /** The tag's theme variant. */
-  @property({ reflect: true }) variant: 'primary' | 'success' | 'neutral' | 'warning' | 'danger' | 'text' = 'neutral';
+  @property({ reflect: true }) variant: 'blue' | 'green' | 'gray' | 'yellow' | 'red' | 'teal' | 'fuchsia' | 'purple' = 'gray';
 
   /** The tag's size. */
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
@@ -53,12 +55,14 @@ export default class SlTag extends ShoelaceElement {
           tag: true,
 
           // Types
-          'tag--primary': this.variant === 'primary',
-          'tag--success': this.variant === 'success',
-          'tag--neutral': this.variant === 'neutral',
-          'tag--warning': this.variant === 'warning',
-          'tag--danger': this.variant === 'danger',
-          'tag--text': this.variant === 'text',
+          'tag--blue': this.variant === 'blue',
+          'tag--green': this.variant === 'green',
+          'tag--gray': this.variant === 'gray',
+          'tag--yellow': this.variant === 'yellow',
+          'tag--red': this.variant === 'red',
+          'tag--teal': this.variant === 'teal',
+          'tag--fuchsia': this.variant === 'fuchsia',
+          'tag--purple': this.variant === 'purple',
 
           // Sizes
           'tag--small': this.size === 'small',
