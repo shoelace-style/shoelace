@@ -24,9 +24,12 @@ components.map(component => {
   const tagWithoutPrefix = component.tagName.replace(/^sl-/, '');
   const componentDir = path.join(reactDir, tagWithoutPrefix);
   const componentFile = path.join(componentDir, 'index.ts');
-  const importPath = component.path;
+  const importPath = component.path.replace(/\.js$/, ".component.js");
   const eventImports = (component.events || [])
-    .map(event => `import { ${event.eventName} } from '../../../src/events/events';`)
+    .map(event => `import type { ${event.eventName} } from '../../../src/events/events';`)
+    .join('\n');
+  const eventExports = (component.events || [])
+    .map(event => `export type { ${event.eventName} } from '../../../src/events/events';`)
     .join('\n');
   const eventNameImport =
     (component.events || []).length > 0 ? `import { type EventName  } from '@lit-labs/react';` : ``;
@@ -46,6 +49,7 @@ components.map(component => {
 
       ${eventNameImport}
       ${eventImports}
+      ${eventExports}
 
       const tagName = '${component.tagName}'
 

@@ -53,8 +53,10 @@ export default {
               return;
             }
 
-            const tagName = 'sl-' + path.basename(importPath, '.component.ts');
+            const tagNameWithoutPrefix = path.basename(importPath, '.component.ts');
+            const tagName = 'sl-' + tagNameWithoutPrefix
 
+            classDoc.tagNameWithoutPrefix = tagNameWithoutPrefix
             classDoc.tagName = tagName;
 
             // This used to be set to true by @customElement

@@ -196,7 +196,7 @@ setBasePath('/path/to/shoelace/%NPMDIR%
 Component modules include side effects for registration purposes. Because of this, importing directly from `@shoelace-style/shoelace` may result in a larger bundle size than necessary. For optimal tree shaking, always cherry pick, i.e. import components and utilities from their respective files, as shown above.
 :::
 
-### Avoiding side-effect imports
+### Avoiding auto-registering imports
 
 By default, imports to components will auto-register themselves. This may not be ideal in all cases. To import just the component's class without auto-registering it's tag we can do the following:
 
