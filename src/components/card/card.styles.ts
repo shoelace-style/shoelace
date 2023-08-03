@@ -5,7 +5,7 @@ export default css`
   ${componentStyles}
 
   :host {
-    --border-color: var(--sl-color-neutral-200);
+    --border-color: var(--sl-color-neutral-300);
     --border-radius: var(--sl-border-radius-medium);
     --border-width: 1px;
     --padding: var(--sl-spacing-large);
@@ -20,6 +20,10 @@ export default css`
     box-shadow: var(--sl-shadow-x-small);
     border: solid var(--border-width) var(--border-color);
     border-radius: var(--border-radius);
+  }
+
+  .card--no-shadow {
+    box-shadow: none;
   }
 
   .card__image {

@@ -1,5 +1,5 @@
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { HasSlotController } from '../../internal/slot';
 import { html } from 'lit';
 import ShoelaceElement from '../../internal/shoelace-element';
@@ -11,6 +11,8 @@ import type { CSSResultGroup } from 'lit';
  * @documentation https://shoelace.style/components/card
  * @status stable
  * @since 2.0
+ * @pattern stable
+ * @figma draft
  *
  * @slot - The card's main content.
  * @slot header - An optional header for the card.
@@ -34,6 +36,9 @@ export default class SlCard extends ShoelaceElement {
 
   private readonly hasSlotController = new HasSlotController(this, 'footer', 'header', 'image');
 
+  /** Option to remove the card's default box shadow. */
+  @property({ type: Boolean, reflect: true }) noShadow = false;
+
   render() {
     return html`
       <div
@@ -42,7 +47,8 @@ export default class SlCard extends ShoelaceElement {
           card: true,
           'card--has-footer': this.hasSlotController.test('footer'),
           'card--has-image': this.hasSlotController.test('image'),
-          'card--has-header': this.hasSlotController.test('header')
+          'card--has-header': this.hasSlotController.test('header'),
+          'card--no-shadow': this.noShadow
         })}
       >
         <slot name="image" part="image" class="card__image"></slot>
