@@ -593,7 +593,7 @@
 
 <div class="panel-content">
 <h2>Link text</h2>
-<div>Link text is <code>blue 700</code> on light backgrounds and <code>blue 300</code> on dark backgrounds.</div>
+<div>Link text is <code>blue 600</code> on light backgrounds and <code>blue 300</code> on dark backgrounds.</div>
 <ul class="color-tokens">
 <li><span class="ts-heading-8">Tailwind classes:</span>
   <code>.ts-text-link</code>
@@ -608,14 +608,11 @@
 
 ```html preview
 <div class="ts-body-1">
-  Teamshares helps traditional small businesses become <a href="#" class="ts-text-link">employee-owned</a> through
-  education, good governance and digital products that make financials and operations simpler.
+  Teamshares is an  <a href="#" class="ts-text-link">employee ownership platform</a> for small business, driven by proprietary software, education, and financial products.
 </div>
 <div class="dark-background">
   <div class="ts-body-1 ts-text-light">
-    Teamshares helps traditional small businesses become
-    <a href="#" class="ts-text-link-light">employee-owned</a> through education, good governance and digital products
-    that make financials and operations simpler.
+    Teamshares is an  <a href="#" class="ts-text-link-light">employee ownership platform</a> for small business, driven by proprietary software, education, and financial products.
   </div>
 </div>
 ```
