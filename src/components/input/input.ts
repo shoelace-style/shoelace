@@ -19,6 +19,8 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element';
  * @documentation https://shoelace.style/components/input
  * @status stable
  * @since 2.0
+ * @pattern stable
+ * @figma ready
  *
  * @dependency sl-icon
  *

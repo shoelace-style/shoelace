@@ -388,6 +388,29 @@
           badgeType = 'danger';
         }
 
+        let figmaBadgeType = 'danger';
+        let figmaBadgeTooltip = 'Need to create';
+        if (component.figma === 'ready') {
+          figmaBadgeType = 'success';
+          figmaBadgeTooltip = 'Matches Shoelace';
+        }
+        if (component.figma === 'draft') {
+          figmaBadgeType = 'warning';
+          figmaBadgeTooltip = 'Needs review';
+        }
+
+        let patternBadgeType = 'danger';
+        let patternBadgeTooltip = "Variants need review";
+        if (component.pattern === 'stable') {
+          patternBadgeType = 'primary';
+          patternBadgeTooltip = 'Variants reviewed';
+        }
+        if (component.pattern === 'in review') {
+          patternBadgeType = 'neutral';
+          patternBadgeTooltip = 'Variants under review';
+        }
+
+
         result += `
           <div class="component-header">
             <div class="component-header__tag">
@@ -396,13 +419,25 @@
 
             <div class="component-header__info">
               <sl-badge variant="neutral" pill>
-                Since ${component.since || '?'}
+                Since Shoelace ${component.since || '?'}
               </sl-badge>
 
               <sl-badge variant="${badgeType}" pill style="text-transform: capitalize;">
-                ${component.status}
+                Code ${component.status}
               </sl-badge>
-            </div>
+
+            <sl-tooltip content="${patternBadgeTooltip}">
+              <sl-badge variant="${patternBadgeType}" pill style="text-transform: capitalize;" class="${component.pattern === 'hide' ? 'hidden' : ''}">
+                Pattern ${component.pattern || 'Tentative'}
+              </sl-badge>
+            </sl-tooltip>
+
+            <sl-tooltip content="${figmaBadgeTooltip}">
+              <sl-badge variant="${figmaBadgeType}" pill style="text-transform: capitalize;" class="${component.figma === 'hide' ? 'hidden' : ''}">
+                Figma ${component.figma || 'Needed'}
+              </sl-badge>
+            </sl-tooltip>
+          </div>
 
             <div class="component-header__summary">
               ${component.summary ? `<p>${marked(component.summary)}</p>` : ''}

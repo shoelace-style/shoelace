@@ -8,6 +8,8 @@ import ShoelaceElement from '../../internal/shoelace-element';
  * @documentation https://shoelace.style/components/format-date
  * @status stable
  * @since 2.0
+ * @pattern hide
+ * @figma hide 
  */
 @customElement('sl-format-date')
 export default class SlFormatDate extends ShoelaceElement {

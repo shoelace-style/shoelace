@@ -17,6 +17,8 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element';
  * @documentation https://shoelace.style/components/textarea
  * @status stable
  * @since 2.0
+ * @pattern stable 
+ * @figma ready
  *
  * @slot label - The textarea's label. Alternatively, you can use the `label` attribute.
  * @slot help-text - Text that describes how to use the input. Alternatively, you can use the `help-text` attribute.

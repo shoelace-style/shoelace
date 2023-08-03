@@ -16,6 +16,8 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element';
  * @documentation https://shoelace.style/components/switch
  * @status stable
  * @since 2.0
+ * @pattern stable
+ * @figma ready
  *
  * @slot - The switch's label.
  *

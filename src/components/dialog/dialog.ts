@@ -20,6 +20,8 @@ import type { CSSResultGroup } from 'lit';
  * @documentation https://shoelace.style/components/dialog
  * @status stable
  * @since 2.0
+ * @pattern stable
+ * @figma draft
  *
  * @dependency sl-icon-button
  *

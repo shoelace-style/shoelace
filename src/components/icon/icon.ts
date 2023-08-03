@@ -17,6 +17,7 @@ const iconCache = new Map<string, Promise<SVGResult>>();
  * @documentation https://shoelace.style/components/icon
  * @status stable
  * @since 2.0
+ * @figma ready
  *
  * @event sl-load - Emitted when the icon has loaded.
  * @event sl-error - Emitted when the icon fails to load due to an error.

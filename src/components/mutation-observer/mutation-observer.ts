@@ -10,6 +10,8 @@ import type { CSSResultGroup } from 'lit';
  * @documentation https://shoelace.style/components/mutation-observer
  * @status stable
  * @since 2.0
+ * @pattern hide
+ * @figma hide 
  *
  * @event {{ mutationList: MutationRecord[] }} sl-mutation - Emitted when a mutation occurs.
  *

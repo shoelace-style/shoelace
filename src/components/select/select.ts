@@ -26,6 +26,7 @@ import type SlRemoveEvent from '../../events/sl-remove';
  * @documentation https://shoelace.style/components/select
  * @status stable
  * @since 2.0
+ * @pattern stable 
  *
  * @dependency sl-icon
  * @dependency sl-popup

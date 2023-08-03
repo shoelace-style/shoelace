@@ -9,6 +9,8 @@ import type { CSSResultGroup } from 'lit';
  * @documentation https://shoelace.style/components/visually-hidden
  * @status stable
  * @since 2.0
+ * @pattern hide
+ * @figma hide 
  *
  * @slot - The content to be visually hidden.
  */

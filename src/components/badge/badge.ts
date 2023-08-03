@@ -10,6 +10,7 @@ import type { CSSResultGroup } from 'lit';
  * @documentation https://shoelace.style/components/badge
  * @status stable
  * @since 2.0
+ * @figma draft
  *
  * @slot - The badge's content.
  *

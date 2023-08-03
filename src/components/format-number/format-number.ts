@@ -7,6 +7,8 @@ import ShoelaceElement from '../../internal/shoelace-element';
  * @documentation https://shoelace.style/components/format-number
  * @status stable
  * @since 2.0
+ * @pattern hide
+ * @figma hide 
  */
 @customElement('sl-format-number')
 export default class SlFormatNumber extends ShoelaceElement {

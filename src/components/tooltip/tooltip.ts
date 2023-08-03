@@ -17,6 +17,8 @@ import type SlPopup from '../popup/popup';
  * @documentation https://shoelace.style/components/tooltip
  * @status stable
  * @since 2.0
+ * @pattern stable
+ * @figma draft
  *
  * @dependency sl-popup
  *
