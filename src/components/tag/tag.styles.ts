@@ -33,7 +33,7 @@ export default css`
 
   .tag--blue {
     background-color: var(--sl-color-primary-100);
-    color: var(--sl-color-primary-700);
+    color: var(--sl-color-primary-800);
   }
 
   .tag--green {
@@ -58,7 +58,7 @@ export default css`
 
   .tag--teal {
     background-color: var(--sl-color-teal-100);
-    color: var(--sl-color-teal-700);
+    color: var(--sl-color-teal-800);
   }
 
   .tag--fuchsia {
