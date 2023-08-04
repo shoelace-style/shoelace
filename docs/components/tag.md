@@ -3,6 +3,79 @@
 [component-header:sl-tag]
 
 ```html preview
+<sl-tag variant="blue">Blue</sl-tag>
+<sl-tag variant="green">Green</sl-tag>
+<sl-tag variant="gray">Gray</sl-tag>
+<sl-tag variant="yellow">Yellow</sl-tag>
+<sl-tag variant="red">Red</sl-tag>
+<sl-tag variant="teal">Teal</sl-tag>
+<sl-tag variant="fuchsia">Fuchsia</sl-tag>
+<sl-tag variant="purple">Purple</sl-tag>
+```
+
+```pug slim
+sl-tag variant="blue" Blue
+sl-tag variant="green" Green
+sl-tag variant="gray" Gray
+sl-tag variant="yellow" Yellow
+sl-tag variant="red" Red
+sl-tag variant="teal" Teal
+sl-tag variant="fuchsia" Fuchsia
+sl-tag variant="purple" Purple
+```
+
+```jsx react
+import { SlTag } from '@teamshares/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <SlTag variant="blue">Blue</SlTag>
+    <SlTag variant="green">Green</SlTag>
+    <SlTag variant="gray">Gray</SlTag>
+    <SlTag variant="yellow">Yellow</SlTag>
+    <SlTag variant="red">Red</SlTag>
+    <SlTag variant="teal">Teal</SlTag>
+    <SlTag variant="fuchsia">Fuchsia</SlTag>
+    <SlTag variant="purple">Purple</SlTag>
+  </>
+);
+```
+
+## Examples
+
+### Sizes
+
+Use the `size` attribute to change a tag's size.
+
+```html preview
+<sl-tag size="small">Small</sl-tag>
+<sl-tag size="medium">Medium</sl-tag>
+<sl-tag size="large">Large</sl-tag>
+```
+
+```pug slim
+sl-tag size="small" Small
+sl-tag size="medium" Medium
+sl-tag size="large" Large
+```
+
+```jsx react
+import { SlTag } from '@teamshares/shoelace/dist/react';
+
+const App = () => (
+  <>
+    <SlTag size="small">Small</SlTag>
+    <SlTag size="medium">Medium</SlTag>
+    <SlTag size="large">Large</SlTag>
+  </>
+);
+```
+
+### Semantic variants
+
+A selection of tag colors also map to semantic variants: `primary` (blue), `success` (green), `neutral` (gray), `warning` (yellow), `danger` (red).
+
+```html preview
 <sl-tag variant="primary">Primary</sl-tag>
 <sl-tag variant="success">Success</sl-tag>
 <sl-tag variant="neutral">Neutral</sl-tag>
@@ -32,39 +105,10 @@ const App = () => (
 );
 ```
 
-## Examples
-
-### Sizes
-
-Use the `size` attribute to change a tab's size.
-
-```html preview
-<sl-tag size="small">Small</sl-tag>
-<sl-tag size="medium">Medium</sl-tag>
-<sl-tag size="large">Large</sl-tag>
-```
-
-```pug slim
-sl-tag size="small" Small
-sl-tag size="medium" Medium
-sl-tag size="large" Large
-```
-
-```jsx react
-import { SlTag } from '@teamshares/shoelace/dist/react';
-
-const App = () => (
-  <>
-    <SlTag size="small">Small</SlTag>
-    <SlTag size="medium">Medium</SlTag>
-    <SlTag size="large">Large</SlTag>
-  </>
-);
-```
 
 ### Pill
 
-Use the `pill` attribute to give tabs rounded edges.
+Use the `pill` attribute to give tags rounded edges. This variant is very similar to the pill button. Use only when there's little risk of it being confused with a button.
 
 ```html preview
 <sl-tag size="small" pill>Small</sl-tag>
