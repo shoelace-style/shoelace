@@ -657,6 +657,6 @@ export default css`
   .button--small .button__suffix,
   .button--small .button__caret,
   .button--circle .button__label {
-    font-size: var(--ts-font-base);
+    font-size: var(--sl-font-size-medium);
   }
 `;

@@ -20,9 +20,9 @@ export default css`
     border-top-width: calc(var(--sl-panel-border-width) * 3);
     border-radius: var(--sl-border-radius-medium);
     font-family: var(--sl-font-sans);
-    font-size: var(--ts-font-sm);
+    font-size: var(--sl-font-size-small);
     font-weight: var(--sl-font-weight-normal);
-    letter-spacing: var(--ts-tracking-normal);
+    letter-spacing: var(--sl-letter-spacing-normal);
     line-height: var(--ts-leading-5);
     color: var(--ts-color-text-default);
     margin: inherit;
@@ -97,10 +97,10 @@ export default css`
 
   .alert__header {
     /* ts-heading-8 */
-    font-size: var(--ts-font-sm);
+    font-size: var(--sl-font-size-small);
     font-weight: var(--ts-font-semibold);
     line-height: var(--ts-leading-5);
-    letter-spacing: var(--ts-tracking-tight);
+    letter-spacing: var(--sl-letter-spacing-dense);
   }
 
   .alert__close-button {
