@@ -54,8 +54,7 @@ Previously, it was recommended to import from a single entrypoint like so:
 import { SlButton } from '@shoelace-style/shoelace/%NPMDIR%/react';
 ```
 
-However, tree-shaking extra Shoelace components proved to be a challenge. As a result,
-we now recommend cherry-picking components you want to use, rather than importing from a single entrypoint.
+However, tree-shaking extra Shoelace components proved to be a challenge. As a result, we now recommend cherry-picking components you want to use, rather than importing from a single entrypoint.
 
 ```diff
 - import { SlButton } from '@shoelace-style/shoelace/%NPMDIR%/react';
