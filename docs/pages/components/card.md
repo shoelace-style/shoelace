@@ -41,9 +41,9 @@ layout: component
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/sl-button'
-import SlCard from '@shoelace-style/shoelace/dist/react/sl-card'
-import SlRating from '@shoelace-style/shoelace/dist/react/sl-rating'
+import SlButton from '@shoelace-style/shoelace/dist/react/sl-button';
+import SlCard from '@shoelace-style/shoelace/dist/react/sl-card';
+import SlRating from '@shoelace-style/shoelace/dist/react/sl-rating';
 
 const css = `
   .card-overview {
@@ -106,7 +106,7 @@ Basic cards aren't very exciting, but they can display any content you want them
 ```
 
 ```jsx:react
-import SlCard from '@shoelace-style/shoelace/dist/react/sl-card'
+import SlCard from '@shoelace-style/shoelace/dist/react/sl-card';
 
 const css = `
   .card-basic {
@@ -161,8 +161,8 @@ Headers can be used to display titles and more.
 ```
 
 ```jsx:react
-import SlCard from '@shoelace-style/shoelace/dist/react/sl-card'
-import SlIconButton from '@shoelace-style/shoelace/dist/react/sl-icon-button'
+import SlCard from '@shoelace-style/shoelace/dist/react/sl-card';
+import SlIconButton from '@shoelace-style/shoelace/dist/react/sl-icon-button';
 
 const css = `
   .card-header {
@@ -227,9 +227,9 @@ Footers can be used to display actions, summaries, or other relevant content.
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/sl-button'
-import SlCard from '@shoelace-style/shoelace/dist/react/sl-card'
-import SlRating from '@shoelace-style/shoelace/dist/react/sl-rating'
+import SlButton from '@shoelace-style/shoelace/dist/react/sl-button';
+import SlCard from '@shoelace-style/shoelace/dist/react/sl-card';
+import SlRating from '@shoelace-style/shoelace/dist/react/sl-rating';
 
 const css = `
   .card-footer {
@@ -282,7 +282,7 @@ Cards accept an `image` slot. The image is displayed atop the card and stretches
 ```
 
 ```jsx:react
-import SlCard from '@shoelace-style/shoelace/dist/react/sl-card'
+import SlCard from '@shoelace-style/shoelace/dist/react/sl-card';
 
 const css = `
   .card-image {

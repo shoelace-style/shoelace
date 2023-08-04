@@ -70,7 +70,7 @@ Icons inherit their color from the current text color. Thus, you can set the `co
 {% raw %}
 
 ```jsx:react
-import SlIcon from '@shoelace-style/shoelace/dist/react/sl-icon'
+import SlIcon from '@shoelace-style/shoelace/dist/react/sl-icon';
 
 const App = () => (
   <>
@@ -132,7 +132,7 @@ Icons are sized relative to the current font size. To change their size, set the
 {% raw %}
 
 ```jsx:react
-import SlIcon from '@shoelace-style/shoelace/dist/react/sl-icon'
+import SlIcon from '@shoelace-style/shoelace/dist/react/sl-icon';
 
 const App = () => (
   <div style={{ fontSize: '32px' }}>
@@ -167,7 +167,7 @@ For non-decorative icons, use the `label` attribute to announce it to assistive 
 ```
 
 ```jsx:react
-import SlIcon from '@shoelace-style/shoelace/dist/react/sl-icon'
+import SlIcon from '@shoelace-style/shoelace/dist/react/sl-icon';
 
 const App = () => <SlIcon name="star-fill" label="Add to favorites" />;
 ```
@@ -183,7 +183,7 @@ Custom icons can be loaded individually with the `src` attribute. Only SVGs on a
 {% raw %}
 
 ```jsx:react
-import SlIcon from '@shoelace-style/shoelace/dist/react/sl-icon'
+import SlIcon from '@shoelace-style/shoelace/dist/react/sl-icon';
 
 const App = () => <SlIcon src="https://shoelace.style/assets/images/shoe.svg" style={{ fontSize: '8rem' }}></SlIcon>;
 ```

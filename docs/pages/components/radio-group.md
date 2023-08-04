@@ -14,8 +14,8 @@ layout: component
 ```
 
 ```jsx:react
-import SlRadio from '@shoelace-style/shoelace/dist/react/sl-radio'
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group'
+import SlRadio from '@shoelace-style/shoelace/dist/react/sl-radio';
+import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group';
 
 const App = () => (
   <SlRadioGroup label="Select an option" name="a" value="1">
@@ -41,8 +41,8 @@ Add descriptive help text to a radio group with the `help-text` attribute. For h
 ```
 
 ```jsx:react
-import SlRadio from '@shoelace-style/shoelace/dist/react/sl-radio'
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group'
+import SlRadio from '@shoelace-style/shoelace/dist/react/sl-radio';
+import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group';
 
 const App = () => (
   <SlRadioGroup label="Select an option" help-text="Choose the most appropriate option." name="a" value="1">
@@ -66,8 +66,8 @@ const App = () => (
 ```
 
 ```jsx:react
-import SlRadioButton from '@shoelace-style/shoelace/dist/react/sl-radio-button'
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group'
+import SlRadioButton from '@shoelace-style/shoelace/dist/react/sl-radio-button';
+import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group';
 
 const App = () => (
   <SlRadioGroup label="Select an option" name="a" value="1">
@@ -91,8 +91,8 @@ Radios and radio buttons can be disabled by adding the `disabled` attribute to t
 ```
 
 ```jsx:react
-import SlRadio from '@shoelace-style/shoelace/dist/react/sl-radio'
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group'
+import SlRadio from '@shoelace-style/shoelace/dist/react/sl-radio';
+import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group';
 
 const App = () => (
   <SlRadioGroup label="Select an option" name="a" value="1">
@@ -182,10 +182,10 @@ Setting the `required` attribute to make selecting an option mandatory. If a val
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/sl-button'
-import SlIcon from '@shoelace-style/shoelace/dist/react/sl-icon'
-import SlRadio from '@shoelace-style/shoelace/dist/react/sl-radio'
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group'
+import SlButton from '@shoelace-style/shoelace/dist/react/sl-button';
+import SlIcon from '@shoelace-style/shoelace/dist/react/sl-icon';
+import SlRadio from '@shoelace-style/shoelace/dist/react/sl-radio';
+import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group';
 const App = () => {
   function handleSubmit(event) {
     event.preventDefault();
@@ -255,10 +255,10 @@ Use the `setCustomValidity()` method to set a custom validation message. This wi
 
 ```jsx:react
 import { useEffect, useRef } from 'react';
-import SlButton from '@shoelace-style/shoelace/dist/react/sl-button'
-import SlIcon from '@shoelace-style/shoelace/dist/react/sl-icon'
-import SlRadio from '@shoelace-style/shoelace/dist/react/sl-radio'
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group'
+import SlButton from '@shoelace-style/shoelace/dist/react/sl-button';
+import SlIcon from '@shoelace-style/shoelace/dist/react/sl-icon';
+import SlRadio from '@shoelace-style/shoelace/dist/react/sl-radio';
+import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group';
 const App = () => {
   const radioGroup = useRef(null);
   const errorMessage = 'You must choose this option';

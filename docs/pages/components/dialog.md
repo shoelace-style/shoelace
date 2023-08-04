@@ -27,8 +27,8 @@ layout: component
 
 ```jsx:react
 import { useState } from 'react';
-import SlButton from '@shoelace-style/shoelace/dist/react/sl-button'
-import SlDialog from '@shoelace-style/shoelace/dist/react/sl-dialog'
+import SlButton from '@shoelace-style/shoelace/dist/react/sl-button';
+import SlDialog from '@shoelace-style/shoelace/dist/react/sl-dialog';
 
 const App = () => {
   const [open, setOpen] = useState(false);
@@ -76,8 +76,8 @@ Use the `--width` custom property to set the dialog's width.
 
 ```jsx:react
 import { useState } from 'react';
-import SlButton from '@shoelace-style/shoelace/dist/react/sl-button'
-import SlDialog from '@shoelace-style/shoelace/dist/react/sl-dialog'
+import SlButton from '@shoelace-style/shoelace/dist/react/sl-button';
+import SlDialog from '@shoelace-style/shoelace/dist/react/sl-dialog';
 
 const App = () => {
   const [open, setOpen] = useState(false);
@@ -127,8 +127,8 @@ By design, a dialog's height will never exceed that of the viewport. As such, di
 
 ```jsx:react
 import { useState } from 'react';
-import SlButton from '@shoelace-style/shoelace/dist/react/sl-button'
-import SlDialog from '@shoelace-style/shoelace/dist/react/sl-dialog'
+import SlButton from '@shoelace-style/shoelace/dist/react/sl-button';
+import SlDialog from '@shoelace-style/shoelace/dist/react/sl-dialog';
 
 const App = () => {
   const [open, setOpen] = useState(false);
@@ -186,9 +186,9 @@ The header shows a functional close button by default. You can use the `header-a
 
 ```jsx:react
 import { useState } from 'react';
-import SlButton from '@shoelace-style/shoelace/dist/react/sl-button'
-import SlDialog from '@shoelace-style/shoelace/dist/react/sl-dialog'
-import SlIconButton from '@shoelace-style/shoelace/dist/react/sl-icon-button'
+import SlButton from '@shoelace-style/shoelace/dist/react/sl-button';
+import SlDialog from '@shoelace-style/shoelace/dist/react/sl-dialog';
+import SlIconButton from '@shoelace-style/shoelace/dist/react/sl-icon-button';
 
 const App = () => {
   const [open, setOpen] = useState(false);
@@ -249,8 +249,8 @@ You can use `event.detail.source` to determine what triggered the request to clo
 
 ```jsx:react
 import { useState } from 'react';
-import SlButton from '@shoelace-style/shoelace/dist/react/sl-button'
-import SlDialog from '@shoelace-style/shoelace/dist/react/sl-dialog'
+import SlButton from '@shoelace-style/shoelace/dist/react/sl-button';
+import SlDialog from '@shoelace-style/shoelace/dist/react/sl-dialog';
 
 const App = () => {
   const [open, setOpen] = useState(false);
@@ -302,9 +302,9 @@ By default, the dialog's panel will gain focus when opened. This allows a subseq
 
 ```jsx:react
 import { useState } from 'react';
-import SlButton from '@shoelace-style/shoelace/dist/react/sl-button'
-import SlDialog from '@shoelace-style/shoelace/dist/react/sl-dialog'
-import SlInput from '@shoelace-style/shoelace/dist/react/sl-input'
+import SlButton from '@shoelace-style/shoelace/dist/react/sl-button';
+import SlDialog from '@shoelace-style/shoelace/dist/react/sl-dialog';
+import SlInput from '@shoelace-style/shoelace/dist/react/sl-input';
 
 const App = () => {
   const [open, setOpen] = useState(false);

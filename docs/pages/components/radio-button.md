@@ -16,8 +16,8 @@ Radio buttons are designed to be used with [radio groups](/components/radio-grou
 ```
 
 ```jsx:react
-import SlRadioButton from '@shoelace-style/shoelace/dist/react/sl-radio-button'
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group'
+import SlRadioButton from '@shoelace-style/shoelace/dist/react/sl-radio-button';
+import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group';
 
 const App = () => (
   <SlRadioGroup label="Select an option" name="a" value="1">
@@ -43,8 +43,8 @@ To set the initial value and checked state, use the `value` attribute on the con
 ```
 
 ```jsx:react
-import SlRadioButton from '@shoelace-style/shoelace/dist/react/sl-radio-button'
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group'
+import SlRadioButton from '@shoelace-style/shoelace/dist/react/sl-radio-button';
+import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group';
 
 const App = () => (
   <SlRadioGroup label="Select an option" name="a" value="1">
@@ -68,8 +68,8 @@ Use the `disabled` attribute to disable a radio button.
 ```
 
 ```jsx:react
-import SlRadioButton from '@shoelace-style/shoelace/dist/react/sl-radio-button'
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group'
+import SlRadioButton from '@shoelace-style/shoelace/dist/react/sl-radio-button';
+import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group';
 
 const App = () => (
   <SlRadioGroup label="Select an option" name="a" value="1">
@@ -111,8 +111,8 @@ Use the `size` attribute to change a radio button's size.
 ```
 
 ```jsx:react
-import SlRadioButton from '@shoelace-style/shoelace/dist/react/sl-radio-button'
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group'
+import SlRadioButton from '@shoelace-style/shoelace/dist/react/sl-radio-button';
+import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group';
 
 const App = () => (
   <SlRadioGroup label="Select an option" name="a" value="1">
@@ -168,8 +168,8 @@ Use the `pill` attribute to give radio buttons rounded edges.
 ```
 
 ```jsx:react
-import SlRadioButton from '@shoelace-style/shoelace/dist/react/sl-radio-button'
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group'
+import SlRadioButton from '@shoelace-style/shoelace/dist/react/sl-radio-button';
+import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group';
 
 const App = () => (
   <SlRadioGroup label="Select an option" name="a" value="1">
@@ -221,9 +221,9 @@ Use the `prefix` and `suffix` slots to add icons.
 ```
 
 ```jsx:react
-import SlIcon from '@shoelace-style/shoelace/dist/react/sl-icon'
-import SlRadioButton from '@shoelace-style/shoelace/dist/react/sl-radio-button'
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group'
+import SlIcon from '@shoelace-style/shoelace/dist/react/sl-icon';
+import SlRadioButton from '@shoelace-style/shoelace/dist/react/sl-radio-button';
+import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group';
 
 const App = () => (
   <SlRadioGroup label="Select an option" name="a" value="1">
@@ -275,9 +275,9 @@ You can omit button labels and use icons instead. Make sure to set a `label` att
 ```
 
 ```jsx:react
-import SlIcon from '@shoelace-style/shoelace/dist/react/sl-icon'
-import SlRadioButton from '@shoelace-style/shoelace/dist/react/sl-radio-button'
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group'
+import SlIcon from '@shoelace-style/shoelace/dist/react/sl-icon';
+import SlRadioButton from '@shoelace-style/shoelace/dist/react/sl-radio-button';
+import SlRadioGroup from '@shoelace-style/shoelace/dist/react/sl-radio-group';
 
 const App = () => (
   <SlRadioGroup label="Select an option" name="a" value="neutral">

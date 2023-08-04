@@ -14,8 +14,8 @@ layout: component
 ```
 
 ```jsx:react
-import SlOption from '@shoelace-style/shoelace/dist/react/sl-option'
-import SlSelect from '@shoelace-style/shoelace/dist/react/sl-select'
+import SlOption from '@shoelace-style/shoelace/dist/react/sl-option';
+import SlSelect from '@shoelace-style/shoelace/dist/react/sl-select';
 
 const App = () => (
   <SlSelect>
@@ -41,8 +41,8 @@ Use the `disabled` attribute to disable an option and prevent it from being sele
 ```
 
 ```jsx:react
-import SlOption from '@shoelace-style/shoelace/dist/react/sl-option'
-import SlSelect from '@shoelace-style/shoelace/dist/react/sl-select'
+import SlOption from '@shoelace-style/shoelace/dist/react/sl-option';
+import SlSelect from '@shoelace-style/shoelace/dist/react/sl-select';
 
 const App = () => (
   <SlSelect>
