@@ -90,7 +90,7 @@ export default css`
   }
 
   .breadcrumb-item__separator {
-    color: var(--sl-color-neutral-600);
+    color: var(--sl-color-neutral-700);
     display: inline-flex;
     align-items: center;
     margin: 0 var(--sl-spacing-x-small);
