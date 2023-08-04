@@ -8,7 +8,7 @@ const ignoredRules = ['color-contrast'];
 describe('<sl-breadcrumb>', () => {
   let el: SlBreadcrumb;
 
-  describe.only('when provided a standard list of el-breadcrumb-item children and no parameters', () => {
+  describe('when provided a standard list of el-breadcrumb-item children and no parameters', () => {
     before(async () => {
       el = await fixture<SlBreadcrumb>(html`
         <sl-breadcrumb>
