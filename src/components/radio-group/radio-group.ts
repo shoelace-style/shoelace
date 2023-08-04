@@ -22,7 +22,7 @@ import type SlRadioButton from '../radio-button/radio-button';
  * @documentation https://shoelace.style/components/radio-group
  * @status stable
  * @since 2.0
- * @pattern stable 
+ * @pattern stable
  * @figma ready
  *
  * @dependency sl-button-group

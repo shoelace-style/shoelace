@@ -11,7 +11,7 @@ import type { CSSResultGroup } from 'lit';
  * @status stable
  * @since 2.0
  * @pattern hide
- * @figma hide 
+ * @figma hide
  *
  * @event {{ mutationList: MutationRecord[] }} sl-mutation - Emitted when a mutation occurs.
  *

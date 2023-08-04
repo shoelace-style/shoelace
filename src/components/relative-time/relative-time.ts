@@ -24,7 +24,7 @@ const availableUnits: UnitConfig[] = [
  * @status stable
  * @since 2.0
  * @pattern hide
- * @figma hide 
+ * @figma hide
  */
 @customElement('sl-relative-time')
 export default class SlRelativeTime extends ShoelaceElement {

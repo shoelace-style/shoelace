@@ -105,7 +105,6 @@ const App = () => (
 );
 ```
 
-
 ### Pill
 
 Use the `pill` attribute to give tags rounded edges. This variant is very similar to the pill button. Use only when there's little risk of it being confused with a button.

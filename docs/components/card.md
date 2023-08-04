@@ -163,9 +163,7 @@ const App = () => (
 Use the `noShadow` property to remove a card's default box shadow.
 
 ```html preview
-<sl-card class="card-basic" noShadow>
-  This is just a basic card with no shadow.
-</sl-card>
+<sl-card class="card-basic" noShadow> This is just a basic card with no shadow. </sl-card>
 
 <style>
   .card-basic {

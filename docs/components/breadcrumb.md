@@ -298,8 +298,7 @@ const App = () => (
     <SlBreadcrumbItem>
       Web Design
       <SlDropdown slot="suffix">
-        <SlIconButton slot="trigger" library="fa" label="More options" name="ellipsis">
-        </SlIconButton>
+        <SlIconButton slot="trigger" library="fa" label="More options" name="ellipsis"></SlIconButton>
         <SlMenu>
           <SlMenuItem type="checkbox" checked>
             Web Design

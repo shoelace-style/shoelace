@@ -10,7 +10,7 @@ import type { CSSResultGroup } from 'lit';
  * @status stable
  * @since 2.0
  * @pattern hide
- * @figma hide 
+ * @figma hide
  *
  * @slot - The content to be visually hidden.
  */

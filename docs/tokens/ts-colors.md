@@ -608,11 +608,13 @@
 
 ```html preview
 <div class="ts-body-1">
-  Teamshares is an  <a href="#" class="ts-text-link">employee ownership platform</a> for small business, driven by proprietary software, education, and financial products.
+  Teamshares is an <a href="#" class="ts-text-link">employee ownership platform</a> for small business, driven by
+  proprietary software, education, and financial products.
 </div>
 <div class="dark-background">
   <div class="ts-body-1 ts-text-light">
-    Teamshares is an  <a href="#" class="ts-text-link-light">employee ownership platform</a> for small business, driven by proprietary software, education, and financial products.
+    Teamshares is an <a href="#" class="ts-text-link-light">employee ownership platform</a> for small business, driven
+    by proprietary software, education, and financial products.
   </div>
 </div>
 ```

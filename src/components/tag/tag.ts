@@ -32,7 +32,20 @@ export default class SlTag extends ShoelaceElement {
   private readonly localize = new LocalizeController(this);
 
   /** The tag's theme variant. */
-  @property({ reflect: true }) variant: 'blue' | 'green' | 'gray' | 'yellow' | 'red' | 'teal' | 'fuchsia' | 'purple' | 'primary' | 'success' | 'neutral' | 'warning' | 'danger' = 'gray';
+  @property({ reflect: true }) variant:
+    | 'blue'
+    | 'green'
+    | 'gray'
+    | 'yellow'
+    | 'red'
+    | 'teal'
+    | 'fuchsia'
+    | 'purple'
+    | 'primary'
+    | 'success'
+    | 'neutral'
+    | 'warning'
+    | 'danger' = 'gray';
 
   /** The tag's size. */
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
@@ -57,7 +70,7 @@ export default class SlTag extends ShoelaceElement {
           // Types
           'tag--blue': this.variant === 'blue' || this.variant === 'primary',
           'tag--green': this.variant === 'green' || this.variant === 'success',
-          'tag--gray': this.variant === 'gray'|| this.variant === 'neutral',
+          'tag--gray': this.variant === 'gray' || this.variant === 'neutral',
           'tag--yellow': this.variant === 'yellow' || this.variant === 'warning',
           'tag--red': this.variant === 'red' || this.variant === 'danger',
           'tag--teal': this.variant === 'teal',

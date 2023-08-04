@@ -14,7 +14,7 @@ import type { CSSResultGroup } from 'lit';
  * @status stable
  * @since 2.0
  * @pattern stable
- * @figma draft 
+ * @figma draft
  *
  * @dependency sl-icon
  *

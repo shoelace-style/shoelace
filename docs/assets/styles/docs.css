@@ -590,7 +590,6 @@ sl-card.small-footer::part(footer) {
   margin-top: 0.25rem;
 }
 
-
 .markdown-section ul ul {
   margin-bottom: 0;
 }
@@ -1084,7 +1083,8 @@ div.panel-content h3 {
   }
 }
 
-.text-style, .token-style {
+.text-style,
+.token-style {
   width: 100%;
   margin-bottom: 1rem;
 }
@@ -1106,7 +1106,8 @@ div.token-style {
   padding: 0 0 1rem;
 }
 
-div.text-specs div, div.token-style div {
+div.text-specs div,
+div.token-style div {
   font-size: var(--ts-font-sm);
   margin: 0;
 }
@@ -1120,7 +1121,8 @@ div.text-specs {
   padding: 0 0 0.75rem;
 }
 
-.text-specs:last-child, .token-style:last-child {
+.text-specs:last-child,
+.token-style:last-child {
   border-bottom: none;
   margin-bottom: 0;
 }

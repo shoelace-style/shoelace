@@ -92,7 +92,7 @@ export default class SlBreadcrumb extends ShoelaceElement {
       </nav>
 
       <slot name="separator" hidden aria-hidden="true">
-        <span>${this.localize.dir() === 'rtl' ? '\\' : '/' }</span>
+        <span>${this.localize.dir() === 'rtl' ? '\\' : '/'}</span>
       </slot>
     `;
   }

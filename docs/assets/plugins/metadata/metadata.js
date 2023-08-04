@@ -400,7 +400,7 @@
         }
 
         let patternBadgeType = 'danger';
-        let patternBadgeTooltip = "Variants need review";
+        let patternBadgeTooltip = 'Variants need review';
         if (component.pattern === 'stable') {
           patternBadgeType = 'primary';
           patternBadgeTooltip = 'Variants reviewed';
@@ -409,7 +409,6 @@
           patternBadgeType = 'neutral';
           patternBadgeTooltip = 'Variants under review';
         }
-
 
         result += `
           <div class="component-header">
@@ -427,13 +426,17 @@
               </sl-badge>
 
             <sl-tooltip content="${patternBadgeTooltip}">
-              <sl-badge variant="${patternBadgeType}" pill style="text-transform: capitalize;" class="${component.pattern === 'hide' ? 'hidden' : ''}">
+              <sl-badge variant="${patternBadgeType}" pill style="text-transform: capitalize;" class="${
+          component.pattern === 'hide' ? 'hidden' : ''
+        }">
                 Pattern ${component.pattern || 'Tentative'}
               </sl-badge>
             </sl-tooltip>
 
             <sl-tooltip content="${figmaBadgeTooltip}">
-              <sl-badge variant="${figmaBadgeType}" pill style="text-transform: capitalize;" class="${component.figma === 'hide' ? 'hidden' : ''}">
+              <sl-badge variant="${figmaBadgeType}" pill style="text-transform: capitalize;" class="${
+          component.figma === 'hide' ? 'hidden' : ''
+        }">
                 Figma ${component.figma || 'Needed'}
               </sl-badge>
             </sl-tooltip>

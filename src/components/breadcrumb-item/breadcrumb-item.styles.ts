@@ -81,7 +81,7 @@ export default css`
   }
 
   :host(:not(:last-of-type)) .breadcrumb-item--has-prefix .breadcrumb-item__prefix,
-  :host(:not(:last-of-type)) .breadcrumb-item--has-suffix .breadcrumb-item__suffix  {
+  :host(:not(:last-of-type)) .breadcrumb-item--has-suffix .breadcrumb-item__suffix {
     color: var(--sl-color-primary-600);
   }
 

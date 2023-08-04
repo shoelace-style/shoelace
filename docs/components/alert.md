@@ -8,7 +8,6 @@
 
   <sl-tab-panel name="examples">
 
-
 ```html preview
 <sl-alert open>
   <sl-icon slot="icon" library="fa" name="fas-circle-info"></sl-icon>
@@ -543,7 +542,6 @@ By default, the toast stack is positioned at the top-right of the viewport. You 
   <li>Default to using the icons shown in the code examples that go with each alert variant.</li>
   <li>If you feel you really have a good use case for using a different icon with an existing variant, bring it up to the design team for further discussion.</li>
 </ul>
-
 
 ### Alert header
 
