@@ -173,7 +173,7 @@ Use the `noShadow` property to remove a card's default box shadow.
 ```
 
 ```pug slim
-sl-card.card-basic noShadow="true"
+sl-card.card-basic noShadow=true
   |   This is just a basic card with no shadow.
 
 css:
