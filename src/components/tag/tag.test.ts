@@ -13,7 +13,7 @@ describe('<sl-tag>', () => {
   });
 
   it('should set variant by attribute', async () => {
-    const el = await fixture<SlTag>(html` <sl-tag variant="danger">Test</sl-tag> `);
+    const el = await fixture<SlTag>(html` <sl-tag variant="red">Test</sl-tag> `);
 
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
