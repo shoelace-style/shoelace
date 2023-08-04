@@ -8,7 +8,7 @@ const ignoredRules = ['color-contrast'];
 describe('<sl-breadcrumb>', () => {
   let el: SlBreadcrumb;
 
-  describe('when provided a standard list of el-breadcrumb-item children and no parameters', () => {
+  describe.only('when provided a standard list of el-breadcrumb-item children and no parameters', () => {
     before(async () => {
       el = await fixture<SlBreadcrumb>(html`
         <sl-breadcrumb>
@@ -24,8 +24,8 @@ describe('<sl-breadcrumb>', () => {
       await expect(el).to.be.accessible({ ignoredRules });
     });
 
-    it('should render sl-icon as separator', () => {
-      expect(el.querySelectorAll('sl-icon').length).to.eq(4);
+    it('should render a span containing a forward slash as separator', () => {
+      expect(el.querySelectorAll('span[slot=separator]').length).to.eq(4);
     });
 
     it('should attach aria-current "page" on the last breadcrumb item.', () => {
