@@ -16,46 +16,44 @@
 
   - [Colors](/tokens/ts-colors)
   - [Typography](/tokens/ts-typography)
+  - [Spacing](/tokens/ts-spacing)
+  - [Elevation](/tokens/ts-elevation)
+  - [Border Radius](/tokens/ts-border-radius)  
 
-- Components
+- Core Components
 
   - [Alert](/components/alert)
   - [Avatar](/components/avatar)
   - [Badge](/components/badge)
   - [Breadcrumb](/components/breadcrumb)
-  - [Breadcrumb Item](/components/breadcrumb-item)
+  - [Breadcrumb Item](/components/breadcrumb-item)  
   - [Button](/components/button)
   - [Button Group](/components/button-group)
   - [Card](/components/card)
-  - [Carousel](/components/carousel)
-  - [Carousel Item](/components/carousel-item)
   - [Checkbox](/components/checkbox)
-  <!-- - [Color Picker](/components/color-picker) -->
-  - [Details](/components/details)
-  - [Dialog](/components/dialog)
-  - [Divider](/components/divider)
+  - [Details (Collapsible card)](/components/details)
+  - [Dialog (Modal)](/components/dialog)
+  - [Divider](/components/divider)  
   - [Drawer](/components/drawer)
   - [Dropdown](/components/dropdown)
   - [Icon](/components/icon)
   - [Icon Button](/components/icon-button)
-  - [Image Comparer](/components/image-comparer)
   - [Input](/components/input)
   - [Menu](/components/menu)
   - [Menu Item](/components/menu-item)
   - [Menu Label](/components/menu-label)
   - [Option](/components/option)
   - [Progress Bar](/components/progress-bar)
-  - [Progress Ring](/components/progress-ring)
-  <!-- - [QR Code](/components/qr-code) -->
   - [Radio](/components/radio)
   - [Radio Button](/components/radio-button)
   - [Radio Group](/components/radio-group)
+  - [Progress Ring](/components/progress-ring)
   - [Range](/components/range)
   - [Rating](/components/rating)
   - [Select](/components/select)
   - [Skeleton](/components/skeleton)
   - [Spinner](/components/spinner)
-  - [Split Panel](/components/split-panel)
+  - [Split Panel](/components/split-panel)  
   - [Switch](/components/switch)
   - [Tab Group](/components/tab-group)
   - [Tab](/components/tab)
@@ -63,21 +61,22 @@
   - [Tag](/components/tag)
   - [Textarea](/components/textarea)
   - [Tooltip](/components/tooltip)
-  - [Tree](/components/tree)
-  - [Tree Item](/components/tree-item)
   <!--plop:component-->
 
-- Vendor
-
+- Auxiliary Components
+  - [Carousel](/components/carousel)
+  - [Carousel Item](/components/carousel-item)
+  <!-- - [Color Picker](/components/color-picker) -->
   - [Data Grid](/vendor/data-grid.md)
+  - [Image Comparer](/components/image-comparer)
+  - [QR Code](/components/qr-code)
+  - [Tree](/components/tree)
+  - [Tree Item](/components/tree-item)
 
 <!-- - Design Tokens
 
   - [Typography](/tokens/typography)
   - [Color](/tokens/color)
-  - [Spacing](/tokens/spacing)
-  - [Elevation](/tokens/elevation)
-  - [Border Radius](/tokens/border-radius)
   - [Transition](/tokens/transition)
   - [Z-index](/tokens/z-index)
   - [More](/tokens/more) -->

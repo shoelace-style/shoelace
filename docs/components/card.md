@@ -26,7 +26,7 @@
   }
 
   .card-overview small {
-    color: var(--sl-color-neutral-500);
+    color: var(--sl-color-neutral-700);
   }
 
   .card-overview [slot='footer'] {
@@ -55,7 +55,7 @@ css:
   }
 
   .card-overview small {
-    color: var(--sl-color-neutral-500);
+    color: var(--sl-color-neutral-700);
   }
 
   .card-overview [slot=footer] {
@@ -74,12 +74,12 @@ const css = `
   }
 
   .card-overview small {
-    color: var(--sl-color-neutral-500);
+    color: var(--sl-color-neutral-700);
   }
 
   .card-overview [slot="footer"] {
-    display: flex; 
-    justify-content: space-between; 
+    display: flex;
+    justify-content: space-between;
     align-items: center;
   }
 `;
@@ -158,6 +158,52 @@ const App = () => (
 );
 ```
 
+## Card with no shadow
+
+Use the `noShadow` property to remove a card's default box shadow.
+
+```html preview
+<sl-card class="card-basic" noShadow>
+  This is just a basic card with no shadow.
+</sl-card>
+
+<style>
+  .card-basic {
+    max-width: 300px;
+  }
+</style>
+```
+
+```pug slim
+sl-card.card-basic noShadow="true"
+  |   This is just a basic card with no shadow.
+
+css:
+  .card-basic {
+    max-width: 300px;
+  }
+```
+
+```jsx react
+import { SlCard } from '@teamshares/shoelace/dist/react';
+
+const css = `
+  .card-basic {
+    max-width: 300px;
+  }
+`;
+
+const App = () => (
+  <>
+    <SlCard className="card-basic" noShadow>
+      This is just a basic card with no shadow.
+    </SlCard>
+
+    <style>{css}</style>
+  </>
+);
+```
+
 ## Card with Header
 
 Headers can be used to display titles and more.
@@ -229,8 +275,8 @@ const css = `
   }
 
   .card-header [slot="header"] {
-    display: flex; 
-    align-items: center; 
+    display: flex;
+    align-items: center;
     justify-content: space-between;
   }
 
@@ -313,8 +359,8 @@ const css = `
   }
 
   .card-footer [slot="footer"] {
-    display: flex; 
-    justify-content: space-between; 
+    display: flex;
+    justify-content: space-between;
     align-items: center;
   }
 `;
