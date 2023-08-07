@@ -55,28 +55,34 @@ export default class SlMenu extends ShoelaceElement {
 
     // Move the selection when pressing down or up
     if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
-      const items = this.getAllItems();
-      const activeItem = this.getCurrentItem();
-      let index = activeItem ? items.indexOf(activeItem) : 0;
+      const items = this.getAllItems().filter(item => !item.disabled);
 
-      if (items.length > 0) {
+      if (items.length > 1) {
         event.preventDefault();
+        const activeItem = this.getCurrentItem();
+        let index = activeItem ? items.indexOf(activeItem) : 0;
+        let isFocusableItem = false;
 
-        if (event.key === 'ArrowDown') {
-          index++;
-        } else if (event.key === 'ArrowUp') {
-          index--;
-        } else if (event.key === 'Home') {
-          index = 0;
-        } else if (event.key === 'End') {
-          index = items.length - 1;
-        }
+        while (!isFocusableItem) {
+          if (event.key === 'ArrowDown') {
+            index++;
+          } else if (event.key === 'ArrowUp') {
+            index--;
+          } else if (event.key === 'Home') {
+            index = 0;
+          } else if (event.key === 'End') {
+            index = items.length - 1;
+          }
 
-        if (index < 0) {
-          index = items.length - 1;
-        }
-        if (index > items.length - 1) {
-          index = 0;
+          if (index < 0) {
+            index = items.length - 1;
+          } else if (index > items.length - 1) {
+            index = 0;
+          }
+
+          if (!items[index].disabled) {
+            isFocusableItem = true;
+          }
         }
 
         this.setCurrentItem(items[index]);
@@ -136,7 +142,7 @@ export default class SlMenu extends ShoelaceElement {
 
     // Update tab indexes
     items.forEach(i => {
-      i.setAttribute('tabindex', i === item ? '0' : '-1');
+      i.setAttribute('tabindex', i === item && !item.disabled ? '0' : '-1');
     });
   }
 
