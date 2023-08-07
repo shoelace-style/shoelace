@@ -15,8 +15,8 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 ## Next
 
 - Fixed a bug in `<sl-dropdown>` where pressing [[Up]] or [[Down]] when focused on the trigger wouldn't focus the first/last menu items [#1472]
-- Fixed a bug in `<sl-menu>` where pressing [[Up]], [[Down]], [[Home]] or [[End]] failed when there were disabled menu items.
-- Fixed a bug in `<sl-menu-menu>` where `aria-disabled` weren't applied on a `disabled` menu item.
+- Fixed a bug in `<sl-menu>` where pressing [[Up]], [[Down]], [[Home]] or [[End]] failed when there were disabled menu items. [#1494]
+- Fixed a bug in `<sl-menu-menu>` where `aria-disabled` weren't applied on a `disabled` menu item. [#1494]
 
 ## 2.6.0
 
