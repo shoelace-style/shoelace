@@ -112,6 +112,7 @@ export default class SlMenuItem extends ShoelaceElement {
           'menu-item--disabled': this.disabled,
           'menu-item--has-submenu': false // reserved for future use
         })}
+        aria-disabled=${this.disabled ? 'true' : 'false'}
       >
         <span part="checked-icon" class="menu-item__check">
           <sl-icon name="check" library="system" aria-hidden="true"></sl-icon>
