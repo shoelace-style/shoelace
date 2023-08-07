@@ -15,6 +15,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 ## Next
 
 - Fixed a bug in `<sl-dropdown>` where pressing [[Up]] or [[Down]] when focused on the trigger wouldn't focus the first/last menu items [#1472]
+- Removed `sideEffects` key from `package.json`. Update React docs to use cherry-picking. [#1485]
 
 ## 2.6.0
 

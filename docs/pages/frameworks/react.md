@@ -39,11 +39,26 @@ Now you can start using components!
 Every Shoelace component is available to import as a React component. Note that we're importing the `<SlButton>` _React component_ instead of the `<sl-button>` _custom element_ in the example below.
 
 ```jsx
-import { SlButton } from '@shoelace-style/shoelace/%NPMDIR%/react';
+import SlButton from '@shoelace-style/shoelace/%NPMDIR%/react/button';
 
 const MyComponent = () => <SlButton variant="primary">Click me</SlButton>;
 
 export default MyComponent;
+```
+
+#### Notes about tree shaking
+
+Previously, it was recommended to import from a single entrypoint like so:
+
+```jsx
+import { SlButton } from '@shoelace-style/shoelace/%NPMDIR%/react';
+```
+
+However, tree-shaking extra Shoelace components proved to be a challenge. As a result, we now recommend cherry-picking components you want to use, rather than importing from a single entrypoint.
+
+```diff
+- import { SlButton } from '@shoelace-style/shoelace/%NPMDIR%/react';
++ import SlButton from '@shoelace-style/shoelace/%NPMDIR%/react/button';
 ```
 
 You can find a copy + paste import for each component in the "importing" section of its documentation.
@@ -56,7 +71,7 @@ Here's how you can bind the input's value to a state variable.
 
 ```jsx
 import { useState } from 'react';
-import { SlInput } from '@shoelace-style/shoelace/%NPMDIR%/react';
+import SlInput from '@shoelace-style/shoelace/%NPMDIR%/react/input';
 
 function MyComponent() {
   const [value, setValue] = useState('');
@@ -71,7 +86,7 @@ If you're using TypeScript, it's important to note that `event.target` will be a
 
 ```tsx
 import { useState } from 'react';
-import { SlInput } from '@shoelace-style/shoelace/%NPMDIR%/react';
+import SlInput from '@shoelace-style/shoelace/%NPMDIR%/react/input';
 import type SlInputElement from '@shoelace-style/shoelace/%NPMDIR%/components/input/input';
 
 function MyComponent() {
@@ -87,7 +102,7 @@ You can also import the event type for use in your callbacks, shown below.
 
 ```tsx
 import { useCallback, useState } from 'react';
-import { SlInput, SlInputEvent } from '@shoelace-style/shoelace/%NPMDIR%/react';
+import SlInput, { type SlInputEvent } from '@shoelace-style/shoelace/%NPMDIR%/react/input';
 import type SlInputElement from '@shoelace-style/shoelace/%NPMDIR%/components/input/input';
 
 function MyComponent() {
@@ -159,7 +174,7 @@ To fix this, add the following to your `package.json` which tells the transpiler
 ```js
 {
   "jest": {
-    "transformIgnorePatterns": ["node_modules/?!(@shoelace)"]
+    "transformIgnorePatterns": ["node_modules/(?!(@shoelace))"]
   }
 }
 ```
