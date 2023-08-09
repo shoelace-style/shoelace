@@ -7,7 +7,7 @@ import type { IconLibrary } from './library.js';
 // All Shoelace components must use the system library instead of the default library. For visual consistency, system
 // icons are a subset of Bootstrap Icons.
 //
-const icons = {
+export const icons = {
   caret: `
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <polyline points="6 9 12 15 18 9"></polyline>
