@@ -407,7 +407,9 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
     const hasClearIcon =
-      this.clearable && !this.disabled && !this.readonly && (typeof this.value === 'number' || this.value.length > 0);
+      this.clearable && !this.disabled && !this.readonly;
+    const hasClearIconVisible =
+      hasClearIcon && (typeof this.value === 'number' || this.value.length > 0);
 
     return html`
       <div
@@ -497,6 +499,7 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
                     type="button"
                     aria-label=${this.localize.term('clearEntry')}
                     @click=${this.handleClearClick}
+                    style="visibility: ${hasClearIconVisible?'visible':'hidden'}"
                     tabindex="-1"
                   >
                     <slot name="clear-icon">
