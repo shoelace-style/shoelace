@@ -53,8 +53,10 @@ export default {
               return;
             }
 
-            const tagName = 'sl-' + path.basename(importPath, '.component.ts');
+            const tagNameWithoutPrefix = path.basename(importPath, '.component.ts');
+            const tagName = 'sl-' + tagNameWithoutPrefix;
 
+            classDoc.tagNameWithoutPrefix = tagNameWithoutPrefix;
             classDoc.tagName = tagName;
 
             // This used to be set to true by @customElement
@@ -167,7 +169,7 @@ export default {
           //
           const terms = [
             { from: /^src\//, to: '' }, // Strip the src/ prefix
-            { from: /\.(t|j)sx?$/, to: '.js' } // Convert .ts to .js
+            { from: /\.component.(t|j)sx?$/, to: '.js' } // Convert .ts to .js
           ];
 
           mod.path = replace(mod.path, terms);

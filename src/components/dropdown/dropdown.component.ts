@@ -213,7 +213,7 @@ export default class SlDropdown extends ShoelaceElement {
     }
   }
 
-  handleTriggerKeyDown(event: KeyboardEvent) {
+  async handleTriggerKeyDown(event: KeyboardEvent) {
     // When spacebar/enter is pressed, show the panel but don't focus on the menu. This let's the user press the same
     // key again to hide the menu in case they don't want to make a selection.
     if ([' ', 'Enter'].includes(event.key)) {
@@ -238,6 +238,9 @@ export default class SlDropdown extends ShoelaceElement {
         // Show the menu if it's not already open
         if (!this.open) {
           this.show();
+
+          // Wait for the dropdown to open before focusing, but not the animation
+          await this.updateComplete;
         }
 
         if (menuItems.length > 0) {

@@ -1,9 +1,9 @@
 (() => {
   function convertModuleLinks(html) {
     html = html
-      .replace(/@shoelace-style\/shoelace/g, `https://cdn.skypack.dev/@shoelace-style/shoelace@${shoelaceVersion}`)
-      .replace(/from 'react'/g, `from 'https://cdn.skypack.dev/react@${reactVersion}'`)
-      .replace(/from "react"/g, `from "https://cdn.skypack.dev/react@${reactVersion}"`);
+      .replace(/@shoelace-style\/shoelace/g, `https://esm.sh/@shoelace-style/shoelace@${shoelaceVersion}`)
+      .replace(/from 'react'/g, `from 'https://esm.sh/react@${reactVersion}'`)
+      .replace(/from "react"/g, `from "https://esm.sh/react@${reactVersion}"`);
 
     return html;
   }
@@ -191,12 +191,12 @@
       if (isReact) {
         htmlTemplate = '<div id="root"></div>';
         jsTemplate =
-          `import React from 'https://cdn.skypack.dev/react@${reactVersion}';\n` +
-          `import ReactDOM from 'https://cdn.skypack.dev/react-dom@${reactVersion}';\n` +
-          `import { setBasePath } from 'https://cdn.skypack.dev/@shoelace-style/shoelace@${shoelaceVersion}/${cdndir}/utilities/base-path';\n` +
+          `import React from 'https://esm.sh/react@${reactVersion}';\n` +
+          `import ReactDOM from 'https://esm.sh/react-dom@${reactVersion}';\n` +
+          `import { setBasePath } from 'https://esm.sh/@shoelace-style/shoelace@${shoelaceVersion}/${cdndir}/utilities/base-path';\n` +
           `\n` +
           `// Set the base path for Shoelace assets\n` +
-          `setBasePath('https://cdn.skypack.dev/@shoelace-style/shoelace@${shoelaceVersion}/${npmdir}/')\n` +
+          `setBasePath('https://esm.sh/@shoelace-style/shoelace@${shoelaceVersion}/${npmdir}/')\n` +
           `\n${convertModuleLinks(reactExample)}\n` +
           `\n` +
           `ReactDOM.render(<App />, document.getElementById('root'));`;

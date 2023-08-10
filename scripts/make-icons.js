@@ -32,7 +32,7 @@ await deleteAsync([iconDir]);
 await fs.mkdir(iconDir, { recursive: true });
 await Promise.all([
   copy(`${srcPath}/icons`, iconDir),
-  copy(`${srcPath}/LICENSE.md`, path.join(iconDir, 'LICENSE.md')),
+  copy(`${srcPath}/LICENSE`, path.join(iconDir, 'LICENSE')),
   copy(`${srcPath}/bootstrap-icons.svg`, './docs/assets/images/sprite.svg', { overwrite: true })
 ]);
 

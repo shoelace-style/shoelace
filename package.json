@@ -10,15 +10,6 @@
   "type": "module",
   "types": "dist/shoelace.d.ts",
   "jsdelivr": "./cdn/shoelace-autoloader.js",
-  "sideEffects": [
-    "./dist/shoelace.js",
-    "./dist/shoelace-autoloader.js",
-    "./dist/components/**/*.js",
-    "./dist/translations/**/*.*",
-    "./src/translations/**/*.*",
-    "// COMMENT: This monstrosity below isn't perfect, but its like 99% to get bundlers to recognize 'thing.component.ts' as having no side effects. Example: https://regexr.com/7grof",
-    "./dist/components/**/*((?<!(\\.component|\\.styles)))\\.js"
-  ],
   "exports": {
     ".": {
       "types": "./dist/shoelace.d.ts",
@@ -97,7 +88,7 @@
     "@web/test-runner": "^0.15.0",
     "@web/test-runner-commands": "^0.6.5",
     "@web/test-runner-playwright": "^0.9.0",
-    "bootstrap-icons": "^1.10.3",
+    "bootstrap-icons": "^1.10.5",
     "browser-sync": "^2.29.3",
     "cem-plugin-vs-code-custom-data-generator": "^1.4.1",
     "chalk": "^5.2.0",
