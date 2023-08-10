@@ -394,6 +394,10 @@ table td p:last-child {
   overflow-x: auto;
 }
 
+.table-scroll code {
+  white-space: nowrap;
+}
+
 th.table-name,
 th.table-event-detail {
   min-width: 15ch;
