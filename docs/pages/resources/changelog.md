@@ -17,6 +17,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-dropdown>` where pressing [[Up]] or [[Down]] when focused on the trigger wouldn't focus the first/last menu items [#1472]
 - Improved the behavior of the clear button in `<sl-input>` to prevent the component's width from shifting when toggled [#1496]
 - Removed `sideEffects` key from `package.json`. Update React docs to use cherry-picking. [#1485]
+- Updated Bootstrap Icons to 1.10.5
 
 ## 2.6.0
 
