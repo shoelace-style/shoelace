@@ -645,9 +645,7 @@ When using sprite sheets, the `sl-load` and `sl-error` events will not fire.
 :::
 
 :::danger
-For security reasons, browsers may apply the same-origin policy on `<use>` elements located in the `<sl-icon>` shadow dom and
-may refuse to load a cross-origin URL. There is currently no defined way to set a cross-origin policy for `<use>` elements.
-For this reason, sprite sheets should only be used if you're self-hosting them.
+For security reasons, browsers may apply the same-origin policy on `<use>` elements located in the `<sl-icon>` shadow DOM and may refuse to load a cross-origin URL. There is currently no defined way to set a cross-origin policy for `<use>` elements. For this reason, sprite sheets should only be used if you're self-hosting them.
 :::
 
 ```html:preview
