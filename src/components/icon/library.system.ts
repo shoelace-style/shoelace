@@ -41,8 +41,8 @@ const icons = {
     </svg>
   `,
   copy: `
-    <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-      <path d="M3.5 11.889c-.828 0-1.5-.697-1.5-1.556V2.556C2 1.696 2.672 1 3.5 1h5.25c.555 0 1.04.313 1.3.778M7.25 15h5.25c.828 0 1.5-.696 1.5-1.556V5.667c0-.86-.672-1.556-1.5-1.556H7.25c-.828 0-1.5.697-1.5 1.556v7.777c0 .86.672 1.556 1.5 1.556Z" stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M3.5 11.889c-.828 0-1.5-.697-1.5-1.556V2.556C2 1.696 2.672 1 3.5 1h5.25c.555 0 1.04.313 1.3.778M7.25 15h5.25c.828 0 1.5-.696 1.5-1.556V5.667c0-.86-.672-1.556-1.5-1.556H7.25c-.828 0-1.5.697-1.5 1.556v7.777c0 .86.672 1.556 1.5 1.556Z" stroke="currentColor" fill="none" fill-rule="evenodd" />
     </svg>
   `,
   eye: `
