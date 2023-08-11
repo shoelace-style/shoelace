@@ -33,7 +33,7 @@ function stubCustomElements() {
       return;
     }
 
-    // Assign it a random string so it doesnt pollute globally.
+    // Assign it a random string so it doesn't pollute globally.
     const randomTagName = str + '-' + counter.toString();
     counter++;
     stub.wrappedMethod.apply(window.customElements, [randomTagName, ctor]);
