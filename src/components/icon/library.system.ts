@@ -41,8 +41,8 @@ const icons = {
     </svg>
   `,
   copy: `
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-      <path d="M3.5 11.889c-.828 0-1.5-.697-1.5-1.556V2.556C2 1.696 2.672 1 3.5 1h5.25c.555 0 1.04.313 1.3.778M7.25 15h5.25c.828 0 1.5-.696 1.5-1.556V5.667c0-.86-.672-1.556-1.5-1.556H7.25c-.828 0-1.5.697-1.5 1.556v7.777c0 .86.672 1.556 1.5 1.556Z" stroke="currentColor" fill="none" fill-rule="evenodd" />
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-files" viewBox="0 0 16 16" part="svg">
+      <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"></path>
     </svg>
   `,
   eye: `
