@@ -19,6 +19,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug that caused key presses in text fields to be hijacked when used inside `<sl-tree>` [#1492]
 - Improved the behavior of the clear button in `<sl-input>` to prevent the component's width from shifting when toggled [#1496]
 - Improved `<sl-tooltip>` to prevent user selection so the tooltip doesn't get highlighted when dragging selections
+- Moved tag type definitions out of component files and into definition files
 - Removed `sideEffects` key from `package.json`. Update React docs to use cherry-picking. [#1485]
 - Updated Bootstrap Icons to 1.10.5
 
