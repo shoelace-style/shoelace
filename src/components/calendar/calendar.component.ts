@@ -202,9 +202,3 @@ export default class SlCalendar extends ShoelaceElement {
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-calendar': SlCalendar;
-  }
-}
