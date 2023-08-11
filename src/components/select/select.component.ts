@@ -867,9 +867,3 @@ setDefaultAnimation('select.hide', {
   ],
   options: { duration: 100, easing: 'ease' }
 });
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-select': SlSelect;
-  }
-}

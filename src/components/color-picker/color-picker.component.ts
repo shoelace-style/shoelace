@@ -1065,9 +1065,3 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-color-picker': SlColorPicker;
-  }
-}

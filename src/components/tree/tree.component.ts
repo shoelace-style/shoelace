@@ -420,9 +420,3 @@ export default class SlTree extends ShoelaceElement {
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-tree': SlTree;
-  }
-}

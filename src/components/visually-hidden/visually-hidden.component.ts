@@ -18,9 +18,3 @@ export default class SlVisuallyHidden extends ShoelaceElement {
     return html` <slot></slot> `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-visually-hidden': SlVisuallyHidden;
-  }
-}

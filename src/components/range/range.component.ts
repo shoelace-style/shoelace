@@ -354,9 +354,3 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-range': SlRange;
-  }
-}

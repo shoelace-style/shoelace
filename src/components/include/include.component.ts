@@ -73,9 +73,3 @@ export default class SlInclude extends ShoelaceElement {
     return html`<slot></slot>`;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-include': SlInclude;
-  }
-}

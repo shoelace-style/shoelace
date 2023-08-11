@@ -61,9 +61,3 @@ export default class SlProgressBar extends ShoelaceElement {
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-progress-bar': SlProgressBar;
-  }
-}

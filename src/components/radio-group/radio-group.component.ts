@@ -398,9 +398,3 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     /* eslint-enable lit-a11y/click-events-have-key-events */
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-radio-group': SlRadioGroup;
-  }
-}

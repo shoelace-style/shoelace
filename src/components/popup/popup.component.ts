@@ -471,9 +471,3 @@ export default class SlPopup extends ShoelaceElement {
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-popup': SlPopup;
-  }
-}
