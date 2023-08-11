@@ -26,6 +26,13 @@ import type { CSSResultGroup } from 'lit';
  * @slot error-icon - The icon to show when a copy error occurs. Works best with `<sl-icon>`.
  *
  * @csspart button - The internal `<button>` element.
+ * @csspart copy-icon - The container that holds the copy icon.
+ * @csspart success-icon - The container that holds the success icon.
+ * @csspart error-icon - The container that holds the error icon.
+ * @csspart tooltip__base - The tooltip's exported `base` part.
+ * @csspart tooltip__base__popup - The tooltip's exported `popup` part.
+ * @csspart tooltip__base__arrow - The tooltip's exported `arrow` part.
+ * @csspart tooltip__body - The tooltip's exported `body` part.
  *
  * @cssproperty --success-color - The color to use for success feedback.
  * @cssproperty --error-color - The color to use for error feedback.
@@ -79,6 +86,13 @@ export default class SlCopyButton extends ShoelaceElement {
   /** The preferred placement of the tooltip. */
   @property({ attribute: 'tooltip-placement' }) tooltipPlacement: 'top' | 'right' | 'bottom' | 'left' = 'top';
 
+  /**
+   * Enable this option to prevent the tooltip from being clipped when the component is placed inside a container with
+   * `overflow: auto|hidden|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all,
+   * scenarios.
+   */
+  @property({ type: Boolean }) hoist = false;
+
   private async handleCopy() {
     if (this.disabled || this.isCopying) {
       return;
@@ -94,13 +108,15 @@ export default class SlCopyButton extends ShoelaceElement {
 
       // Simple way to parse ids, properties, and attributes
       const isProperty = this.from.includes('.');
-      const isAttribute = this.from.includes('[');
+      const isAttribute = this.from.includes('[') && this.from.includes(']');
       let id = this.from;
       let field = '';
 
       if (isProperty) {
+        // Split at the dot
         [id, field] = this.from.trim().split('.');
       } else if (isAttribute) {
+        // Trim the ] and split at the [
         [id, field] = this.from.trim().replace(/\]$/, '').split('[');
       }
 
@@ -188,6 +204,13 @@ export default class SlCopyButton extends ShoelaceElement {
         content=${copyLabel}
         placement=${this.tooltipPlacement}
         ?disabled=${this.disabled}
+        ?hoist=${this.hoist}
+        exportparts="
+          base:tooltip__base
+          base__popup:tooltip__base__popup
+          base__arrow:tooltip__base__arrow
+          body:tooltip__body
+        "
       >
         <button
           class="copy-button__button"
@@ -196,13 +219,13 @@ export default class SlCopyButton extends ShoelaceElement {
           ?disabled=${this.disabled}
           @click=${this.handleCopy}
         >
-          <slot name="copy-icon">
+          <slot part="copy-icon" name="copy-icon">
             <sl-icon library="system" name="copy"></sl-icon>
           </slot>
-          <slot name="success-icon" hidden>
+          <slot part="success-icon" name="success-icon" hidden>
             <sl-icon library="system" name="check"></sl-icon>
           </slot>
-          <slot name="error-icon" hidden>
+          <slot part="error-icon" name="error-icon" hidden>
             <sl-icon library="system" name="x-lg"></sl-icon>
           </slot>
         </button>
