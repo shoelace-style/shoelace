@@ -16,8 +16,10 @@ export interface Translation extends DefaultTranslation {
   carousel: string;
   clearEntry: string;
   close: string;
+  copied: string;
   copy: string;
   currentValue: string;
+  error: string;
   goToSlide: (slide: number, count: number) => string;
   hidePassword: string;
   loading: string;

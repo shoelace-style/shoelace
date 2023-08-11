@@ -3,8 +3,6 @@ name: Feature Request
 about: Suggest an idea for this project.
 title: ''
 labels: feature
-assignees: claviska
-
 ---
 
 ### What issue are you having?

@@ -8,6 +8,7 @@ export type { default as SlChangeEvent } from './sl-change';
 export type { default as SlClearEvent } from './sl-clear';
 export type { default as SlCloseEvent } from './sl-close';
 export type { default as SlCollapseEvent } from './sl-collapse';
+export type { default as SlCopyEvent } from './sl-copy';
 export type { default as SlErrorEvent } from './sl-error';
 export type { default as SlExpandEvent } from './sl-expand';
 export type { default as SlFinishEvent } from './sl-finish';

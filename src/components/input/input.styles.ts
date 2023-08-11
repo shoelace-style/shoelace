@@ -248,6 +248,10 @@ export default css`
    * Clearable + Password Toggle
    */
 
+  .input__clear:not(.input__clear--visible) {
+    visibility: hidden;
+  }
+
   .input__clear,
   .input__password-toggle {
     display: inline-flex;

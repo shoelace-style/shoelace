@@ -3,8 +3,7 @@ name: Bug Report
 about: Create a bug report to help us fix a demonstrable problem with code in the library.
 title: ''
 labels: bug
-assignees: claviska
-
+assignees: 
 ---
 
 ### Describe the bug

@@ -22,7 +22,10 @@ layout: component
 {% raw %}
 
 ```jsx:react
-import { SlDivider, SlMenu, SlMenuLabel, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
+import SlDivider from '@shoelace-style/shoelace/dist/react/sl-divider';
+import SlMenu from '@shoelace-style/shoelace/dist/react/sl-menu';
+import SlMenuLabel from '@shoelace-style/shoelace/dist/react/sl-menu-label';
+import SlMenuItem from '@shoelace-style/shoelace/dist/react/sl-menu-item';
 
 const App = () => (
   <SlMenu style={{ maxWidth: '200px' }}>
