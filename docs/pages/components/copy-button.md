@@ -21,7 +21,7 @@ const App = () => (
 
 ### Custom Labels
 
-Copy Buttons display feedback labels in a tooltip. You can change the labels by setting the `copy-label`, `success-label`, and `error-label` attributes.
+Copy Buttons display feedback in a tooltip. You can customize the labels using the `copy-label`, `success-label`, and `error-label` attributes.
 
 ```html:preview
 <sl-copy-button
@@ -125,7 +125,9 @@ const App = () => (
 
 ### Handling Errors
 
-Copy errors occur if the value is an empty string, if the `from` attribute points to an id that doesn't exist, or if the browser rejects the operation for any reason. This example shows what happens when a copy error occurs.
+A copy error will occur if the value is an empty string, if the `from` attribute points to an id that doesn't exist, or if the browser rejects the operation for any reason. When this happens, the `sl-error` event will be emitted.
+
+This example demonstrates what happens when a copy error occurs. You can customize the error label and icon using the `error-label` attribute and the `error-icon` slot, respectively.
 
 ```html:preview
 <sl-copy-button from="i-do-not-exist"></sl-copy-button>
@@ -176,7 +178,11 @@ const App = () => (
 You can customize the button to your liking with CSS.
 
 ```html:preview
-<sl-copy-button value="I'm so stylish" class="custom-styles"></sl-copy-button>
+<sl-copy-button value="I'm so stylish" class="custom-styles">
+  <sl-icon slot="copy-icon" name="asterisk"></sl-icon>
+  <sl-icon slot="success-icon" name="check-lg"></sl-icon>
+  <sl-icon slot="error-icon" name="x-lg"></sl-icon>
+</sl-copy-button>
 
 <style>
   .custom-styles {
