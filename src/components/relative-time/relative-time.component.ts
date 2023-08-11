@@ -119,9 +119,3 @@ function getTimeUntilNextUnit(unit: 'second' | 'minute' | 'hour' | 'day') {
   const value = units[unit];
   return value - (Date.now() % value);
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-relative-time': SlRelativeTime;
-  }
-}

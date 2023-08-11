@@ -95,7 +95,7 @@ Russian: <sl-format-number value="2000" lang="ru" minimum-fraction-digits="2"></
 ```
 
 ```jsx:react
-import SlFormatNumber from '@shoelace-style/shoelace/dist/react/sl-format-number';
+import SlFormatNumber from '@shoelace-style/shoelace/dist/react/format-number';
 
 const App = () => (
   <>
@@ -121,7 +121,7 @@ To format a number as a monetary value, set the `type` attribute to `currency` a
 ```
 
 ```jsx:react
-import SlFormatNumber from '@shoelace-style/shoelace/dist/react/sl-format-number';
+import SlFormatNumber from '@shoelace-style/shoelace/dist/react/format-number';
 
 const App = () => (
   <>

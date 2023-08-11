@@ -181,9 +181,3 @@ export default class SlIcon extends ShoelaceElement {
     return this.svg;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-icon': SlIcon;
-  }
-}

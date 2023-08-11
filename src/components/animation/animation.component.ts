@@ -218,9 +218,3 @@ export default class SlAnimation extends ShoelaceElement {
     return html` <slot @slotchange=${this.handleSlotChange}></slot> `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-animation': SlAnimation;
-  }
-}

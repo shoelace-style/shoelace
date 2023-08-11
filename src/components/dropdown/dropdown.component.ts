@@ -436,9 +436,3 @@ setDefaultAnimation('dropdown.hide', {
   ],
   options: { duration: 100, easing: 'ease' }
 });
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-dropdown': SlDropdown;
-  }
-}
