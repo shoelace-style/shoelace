@@ -1,9 +1,9 @@
-import { generateCustomData } from 'cem-plugin-vs-code-custom-data-generator';
+import * as path from 'path';
+import { customElementVsCodePlugin } from "custom-element-vs-code-integration";
 import { parse } from 'comment-parser';
 import { pascalCase } from 'pascal-case';
 import commandLineArgs from 'command-line-args';
 import fs from 'fs';
-import * as path from 'path';
 
 const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 const { name, description, version, author, homepage, license } = packageData;
@@ -191,9 +191,13 @@ export default {
       }
     },
     // Generate custom VS Code data
-    generateCustomData({
+    customElementVsCodePlugin({
       outdir,
-      cssFileName: null
+      cssFileName: null,
+      referencesTemplate: (_, tag) => [{
+        name: "Documentation",
+        url: `https://shoelace.style/components/${tag.replace('sl-', '')}`
+      }]
     })
   ]
 };
