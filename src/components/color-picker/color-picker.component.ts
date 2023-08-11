@@ -882,7 +882,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
                       style=${styleMap({
                         backgroundImage: `linear-gradient(
                           to right,
-                          ${this.getHexString(this.hue, this.saturation, this.brightness, 0)} 0%
+                          ${this.getHexString(this.hue, this.saturation, this.brightness, 0)} 0%,
                           ${this.getHexString(this.hue, this.saturation, this.brightness, 100)} 100%
                         )`
                       })}
