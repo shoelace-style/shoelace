@@ -1,4 +1,4 @@
-import { generateCustomData } from 'cem-plugin-vs-code-custom-data-generator';
+import { customElementVsCodePlugin } from "custom-element-vs-code-integration";
 import { parse } from 'comment-parser';
 import { pascalCase } from 'pascal-case';
 import commandLineArgs from 'command-line-args';
@@ -191,7 +191,7 @@ export default {
       }
     },
     // Generate custom VS Code data
-    generateCustomData({
+    customElementVsCodePlugin({
       outdir,
       cssFileName: null
     })
