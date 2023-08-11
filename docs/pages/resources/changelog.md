@@ -16,6 +16,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 - Added the `<sl-copy-button>` component [#1473]
 - Fixed a bug in `<sl-dropdown>` where pressing [[Up]] or [[Down]] when focused on the trigger wouldn't focus the first/last menu items [#1472]
+- Fixed a bug that caused key presses in text fields to be hijacked when used inside `<sl-tree>` [#1492]
 - Improved the behavior of the clear button in `<sl-input>` to prevent the component's width from shifting when toggled [#1496]
 - Improved `<sl-tooltip>` to prevent user selection so the tooltip doesn't get highlighted when dragging selections
 - Removed `sideEffects` key from `package.json`. Update React docs to use cherry-picking. [#1485]

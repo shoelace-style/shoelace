@@ -222,7 +222,14 @@ export default class SlTree extends ShoelaceElement {
   }
 
   private handleKeyDown(event: KeyboardEvent) {
+    // Ignore key presses we aren't interested in
     if (!['ArrowDown', 'ArrowUp', 'ArrowRight', 'ArrowLeft', 'Home', 'End', 'Enter', ' '].includes(event.key)) {
+      return;
+    }
+
+    // Ignore key presses when focus is inside a text field. This prevents the component from hijacking nested form
+    // controls that exist inside tree items.
+    if (event.composedPath().some((el: HTMLElement) => ['input', 'textarea'].includes(el?.tagName?.toLowerCase()))) {
       return;
     }
 
