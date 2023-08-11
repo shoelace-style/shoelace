@@ -39,9 +39,3 @@ export default class SlFormatBytes extends ShoelaceElement {
     });
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-format-bytes': SlFormatBytes;
-  }
-}

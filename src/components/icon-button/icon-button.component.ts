@@ -128,9 +128,3 @@ export default class SlIconButton extends ShoelaceElement {
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-icon-button': SlIconButton;
-  }
-}

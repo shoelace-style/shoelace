@@ -31,9 +31,3 @@ export default class SlSpinner extends ShoelaceElement {
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-spinner': SlSpinner;
-  }
-}

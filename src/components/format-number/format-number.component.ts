@@ -59,9 +59,3 @@ export default class SlFormatNumber extends ShoelaceElement {
     });
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-format-number': SlFormatNumber;
-  }
-}

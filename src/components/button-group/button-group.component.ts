@@ -89,9 +89,3 @@ function findButton(el: HTMLElement) {
   // The button could be the target element or a child of it (e.g. a dropdown or tooltip anchor)
   return el.closest(selector) ?? el.querySelector(selector);
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-button-group': SlButtonGroup;
-  }
-}

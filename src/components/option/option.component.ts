@@ -131,9 +131,3 @@ export default class SlOption extends ShoelaceElement {
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-option': SlOption;
-  }
-}

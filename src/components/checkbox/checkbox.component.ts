@@ -243,9 +243,3 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-checkbox': SlCheckbox;
-  }
-}

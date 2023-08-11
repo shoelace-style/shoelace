@@ -99,12 +99,12 @@ The form will not be submitted if a required field is incomplete.
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/sl-button';
-import SlCheckbox from '@shoelace-style/shoelace/dist/react/sl-checkbox';
-import SlInput from '@shoelace-style/shoelace/dist/react/sl-input';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/sl-menu-item';
-import SlSelect from '@shoelace-style/shoelace/dist/react/sl-select';
-import SlTextarea from '@shoelace-style/shoelace/dist/react/sl-textarea';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlCheckbox from '@shoelace-style/shoelace/dist/react/checkbox';
+import SlInput from '@shoelace-style/shoelace/dist/react/input';
+import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import SlSelect from '@shoelace-style/shoelace/dist/react/select';
+import SlTextarea from '@shoelace-style/shoelace/dist/react/textarea';
 
 const App = () => {
   function handleSubmit(event) {
@@ -165,8 +165,8 @@ To restrict a value to a specific [pattern](https://developer.mozilla.org/en-US/
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/sl-button';
-import SlInput from '@shoelace-style/shoelace/dist/react/sl-input';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlInput from '@shoelace-style/shoelace/dist/react/input';
 
 const App = () => {
   function handleSubmit(event) {
@@ -217,8 +217,8 @@ Some input types will automatically trigger constraints, such as `email` and `ur
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/sl-button';
-import SlInput from '@shoelace-style/shoelace/dist/react/sl-input';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlInput from '@shoelace-style/shoelace/dist/react/input';
 
 const App = () => {
   function handleSubmit(event) {
@@ -279,8 +279,8 @@ To create a custom validation error, pass a non-empty string to the `setCustomVa
 
 ```jsx:react
 import { useRef, useState } from 'react';
-import SlButton from '@shoelace-style/shoelace/dist/react/sl-button';
-import SlInput from '@shoelace-style/shoelace/dist/react/sl-input';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlInput from '@shoelace-style/shoelace/dist/react/input';
 
 const App = () => {
   const input = useRef(null);
