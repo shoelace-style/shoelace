@@ -104,11 +104,11 @@ Popup is a low-level utility built specifically for positioning elements. Do not
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/sl-popup';
-import SlSelect from '@shoelace-style/shoelace/dist/react/sl-select';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/sl-menu-item';
-import SlInput from '@shoelace-style/shoelace/dist/react/sl-input';
-import SlSwitch from '@shoelace-style/shoelace/dist/react/sl-switch';
+import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
+import SlSelect from '@shoelace-style/shoelace/dist/react/select';
+import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import SlInput from '@shoelace-style/shoelace/dist/react/input';
+import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
 const css = `
   .popup-overview sl-popup {
@@ -273,8 +273,8 @@ Popups are inactive and hidden until the `active` attribute is applied. Removing
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/sl-popup';
-import SlSwitch from '@shoelace-style/shoelace/dist/react/sl-switch';
+import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
+import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
 const css = `
   .popup-active span[slot='anchor'] {
@@ -346,7 +346,7 @@ By default, anchors are slotted into the popup using the `anchor` slot. If your 
 ```
 
 ```jsx:react
-import SlPopup from '@shoelace-style/shoelace/dist/react/sl-popup';
+import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
 
 const css = `
   #external-anchor {
@@ -441,9 +441,9 @@ Since placement is preferred when using `flip`, you can observe the popup's curr
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/sl-popup';
-import SlSelect from '@shoelace-style/shoelace/dist/react/sl-select';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/sl-menu-item';
+import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
+import SlSelect from '@shoelace-style/shoelace/dist/react/select';
+import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const css = `
   .popup-placement span[slot='anchor'] {
@@ -545,8 +545,8 @@ Use the `distance` attribute to change the distance between the popup and its an
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/sl-popup';
-import SlRange from '@shoelace-style/shoelace/dist/react/sl-range';
+import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
+import SlRange from '@shoelace-style/shoelace/dist/react/range';
 
 const css = `
   .popup-distance span[slot='anchor'] {
@@ -642,8 +642,8 @@ The `skidding` attribute is similar to `distance`, but instead allows you to off
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/sl-popup';
-import SlRange from '@shoelace-style/shoelace/dist/react/sl-range';
+import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
+import SlRange from '@shoelace-style/shoelace/dist/react/range';
 
 const css = `
   .popup-skidding span[slot='anchor'] {
@@ -786,10 +786,10 @@ By default, the arrow will be aligned as close to the center of the _anchor_ as 
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/sl-popup';
-import SlSelect from '@shoelace-style/shoelace/dist/react/sl-select';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/sl-menu-item';
-import SlSwitch from '@shoelace-style/shoelace/dist/react/sl-switch';
+import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
+import SlSelect from '@shoelace-style/shoelace/dist/react/select';
+import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
 const css = `
   .popup-arrow sl-popup {
@@ -942,9 +942,9 @@ Use the `sync` attribute to make the popup the same width or height as the ancho
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/sl-popup';
-import SlSelect from '@shoelace-style/shoelace/dist/react/sl-select';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/sl-menu-item';
+import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
+import SlSelect from '@shoelace-style/shoelace/dist/react/select';
+import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const css = `
   .popup-sync span[slot='anchor'] {
@@ -1055,8 +1055,8 @@ Toggle the switch and scroll the container to see the difference.
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/sl-popup';
-import SlSwitch from '@shoelace-style/shoelace/dist/react/sl-switch';
+import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
+import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
 const css = `
   .popup-strategy .overflow {
@@ -1164,8 +1164,8 @@ Scroll the container to see how the popup flips to prevent clipping.
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/sl-popup';
-import SlSwitch from '@shoelace-style/shoelace/dist/react/sl-switch';
+import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
+import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
 const css = `
   .popup-flip .overflow {
@@ -1262,7 +1262,7 @@ Scroll the container to see how the popup changes it's fallback placement to pre
 ```
 
 ```jsx:react
-import SlPopup from '@shoelace-style/shoelace/dist/react/sl-popup';
+import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
 
 const css = `
   .popup-flip-fallbacks .overflow {
@@ -1358,8 +1358,8 @@ Toggle the switch to see the difference.
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/sl-popup';
-import SlSwitch from '@shoelace-style/shoelace/dist/react/sl-switch';
+import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
+import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
 const css = `
   .popup-shift .overflow {
@@ -1471,8 +1471,8 @@ Scroll the container to see the popup resize as its available space changes.
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/sl-popup';
-import SlSwitch from '@shoelace-style/shoelace/dist/react/sl-switch';
+import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
+import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
 const css = `
   .popup-auto-size .overflow {
@@ -1623,8 +1623,8 @@ This example anchors a popup to the mouse cursor using a virtual element. As suc
 
 ```jsx:react
 import { useRef, useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/sl-popup';
-import SlSwitch from '@shoelace-style/shoelace/dist/react/sl-switch';
+import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
+import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
 const css = `
   /* If you need to set a z-index, set it on the popup part like this */

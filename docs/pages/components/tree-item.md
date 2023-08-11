@@ -20,8 +20,8 @@ layout: component
 
 <!-- prettier-ignore -->
 ```jsx:react
-import SlTree from '@shoelace-style/shoelace/dist/react/sl-tree';
-import SlTreeItem from '@shoelace-style/shoelace/dist/react/sl-tree-item';
+import SlTree from '@shoelace-style/shoelace/dist/react/tree';
+import SlTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
 
 const App = () => (
   <SlTree>
@@ -63,8 +63,8 @@ A tree item can contain other tree items. This allows the node to be expanded or
 
 <!-- prettier-ignore -->
 ```jsx:react
-import SlTree from '@shoelace-style/shoelace/dist/react/sl-tree';
-import SlTreeItem from '@shoelace-style/shoelace/dist/react/sl-tree-item';
+import SlTree from '@shoelace-style/shoelace/dist/react/tree';
+import SlTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
 
 const App = () => (
   <SlTree>
@@ -104,8 +104,8 @@ Use the `selected` attribute to select a tree item initially.
 
 <!-- prettier-ignore -->
 ```jsx:react
-import SlTree from '@shoelace-style/shoelace/dist/react/sl-tree';
-import SlTreeItem from '@shoelace-style/shoelace/dist/react/sl-tree-item';
+import SlTree from '@shoelace-style/shoelace/dist/react/tree';
+import SlTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
 
 const App = () => (
   <SlTree>
@@ -145,8 +145,8 @@ Use the `expanded` attribute to expand a tree item initially.
 
 <!-- prettier-ignore -->
 ```jsx:react
-import SlTree from '@shoelace-style/shoelace/dist/react/sl-tree';
-import SlTreeItem from '@shoelace-style/shoelace/dist/react/sl-tree-item';
+import SlTree from '@shoelace-style/shoelace/dist/react/tree';
+import SlTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
 
 const App = () => (
   <SlTree>
