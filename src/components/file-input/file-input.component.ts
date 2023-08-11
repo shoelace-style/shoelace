@@ -244,9 +244,3 @@ export default class SlFileInput extends ShoelaceElement implements ShoelaceForm
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-file-input': SlFileInput;
-  }
-}
