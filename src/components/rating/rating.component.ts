@@ -307,9 +307,3 @@ export default class SlRating extends ShoelaceElement {
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-rating': SlRating;
-  }
-}

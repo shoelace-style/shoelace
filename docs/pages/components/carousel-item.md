@@ -41,7 +41,8 @@ layout: component
 ```
 
 ```jsx:react
-import { SlCarousel, SlCarouselItem } from '@shoelace-style/shoelace/dist/react';
+import SlCarousel from '@shoelace-style/shoelace/dist/react/carousel';
+import SlCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
 
 const App = () => (
   <SlCarousel pagination>

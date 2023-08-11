@@ -22,7 +22,9 @@ You can use [menu items](/components/menu-item), [menu labels](/components/menu-
 {% raw %}
 
 ```jsx:react
-import { SlDivider, SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
+import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
+import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
+import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const App = () => (
   <SlMenu style={{ maxWidth: '200px' }}>

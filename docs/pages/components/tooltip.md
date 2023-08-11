@@ -16,7 +16,8 @@ Tooltips use `display: contents` so they won't interfere with how elements are p
 ```
 
 ```jsx:react
-import { SlButton, SlTooltip } from '@shoelace-style/shoelace/dist/react';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
 
 const App = () => (
   <SlTooltip content="This is a tooltip">
@@ -125,7 +126,8 @@ Use the `placement` attribute to set the preferred placement of the tooltip.
 ```
 
 ```jsx:react
-import { SlButton, SlTooltip } from '@shoelace-style/shoelace/dist/react';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
 
 const css = `
   .tooltip-placement-example {
@@ -235,7 +237,8 @@ Set the `trigger` attribute to `click` to toggle the tooltip on click instead of
 ```
 
 ```jsx:react
-import { SlButton, SlTooltip } from '@shoelace-style/shoelace/dist/react';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
 
 const App = () => (
   <SlTooltip content="Click again to dismiss" trigger="click">
@@ -267,7 +270,9 @@ Tooltips can be controller programmatically by setting the `trigger` attribute t
 
 ```jsx:react
 import { useState } from 'react';
-import { SlAvatar, SlButton, SlTooltip } from '@shoelace-style/shoelace/dist/react';
+import SlAvatar from '@shoelace-style/shoelace/dist/react/avatar';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
 
 const App = () => {
   const [open, setOpen] = useState(false);
@@ -301,7 +306,8 @@ You can control the size of tooltip arrows by overriding the `--sl-tooltip-arrow
 {% raw %}
 
 ```jsx:react
-import { SlButton, SlTooltip } from '@shoelace-style/shoelace/dist/react';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
 
 const App = () => (
   <div style={{ '--sl-tooltip-arrow-size': '0' }}>
@@ -339,7 +345,8 @@ Use the `content` slot to create tooltips with HTML content. Tooltips are design
 ```
 
 ```jsx:react
-import { SlButton, SlTooltip } from '@shoelace-style/shoelace/dist/react';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
 
 const App = () => (
   <SlTooltip>
@@ -365,7 +372,8 @@ Use the `--max-width` custom property to change the width the tooltip can grow t
 {% raw %}
 
 ```jsx:react
-import { SlButton, SlTooltip } from '@shoelace-style/shoelace/dist/react';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
 
 const App = () => (
   <SlTooltip style={{ '--max-width': '80px' }} content="This tooltip will wrap after only 80 pixels.">
@@ -402,7 +410,8 @@ Tooltips will be clipped if they're inside a container that has `overflow: auto|
 ```
 
 ```jsx:react
-import { SlButton, SlTooltip } from '@shoelace-style/shoelace/dist/react';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
 
 const css = `
   .tooltip-hoist {

@@ -45,7 +45,8 @@ The mutation observer will report changes to the content it wraps through the `s
 
 ```jsx:react
 import { useState } from 'react';
-import { SlButton, SlMutationObserver } from '@shoelace-style/shoelace/dist/react';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlMutationObserver from '@shoelace-style/shoelace/dist/react/mutation-observer';
 
 const css = `
   .resize-observer-overview div {
@@ -146,7 +147,8 @@ Use the `child-list` attribute to watch for new child elements that are added or
 
 ```jsx:react
 import { useState } from 'react';
-import { SlButton, SlMutationObserver } from '@shoelace-style/shoelace/dist/react';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlMutationObserver from '@shoelace-style/shoelace/dist/react/mutation-observer';
 
 const css = `
   .mutation-child-list .buttons {

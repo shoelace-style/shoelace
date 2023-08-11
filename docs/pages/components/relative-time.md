@@ -13,7 +13,7 @@ Localization is handled by the browser's [`Intl.RelativeTimeFormat` API](https:/
 ```
 
 ```jsx:react
-import { SlRelativeTime } from '@shoelace-style/shoelace/dist/react';
+import SlRelativeTime from '@shoelace-style/shoelace/dist/react/relative-time';
 
 const App = () => <SlRelativeTime date="2020-07-15T09:17:00-04:00" />;
 ```
@@ -44,7 +44,7 @@ Use the `sync` attribute to update the displayed value automatically as time pas
 ```
 
 ```jsx:react
-import { SlRelativeTime } from '@shoelace-style/shoelace/dist/react';
+import SlRelativeTime from '@shoelace-style/shoelace/dist/react/relative-time';
 
 const date = new Date(new Date().getTime() - 60000);
 
@@ -62,7 +62,7 @@ You can change how the time is displayed using the `format` attribute. Note that
 ```
 
 ```jsx:react
-import { SlRelativeTime } from '@shoelace-style/shoelace/dist/react';
+import SlRelativeTime from '@shoelace-style/shoelace/dist/react/relative-time';
 
 const App = () => (
   <>
@@ -88,7 +88,7 @@ Russian: <sl-relative-time date="2020-07-15T09:17:00-04:00" lang="ru"></sl-relat
 ```
 
 ```jsx:react
-import { SlRelativeTime } from '@shoelace-style/shoelace/dist/react';
+import SlRelativeTime from '@shoelace-style/shoelace/dist/react/relative-time';
 
 const App = () => (
   <>

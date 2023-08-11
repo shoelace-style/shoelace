@@ -882,7 +882,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
                       style=${styleMap({
                         backgroundImage: `linear-gradient(
                           to right,
-                          ${this.getHexString(this.hue, this.saturation, this.brightness, 0)} 0%
+                          ${this.getHexString(this.hue, this.saturation, this.brightness, 0)} 0%,
                           ${this.getHexString(this.hue, this.saturation, this.brightness, 100)} 100%
                         )`
                       })}
@@ -1063,11 +1063,5 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
         ${colorPicker}
       </sl-dropdown>
     `;
-  }
-}
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-color-picker': SlColorPicker;
   }
 }

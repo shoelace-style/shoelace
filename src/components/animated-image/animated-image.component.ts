@@ -114,9 +114,3 @@ export default class SlAnimatedImage extends ShoelaceElement {
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-animated-image': SlAnimatedImage;
-  }
-}

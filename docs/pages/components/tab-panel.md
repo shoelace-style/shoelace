@@ -20,7 +20,9 @@ layout: component
 ```
 
 ```jsx:react
-import { SlTab, SlTabGroup, SlTabPanel } from '@shoelace-style/shoelace/dist/react';
+import SlTab from '@shoelace-style/shoelace/dist/react/tab';
+import SlTabGroup from '@shoelace-style/shoelace/dist/react/tab-group';
+import SlTabPanel from '@shoelace-style/shoelace/dist/react/tab-panel';
 
 const App = () => (
   <SlTabGroup>

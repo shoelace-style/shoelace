@@ -28,7 +28,10 @@ layout: component
 {% raw %}
 
 ```jsx:react
-import { SlDivider, SlIcon, SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
+import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
+import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
+import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
+import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const App = () => (
   <SlMenu style={{ maxWidth: '200px' }}>
@@ -72,7 +75,8 @@ Add the `disabled` attribute to disable the menu item so it cannot be selected.
 {% raw %}
 
 ```jsx:react
-import { SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
+import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
+import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const App = () => (
   <SlMenu style={{ maxWidth: '200px' }}>
@@ -114,7 +118,11 @@ Add content to the start and end of menu items using the `prefix` and `suffix` s
 {% raw %}
 
 ```jsx:react
-import { SlBadge, SlDivider, SlIcon, SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
+import SlBadge from '@shoelace-style/shoelace/dist/react/badge';
+import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
+import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
+import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
+import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const App = () => (
   <SlMenu style={{ maxWidth: '200px' }}>
@@ -160,7 +168,8 @@ Checkbox menu items are visually indistinguishable from regular menu items. Thei
 {% raw %}
 
 ```jsx:react
-import { SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
+import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
+import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const App = () => (
   <SlMenu style={{ maxWidth: '200px' }}>
@@ -209,7 +218,8 @@ The `value` attribute can be used to assign a hidden value, such as a unique ide
 {% raw %}
 
 ```jsx:react
-import { SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
+import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
+import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const App = () => {
   function handleSelect(event) {

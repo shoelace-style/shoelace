@@ -17,7 +17,9 @@ layout: component
 ```
 
 ```jsx:react
-import { SlBreadcrumb, SlBreadcrumbItem, SlIcon } from '@shoelace-style/shoelace/dist/react';
+import SlBreadcrumb from '@shoelace-style/shoelace/dist/react/breadcrumb';
+import SlBreadcrumbItem from '@shoelace-style/shoelace/dist/react/breadcrumb-item';
+import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
 
 const App = () => (
   <SlBreadcrumb>

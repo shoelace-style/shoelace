@@ -30,9 +30,3 @@ export default class SlDivider extends ShoelaceElement {
     this.setAttribute('aria-orientation', this.vertical ? 'vertical' : 'horizontal');
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-divider': SlDivider;
-  }
-}

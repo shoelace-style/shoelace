@@ -10,7 +10,7 @@ layout: component
 ```
 
 ```jsx:react
-import { SlDivider } from '@shoelace-style/shoelace/dist/react';
+import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
 
 const App = () => <SlDivider />;
 ```
@@ -28,7 +28,7 @@ Use the `--width` custom property to change the width of the divider.
 {% raw %}
 
 ```jsx:react
-import { SlDivider } from '@shoelace-style/shoelace/dist/react';
+import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
 
 const App = () => <SlDivider style={{ '--width': '4px' }} />;
 ```
@@ -46,7 +46,7 @@ Use the `--color` custom property to change the color of the divider.
 {% raw %}
 
 ```jsx:react
-import { SlDivider } from '@shoelace-style/shoelace/dist/react';
+import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
 
 const App = () => <SlDivider style={{ '--color': 'tomato' }} />;
 ```
@@ -68,7 +68,7 @@ Use the `--spacing` custom property to change the amount of space between the di
 {% raw %}
 
 ```jsx:react
-import { SlDivider } from '@shoelace-style/shoelace/dist/react';
+import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
 
 const App = () => (
   <>
@@ -98,7 +98,7 @@ Add the `vertical` attribute to draw the divider in a vertical orientation. The 
 {% raw %}
 
 ```jsx:react
-import { SlDivider } from '@shoelace-style/shoelace/dist/react';
+import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
 
 const App = () => (
   <div
@@ -138,7 +138,9 @@ Use dividers in [menus](/components/menu) to visually group menu items.
 {% raw %}
 
 ```jsx:react
-import { SlDivider, SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
+import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
+import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
+import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const App = () => (
   <SlMenu style={{ maxWidth: '200px' }}>

@@ -459,9 +459,3 @@ setDefaultAnimation('drawer.overlay.hide', {
   keyframes: [{ opacity: 1 }, { opacity: 0 }],
   options: { duration: 250 }
 });
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-drawer': SlDrawer;
-  }
-}

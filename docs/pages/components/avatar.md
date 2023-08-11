@@ -12,7 +12,7 @@ By default, a generic icon will be shown. You can personalize avatars by adding 
 ```
 
 ```jsx:react
-import { SlAvatar } from '@shoelace-style/shoelace/dist/react';
+import SlAvatar from '@shoelace-style/shoelace/dist/react/avatar';
 
 const App = () => <SlAvatar label="User avatar" />;
 ```
@@ -37,7 +37,7 @@ Avatar images can be lazily loaded by setting the `loading` attribute to `lazy`.
 ```
 
 ```jsx:react
-import { SlAvatar } from '@shoelace-style/shoelace/dist/react';
+import SlAvatar from '@shoelace-style/shoelace/dist/react/avatar';
 
 const App = () => (
   <SlAvatar
@@ -61,7 +61,7 @@ When you don't have an image to use, you can set the `initials` attribute to sho
 ```
 
 ```jsx:react
-import { SlAvatar } from '@shoelace-style/shoelace/dist/react';
+import SlAvatar from '@shoelace-style/shoelace/dist/react/avatar';
 
 const App = () => <SlAvatar initials="SL" label="Avatar with initials: SL" />;
 ```
@@ -85,7 +85,8 @@ When no image or initials are set, an icon will be shown. The default avatar sho
 ```
 
 ```jsx:react
-import { SlAvatar, SlIcon } from '@shoelace-style/shoelace/dist/react';
+import SlAvatar from '@shoelace-style/shoelace/dist/react/avatar';
+import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
 
 const App = () => (
   <>
@@ -115,7 +116,8 @@ Avatars can be shaped using the `shape` attribute.
 ```
 
 ```jsx:react
-import { SlAvatar, SlIcon } from '@shoelace-style/shoelace/dist/react';
+import SlAvatar from '@shoelace-style/shoelace/dist/react/avatar';
+import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
 
 const App = () => (
   <>
@@ -165,7 +167,8 @@ You can group avatars with a few lines of CSS.
 ```
 
 ```jsx:react
-import { SlAvatar, SlIcon } from '@shoelace-style/shoelace/dist/react';
+import SlAvatar from '@shoelace-style/shoelace/dist/react/avatar';
+import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
 
 const css = `
   .avatar-group sl-avatar:not(:first-of-type) {

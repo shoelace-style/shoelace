@@ -23,7 +23,7 @@ For best results, use images that share the same dimensions. The slider can be c
 ```
 
 ```jsx:react
-import { SlImageComparer } from '@shoelace-style/shoelace/dist/react';
+import SlImageComparer from '@shoelace-style/shoelace/dist/react/image-comparer';
 
 const App = () => (
   <SlImageComparer>
@@ -63,7 +63,7 @@ Use the `position` attribute to set the initial position of the slider. This is 
 ```
 
 ```jsx:react
-import { SlImageComparer } from '@shoelace-style/shoelace/dist/react';
+import SlImageComparer from '@shoelace-style/shoelace/dist/react/image-comparer';
 
 const App = () => (
   <SlImageComparer position={25}>

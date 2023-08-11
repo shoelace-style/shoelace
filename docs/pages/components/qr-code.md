@@ -39,7 +39,8 @@ QR codes are useful for providing small pieces of information to users who can q
 
 ```jsx:react
 import { useState } from 'react';
-import { SlQrCode, SlInput } from '@shoelace-style/shoelace/dist/react';
+import SlQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
+import SlInput from '@shoelace-style/shoelace/dist/react/input';
 
 const css = `
   .qr-overview {
@@ -80,7 +81,7 @@ Use the `fill` and `background` attributes to modify the QR code's colors. You s
 ```
 
 ```jsx:react
-import { SlQrCode } from '@shoelace-style/shoelace/dist/react';
+import SlQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
 
 const App = () => <SlQrCode value="https://shoelace.style/" fill="deeppink" background="white" />;
 ```
@@ -94,7 +95,7 @@ Use the `size` attribute to change the size of the QR code.
 ```
 
 ```jsx:react
-import { SlQrCode } from '@shoelace-style/shoelace/dist/react';
+import SlQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
 
 const App = () => <SlQrCode value="https://shoelace.style/" size="64" />;
 ```
@@ -108,7 +109,7 @@ Create a rounded effect with the `radius` attribute.
 ```
 
 ```jsx:react
-import { SlQrCode } from '@shoelace-style/shoelace/dist/react';
+import SlQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
 
 const App = () => <SlQrCode value="https://shoelace.style/" radius="0.5" />;
 ```
@@ -135,7 +136,7 @@ QR codes can be rendered with various levels of [error correction](https://www.q
 ```
 
 ```jsx:react
-import { SlQrCode } from '@shoelace-style/shoelace/dist/react';
+import SlQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
 
 const css = `
   .qr-error-correction {

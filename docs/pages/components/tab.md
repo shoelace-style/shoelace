@@ -13,7 +13,7 @@ layout: component
 ```
 
 ```jsx:react
-import { SlTab } from '@shoelace-style/shoelace/dist/react';
+import SlTab from '@shoelace-style/shoelace/dist/react/tab';
 
 const App = () => (
   <>

@@ -14,7 +14,8 @@ layout: component
 ```
 
 ```jsx:react
-import { SlButton, SlButtonGroup } from '@shoelace-style/shoelace/dist/react';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlButtonGroup from '@shoelace-style/shoelace/dist/react/button-group';
 
 const App = () => (
   <SlButtonGroup label="Alignment">
@@ -56,7 +57,8 @@ All button sizes are supported, but avoid mixing sizes within the same button gr
 ```
 
 ```jsx:react
-import { SlButton, SlButtonGroup } from '@shoelace-style/shoelace/dist/react';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlButtonGroup from '@shoelace-style/shoelace/dist/react/button-group';
 
 const App = () => (
   <>
@@ -132,7 +134,8 @@ Theme buttons are supported through the button's `variant` attribute.
 ```
 
 ```jsx:react
-import { SlButton, SlButtonGroup } from '@shoelace-style/shoelace/dist/react';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlButtonGroup from '@shoelace-style/shoelace/dist/react/button-group';
 
 const App = () => (
   <>
@@ -210,7 +213,8 @@ Pill buttons are supported through the button's `pill` attribute.
 ```
 
 ```jsx:react
-import { SlButton, SlButtonGroup } from '@shoelace-style/shoelace/dist/react';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlButtonGroup from '@shoelace-style/shoelace/dist/react/button-group';
 
 const App = () => (
   <>
@@ -279,7 +283,11 @@ Dropdowns can be placed inside button groups as long as the trigger is an `<sl-b
 ```
 
 ```jsx:react
-import { SlButton, SlButtonGroup, SlDropdown, SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlButtonGroup from '@shoelace-style/shoelace/dist/react/button-group';
+import SlDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
+import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
+import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const App = () => (
   <SlButtonGroup label="Example Button Group">
@@ -320,7 +328,11 @@ Create a split button using a button and a dropdown. Use a [visually hidden](/co
 ```
 
 ```jsx:react
-import { SlButton, SlButtonGroup, SlDropdown, SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlButtonGroup from '@shoelace-style/shoelace/dist/react/button-group';
+import SlDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
+import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
+import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const App = () => (
   <SlButtonGroup label="Example Button Group">
@@ -358,7 +370,9 @@ Buttons can be wrapped in tooltips to provide more detail when the user interact
 ```
 
 ```jsx:react
-import { SlButton, SlButtonGroup, SlTooltip } from '@shoelace-style/shoelace/dist/react';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlButtonGroup from '@shoelace-style/shoelace/dist/react/button-group';
+import SlTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
 
 const App = () => (
   <>
@@ -427,7 +441,10 @@ Create interactive toolbars with button groups.
 ```
 
 ```jsx:react
-import { SlButton, SlButtonGroup, SlIcon, SlTooltip } from '@shoelace-style/shoelace/dist/react';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlButtonGroup from '@shoelace-style/shoelace/dist/react/button-group';
+import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
+import SlTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
 
 const css = `
   .button-group-toolbar sl-button-group:not(:last-of-type) {

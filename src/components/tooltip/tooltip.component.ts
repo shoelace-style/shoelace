@@ -99,8 +99,6 @@ export default class SlTooltip extends ShoelaceElement {
 
   constructor() {
     super();
-    // TODO (justinfagnani): does this need to be done in firstUpdated for some
-    // reason? If so, document why in a comment.
     this.addEventListener('blur', this.handleBlur, true);
     this.addEventListener('focus', this.handleFocus, true);
     this.addEventListener('click', this.handleClick);
@@ -293,9 +291,3 @@ setDefaultAnimation('tooltip.hide', {
   ],
   options: { duration: 150, easing: 'ease' }
 });
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-tooltip': SlTooltip;
-  }
-}

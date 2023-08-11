@@ -13,6 +13,7 @@ export { default as SlCarousel } from './components/carousel/carousel.js';
 export { default as SlCarouselItem } from './components/carousel-item/carousel-item.js';
 export { default as SlCheckbox } from './components/checkbox/checkbox.js';
 export { default as SlColorPicker } from './components/color-picker/color-picker.js';
+export { default as SlCopyButton } from './components/copy-button/copy-button.js';
 export { default as SlDetails } from './components/details/details.js';
 export { default as SlDialog } from './components/dialog/dialog.js';
 export { default as SlDivider } from './components/divider/divider.js';

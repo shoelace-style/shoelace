@@ -14,7 +14,7 @@ The included content will be inserted into the `<sl-include>` element's default 
 ```
 
 ```jsx:react
-import { SlInclude } from '@shoelace-style/shoelace/dist/react';
+import SlInclude from '@shoelace-style/shoelace/dist/react/include';
 
 const App = () => <SlInclude src="https://shoelace.style/assets/examples/include.html" />;
 ```
