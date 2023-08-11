@@ -87,9 +87,3 @@ export default class SlBreadcrumbItem extends ShoelaceElement {
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-breadcrumb-item': SlBreadcrumbItem;
-  }
-}

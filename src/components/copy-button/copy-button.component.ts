@@ -249,9 +249,3 @@ setDefaultAnimation('copy.out', {
   ],
   options: { duration: 100 }
 });
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-copy-button': SlCopyButton;
-  }
-}

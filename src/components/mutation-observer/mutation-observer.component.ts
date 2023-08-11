@@ -111,9 +111,3 @@ export default class SlMutationObserver extends ShoelaceElement {
     return html` <slot></slot> `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-mutation-observer': SlMutationObserver;
-  }
-}

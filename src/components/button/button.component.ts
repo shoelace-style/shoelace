@@ -328,9 +328,3 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
     /* eslint-enable lit/binding-positions */
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-button': SlButton;
-  }
-}

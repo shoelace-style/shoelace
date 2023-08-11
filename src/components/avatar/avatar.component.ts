@@ -96,9 +96,3 @@ export default class SlAvatar extends ShoelaceElement {
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-avatar': SlAvatar;
-  }
-}

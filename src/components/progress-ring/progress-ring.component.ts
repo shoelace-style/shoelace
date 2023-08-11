@@ -78,9 +78,3 @@ export default class SlProgressRing extends ShoelaceElement {
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-progress-ring': SlProgressRing;
-  }
-}

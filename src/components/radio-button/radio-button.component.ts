@@ -137,9 +137,3 @@ export default class SlRadioButton extends ShoelaceElement {
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-radio-button': SlRadioButton;
-  }
-}

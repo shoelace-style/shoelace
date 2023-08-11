@@ -39,9 +39,3 @@ export default class SlSkeleton extends ShoelaceElement {
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-skeleton': SlSkeleton;
-  }
-}

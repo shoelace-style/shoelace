@@ -291,9 +291,3 @@ setDefaultAnimation('tooltip.hide', {
   ],
   options: { duration: 150, easing: 'ease' }
 });
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-tooltip': SlTooltip;
-  }
-}
