@@ -250,7 +250,11 @@ Note that multi-select options may wrap, causing the control to expand verticall
 
 ### Setting Initial Values
 
-Use the `value` attribute to set the initial selection. When using `multiple`, use space-delimited values to select more than one option.
+Use the `value` attribute to set the initial selection.
+
+When using `multiple`, the `value` _attribute_ uses space-delimited values to select more than one option.
+Note that `sl-option` values cannot contain spaces for this reason. If accessing or setting the `value` _property_
+through Javascript, `value` is an array.
 
 ```html:preview
 <sl-select value="option-1 option-2" multiple clearable>
@@ -259,6 +263,11 @@ Use the `value` attribute to set the initial selection. When using `multiple`, u
   <sl-option value="option-3">Option 3</sl-option>
   <sl-option value="option-4">Option 4</sl-option>
 </sl-select>
+```
+
+```js
+const select = document.querySelector('sl-select[multiple]');
+select.value = ['option-1', 'option-2']
 ```
 
 ```jsx:react
