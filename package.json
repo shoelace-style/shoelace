@@ -6,7 +6,7 @@
   "author": "Cory LaViska",
   "license": "MIT",
   "customElements": "dist/custom-elements.json",
-  "web-types": "dist/web-types.json",
+  "web-types": "./web-types.json",
   "type": "module",
   "types": "dist/shoelace.d.ts",
   "jsdelivr": "./cdn/shoelace-autoloader.js",
@@ -25,15 +25,8 @@
     "./dist/react/*": "./dist/react/*",
     "./dist/translations/*": "./dist/translations/*"
   },
-  "files": [
-    "dist",
-    "cdn"
-  ],
-  "keywords": [
-    "web components",
-    "custom elements",
-    "components"
-  ],
+  "files": ["dist", "cdn"],
+  "keywords": ["web components", "custom elements", "components"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/shoelace-style/shoelace.git"
@@ -141,9 +134,6 @@
     "user-agent-data-types": "^0.3.0"
   },
   "lint-staged": {
-    "*.{ts,js}": [
-      "eslint --max-warnings 0 --cache --fix",
-      "prettier --write"
-    ]
+    "*.{ts,js}": ["eslint --max-warnings 0 --cache --fix", "prettier --write"]
   }
 }

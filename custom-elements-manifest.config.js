@@ -203,7 +203,6 @@ export default {
       ]
     }),
     customElementJetBrainsPlugin({
-      outdir,
       excludeCss: true,
       referencesTemplate: (_, tag) => {
         return {
