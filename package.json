@@ -47,7 +47,6 @@
   },
   "scripts": {
     "start": "node scripts/build.js --serve",
-    "analyze": "cem analyze --litelement --outdir dist",
     "build": "node scripts/build.js",
     "verify": "npm run prettier:check && npm run lint && npm run build && npm run test",
     "prepublishOnly": "npm run verify",
