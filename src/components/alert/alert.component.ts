@@ -239,9 +239,3 @@ setDefaultAnimation('alert.hide', {
   ],
   options: { duration: 250, easing: 'ease' }
 });
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-alert': SlAlert;
-  }
-}

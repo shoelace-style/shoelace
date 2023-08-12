@@ -80,9 +80,3 @@ export default class SlQrCode extends ShoelaceElement {
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-qr-code': SlQrCode;
-  }
-}

@@ -551,9 +551,3 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-input': SlInput;
-  }
-}

@@ -383,9 +383,3 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-textarea': SlTextarea;
-  }
-}

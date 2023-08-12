@@ -55,9 +55,3 @@ export default class SlTabPanel extends ShoelaceElement {
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-tab-panel': SlTabPanel;
-  }
-}

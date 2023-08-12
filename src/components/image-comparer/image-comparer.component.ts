@@ -151,9 +151,3 @@ export default class SlImageComparer extends ShoelaceElement {
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-image-comparer': SlImageComparer;
-  }
-}

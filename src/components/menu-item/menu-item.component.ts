@@ -130,9 +130,3 @@ export default class SlMenuItem extends ShoelaceElement {
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-menu-item': SlMenuItem;
-  }
-}

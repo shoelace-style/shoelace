@@ -80,9 +80,3 @@ export default class SlFormatDate extends ShoelaceElement {
     `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-format-date': SlFormatDate;
-  }
-}

@@ -30,9 +30,3 @@ export default class SlCarouselItem extends ShoelaceElement {
     return html` <slot></slot> `;
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'sl-carousel-item': SlCarouselItem;
-  }
-}
