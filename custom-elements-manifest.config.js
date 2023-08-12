@@ -1,5 +1,6 @@
 import * as path from 'path';
-import { customElementVsCodePlugin } from "custom-element-vs-code-integration";
+import { customElementJetBrainsPlugin } from 'custom-element-jet-brains-integration';
+import { customElementVsCodePlugin } from 'custom-element-vs-code-integration';
 import { parse } from 'comment-parser';
 import { pascalCase } from 'pascal-case';
 import commandLineArgs from 'command-line-args';
@@ -194,10 +195,22 @@ export default {
     customElementVsCodePlugin({
       outdir,
       cssFileName: null,
-      referencesTemplate: (_, tag) => [{
-        name: "Documentation",
-        url: `https://shoelace.style/components/${tag.replace('sl-', '')}`
-      }]
+      referencesTemplate: (_, tag) => [
+        {
+          name: 'Documentation',
+          url: `https://shoelace.style/components/${tag.replace('sl-', '')}`
+        }
+      ]
+    }),
+    customElementJetBrainsPlugin({
+      outdir,
+      excludeCss: true,
+      referencesTemplate: (_, tag) => {
+        return {
+          name: 'Documentation',
+          url: `https://shoelace.style/components/${tag.replace('sl-', '')}`
+        };
+      }
     })
   ]
 };
