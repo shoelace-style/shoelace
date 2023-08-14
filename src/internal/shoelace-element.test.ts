@@ -137,7 +137,7 @@ before(async () => {
       stubCustomElements();
       // Check if importing the files automatically registers any components
       // this path comes through as "button.js" but we really need to test "button.component.js"
-      path = path.split(".js")[0] + ".component.js"
+      path = path.split('.js')[0] + '.component.js';
       await import('../../dist/' + path);
 
       const registeredTags = tagNames.filter(tag => Boolean(window.customElements.get(tag)));
