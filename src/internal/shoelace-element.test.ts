@@ -133,6 +133,8 @@ before(async () => {
 
   relevantMetadata.forEach(({ tagName, path }) => {
     it(`Should not register any components: ${tagName}`, async () => {
+      Sinon.restore();
+      stubCustomElements();
       // Check if importing the files automatically registers any components
       await import('../../dist/' + path);
 
