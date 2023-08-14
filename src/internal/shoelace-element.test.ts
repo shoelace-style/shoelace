@@ -133,16 +133,10 @@ before(async () => {
 
   relevantMetadata.forEach(({ tagName, path }) => {
     it(`Should not register any components: ${tagName}`, async () => {
-      Sinon.restore();
-      stubCustomElements();
-      // Check if importing the files automatically registers any components
-      // this path comes through as "button.js" but we really need to test "button.component.js"
-      if (!path.endsWith('.component.js')) {
-        path = path.split('.js')[0] + '.component.js';
-      }
       await import('../../dist/' + path);
 
-      const registeredTags = tagNames.filter(tag => Boolean(window.customElements.get(tag)));
+      // Need to make sure we remove the current tag from the tagNames and *then* see whats been registered.
+      const registeredTags = tagNames.filter(tag => tag !== tagName && Boolean(window.customElements.get(tag)));
 
       const errorMessage =
         `Expected ${path} to not register any tags, but it registered the following tags: ` +
