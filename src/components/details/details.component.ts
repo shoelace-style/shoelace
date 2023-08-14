@@ -90,15 +90,15 @@ export default class SlDetails extends ShoelaceElement {
     this.detailsObserver.disconnect();
   }
 
-  private handleSummaryClick(ev: MouseEvent) {
-    ev.preventDefault();
+  private handleSummaryClick(event: MouseEvent) {
+    event.preventDefault();
+
     if (!this.disabled) {
       if (this.open) {
         this.hide();
       } else {
         this.show();
       }
-
       this.header.focus();
     }
   }
