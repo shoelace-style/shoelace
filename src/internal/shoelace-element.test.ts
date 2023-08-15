@@ -133,10 +133,10 @@ before(async () => {
 
   relevantMetadata.forEach(({ tagName, path }) => {
     it(`Should not register any components: ${tagName}`, async () => {
-      // Check if importing the files automatically registers any components
       await import('../../dist/' + path);
 
-      const registeredTags = tagNames.filter(tag => Boolean(window.customElements.get(tag)));
+      // Need to make sure we remove the current tag from the tagNames and *then* see whats been registered.
+      const registeredTags = tagNames.filter(tag => tag !== tagName && Boolean(window.customElements.get(tag)));
 
       const errorMessage =
         `Expected ${path} to not register any tags, but it registered the following tags: ` +
