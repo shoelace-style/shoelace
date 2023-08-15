@@ -12,9 +12,9 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
-## Next
+## 2.7.0
 
-- Added the `<sl-copy-button>` component [#1473]
+- Added the experimental `<sl-copy-button>` component [#1473]
 - Fixed a bug in `<sl-dropdown>` where pressing [[Up]] or [[Down]] when focused on the trigger wouldn't focus the first/last menu items [#1472]
 - Fixed a bug that caused key presses in text fields to be hijacked when used inside `<sl-tree>` [#1492]
 - Fixed an upstream bug that caused React CodePen examples to stop working
