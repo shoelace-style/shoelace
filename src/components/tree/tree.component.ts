@@ -192,7 +192,11 @@ export default class SlTree extends ShoelaceElement {
       }
       this.syncTreeItems(selectedItem);
     } else if (this.selection === 'single' || selectedItem.isLeaf) {
-      selectedItem.expanded = !selectedItem.expanded;
+      if (selectedItem.selected) {
+        selectedItem.expanded = !selectedItem.expanded;
+      } else {
+        selectedItem.expanded = true;
+      }
       selectedItem.selected = true;
 
       this.syncTreeItems(selectedItem);
