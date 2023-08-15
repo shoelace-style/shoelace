@@ -187,7 +187,7 @@ import '@shoelace-style/shoelace/%NPMDIR%/components/rating/rating.js';
 import { setBasePath } from '@shoelace-style/shoelace/%NPMDIR%/utilities/base-path.js';
 
 // Set the base path to the folder you copied Shoelace's assets to
-setBasePath('/path/to/shoelace/%NPMDIR%
+setBasePath('/path/to/shoelace/%NPMDIR%')
 
 // <sl-button>, <sl-icon>, <sl-input>, and <sl-rating> are ready to use!
 ```
