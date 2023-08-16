@@ -180,9 +180,9 @@ Use the `contained` attribute to add a container around the radio.
 
 ```pug slim
 sl-radio-group label="Select an option" name="a" value="3"
-  sl-radio contained="true" value="1 Option 1
-  sl-radio contained="true" disabled="true" value="2 Option 2
-  sl-radio contained="true" value="3 Option 3
+  sl-radio contained="true" value="1" Option 1
+  sl-radio contained="true" disabled="true" value="2" Option 2
+  sl-radio contained="true" value="3" Option 3
     div slot="description" A short description about this option
 ```
 
