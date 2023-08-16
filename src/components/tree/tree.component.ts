@@ -311,7 +311,7 @@ export default class SlTree extends ShoelaceElement {
       return;
     }
 
-    if (this.selection === 'multiple' && isExpandButton) {
+    if (isExpandButton) {
       treeItem.expanded = !treeItem.expanded;
     } else {
       this.selectItem(treeItem);
