@@ -12,6 +12,10 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## Next
+
+- Fixed a regression that caused `<sl-radio-button>` to render incorrectly with gaps [#1523]
+
 ## 2.7.0
 
 - Added the experimental `<sl-copy-button>` component [#1473]
