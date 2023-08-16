@@ -462,7 +462,7 @@ To disable the browser's error messages, you need to cancel the `sl-invalid` eve
   <sl-button type="reset" variant="default">Reset</sl-button>
 </form>
 
-<script>
+<script type="module">
   const form = document.querySelector('.inline-validation');
   const nameError = document.querySelector('#name-error');
 
