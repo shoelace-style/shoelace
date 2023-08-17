@@ -51,6 +51,17 @@ components.map(component => {
       ${eventImports}
       ${eventExports}
 
+      export type ForwardComponent<
+        Element extends HTMLElement,
+        ReactComponent extends React.ElementType
+      > = React.JSXElementConstructor<
+        React.ComponentPropsWithoutRef<ReactComponent> & {
+          ref?: React.ForwardedRef<Element>;
+        } &
+        // Adds { displayName?: string, propTypes?: {} } etc.
+        Omit<React.FC<ReactComponent>, 'ref'>
+      >;
+
       const tagName = '${component.tagName}'
 
       const component = createComponent({
@@ -76,7 +87,7 @@ components.map(component => {
         }
       }
 
-      export default SlComponent;
+      export default SlComponent as ForwardComponent<Component, typeof SlComponent>;
     `,
     Object.assign(prettierConfig, {
       parser: 'babel-ts'
