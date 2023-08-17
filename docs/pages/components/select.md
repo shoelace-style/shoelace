@@ -454,3 +454,57 @@ const App = () => (
   </>
 );
 ```
+
+### Custom Tags
+
+When multiple options can be selected, you can provide custom tags by passing a function to the `getTag` property.
+Your `getTag(option, index)` function can return a string or a Lit <a href="https://lit.dev/docs/templates/overview/">Template</a>
+
+```html:preview
+<sl-select placeholder="Select" value="option-1 option-2" class="custom-tag" multiple clearable>
+  <sl-option value="option-1">
+    <sl-icon slot="prefix" name="envelope"></sl-icon>
+    Email
+    <sl-icon slot="suffix" name="patch-check"></sl-icon>
+  </sl-option>
+
+  <sl-option value="option-2">
+    <sl-icon slot="prefix" name="telephone"></sl-icon>
+    Phone
+    <sl-icon slot="suffix" name="patch-check"></sl-icon>
+  </sl-option>
+
+  <sl-option value="option-3">
+    <sl-icon slot="prefix" name="chat-dots"></sl-icon>
+    Chat
+    <sl-icon slot="suffix" name="patch-check"></sl-icon>
+  </sl-option>
+  <sl-option value="option-4">Option 4</sl-option>
+  <sl-option value="option-5">Option 5</sl-option>
+</sl-select>
+
+<script type="module">
+  import {html} from "https://cdn.jsdelivr.net/npm/lit@2.8.0/+esm";
+
+  const select = document.querySelector('.custom-tag');
+  select.getTag = (option, index) => {
+    const icons = {'option-1': 'envelope', 'option-2': 'telephone', 'option-3': 'chat-dots'};
+    if(typeof icons[option.value] == "undefined") {
+      // Return a string
+      return "<sl-tag removable>"+
+        "<sl-icon part=\"tag-icon\" name=\"patch-question\"></sl-icon>" +
+        option.getTextLabel() +
+        "</sl-tag>"
+    } else {
+      // Return a Lit template
+      return html`<sl-tag removable>
+        <sl-icon part="tag-icon" name="${ icons[option.value] }"></sl-icon>
+        ${ option.getTextLabel() }
+      </sl-tag>`;
+    }
+  };
+  </script>
+  <style>
+    .custom-tag::part(tag-icon) { padding-right: var(--sl-spacing-small); }
+  </style>
+```
