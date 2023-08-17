@@ -4,10 +4,11 @@ import { defaultValue } from '../../internal/default-value.js';
 import { FormControlController } from '../../internal/form.js';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
 import { HasSlotController } from '../../internal/slot.js';
-import { html, TemplateResult } from 'lit';
+import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
 import { property, query, state } from 'lit/decorators.js';
 import { scrollIntoView } from '../../internal/scroll.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { waitForEvent } from '../../internal/event.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
@@ -15,11 +16,10 @@ import SlIcon from '../icon/icon.component.js';
 import SlPopup from '../popup/popup.component.js';
 import SlTag from '../tag/tag.component.js';
 import styles from './select.styles.js';
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, TemplateResult } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
 import type SlOption from '../option/option.component.js';
 import type SlRemoveEvent from '../../events/sl-remove.js';
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 /**
  * @summary Selects allow you to choose items from a menu of predefined options.
@@ -178,7 +178,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
    * is the current tag's index.  The function should return either a Lit TemplateResult or a string containing trusted HTML of the symbol to render at
    * the specified value.
    */
-  @property() getTag: (option: SlOption, index: number) => TemplateResult | string = (option, index) => {
+  @property() getTag: (option: SlOption, index: number) => TemplateResult | string = option => {
     return html`
       <sl-tag
         part="tag"
