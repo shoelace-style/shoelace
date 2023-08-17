@@ -58,8 +58,7 @@ components.map(component => {
         React.ComponentPropsWithoutRef<ReactComponent> & {
           ref?: React.ForwardedRef<Element>;
         }
-      > &
-        Omit<React.FC<ReactComponent>, 'ref'>;
+      > & { displayName?: string }
 
       const tagName = '${component.tagName}'
 
