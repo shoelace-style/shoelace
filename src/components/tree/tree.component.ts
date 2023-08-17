@@ -178,8 +178,6 @@ export default class SlTree extends ShoelaceElement {
       }
       syncCheckboxes(selectedItem);
     } else if (this.selection === 'single' || selectedItem.isLeaf) {
-      selectedItem.expanded = !selectedItem.expanded;
-
       const items = this.getAllTreeItems();
       for (const item of items) {
         item.selected = (item === selectedItem);
