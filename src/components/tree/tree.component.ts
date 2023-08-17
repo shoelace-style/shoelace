@@ -168,20 +168,6 @@ export default class SlTree extends ShoelaceElement {
     }
   };
 
-  private syncTreeItems(selectedItem: SlTreeItem) {
-    const items = this.getAllTreeItems();
-
-    if (this.selection === 'multiple') {
-      syncCheckboxes(selectedItem);
-    } else {
-      for (const item of items) {
-        if (item !== selectedItem) {
-          item.selected = false;
-        }
-      }
-    }
-  }
-
   private selectItem(selectedItem: SlTreeItem) {
     const previousSelection = [...this.selectedItems];
 
@@ -190,12 +176,14 @@ export default class SlTree extends ShoelaceElement {
       if (selectedItem.lazy) {
         selectedItem.expanded = true;
       }
-      this.syncTreeItems(selectedItem);
+      syncCheckboxes(selectedItem);
     } else if (this.selection === 'single' || selectedItem.isLeaf) {
       selectedItem.expanded = !selectedItem.expanded;
-      selectedItem.selected = true;
 
-      this.syncTreeItems(selectedItem);
+      const items = this.getAllTreeItems();
+      for (const item of items) {
+        item.selected = (item === selectedItem);
+      }
     } else if (this.selection === 'leaf') {
       selectedItem.expanded = !selectedItem.expanded;
     }
