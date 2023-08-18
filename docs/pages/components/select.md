@@ -457,55 +457,50 @@ const App = () => (
 
 ### Custom Tags
 
-When multiple options can be selected, you can provide custom tags by passing a function to the `getTag` property.
-Your `getTag(option, index)` function can return a string, a Lit <a href="https://lit.dev/docs/templates/overview/">Template</a>,
-or an HTMLElement.
+When multiple options can be selected, you can provide custom tags by passing a function to the `getTag` property. Your function can return a string of HTML, a <a href="https://lit.dev/docs/templates/overview/">Lit Template</a>, or an [`HTMLElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement). The `getTag()` function will be called for each option. The first argument is an `<sl-option>` element and the second argument is the tag's index (its position in the tag list).
+
+Remember that custom tags are rendered in a shadow root. To style them, you can use the `style` attribute in your template or you can add your own [parts](/getting-started/customizing/#css-parts) and target them with the [`::part()`](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) selector.
 
 ```html:preview
-<sl-select placeholder="Select" value="option-1 option-2" class="custom-tag" multiple clearable>
-  <sl-option value="option-1">
+<sl-select
+  placeholder="Select one"
+  value="email phone"
+  multiple
+  clearable
+  class="custom-tag"
+>
+  <sl-option value="email">
     <sl-icon slot="prefix" name="envelope"></sl-icon>
     Email
-    <sl-icon slot="suffix" name="patch-check"></sl-icon>
   </sl-option>
-
-  <sl-option value="option-2">
+  <sl-option value="phone">
     <sl-icon slot="prefix" name="telephone"></sl-icon>
     Phone
-    <sl-icon slot="suffix" name="patch-check"></sl-icon>
   </sl-option>
-
-  <sl-option value="option-3">
+  <sl-option value="chat">
     <sl-icon slot="prefix" name="chat-dots"></sl-icon>
     Chat
-    <sl-icon slot="suffix" name="patch-check"></sl-icon>
   </sl-option>
-  <sl-option value="option-4">Option 4</sl-option>
-  <sl-option value="option-5">Option 5</sl-option>
 </sl-select>
 
 <script type="module">
-  import {html} from "https://cdn.jsdelivr.net/npm/lit@2.8.0/+esm";
-
   const select = document.querySelector('.custom-tag');
+
   select.getTag = (option, index) => {
-    const icons = {'option-1': 'envelope', 'option-2': 'telephone', 'option-3': 'chat-dots'};
-    if(typeof icons[option.value] == "undefined") {
-      // Return a string
-      return "<sl-tag removable>"+
-        "<sl-icon part=\"tag-icon\" name=\"patch-question\"></sl-icon>" +
-        option.getTextLabel() +
-        "</sl-tag>"
-    } else {
-      // Return a Lit template
-      return html`<sl-tag removable>
-        <sl-icon part="tag-icon" name="${ icons[option.value] }"></sl-icon>
-        ${ option.getTextLabel() }
-      </sl-tag>`;
-    }
+    // Use the same icon used in the <sl-option>
+    const name = option.querySelector('sl-icon[slot="prefix"]').name;
+
+    // You can return a string, a Lit Template, or an HTMLElement here
+    return `
+      <sl-tag removable>
+        <sl-icon name="${name}" style="padding-inline-end: .5rem;"></sl-icon>
+        ${option.getTextLabel()}
+      </sl-tag>
+    `;
   };
-  </script>
-  <style>
-    .custom-tag::part(tag-icon) { padding-right: var(--sl-spacing-small); }
-  </style>
+</script>
 ```
+
+:::warning
+Be sure you trust the content you are outputting! Passing unsanitized user input to `getTag()` can result in XSS vulnerabilities.
+:::
