@@ -180,7 +180,7 @@ export default class SlTree extends ShoelaceElement {
     } else if (this.selection === 'single' || selectedItem.isLeaf) {
       const items = this.getAllTreeItems();
       for (const item of items) {
-        item.selected = (item === selectedItem);
+        item.selected = item === selectedItem;
       }
     } else if (this.selection === 'leaf') {
       selectedItem.expanded = !selectedItem.expanded;
