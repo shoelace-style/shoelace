@@ -22,6 +22,20 @@ layout: component
     Suffix Icon
     <sl-icon slot="suffix" name="heart"></sl-icon>
   </sl-menu-item>
+  <sl-divider></sl-divider>
+  <sl-menu-item>
+    Submenu
+    <sl-menu slot="submenu">
+      <sl-menu-item>Submenu Option 1</sl-menu-item>
+      <sl-menu-item>Submenu Option 2</sl-menu-item>
+      <sl-menu-item>
+        Submenu Option 3
+        <sl-menu slot="submenu">
+          <sl-menu-item>Sub-submenu Option 1</sl-menu-item>
+        </sl-menu>
+      </sl-menu-item>
+    </sl-menu>
+  </sl-menu-item>
 </sl-menu>
 ```
 
@@ -183,6 +197,10 @@ const App = () => (
 ```
 
 {% endraw %}
+
+### Submenus
+
+See the [Submenus section of the menu component](/components/menu#submenus).
 
 ### Value & Selection
 
