@@ -15,6 +15,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 ## Next
 
 - Fixed a regression that caused `<sl-radio-button>` to render incorrectly with gaps [#1523]
+- Improved expand/collapse behavior of `<sl-tree>` to work more like users expect [#1521]
 
 ## 2.7.0
 
