@@ -153,6 +153,7 @@ export default class SlMenuItem extends ShoelaceElement {
 
   render() {
     const isRtl = this.localize.dir() === 'rtl';
+    const isSubmenuExpanded = this.submenuController.isExpanded();
 
     return html`
       <div
@@ -163,10 +164,11 @@ export default class SlMenuItem extends ShoelaceElement {
           'menu-item--rtl': isRtl,
           'menu-item--checked': this.checked,
           'menu-item--disabled': this.disabled,
-          'menu-item--has-submenu': this.isSubmenu()
+          'menu-item--has-submenu': this.isSubmenu(),
+          'menu-item--submenu-expanded': isSubmenuExpanded
         })}
         ?aria-haspopup="${this.isSubmenu()}"
-        ?aria-expanded="${this.submenuController.isExpanded() ? true : false}"
+        ?aria-expanded="${isSubmenuExpanded ? true : false}"
       >
         <span part="checked-icon" class="menu-item__check">
           <sl-icon name="check" library="system" aria-hidden="true"></sl-icon>
