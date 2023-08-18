@@ -458,7 +458,8 @@ const App = () => (
 ### Custom Tags
 
 When multiple options can be selected, you can provide custom tags by passing a function to the `getTag` property.
-Your `getTag(option, index)` function can return a string or a Lit <a href="https://lit.dev/docs/templates/overview/">Template</a>
+Your `getTag(option, index)` function can return a string, a Lit <a href="https://lit.dev/docs/templates/overview/">Template</a>,
+or an HTMLElement.
 
 ```html:preview
 <sl-select placeholder="Select" value="option-1 option-2" class="custom-tag" multiple clearable>

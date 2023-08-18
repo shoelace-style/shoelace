@@ -178,7 +178,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
    * is the current tag's index.  The function should return either a Lit TemplateResult or a string containing trusted HTML of the symbol to render at
    * the specified value.
    */
-  @property() getTag: (option: SlOption, index: number) => TemplateResult | string = option => {
+  @property() getTag: (option: SlOption, index: number) => TemplateResult | string | HTMLElement = option => {
     return html`
       <sl-tag
         part="tag"
