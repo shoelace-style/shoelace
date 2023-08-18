@@ -16,12 +16,97 @@ You can use [menu items](/components/menu-item), [menu labels](/components/menu-
   <sl-menu-item value="copy">Copy</sl-menu-item>
   <sl-menu-item value="paste">Paste</sl-menu-item>
   <sl-menu-item value="delete">Delete</sl-menu-item>
+</sl-menu>
+```
+
+{% raw %}
+
+```jsx:react
+import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
+import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
+import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+
+const App = () => (
+  <SlMenu style={{ maxWidth: '200px' }}>
+    <SlMenuItem value="undo">Undo</SlMenuItem>
+    <SlMenuItem value="redo">Redo</SlMenuItem>
+    <SlDivider />
+    <SlMenuItem value="cut">Cut</SlMenuItem>
+    <SlMenuItem value="copy">Copy</SlMenuItem>
+    <SlMenuItem value="paste">Paste</SlMenuItem>
+    <SlMenuItem value="delete">Delete</SlMenuItem>
+  </SlMenu>
+);
+```
+
+{% endraw %}
+
+:::tip
+Menus are intended for system menus (dropdown menus, select menus, context menus, etc.). They should not be mistaken for navigation menus which serve a different purpose and have a different semantic meaning. If you're building navigation, use `<nav>` and `<a>` elements instead.
+:::
+
+## Examples
+
+### In Dropdowns
+
+Menus work really well when used inside [dropdowns](/components/dropdown).
+
+```html:preview
+<sl-dropdown>
+  <sl-button slot="trigger" caret>Edit</sl-button>
+  <sl-menu>
+    <sl-menu-item value="cut">Cut</sl-menu-item>
+    <sl-menu-item value="copy">Copy</sl-menu-item>
+    <sl-menu-item value="paste">Paste</sl-menu-item>
+  </sl-menu>
+</sl-dropdown>
+```
+
+```jsx:react
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
+import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
+import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+
+const App = () => (
+  <SlDropdown>
+    <SlButton slot="trigger" caret>Edit</SlButton>
+    <SlMenu>
+      <SlMenuItem value="cut">Cut</SlMenuItem>
+      <SlMenuItem value="copy">Copy</SlMenuItem>
+      <SlMenuItem value="paste">Paste</SlMenuItem>
+    </SlMenu>
+  </SlDropdown>
+);
+```
+
+### Submenus
+
+To create a submenu, nest an `<sl-menu slot="submenu">` in any [menu item](/components/menu-item).
+
+```html:preview
+<sl-menu style="max-width: 200px;">
+  <sl-menu-item value="undo">Undo</sl-menu-item>
+  <sl-menu-item value="redo">Redo</sl-menu-item>
+  <sl-divider></sl-divider>
+  <sl-menu-item value="cut">Cut</sl-menu-item>
+  <sl-menu-item value="copy">Copy</sl-menu-item>
+  <sl-menu-item value="paste">Paste</sl-menu-item>
   <sl-divider></sl-divider>
   <sl-menu-item>
     Find
     <sl-menu slot="submenu">
-      <sl-menu-item value="find-previous">Find Previous</sl-menu-item>
-      <sl-menu-item value="find-next">Find Next</sl-menu-item>
+      <sl-menu-item value="find">Find…</sl-menu-item>
+      <sl-menu-item value="find-previous">Find Next</sl-menu-item>
+      <sl-menu-item value="find-next">Find Previous</sl-menu-item>
+    </sl-menu>
+  </sl-menu-item>
+  <sl-menu-item>
+    Transformations
+    <sl-menu slot="submenu">
+      <sl-menu-item value="uppercase">Make uppercase</sl-menu-item>
+      <sl-menu-item value="lowercase">Make lowercase</sl-menu-item>
+      <sl-menu-item value="capitalize">Capitalize</sl-menu-item>
     </sl-menu>
   </sl-menu-item>
 </sl-menu>
@@ -42,77 +127,29 @@ const App = () => (
     <SlMenuItem value="cut">Cut</SlMenuItem>
     <SlMenuItem value="copy">Copy</SlMenuItem>
     <SlMenuItem value="paste">Paste</SlMenuItem>
-    <SlMenuItem value="delete">Delete</SlMenuItem>
     <SlDivider />
     <SlMenuItem>
       Find
       <SlMenu slot="submenu">
-        <SlMenuItem value="find-previous">Find Previous</SlMenuItem>
-        <SlMenuItem value="find-next">Find Next</SlMenuItem>
+        <SlMenuItem value="find">Find…</SlMenuItem>
+        <SlMenuItem value="find-previous">Find Next</SlMenuItem>
+        <SlMenuItem value="find-next">Find Previous</SlMenuItem>
       </SlMenu>
     </SlMenuItem>
-  </SlMenu>
-);
-```
-
-{% endraw %}
-
-:::tip
-Menus are intended for system menus (dropdown menus, select menus, context menus, etc.). They should not be mistaken for navigation menus which serve a different purpose and have a different semantic meaning. If you're building navigation, use `<nav>` and `<a>` elements instead.
-:::
-
-## Examples
-
-### Submenus
-
-The `submenu` slot of a [menu-item](/components/menu-item) can be used to nest a menu, which is rendered by leveraging the [popup](/components/popup) component.
-
-```html:preview
-<sl-menu style="max-width: 200px;">
-  <sl-menu-item>
-    Submenu
-    <sl-menu slot="submenu">
-      <sl-menu-item>Submenu Option 1</sl-menu-item>
-      <sl-menu-item>Submenu Option 2</sl-menu-item>
-      <sl-menu-item>
-        Submenu Option 3
-        <sl-menu slot="submenu">
-          <sl-menu-item>Sub-submenu Option 1</sl-menu-item>
-        </sl-menu>
-      </sl-menu-item>
-    </sl-menu>
-  </sl-menu-item>
-  <sl-menu-item disabled>
-    Disabled Submenu
-    <sl-menu slot="submenu">
-      <sl-menu-item>Disabled Submenu Option 1</sl-menu-item>
-    </sl-menu>
-  </sl-menu-item>
-</sl-menu>
-```
-
-{% raw %}
-
-```jsx:react
-import { SlMenu, SlMenuItem } from '@shoelace-style/shoelace/dist/react';
-
-const App = () => (
-  <SlMenu style={{ maxWidth: '200px' }}>
     <SlMenuItem>
-      Submenu
+      Transformations
       <SlMenu slot="submenu">
-        <SlMenuItem>Submenu Option 1</SlMenuItem>
-        <SlMenuItem>Submenu Option 2</SlMenuItem>
-        <SlMenuItem>
-          Submenu Option 3
-          <SlMenu slot="submenu">
-            <SlMenuItem>Sub-submenu Option 1</SlMenuItem>
-          </SlMenu>
-        </SlMenuItem>
+        <SlMenuItem value="uppercase">Make uppercase</SlMenuItem>
+        <SlMenuItem value="lowercase">Make lowercase</SlMenuItem>
+        <SlMenuItem value="capitalize">Capitalize</SlMenuItem>
       </SlMenu>
     </SlMenuItem>
   </SlMenu>
 );
 ```
+
+:::warning
+As a UX best practice, avoid using more than one level of submenus when possible.
+:::
 
 {% endraw %}

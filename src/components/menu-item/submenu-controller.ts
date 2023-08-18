@@ -1,11 +1,8 @@
-import '../popup/popup.js';
-
 import { createRef, ref, type Ref } from 'lit/directives/ref.js';
-import type { ReactiveController, ReactiveControllerHost } from 'lit';
-
 import { type HasSlotController } from '../../internal/slot.js';
 import { html } from 'lit';
 import { type LocalizeController } from '../../utilities/localize.js';
+import type { ReactiveController, ReactiveControllerHost } from 'lit';
 import type SlMenuItem from './menu-item.js';
 import type SlPopup from '../popup/popup.js';
 
@@ -13,15 +10,12 @@ import type SlPopup from '../popup/popup.js';
 export class SubmenuController implements ReactiveController {
   private host: ReactiveControllerHost & SlMenuItem;
   private popupRef: Ref<SlPopup> = createRef();
-
   private enableSubmenuTimer = -1;
   private isConnected = false;
   private isPopupConnected = false;
   private skidding = 0;
-
   private readonly hasSlotController: HasSlotController;
   private readonly localize: LocalizeController;
-  private readonly submenuDistance = -4;
   private readonly submenuOpenDelay = 100;
 
   constructor(
@@ -142,7 +136,7 @@ export class SubmenuController implements ReactiveController {
     }
   }
 
-  /** Focus on the first menu-item of a submenu. */
+  // Focus on the first menu-item of a submenu.
   private handleKeyDown = (event: KeyboardEvent) => {
     switch (event.key) {
       case 'Escape':
@@ -150,7 +144,7 @@ export class SubmenuController implements ReactiveController {
         this.disableSubmenu();
         break;
       case 'ArrowLeft':
-        // Either focus is currently on the host element or a child.
+        // Either focus is currently on the host element or a child
         if (event.target !== this.host) {
           event.preventDefault();
           event.stopPropagation();
@@ -169,8 +163,7 @@ export class SubmenuController implements ReactiveController {
   };
 
   private handleClick = (event: MouseEvent) => {
-    // Clicking on the item which heads the menu does nothing,
-    // otherwise hide submenu and propagate.
+    // Clicking on the item which heads the menu does nothing, otherwise hide submenu and propagate
     if (event.target === this.host) {
       event.preventDefault();
       event.stopPropagation();
@@ -182,7 +175,7 @@ export class SubmenuController implements ReactiveController {
     }
   };
 
-  /** Close this submenu on focus outside of the parent or any descendents. */
+  // Close this submenu on focus outside of the parent or any descendants.
   private handleFocusOut = (event: FocusEvent) => {
     if (event.relatedTarget && event.relatedTarget instanceof Element && this.host.contains(event.relatedTarget)) {
       return;
@@ -190,7 +183,7 @@ export class SubmenuController implements ReactiveController {
     this.disableSubmenu();
   };
 
-  /** Prevent the parent menu-item from getting focus on mouse movement on the submenu. */
+  // Prevent the parent menu-item from getting focus on mouse movement on the submenu
   private handlePopupMouseover = (event: MouseEvent) => {
     event.stopPropagation();
   };
@@ -204,9 +197,8 @@ export class SubmenuController implements ReactiveController {
     }
   }
 
-  /** Show the submenu. Supports disabling the opening delay (e.g. for
-   * keyboard events that want to set the focus to the newly opened
-   * menu). */
+  // Shows the submenu. Supports disabling the opening delay, e.g. for keyboard events that want to set the focus to the
+  // newly opened menu.
   private enableSubmenu(delay = true) {
     if (delay) {
       this.enableSubmenuTimer = window.setTimeout(() => {
@@ -222,7 +214,7 @@ export class SubmenuController implements ReactiveController {
     this.setSubmenuState(false);
   }
 
-  /** Calculate the space the top of a menu takes-up, for aligning the popup menu-item with the activating element. */
+  // Calculate the space the top of a menu takes-up, for aligning the popup menu-item with the activating element.
   private updateSkidding(): void {
     // .computedStyleMap() not always available.
     if (!this.host.parentElement?.computedStyleMap) {
@@ -231,11 +223,11 @@ export class SubmenuController implements ReactiveController {
     const styleMap: StylePropertyMapReadOnly = this.host.parentElement.computedStyleMap();
     const attrs: string[] = ['padding-top', 'border-top-width', 'margin-top'];
 
-    const skidding = attrs.reduce((accum, attr) => {
+    const skidding = attrs.reduce((accumulator, attr) => {
       const styleValue: CSSStyleValue = styleMap.get(attr) ?? new CSSUnitValue(0, 'px');
       const unitValue = styleValue instanceof CSSUnitValue ? styleValue : new CSSUnitValue(0, 'px');
       const pxValue = unitValue.to('px');
-      return accum - pxValue.value;
+      return accumulator - pxValue.value;
     }, 0);
 
     this.skidding = skidding;
@@ -246,20 +238,14 @@ export class SubmenuController implements ReactiveController {
   }
 
   renderSubmenu() {
-    // Always render the slot. Conditionally render the outer sl-popup.
+    const isLtr = this.localize.dir() === 'ltr';
 
+    // Always render the slot, but conditionally render the outer <sl-popup>
     if (!this.isConnected) {
       return html` <slot name="submenu" hidden></slot> `;
     }
 
-    const isLtr = this.localize.dir() === 'ltr';
     return html`
-      <style>
-        ::part(popup) {
-          z-index: var(--sl-z-index-dropdown);
-          box-shadow: var(--sl-shadow-large);
-        }
-      </style>
       <sl-popup
         ${ref(this.popupRef)}
         placement=${isLtr ? 'right-start' : 'left-start'}
@@ -267,7 +253,6 @@ export class SubmenuController implements ReactiveController {
         flip
         flip-fallback-strategy="best-fit"
         skidding="${this.skidding}"
-        distance="${this.submenuDistance}"
         strategy="fixed"
       >
         <slot name="submenu"></slot>

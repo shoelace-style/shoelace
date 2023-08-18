@@ -5,6 +5,8 @@ export default css`
   ${componentStyles}
 
   :host {
+    --submenu-offset: -2px;
+
     display: block;
   }
 
@@ -38,6 +40,8 @@ export default css`
   .menu-item .menu-item__label {
     flex: 1 1 auto;
     display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   .menu-item .menu-item__prefix {
@@ -89,6 +93,17 @@ export default css`
   .menu-item--checked .menu-item__check,
   .menu-item--has-submenu .menu-item__chevron {
     visibility: visible;
+  }
+
+  /* Add elevation and z-index to submenus */
+  sl-popup::part(popup) {
+    box-shadow: var(--sl-shadow-large);
+    z-index: var(--sl-z-index-dropdown);
+    margin-left: var(--submenu-offset);
+  }
+
+  .menu-item--rtl sl-popup::part(popup) {
+    margin-left: calc(-1 * var(--submenu-offset));
   }
 
   @media (forced-colors: active) {
