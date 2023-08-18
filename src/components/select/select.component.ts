@@ -8,6 +8,7 @@ import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
 import { property, query, state } from 'lit/decorators.js';
 import { scrollIntoView } from '../../internal/scroll.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { waitForEvent } from '../../internal/event.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
@@ -15,7 +16,7 @@ import SlIcon from '../icon/icon.component.js';
 import SlPopup from '../popup/popup.component.js';
 import SlTag from '../tag/tag.component.js';
 import styles from './select.styles.js';
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, TemplateResult } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
 import type SlOption from '../option/option.component.js';
 import type SlRemoveEvent from '../../events/sl-remove.js';
@@ -171,6 +172,31 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
   /** The select's required attribute. */
   @property({ type: Boolean, reflect: true }) required = false;
+
+  /**
+   * A function that customizes the tags to be rendered when multiple=true. The first argument is the option, the second
+   * is the current tag's index.  The function should return either a Lit TemplateResult or a string containing trusted HTML of the symbol to render at
+   * the specified value.
+   */
+  @property() getTag: (option: SlOption, index: number) => TemplateResult | string | HTMLElement = option => {
+    return html`
+      <sl-tag
+        part="tag"
+        exportparts="
+              base:tag__base,
+              content:tag__content,
+              remove-button:tag__remove-button,
+              remove-button__base:tag__remove-button__base
+            "
+        ?pill=${this.pill}
+        size=${this.size}
+        removable
+        @sl-remove=${(event: SlRemoveEvent) => this.handleTagRemove(event, option)}
+      >
+        ${option.getTextLabel()}
+      </sl-tag>
+    `;
+  };
 
   /** Gets the validity state object */
   get validity() {
@@ -547,6 +573,21 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
       this.formControlController.updateValidity();
     });
   }
+  protected get tags() {
+    return this.selectedOptions.map((option, index) => {
+      if (index < this.maxOptionsVisible || this.maxOptionsVisible <= 0) {
+        const tag = this.getTag(option, index);
+        // Wrap so we can handle the remove
+        return html`<div @sl-remove=${(e: SlRemoveEvent) => this.handleTagRemove(e, option)}>
+          ${typeof tag === 'string' ? unsafeHTML(tag) : tag}
+        </div>`;
+      } else if (index === this.maxOptionsVisible) {
+        // Hit tag limit
+        return html`<sl-tag>+${this.selectedOptions.length - index}</sl-tag>`;
+      }
+      return html``;
+    });
+  }
 
   private handleInvalid(event: Event) {
     this.formControlController.setValidity(false);
@@ -755,37 +796,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
                 @blur=${this.handleBlur}
               />
 
-              ${this.multiple
-                ? html`
-                    <div part="tags" class="select__tags">
-                      ${this.selectedOptions.map((option, index) => {
-                        if (index < this.maxOptionsVisible || this.maxOptionsVisible <= 0) {
-                          return html`
-                            <sl-tag
-                              part="tag"
-                              exportparts="
-                                base:tag__base,
-                                content:tag__content,
-                                remove-button:tag__remove-button,
-                                remove-button__base:tag__remove-button__base
-                              "
-                              ?pill=${this.pill}
-                              size=${this.size}
-                              removable
-                              @sl-remove=${(event: SlRemoveEvent) => this.handleTagRemove(event, option)}
-                            >
-                              ${option.getTextLabel()}
-                            </sl-tag>
-                          `;
-                        } else if (index === this.maxOptionsVisible) {
-                          return html` <sl-tag size=${this.size}> +${this.selectedOptions.length - index} </sl-tag> `;
-                        } else {
-                          return null;
-                        }
-                      })}
-                    </div>
-                  `
-                : ''}
+              ${this.multiple ? html`<div part="tags" class="select__tags">${this.tags}</div>` : ''}
 
               <input
                 class="select__value-input"
