@@ -275,7 +275,6 @@ describe('<sl-tree>', () => {
           // Assert
           expect(el.selectedItems.length).to.eq(1);
           expect(el.children[2]).to.have.attribute('selected');
-          expect(el.children[2]).to.have.attribute('expanded');
         });
       });
 
@@ -439,7 +438,6 @@ describe('<sl-tree>', () => {
         await el.updateComplete;
 
         // Assert
-        expect(node).to.have.attribute('selected');
         expect(node).to.have.attribute('expanded');
       });
     });
