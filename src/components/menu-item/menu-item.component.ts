@@ -1,9 +1,8 @@
-import '../icon/icon.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query } from 'lit/decorators.js';
 import { getTextContent, HasSlotController } from '../../internal/slot.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
+import { property, query } from 'lit/decorators.js';
 import { SubmenuController } from './submenu-controller.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
@@ -35,7 +34,6 @@ import type { CSSResultGroup } from 'lit';
  *
  * @cssproperty [--submenu-offset=-2px] - The distance submenus shift to overlap the parent menu.
  */
-@customElement('sl-menu-item')
 export default class SlMenuItem extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
   static dependencies = {
@@ -63,10 +61,6 @@ export default class SlMenuItem extends ShoelaceElement {
   private readonly localize = new LocalizeController(this);
   private readonly hasSlotController = new HasSlotController(this, 'submenu');
   private submenuController: SubmenuController = new SubmenuController(this, this.hasSlotController, this.localize);
-
-  constructor() {
-    super();
-  }
 
   connectedCallback() {
     super.connectedCallback();
