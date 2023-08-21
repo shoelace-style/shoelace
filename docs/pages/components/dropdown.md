@@ -310,6 +310,96 @@ const App = () => (
 );
 ```
 
+### Submenus
+
+To create a submenu, nest an `<sl-menu slot="submenu">` element in a [menu item](/components/menu-item).
+
+```html:preview
+<sl-dropdown>
+  <sl-button slot="trigger" caret>Edit</sl-button>
+
+  <sl-menu style="max-width: 200px;">
+    <sl-menu-item value="undo">Undo</sl-menu-item>
+    <sl-menu-item value="redo">Redo</sl-menu-item>
+    <sl-divider></sl-divider>
+    <sl-menu-item value="cut">Cut</sl-menu-item>
+    <sl-menu-item value="copy">Copy</sl-menu-item>
+    <sl-menu-item value="paste">Paste</sl-menu-item>
+    <sl-divider></sl-divider>
+    <sl-menu-item>
+      Find
+      <sl-menu slot="submenu">
+        <sl-menu-item value="find">Find…</sl-menu-item>
+        <sl-menu-item value="find-previous">Find Next</sl-menu-item>
+        <sl-menu-item value="find-next">Find Previous</sl-menu-item>
+      </sl-menu>
+    </sl-menu-item>
+    <sl-menu-item>
+      Transformations
+      <sl-menu slot="submenu">
+        <sl-menu-item value="uppercase">Make uppercase</sl-menu-item>
+        <sl-menu-item value="lowercase">Make lowercase</sl-menu-item>
+        <sl-menu-item value="capitalize">Capitalize</sl-menu-item>
+      </sl-menu>
+    </sl-menu-item>
+  </sl-menu>
+</sl-dropdown>
+```
+
+```jsx:react
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
+import SlDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
+import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
+import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+
+const css = `
+  .dropdown-hoist {
+    border: solid 2px var(--sl-panel-border-color);
+    padding: var(--sl-spacing-medium);
+    overflow: hidden;
+  }
+`;
+
+const App = () => (
+  <>
+    <SlDropdown>
+      <SlButton slot="trigger" caret>Edit</SlButton>
+
+      <SlMenu style="max-width: 200px;">
+        <SlMenuItem value="undo">Undo</SlMenuItem>
+        <SlMenuItem value="redo">Redo</SlMenuItem>
+        <SlDivider />
+        <SlMenuItem value="cut">Cut</SlMenuItem>
+        <SlMenuItem value="copy">Copy</SlMenuItem>
+        <SlMenuItem value="paste">Paste</SlMenuItem>
+        <SlDivider />
+        <SlMenuItem>
+          Find
+          <SlMenu slot="submenu">
+            <SlMenuItem value="find">Find…</SlMenuItem>
+            <SlMenuItem value="find-previous">Find Next</SlMenuItem>
+            <SlMenuItem value="find-next">Find Previous</SlMenuItem>
+          </SlMenu>
+        </SlMenuItem>
+        <SlMenuItem>
+          Transformations
+          <SlMenu slot="submenu">
+            <SlMenuItem value="uppercase">Make uppercase</SlMenuItem>
+            <SlMenuItem value="lowercase">Make lowercase</SlMenuItem>
+            <SlMenuItem value="capitalize">Capitalize</SlMenuItem>
+          </SlMenu>
+        </SlMenuItem>
+      </SlMenu>
+    </SlDropdown>
+  </>
+);
+```
+
+:::warning
+As a UX best practice, avoid using more than one level of submenu when possible.
+:::
+
 ### Hoisting
 
 Dropdown panels will be clipped if they're inside a container that has `overflow: auto|hidden`. The `hoist` attribute forces the panel to use a fixed positioning strategy, allowing it to break out of the container. In this case, the panel will be positioned relative to its [containing block](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#Identifying_the_containing_block), which is usually the viewport unless an ancestor uses a `transform`, `perspective`, or `filter`. [Refer to this page](https://developer.mozilla.org/en-US/docs/Web/CSS/position#fixed) for more details.
@@ -349,7 +439,6 @@ Dropdown panels will be clipped if they're inside a container that has `overflow
 import SlButton from '@shoelace-style/shoelace/dist/react/button';
 import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
 import SlDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
-import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
 import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
 import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
