@@ -7,10 +7,10 @@ import { queryByTestId } from '../../internal/test/data-testid-helpers.js';
 import { sendKeys } from '@web/test-runner-commands';
 import { waitForScrollingToEnd } from '../../internal/test/wait-for-scrolling.js';
 import type { HTMLTemplateResult } from 'lit';
+import type { SlTabShowEvent } from '../../events/sl-tab-show.js';
 import type SlTab from '../tab/tab.js';
 import type SlTabGroup from './tab-group.js';
 import type SlTabPanel from '../tab-panel/tab-panel.js';
-import type SlTabShowEvent from '../../events/sl-tab-show.js';
 
 interface ClientRectangles {
   body?: DOMRect;

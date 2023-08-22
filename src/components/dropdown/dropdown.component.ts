@@ -11,10 +11,10 @@ import ShoelaceElement from '../../internal/shoelace-element.js';
 import SlPopup from '../popup/popup.component.js';
 import styles from './dropdown.styles.js';
 import type { CSSResultGroup } from 'lit';
+import type { SlSelectEvent } from '../../events/sl-select.js';
 import type SlButton from '../button/button.js';
 import type SlIconButton from '../icon-button/icon-button.js';
 import type SlMenu from '../menu/menu.js';
-import type { SlSelectEvent } from '../../events/sl-select.js';
 
 /**
  * @summary Dropdowns expose additional content that "drops down" in a panel.

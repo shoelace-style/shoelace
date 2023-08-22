@@ -2,8 +2,8 @@ import '../../../dist/shoelace.js';
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
+import type { SlSelectEvent } from '../../events/sl-select';
 import type SlMenuItem from './menu-item';
-import type SlSelectEvent from '../../events/sl-select';
 
 describe('<sl-menu-item>', () => {
   it('should pass accessibility tests', async () => {
