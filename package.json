@@ -10,6 +10,7 @@
   "type": "module",
   "types": "dist/shoelace.d.ts",
   "jsdelivr": "./cdn/shoelace-autoloader.js",
+  "style": "./dist/themes/light.css",
   "exports": {
     ".": {
       "types": "./dist/shoelace.d.ts",
