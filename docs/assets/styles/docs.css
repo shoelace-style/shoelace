@@ -534,7 +534,7 @@ pre .copy-code-button {
 }
 
 pre:hover .copy-code-button,
-.copy-code-button:focus-visible {
+.copy-code-button:focus-within {
   opacity: 1;
   scale: 1;
 }
