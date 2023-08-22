@@ -1,10 +1,10 @@
 import { elementUpdated, expect, fixture } from '@open-wc/testing';
 
 import '../../dist/shoelace.js';
+import { activeElements } from './active-elements.js';
 import { html } from 'lit';
 import { sendKeys } from '@web/test-runner-commands';
 import type { SlDrawer } from '../../dist/shoelace.js';
-import { activeElements } from './active-elements.js';
 
 async function holdShiftKey(callback: () => Promise<void>) {
   await sendKeys({ down: 'Shift' });
@@ -13,12 +13,12 @@ async function holdShiftKey(callback: () => Promise<void>) {
 }
 
 // Simple helper to turn the activeElements generator into an array
-function activeElementsArray () {
-  return [...activeElements()]
+function activeElementsArray() {
+  return [...activeElements()];
 }
 
-function getDeepestActiveElement () {
-  return activeElementsArray().pop()
+function getDeepestActiveElement() {
+  return activeElementsArray().pop();
 }
 
 window.customElements.define(
