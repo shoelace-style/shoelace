@@ -28,7 +28,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "useUnknownInCatchVariables": true,
-    "baseUrl": ".",
     "types": [
       "mocha",
       "user-agent-data-types"

@@ -383,10 +383,8 @@ The preferred placement of the select's listbox can be set with the `placement` 
 ```
 
 ```jsx:react
-import {
-  SlOption,
-  SlSelect
-} from '@shoelace-style/shoelace/dist/react';
+import SlOption from '@shoelace-style/shoelace/dist/react/option';
+import SlSelect from '@shoelace-style/shoelace/dist/react/select';
 
 const App = () => (
   <SlSelect placement="top">

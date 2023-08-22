@@ -14,10 +14,14 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
-- Removed the extra `React.Component` around `@lit-labs/react` wrapper. Upgrade to `@lit-labs/react` v2.0.1. [#1531]
+- Added support for submenus in `<sl-menu-item>` [#1410]
+- Added the `--submenu-offset` custom property to `<sl-menu-item>` [#1410]
 - Fixed type issues with the `ref` attribute in React Wrappers. [#1526]
 - Fixed a regression that caused `<sl-radio-button>` to render incorrectly with gaps [#1523]
 - Improved expand/collapse behavior of `<sl-tree>` to work more like users expect [#1521]
+- Improved `<sl-menu-item>` so labels truncate properly instead of getting chopped and overflowing
+- Removed the extra `React.Component` around `@lit-labs/react` wrapper. [#1531]
+- Upgrade `@lit-labs/react` to v2.0.1. [#1531]
 
 ## 2.7.0
 
