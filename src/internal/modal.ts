@@ -63,7 +63,6 @@ export default class Modal {
   startElementAlreadyFocused(startElement: HTMLElement) {
     for (const activeElement of activeElements()) {
       if (startElement === activeElement) {
-        //
         return true;
       }
     }
