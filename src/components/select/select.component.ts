@@ -19,7 +19,7 @@ import styles from './select.styles.js';
 import type { CSSResultGroup, TemplateResult } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
 import type SlOption from '../option/option.component.js';
-import type SlRemoveEvent from '../../events/sl-remove.js';
+import type { SlRemoveEvent } from '../../events/sl-remove.js';
 
 /**
  * @summary Selects allow you to choose items from a menu of predefined options.
