@@ -4,7 +4,6 @@ import '../../dist/shoelace.js';
 import { activeElements } from './active-elements.js';
 import { html } from 'lit';
 import { sendKeys } from '@web/test-runner-commands';
-import type { SlDrawer } from '../../dist/shoelace.js';
 
 async function holdShiftKey(callback: () => Promise<void>) {
   await sendKeys({ down: 'Shift' });
@@ -63,15 +62,23 @@ it('Should allow tabbing to slotted elements', async () => {
     </tab-test-1>
   `);
 
-  const drawer = el.shadowRoot!.querySelector('sl-drawer') as unknown as SlDrawer;
+  const drawer = el.shadowRoot?.querySelector('sl-drawer');
+
+  if (drawer === null || drawer === undefined) throw Error('Could not find drawer inside of the test element');
 
   await drawer.show();
 
   await elementUpdated(drawer);
 
-  const focusZero = drawer.shadowRoot!.querySelector("[role='dialog']");
+  const focusZero = drawer.shadowRoot?.querySelector("[role='dialog']");
+
+  if (focusZero === null || focusZero === undefined) throw Error('Could not find dialog panel inside <sl-drawer>');
+
   const focusOne = el.querySelector('#focus-1');
-  const focusTwo = drawer.shadowRoot!.querySelector("[part~='close-button']");
+  const focusTwo = drawer.shadowRoot?.querySelector("[part~='close-button']");
+
+  if (focusTwo === null || focusTwo === undefined) throw Error('Could not find close button inside <sl-drawer>');
+
   const focusThree = el.querySelector('#focus-3');
   const focusFour = el.querySelector('#focus-4');
   const focusFive = el.querySelector('#focus-5');
