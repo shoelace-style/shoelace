@@ -75,8 +75,8 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
   function walk(el: HTMLElement | ShadowRoot) {
     if (el instanceof Element) {
       // if the element has "inert" we can just no-op it.
-      if (el.hasAttribute("inert")) {
-        return
+      if (el.hasAttribute('inert')) {
+        return;
       }
 
       if (!allElements.includes(el)) {
@@ -84,7 +84,7 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
       }
 
       if (!tabbableElements.includes(el) && isTabbable(el)) {
-        tabbableElements.push(el)
+        tabbableElements.push(el);
       }
 
       /**
@@ -92,12 +92,13 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
        * However, there is an edge case if the `root` is wrapped by another shadowDOM, it won't grab the children.
        * This fixes that fun edge case.
        */
-      const slotElementsOutsideRootElement = (el: HTMLSlotElement) => (el.getRootNode({ composed: true }) as ShadowRoot | null)?.host !== root
+      const slotChildrenOutsideRootElement = (slotElement: HTMLSlotElement) =>
+        (slotElement.getRootNode({ composed: true }) as ShadowRoot | null)?.host !== root;
 
-      if (el instanceof HTMLSlotElement && slotElementsOutsideRootElement(el)) {
-        el.assignedElements({ flatten: true }).forEach((el: HTMLElement) => {
-          walk(el)
-        })
+      if (el instanceof HTMLSlotElement && slotChildrenOutsideRootElement(el)) {
+        el.assignedElements({ flatten: true }).forEach((assignedEl: HTMLElement) => {
+          walk(assignedEl);
+        });
       }
 
       if (el.shadowRoot !== null && el.shadowRoot.mode === 'open') {
@@ -111,7 +112,7 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
   // Collect all elements including the root
   walk(root);
 
-  return tabbableElements
+  return tabbableElements;
 
   // Is this worth having? Most sorts will always add increased overhead. And positive tabindexes shouldn't really be used.
   // So is it worth being right? Or fast?

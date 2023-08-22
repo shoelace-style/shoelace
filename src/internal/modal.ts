@@ -1,5 +1,5 @@
+import { activeElements } from './active-elements.js';
 import { getTabbableElements } from './tabbable.js';
-import { activeElements } from './active-elements.js'
 
 let activeModals: HTMLElement[] = [];
 
@@ -60,15 +60,15 @@ export default class Modal {
    * Checks if the `startElement` is already focused. This is important if the modal already
    *   has an existing focused prior to the first tab key.
    */
-  startElementAlreadyFocused (startElement: HTMLElement) {
+  startElementAlreadyFocused(startElement: HTMLElement) {
     for (const activeElement of activeElements()) {
       if (startElement === activeElement) {
-      //
-        return true
+        //
+        return true;
       }
     }
 
-    return false
+    return false;
   }
 
   handleKeyDown = (event: KeyboardEvent) => {
