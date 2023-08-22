@@ -4,37 +4,21 @@ import '../../dist/shoelace.js';
 import { html } from 'lit';
 import { sendKeys } from '@web/test-runner-commands';
 import type { SlDrawer } from '../../dist/shoelace.js';
-
-function getActiveElements(el: null | Element = document.activeElement) {
-  const elements: Element[] = [];
-
-  function walk(element: null | Element) {
-    if (element === null || element === undefined) {
-      return;
-    }
-
-    elements.push(element);
-
-    if ('shadowRoot' in element && element.shadowRoot && element.shadowRoot.mode !== 'closed') {
-      walk(element.shadowRoot.activeElement);
-    }
-  }
-
-  walk(el);
-
-  return elements;
-}
-
-function getDeepestActiveElement(el: null | Element = document.activeElement) {
-  const activeElements = getActiveElements(el);
-
-  return activeElements[activeElements.length - 1];
-}
+import { activeElements } from './active-elements.js';
 
 async function holdShiftKey(callback: () => Promise<void>) {
   await sendKeys({ down: 'Shift' });
   await callback();
   await sendKeys({ up: 'Shift' });
+}
+
+// Simple helper to turn the activeElements generator into an array
+function activeElementsArray () {
+  return [...activeElements()]
+}
+
+function getDeepestActiveElement () {
+  return activeElementsArray().pop()
 }
 
 window.customElements.define(
@@ -97,57 +81,57 @@ it('Should allow tabbing to slotted elements', async () => {
   expect(getDeepestActiveElement()).to.equal(focusZero);
 
   await sendKeys({ press: 'Tab' });
-  expect(getActiveElements()).to.include(focusOne);
+  expect(activeElementsArray()).to.include(focusOne);
 
   // When we hit the <Tab> key we should go to the "close button" on the drawer
   await sendKeys({ press: 'Tab' });
-  expect(getActiveElements()).to.include(focusTwo);
+  expect(activeElementsArray()).to.include(focusTwo);
 
   await sendKeys({ press: 'Tab' });
-  expect(getActiveElements()).to.include(focusThree);
+  expect(activeElementsArray()).to.include(focusThree);
 
   await sendKeys({ press: 'Tab' });
-  expect(getActiveElements()).to.include(focusFour);
+  expect(activeElementsArray()).to.include(focusFour);
 
   await sendKeys({ press: 'Tab' });
-  expect(getActiveElements()).to.include(focusFive);
+  expect(activeElementsArray()).to.include(focusFive);
 
   await sendKeys({ press: 'Tab' });
-  expect(getActiveElements()).to.include(focusSix);
-
-  // Now we should loop back to #panel
-  await sendKeys({ press: 'Tab' });
-  expect(getActiveElements()).to.include(focusZero);
+  expect(activeElementsArray()).to.include(focusSix);
 
   // Now we should loop back to #panel
   await sendKeys({ press: 'Tab' });
-  expect(getActiveElements()).to.include(focusOne);
+  expect(activeElementsArray()).to.include(focusZero);
+
+  // Now we should loop back to #panel
+  await sendKeys({ press: 'Tab' });
+  expect(activeElementsArray()).to.include(focusOne);
 
   // Let's reset and try from starting point 0 and go backwards.
   await holdShiftKey(async () => await sendKeys({ press: 'Tab' }));
-  expect(getActiveElements()).to.include(focusZero);
+  expect(activeElementsArray()).to.include(focusZero);
 
   await holdShiftKey(async () => await sendKeys({ press: 'Tab' }));
-  expect(getActiveElements()).to.include(focusSix);
+  expect(activeElementsArray()).to.include(focusSix);
 
   await holdShiftKey(async () => await sendKeys({ press: 'Tab' }));
-  expect(getActiveElements()).to.include(focusFive);
+  expect(activeElementsArray()).to.include(focusFive);
 
   await holdShiftKey(async () => await sendKeys({ press: 'Tab' }));
-  expect(getActiveElements()).to.include(focusFour);
+  expect(activeElementsArray()).to.include(focusFour);
 
   await holdShiftKey(async () => await sendKeys({ press: 'Tab' }));
-  expect(getActiveElements()).to.include(focusThree);
+  expect(activeElementsArray()).to.include(focusThree);
 
   await holdShiftKey(async () => await sendKeys({ press: 'Tab' }));
-  expect(getActiveElements()).to.include(focusTwo);
+  expect(activeElementsArray()).to.include(focusTwo);
 
   await holdShiftKey(async () => await sendKeys({ press: 'Tab' }));
-  expect(getActiveElements()).to.include(focusOne);
+  expect(activeElementsArray()).to.include(focusOne);
 
   await holdShiftKey(async () => await sendKeys({ press: 'Tab' }));
-  expect(getActiveElements()).to.include(focusZero);
+  expect(activeElementsArray()).to.include(focusZero);
 
   await holdShiftKey(async () => await sendKeys({ press: 'Tab' }));
-  expect(getActiveElements()).to.include(focusSix);
+  expect(activeElementsArray()).to.include(focusSix);
 });
