@@ -1,9 +1,9 @@
 import { html } from 'lit';
 import { query } from 'lit/decorators.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
+import SlMenuItem from '../menu-item/menu-item.component.js';
 import styles from './menu.styles.js';
 import type { CSSResultGroup } from 'lit';
-import type SlMenuItem from '../menu-item/menu-item.js';
 export interface MenuSelectEventDetail {
   item: SlMenuItem;
 }
@@ -29,12 +29,11 @@ export default class SlMenu extends ShoelaceElement {
   }
 
   private handleClick(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    const item = target.closest('sl-menu-item');
-
-    if (!item || item.disabled || item.inert) {
+    if (!(event.target instanceof SlMenuItem)) {
       return;
     }
+
+    const item: SlMenuItem = event.target;
 
     if (item.type === 'checkbox') {
       item.checked = !item.checked;
@@ -48,19 +47,21 @@ export default class SlMenu extends ShoelaceElement {
     if (event.key === 'Enter' || event.key === ' ') {
       const item = this.getCurrentItem();
       event.preventDefault();
+      event.stopPropagation();
 
       // Simulate a click to support @click handlers on menu items that also work with the keyboard
       item?.click();
     }
 
     // Move the selection when pressing down or up
-    if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
+    else if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
       const items = this.getAllItems();
       const activeItem = this.getCurrentItem();
       let index = activeItem ? items.indexOf(activeItem) : 0;
 
       if (items.length > 0) {
         event.preventDefault();
+        event.stopPropagation();
 
         if (event.key === 'ArrowDown') {
           index++;

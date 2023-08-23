@@ -164,32 +164,6 @@
 })();
 
 //
-// Copy code buttons
-//
-(() => {
-  document.addEventListener('click', event => {
-    const button = event.target.closest('.copy-code-button');
-    const pre = button?.closest('pre');
-    const code = pre?.querySelector('code');
-    const copyIcon = button?.querySelector('.copy-code-button__copy-icon');
-    const copiedIcon = button?.querySelector('.copy-code-button__copied-icon');
-
-    if (button && code) {
-      navigator.clipboard.writeText(code.innerText);
-      copyIcon.style.display = 'none';
-      copiedIcon.style.display = 'inline';
-      button.classList.add('copy-code-button--copied');
-
-      setTimeout(() => {
-        copyIcon.style.display = 'inline';
-        copiedIcon.style.display = 'none';
-        button.classList.remove('copy-code-button--copied');
-      }, 1000);
-    }
-  });
-})();
-
-//
 // Smooth links
 //
 (() => {

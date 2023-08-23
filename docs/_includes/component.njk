@@ -137,15 +137,17 @@
           <tr>
             <td>
               <code class="nowrap">{{ prop.name }}</code>
-              {% if prop.attribute != prop.name %}
-                <br>
-                <sl-tooltip content="This attribute is different from its property">
-                  <small>
-                    <code class="nowrap">
-                      {{ prop.attribute }}
-                    </code>
-                  </small>
-                </sl-tooltip>
+              {% if prop.attribute | length > 0 %}
+                {% if prop.attribute != prop.name %}
+                  <br>
+                  <sl-tooltip content="This attribute is different from its property">
+                    <small>
+                      <code class="nowrap">
+                        {{ prop.attribute }}
+                      </code>
+                    </small>
+                  </sl-tooltip>
+                {% endif %}
               {% endif %}
             </td>
             <td>
@@ -185,7 +187,7 @@
       </tbody>
     </table>
 
-    <p><em>Learn more about <a href="{{ rootUrl('/getting-started/usage#properties') }}">attributes and properties</a>.</em></p>
+    <p><em>Learn more about <a href="{{ rootUrl('/getting-started/usage#attributes-and-properties') }}">attributes and properties</a>.</em></p>
   {% endif %}
 
   {# Events #}
@@ -305,7 +307,7 @@
       </tbody>
     </table>
 
-    <p><em>Learn more about <a href="{{ rootUrl('/getting-started/usage#component-parts') }}">customizing CSS parts</a>.</em></p>
+    <p><em>Learn more about <a href="{{ rootUrl('/getting-started/customizing/#css-parts') }}">customizing CSS parts</a>.</em></p>
   {% endif %}
 
   {# Animations #}
@@ -329,7 +331,7 @@
       </tbody>
     </table>
 
-    <p><em>Learn more about <a href="{{ rootUrl('/getting-started/usage#animations') }}">customizing animations</a>.</em></p>
+    <p><em>Learn more about <a href="{{ rootUrl('/getting-started/customizing#animations') }}">customizing animations</a>.</em></p>
   {% endif %}
 
   {# Dependencies #}
