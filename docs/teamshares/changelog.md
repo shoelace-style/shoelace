@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.3
+
+- Fix for missing generated CSS tokens
+- Minor docs quotation fix
+
 ## 1.2.2
 
 - Utilities now export a method to automatically register FontAwesome icon libraries
