@@ -58,7 +58,7 @@ export default class Modal {
 
   /**
    * Checks if the `startElement` is already focused. This is important if the modal already
-   *   has an existing focused prior to the first tab key.
+   * has an existing focus prior to the first tab key.
    */
   startElementAlreadyFocused(startElement: HTMLElement) {
     for (const activeElement of activeElements()) {
