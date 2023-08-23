@@ -188,10 +188,6 @@ await nextTask('Wrapping components for React', () => {
   return execPromise(`node scripts/make-react.js --outdir "${outdir}"`, { stdio: 'inherit' });
 });
 
-await nextTask('Generating Web Types', () => {
-  return execPromise(`node scripts/make-web-types.js --outdir "${outdir}"`, { stdio: 'inherit' });
-});
-
 await nextTask('Generating themes', () => {
   return execPromise(`node scripts/make-themes.js --outdir "${outdir}"`, { stdio: 'inherit' });
 });
@@ -207,6 +203,7 @@ await nextTask('Running the TypeScript compiler', () => {
 // Copy the above steps to the CDN directory directly so we don't need to twice the work for nothing.
 await nextTask(`Copying Web Types, Themes, Icons, and TS Types to "${cdndir}"`, async () => {
   await deleteAsync(cdndir);
+  await copy('./web-types.json', `${outdir}/web-types.json`);
   await copy(outdir, cdndir);
 });
 

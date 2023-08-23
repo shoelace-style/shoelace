@@ -250,7 +250,9 @@ Note that multi-select options may wrap, causing the control to expand verticall
 
 ### Setting Initial Values
 
-Use the `value` attribute to set the initial selection. When using `multiple`, use space-delimited values to select more than one option.
+Use the `value` attribute to set the initial selection.
+
+When using `multiple`, the `value` _attribute_ uses space-delimited values to select more than one option. Because of this, `<sl-option>` values cannot contain spaces. If you're accessing the `value` _property_ through Javascript, it will be an array.
 
 ```html:preview
 <sl-select value="option-1 option-2" multiple clearable>
@@ -381,10 +383,8 @@ The preferred placement of the select's listbox can be set with the `placement` 
 ```
 
 ```jsx:react
-import {
-  SlOption,
-  SlSelect
-} from '@shoelace-style/shoelace/dist/react';
+import SlOption from '@shoelace-style/shoelace/dist/react/option';
+import SlSelect from '@shoelace-style/shoelace/dist/react/select';
 
 const App = () => (
   <SlSelect placement="top">
@@ -452,3 +452,53 @@ const App = () => (
   </>
 );
 ```
+
+### Custom Tags
+
+When multiple options can be selected, you can provide custom tags by passing a function to the `getTag` property. Your function can return a string of HTML, a <a href="https://lit.dev/docs/templates/overview/">Lit Template</a>, or an [`HTMLElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement). The `getTag()` function will be called for each option. The first argument is an `<sl-option>` element and the second argument is the tag's index (its position in the tag list).
+
+Remember that custom tags are rendered in a shadow root. To style them, you can use the `style` attribute in your template or you can add your own [parts](/getting-started/customizing/#css-parts) and target them with the [`::part()`](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) selector.
+
+```html:preview
+<sl-select
+  placeholder="Select one"
+  value="email phone"
+  multiple
+  clearable
+  class="custom-tag"
+>
+  <sl-option value="email">
+    <sl-icon slot="prefix" name="envelope"></sl-icon>
+    Email
+  </sl-option>
+  <sl-option value="phone">
+    <sl-icon slot="prefix" name="telephone"></sl-icon>
+    Phone
+  </sl-option>
+  <sl-option value="chat">
+    <sl-icon slot="prefix" name="chat-dots"></sl-icon>
+    Chat
+  </sl-option>
+</sl-select>
+
+<script type="module">
+  const select = document.querySelector('.custom-tag');
+
+  select.getTag = (option, index) => {
+    // Use the same icon used in the <sl-option>
+    const name = option.querySelector('sl-icon[slot="prefix"]').name;
+
+    // You can return a string, a Lit Template, or an HTMLElement here
+    return `
+      <sl-tag removable>
+        <sl-icon name="${name}" style="padding-inline-end: .5rem;"></sl-icon>
+        ${option.getTextLabel()}
+      </sl-tag>
+    `;
+  };
+</script>
+```
+
+:::warning
+Be sure you trust the content you are outputting! Passing unsanitized user input to `getTag()` can result in XSS vulnerabilities.
+:::

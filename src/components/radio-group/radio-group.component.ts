@@ -327,11 +327,8 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     const hasHelpTextSlot = this.hasSlotController.test('help-text');
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
-
     const defaultSlot = html`
-      <span @click=${this.handleRadioClick} @keydown=${this.handleKeyDown} role="presentation">
-        <slot @slotchange=${this.syncRadios}></slot>
-      </span>
+      <slot @slotchange=${this.syncRadios} @click=${this.handleRadioClick} @keydown=${this.handleKeyDown}></slot>
     `;
 
     return html`
@@ -378,7 +375,7 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
 
           ${this.hasButtonGroup
             ? html`
-                <sl-button-group part="button-group" exportparts="base:button-group__base">
+                <sl-button-group part="button-group" exportparts="base:button-group__base" role="presentation">
                   ${defaultSlot}
                 </sl-button-group>
               `
@@ -395,6 +392,5 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
         </div>
       </fieldset>
     `;
-    /* eslint-enable lit-a11y/click-events-have-key-events */
   }
 }

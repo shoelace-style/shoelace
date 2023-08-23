@@ -52,8 +52,10 @@ components.map(component => {
       ${eventExports}
 
       const tagName = '${component.tagName}'
+      Component.define('${component.tagName}')
 
-      const component = createComponent({
+      ${jsDoc}
+      const reactWrapper = createComponent({
         tagName,
         elementClass: Component,
         react: React,
@@ -63,20 +65,7 @@ components.map(component => {
         displayName: "${component.name}"
       })
 
-      ${jsDoc}
-      class SlComponent extends React.Component<Parameters<typeof component>[0]> {
-        constructor (...args: Parameters<typeof component>) {
-          super(...args)
-          Component.define(tagName)
-        }
-
-        render () {
-          const { children, ...props } = this.props
-          return React.createElement(component, props, children)
-        }
-      }
-
-      export default SlComponent;
+      export default reactWrapper
     `,
     Object.assign(prettierConfig, {
       parser: 'babel-ts'

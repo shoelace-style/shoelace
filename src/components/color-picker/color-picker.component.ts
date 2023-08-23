@@ -20,8 +20,8 @@ import SlVisuallyHidden from '../visually-hidden/visually-hidden.component.js';
 import styles from './color-picker.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
-import type SlChangeEvent from '../../events/sl-change.js';
-import type SlInputEvent from '../../events/sl-input.js';
+import type { SlChangeEvent } from '../../events/sl-change.js';
+import type { SlInputEvent } from '../../events/sl-input.js';
 
 const hasEyeDropper = 'EyeDropper' in window;
 

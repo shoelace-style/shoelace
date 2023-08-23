@@ -54,7 +54,7 @@ export default class SlButtonGroup extends ShoelaceElement {
       const index = slottedElements.indexOf(el);
       const button = findButton(el);
 
-      if (button !== null) {
+      if (button) {
         button.classList.add('sl-button-group__button');
         button.classList.toggle('sl-button-group__button--first', index === 0);
         button.classList.toggle('sl-button-group__button--inner', index > 0 && index < slottedElements.length - 1);

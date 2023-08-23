@@ -506,44 +506,37 @@ pre .token.italic {
 
 /* Copy code button */
 .copy-code-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  background: var(--sl-color-neutral-0);
-  border-radius: calc(var(--docs-border-radius) * 0.875);
-  border: solid 1px var(--sl-color-neutral-200);
+  top: 0;
+  right: 0;
+  white-space: normal;
   color: var(--sl-color-neutral-800);
-  text-transform: uppercase;
-  padding: 0.5rem;
-  margin: 0;
-  cursor: pointer;
-  transition: 100ms opacity, 100ms scale;
+  transition: 150ms opacity, 150ms scale;
 }
 
-.copy-code-button svg {
-  width: 1rem;
-  height: 1rem;
+.copy-code-button::part(button) {
+  background-color: var(--sl-color-neutral-50);
+  border-radius: 0 var(--docs-border-radius) 0 var(--docs-border-radius);
+  padding: 0.75rem;
+}
+
+.copy-code-button::part(button):hover {
+  background-color: color-mix(in oklch, var(--sl-color-neutral-50), var(--sl-color-neutral-1000) 3%);
+}
+
+.copy-code-button::part(button):active {
+  background-color: color-mix(in oklch, var(--sl-color-neutral-50), var(--sl-color-neutral-1000) 6%);
 }
 
 pre .copy-code-button {
   opacity: 0;
-  scale: 0.9;
+  scale: 0.75;
 }
 
 pre:hover .copy-code-button,
-.copy-code-button:focus-visible {
+.copy-code-button:focus-within {
   opacity: 1;
   scale: 1;
-}
-
-pre:hover .copy-code-button:hover,
-pre:hover .copy-code-button--copied {
-  background: var(--sl-color-neutral-200);
-  border-color: var(--sl-color-neutral-300);
-  color: var(--sl-color-neutral-900);
 }
 
 /* Callouts */

@@ -1,4 +1,5 @@
 import * as path from 'path';
+import { customElementJetBrainsPlugin } from 'custom-element-jet-brains-integration';
 import { customElementVsCodePlugin } from 'custom-element-vs-code-integration';
 import { parse } from 'comment-parser';
 import { pascalCase } from 'pascal-case';
@@ -200,6 +201,15 @@ export default {
           url: `https://shoelace.style/components/${tag.replace('sl-', '')}`
         }
       ]
+    }),
+    customElementJetBrainsPlugin({
+      excludeCss: true,
+      referencesTemplate: (_, tag) => {
+        return {
+          name: 'Documentation',
+          url: `https://shoelace.style/components/${tag.replace('sl-', '')}`
+        };
+      }
     })
   ]
 };
