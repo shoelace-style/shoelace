@@ -69,7 +69,6 @@ export function getTabbableBoundary(root: HTMLElement | ShadowRoot) {
 }
 
 export function getTabbableElements(root: HTMLElement | ShadowRoot) {
-  const allElements: HTMLElement[] = [];
   const tabbableElements: HTMLElement[] = [];
 
   function walk(el: HTMLElement | ShadowRoot) {
@@ -77,10 +76,6 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
       // if the element has "inert" we can just no-op it.
       if (el.hasAttribute('inert')) {
         return;
-      }
-
-      if (!allElements.includes(el)) {
-        allElements.push(el);
       }
 
       if (!tabbableElements.includes(el) && isTabbable(el)) {
@@ -116,7 +111,7 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
 
   // Is this worth having? Most sorts will always add increased overhead. And positive tabindexes shouldn't really be used.
   // So is it worth being right? Or fast?
-  // return allElements.filter(isTabbable).sort((a, b) => {
+  // return tabbableElements.filter(isTabbable).sort((a, b) => {
   //   // Make sure we sort by tabindex.
   //   const aTabindex = Number(a.getAttribute('tabindex')) || 0;
   //   const bTabindex = Number(b.getAttribute('tabindex')) || 0;
