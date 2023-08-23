@@ -14,6 +14,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- Added `--isolatedModules` and `--verbatimModuleSyntax` to `tsconfig.json`. For anyone directly importing event types, they no longer provide a default export due to these options being enabled. For people using the `events/event.js` file directly, there is no change.
 - Added support for submenus in `<sl-menu-item>` [#1410]
 - Added the `--submenu-offset` custom property to `<sl-menu-item>` [#1410]
 - Fixed type issues with the `ref` attribute in React Wrappers. [#1526]

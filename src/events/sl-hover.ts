@@ -1,4 +1,4 @@
-type SlHoverEvent = CustomEvent<{
+export type SlHoverEvent = CustomEvent<{
   phase: 'start' | 'move' | 'end';
   value: number;
 }>;
@@ -8,5 +8,3 @@ declare global {
     'sl-hover': SlHoverEvent;
   }
 }
-
-export default SlHoverEvent;
