@@ -89,7 +89,7 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
 
       /**
        * This looks funky. Basically a slots children will always be picked up *if* they're within the `root` element.
-       * However, there is an edge case if the `root` is wrapped by another shadowDOM, it won't grab the children.
+       * However, there is an edge case when, if the `root` is wrapped by another shadow DOM, it won't grab the children.
        * This fixes that fun edge case.
        */
       const slotChildrenOutsideRootElement = (slotElement: HTMLSlotElement) =>
