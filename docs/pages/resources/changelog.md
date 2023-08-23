@@ -12,10 +12,18 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
-## Next
+## 2.8.0
 
+- Added `--isolatedModules` and `--verbatimModuleSyntax` to `tsconfig.json`. For anyone directly importing event types, they no longer provide a default export due to these options being enabled. For people using the `events/event.js` file directly, there is no change.
+- Added support for submenus in `<sl-menu-item>` [#1410]
+- Added the `--submenu-offset` custom property to `<sl-menu-item>` [#1410]
+- Fixed an issue with focus trapping elements like `<sl-dialog>` when wrapped by other elements not checking the assigned elements of `<slot>`s. [#1537]
+- Fixed type issues with the `ref` attribute in React Wrappers. [#1526]
 - Fixed a regression that caused `<sl-radio-button>` to render incorrectly with gaps [#1523]
 - Improved expand/collapse behavior of `<sl-tree>` to work more like users expect [#1521]
+- Improved `<sl-menu-item>` so labels truncate properly instead of getting chopped and overflowing
+- Removed the extra `React.Component` around `@lit-labs/react` wrapper. [#1531]
+- Upgrade `@lit-labs/react` to v2.0.1. [#1531]
 
 ## 2.7.0
 
