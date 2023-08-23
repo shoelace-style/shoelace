@@ -17,6 +17,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Added `--isolatedModules` and `--verbatimModuleSyntax` to `tsconfig.json`. For anyone directly importing event types, they no longer provide a default export due to these options being enabled. For people using the `events/event.js` file directly, there is no change.
 - Added support for submenus in `<sl-menu-item>` [#1410]
 - Added the `--submenu-offset` custom property to `<sl-menu-item>` [#1410]
+- Fixed an issue with focus trapping elements like `<sl-dialog>` when wrapped by other elements not checking the assigned elements of `<slot>`s. [#1537]
 - Fixed type issues with the `ref` attribute in React Wrappers. [#1526]
 - Fixed a regression that caused `<sl-radio-button>` to render incorrectly with gaps [#1523]
 - Improved expand/collapse behavior of `<sl-tree>` to work more like users expect [#1521]
