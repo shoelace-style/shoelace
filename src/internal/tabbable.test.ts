@@ -11,9 +11,8 @@ async function holdShiftKey(callback: () => Promise<void>) {
   await sendKeys({ up: 'Shift' });
 }
 
-const tabKey = navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('HeadlessChrome')
-    ? 'Alt+Tab'
-    : 'Tab';
+const tabKey =
+  navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('HeadlessChrome') ? 'Alt+Tab' : 'Tab';
 
 // Simple helper to turn the activeElements generator into an array
 function activeElementsArray() {
