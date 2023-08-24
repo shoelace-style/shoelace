@@ -10,7 +10,7 @@
 
   <div class="panel-content">
     <h2>Type styles</h2>
-    <div>Styles can be applied using a <code>.ts-<em>{style-name}</em></code> class. The classes are composed with Tailwind utility classes and are defined in this <a href="https://github.com/teamshares/shared-ui/blob/main/scss/includes/_typography.scss" target="_blank">_typography.scss</a> file.</div>
+    <div>Styles can be applied using a <code>.ts-<em>{style-name}</em></code> class. The classes are composed with Tailwind utility classes and are defined in this <a href="https://github.com/teamshares/shared-ui/blob/main/scss/includes/_typography.scss" class="ts-text-link" target="_blank">_typography.scss</a> file.</div>
   </div>
 
 ```html preview
@@ -312,7 +312,7 @@
     </sl-card>
     <sl-card class="text-style">
       <div slot="header">
-        <div class="ts-body-large">Teamshares helps traditional small businesses become employee-owned through education, good governance and digital products that make financials and operations simpler.</div>
+        <div class="ts-body-large">Teamshares is an employee ownership platform for small business, driven by proprietary software, education, and financial products.</div>
         <code>.ts-body-large</code>
       </div>
       <div class="text-specs">
@@ -342,7 +342,7 @@
     </sl-card>
     <sl-card class="text-style">
       <div slot="header">
-        <div class="ts-body-1">Teamshares helps traditional small businesses become employee-owned through education, good governance and digital products that make financials and operations simpler.</div>
+        <div class="ts-body-1">Teamshares is an employee ownership platform for small business, driven by proprietary software, education, and financial products.</div>
         <code>.ts-body-1</code>
       </div>
       <div class="text-specs">
@@ -372,7 +372,7 @@
     </sl-card>
     <sl-card class="text-style">
       <div slot="header">
-        <div class="ts-body-2">Teamshares helps traditional small businesses become employee-owned through education, good governance and digital products that make financials and operations simpler.</div>
+        <div class="ts-body-2">Teamshares is an employee ownership platform for small business, driven by proprietary software, education, and financial products.</div>
         <code>.ts-body-2</code>
       </div>
       <div class="text-specs">
@@ -402,7 +402,7 @@
     </sl-card>
     <sl-card class="text-style">
       <div slot="header">
-        <div class="ts-body-3">Teamshares helps traditional small businesses become employee-owned through education, good governance and digital products that make financials and operations simpler.</div>
+        <div class="ts-body-3">Teamshares is an employee ownership platform for small business, driven by proprietary software, education, and financial products.</div>
         <code>.ts-body-3</code>
       </div>
       <div class="text-specs">

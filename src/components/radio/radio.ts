@@ -13,6 +13,8 @@ import type { CSSResultGroup } from 'lit';
  * @documentation https://shoelace.style/components/radio
  * @status stable
  * @since 2.0
+ * @pattern stable
+ * @figma ready
  *
  * @dependency sl-icon
  *

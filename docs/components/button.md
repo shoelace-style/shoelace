@@ -220,6 +220,7 @@ Use the `text` variant to create text buttons that share the same size as regula
 <sl-button variant="text" size="small">Text</sl-button>
 <sl-button variant="text" size="medium">Text</sl-button>
 <sl-button variant="text" size="large">Text</sl-button>
+<sl-button variant="text" size="x-large">Text</sl-button>
 ```
 
 ```pug slim

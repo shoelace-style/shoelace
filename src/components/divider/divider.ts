@@ -9,6 +9,8 @@ import type { CSSResultGroup } from 'lit';
  * @documentation https://shoelace.style/components/divider
  * @status stable
  * @since 2.0
+ * @pattern stable
+ * @figma ready
  *
  * @cssproperty --color - The color of the divider.
  * @cssproperty --width - The width of the divider.

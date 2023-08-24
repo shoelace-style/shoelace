@@ -24,8 +24,8 @@ describe('<sl-breadcrumb>', () => {
       await expect(el).to.be.accessible({ ignoredRules });
     });
 
-    it('should render sl-icon as separator', () => {
-      expect(el.querySelectorAll('sl-icon').length).to.eq(4);
+    it('should render a span containing a forward slash as separator', () => {
+      expect(el.querySelectorAll('span[slot=separator]').length).to.eq(4);
     });
 
     it('should attach aria-current "page" on the last breadcrumb item.', () => {

@@ -7,7 +7,7 @@
 
 .code-block__preview {
   position: relative;
-  border: solid 1px var(--sl-color-neutral-200);
+  border: solid 1px var(--sl-color-neutral-300);
   border-bottom: none;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
@@ -41,7 +41,7 @@
   font-size: 20px;
   color: var(--sl-color-neutral-600);
   background-color: var(--sl-color-neutral-0);
-  border-left: solid 1px var(--sl-color-neutral-200);
+  border-left: solid 1px var(--sl-color-neutral-300);
   border-top-right-radius: 3px;
   cursor: ew-resize;
   transition: 250ms background-color;
@@ -58,7 +58,7 @@
 }
 
 .code-block__source {
-  border: solid 1px var(--sl-color-neutral-200);
+  border: solid 1px var(--sl-color-neutral-300);
   border-bottom: none;
   border-radius: 0 !important;
   display: none;
@@ -74,7 +74,7 @@
 
 .code-block__buttons {
   position: relative;
-  border: solid 1px var(--sl-color-neutral-200);
+  border: solid 1px var(--sl-color-neutral-300);
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
   display: flex;
@@ -97,7 +97,7 @@
 }
 
 .code-block__button:not(:last-of-type) {
-  border-right: solid 1px var(--sl-color-neutral-200);
+  border-right: solid 1px var(--sl-color-neutral-300);
 }
 
 .code-block__button--html,

@@ -121,81 +121,7 @@ sl-select[multiple]:focus {
 /** modifying the styles in the components themselves             */
 /** ************************************************************* */
 
-/** ****************** */
-/** Alert */
-/** ****************** */
-
-sl-alert::part(message) {
-  color: var(--ts-color-text-default);
-  /* ts-body-2 */
-  font-size: var(--ts-font-sm);
-  /* 14px */
-  letter-spacing: var(--ts-tracking-normal);
-  /* normal */
-  line-height: var(--ts-leading-5);
-  /* 1.25rem * 20px */
-}
-
-sl-alert::part(icon) {
-  font-size: 24px;
-  /* Only needed if we use Heroicons outline set */
-}
-
-sl-alert[variant='primary']::part(base) {
-  background-color: var(--sl-color-primary-50);
-  border: 1px solid var(--sl-color-primary-200);
-}
-
-sl-alert[variant='success']::part(base) {
-  background-color: var(--sl-color-success-100);
-  border: 1px solid var(--sl-color-success-200);
-}
-
-sl-alert[variant='success']::part(icon) {
-  color: var(--sl-color-success-700);
-}
-
-sl-alert[variant='neutral']::part(base) {
-  background-color: var(--sl-color-neutral-100);
-  border: 1px solid var(--sl-color-neutral-300);
-}
-
-sl-alert[variant='neutral']::part(icon) {
-  color: var(--sl-color-neutral-600);
-}
-
-sl-alert[variant='warning']::part(base) {
-  background-color: var(--sl-color-warning-50);
-  border: 1px solid var(--sl-color-warning-200);
-}
-
-sl-alert[variant='warning']::part(icon) {
-  color: var(--sl-color-warning-800);
-}
-
-sl-alert[variant='danger']::part(base) {
-  background-color: var(--sl-color-danger-100);
-  border: 1px solid var(--sl-color-danger-200);
-}
-
-sl-alert[variant='danger']::part(icon) {
-  color: var(--sl-color-danger-800);
-}
-
-sl-alert::part(close-button__base) {
-  color: var(--sl-color-neutral-700);
-  font-size: 24px;
-}
-
-sl-alert::part(close-button__base):hover {
-  color: var(--sl-color-neutral-800);
-}
-
-sl-alert::part(close-button__base):active {
-  color: var(--sl-color-neutral-900);
-}
-
-/** ****************** */
+/** ******************************** */
 /** Button */
 /** ****************** */
 
@@ -277,6 +203,14 @@ sl-button[variant='danger']::part(base):hover {
 sl-button[variant='danger']::part(base):active {
   background-color: var(--sl-color-danger-900);
   border-color: var(--sl-color-danger-700);
+}
+
+sl-button[variant='text']::part(base):hover {
+  color: var(--sl-color-primary-800);
+}
+
+sl-button[variant='text']::part(base):active {
+  color: var(--sl-color-primary-900);
 }
 
 /* Outline buttons */
@@ -432,14 +366,6 @@ sl-button.no-gap {
 }
 
 /** ****************** */
-/** Card */
-/** ****************** */
-
-sl-card {
-  --border-color: var(--sl-color-neutral-300);
-}
-
-/** ****************** */
 /* Checkbox & radio */
 /** ****************** */
 
@@ -462,19 +388,6 @@ sl-radio::part(label) {
 
 sl-radio::part(base) {
   margin-top: var(--sl-spacing-medium);
-}
-
-/** ****************** */
-/** Details */
-/** ****************** */
-
-sl-details::part(base) {
-  border: 1px solid var(--sl-color-neutral-300);
-}
-
-/* To add a card shadow around the details block */
-sl-details.card-shadow::part(base) {
-  box-shadow: var(--sl-shadow-x-small);
 }
 
 /* To remove the border around the details block */

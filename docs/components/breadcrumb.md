@@ -84,7 +84,7 @@ Use the `separator` slot to change the separator that goes between breadcrumb it
 
 ```html preview
 <sl-breadcrumb>
-  <sl-icon name="arrow-small-right-mini" slot="separator"></sl-icon>
+  <sl-icon library="fa" name="arrow-right" slot="separator"></sl-icon>
   <sl-breadcrumb-item>First</sl-breadcrumb-item>
   <sl-breadcrumb-item>Second</sl-breadcrumb-item>
   <sl-breadcrumb-item>Third</sl-breadcrumb-item>
@@ -93,7 +93,7 @@ Use the `separator` slot to change the separator that goes between breadcrumb it
 <br />
 
 <sl-breadcrumb>
-  <sl-icon name="arrow-right" slot="separator"></sl-icon>
+  <sl-icon library="fa" name="chevron-right" slot="separator"></sl-icon>
   <sl-breadcrumb-item>First</sl-breadcrumb-item>
   <sl-breadcrumb-item>Second</sl-breadcrumb-item>
   <sl-breadcrumb-item>Third</sl-breadcrumb-item>
@@ -102,7 +102,7 @@ Use the `separator` slot to change the separator that goes between breadcrumb it
 <br />
 
 <sl-breadcrumb>
-  <span slot="separator">/</span>
+  <span slot="separator">•</span>
   <sl-breadcrumb-item>First</sl-breadcrumb-item>
   <sl-breadcrumb-item>Second</sl-breadcrumb-item>
   <sl-breadcrumb-item>Third</sl-breadcrumb-item>
@@ -111,19 +111,19 @@ Use the `separator` slot to change the separator that goes between breadcrumb it
 
 ```pug slim
 sl-breadcrumb
-  sl-icon name="arrow-small-right-mini" slot="separator"
+  sl-icon library="fa" name="arrow-right" slot="separator"
   sl-breadcrumb-item First
   sl-breadcrumb-item Second
   sl-breadcrumb-item Third
 br
 sl-breadcrumb
-  sl-icon name="arrow-right" slot="separator"
+  sl-icon library="fa" name="chevron-right" slot="separator"
   sl-breadcrumb-item First
   sl-breadcrumb-item Second
   sl-breadcrumb-item Third
 br
 sl-breadcrumb
-  span slot="separator" /
+  span slot="separator" •
   sl-breadcrumb-item First
   sl-breadcrumb-item Second
   sl-breadcrumb-item Third
@@ -136,7 +136,7 @@ import { SlBreadcrumb, SlBreadcrumbItem } from '@teamshares/shoelace/dist/react'
 const App = () => (
   <>
     <SlBreadcrumb>
-      <sl-icon name="arrow-small-right-mini" slot="separator" />
+      <sl-icon library="fa" name="arrow-right" slot="separator" />
       <SlBreadcrumbItem>First</SlBreadcrumbItem>
       <SlBreadcrumbItem>Second</SlBreadcrumbItem>
       <SlBreadcrumbItem>Third</SlBreadcrumbItem>
@@ -145,7 +145,7 @@ const App = () => (
     <br />
 
     <SlBreadcrumb>
-      <sl-icon name="arrow-right" slot="separator" />
+      <sl-icon library="fa" name="chevron-right" slot="separator" />
       <SlBreadcrumbItem>First</SlBreadcrumbItem>
       <SlBreadcrumbItem>Second</SlBreadcrumbItem>
       <SlBreadcrumbItem>Third</SlBreadcrumbItem>
@@ -154,7 +154,7 @@ const App = () => (
     <br />
 
     <SlBreadcrumb>
-      <span slot="separator">/</span>
+      <span slot="separator">•</span>
       <SlBreadcrumbItem>First</SlBreadcrumbItem>
       <SlBreadcrumbItem>Second</SlBreadcrumbItem>
       <SlBreadcrumbItem>Third</SlBreadcrumbItem>
@@ -253,9 +253,7 @@ Dropdown menus can be placed in a prefix or suffix slot to provide additional op
   <sl-breadcrumb-item>
     Web Design
     <sl-dropdown slot="suffix">
-      <sl-button slot="trigger" size="small" circle>
-        <sl-icon label="More options" name="ellipsis-vertical"></sl-icon>
-      </sl-button>
+      <sl-icon-button slot="trigger" library="fa" label="More options" name="ellipsis"></sl-icon-button>
       <sl-menu>
         <sl-menu-item type="checkbox" checked>Web Design</sl-menu-item>
         <sl-menu-item type="checkbox">Web Development</sl-menu-item>
@@ -274,8 +272,7 @@ sl-breadcrumb
   sl-breadcrumb-item
     | Web Design
     sl-dropdown slot="suffix"
-      sl-button slot="trigger" size="small" circle="true"
-        sl-icon label="More options" name="ellipsis-vertical"
+      sl-icon-button slot="trigger" library="fa" label="More options" name="ellipsis"
       sl-menu
         sl-menu-item type="checkbox" checked="true" Web Design
         sl-menu-item type="checkbox" Web Development
@@ -301,9 +298,7 @@ const App = () => (
     <SlBreadcrumbItem>
       Web Design
       <SlDropdown slot="suffix">
-        <SlButton slot="trigger" size="small" circle>
-          <SlIcon label="More options" name="ellipsis-vertical"></SlIcon>
-        </SlButton>
+        <SlIconButton slot="trigger" library="fa" label="More options" name="ellipsis"></SlIconButton>
         <SlMenu>
           <SlMenuItem type="checkbox" checked>
             Web Design

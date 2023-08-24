@@ -13,6 +13,8 @@ let id = 0;
  * @documentation https://shoelace.style/components/tab-panel
  * @status stable
  * @since 2.0
+ * @pattern stable
+ * @figma draft
  *
  * @slot - The tab panel's content.
  *

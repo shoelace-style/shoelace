@@ -2,17 +2,25 @@
 
 [component-header:sl-alert]
 
+<sl-tab-group>
+  <sl-tab slot="nav" panel="examples">Examples</sl-tab>
+  <sl-tab slot="nav" panel="guidelines">Guidelines</sl-tab>
+
+  <sl-tab-panel name="examples">
+
 ```html preview
 <sl-alert open>
-  <sl-icon slot="icon" name="information-circle"></sl-icon>
-  This is a standard alert. You can customize its content and even the icon.
+  <sl-icon slot="icon" library="fa" name="fas-circle-info"></sl-icon>
+  <div slot="header">This is super informative</div>
+  This is a standard informational alert.
 </sl-alert>
 ```
 
 ```pug slim
 sl-alert open="true"
-  sl-icon slot="icon" name="information-circle"
-  | This is a standard alert. You can customize its content and even the icon.
+  sl-icon slot="icon" library="fa" name="fas-circle-info"
+  div slot="header" This is super informative
+  | This is a standard informational alert.
 ```
 
 ```jsx react
@@ -20,15 +28,14 @@ import { SlAlert, SlIcon } from '@teamshares/shoelace/dist/react';
 
 const App = () => (
   <SlAlert open>
-    <SlIcon slot="icon" name="information-circle" />
-    This is a standard alert. You can customize its content and even the icon.
+    <SlIcon slot="icon" library="fa" name="fas-circle-info" />
+    <div slot="header">This is super informative</div>
+    This is a standard standard informational alert.
   </SlAlert>
 );
 ```
 
 ?> Alerts will not be visible if the `open` attribute is not present.
-
-## Examples
 
 ### Variants
 
@@ -36,73 +43,55 @@ Set the `variant` attribute to change the alert's variant.
 
 ```html preview
 <sl-alert variant="primary" open>
-  <sl-icon slot="icon" name="information-circle"></sl-icon>
-  <strong>This is super informative</strong><br />
+  <sl-icon slot="icon" library="fa" name="fas-circle-info"></sl-icon>
+  <div slot="header">This is super informative</div>
   You can tell by how pretty the alert is.
 </sl-alert>
 
 <br />
 
 <sl-alert variant="success" open>
-  <sl-icon slot="icon" name="check-circle"></sl-icon>
-  <strong>Your changes have been saved</strong><br />
-  You can safely exit the app now.
-</sl-alert>
-
-<br />
-
-<sl-alert variant="neutral" open>
-  <sl-icon slot="icon" name="cog-6-tooth"></sl-icon>
-  <strong>Your settings have been updated</strong><br />
-  Settings will take affect on next login.
+  <sl-icon slot="icon" library="fa" name="fas-circle-check"></sl-icon>
+  <div slot="header">You can safely exit the app now</div>
+  Your changes have been saved.
 </sl-alert>
 
 <br />
 
 <sl-alert variant="warning" open>
-  <sl-icon slot="icon" name="exclamation-triangle"></sl-icon>
-  <strong>Your session has ended</strong><br />
+  <sl-icon slot="icon" library="fa" name="fas-triangle-exclamation"></sl-icon>
+  <div slot="header">Your session has ended</div>
   Please login again to continue.
 </sl-alert>
 
 <br />
 
 <sl-alert variant="danger" open>
-  <sl-icon slot="icon" name="exclamation-circle"></sl-icon>
-  <strong>Your account has been deleted</strong><br />
+  <sl-icon slot="icon" library="fa" name="fas-circle-exclamation"></sl-icon>
+  <div slot="header">Your account has been deleted</div>
   We are very sorry to see you go!
 </sl-alert>
 ```
 
 ```pug slim
 sl-alert variant="primary" open="true"
-  sl-icon slot="icon" name="information-circle"
-  strong This is super informative
-  br
+  sl-icon slot="icon" library="fa" name="fas-circle-info"
+  div slot="header" This is super informative
   | You can tell by how pretty the alert is.
 br
 sl-alert variant="success" open="true"
-  sl-icon slot="icon" name="check-circle"
-  strong Your changes have been saved
-  br
+  sl-icon slot="icon" library="fa" name="fas-circle-check"
+  div slot="header" Your changes have been saved
   | You can safely exit the app now.
 br
-sl-alert variant="neutral" open="true"
-  sl-icon slot="icon" name="cog-6-tooth"
-  strong Your settings have been updated
-  br
-  | Settings will take affect on next login.
-br
 sl-alert variant="warning" open="true"
-  sl-icon slot="icon" name="exclamation-triangle"
-  strong Your session has ended
-  br
+  sl-icon slot="icon" library="fa" name="fas-triangle-exclamation"
+  div slot="header" Your session has ended
   | Please login again to continue.
 br
 sl-alert variant="danger" open="true"
-  sl-icon slot="icon" name="exclamation-circle"
-  strong Your account has been deleted
-  br
+  sl-icon slot="icon" library="fa" name="fas-circle-exclamation"
+  div slot="header" Your account has been deleted
   | We are very sorry to see you go!
 ```
 
@@ -112,45 +101,32 @@ import { SlAlert, SlIcon } from '@teamshares/shoelace/dist/react';
 const App = () => (
   <>
     <SlAlert variant="primary" open>
-      <SlIcon slot="icon" name="information-circle" />
-      <strong>This is super informative</strong>
-      <br />
+      <SlIcon slot="icon" library="fa" name="fas-circle-info" />
+      <div slot="header">This is super informative</div>
       You can tell by how pretty the alert is.
     </SlAlert>
 
     <br />
 
     <SlAlert variant="success" open>
-      <SlIcon slot="icon" name="check-circle" />
-      <strong>Your changes have been saved</strong>
-      <br />
+      <SlIcon slot="icon" library="fa" name="fas-circle-check" />
+      <div slot="header">Your changes have been saved</div>
       You can safely exit the app now.
     </SlAlert>
 
     <br />
 
-    <SlAlert variant="neutral" open>
-      <SlIcon slot="icon" name="cog-6-tooth" />
-      <strong>Your settings have been updated</strong>
-      <br />
-      Settings will take affect on next login.
-    </SlAlert>
-
-    <br />
-
     <SlAlert variant="warning" open>
-      <SlIcon slot="icon" name="exclamation-triangle" />
-      <strong>Your session has ended</strong>
-      <br />
+      <SlIcon slot="icon" library="fa" name="fas-triangle-exclamation" />
+      <div slot="header">Your session has ended</div>
       Please login again to continue.
     </SlAlert>
 
     <br />
 
     <SlAlert variant="danger" open>
-      <SlIcon slot="icon" name="exclamation-circle" />
-      <strong>Your account has been deleted</strong>
-      <br />
+      <SlIcon slot="icon" library="fa" name="fas-circle-exclamation" />
+      <div slot="header">Your account has been deleted</div>
       We are very sorry to see you go!
     </SlAlert>
   </>
@@ -163,7 +139,7 @@ Add the `closable` attribute to show a close button that will hide the alert.
 
 ```html preview
 <sl-alert variant="primary" open closable class="alert-closable">
-  <sl-icon slot="icon" name="information-circle"></sl-icon>
+  <sl-icon slot="icon" library="fa" name="fas-circle-info"></sl-icon>
   You can close this alert any time!
 </sl-alert>
 
@@ -177,7 +153,7 @@ Add the `closable` attribute to show a close button that will hide the alert.
 
 ```pug slim
 sl-alert.alert-closable variant="primary" open="true" closable="true"
-  sl-icon slot="icon" name="information-circle"
+  sl-icon slot="icon" library="fa" name="fas-circle-info"
   | You can close this alert any time!
 
 javascript:
@@ -201,14 +177,14 @@ const App = () => {
 
   return (
     <SlAlert open={open} closable onSlAfterHide={handleHide}>
-      <SlIcon slot="icon" name="information-circle" />
+      <SlIcon slot="icon" library="fa" name="fas-circle-info" />
       You can close this alert any time!
     </SlAlert>
   );
 };
 ```
 
-### Without Icons
+<!-- ### Without Icons
 
 Icons are optional. Simply omit the `icon` slot if you don't want them.
 
@@ -228,7 +204,7 @@ const App = () => (
     Nothing fancy here, just a simple alert.
   </SlAlert>
 );
-```
+``` -->
 
 ### Duration
 
@@ -239,7 +215,7 @@ Set the `duration` attribute to automatically hide an alert after a period of ti
   <sl-button variant="primary">Show Alert</sl-button>
 
   <sl-alert variant="primary" duration="3000" closable>
-    <sl-icon slot="icon" name="information-circle"></sl-icon>
+    <sl-icon slot="icon" library="fa" name="fas-circle-info"></sl-icon>
     This alert will automatically hide itself after three seconds, unless you interact with it.
   </sl-alert>
 </div>
@@ -263,7 +239,7 @@ Set the `duration` attribute to automatically hide an alert after a period of ti
 div.alert-duration
   sl-button variant="primary" Show Alert
   sl-alert variant="primary" duration="3000" closable="true"
-    sl-icon slot="icon" name="information-circle"
+    sl-icon slot="icon" library="fa" name="fas-circle-info"
     | This alert will automatically hide itself after three seconds, unless you interact with it.
 
 javascript:
@@ -300,7 +276,7 @@ const App = () => {
         </SlButton>
 
         <SlAlert variant="primary" duration="3000" open={open} closable onSlAfterHide={() => setOpen(false)}>
-          <SlIcon slot="icon" name="information-circle" />
+          <SlIcon slot="icon" library="fa" name="fas-circle-info" />
           This alert will automatically hide itself after three seconds, unless you interact with it.
         </SlAlert>
       </div>
@@ -321,37 +297,30 @@ You should always use the `closable` attribute so users can dismiss the notifica
 <div class="alert-toast">
   <sl-button variant="primary">Primary</sl-button>
   <sl-button variant="success">Success</sl-button>
-  <sl-button variant="neutral">Neutral</sl-button>
   <sl-button variant="warning">Warning</sl-button>
   <sl-button variant="danger">Danger</sl-button>
 
   <sl-alert variant="primary" duration="3000" closable>
-    <sl-icon slot="icon" name="information-circle"></sl-icon>
-    <strong>This is super informative</strong><br />
+    <sl-icon slot="icon" library="fa" name="fas-circle-info"></sl-icon>
+    <div slot="header">This is super informative</div>
     You can tell by how pretty the alert is.
   </sl-alert>
 
   <sl-alert variant="success" duration="3000" closable>
-    <sl-icon slot="icon" name="check-circle"></sl-icon>
-    <strong>Your changes have been saved</strong><br />
+    <sl-icon slot="icon" library="fa" name="fas-circle-check"></sl-icon>
+    <div slot="header">Your changes have been saved</div>
     You can safely exit the app now.
   </sl-alert>
 
-  <sl-alert variant="neutral" duration="3000" closable>
-    <sl-icon slot="icon" name="cog-6-tooth"></sl-icon>
-    <strong>Your settings have been updated</strong><br />
-    Settings will take affect on next login.
-  </sl-alert>
-
   <sl-alert variant="warning" duration="3000" closable>
-    <sl-icon slot="icon" name="exclamation-triangle"></sl-icon>
-    <strong>Your session has ended</strong><br />
+    <sl-icon slot="icon" library="fa" name="fas-triangle-exclamation"></sl-icon>
+    <div slot="header">Your session has ended</div>
     Please login again to continue.
   </sl-alert>
 
   <sl-alert variant="danger" duration="3000" closable>
-    <sl-icon slot="icon" name="exclamation-circle"></sl-icon>
-    <strong>Your account has been deleted</strong><br />
+    <sl-icon slot="icon" library="fa" name="fas-circle-exclamation"></sl-icon>
+    <div slot="header">Your account has been deleted</div>
     We are very sorry to see you go!
   </sl-alert>
 </div>
@@ -359,7 +328,7 @@ You should always use the `closable` attribute so users can dismiss the notifica
 <script>
   const container = document.querySelector('.alert-toast');
 
-  ['primary', 'success', 'neutral', 'warning', 'danger'].map(variant => {
+  ['primary', 'success', 'warning', 'danger'].map(variant => {
     const button = container.querySelector(`sl-button[variant="${variant}"]`);
     const alert = container.querySelector(`sl-alert[variant="${variant}"]`);
 
@@ -372,39 +341,29 @@ You should always use the `closable` attribute so users can dismiss the notifica
 div.alert-toast
   sl-button variant="primary" Primary
   sl-button variant="success" Success
-  sl-button variant="neutral" Neutral
   sl-button variant="warning" Warning
   sl-button variant="danger" Danger
   sl-alert variant="primary" duration="3000" closable="true"
-    sl-icon slot="icon" name="information-circle"
-    strong This is super informative
-    br
+    sl-icon slot="icon" library="fa" name="fas-circle-info"
+    div slot="header" This is super informative
     | You can tell by how pretty the alert is.
   sl-alert variant="success" duration="3000" closable="true"
-    sl-icon slot="icon" name="check-circle"
-    strong Your changes have been saved
-    br
+    sl-icon slot="icon" library="fa" name="fas-circle-check"
+    div slot="header" Your changes have been saved
     | You can safely exit the app now.
-  sl-alert variant="neutral" duration="3000" closable="true"
-    sl-icon slot="icon" name="cog-6-tooth"
-    strong Your settings have been updated
-    br
-    | Settings will take affect on next login.
   sl-alert variant="warning" duration="3000" closable="true"
-    sl-icon slot="icon" name="exclamation-triangle"
-    strong Your session has ended
-    br
+    sl-icon slot="icon" library="fa" name="fas-triangle-exclamation"
+    div slot="header" Your session has ended
     | Please login again to continue.
   sl-alert variant="danger" duration="3000" closable="true"
-    sl-icon slot="icon" name="exclamation-circle"
-    strong Your account has been deleted
-    br
+    sl-icon slot="icon" library="fa" name="fas-circle-exclamation"
+    div slot="header" Your account has been deleted
     | We are very sorry to see you go!
 
 javascript:
   const container = document.querySelector(.alert-toast);
 
-  [primary, success, neutral, warning, danger].map(variant => {
+  [primary, success, warning, danger].map(variant => {
     const button = container.querySelector(`sl-button[variant="${variant}"]`);
     const alert = container.querySelector(`sl-alert[variant="${variant}"]`);
 
@@ -423,7 +382,6 @@ function showToast(alert) {
 const App = () => {
   const primary = useRef(null);
   const success = useRef(null);
-  const neutral = useRef(null);
   const warning = useRef(null);
   const danger = useRef(null);
 
@@ -437,10 +395,6 @@ const App = () => {
         Success
       </SlButton>
 
-      <SlButton variant="neutral" onClick={() => neutral.current.toast()}>
-        Neutral
-      </SlButton>
-
       <SlButton variant="warning" onClick={() => warning.current.toast()}>
         Warning
       </SlButton>
@@ -450,37 +404,26 @@ const App = () => {
       </SlButton>
 
       <SlAlert ref={primary} variant="primary" duration="3000" closable>
-        <SlIcon slot="icon" name="information-circle" />
-        <strong>This is super informative</strong>
-        <br />
+        <SlIcon slot="icon" library="fa" name="fas-circle-info" />
+        <div slot="header">This is super informative</div>
         You can tell by how pretty the alert is.
       </SlAlert>
 
       <SlAlert ref={success} variant="success" duration="3000" closable>
-        <SlIcon slot="icon" name="check-circle" />
-        <strong>Your changes have been saved</strong>
-        <br />
+        <SlIcon slot="icon" library="fa" name="fas-circle-check" />
+        <div slot="header">Your changes have been saved</div>
         You can safely exit the app now.
       </SlAlert>
 
-      <SlAlert ref={neutral} variant="neutral" duration="3000" closable>
-        <SlIcon slot="icon" name="cog-6-tooth" />
-        <strong>Your settings have been updated</strong>
-        <br />
-        Settings will take affect on next login.
-      </SlAlert>
-
       <SlAlert ref={warning} variant="warning" duration="3000" closable>
-        <SlIcon slot="icon" name="exclamation-triangle" />
-        <strong>Your session has ended</strong>
-        <br />
+        <SlIcon slot="icon" library="fa" name="fas-triangle-exclamation" />
+        <div slot="header">Your session has ended</div>
         Please login again to continue.
       </SlAlert>
 
       <SlAlert ref={danger} variant="danger" duration="3000" closable>
-        <SlIcon slot="icon" name="exclamation-circle" />
-        <strong>Your account has been deleted</strong>
-        <br />
+        <SlIcon slot="icon" library="fa" name="fas-circle-exclamation" />
+        <div slot="header">Your account has been deleted</div>
         We are very sorry to see you go!
       </SlAlert>
     </>
@@ -510,13 +453,13 @@ For convenience, you can create a utility that emits toast notifications with a 
   }
 
   // Custom function to emit toast notifications
-  function notify(message, variant = 'primary', icon = 'information-circle', duration = 3000) {
+  function notify(message, variant = 'primary', icon = 'fas-circle-info', duration = 3000) {
     const alert = Object.assign(document.createElement('sl-alert'), {
       variant,
       closable: true,
       duration: duration,
       innerHTML: `
-        <sl-icon name="${icon}" slot="icon"></sl-icon>
+        <sl-icon name="${icon}" library="fa" slot="icon"></sl-icon>
         ${escapeHtml(message)}
       `
     });
@@ -549,13 +492,13 @@ javascript:
   }
 
   // Custom function to emit toast notifications
-  function notify(message, variant = 'primary', icon = 'information-circle', duration = 3000) {
+  function notify(message, variant = 'primary', icon = 'fas-circle-info', duration = 3000) {
     const alert = Object.assign(document.createElement('sl-alert'), {
       variant,
       closable: true,
       duration: duration,
       innerHTML: `
-        <sl-icon name="${icon}" slot="icon"></sl-icon>
+        <sl-icon name="${icon}" library="fa" slot="icon"></sl-icon>
         ${escapeHtml(message)}
       `
     });
@@ -585,3 +528,36 @@ By default, the toast stack is positioned at the top-right of the viewport. You 
 ?> By design, it is not possible to show toasts in more than one stack simultaneously. Such behavior is confusing and makes for a poor user experience.
 
 [component-metadata:sl-alert]
+</sl-tab-panel>
+
+<!--- ************************************ --->
+<!--- Guidelines panel content --->
+<!--- ************************************ --->
+<sl-tab-panel name="guidelines">
+
+### Alert icon
+
+<ul>
+  <li>Always use an icon in the alert.</li>
+  <li>Default to using the icons shown in the code examples that go with each alert variant.</li>
+  <li>If you feel you really have a good use case for using a different icon with an existing variant, bring it up to the design team for further discussion.</li>
+</ul>
+
+### Alert header
+
+<ul>
+<li>Opt to always include a header (using <code>slot="header"</code>) in the alert.</li>
+<li>Keep the header short and scannable.</li>
+<li>The header doesn&rsquo;t need a period.</li>
+<li>Use sentence case.</li>
+</ul>
+
+### Alert message
+
+<ul>
+<li>The alert message could contain plain text or a bulleted list, or even a button.</li>
+<li>Keep the message as short as possible.</li>
+</ul>
+
+</sl-tab-panel>
+</sl-tab-group>

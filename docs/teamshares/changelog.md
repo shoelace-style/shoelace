@@ -1,5 +1,28 @@
 # Changelog
 
+## 1.3.0
+
+- Alert
+  - Update styling
+  - Add optional `header` slot
+- Breadcrumb
+  - Update styling
+  - Change default separator to `/`
+- Card
+  - Add `noShadow` boolean
+- Details
+  - Add `shadow` boolean
+- Tab
+  - Update styling
+- Tag
+  - Update styling
+  - Add new color variants: `blue`, `green`, `gray`, `yellow`, `red`, `teal`, `fuchsia`, `purple`
+  - Map existing semantic variants to new colors (`primary` = `blue`, `success` = `green`, `neutral` = `gray`, `warning` = `yellow`, `danger` = `red`)
+- Docs
+  - Add new Styles pages for Spacing, Elevation, Border Radius
+  - Add design pattern and Figma component status badges to all components
+  - Force site to always display light theme
+
 ## 1.2.3
 
 - Fix for missing generated CSS tokens

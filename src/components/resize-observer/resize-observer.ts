@@ -10,6 +10,8 @@ import type { CSSResultGroup } from 'lit';
  * @documentation https://shoelace.style/components/resize-observer
  * @status stable
  * @since 2.0
+ * @pattern hide
+ * @figma hide
  *
  * @slot - One or more elements to watch for resizing.
  *

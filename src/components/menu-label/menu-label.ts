@@ -9,6 +9,8 @@ import type { CSSResultGroup } from 'lit';
  * @documentation https://shoelace.style/components/menu-label
  * @status stable
  * @since 2.0
+ * @pattern stable
+ * @figma draft
  *
  * @slot - The menu label's content.
  *

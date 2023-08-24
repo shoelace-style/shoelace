@@ -22,6 +22,7 @@ import type SlSelectEvent from '../../events/sl-select';
  * @documentation https://shoelace.style/components/dropdown
  * @status stable
  * @since 2.0
+ * @pattern stable
  *
  * @dependency sl-popup
  *

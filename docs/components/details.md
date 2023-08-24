@@ -30,6 +30,34 @@ const App = () => (
 
 ## Examples
 
+### Details with shadow
+
+Use the `shadow` property to add a box shadow to the details card. The shadow matches the `Card` component's shadow.
+
+```html preview
+<sl-details summary="Details with shadow" shadow>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+</sl-details>
+```
+
+```pug slim
+sl-details summary="Details with shadow" shadow=true
+  | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+  | aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+```
+
+```jsx react
+import { SlDetails } from '@teamshares/shoelace/dist/react';
+
+const App = () => (
+  <SlDetails summary="Details with shadow" shadow>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </SlDetails>
+);
+```
+
 ### Disabled
 
 Use the `disable` attribute to prevent the details from expanding.

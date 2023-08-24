@@ -12,6 +12,8 @@ import type { CSSResultGroup } from 'lit';
  * @documentation https://shoelace.style/components/popup
  * @status stable
  * @since 2.0
+ * @pattern hide
+ * @figma hide
  *
  * @event sl-reposition - Emitted when the popup is repositioned. This event can fire a lot, so avoid putting expensive
  *  operations in your listener or consider debouncing it.

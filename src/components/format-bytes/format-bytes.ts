@@ -7,6 +7,8 @@ import ShoelaceElement from '../../internal/shoelace-element';
  * @documentation https://shoelace.style/components/format-bytes
  * @status stable
  * @since 2.0
+ * @pattern hide
+ * @figma hide
  */
 @customElement('sl-format-bytes')
 export default class SlFormatBytes extends ShoelaceElement {

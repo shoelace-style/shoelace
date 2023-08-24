@@ -12,6 +12,7 @@ import type { CSSResultGroup } from 'lit';
  * @documentation https://shoelace.style/components/breadcrumb-item
  * @status stable
  * @since 2.0
+ * @pattern stable
  *
  * @slot - The breadcrumb item's label.
  * @slot prefix - An optional prefix, usually an icon or icon button.

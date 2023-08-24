@@ -24,7 +24,7 @@
   --ts-color-subdued: var(--ts-color-gray-700);
   --ts-color-success: var(--ts-color-green-700);
   --ts-color-error: var(--ts-color-red-700);
-  --ts-color-link: var(--ts-color-primary-700);
+  --ts-color-link: var(--ts-color-primary-600);
   --ts-color-link-light: var(--ts-color-primary-300);
   --ts-color-text: var(--ts-color-default);
   --ts-color-text-default: var(--ts-color-gray-900);
@@ -130,6 +130,8 @@
   --ts-spacing-2x-large: 2rem;
   /* 64px */
   --ts-spacing-4x-large: 4rem;
+  /* 80px */
+  --ts-spacing-5x-large: 5rem;
 
   /***** Input sizes */
   /* 28px */

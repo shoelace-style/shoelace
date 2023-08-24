@@ -11,6 +11,8 @@ import type { CSSResultGroup } from 'lit';
  * @documentation https://shoelace.style/components/include
  * @status stable
  * @since 2.0
+ * @pattern hide
+ * @figma hide
  *
  * @event sl-load - Emitted when the included file is loaded.
  * @event {{ status: number }} sl-error - Emitted when the included file fails to load due to an error.

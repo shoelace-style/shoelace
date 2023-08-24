@@ -11,14 +11,19 @@ export default css`
   .tag {
     display: flex;
     align-items: center;
-    border: solid 1px;
+    border: none;
+    border-radius: var(--ts-border-radius-x-small);
     line-height: 1;
     white-space: nowrap;
     user-select: none;
   }
 
+  .tag:active > sl-icon-button {
+    color: var(--sl-color-neutral-900);
+  }
+
   .tag__remove::part(base) {
-    color: inherit;
+    color: var(--sl-color-neutral-700);
     padding: 0;
   }
 
@@ -26,54 +31,44 @@ export default css`
    * Variant modifiers
    */
 
-  .tag--primary {
-    background-color: var(--sl-color-primary-50);
-    border-color: var(--sl-color-primary-200);
+  .tag--blue {
+    background-color: var(--sl-color-primary-100);
     color: var(--sl-color-primary-800);
   }
 
-  .tag--primary:active > sl-icon-button {
-    color: var(--sl-color-primary-600);
-  }
-
-  .tag--success {
-    background-color: var(--sl-color-success-50);
-    border-color: var(--sl-color-success-200);
+  .tag--green {
+    background-color: var(--sl-color-success-100);
     color: var(--sl-color-success-800);
   }
 
-  .tag--success:active > sl-icon-button {
-    color: var(--sl-color-success-600);
-  }
-
-  .tag--neutral {
-    background-color: var(--sl-color-neutral-50);
-    border-color: var(--sl-color-neutral-200);
+  .tag--gray {
+    background-color: var(--sl-color-neutral-200);
     color: var(--sl-color-neutral-800);
   }
 
-  .tag--neutral:active > sl-icon-button {
-    color: var(--sl-color-neutral-600);
-  }
-
-  .tag--warning {
-    background-color: var(--sl-color-warning-50);
-    border-color: var(--sl-color-warning-200);
+  .tag--yellow {
+    background-color: var(--sl-color-warning-100);
     color: var(--sl-color-warning-800);
   }
 
-  .tag--warning:active > sl-icon-button {
-    color: var(--sl-color-warning-600);
-  }
-
-  .tag--danger {
-    background-color: var(--sl-color-danger-50);
-    border-color: var(--sl-color-danger-200);
+  .tag--red {
+    background-color: var(--sl-color-danger-100);
     color: var(--sl-color-danger-800);
   }
 
-  .tag--danger:active > sl-icon-button {
-    color: var(--sl-color-danger-600);
+  .tag--teal {
+    background-color: var(--sl-color-teal-100);
+    color: var(--sl-color-teal-800);
+  }
+
+  .tag--fuchsia {
+    background-color: var(--sl-color-fuchsia-100);
+    color: var(--sl-color-fuchsia-700);
+  }
+
+  .tag--purple {
+    background-color: var(--sl-color-purple-100);
+    color: var(--sl-color-purple-700);
   }
 
   /*
@@ -81,10 +76,9 @@ export default css`
    */
 
   .tag--small {
-    font-size: var(--sl-button-font-size-small);
-    height: calc(var(--sl-input-height-small) * 0.8);
+    font-size: var(--sl-button-font-size-medium);
+    height: calc(var(--sl-input-height-small) * 0.9);
     line-height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
-    border-radius: var(--sl-input-border-radius-small);
     padding: 0 var(--sl-spacing-x-small);
   }
 
@@ -92,7 +86,6 @@ export default css`
     font-size: var(--sl-button-font-size-medium);
     height: calc(var(--sl-input-height-medium) * 0.8);
     line-height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
-    border-radius: var(--sl-input-border-radius-medium);
     padding: 0 var(--sl-spacing-small);
   }
 
@@ -100,8 +93,11 @@ export default css`
     font-size: var(--sl-button-font-size-large);
     height: calc(var(--sl-input-height-large) * 0.8);
     line-height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
-    border-radius: var(--sl-input-border-radius-large);
     padding: 0 var(--sl-spacing-medium);
+  }
+
+  .tag--small > .tag__remove {
+    font-size: var(--sl-font-size-x-small);
   }
 
   .tag__remove {

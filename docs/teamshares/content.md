@@ -17,7 +17,7 @@
       alt="Notion image"
       style="margin: 1px; border-radius: 8px 8px 0 0;"
       />
-     <h3 style="margin: 0; display: flex; align-items: flex-start;">Writing and Communicating for Teamshares<sl-icon name="lock-closed" style="margin-left: .5em; color: #2e333c;"></sl-icon></h3>
+     <h3 style="margin: 0; display: flex; align-items: flex-start;">Writing and Communicating for Teamshares<sl-icon library="fa" name="lock" style="margin-left: .5em; color: #2e333c;"></sl-icon></h3>
        <p class="ts-body-2 ts-text-subdued" style="margin-bottom: 0;">Login required</p>
       <div slot="footer" style="margin: 0; padding: 0;">
         <sl-button
@@ -25,7 +25,7 @@
           href="https://www.notion.so/teamshares/Writing-and-Communicating-for-Teamshares-599d6c1c65474306aee5b69d0734d8ec?pvs=4"
           target="_blank">
            Open
-           <sl-icon slot="suffix" name="arrow-top-right-on-square"></sl-icon>
+           <sl-icon slot="suffix" library="fa" name="arrow-up-right-from-square"></sl-icon>
         </sl-button>
       </div>
     </sl-card>
@@ -41,16 +41,14 @@
     <p>Use sentence case for all headings and labels, including labels for UI elements like buttons.</p>
     <div class="grid-cards-2-col">
       <sl-alert class="do-dont" variant="success" open>
-        <sl-icon slot="icon" name="check-circle-solid"></sl-icon>
-        <div class="ts-heading-8">Do</div>
-        <div><sl-button>Edit cap table</sl-button></div>
-        <div><sl-tag>In progress</sl-tag></div>
+        <sl-icon slot="icon" library="fa" name="fas-circle-check"></sl-icon>
+        <div style="margin-top:0" slot="header">Do</div>
+        <div><sl-button variant="primary">Edit cap table</sl-button></div>
       </sl-alert>
       <sl-alert class="do-dont" variant="danger" open>
-        <sl-icon slot="icon" name="x-circle-solid"></sl-icon>
-        <div class="ts-heading-8">Don’t</div>
-        <div><sl-button>Edit Cap Table</sl-button></div>
-        <div><sl-tag>In Progress</sl-tag></div>
+        <sl-icon slot="icon" library="fa" name="fas-circle-exclamation"></sl-icon>
+        <div style="margin-top:0" slot="header">Don’t</div>
+        <div><sl-button variant="primary">Edit Cap Table</sl-button></div>
       </sl-alert>
     </div>
     <sl-divider style="--spacing: 3rem;"></sl-divider>
@@ -58,13 +56,13 @@
     <p>Use curly (<code>“”</code>) instead of straight (<code>""</code>) versions of quotation marks and apostrophes.</p>
     <div class="grid-cards-2-col">
       <sl-alert class="do-dont" variant="success" open>
-        <sl-icon slot="icon" name="check-circle-solid"></sl-icon>
-        <div class="ts-heading-8">Do</div>
+        <sl-icon slot="icon" library="fa" name="fas-circle-check"></sl-icon>
+        <div style="margin-top:0" slot="header">Do</div>
         <div class="ts-body-large">Welcome! We’re glad you’re here.</div>
       </sl-alert>
       <sl-alert class="do-dont" variant="danger" open>
-        <sl-icon slot="icon" name="x-circle-solid"></sl-icon>
-        <div class="ts-heading-8">Don’t</div>
+        <sl-icon slot="icon" library="fa" name="fas-circle-exclamation"></sl-icon>
+        <div style="margin-top:0" slot="header">Don’t</div>
         <div class="ts-body-large">Welcome! We're glad you're here.</div>
       </sl-alert>
     </div>

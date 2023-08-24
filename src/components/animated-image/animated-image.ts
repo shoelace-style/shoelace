@@ -11,6 +11,8 @@ import type { CSSResultGroup } from 'lit';
  * @documentation https://shoelace.style/components/animated-image
  * @status stable
  * @since 2.0
+ * @pattern hide
+ * @figma hide
  *
  * @dependency sl-icon
  *

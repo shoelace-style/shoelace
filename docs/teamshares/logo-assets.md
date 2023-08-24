@@ -25,21 +25,21 @@
         variant="text"
         href="/teamshares/logos/teamshares_logo.svg"
         download="teamshares_logo.svg">
-        <sl-icon slot="prefix" name="arrow-down-tray"></sl-icon>
+        <sl-icon slot="prefix" library="fa" name="arrow-down-to-bracket"></sl-icon>
        SVG
       </sl-button>
       <sl-button
         variant="text"
         href="/teamshares/logos/teamshares_logo.png"
         download="teamshares_logo.png">
-        <sl-icon slot="prefix" name="arrow-down-tray"></sl-icon>
+        <sl-icon slot="prefix" library="fa" name="arrow-down-to-bracket"></sl-icon>
          PNG
       </sl-button>
       <sl-button
         variant="text"
         href="/teamshares/logos/teamshares_logo.pdf"
         download="teamshares_logo.pdf">
-        <sl-icon slot="prefix" name="arrow-down-tray"></sl-icon>
+        <sl-icon slot="prefix" library="fa" name="arrow-down-to-bracket"></sl-icon>
          PDF
       </sl-button>
     </div>
@@ -58,21 +58,21 @@
         variant="text"
         href="/teamshares/logos/teamshares_logo_white.svg"
         download="teamshares_logo_white.svg">
-        <sl-icon slot="prefix" name="arrow-down-tray"></sl-icon>
+        <sl-icon slot="prefix" library="fa" name="arrow-down-to-bracket"></sl-icon>
          SVG
       </sl-button>
       <sl-button
         variant="text"
         href="/teamshares/logos/teamshares_logo_white.png"
         download="teamshares_logo_white.png">
-        <sl-icon slot="prefix" name="arrow-down-tray"></sl-icon>
+        <sl-icon slot="prefix" library="fa" name="arrow-down-to-bracket"></sl-icon>
          PNG
       </sl-button>
       <sl-button
         variant="text"
         href="/teamshares/logos/teamshares_logo_white.pdf"
         download="teamshares_logo_white.pdf">
-        <sl-icon slot="prefix" name="arrow-down-tray"></sl-icon>
+        <sl-icon slot="prefix" library="fa" name="arrow-down-to-bracket"></sl-icon>
          PDF
       </sl-button>
     </div>
@@ -97,7 +97,7 @@
         variant="text"
         href="/teamshares/logos/alee_files_teamshares.zip"
         download="alee_files_teamshares.zip">
-        <sl-icon slot="prefix" name="arrow-down-tray"></sl-icon>
+        <sl-icon slot="prefix" library="fa" name="arrow-down-to-bracket"></sl-icon>
        ZIP
       </sl-button>
     </div>
@@ -116,7 +116,7 @@
         variant="text"
         href="/teamshares/logos/alee_files_buyout.zip"
         download="alee_files_buyout.zip">
-        <sl-icon slot="prefix" name="arrow-down-tray"></sl-icon>
+        <sl-icon slot="prefix" library="fa" name="arrow-down-to-bracket"></sl-icon>
        ZIP
       </sl-button>
     </div>
@@ -142,14 +142,14 @@
         variant="text"
         href="/teamshares/logos/teamshares_logo_buyout.svg"
         download="teamshares_logo_buyout.svg">
-        <sl-icon slot="prefix" name="arrow-down-tray"></sl-icon>
+        <sl-icon slot="prefix" library="fa" name="arrow-down-to-bracket"></sl-icon>
        SVG
       </sl-button>
       <sl-button
         variant="text"
         href="/teamshares/logos/teamshares_logo_buyout.png"
         download="teamshares_logo_buyout.png">
-        <sl-icon slot="prefix" name="arrow-down-tray"></sl-icon>
+        <sl-icon slot="prefix" library="fa" name="arrow-down-to-bracket"></sl-icon>
          PNG
       </sl-button>
     </div>
@@ -168,21 +168,21 @@
         variant="text"
         href="/teamshares/logos/teamshares_logo.svg"
         download="teamshares_logo.svg">
-        <sl-icon slot="prefix" name="arrow-down-tray"></sl-icon>
+        <sl-icon slot="prefix" library="fa" name="arrow-down-to-bracket"></sl-icon>
          SVG
       </sl-button>
       <sl-button
         variant="text"
         href="/teamshares/logos/teamshares_logo.png"
         download="teamshares_logo.png">
-        <sl-icon slot="prefix" name="arrow-down-tray"></sl-icon>
+        <sl-icon slot="prefix" library="fa" name="arrow-down-to-bracket"></sl-icon>
          PNG
       </sl-button>
       <sl-button
         variant="text"
         href="/teamshares/logos/teamshares_logo.pdf"
         download="teamshares_logo.pdf">
-        <sl-icon slot="prefix" name="arrow-down-tray"></sl-icon>
+        <sl-icon slot="prefix" library="fa" name="arrow-down-to-bracket"></sl-icon>
          PDF
       </sl-button>
     </div>
@@ -201,7 +201,7 @@
     src="/teamshares/images/brand-book.svg"
     alt="Decorative brand image"
     />
-   <h3 style="margin: 0; display: flex; align-items: flex-start;">Brand book on Pitch<sl-icon name="lock-closed" style="margin-left: .5em; color: #2e333c;"></sl-icon></h3>
+   <h3 style="margin: 0; display: flex; align-items: flex-start;">Brand book on Pitch<sl-icon library="fa" name="lock" style="margin-left: .5em; color: #2e333c;"></sl-icon></h3>
      <p class="ts-body-2 ts-text-subdued" style="margin-bottom: 0;">Login required</p>
     <div slot="footer" style="margin: 0; padding: 0;">
       <sl-button
@@ -209,7 +209,7 @@
         href="https://app.pitch.com/app/presentation/1abf8c85-db06-4d4b-a4c5-71f0fb935ab1/e4229594-37e8-442e-baa1-bc8a8e5f598b"
         target="_blank">
          Open
-         <sl-icon slot="suffix" name="arrow-top-right-on-square"></sl-icon>
+         <sl-icon slot="suffix" library="fa" name="arrow-up-right-from-square"></sl-icon>
       </sl-button>
     </div>
   </sl-card>
@@ -224,7 +224,7 @@
      alt="Google suite logo image"
      style="margin: 1px; border-radius: 8px 8px 0 0;"
      />
-     <h3 style="margin: 0; display: flex; align-items: flex-start;">Letterhead<sl-icon name="lock-closed" style="margin-left: .5em; color: #2e333c;"></sl-icon></h3>
+     <h3 style="margin: 0; display: flex; align-items: flex-start;">Letterhead<sl-icon library="fa" name="lock" style="margin-left: .5em; color: #2e333c;"></sl-icon></h3>
      <p class="ts-body-2 ts-text-subdued" style="margin-bottom: 0;">Login required. Remember to select “File > Make a copy”, then rename and save before editing.</p>
      <div slot="footer" style="margin: 0; padding: 0;">
        <sl-button
@@ -232,7 +232,7 @@
          href="https://docs.google.com/document/d/1_lFHimrmLsM65YQpDNZFM7nr3l5WVnkK43kemEWi4RI/edit?usp=sharing"
          target="_blank">
           Open
-          <sl-icon slot="suffix" name="arrow-top-right-on-square"></sl-icon>
+          <sl-icon slot="suffix" library="fa" name="arrow-up-right-from-square"></sl-icon>
        </sl-button>
      </div>
    </sl-card>
@@ -243,7 +243,7 @@
      alt="Google suite logo image"
      style="margin: 1px; border-radius: 8px 8px 0 0;"
      />
-     <h3 style="margin: 0; display: flex; align-items: flex-start;">Multi-page doc<sl-icon name="lock-closed" style="margin-left: .5em; color: #2e333c;"></sl-icon></h3>
+     <h3 style="margin: 0; display: flex; align-items: flex-start;">Multi-page doc<sl-icon library="fa" name="lock" style="margin-left: .5em; color: #2e333c;"></sl-icon></h3>
      <p class="ts-body-2 ts-text-subdued" style="margin-bottom: 0;">Login required. Remember to select “File > Make a copy”, then rename and save before editing.</p>
      <div slot="footer" style="margin: 0; padding: 0;">
        <sl-button
@@ -251,7 +251,7 @@
          href="https://docs.google.com/document/d/1ZRqsviVkhboB1SLjNp2vuS7gRvm6aD0s3ptCaLMpKoY/edit?usp=sharing"
          target="_blank">
           Open
-          <sl-icon slot="suffix" name="arrow-top-right-on-square"></sl-icon>
+          <sl-icon slot="suffix" library="fa" name="arrow-up-right-from-square"></sl-icon>
        </sl-button>
      </div>
    </sl-card>
@@ -262,7 +262,7 @@
      alt="Google suite logo image"
      style="margin: 1px; border-radius: 8px 8px 0 0;"
      />
-     <h3 style="margin: 0; display: flex; align-items: flex-start;">Form<sl-icon name="lock-closed" style="margin-left: .5em; color: #2e333c;"></sl-icon></h3>
+     <h3 style="margin: 0; display: flex; align-items: flex-start;">Form<sl-icon library="fa" name="lock" style="margin-left: .5em; color: #2e333c;"></sl-icon></h3>
      <p class="ts-body-2 ts-text-subdued" style="margin-bottom: 0;">Login required. Remember to select “File > Make a copy”, then rename and save before editing.</p>
      <div slot="footer" style="margin: 0; padding: 0;">
        <sl-button
@@ -270,7 +270,7 @@
          href="https://docs.google.com/document/d/1tLMnBCVfHF_jDwUORPMSe8GBQIhjB3ENbU7i2Lt8OJg/edit?usp=sharing"
          target="_blank">
           Open
-          <sl-icon slot="suffix" name="arrow-top-right-on-square"></sl-icon>
+          <sl-icon slot="suffix" library="fa" name="arrow-up-right-from-square"></sl-icon>
        </sl-button>
      </div>
    </sl-card>
@@ -281,7 +281,7 @@
      alt="Google suite logo image"
      style="margin: 1px; border-radius: 8px 8px 0 0;"
      />
-     <h3 style="margin: 0; display: flex; align-items: flex-start;">Slide deck<sl-icon name="lock-closed" style="margin-left: .5em; color: #2e333c;"></sl-icon></h3>
+     <h3 style="margin: 0; display: flex; align-items: flex-start;">Slide deck<sl-icon library="fa" name="lock" style="margin-left: .5em; color: #2e333c;"></sl-icon></h3>
      <p class="ts-body-2 ts-text-subdued" style="margin-bottom: 0;">Login required. Remember to select “File > Make a copy”, then rename and save before editing.</p>
      <div slot="footer" style="margin: 0; padding: 0;">
        <sl-button
@@ -289,7 +289,7 @@
          href="https://docs.google.com/presentation/d/1YW2q08crd8z2BegDh3-OQNkpvminRT_TCMsMRRJCXP4/edit?usp=sharing"
          target="_blank">
           Open
-          <sl-icon slot="suffix" name="arrow-top-right-on-square"></sl-icon>
+          <sl-icon slot="suffix" library="fa" name="arrow-up-right-from-square"></sl-icon>
        </sl-button>
      </div>
    </sl-card>

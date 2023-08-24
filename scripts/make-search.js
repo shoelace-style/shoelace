@@ -80,7 +80,15 @@ console.log('Generating search index for documentation');
         relativePath.startsWith('assets/') ||
         relativePath.startsWith('dist/') ||
         filename === '_sidebar.md' ||
-        filename === '404.md'
+        filename === '404.md' ||
+        filename === 'border-radius.md' ||
+        filename === 'color.md' ||
+        filename === 'elevation.md' ||
+        filename === 'more.md' ||
+        filename === 'spacing.md' ||
+        filename === 'transition.md' ||
+        filename === 'typography.md' ||
+        filename === 'z-index.md'
       ) {
         return false;
       }
