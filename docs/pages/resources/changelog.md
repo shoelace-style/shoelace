@@ -12,6 +12,11 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## Next
+
+- Fixed a bug in `<sl-switch>` that resulted in improper spacing between the label and the required asterisk [#1540]
+- Updated `@ctrl/tinycolor` to 4.0.1 [#1542]
+
 ## 2.8.0
 
 - Added `--isolatedModules` and `--verbatimModuleSyntax` to `tsconfig.json`. For anyone directly importing event types, they no longer provide a default export due to these options being enabled. For people using the `events/event.js` file directly, there is no change.
@@ -23,7 +28,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Improved expand/collapse behavior of `<sl-tree>` to work more like users expect [#1521]
 - Improved `<sl-menu-item>` so labels truncate properly instead of getting chopped and overflowing
 - Removed the extra `React.Component` around `@lit-labs/react` wrapper. [#1531]
-- Upgrade `@lit-labs/react` to v2.0.1. [#1531]
+- Updated `@lit-labs/react` to v2.0.1. [#1531]
 
 ## 2.7.0
 

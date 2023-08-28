@@ -53,6 +53,10 @@ async function buildTheDocs(watch = false) {
       output.push(data.toString());
     });
 
+    child.stderr.on('data', data => {
+      output.push(data.toString());
+    });
+
     if (watch) {
       // The process doesn't terminate in watch mode so, before resolving, we listen for a known signal in stdout that
       // tells us when the first build completes.
