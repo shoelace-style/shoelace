@@ -60,7 +60,7 @@
     "node": ">=14.17.0"
   },
   "dependencies": {
-    "@ctrl/tinycolor": "^3.5.0",
+    "@ctrl/tinycolor": "^4.0.1",
     "@floating-ui/dom": "^1.2.1",
     "@lit-labs/react": "^2.0.1",
     "@shoelace-style/animations": "^1.1.0",

@@ -15,6 +15,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 ## Next
 
 - Fixed a bug in `<sl-switch>` that resulted in improper spacing between the label and the required asterisk [#1540]
+- Updated `@ctrl/tinycolor` to 4.0.1 [#1542]
 
 ## 2.8.0
 
@@ -27,7 +28,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Improved expand/collapse behavior of `<sl-tree>` to work more like users expect [#1521]
 - Improved `<sl-menu-item>` so labels truncate properly instead of getting chopped and overflowing
 - Removed the extra `React.Component` around `@lit-labs/react` wrapper. [#1531]
-- Upgrade `@lit-labs/react` to v2.0.1. [#1531]
+- Updated `@lit-labs/react` to v2.0.1. [#1531]
 
 ## 2.7.0
 
