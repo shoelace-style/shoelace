@@ -34,6 +34,9 @@ const shoelaceVersion = JSON.stringify(packageData.version.toString());
 async function buildTheDocs(watch = false) {
   return new Promise(async (resolve, reject) => {
     const afterSignal = '[eleventy.after]';
+
+    // Totally non-scientific way to handle errors. Perhaps its just better to resolve on stderr? :shrug:
+    const errorSignal = 'Original error stack trace:'
     const args = ['@11ty/eleventy', '--quiet'];
     const output = [];
 
@@ -65,6 +68,14 @@ async function buildTheDocs(watch = false) {
           resolve({ child, output });
         }
       });
+
+      child.stderr.on('data', data => {
+        if (data.includes(errorSignal)) {
+          // This closes the dev server, not sure if thats what we want?
+          reject(child);
+        }
+      });
+
     } else {
       child.on('close', () => {
         resolve({ child, output });
