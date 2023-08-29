@@ -72,7 +72,7 @@ async function buildTheDocs(watch = false) {
       child.stderr.on('data', data => {
         if (data.includes(errorSignal)) {
           // This closes the dev server, not sure if thats what we want?
-          reject(child);
+          reject(output);
         }
       });
 
