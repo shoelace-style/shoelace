@@ -36,7 +36,7 @@ async function buildTheDocs(watch = false) {
     const afterSignal = '[eleventy.after]';
 
     // Totally non-scientific way to handle errors. Perhaps its just better to resolve on stderr? :shrug:
-    const errorSignal = 'Original error stack trace:'
+    const errorSignal = 'Original error stack trace:';
     const args = ['@11ty/eleventy', '--quiet'];
     const output = [];
 
@@ -75,7 +75,6 @@ async function buildTheDocs(watch = false) {
           reject(output);
         }
       });
-
     } else {
       child.on('close', () => {
         resolve({ child, output });
