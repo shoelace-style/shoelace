@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.1
+- Button
+  - Remove default icon size increase for small buttons
+
 ## 1.3.0
 
 - Alert
