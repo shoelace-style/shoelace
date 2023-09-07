@@ -341,7 +341,7 @@ Use the `prefix` and `suffix` slots to add icons.
 </sl-button>
 
 <sl-button variant="default" size="small">
-  <sl-icon slot="prefix" library="fa" name="arrows-maximize"></sl-icon>
+  <sl-icon slot="prefix" library="fa" name="fas-arrows-maximize"></sl-icon>
   <sl-icon slot="suffix" library="fa" name="fas-up-right-from-square"></sl-icon>
   Open
 </sl-button>
@@ -359,7 +359,7 @@ Use the `prefix` and `suffix` slots to add icons.
 </sl-button>
 
 <sl-button variant="default">
-  <sl-icon slot="prefix" library="fa" name="arrows-maximize"></sl-icon>
+  <sl-icon slot="prefix" library="fa" name="fas-arrows-maximize"></sl-icon>
   <sl-icon slot="suffix" library="fa" name="fas-up-right-from-square"></sl-icon>
   Open
 </sl-button>
@@ -377,7 +377,7 @@ Use the `prefix` and `suffix` slots to add icons.
 </sl-button>
 
 <sl-button variant="default" size="large">
-  <sl-icon slot="prefix" library="fa" name="arrows-maximize"></sl-icon>
+  <sl-icon slot="prefix" library="fa" name="fas-arrows-maximize"></sl-icon>
   <sl-icon slot="suffix" library="fa" name="fas-up-right-from-square"></sl-icon>
   Open
 </sl-button>
@@ -395,7 +395,7 @@ Use the `prefix` and `suffix` slots to add icons.
 </sl-button>
 
 <sl-button variant="default" size="x-large">
-  <sl-icon slot="prefix" library="fa" name="arrows-maximize"></sl-icon>
+  <sl-icon slot="prefix" library="fa" name="fas-arrows-maximize"></sl-icon>
   <sl-icon slot="suffix" library="fa" name="fas-up-right-from-square"></sl-icon>
   Open
 </sl-button>
@@ -409,7 +409,7 @@ sl-button variant="default" size="small"
   sl-icon slot="suffix" library="fa" name="fas-arrows-rotate"
   | Refresh
 sl-button variant="default" size="small"
-  sl-icon slot="prefix" library="fa" name="arrows-maximize"
+  sl-icon slot="prefix" library="fa" name="fas-arrows-maximize"
   sl-icon slot="suffix" library="fa" name="fas-up-right-from-square"
   | Open
 br
@@ -421,7 +421,7 @@ sl-button variant="default"
   sl-icon slot="suffix" library="fa" name="fas-arrows-rotate"
   | Refresh
 sl-button variant="default"
-  sl-icon slot="prefix" library="fa" name="arrows-maximize"
+  sl-icon slot="prefix" library="fa" name="fas-arrows-maximize"
   sl-icon slot="suffix" library="fa" name="fas-up-right-from-square"
   | Open
 br
@@ -433,7 +433,7 @@ sl-button variant="default" size="large"
   sl-icon slot="suffix" library="fa" name="fas-arrows-rotate"
   | Refresh
 sl-button variant="default" size="large"
-  sl-icon slot="prefix" library="fa" name="arrows-maximize"
+  sl-icon slot="prefix" library="fa" name="fas-arrows-maximize"
   sl-icon slot="suffix" library="fa" name="fas-up-right-from-square"
   | Open
 br
@@ -445,7 +445,7 @@ sl-button variant="default" size="x-large"
   sl-icon slot="suffix" library="fa" name="fas-arrows-rotate"
   | Refresh
 sl-button variant="default" size="x-large"
-  sl-icon slot="prefix" library="fa" name="arrows-maximize"
+  sl-icon slot="prefix" library="fa" name="fas-arrows-maximize"
   sl-icon slot="suffix" library="fa" name="fas-up-right-from-square"
   | Open
 ```
@@ -466,7 +466,7 @@ const App = () => (
     </SlButton>
 
     <SlButton variant="default" size="small">
-      <SlIcon slot="prefix" library="fa" name="arrows-maximize"></SlIcon>
+      <SlIcon slot="prefix" library="fa" name="fas-arrows-maximize"></SlIcon>
       <SlIcon slot="suffix" library="fa" name="fas-up-right-from-square"></SlIcon>
       Open
     </SlButton>
@@ -485,7 +485,7 @@ const App = () => (
     </SlButton>
 
     <SlButton variant="default">
-      <SlIcon slot="prefix" library="fa" name="arrows-maximize"></SlIcon>
+      <SlIcon slot="prefix" library="fa" name="fas-arrows-maximize"></SlIcon>
       <SlIcon slot="suffix" library="fa" name="fas-up-right-from-square"></SlIcon>
       Open
     </SlButton>
@@ -504,7 +504,7 @@ const App = () => (
     </SlButton>
 
     <SlButton variant="default" size="large">
-      <SlIcon slot="prefix" library="fa" name="arrows-maximize"></SlIcon>
+      <SlIcon slot="prefix" library="fa" name="fas-arrows-maximize"></SlIcon>
       <SlIcon slot="suffix" library="fa" name="fas-up-right-from-square"></SlIcon>
       Open
     </SlButton>
@@ -523,7 +523,7 @@ const App = () => (
     </SlButton>
 
     <SlButton variant="default" size="x-large">
-      <SlIcon slot="prefix" library="fa" name="arrows-maximize"></SlIcon>
+      <SlIcon slot="prefix" library="fa" name="fas-arrows-maximize"></SlIcon>
       <SlIcon slot="suffix" library="fa" name="fas-up-right-from-square"></SlIcon>
       Open
     </SlButton>
