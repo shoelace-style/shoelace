@@ -13,7 +13,7 @@ const translation: Translation = {
   copy: 'Kopieren',
   currentValue: 'Aktueller Wert',
   error: 'Fehler',
-  goToSlide: (slide, count) => `Gehen Sie zu Folie ${slide} von ${count}`,
+  goToSlide: (slide, count) => `Zu Folie ${slide} von ${count} gehen`,
   hidePassword: 'Passwort verbergen',
   loading: 'Wird geladen',
   nextSlide: 'Nächste Folie',
@@ -28,7 +28,7 @@ const translation: Translation = {
   resize: 'Größe ändern',
   scrollToEnd: 'Zum Ende scrollen',
   scrollToStart: 'Zum Anfang scrollen',
-  selectAColorFromTheScreen: 'Wähle eine Farbe vom Bildschirm',
+  selectAColorFromTheScreen: 'Farbe vom Bildschirm auswählen',
   showPassword: 'Passwort anzeigen',
   slideNum: slide => `Folie ${slide}`,
   toggleColorFormat: 'Farbformat umschalten'
