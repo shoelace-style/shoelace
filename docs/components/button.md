@@ -164,31 +164,31 @@ Use the `circle` attribute to create circular icon buttons. When this attribute 
 
 ```html preview
 <sl-button variant="default" size="small" circle>
-  <sl-icon name="cog-6-tooth" label="Settings"></sl-icon>
+  <sl-icon library="fa" name="fas-gear" label="Settings"></sl-icon>
 </sl-button>
 
 <sl-button variant="default" size="medium" circle>
-  <sl-icon name="cog-6-tooth" label="Settings"></sl-icon>
+  <sl-icon library="fa" name="fas-gear" label="Settings"></sl-icon>
 </sl-button>
 
 <sl-button variant="default" size="large" circle>
-  <sl-icon name="cog-6-tooth" label="Settings"></sl-icon>
+  <sl-icon library="fa" name="fas-gear" label="Settings"></sl-icon>
 </sl-button>
 
 <sl-button variant="default" size="x-large" circle>
-  <sl-icon name="cog-6-tooth" label="Settings"></sl-icon>
+  <sl-icon library="fa" name="fas-gear" label="Settings"></sl-icon>
 </sl-button>
 ```
 
 ```pug slim
 sl-button variant="default" size="small" circle="true"
-  sl-icon name="cog-6-tooth" label="Settings"
+  sl-icon library="fa" name="fas-gear" label="Settings"
 sl-button variant="default" size="medium" circle="true"
-  sl-icon name="cog-6-tooth" label="Settings"
+  sl-icon library="fa" name="fas-gear" label="Settings"
 sl-button variant="default" size="large" circle="true"
-  sl-icon name="cog-6-tooth" label="Settings"
+  sl-icon library="fa" name="fas-gear" label="Settings"
 sl-button variant="default" size="x-large" circle="true"
-  sl-icon name="cog-6-tooth" label="Settings"
+  sl-icon library="fa" name="fas-gear" label="Settings"
 ```
 
 ```jsx react
@@ -197,16 +197,16 @@ import { SlButton, SlIcon } from '@teamshares/shoelace/dist/react';
 const App = () => (
   <>
     <SlButton variant="default" size="small" circle>
-      <SlIcon name="cog-6-tooth" />
+      <SlIcon library="fa" name="fas-gear" />
     </SlButton>
     <SlButton variant="default" size="medium" circle>
-      <SlIcon name="cog-6-tooth" />
+      <SlIcon library="fa" name="fas-gear" />
     </SlButton>
     <SlButton variant="default" size="large" circle>
-      <SlIcon name="cog-6-tooth" />
+      <SlIcon library="fa" name="fas-gear" />
     </SlButton>
     <SlButton variant="default" size="x-large" circle>
-      <SlIcon name="cog-6-tooth" />
+      <SlIcon library="fa" name="fas-gear" />
     </SlButton>
   </>
 );
@@ -331,122 +331,122 @@ Use the `prefix` and `suffix` slots to add icons.
 
 ```html preview
 <sl-button variant="default" size="small">
-  <sl-icon slot="prefix" name="cog-6-tooth"></sl-icon>
+  <sl-icon slot="prefix" library="fa" name="fas-gear"></sl-icon>
   Settings
 </sl-button>
 
 <sl-button variant="default" size="small">
-  <sl-icon slot="suffix" name="arrow-uturn-left"></sl-icon>
+  <sl-icon slot="suffix" library="fa" name="fas-arrows-rotate"></sl-icon>
   Refresh
 </sl-button>
 
 <sl-button variant="default" size="small">
-  <sl-icon slot="prefix" name="arrows-pointing-out"></sl-icon>
-  <sl-icon slot="suffix" name="arrow-top-right-on-square"></sl-icon>
+  <sl-icon slot="prefix" library="fa" name="fas-arrows-maximize"></sl-icon>
+  <sl-icon slot="suffix" library="fa" name="fas-up-right-from-square"></sl-icon>
   Open
 </sl-button>
 
 <br /><br />
 
 <sl-button variant="default">
-  <sl-icon slot="prefix" name="cog-6-tooth"></sl-icon>
+  <sl-icon slot="prefix" library="fa" name="fas-gear"></sl-icon>
   Settings
 </sl-button>
 
 <sl-button variant="default">
-  <sl-icon slot="suffix" name="arrow-uturn-left"></sl-icon>
+  <sl-icon slot="suffix" library="fa" name="fas-arrows-rotate"></sl-icon>
   Refresh
 </sl-button>
 
 <sl-button variant="default">
-  <sl-icon slot="prefix" name="arrows-pointing-out"></sl-icon>
-  <sl-icon slot="suffix" name="arrow-top-right-on-square"></sl-icon>
+  <sl-icon slot="prefix" library="fa" name="fas-arrows-maximize"></sl-icon>
+  <sl-icon slot="suffix" library="fa" name="fas-up-right-from-square"></sl-icon>
   Open
 </sl-button>
 
 <br /><br />
 
 <sl-button variant="default" size="large">
-  <sl-icon slot="prefix" name="cog-6-tooth"></sl-icon>
+  <sl-icon slot="prefix" library="fa" name="fas-gear"></sl-icon>
   Settings
 </sl-button>
 
 <sl-button variant="default" size="large">
-  <sl-icon slot="suffix" name="arrow-uturn-left"></sl-icon>
+  <sl-icon slot="suffix" library="fa" name="fas-arrows-rotate"></sl-icon>
   Refresh
 </sl-button>
 
 <sl-button variant="default" size="large">
-  <sl-icon slot="prefix" name="arrows-pointing-out"></sl-icon>
-  <sl-icon slot="suffix" name="arrow-top-right-on-square"></sl-icon>
+  <sl-icon slot="prefix" library="fa" name="fas-arrows-maximize"></sl-icon>
+  <sl-icon slot="suffix" library="fa" name="fas-up-right-from-square"></sl-icon>
   Open
 </sl-button>
 
 <br /><br />
 
 <sl-button variant="default" size="x-large">
-  <sl-icon slot="prefix" name="cog-6-tooth"></sl-icon>
+  <sl-icon slot="prefix" library="fa" name="fas-gear"></sl-icon>
   Settings
 </sl-button>
 
 <sl-button variant="default" size="x-large">
-  <sl-icon slot="suffix" name="arrow-uturn-left"></sl-icon>
+  <sl-icon slot="suffix" library="fa" name="fas-arrows-rotate"></sl-icon>
   Refresh
 </sl-button>
 
 <sl-button variant="default" size="x-large">
-  <sl-icon slot="prefix" name="arrows-pointing-out"></sl-icon>
-  <sl-icon slot="suffix" name="arrow-top-right-on-square"></sl-icon>
+  <sl-icon slot="prefix" library="fa" name="fas-arrows-maximize"></sl-icon>
+  <sl-icon slot="suffix" library="fa" name="fas-up-right-from-square"></sl-icon>
   Open
 </sl-button>
 ```
 
 ```pug slim
 sl-button variant="default" size="small"
-  sl-icon slot="prefix" name="cog-6-tooth"
+  sl-icon slot="prefix" library="fa" name="fas-gear"
   | Settings
 sl-button variant="default" size="small"
-  sl-icon slot="suffix" name="arrow-uturn-left"
+  sl-icon slot="suffix" library="fa" name="fas-arrows-rotate"
   | Refresh
 sl-button variant="default" size="small"
-  sl-icon slot="prefix" name="arrows-pointing-out"
-  sl-icon slot="suffix" name="arrow-top-right-on-square"
+  sl-icon slot="prefix" library="fa" name="fas-arrows-maximize"
+  sl-icon slot="suffix" library="fa" name="fas-up-right-from-square"
   | Open
 br
 br
 sl-button variant="default"
-  sl-icon slot="prefix" name="cog-6-tooth"
+  sl-icon slot="prefix" library="fa" name="fas-gear"
   | Settings
 sl-button variant="default"
-  sl-icon slot="suffix" name="arrow-uturn-left"
+  sl-icon slot="suffix" library="fa" name="fas-arrows-rotate"
   | Refresh
 sl-button variant="default"
-  sl-icon slot="prefix" name="arrows-pointing-out"
-  sl-icon slot="suffix" name="arrow-top-right-on-square"
+  sl-icon slot="prefix" library="fa" name="fas-arrows-maximize"
+  sl-icon slot="suffix" library="fa" name="fas-up-right-from-square"
   | Open
 br
 br
 sl-button variant="default" size="large"
-  sl-icon slot="prefix" name="cog-6-tooth"
+  sl-icon slot="prefix" library="fa" name="fas-gear"
   | Settings
 sl-button variant="default" size="large"
-  sl-icon slot="suffix" name="arrow-uturn-left"
+  sl-icon slot="suffix" library="fa" name="fas-arrows-rotate"
   | Refresh
 sl-button variant="default" size="large"
-  sl-icon slot="prefix" name="arrows-pointing-out"
-  sl-icon slot="suffix" name="arrow-top-right-on-square"
+  sl-icon slot="prefix" library="fa" name="fas-arrows-maximize"
+  sl-icon slot="suffix" library="fa" name="fas-up-right-from-square"
   | Open
 br
 br
 sl-button variant="default" size="x-large"
-  sl-icon slot="prefix" name="cog-6-tooth"
+  sl-icon slot="prefix" library="fa" name="fas-gear"
   | Settings
 sl-button variant="default" size="x-large"
-  sl-icon slot="suffix" name="arrow-uturn-left"
+  sl-icon slot="suffix" library="fa" name="fas-arrows-rotate"
   | Refresh
 sl-button variant="default" size="x-large"
-  sl-icon slot="prefix" name="arrows-pointing-out"
-  sl-icon slot="suffix" name="arrow-top-right-on-square"
+  sl-icon slot="prefix" library="fa" name="fas-arrows-maximize"
+  sl-icon slot="suffix" library="fa" name="fas-up-right-from-square"
   | Open
 ```
 
@@ -456,18 +456,18 @@ import { SlButton, SlIcon } from '@teamshares/shoelace/dist/react';
 const App = () => (
   <>
     <SlButton variant="default" size="small">
-      <SlIcon slot="prefix" name="cog-6-tooth"></SlIcon>
+      <SlIcon slot="prefix" library="fa" name="fas-gear"></SlIcon>
       Settings
     </SlButton>
 
     <SlButton variant="default" size="small">
-      <SlIcon slot="suffix" name="arrow-uturn-left"></SlIcon>
+      <SlIcon slot="suffix" library="fa" name="fas-arrows-rotate"></SlIcon>
       Refresh
     </SlButton>
 
     <SlButton variant="default" size="small">
-      <SlIcon slot="prefix" name="arrows-pointing-out"></SlIcon>
-      <SlIcon slot="suffix" name="arrow-top-right-on-square"></SlIcon>
+      <SlIcon slot="prefix" library="fa" name="fas-arrows-maximize"></SlIcon>
+      <SlIcon slot="suffix" library="fa" name="fas-up-right-from-square"></SlIcon>
       Open
     </SlButton>
 
@@ -475,18 +475,18 @@ const App = () => (
     <br />
 
     <SlButton variant="default">
-      <SlIcon slot="prefix" name="cog-6-tooth"></SlIcon>
+      <SlIcon slot="prefix" library="fa" name="fas-gear"></SlIcon>
       Settings
     </SlButton>
 
     <SlButton variant="default">
-      <SlIcon slot="suffix" name="arrow-uturn-left"></SlIcon>
+      <SlIcon slot="suffix" library="fa" name="fas-arrows-rotate"></SlIcon>
       Refresh
     </SlButton>
 
     <SlButton variant="default">
-      <SlIcon slot="prefix" name="arrows-pointing-out"></SlIcon>
-      <SlIcon slot="suffix" name="arrow-top-right-on-square"></SlIcon>
+      <SlIcon slot="prefix" library="fa" name="fas-arrows-maximize"></SlIcon>
+      <SlIcon slot="suffix" library="fa" name="fas-up-right-from-square"></SlIcon>
       Open
     </SlButton>
 
@@ -494,18 +494,18 @@ const App = () => (
     <br />
 
     <SlButton variant="default" size="large">
-      <SlIcon slot="prefix" name="cog-6-tooth"></SlIcon>
+      <SlIcon slot="prefix" library="fa" name="fas-gear"></SlIcon>
       Settings
     </SlButton>
 
     <SlButton variant="default" size="large">
-      <SlIcon slot="suffix" name="arrow-uturn-left"></SlIcon>
+      <SlIcon slot="suffix" library="fa" name="fas-arrows-rotate"></SlIcon>
       Refresh
     </SlButton>
 
     <SlButton variant="default" size="large">
-      <SlIcon slot="prefix" name="arrows-pointing-out"></SlIcon>
-      <SlIcon slot="suffix" name="arrow-top-right-on-square"></SlIcon>
+      <SlIcon slot="prefix" library="fa" name="fas-arrows-maximize"></SlIcon>
+      <SlIcon slot="suffix" library="fa" name="fas-up-right-from-square"></SlIcon>
       Open
     </SlButton>
 
@@ -513,18 +513,18 @@ const App = () => (
     <br />
 
     <SlButton variant="default" size="x-large">
-      <SlIcon slot="prefix" name="cog-6-tooth"></SlIcon>
+      <SlIcon slot="prefix" library="fa" name="fas-gear"></SlIcon>
       Settings
     </SlButton>
 
     <SlButton variant="default" size="x-large">
-      <SlIcon slot="suffix" name="arrow-uturn-left"></SlIcon>
+      <SlIcon slot="suffix" library="fa" name="fas-arrows-rotate"></SlIcon>
       Refresh
     </SlButton>
 
     <SlButton variant="default" size="x-large">
-      <SlIcon slot="prefix" name="arrows-pointing-out"></SlIcon>
-      <SlIcon slot="suffix" name="arrow-top-right-on-square"></SlIcon>
+      <SlIcon slot="prefix" library="fa" name="fas-arrows-maximize"></SlIcon>
+      <SlIcon slot="suffix" library="fa" name="fas-up-right-from-square"></SlIcon>
       Open
     </SlButton>
   </>
