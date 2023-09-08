@@ -25,7 +25,7 @@
     "./dist/react/*": "./dist/react/*",
     "./dist/translations/*": "./dist/translations/*"
   },
-  "files": ["dist", "cdn"],
+  "files": ["dist", "cdn", "web-types.json"],
   "keywords": ["web components", "custom elements", "components"],
   "repository": {
     "type": "git",

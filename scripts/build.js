@@ -217,7 +217,6 @@ await nextTask('Running the TypeScript compiler', () => {
 // Copy the above steps to the CDN directory directly so we don't need to twice the work for nothing.
 await nextTask(`Copying Web Types, Themes, Icons, and TS Types to "${cdndir}"`, async () => {
   await deleteAsync(cdndir);
-  await copy('./web-types.json', `${outdir}/web-types.json`);
   await copy(outdir, cdndir);
 });
 

@@ -210,7 +210,7 @@ Shoelace ships with a file called `vscode.html-custom-data.json` that can be use
 
 If `settings.json` already exists, simply add the above line to the root of the object. Note that you may need to restart VS Code for the changes to take affect.
 
-## JetBrains IDEs
+### JetBrains IDEs
 
 If you are using a [JetBrains IDE](https://www.jetbrains.com/) and you are installing Shoelace from NPM, the editor will automatically detect the `web-types.json` file from the package and you should immediately see component information in your editor.
 
