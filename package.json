@@ -6,7 +6,7 @@
   "author": "Cory LaViska",
   "license": "MIT",
   "customElements": "dist/custom-elements.json",
-  "web-types": "./web-types.json",
+  "web-types": "./dist/web-types.json",
   "type": "module",
   "types": "dist/shoelace.d.ts",
   "jsdelivr": "./cdn/shoelace-autoloader.js",
