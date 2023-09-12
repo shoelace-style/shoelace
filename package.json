@@ -81,7 +81,7 @@
     "@web/test-runner": "^0.15.0",
     "@web/test-runner-commands": "^0.6.5",
     "@web/test-runner-playwright": "^0.9.0",
-    "bootstrap-icons": "^1.10.5",
+    "bootstrap-icons": "^1.11.0",
     "browser-sync": "^2.29.3",
     "chalk": "^5.2.0",
     "change-case": "^4.1.2",

@@ -16,6 +16,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 - Fixed a bug in `<sl-switch>` that resulted in improper spacing between the label and the required asterisk [#1540]
 - Updated `@ctrl/tinycolor` to 4.0.1 [#1542]
+- Updated Bootstrap Icons to 1.11.0
 
 ## 2.8.0
 
