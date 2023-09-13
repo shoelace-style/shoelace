@@ -20,7 +20,7 @@ export async function discover(root: Element | ShadowRoot) {
     .map(el => el.tagName.toLowerCase())
     .filter(tag => tag.startsWith('sl-'));
 
-  // If the root element is an undefined shoelace custom element, add it to the list
+  // If the root element is an undefined Shoelace component, add it to the list
   if (rootIsShoelaceElement && !customElements.get(rootTagName)) {
     tags.push(rootTagName);
   }
