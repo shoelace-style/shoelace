@@ -246,13 +246,10 @@ export default class SlPopup extends ShoelaceElement {
       this.anchorEl = this.anchorEl.assignedElements({ flatten: true })[0] as HTMLElement;
     }
 
-    if (!this.anchorEl) {
-      throw new Error(
-        'Invalid anchor element: no anchor could be found using the anchor slot or the anchor attribute.'
-      );
+    // If the anchor is valid, start it up
+    if (this.anchorEl) {
+      this.start();
     }
-
-    this.start();
   }
 
   private start() {
