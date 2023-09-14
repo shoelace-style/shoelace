@@ -1,5 +1,5 @@
 import { classMap } from 'lit/directives/class-map.js';
-import { HasSlotController } from '../../internal/slot.js';
+import { HasSlotController } from '../../utilities/slot.js';
 import { html } from 'lit';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './card.styles.js';

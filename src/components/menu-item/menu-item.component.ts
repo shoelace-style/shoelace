@@ -1,5 +1,5 @@
 import { classMap } from 'lit/directives/class-map.js';
-import { getTextContent, HasSlotController } from '../../internal/slot.js';
+import { getTextContent, HasSlotController } from '../../utilities/slot.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
 import { property, query } from 'lit/decorators.js';

@@ -1,5 +1,5 @@
 import { createRef, ref, type Ref } from 'lit/directives/ref.js';
-import { type HasSlotController } from '../../internal/slot.js';
+import { type HasSlotController } from '../../utilities/slot.js';
 import { html } from 'lit';
 import { type LocalizeController } from '../../utilities/localize.js';
 import type { ReactiveController, ReactiveControllerHost } from 'lit';

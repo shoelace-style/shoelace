@@ -5,7 +5,7 @@ import {
   validValidityState,
   valueMissingValidityState
 } from '../../internal/form.js';
-import { HasSlotController } from '../../internal/slot.js';
+import { HasSlotController } from '../../utilities/slot.js';
 import { html } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';

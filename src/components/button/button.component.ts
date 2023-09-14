@@ -1,6 +1,6 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { FormControlController, validValidityState } from '../../internal/form.js';
-import { HasSlotController } from '../../internal/slot.js';
+import { HasSlotController } from '../../utilities/slot.js';
 import { html, literal } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LocalizeController } from '../../utilities/localize.js';
