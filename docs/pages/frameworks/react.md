@@ -32,6 +32,10 @@ If you'd rather not use the CDN for assets, you can create a [build task](https:
 
 Now you can start using components!
 
+### Preact
+
+Preact users facing type errors using components may benefit from setting "paths" in their tsconfig.json so that react types will instead resolve to preact/compat as described in [Preact's typescript documentation](https://preactjs.com/guide/v10/typescript/#typescript-preactcompat-configuration).
+
 ## Usage
 
 ### Importing Components
