@@ -52,6 +52,7 @@ export default class SlMutationObserver extends ShoelaceElement {
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback();
     this.stopObserver();
   }
 

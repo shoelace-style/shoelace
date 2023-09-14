@@ -198,6 +198,7 @@ export default class SlPopup extends ShoelaceElement {
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback();
     this.stop();
   }
 
