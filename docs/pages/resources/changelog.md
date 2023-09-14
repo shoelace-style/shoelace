@@ -19,6 +19,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Removed error when a missing popup anchor is provided [#1548]
 - Updated `@ctrl/tinycolor` to 4.0.1 [#1542]
 - Updated Bootstrap Icons to 1.11.0
+- Exported slot.js (moved from ./src/internal to ./src/utilities) [#1566]
 
 ## 2.8.0
 
