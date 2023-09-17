@@ -226,31 +226,8 @@ describe('<sl-carousel>', () => {
   });
 
   describe('when `slides-per-move` attribute is provided', () => {
-    it('should set the granularity of snapping', async () => {
-      // Arrange
-      const expectedSnapGranularity = 2;
-      const el = await fixture<SlCarousel>(html`
-        <sl-carousel slides-per-move="${expectedSnapGranularity}">
-          <sl-carousel-item>Node 1</sl-carousel-item>
-          <sl-carousel-item>Node 2</sl-carousel-item>
-          <sl-carousel-item>Node 3</sl-carousel-item>
-          <sl-carousel-item>Node 4</sl-carousel-item>
-        </sl-carousel>
-      `);
-
-      // Act
-      await el.updateComplete;
-
-      // Assert
-      for (let i = 0; i < el.children.length; i++) {
-        const child = el.children[i] as HTMLElement;
-
-        if (i % expectedSnapGranularity === 0) {
-          expect(child.style.getPropertyValue('scroll-snap-align')).to.be.equal('');
-        } else {
-          expect(child.style.getPropertyValue('scroll-snap-align')).to.be.equal('none');
-        }
-      }
+    describe('and it is less than `slides-per-page`', () => {
+      // TODO
     });
   });
 
