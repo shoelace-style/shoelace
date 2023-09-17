@@ -1,3 +1,5 @@
+import '../../internal/scrollend-polyfill.js';
+
 import { AutoplayController } from './autoplay-controller.js';
 import { clamp } from '../../internal/math.js';
 import { classMap } from 'lit/directives/class-map.js';
