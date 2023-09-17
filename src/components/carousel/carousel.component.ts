@@ -141,7 +141,15 @@ export default class SlCarousel extends ShoelaceElement {
   }
 
   private getCurrentPage() {
-    return Math.ceil(this.activeSlide / this.slidesPerPage);
+    return Math.floor(this.activeSlide / this.slidesPerPage);
+  }
+
+  private canScrollNext(): boolean {
+    return this.loop || this.activeSlide + this.slidesPerPage <= this.getSlides().length - 1;
+  }
+
+  private canScrollPrev(): boolean {
+    return this.loop || this.activeSlide > 0;
   }
 
   private getSlides({ excludeClones = true }: { excludeClones?: boolean } = {}) {
@@ -291,21 +299,6 @@ export default class SlCarousel extends ShoelaceElement {
     }
   }
 
-  @watch('slidesPerMove')
-  handleSlidesPerMoveChange() {
-    const slides = this.getSlides({ excludeClones: false });
-
-    const slidesPerMove = this.slidesPerMove;
-    slides.forEach((slide, i) => {
-      const shouldSnap = Math.abs(i - slidesPerMove) % slidesPerMove === 0;
-      if (shouldSnap) {
-        slide.style.removeProperty('scroll-snap-align');
-      } else {
-        slide.style.setProperty('scroll-snap-align', 'none');
-      }
-    });
-  }
-
   @watch('autoplay')
   handleAutoplayChange() {
     this.autoplayController.stop();
@@ -358,7 +351,7 @@ export default class SlCarousel extends ShoelaceElement {
     const slidesWithClones = this.getSlides({ excludeClones: false });
 
     // Sets the next index without taking into account clones, if any.
-    const newActiveSlide = (index + slides.length) % slides.length;
+    const newActiveSlide = loop ? (index + slides.length) % slides.length : clamp(index, 0, slides.length - 1);
     this.activeSlide = newActiveSlide;
 
     // Get the index of the next slide. For looping carousel it adds `slidesPerPage`
@@ -380,8 +373,8 @@ export default class SlCarousel extends ShoelaceElement {
     const { scrollController, slidesPerPage } = this;
     const pagesCount = this.getPageCount();
     const currentPage = this.getCurrentPage();
-    const prevEnabled = this.loop || currentPage > 0;
-    const nextEnabled = this.loop || currentPage < pagesCount - 1;
+    const prevEnabled = this.canScrollPrev();
+    const nextEnabled = this.canScrollNext();
     const isLtr = this.localize.dir() === 'ltr';
 
     return html`
