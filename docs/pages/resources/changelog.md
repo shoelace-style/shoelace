@@ -19,6 +19,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Removed error when a missing popup anchor is provided [#1548]
 - Updated `@ctrl/tinycolor` to 4.0.1 [#1542]
 - Updated Bootstrap Icons to 1.11.0
+- Fixed a bug in `<sl-icon>` where we load svg URL via `<use>` if the default icon library was changed to be a sprite.
 
 ## 2.8.0
 
