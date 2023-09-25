@@ -54,7 +54,7 @@ Set the `variant` attribute to change the alert's variant.
 <sl-alert variant="neutral" open>
   <sl-icon slot="icon" name="gear"></sl-icon>
   <strong>Your settings have been updated</strong><br />
-  Settings will take affect on next login.
+  Settings will take effect on next login.
 </sl-alert>
 
 <br />
@@ -102,7 +102,7 @@ const App = () => (
       <SlIcon slot="icon" name="gear" />
       <strong>Your settings have been updated</strong>
       <br />
-      Settings will take affect on next login.
+      Settings will take effect on next login.
     </SlAlert>
 
     <br />
