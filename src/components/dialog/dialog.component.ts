@@ -60,6 +60,10 @@ import type { CSSResultGroup } from 'lit';
  * @animation dialog.denyClose - The animation to use when a request to close the dialog is denied.
  * @animation dialog.overlay.show - The animation to use when showing the dialog's overlay.
  * @animation dialog.overlay.hide - The animation to use when hiding the dialog's overlay.
+ *
+ * @property modal - Exposes the internal modal utility that controls focus trapping. To temporarily disable focus
+ *   trapping and allow third-party modals spawned from an active Shoelace modal, call `modal.activateExternal()` when
+ *   the third-party modal opens. Upon closing, call `modal.deactivateExternal()` to restore Shoelace's focus trapping.
  */
 export default class SlDialog extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
@@ -69,8 +73,8 @@ export default class SlDialog extends ShoelaceElement {
 
   private readonly hasSlotController = new HasSlotController(this, 'footer');
   private readonly localize = new LocalizeController(this);
-  private modal = new Modal(this);
   private originalTrigger: HTMLElement | null;
+  public modal = new Modal(this);
 
   @query('.dialog') dialog: HTMLElement;
   @query('.dialog__panel') panel: HTMLElement;

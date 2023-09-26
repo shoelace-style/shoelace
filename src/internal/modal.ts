@@ -5,6 +5,7 @@ let activeModals: HTMLElement[] = [];
 
 export default class Modal {
   element: HTMLElement;
+  isExternalActivated: boolean;
   tabDirection: 'forward' | 'backward' = 'forward';
   currentFocus: HTMLElement | null;
 
@@ -12,6 +13,7 @@ export default class Modal {
     this.element = element;
   }
 
+  /** Activates focus trapping. */
   activate() {
     activeModals.push(this.element);
     document.addEventListener('focusin', this.handleFocusIn);
@@ -19,6 +21,7 @@ export default class Modal {
     document.addEventListener('keyup', this.handleKeyUp);
   }
 
+  /** Deactivates focus trapping. */
   deactivate() {
     activeModals = activeModals.filter(modal => modal !== this.element);
     this.currentFocus = null;
@@ -27,13 +30,24 @@ export default class Modal {
     document.removeEventListener('keyup', this.handleKeyUp);
   }
 
+  /** Determines if this modal element is currently active or not. */
   isActive() {
     // The "active" modal is always the most recent one shown
     return activeModals[activeModals.length - 1] === this.element;
   }
 
-  checkFocus() {
-    if (this.isActive()) {
+  /** Activates external modal behavior and temporarily disables focus trapping. */
+  activateExternal() {
+    this.isExternalActivated = true;
+  }
+
+  /** Deactivates external modal behavior and re-enables focus trapping. */
+  deactivateExternal() {
+    this.isExternalActivated = false;
+  }
+
+  private checkFocus() {
+    if (this.isActive() && !this.isExternalActivated) {
       const tabbableElements = getTabbableElements(this.element);
       if (!this.element.matches(':focus-within')) {
         const start = tabbableElements[0];
@@ -56,11 +70,9 @@ export default class Modal {
     return getTabbableElements(this.element).findIndex(el => el === this.currentFocus);
   }
 
-  /**
-   * Checks if the `startElement` is already focused. This is important if the modal already
-   * has an existing focus prior to the first tab key.
-   */
-  startElementAlreadyFocused(startElement: HTMLElement) {
+  // Checks if the `startElement` is already focused. This is important if the modal already has an existing focus prior
+  // to the first tab key.
+  private startElementAlreadyFocused(startElement: HTMLElement) {
     for (const activeElement of activeElements()) {
       if (startElement === activeElement) {
         return true;
@@ -70,8 +82,8 @@ export default class Modal {
     return false;
   }
 
-  handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key !== 'Tab') return;
+  private handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key !== 'Tab' || this.isExternalActivated) return;
 
     if (event.shiftKey) {
       this.tabDirection = 'backward';
