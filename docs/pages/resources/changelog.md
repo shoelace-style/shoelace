@@ -14,6 +14,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- Added the `modal` property to `<sl-dialog>` and `<sl-drawer>` to support third-party modals [#1571]
 - Fixed a bug in the autoloader causing it to register non-Shoelace elements [#1563]
 - Fixed a bug in `<sl-switch>` that resulted in improper spacing between the label and the required asterisk [#1540]
 - Removed error when a missing popup anchor is provided [#1548]
