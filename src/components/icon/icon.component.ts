@@ -109,7 +109,7 @@ export default class SlIcon extends ShoelaceElement {
     unwatchIcon(this);
   }
 
-  private getUrl(): IconSource {
+  private getIconSource(): IconSource {
     const library = getIconLibrary(this.library);
     if (this.name && library) {
       return {
@@ -141,7 +141,7 @@ export default class SlIcon extends ShoelaceElement {
 
   @watch(['name', 'src', 'library'])
   async setIcon() {
-    const { url, fromLibrary } = this.getUrl();
+    const { url, fromLibrary } = this.getIconSource();
     const library = fromLibrary ? getIconLibrary(this.library) : undefined;
 
     if (!url) {
@@ -166,7 +166,7 @@ export default class SlIcon extends ShoelaceElement {
       iconCache.delete(url);
     }
 
-    if (url !== this.getUrl().url) {
+    if (url !== this.getIconSource().url) {
       // If the url has changed while fetching the icon, ignore this request
       return;
     }
