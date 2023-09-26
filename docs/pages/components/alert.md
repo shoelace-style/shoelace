@@ -54,7 +54,7 @@ Set the `variant` attribute to change the alert's variant.
 <sl-alert variant="neutral" open>
   <sl-icon slot="icon" name="gear"></sl-icon>
   <strong>Your settings have been updated</strong><br />
-  Settings will take affect on next login.
+  Settings will take effect on next login.
 </sl-alert>
 
 <br />
@@ -102,7 +102,7 @@ const App = () => (
       <SlIcon slot="icon" name="gear" />
       <strong>Your settings have been updated</strong>
       <br />
-      Settings will take affect on next login.
+      Settings will take effect on next login.
     </SlAlert>
 
     <br />
@@ -276,7 +276,7 @@ You should always use the `closable` attribute so users can dismiss the notifica
   <sl-alert variant="neutral" duration="3000" closable>
     <sl-icon slot="icon" name="gear"></sl-icon>
     <strong>Your settings have been updated</strong><br />
-    Settings will take affect on next login.
+    Settings will take effect on next login.
   </sl-alert>
 
   <sl-alert variant="warning" duration="3000" closable>
@@ -361,7 +361,7 @@ const App = () => {
         <SlIcon slot="icon" name="gear" />
         <strong>Your settings have been updated</strong>
         <br />
-        Settings will take affect on next login.
+        Settings will take effect on next login.
       </SlAlert>
 
       <SlAlert ref={warning} variant="warning" duration="3000" closable>

@@ -15,13 +15,13 @@ const observer = new MutationObserver(mutations => {
  */
 export async function discover(root: Element | ShadowRoot) {
   const rootTagName = root instanceof Element ? root.tagName.toLowerCase() : '';
-  const rootIsCustomElement = rootTagName?.includes('-');
+  const rootIsShoelaceElement = rootTagName?.startsWith('sl-');
   const tags = [...root.querySelectorAll(':not(:defined)')]
     .map(el => el.tagName.toLowerCase())
     .filter(tag => tag.startsWith('sl-'));
 
-  // If the root element is an undefined custom element, add it to the list
-  if (rootIsCustomElement && !customElements.get(rootTagName)) {
+  // If the root element is an undefined Shoelace component, add it to the list
+  if (rootIsShoelaceElement && !customElements.get(rootTagName)) {
     tags.push(rootTagName);
   }
 
@@ -35,13 +35,13 @@ export async function discover(root: Element | ShadowRoot) {
  * Registers an element by tag name.
  */
 function register(tagName: string): Promise<void> {
-  const tagWithoutPrefix = tagName.replace(/^sl-/i, '');
-  const path = getBasePath(`components/${tagWithoutPrefix}/${tagWithoutPrefix}.js`);
-
   // If the element is already defined, there's nothing more to do
   if (customElements.get(tagName)) {
     return Promise.resolve();
   }
+
+  const tagWithoutPrefix = tagName.replace(/^sl-/i, '');
+  const path = getBasePath(`components/${tagWithoutPrefix}/${tagWithoutPrefix}.js`);
 
   // Register it
   return new Promise((resolve, reject) => {
