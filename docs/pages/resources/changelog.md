@@ -12,6 +12,16 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## 2.9.0
+
+- Added the `modal` property to `<sl-dialog>` and `<sl-drawer>` to support third-party modals [#1571]
+- Fixed a bug in the autoloader causing it to register non-Shoelace elements [#1563]
+- Fixed a bug in `<sl-switch>` that resulted in improper spacing between the label and the required asterisk [#1540]
+- Fixed a bug in `<sl-icon>` that caused icons to not load when the default library used a sprite [#1572]
+- Removed error when a missing popup anchor is provided [#1548]
+- Updated `@ctrl/tinycolor` to 4.0.1 [#1542]
+- Updated Bootstrap Icons to 1.11.0
+
 ## 2.8.0
 
 - Added `--isolatedModules` and `--verbatimModuleSyntax` to `tsconfig.json`. For anyone directly importing event types, they no longer provide a default export due to these options being enabled. For people using the `events/event.js` file directly, there is no change.
@@ -23,7 +33,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Improved expand/collapse behavior of `<sl-tree>` to work more like users expect [#1521]
 - Improved `<sl-menu-item>` so labels truncate properly instead of getting chopped and overflowing
 - Removed the extra `React.Component` around `@lit-labs/react` wrapper. [#1531]
-- Upgrade `@lit-labs/react` to v2.0.1. [#1531]
+- Updated `@lit-labs/react` to v2.0.1. [#1531]
 
 ## 2.7.0
 

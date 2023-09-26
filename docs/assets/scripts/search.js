@@ -373,4 +373,12 @@
       hide();
     }
   });
+
+  // We're using Turbo, so when a user searches for something, visits a result, and presses the back button, the search
+  // UI will still be visible but not interactive. This removes the search UI when Turbo renders a page so they don't
+  // get trapped.
+  window.addEventListener('turbo:render', () => {
+    document.body.classList.remove('search-visible');
+    document.querySelectorAll('.search__overlay, .search__dialog').forEach(el => el.remove());
+  });
 })();
