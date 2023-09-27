@@ -20,3 +20,14 @@ export function* activeElements(activeElement: Element | null = document.activeE
     yield* activeElements(activeElement.shadowRoot.activeElement);
   }
 }
+
+export function getDeepestActiveElement() {
+  let activeElement
+
+  for (const element of activeElements()) {
+    activeElement = element
+  }
+
+  return activeElement
+}
+
