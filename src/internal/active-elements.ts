@@ -22,12 +22,11 @@ export function* activeElements(activeElement: Element | null = document.activeE
 }
 
 export function getDeepestActiveElement() {
-  let activeElement
+  let activeElement;
 
   for (const element of activeElements()) {
-    activeElement = element
+    activeElement = element;
   }
 
-  return activeElement
+  return activeElement;
 }
-

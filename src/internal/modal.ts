@@ -82,8 +82,8 @@ export default class Modal {
     // Because sometimes focus can actually be taken over from outside sources,
     // we don't want to rely on `this.currentFocus`. Instead we check the actual `activeElement` and
     // recurse through shadowRoots.
-    const currentActiveElement = getDeepestActiveElement()
-    let currentFocusIndex = tabbableElements.findIndex((el) => el === currentActiveElement)
+    const currentActiveElement = getDeepestActiveElement();
+    let currentFocusIndex = tabbableElements.findIndex(el => el === currentActiveElement);
 
     if (currentFocusIndex === -1) {
       this.currentFocus = tabbableElements[0];
