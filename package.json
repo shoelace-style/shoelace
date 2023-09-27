@@ -25,15 +25,8 @@
     "./dist/react/*": "./dist/react/*",
     "./dist/translations/*": "./dist/translations/*"
   },
-  "files": [
-    "dist",
-    "cdn"
-  ],
-  "keywords": [
-    "web components",
-    "custom elements",
-    "components"
-  ],
+  "files": ["dist", "cdn"],
+  "keywords": ["web components", "custom elements", "components"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/shoelace-style/shoelace.git"
@@ -71,7 +64,7 @@
     "@floating-ui/dom": "^1.2.1",
     "@lit-labs/react": "^2.0.3",
     "@shoelace-style/animations": "^1.1.0",
-    "@shoelace-style/localize": "^3.1.1",
+    "@shoelace-style/localize": "^3.1.2",
     "composed-offset-position": "^0.0.4",
     "lit": "^2.7.5",
     "qr-creator": "^1.0.0"
@@ -140,9 +133,6 @@
     "user-agent-data-types": "^0.3.0"
   },
   "lint-staged": {
-    "*.{ts,js}": [
-      "eslint --max-warnings 0 --cache --fix",
-      "prettier --write"
-    ]
+    "*.{ts,js}": ["eslint --max-warnings 0 --cache --fix", "prettier --write"]
   }
 }

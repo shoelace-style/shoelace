@@ -12,6 +12,11 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## Next
+
+- Fixed a bug [in the localize dependency](https://github.com/shoelace-style/localize/issues/20) that caused underscores in language codes to throw a `RangeError`
+- Updated `@shoelace-style/localize` to 3.1.0
+
 ## 2.9.0
 
 - Added the `modal` property to `<sl-dialog>` and `<sl-drawer>` to support third-party modals [#1571]
