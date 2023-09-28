@@ -22,11 +22,5 @@ export function* activeElements(activeElement: Element | null = document.activeE
 }
 
 export function getDeepestActiveElement() {
-  let activeElement;
-
-  for (const element of activeElements()) {
-    activeElement = element;
-  }
-
-  return activeElement;
+  return [...activeElements()].pop()
 }
