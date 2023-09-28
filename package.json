@@ -64,7 +64,7 @@
     "@floating-ui/dom": "^1.2.1",
     "@lit-labs/react": "^2.0.3",
     "@shoelace-style/animations": "^1.1.0",
-    "@shoelace-style/localize": "^3.1.1",
+    "@shoelace-style/localize": "^3.1.2",
     "composed-offset-position": "^0.0.4",
     "lit": "^2.7.5",
     "qr-creator": "^1.0.0"
