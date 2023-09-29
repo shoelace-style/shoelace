@@ -15,6 +15,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 ## Next
 
 - Fixed a bug [in the localize dependency](https://github.com/shoelace-style/localize/issues/20) that caused underscores in language codes to throw a `RangeError`
+- Fixed a bug in the focus trapping utility used by modals that caused unexpected focus behavior. [#1583]
 - Updated `@shoelace-style/localize` to 3.1.0
 
 ## 2.9.0
