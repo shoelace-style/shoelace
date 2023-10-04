@@ -104,21 +104,22 @@ describe('<sl-menu>', () => {
 
 // @see https://github.com/shoelace-style/shoelace/issues/1596
 it('Should fire "sl-select" when clicking an element within a menu-item', async () => {
-  const selectHandler = sinon.spy((_event: SlSelectEvent) => {});
+  // eslint-disable-next-line
+  const selectHandler = sinon.spy(() => {});
 
   const menu: SlMenu = await fixture(html`
     <sl-menu>
       <sl-menu-label>What Can You Ask Trebellar?</sl-menu-label>
       <sl-menu-item value="p1">
-          <ui-icon slot="prefix" size="1rem" name="chat"></ui-icon>
-          <span class="q">X</span>
+        <ui-icon slot="prefix" size="1rem" name="chat"></ui-icon>
+        <span class="q">X</span>
       </sl-menu-item>
     </sl-menu>
-  `)
+  `);
 
   menu.addEventListener('sl-select', selectHandler);
-  const span = menu.querySelector("span")!
+  const span = menu.querySelector('span')!;
   await clickOnElement(span);
 
   expect(selectHandler).to.have.been.calledOnce;
-})
+});
