@@ -20,3 +20,7 @@ export function* activeElements(activeElement: Element | null = document.activeE
     yield* activeElements(activeElement.shadowRoot.activeElement);
   }
 }
+
+export function getDeepestActiveElement() {
+  return [...activeElements()].pop();
+}
