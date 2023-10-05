@@ -76,11 +76,11 @@ export default css`
   .menu-item--submenu-expanded::after {
     content: '';
     position: fixed;
+    z-index: calc(var(--sl-z-index-dropdown) - 1);
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 1;
     clip-path: polygon(
       var(--safe-triangle-cursor-x) var(--safe-triangle-cursor-y),
       var(--safe-triangle-submenu-start-x) var(--safe-triangle-submenu-start-y),
