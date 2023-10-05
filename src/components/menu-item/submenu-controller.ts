@@ -49,6 +49,7 @@ export class SubmenuController implements ReactiveController {
 
   private addListeners() {
     if (!this.isConnected) {
+      this.host.addEventListener('mousemove', this.handleMouseMove);
       this.host.addEventListener('mouseover', this.handleMouseOver);
       this.host.addEventListener('keydown', this.handleKeyDown);
       this.host.addEventListener('click', this.handleClick);
@@ -68,6 +69,7 @@ export class SubmenuController implements ReactiveController {
 
   private removeListeners() {
     if (this.isConnected) {
+      this.host.removeEventListener('mousemove', this.handleMouseMove);
       this.host.removeEventListener('mouseover', this.handleMouseOver);
       this.host.removeEventListener('keydown', this.handleKeyDown);
       this.host.removeEventListener('click', this.handleClick);
@@ -81,6 +83,27 @@ export class SubmenuController implements ReactiveController {
       }
     }
   }
+
+  private handleMouseMove = (event: MouseEvent) => {
+    const submenuSlot: HTMLSlotElement | null = this.host.renderRoot.querySelector("slot[name='submenu']");
+    const menu = submenuSlot?.assignedElements({ flatten: true }).filter(el => el.localName === 'sl-menu')[0];
+    const isRtl = this.localize.dir() === 'rtl';
+
+    if (!menu) {
+      return;
+    }
+
+    const { left, top, width, height } = menu.getBoundingClientRect();
+    const startX = isRtl ? left + width : left;
+    const endX = isRtl ? left + width : left;
+
+    this.host.style.setProperty('--safe-triangle-cursor-x', `${event.clientX}px`);
+    this.host.style.setProperty('--safe-triangle-cursor-y', `${event.clientY}px`);
+    this.host.style.setProperty('--safe-triangle-submenu-start-x', `${startX}px`);
+    this.host.style.setProperty('--safe-triangle-submenu-start-y', `${top}px`);
+    this.host.style.setProperty('--safe-triangle-submenu-end-x', `${endX}px`);
+    this.host.style.setProperty('--safe-triangle-submenu-end-y', `${top + height}px`);
+  };
 
   private handleMouseOver = () => {
     if (this.hasSlotController.test('submenu')) {
