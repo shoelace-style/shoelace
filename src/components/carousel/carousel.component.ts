@@ -303,7 +303,7 @@ export default class SlCarousel extends ShoelaceElement {
       this.emit('sl-slide-change', {
         detail: {
           index: this.activeSlide,
-          slide: this.getSlides()[this.activeSlide]
+          slide: slides[this.activeSlide]
         }
       });
     }
