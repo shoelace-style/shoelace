@@ -226,8 +226,92 @@ describe('<sl-carousel>', () => {
   });
 
   describe('when `slides-per-move` attribute is provided', () => {
-    describe('and it is less than `slides-per-page`', () => {
-      // TODO
+    it('should set the granularity of snapping', async () => {
+      // Arrange
+      const expectedSnapGranularity = 2;
+      const el = await fixture<SlCarousel>(html`
+        <sl-carousel slides-per-move="${expectedSnapGranularity}">
+          <sl-carousel-item>Node 1</sl-carousel-item>
+          <sl-carousel-item>Node 2</sl-carousel-item>
+          <sl-carousel-item>Node 3</sl-carousel-item>
+          <sl-carousel-item>Node 4</sl-carousel-item>
+        </sl-carousel>
+      `);
+
+      // Act
+      await el.updateComplete;
+
+      // Assert
+      for (let i = 0; i < el.children.length; i++) {
+        const child = el.children[i] as HTMLElement;
+
+        if (i % expectedSnapGranularity === 0) {
+          expect(child.style.getPropertyValue('scroll-snap-align')).to.be.equal('');
+        } else {
+          expect(child.style.getPropertyValue('scroll-snap-align')).to.be.equal('none');
+        }
+      }
+    });
+
+    it('should be possible to move by the given number of slides at a time', async () => {
+      // Arrange
+      const el = await fixture<SlCarousel>(html`
+        <sl-carousel navigation slides-per-move="2" slides-per-page="2">
+          <sl-carousel-item>Node 1</sl-carousel-item>
+          <sl-carousel-item>Node 2</sl-carousel-item>
+          <sl-carousel-item class="expected">Node 3</sl-carousel-item>
+          <sl-carousel-item class="expected">Node 4</sl-carousel-item>
+          <sl-carousel-item>Node 5</sl-carousel-item>
+          <sl-carousel-item>Node 6</sl-carousel-item>
+        </sl-carousel>
+      `);
+      const expectedSlides = el.querySelectorAll('.expected')!;
+      const nextButton: HTMLElement = el.shadowRoot!.querySelector('.carousel__navigation-button--next')!;
+
+      // Act
+      await clickOnElement(nextButton);
+
+      await oneEvent(el.scrollContainer, 'scrollend');
+      await el.updateComplete;
+
+      // Assert
+      for (const expectedSlide of expectedSlides) {
+        expect(expectedSlide).to.have.class('--in-view');
+        expect(expectedSlide).to.be.visible;
+      }
+    });
+
+    it('should be possible to move by a number that is less than the displayed number', async () => {
+      // Arrange
+      const el = await fixture<SlCarousel>(html`
+        <sl-carousel navigation slides-per-move="1" slides-per-page="2">
+          <sl-carousel-item>Node 1</sl-carousel-item>
+          <sl-carousel-item>Node 2</sl-carousel-item>
+          <sl-carousel-item>Node 3</sl-carousel-item>
+          <sl-carousel-item>Node 4</sl-carousel-item>
+          <sl-carousel-item class="expected">Node 5</sl-carousel-item>
+          <sl-carousel-item class="expected">Node 6</sl-carousel-item>
+        </sl-carousel>
+      `);
+      const expectedSlides = el.querySelectorAll('.expected')!;
+      const nextButton: HTMLElement = el.shadowRoot!.querySelector('.carousel__navigation-button--next')!;
+
+      // Act
+      await clickOnElement(nextButton);
+      await clickOnElement(nextButton);
+      await clickOnElement(nextButton);
+      await clickOnElement(nextButton);
+      await clickOnElement(nextButton);
+      await clickOnElement(nextButton);
+
+      await oneEvent(el.scrollContainer, 'scrollend');
+      await el.updateComplete;
+
+      // Assert
+      for (const expectedSlide of expectedSlides) {
+        expect(expectedSlide).to.have.class('--in-view');
+        expect(expectedSlide).to.be.visible;
+      }
     });
   });
 

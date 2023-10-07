@@ -43,7 +43,7 @@ if (!isSupported) {
   document.addEventListener('pointerdown', handlePointerDown);
   document.addEventListener('pointerup', handlePointerUp);
 
-  decorate(EventTarget.prototype, 'addEventListener', function (this: EventTarget, superFn, type) {
+  decorate(EventTarget.prototype, 'addEventListener', function (this: EventTarget, addEventListener, type) {
     if (type !== 'scroll') return;
 
     const handleScrollEnd = debounce(() => {
@@ -56,16 +56,16 @@ if (!isSupported) {
       }
     }, 100);
 
-    superFn.call(this, 'scroll', handleScrollEnd, { passive: true });
+    addEventListener.call(this, 'scroll', handleScrollEnd, { passive: true });
     scrollHandlers.set(this, handleScrollEnd);
   });
 
-  decorate(EventTarget.prototype, 'removeEventListener', function (this: EventTarget, superFn, type) {
+  decorate(EventTarget.prototype, 'removeEventListener', function (this: EventTarget, removeEventListener, type) {
     if (type !== 'scroll') return;
 
     const scrollHandler = scrollHandlers.get(this);
     if (scrollHandler) {
-      superFn.call(this, 'scroll', scrollHandler, { passive: true } as unknown as EventListenerOptions);
+      removeEventListener.call(this, 'scroll', scrollHandler, { passive: true } as unknown as EventListenerOptions);
     }
   });
 }
