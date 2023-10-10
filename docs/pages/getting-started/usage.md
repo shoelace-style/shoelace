@@ -214,7 +214,7 @@ If `settings.json` already exists, simply add the above line to the root of the 
 
 If you are using a [JetBrains IDE](https://www.jetbrains.com/) and you are installing Shoelace from NPM, the editor will automatically detect the `web-types.json` file from the package and you should immediately see component information in your editor.
 
-If you are installing from the CDN, you can [download a local copy](https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace/dist/web-types.json) and add it to the root of your project. Be sure to add a reference to the `web-types.json` file in your `package.json` in order for your to properly detect it.
+If you are installing from the CDN, you can [download a local copy](https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace/dist/web-types.json) and add it to the root of your project. Be sure to add a reference to the `web-types.json` file in your `package.json` in order for your editor to properly detect it.
 
 ```json
 {
