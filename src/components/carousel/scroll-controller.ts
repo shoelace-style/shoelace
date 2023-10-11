@@ -108,7 +108,7 @@ export class ScrollController<T extends ScrollHost> implements ReactiveControlle
     });
   }
 
-  async handleDragEnd() {
+  handleDragEnd() {
     const host = this.host;
     const scrollContainer = host.scrollContainer;
 
@@ -125,13 +125,16 @@ export class ScrollController<T extends ScrollHost> implements ReactiveControlle
     scrollContainer.scrollTo({ left: startLeft, top: startTop, behavior: 'auto' });
     scrollContainer.scrollTo({ left: finalLeft, top: finalTop, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
 
-    if (startLeft !== finalLeft || startTop !== finalTop) {
-      await waitForEvent(scrollContainer, 'scrollend');
-    }
+    // Wait for scroll to be applied
+    requestAnimationFrame(async () => {
+      if (startLeft !== finalLeft || startTop !== finalTop) {
+        await waitForEvent(scrollContainer, 'scrollend');
+      }
 
-    scrollContainer.style.removeProperty('scroll-snap-type');
+      scrollContainer.style.removeProperty('scroll-snap-type');
 
-    this.dragging = false;
-    host.requestUpdate();
+      this.dragging = false;
+      host.requestUpdate();
+    });
   }
 }
