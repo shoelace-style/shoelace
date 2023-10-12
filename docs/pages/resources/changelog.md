@@ -18,6 +18,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug [in the localize dependency](https://github.com/shoelace-style/localize/issues/20) that caused underscores in language codes to throw a `RangeError`
 - Fixed a bug in the focus trapping utility used by modals that caused unexpected focus behavior. [#1583]
 - Fixed a bug in `<sl-copy-button>` that prevented exported tooltip parts from being styled [#1586]
+- Fixed a bug in `<sl-menu>` that caused it not to fire the `sl-select` event if you clicked an element inside of a `<sl-menu-item>` [#1599]
 - Improved submenu selection by implementing the [safe triangle](https://www.smashingmagazine.com/2023/08/better-context-menus-safe-triangles/) method [#1550]
 - Updated `@shoelace-style/localize` to 3.1.0
 
