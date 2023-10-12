@@ -14,6 +14,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- Added the Simplified Chinese translation [#1604]
 - Fixed a bug [in the localize dependency](https://github.com/shoelace-style/localize/issues/20) that caused underscores in language codes to throw a `RangeError`
 - Fixed a bug in the focus trapping utility used by modals that caused unexpected focus behavior. [#1583]
 - Fixed a bug in `<sl-copy-button>` that prevented exported tooltip parts from being styled [#1586]
