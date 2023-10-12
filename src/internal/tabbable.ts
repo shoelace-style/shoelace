@@ -14,11 +14,6 @@ function isTabbable(el: HTMLElement) {
     return false;
   }
 
-  // Elements with aria-disabled are not tabbable
-  if (el.hasAttribute('aria-disabled') && el.getAttribute('aria-disabled') !== 'false') {
-    return false;
-  }
-
   // Radios without a checked attribute are not tabbable
   if (tag === 'input' && el.getAttribute('type') === 'radio' && !el.hasAttribute('checked')) {
     return false;
@@ -107,14 +102,12 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
   // Collect all elements including the root
   walk(root);
 
-  return tabbableElements;
-
   // Is this worth having? Most sorts will always add increased overhead. And positive tabindexes shouldn't really be used.
   // So is it worth being right? Or fast?
-  // return tabbableElements.filter(isTabbable).sort((a, b) => {
-  //   // Make sure we sort by tabindex.
-  //   const aTabindex = Number(a.getAttribute('tabindex')) || 0;
-  //   const bTabindex = Number(b.getAttribute('tabindex')) || 0;
-  //   return bTabindex - aTabindex;
-  // });
+  return tabbableElements.sort((a, b) => {
+    // Make sure we sort by tabindex.
+    const aTabindex = Number(a.getAttribute('tabindex')) || 0;
+    const bTabindex = Number(b.getAttribute('tabindex')) || 0;
+    return bTabindex - aTabindex;
+  });
 }
