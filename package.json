@@ -50,8 +50,8 @@
     "build": "node scripts/build.js",
     "verify": "npm run prettier:check && npm run lint && npm run build && npm run test",
     "prepublishOnly": "npm run verify",
-    "prettier": "prettier --write --loglevel warn .",
-    "prettier:check": "prettier --check --loglevel warn .",
+    "prettier": "prettier --write --log-level=warn .",
+    "prettier:check": "prettier --check --log-level=warn .",
     "lint": "eslint src --max-warnings 0",
     "lint:fix": "eslint src --max-warnings 0 --fix",
     "ts-check": "tsc --noEmit --project ./tsconfig.json",
@@ -72,6 +72,7 @@
     "@lit-labs/react": "^2.1.1",
     "@shoelace-style/animations": "^1.1.0",
     "@shoelace-style/localize": "^3.1.2",
+    "composed-offset-position": "^0.0.4",
     "lit": "^3.0.0",
     "qr-creator": "^1.0.0"
   },
