@@ -1,5 +1,8 @@
 // It doesn't technically check visibility, it checks if the element has been rendered and can maybe possibly be tabbed to.
 // This is a workaround for shadowroots not having an `offsetParent`
+// https://stackoverflow.com/questions/19669786/check-if-element-is-visible-in-dom
+// Previously, we used https://www.npmjs.com/package/composed-offset-position, but recursing up an entire
+// node tree took up a lot of CPU cycles and made focus traps unusable in Chrome / Edge.
 function isTakingUpSpace (elem: HTMLElement): boolean {
   return Boolean( elem.offsetParent || elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length );
 }
