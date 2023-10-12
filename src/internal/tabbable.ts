@@ -3,8 +3,8 @@
 // https://stackoverflow.com/questions/19669786/check-if-element-is-visible-in-dom
 // Previously, we used https://www.npmjs.com/package/composed-offset-position, but recursing up an entire
 // node tree took up a lot of CPU cycles and made focus traps unusable in Chrome / Edge.
-function isTakingUpSpace (elem: HTMLElement): boolean {
-  return Boolean( elem.offsetParent || elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length );
+function isTakingUpSpace(elem: HTMLElement): boolean {
+  return Boolean(elem.offsetParent || elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length);
 }
 /** Determines if the specified element is tabbable using heuristics inspired by https://github.com/focus-trap/tabbable */
 function isTabbable(el: HTMLElement) {
