@@ -109,10 +109,8 @@ it('Should fire "sl-select" when clicking an element within a menu-item', async 
 
   const menu: SlMenu = await fixture(html`
     <sl-menu>
-      <sl-menu-label>What Can You Ask Trebellar?</sl-menu-label>
-      <sl-menu-item value="p1">
-        <ui-icon slot="prefix" size="1rem" name="chat"></ui-icon>
-        <span class="q">X</span>
+      <sl-menu-item>
+        <span>Menu item</span>
       </sl-menu-item>
     </sl-menu>
   `);
