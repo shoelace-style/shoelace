@@ -231,7 +231,9 @@ export default class SlCarousel extends ShoelaceElement {
 
   private handleSlotChange = (mutations: MutationRecord[]) => {
     const needsInitialization = mutations.some(mutation =>
-      [...mutation.addedNodes, ...mutation.removedNodes].some(this.isCarouselItem)
+      [...mutation.addedNodes, ...mutation.removedNodes].some(
+        (el: HTMLElement) => this.isCarouselItem(el) && !el.hasAttribute('data-clone')
+      )
     );
 
     // Reinitialize the carousel if a carousel item has been added or removed
