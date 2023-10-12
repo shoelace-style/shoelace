@@ -21,6 +21,10 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-menu>` that caused it not to fire the `sl-select` event if you clicked an element inside of a `<sl-menu-item>` [#1599]
 - Improved submenu selection by implementing the [safe triangle](https://www.smashingmagazine.com/2023/08/better-context-menus-safe-triangles/) method [#1550]
 - Updated `@shoelace-style/localize` to 3.1.0
+- Updated Bootstrap Icons to 1.11.1
+- Updated Lit to 3.0.0
+- Updated TypeScript to 5.2.2
+- Updated all other dependencies to latest versions
 
 ## 2.9.0
 
