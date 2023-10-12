@@ -4,7 +4,7 @@ import path from 'path';
 import chalk from 'chalk';
 import { deleteSync } from 'del';
 import prettier from 'prettier';
-import prettierConfig from '../prettier.config.cjs';
+import { default as prettierConfig } from '../prettier.config.js';
 import { getAllComponents } from './shared.js';
 
 const { outdir } = commandLineArgs({ name: 'outdir', type: String });
@@ -20,7 +20,7 @@ const metadata = JSON.parse(fs.readFileSync(path.join(outdir, 'custom-elements.j
 const components = getAllComponents(metadata);
 const index = [];
 
-components.map(component => {
+components.forEach(async component => {
   const tagWithoutPrefix = component.tagName.replace(/^sl-/, '');
   const componentDir = path.join(reactDir, tagWithoutPrefix);
   const componentFile = path.join(componentDir, 'index.ts');
@@ -41,7 +41,7 @@ components.map(component => {
 
   const jsDoc = component.jsDoc || '';
 
-  const source = prettier.format(
+  const source = await prettier.format(
     `
       import * as React from 'react';
       import { createComponent } from '@lit-labs/react';

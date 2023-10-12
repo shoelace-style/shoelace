@@ -99,25 +99,25 @@ describe('<sl-button>', () => {
     });
 
     it('should render a link with rel="noreferrer noopener" when target is set and rel is not', async () => {
-      const el = await fixture<SlButton>(
-        html` <sl-button href="https://example.com/" target="_blank">Link</sl-button> `
-      );
+      const el = await fixture<SlButton>(html`
+        <sl-button href="https://example.com/" target="_blank">Link</sl-button>
+      `);
       const link = el.shadowRoot!.querySelector('a')!;
       expect(link?.getAttribute('rel')).to.equal('noreferrer noopener');
     });
 
     it('should render a link with rel="" when a target is provided and rel is empty', async () => {
-      const el = await fixture<SlButton>(
-        html` <sl-button href="https://example.com/" target="_blank" rel="">Link</sl-button> `
-      );
+      const el = await fixture<SlButton>(html`
+        <sl-button href="https://example.com/" target="_blank" rel="">Link</sl-button>
+      `);
       const link = el.shadowRoot!.querySelector('a')!;
       expect(link?.getAttribute('rel')).to.equal('');
     });
 
     it(`should render a link with a custom rel when a custom rel is provided`, async () => {
-      const el = await fixture<SlButton>(
-        html` <sl-button href="https://example.com/" target="_blank" rel="1">Link</sl-button> `
-      );
+      const el = await fixture<SlButton>(html`
+        <sl-button href="https://example.com/" target="_blank" rel="1">Link</sl-button>
+      `);
       const link = el.shadowRoot!.querySelector('a')!;
       expect(link?.getAttribute('rel')).to.equal('1');
     });

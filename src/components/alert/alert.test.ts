@@ -210,10 +210,12 @@ describe('<sl-alert>', () => {
     };
 
     it('deletes the toast stack after the last alert is done', async () => {
-      const container = await fixture<HTMLElement>(html`<div>
-        <sl-alert data-testid="alert1" closable>alert 1</sl-alert>
-        <sl-alert data-testid="alert2" closable>alert 2</sl-alert>
-      </div>`);
+      const container = await fixture<HTMLElement>(
+        html`<div>
+          <sl-alert data-testid="alert1" closable>alert 1</sl-alert>
+          <sl-alert data-testid="alert2" closable>alert 2</sl-alert>
+        </div>`
+      );
 
       const alert1 = queryByTestId<SlAlert>(container, 'alert1');
       const alert2 = queryByTestId<SlAlert>(container, 'alert2');

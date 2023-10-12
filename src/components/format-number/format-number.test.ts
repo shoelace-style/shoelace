@@ -24,9 +24,9 @@ describe('<sl-format-number>', () => {
   describe('lang property', () => {
     ['de', 'de-CH', 'fr', 'es', 'he', 'ja', 'nl', 'pl', 'pt', 'ru'].forEach(lang => {
       it(`number has correct language format: ${lang}`, async () => {
-        const el = await fixture<SlFormatNumber>(
-          html` <sl-format-number value="1000" lang="${lang}"></sl-format-number> `
-        );
+        const el = await fixture<SlFormatNumber>(html`
+          <sl-format-number value="1000" lang="${lang}"></sl-format-number>
+        `);
         const expected = new Intl.NumberFormat(lang, { style: 'decimal', useGrouping: true }).format(1000);
         expect(el.shadowRoot?.textContent).to.equal(expected);
       });
@@ -36,9 +36,9 @@ describe('<sl-format-number>', () => {
   describe('type property', () => {
     ['currency', 'decimal', 'percent'].forEach(type => {
       it(`number has correct type format: ${type}`, async () => {
-        const el = await fixture<SlFormatNumber>(
-          html` <sl-format-number value="1000" type="${type}"></sl-format-number> `
-        );
+        const el = await fixture<SlFormatNumber>(html`
+          <sl-format-number value="1000" type="${type}"></sl-format-number>
+        `);
         const expected = new Intl.NumberFormat('en-US', { style: type, currency: 'USD' }).format(1000);
         expect(el.shadowRoot?.textContent).to.equal(expected);
       });
@@ -62,9 +62,9 @@ describe('<sl-format-number>', () => {
   describe('currency property', () => {
     ['USD', 'CAD', 'AUD', 'UAH'].forEach(currency => {
       it(`number has correct type format: ${currency}`, async () => {
-        const el = await fixture<SlFormatNumber>(
-          html` <sl-format-number value="1000" currency="${currency}"></sl-format-number> `
-        );
+        const el = await fixture<SlFormatNumber>(html`
+          <sl-format-number value="1000" currency="${currency}"></sl-format-number>
+        `);
         const expected = new Intl.NumberFormat('en-US', { style: 'decimal', currency: currency }).format(1000);
         expect(el.shadowRoot?.textContent).to.equal(expected);
       });
@@ -74,9 +74,9 @@ describe('<sl-format-number>', () => {
   describe('currencyDisplay property', () => {
     ['symbol', 'narrowSymbol', 'code', 'name'].forEach(currencyDisplay => {
       it(`number has correct type format: ${currencyDisplay}`, async () => {
-        const el = await fixture<SlFormatNumber>(
-          html` <sl-format-number value="1000" currency-display="${currencyDisplay}"></sl-format-number> `
-        );
+        const el = await fixture<SlFormatNumber>(html`
+          <sl-format-number value="1000" currency-display="${currencyDisplay}"></sl-format-number>
+        `);
         const expected = new Intl.NumberFormat('en-US', { style: 'decimal', currencyDisplay: currencyDisplay }).format(
           1000
         );
@@ -88,9 +88,9 @@ describe('<sl-format-number>', () => {
   describe('minimumIntegerDigits property', () => {
     [4, 5, 6].forEach(minDigits => {
       it(`number has correct type format: ${minDigits}`, async () => {
-        const el = await fixture<SlFormatNumber>(
-          html` <sl-format-number value="1000" minimum-integer-digits="${minDigits}"></sl-format-number> `
-        );
+        const el = await fixture<SlFormatNumber>(html`
+          <sl-format-number value="1000" minimum-integer-digits="${minDigits}"></sl-format-number>
+        `);
         const expected = new Intl.NumberFormat('en-US', {
           style: 'decimal',
           currencyDisplay: 'symbol',
@@ -104,9 +104,9 @@ describe('<sl-format-number>', () => {
   describe('minimumFractionDigits property', () => {
     [4, 5, 6].forEach(minFractionDigits => {
       it(`number has correct type format: ${minFractionDigits}`, async () => {
-        const el = await fixture<SlFormatNumber>(
-          html` <sl-format-number value="1000" minimum-fraction-digits="${minFractionDigits}"></sl-format-number> `
-        );
+        const el = await fixture<SlFormatNumber>(html`
+          <sl-format-number value="1000" minimum-fraction-digits="${minFractionDigits}"></sl-format-number>
+        `);
         const expected = new Intl.NumberFormat('en-US', {
           style: 'decimal',
           currencyDisplay: 'symbol',
@@ -120,9 +120,9 @@ describe('<sl-format-number>', () => {
   describe('maximumFractionDigits property', () => {
     [4, 5, 6].forEach(maxFractionDigits => {
       it(`number has correct type format: ${maxFractionDigits}`, async () => {
-        const el = await fixture<SlFormatNumber>(
-          html` <sl-format-number value="1000" maximum-fraction-digits="${maxFractionDigits}"></sl-format-number> `
-        );
+        const el = await fixture<SlFormatNumber>(html`
+          <sl-format-number value="1000" maximum-fraction-digits="${maxFractionDigits}"></sl-format-number>
+        `);
         const expected = new Intl.NumberFormat('en-US', {
           style: 'decimal',
           currencyDisplay: 'symbol',
@@ -136,11 +136,9 @@ describe('<sl-format-number>', () => {
   describe('minimumSignificantDigits property', () => {
     [4, 5, 6].forEach(minSignificantDigits => {
       it(`number has correct type format: ${minSignificantDigits}`, async () => {
-        const el = await fixture<SlFormatNumber>(
-          html`
-            <sl-format-number value="1000" minimum-significant-digits="${minSignificantDigits}"></sl-format-number>
-          `
-        );
+        const el = await fixture<SlFormatNumber>(html`
+          <sl-format-number value="1000" minimum-significant-digits="${minSignificantDigits}"></sl-format-number>
+        `);
         const expected = new Intl.NumberFormat('en-US', {
           style: 'decimal',
           currencyDisplay: 'symbol',
@@ -154,11 +152,9 @@ describe('<sl-format-number>', () => {
   describe('maximumSignificantDigits property', () => {
     [4, 5, 6].forEach(maxSignificantDigits => {
       it(`number has correct type format: ${maxSignificantDigits}`, async () => {
-        const el = await fixture<SlFormatNumber>(
-          html`
-            <sl-format-number value="1000" maximum-significant-digits="${maxSignificantDigits}"></sl-format-number>
-          `
-        );
+        const el = await fixture<SlFormatNumber>(html`
+          <sl-format-number value="1000" maximum-significant-digits="${maxSignificantDigits}"></sl-format-number>
+        `);
         const expected = new Intl.NumberFormat('en-US', {
           style: 'decimal',
           currencyDisplay: 'symbol',
