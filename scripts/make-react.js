@@ -31,8 +31,7 @@ components.forEach(async component => {
   const eventExports = (component.events || [])
     .map(event => `export type { ${event.eventName} } from '../../../src/events/events';`)
     .join('\n');
-  const eventNameImport =
-    (component.events || []).length > 0 ? `import { type EventName  } from '@lit-labs/react';` : ``;
+  const eventNameImport = (component.events || []).length > 0 ? `import { type EventName  } from '@lit/react';` : ``;
   const events = (component.events || [])
     .map(event => `${event.reactName}: '${event.name}' as EventName<${event.eventName}>`)
     .join(',\n');
@@ -44,7 +43,7 @@ components.forEach(async component => {
   const source = await prettier.format(
     `
       import * as React from 'react';
-      import { createComponent } from '@lit-labs/react';
+      import { createComponent } from '@lit/react';
       import Component from '../../${importPath}';
 
       ${eventNameImport}

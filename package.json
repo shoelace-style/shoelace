@@ -62,7 +62,7 @@
   "dependencies": {
     "@ctrl/tinycolor": "^4.0.2",
     "@floating-ui/dom": "^1.5.3",
-    "@lit-labs/react": "^2.1.1",
+    "@lit/react": "^1.0.0",
     "@shoelace-style/animations": "^1.1.0",
     "@shoelace-style/localize": "^3.1.2",
     "composed-offset-position": "^0.0.4",
