@@ -1,6 +1,8 @@
 import '../../../dist/shoelace.js';
 import { clickOnElement } from '../../internal/test.js';
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
+import { map } from 'lit/directives/map.js';
+import { range } from 'lit/directives/range.js';
 import sinon from 'sinon';
 import type SlCarousel from './carousel.js';
 
@@ -222,6 +224,26 @@ describe('<sl-carousel>', () => {
 
       // Assert
       expect(el.scrollContainer.style.getPropertyValue('--slides-per-page').trim()).to.be.equal('2');
+    });
+
+    [
+      [7, 2, 1, 6],
+      [7, 2, 2, 4],
+      [5, 3, 2, 2],
+      [5, 3, 3, 2]
+    ].forEach(([slides, slidesPerPage, slidesPerMove, expected]) => {
+      it(`should display the correct ${expected} pages for ${slides} slides grouped by ${slidesPerPage} and scrolling by ${slidesPerMove}`, async () => {
+        // Arrange
+        const el = await fixture<SlCarousel>(html`
+          <sl-carousel pagination navigation slides-per-page="${slidesPerPage}" slides-per-move="${slidesPerMove}">
+            ${map(range(slides), i => html`<sl-carousel-item>${i}</sl-carousel-item>`)}
+          </sl-carousel>
+        `);
+
+        // Assert
+        const paginationItems = el.shadowRoot!.querySelectorAll('.carousel__pagination-item');
+        expect(paginationItems.length).to.equal(expected);
+      });
     });
   });
 

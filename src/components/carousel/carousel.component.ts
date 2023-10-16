@@ -140,19 +140,19 @@ export default class SlCarousel extends ShoelaceElement {
   }
 
   private getPageCount() {
-    return Math.ceil(this.getSlides().length / this.slidesPerPage);
+    return Math.ceil((this.getSlides().length - this.slidesPerPage) / this.slidesPerMove) + 1;
   }
 
   private getCurrentPage() {
-    return Math.floor(this.activeSlide / this.slidesPerPage);
+    return Math.floor(this.activeSlide / this.slidesPerMove);
   }
 
   private canScrollNext(): boolean {
-    return this.loop || this.activeSlide + this.slidesPerPage <= this.getSlides().length - 1;
+    return this.loop || this.getCurrentPage() < this.getPageCount() - 1;
   }
 
   private canScrollPrev(): boolean {
-    return this.loop || this.activeSlide > 0;
+    return this.loop || this.getCurrentPage() > 0;
   }
 
   /** @internal Gets all carousel items. */
@@ -215,13 +215,11 @@ export default class SlCarousel extends ShoelaceElement {
 
       // Scrolls to the original slide without animating, so the user won't notice that the position has changed
       this.goToSlide(clonePosition, 'auto');
-
-      return;
-    }
-
-    // Activate the first intersecting slide
-    if (firstIntersecting) {
-      this.activeSlide = slides.indexOf(firstIntersecting.target as SlCarouselItem);
+    } else if (firstIntersecting) {
+      // Update the current index based on the first visible slide
+      const slideIndex = slides.indexOf(firstIntersecting.target as SlCarouselItem);
+      // Set the index to the first "snappable" slide
+      this.activeSlide = Math.ceil(slideIndex / this.slidesPerMove) * this.slidesPerMove;
     }
   }
 
@@ -240,7 +238,8 @@ export default class SlCarousel extends ShoelaceElement {
     if (needsInitialization) {
       this.initializeSlides();
     }
-    this.requestUpdate();
+
+    this.goToSlide(this.activeSlide);
   };
 
   @watch('loop', { waitUntilFirstUpdate: true })
@@ -377,7 +376,7 @@ export default class SlCarousel extends ShoelaceElement {
     const slides = this.getSlides();
     const slidesWithClones = this.getSlides({ excludeClones: false });
 
-    // No need to to anything in case there are no items in the carousel
+    // No need to do anything in case there are no items in the carousel
     if (!slides.length) {
       return;
     }
