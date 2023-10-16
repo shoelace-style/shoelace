@@ -87,7 +87,7 @@ export default class Modal {
 
     if (currentFocusIndex === -1) {
       this.currentFocus = tabbableElements[0];
-      this.currentFocus.focus({ preventScroll: true });
+      this.currentFocus?.focus({ preventScroll: true });
       return;
     }
 
