@@ -40,7 +40,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart navigation-button--next - Applied to the next button.
  *
  * @cssproperty --slide-gap - The space between each slide.
- * @cssproperty --aspect-ratio - The aspect ratio of each slide.
+ * @cssproperty [--aspect-ratio=16/9] - The aspect ratio of each slide.
  * @cssproperty --scroll-hint - The amount of padding to apply to the scroll area, allowing adjacent slides to become
  *  partially visible as a scroll hint.
  */

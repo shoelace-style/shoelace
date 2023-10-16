@@ -12,6 +12,22 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## 2.10.0
+
+- Added the Simplified Chinese translation [#1604]
+- Fixed a bug [in the localize dependency](https://github.com/shoelace-style/localize/issues/20) that caused underscores in language codes to throw a `RangeError`
+- Fixed a bug in the focus trapping utility used by modals that caused unexpected focus behavior. [#1583]
+- Fixed a bug in `<sl-copy-button>` that prevented exported tooltip parts from being styled [#1586]
+- Fixed a bug in `<sl-menu>` that caused it not to fire the `sl-select` event if you clicked an element inside of a `<sl-menu-item>` [#1599]
+- Fixed a bug that caused focus trap logic to hang the browser in certain circumstances [#1612]
+- Improved submenu selection by implementing the [safe triangle](https://www.smashingmagazine.com/2023/08/better-context-menus-safe-triangles/) method [#1550]
+- Updated `@shoelace-style/localize` to 3.1.0
+- Updated `@lib-labs/react` to stable `@lit/react`
+- Updated Bootstrap Icons to 1.11.1
+- Updated Lit to 3.0.0
+- Updated TypeScript to 5.2.2
+- Updated all other dependencies to latest versions
+
 ## 2.9.0
 
 - Added the `modal` property to `<sl-dialog>` and `<sl-drawer>` to support third-party modals [#1571]

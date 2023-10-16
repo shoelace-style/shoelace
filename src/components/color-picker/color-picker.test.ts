@@ -97,9 +97,9 @@ describe('<sl-color-picker>', () => {
     });
 
     it('should render the correct swatches when passing a string of color values', async () => {
-      const el = await fixture<SlColorPicker>(
-        html` <sl-color-picker swatches="red; #008000; rgb(0,0,255);"></sl-color-picker> `
-      );
+      const el = await fixture<SlColorPicker>(html`
+        <sl-color-picker swatches="red; #008000; rgb(0,0,255);"></sl-color-picker>
+      `);
       const swatches = [...el.shadowRoot!.querySelectorAll('[part~="swatch"] > div')];
 
       expect(swatches.length).to.equal(3);

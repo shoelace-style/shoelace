@@ -52,5 +52,6 @@ export default css`
     padding: var(--sl-tooltip-padding);
     pointer-events: none;
     user-select: none;
+    -webkit-user-select: none;
   }
 `;

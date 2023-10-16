@@ -1,10 +1,9 @@
 import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import path from 'path';
-import chalk from 'chalk';
 import { deleteSync } from 'del';
 import prettier from 'prettier';
-import prettierConfig from '../prettier.config.cjs';
+import { default as prettierConfig } from '../prettier.config.js';
 import { getAllComponents } from './shared.js';
 
 const { outdir } = commandLineArgs({ name: 'outdir', type: String });
@@ -20,7 +19,7 @@ const metadata = JSON.parse(fs.readFileSync(path.join(outdir, 'custom-elements.j
 const components = getAllComponents(metadata);
 const index = [];
 
-components.map(component => {
+components.forEach(async component => {
   const tagWithoutPrefix = component.tagName.replace(/^sl-/, '');
   const componentDir = path.join(reactDir, tagWithoutPrefix);
   const componentFile = path.join(componentDir, 'index.ts');
@@ -31,8 +30,7 @@ components.map(component => {
   const eventExports = (component.events || [])
     .map(event => `export type { ${event.eventName} } from '../../../src/events/events';`)
     .join('\n');
-  const eventNameImport =
-    (component.events || []).length > 0 ? `import { type EventName  } from '@lit-labs/react';` : ``;
+  const eventNameImport = (component.events || []).length > 0 ? `import { type EventName } from '@lit/react';` : ``;
   const events = (component.events || [])
     .map(event => `${event.reactName}: '${event.name}' as EventName<${event.eventName}>`)
     .join(',\n');
@@ -41,10 +39,10 @@ components.map(component => {
 
   const jsDoc = component.jsDoc || '';
 
-  const source = prettier.format(
+  const source = await prettier.format(
     `
       import * as React from 'react';
-      import { createComponent } from '@lit-labs/react';
+      import { createComponent } from '@lit/react';
       import Component from '../../${importPath}';
 
       ${eventNameImport}
