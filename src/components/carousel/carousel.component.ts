@@ -239,7 +239,7 @@ export default class SlCarousel extends ShoelaceElement {
       this.initializeSlides();
     }
 
-    this.goToSlide(this.activeSlide);
+    this.requestUpdate();
   };
 
   @watch('loop', { waitUntilFirstUpdate: true })
