@@ -21,6 +21,7 @@ export default css`
     white-space: nowrap;
     padding: 0.35em 0.6em;
     user-select: none;
+    -webkit-user-select: none;
     cursor: inherit;
   }
 

@@ -663,6 +663,7 @@ pre:hover .copy-code-button,
   margin: -1rem;
   cursor: pointer;
   user-select: none;
+  -webkit-user-select: none;
 }
 
 .content details summary span {

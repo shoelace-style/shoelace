@@ -25,6 +25,7 @@ export default css`
     border-radius: inherit;
     padding: var(--sl-spacing-medium);
     user-select: none;
+    -webkit-user-select: none;
     cursor: pointer;
   }
 

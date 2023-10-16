@@ -19,6 +19,7 @@ export default css`
     padding: var(--sl-spacing-medium) var(--sl-spacing-large);
     white-space: nowrap;
     user-select: none;
+    -webkit-user-select: none;
     cursor: pointer;
     transition:
       var(--transition-speed) box-shadow,

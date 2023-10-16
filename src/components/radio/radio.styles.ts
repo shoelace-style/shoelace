@@ -113,5 +113,6 @@ export default css`
     line-height: var(--toggle-size);
     margin-inline-start: 0.5em;
     user-select: none;
+    -webkit-user-select: none;
   }
 `;

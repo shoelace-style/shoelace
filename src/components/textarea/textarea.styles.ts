@@ -115,6 +115,7 @@ export default css`
   .textarea__control::placeholder {
     color: var(--sl-input-placeholder-color);
     user-select: none;
+    -webkit-user-select: none;
   }
 
   .textarea__control:focus {
