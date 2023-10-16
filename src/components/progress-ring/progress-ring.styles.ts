@@ -66,5 +66,6 @@ export default css`
     height: 100%;
     text-align: center;
     user-select: none;
+    -webkit-user-select: none;
   }
 `;

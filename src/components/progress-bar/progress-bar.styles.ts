@@ -37,6 +37,7 @@ export default css`
       400ms width,
       400ms background-color;
     user-select: none;
+    -webkit-user-select: none;
   }
 
   /* Indeterminate */

@@ -23,6 +23,7 @@ export default css`
     font-weight: var(--sl-font-weight-normal);
     color: var(--sl-color-neutral-0);
     user-select: none;
+    -webkit-user-select: none;
     vertical-align: middle;
   }
 

@@ -153,6 +153,7 @@ export default css`
     line-height: var(--height);
     margin-inline-start: 0.5em;
     user-select: none;
+    -webkit-user-select: none;
   }
 
   :host([required]) .switch__label::after {

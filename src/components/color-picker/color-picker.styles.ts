@@ -24,6 +24,7 @@ export default css`
     background-color: var(--sl-panel-background-color);
     border-radius: var(--sl-border-radius-medium);
     user-select: none;
+    -webkit-user-select: none;
   }
 
   .color-picker--inline {

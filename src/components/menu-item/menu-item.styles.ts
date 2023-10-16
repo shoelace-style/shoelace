@@ -35,6 +35,7 @@ export default css`
     padding: var(--sl-spacing-2x-small) var(--sl-spacing-2x-small);
     transition: var(--sl-transition-fast) fill;
     user-select: none;
+    -webkit-user-select: none;
     white-space: nowrap;
     cursor: pointer;
   }
