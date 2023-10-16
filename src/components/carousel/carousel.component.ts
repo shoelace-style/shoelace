@@ -144,7 +144,7 @@ export default class SlCarousel extends ShoelaceElement {
   }
 
   private getCurrentPage() {
-    return Math.floor(this.activeSlide / this.slidesPerMove);
+    return Math.ceil(this.activeSlide / this.slidesPerMove);
   }
 
   private canScrollNext(): boolean {
@@ -344,15 +344,7 @@ export default class SlCarousel extends ShoelaceElement {
    * @param behavior - The behavior used for scrolling.
    */
   previous(behavior: ScrollBehavior = 'smooth') {
-    let previousIndex = this.activeSlide || this.activeSlide - this.slidesPerMove;
-    let canSnap = false;
-
-    while (!canSnap && previousIndex > 0) {
-      previousIndex -= 1;
-      canSnap = Math.abs(previousIndex - this.slidesPerMove) % this.slidesPerMove === 0;
-    }
-
-    this.goToSlide(previousIndex, behavior);
+    this.goToSlide(this.activeSlide - this.slidesPerMove, behavior);
   }
 
   /**
@@ -401,7 +393,7 @@ export default class SlCarousel extends ShoelaceElement {
   }
 
   render() {
-    const { scrollController, slidesPerPage } = this;
+    const { scrollController, slidesPerMove } = this;
     const pagesCount = this.getPageCount();
     const currentPage = this.getCurrentPage();
     const prevEnabled = this.canScrollPrev();
@@ -483,7 +475,7 @@ export default class SlCarousel extends ShoelaceElement {
                       aria-selected="${isActive ? 'true' : 'false'}"
                       aria-label="${this.localize.term('goToSlide', index + 1, pagesCount)}"
                       tabindex=${isActive ? '0' : '-1'}
-                      @click=${() => this.goToSlide(index * slidesPerPage)}
+                      @click=${() => this.goToSlide(index * slidesPerMove)}
                       @keydown=${this.handleKeyDown}
                     ></button>
                   `;
