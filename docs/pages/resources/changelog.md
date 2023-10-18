@@ -15,6 +15,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 ## Next
 
 - Added the Croatian translation [#1656]
+- Fixed a bug that caused the [[Escape]] key to stop propagating when tooltips are disabled [#1607]
 
 ## 2.10.0
 

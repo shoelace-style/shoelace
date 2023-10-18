@@ -145,7 +145,7 @@ export default class SlTooltip extends ShoelaceElement {
 
   private handleKeyDown = (event: KeyboardEvent) => {
     // Pressing escape when the target element has focus should dismiss the tooltip
-    if (this.open && event.key === 'Escape') {
+    if (this.open && !this.disabled && event.key === 'Escape') {
       event.stopPropagation();
       this.hide();
     }
