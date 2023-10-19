@@ -19,7 +19,7 @@ const metadata = JSON.parse(fs.readFileSync(path.join(outdir, 'custom-elements.j
 const components = getAllComponents(metadata);
 const index = [];
 
-components.forEach(async component => {
+for await (const component of components) {
   const tagWithoutPrefix = component.tagName.replace(/^sl-/, '');
   const componentDir = path.join(reactDir, tagWithoutPrefix);
   const componentFile = path.join(componentDir, 'index.ts');
@@ -73,7 +73,7 @@ components.forEach(async component => {
   index.push(`export { default as ${component.name} } from './${tagWithoutPrefix}/index.js';`);
 
   fs.writeFileSync(componentFile, source, 'utf8');
-});
+}
 
 // Generate the index file
 fs.writeFileSync(path.join(reactDir, 'index.ts'), index.join('\n'), 'utf8');
