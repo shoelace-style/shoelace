@@ -95,10 +95,10 @@ const App = () => <SlInput type="password" placeholder="Password Toggle" size="m
 
 ### Filled Inputs
 
-Add the `filled` attribute to draw a filled input.
+Add the `filled` attribute to draw a (pre-)filled input.
 
 ```html:preview
-<sl-input placeholder="Type something" filled></sl-input>
+<sl-input value="New York, NY" filled></sl-input>
 ```
 
 ```jsx:react
