@@ -12,6 +12,13 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## 2.11.0
+
+- Added the Croatian translation [#1656]
+- Fixed a bug that caused the [[Escape]] key to stop propagating when tooltips are disabled [#1607]
+- Fixed a bug that made it impossible to style placeholders in `<sl-select>` [#1667]
+- Fixed a bug that caused `dist/react/index.js` to be blank [#1659]
+
 ## 2.10.0
 
 - Added the Simplified Chinese translation [#1604]
