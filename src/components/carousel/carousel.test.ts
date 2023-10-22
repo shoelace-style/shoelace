@@ -262,7 +262,7 @@ describe('<sl-carousel>', () => {
       // Arrange
       const expectedSnapGranularity = 2;
       const el = await fixture<SlCarousel>(html`
-        <sl-carousel slides-per-move="${expectedSnapGranularity}">
+        <sl-carousel slides-per-page="${expectedSnapGranularity}" slides-per-move="${expectedSnapGranularity}">
           <sl-carousel-item>Node 1</sl-carousel-item>
           <sl-carousel-item>Node 2</sl-carousel-item>
           <sl-carousel-item>Node 3</sl-carousel-item>
@@ -344,6 +344,28 @@ describe('<sl-carousel>', () => {
         expect(expectedSlide).to.have.class('--in-view');
         expect(expectedSlide).to.be.visible;
       }
+    });
+
+    it('should not be possible to move by a number that is greater than the displayed number', async () => {
+      // Arrange
+      const expectedSlidesPerMove = 2;
+      const el = await fixture<SlCarousel>(html`
+        <sl-carousel slides-per-page="${expectedSlidesPerMove}">
+          <sl-carousel-item>Node 1</sl-carousel-item>
+          <sl-carousel-item>Node 2</sl-carousel-item>
+          <sl-carousel-item>Node 3</sl-carousel-item>
+          <sl-carousel-item>Node 4</sl-carousel-item>
+          <sl-carousel-item>Node 5</sl-carousel-item>
+          <sl-carousel-item>Node 6</sl-carousel-item>
+        </sl-carousel>
+      `);
+
+      // Act
+      el.slidesPerMove = 3;
+      await el.updateComplete;
+
+      // Assert
+      expect(el.slidesPerMove).to.be.equal(expectedSlidesPerMove);
     });
   });
 
@@ -558,7 +580,7 @@ describe('<sl-carousel>', () => {
       it('should scroll the carousel to the next slide', async () => {
         // Arrange
         const el = await fixture<SlCarousel>(html`
-          <sl-carousel slides-per-move="2">
+          <sl-carousel slides-per-page="2" slides-per-move="2">
             <sl-carousel-item>Node 1</sl-carousel-item>
             <sl-carousel-item>Node 2</sl-carousel-item>
             <sl-carousel-item>Node 3</sl-carousel-item>
@@ -578,7 +600,7 @@ describe('<sl-carousel>', () => {
       it('should scroll the carousel to the previous slide', async () => {
         // Arrange
         const el = await fixture<SlCarousel>(html`
-          <sl-carousel slides-per-move="2">
+          <sl-carousel slides-per-page="2" slides-per-move="2">
             <sl-carousel-item>Node 1</sl-carousel-item>
             <sl-carousel-item>Node 2</sl-carousel-item>
             <sl-carousel-item>Node 3</sl-carousel-item>

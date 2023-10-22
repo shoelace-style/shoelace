@@ -14,7 +14,7 @@ import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import SlIcon from '../icon/icon.component.js';
 import styles from './carousel.styles.js';
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValueMap } from 'lit';
 import type SlCarouselItem from '../carousel-item/carousel-item.component.js';
 
 /**
@@ -70,7 +70,7 @@ export default class SlCarousel extends ShoelaceElement {
 
   /**
    * Specifies the number of slides the carousel will advance when scrolling, useful when specifying a `slides-per-page`
-   * greater than one.
+   * greater than one. It can't be higher than `slides-per-page`.
    */
   @property({ type: Number, attribute: 'slides-per-move' }) slidesPerMove = 1;
 
@@ -137,6 +137,13 @@ export default class SlCarousel extends ShoelaceElement {
       childList: true,
       subtree: true
     });
+  }
+
+  protected willUpdate(changedProperties: PropertyValueMap<SlCarousel> | Map<PropertyKey, unknown>): void {
+    // Ensure the slidesPerMove is never higher than the slidesPerPage
+    if (changedProperties.has('slidesPerMove') || changedProperties.has('slidesPerPage')) {
+      this.slidesPerMove = Math.min(this.slidesPerMove, this.slidesPerPage);
+    }
   }
 
   private getPageCount() {
