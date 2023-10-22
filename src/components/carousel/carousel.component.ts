@@ -140,7 +140,12 @@ export default class SlCarousel extends ShoelaceElement {
   }
 
   private getPageCount() {
-    return Math.ceil((this.getSlides().length - this.slidesPerPage) / this.slidesPerMove) + 1;
+    const slidesCount = this.getSlides().length;
+    const { slidesPerPage, slidesPerMove, loop } = this;
+
+    const pages = loop ? slidesCount / slidesPerMove : (slidesCount - slidesPerPage) / slidesPerMove + 1;
+
+    return Math.ceil(pages);
   }
 
   private getCurrentPage() {
@@ -245,7 +250,6 @@ export default class SlCarousel extends ShoelaceElement {
   @watch('loop', { waitUntilFirstUpdate: true })
   @watch('slidesPerPage', { waitUntilFirstUpdate: true })
   initializeSlides() {
-    const slides = this.getSlides();
     const intersectionObserver = this.intersectionObserver;
 
     this.intersectionObserverEntries.clear();
@@ -263,33 +267,39 @@ export default class SlCarousel extends ShoelaceElement {
       }
     });
 
+    this.updateSlidesSnap();
+
     if (this.loop) {
       // Creates clones to be placed before and after the original elements to simulate infinite scrolling
-      const slidesPerPage = this.slidesPerPage;
-      const lastSlides = slides.slice(-slidesPerPage);
-      const firstSlides = slides.slice(0, slidesPerPage);
-
-      lastSlides.reverse().forEach((slide, i) => {
-        const clone = slide.cloneNode(true) as HTMLElement;
-        clone.setAttribute('data-clone', String(slides.length - i - 1));
-        this.prepend(clone);
-      });
-
-      firstSlides.forEach((slide, i) => {
-        const clone = slide.cloneNode(true) as HTMLElement;
-        clone.setAttribute('data-clone', String(i));
-        this.append(clone);
-      });
+      this.createClones();
     }
 
     this.getSlides({ excludeClones: false }).forEach(slide => {
       intersectionObserver.observe(slide);
     });
 
-    this.updateSlidesSnap();
-
     // Because the DOM may be changed, restore the scroll position to the active slide
     this.goToSlide(this.activeSlide, 'auto');
+  }
+
+  private createClones() {
+    const slides = this.getSlides();
+
+    const slidesPerPage = this.slidesPerPage;
+    const lastSlides = slides.slice(-slidesPerPage);
+    const firstSlides = slides.slice(0, slidesPerPage);
+
+    lastSlides.reverse().forEach((slide, i) => {
+      const clone = slide.cloneNode(true) as HTMLElement;
+      clone.setAttribute('data-clone', String(slides.length - i - 1));
+      this.prepend(clone);
+    });
+
+    firstSlides.forEach((slide, i) => {
+      const clone = slide.cloneNode(true) as HTMLElement;
+      clone.setAttribute('data-clone', String(i));
+      this.append(clone);
+    });
   }
 
   @watch('activeSlide')
@@ -312,7 +322,7 @@ export default class SlCarousel extends ShoelaceElement {
 
   @watch('slidesPerMove')
   updateSlidesSnap() {
-    const slides = this.getSlides({ excludeClones: false });
+    const slides = this.getSlides();
 
     const slidesPerMove = this.slidesPerMove;
     slides.forEach((slide, i) => {

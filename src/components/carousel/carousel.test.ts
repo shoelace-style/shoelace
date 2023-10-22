@@ -227,15 +227,25 @@ describe('<sl-carousel>', () => {
     });
 
     [
-      [7, 2, 1, 6],
-      [7, 2, 2, 4],
-      [5, 3, 2, 2],
-      [5, 3, 3, 2]
-    ].forEach(([slides, slidesPerPage, slidesPerMove, expected]) => {
-      it(`should display the correct ${expected} pages for ${slides} slides grouped by ${slidesPerPage} and scrolling by ${slidesPerMove}`, async () => {
+      [7, 2, 1, false, 6],
+      [5, 3, 3, false, 2],
+      [10, 2, 2, false, 5],
+      [7, 2, 1, true, 7],
+      [5, 3, 3, true, 2],
+      [10, 2, 2, true, 5]
+    ].forEach(([slides, slidesPerPage, slidesPerMove, loop, expected]: [number, number, number, boolean, number]) => {
+      it(`should display ${expected} pages for ${slides} slides grouped by ${slidesPerPage} and scrolled by ${slidesPerMove}${
+        loop ? ' (loop)' : ''
+      }`, async () => {
         // Arrange
         const el = await fixture<SlCarousel>(html`
-          <sl-carousel pagination navigation slides-per-page="${slidesPerPage}" slides-per-move="${slidesPerMove}">
+          <sl-carousel
+            pagination
+            navigation
+            slides-per-page="${slidesPerPage}"
+            slides-per-move="${slidesPerMove}"
+            ?loop=${loop}
+          >
             ${map(range(slides), i => html`<sl-carousel-item>${i}</sl-carousel-item>`)}
           </sl-carousel>
         `);
