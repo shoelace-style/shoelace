@@ -95,16 +95,16 @@ const App = () => <SlInput type="password" placeholder="Password Toggle" size="m
 
 ### Filled Inputs
 
-Add the `filled` attribute to draw a (pre-)filled input.
+Add the `filled` attribute to draw a filled input. This pairs especially well with `readonly`.
 
 ```html:preview
-<sl-input value="New York, NY" filled></sl-input>
+<sl-input value="New York, NY" filled readonly></sl-input>
 ```
 
 ```jsx:react
 import SlInput from '@shoelace-style/shoelace/dist/react/input';
 
-const App = () => <SlInput placeholder="Type something" filled />;
+const App = () => <SlInput placeholder=""New York, NY" filled readonly />;
 ```
 
 ### Disabled
