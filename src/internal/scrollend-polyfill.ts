@@ -69,3 +69,6 @@ if (!isSupported) {
     }
   });
 }
+
+// Without an import or export, TypeScript sees vars in this file as global
+export {};
