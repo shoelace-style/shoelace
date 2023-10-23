@@ -24,7 +24,7 @@ Next, [include a theme](/getting-started/themes). In this example, we'll import 
 
 Its also important to load the components by using a `<script>` tag into the index.html file. However, the Angular way to do it is by adding a script configurations into your angular.json file as follows:
 
-```
+```json
 "architect": {
   "build": {
     ...
