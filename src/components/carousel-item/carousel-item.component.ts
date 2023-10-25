@@ -17,10 +17,6 @@ import type { CSSResultGroup } from 'lit';
 export default class SlCarouselItem extends ShoelaceElement {
   static styles: CSSResultGroup = styles;
 
-  static isCarouselItem(node: Node) {
-    return node instanceof Element && node.getAttribute('aria-roledescription') === 'slide';
-  }
-
   connectedCallback() {
     super.connectedCallback();
     this.setAttribute('role', 'group');

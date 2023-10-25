@@ -1,7 +1,7 @@
 {
   "name": "@shoelace-style/shoelace",
   "description": "A forward-thinking library of web components.",
-  "version": "2.11.0",
+  "version": "2.11.1",
   "homepage": "https://github.com/shoelace-style/shoelace",
   "author": "Cory LaViska",
   "license": "MIT",
@@ -54,7 +54,6 @@
     "prettier:check": "prettier --check --log-level=warn .",
     "lint": "eslint src --max-warnings 0",
     "lint:fix": "eslint src --max-warnings 0 --fix",
-    "ts-check": "tsc --noEmit --project ./tsconfig.json",
     "create": "plop --plopfile scripts/plop/plopfile.js",
     "test": "web-test-runner --group default",
     "test:component": "web-test-runner -- --watch --group",
