@@ -235,8 +235,8 @@ export default class SlCarousel extends ShoelaceElement {
     }
   }
 
-  private isCarouselItem(node: HTMLElement): node is SlCarouselItem {
-    return node.tagName.toLowerCase() === 'sl-carousel-item';
+  private isCarouselItem(node: Node): node is SlCarouselItem {
+    return node instanceof Element && node.tagName.toLowerCase() === 'sl-carousel-item';
   }
 
   private handleSlotChange = (mutations: MutationRecord[]) => {
