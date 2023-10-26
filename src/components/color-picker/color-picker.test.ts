@@ -34,11 +34,11 @@ describe('<sl-color-picker>', () => {
 
       // Simulate a drag event. "sl-change" should not fire until we stop dragging.
       await dragElement(grid, 2, 0, {
-        afterMouseDown: async () => {
+        afterMouseDown: () => {
           expect(changeHandler).to.have.not.been.called;
           expect(inputHandler).to.have.been.calledOnce;
         },
-        afterMouseMove: async () => {
+        afterMouseMove: () => {
           expect(inputHandler).to.have.been.calledTwice;
         }
       });
@@ -63,11 +63,11 @@ describe('<sl-color-picker>', () => {
       await aTimeout(200); // wait for the dropdown to open
       // Simulate a drag event. "sl-change" should not fire until we stop dragging.
       await dragElement(slider, 20, 0, {
-        afterMouseDown: async () => {
+        afterMouseDown: () => {
           expect(changeHandler).to.have.not.been.called;
           expect(inputHandler).to.have.been.calledOnce;
         },
-        afterMouseMove: async () => {
+        afterMouseMove: () => {
           // It's not twice because you can't change the hue of white!
           expect(inputHandler).to.have.been.calledOnce;
         }
@@ -95,11 +95,11 @@ describe('<sl-color-picker>', () => {
 
       // Simulate a drag event. "sl-change" should not fire until we stop dragging.
       await dragElement(slider, 2, 0, {
-        afterMouseDown: async () => {
+        afterMouseDown: () => {
           expect(changeHandler).to.have.not.been.called;
           expect(inputHandler).to.have.been.calledOnce;
         },
-        afterMouseMove: async () => {
+        afterMouseMove: () => {
           expect(inputHandler).to.have.been.calledTwice;
         }
       });
