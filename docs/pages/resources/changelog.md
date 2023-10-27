@@ -12,6 +12,10 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## Next
+
+- Fixed a bug where the `"sl-change"` event would always fire simultaneously with `"sl-input"` event in `<sl-color-picker>`. The `<sl-change>` event now only fires when a user stops dragging a slider or stops dragging on the color canvas.
+
 ## 2.11.2
 
 - Fixed a bug in `<sl-carousel>` component that caused an error to be thrown when rendered with Lit [#1684]
