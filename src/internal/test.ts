@@ -73,11 +73,21 @@ export async function dragElement(
   /** The horizontal distance to drag in pixels */
   deltaX = 0,
   /** The vertical distance to drag in pixels */
-  deltaY = 0
+  deltaY = 0,
+  callbacks: {
+    afterMouseDown?: () => void | Promise<void>;
+    afterMouseMove?: () => void | Promise<void>;
+  } = {}
 ): Promise<void> {
   await moveMouseOnElement(el);
   await sendMouse({ type: 'down' });
+
+  await callbacks.afterMouseDown?.();
+
   const { clickX, clickY } = determineMousePosition(el, 'center', deltaX, deltaY);
   await sendMouse({ type: 'move', position: [clickX, clickY] });
+
+  await callbacks.afterMouseMove?.();
+
   await sendMouse({ type: 'up' });
 }
