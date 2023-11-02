@@ -139,4 +139,30 @@ export default css`
       outline-offset: -1px;
     }
   }
+
+  /*
+   * Loading modifier
+   */
+
+  .menu-item--loading {
+    position: relative;
+    cursor: wait;
+  }
+
+  .menu-item--loading .menu-item__prefix,
+  .menu-item--loading .menu-item__label,
+  .menu-item--loading .menu-item__suffix,
+  .menu-item--loading .menu-item__check {
+    visibility: hidden;
+  }
+
+  .menu-item--loading sl-spinner {
+    --indicator-color: currentColor;
+    position: absolute;
+    font-size: 1em;
+    height: 1em;
+    width: 1em;
+    top: calc(50% - 0.5em);
+    left: calc(50% - 0.5em);
+  }
 `;
