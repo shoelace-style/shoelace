@@ -153,7 +153,7 @@ export default css`
   .menu-item--loading .menu-item__label,
   .menu-item--loading .menu-item__suffix,
   .menu-item--loading .menu-item__check {
-    visibility: hidden;
+    opacity: 0.5;
   }
 
   .menu-item--loading sl-spinner {
@@ -163,6 +163,6 @@ export default css`
     height: 1em;
     width: 1em;
     top: calc(50% - 0.5em);
-    left: calc(50% - 0.5em);
+    left: 0.45em;
   }
 `;
