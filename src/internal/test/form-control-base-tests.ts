@@ -44,6 +44,7 @@ export function runFormControlBaseTests<T extends ShoelaceFormControl = Shoelace
 //   - `.checkValidity()`
 //   - `.reportValidity()`
 //   - `.setCustomValidity(msg)`
+//   - `.getForm`
 //
 function runAllValidityTests(
   tagName: string, //
@@ -124,6 +125,27 @@ function runAllValidityTests(
         const emittedEvents = checkEventEmissions(control, 'sl-invalid', () => control.reportValidity());
         expect(emittedEvents.length).to.equal(0);
       });
+
+      it('Should find the correct form when given a form property', async () => {
+        const formId = 'test-form'
+        const form = await fixture(`<form id='${formId}'></form>`)
+        const control = await createControl()
+        expect(control.getForm()).to.be.null
+        control.form = "test-form"
+        await control.updateComplete
+        expect(control.getForm()).to.equal(form)
+      })
+
+      it('Should find the correct form when given a form attribute', async () => {
+        const formId = 'test-form'
+        const form = await fixture(`<form id='${formId}'></form>`)
+        const control = await createControl()
+        expect(control.getForm()).to.be.null
+        control.setAttribute("form", "test-form")
+
+        await control.updateComplete
+        expect(control.getForm()).to.equal(form)
+      })
     }
 
     // Run special tests depending on component type
