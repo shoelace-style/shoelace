@@ -44,7 +44,7 @@ export function runFormControlBaseTests<T extends ShoelaceFormControl = Shoelace
 //   - `.checkValidity()`
 //   - `.reportValidity()`
 //   - `.setCustomValidity(msg)`
-//   - `.getForm`
+//   - `.getForm()`
 //
 function runAllValidityTests(
   tagName: string, //
