@@ -127,25 +127,25 @@ function runAllValidityTests(
       });
 
       it('Should find the correct form when given a form property', async () => {
-        const formId = 'test-form'
-        const form = await fixture(`<form id='${formId}'></form>`)
-        const control = await createControl()
-        expect(control.getForm()).to.be.null
-        control.form = "test-form"
-        await control.updateComplete
-        expect(control.getForm()).to.equal(form)
-      })
+        const formId = 'test-form';
+        const form = await fixture(`<form id='${formId}'></form>`);
+        const control = await createControl();
+        expect(control.getForm()).to.equal(null);
+        control.form = 'test-form';
+        await control.updateComplete;
+        expect(control.getForm()).to.equal(form);
+      });
 
       it('Should find the correct form when given a form attribute', async () => {
-        const formId = 'test-form'
-        const form = await fixture(`<form id='${formId}'></form>`)
-        const control = await createControl()
-        expect(control.getForm()).to.be.null
-        control.setAttribute("form", "test-form")
+        const formId = 'test-form';
+        const form = await fixture(`<form id='${formId}'></form>`);
+        const control = await createControl();
+        expect(control.getForm()).to.equal(null);
+        control.setAttribute('form', 'test-form');
 
-        await control.updateComplete
-        expect(control.getForm()).to.equal(form)
-      })
+        await control.updateComplete;
+        expect(control.getForm()).to.equal(form);
+      });
     }
 
     // Run special tests depending on component type
