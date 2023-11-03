@@ -16,6 +16,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 - Fixed a bug with bundled components using CDN builds not having translations on initial connect [#1696]
 - Fixed a bug where the `"sl-change"` event would always fire simultaneously with `"sl-input"` event in `<sl-color-picker>`. The `<sl-change>` event now only fires when a user stops dragging a slider or stops dragging on the color canvas. [#1689]
+- Updated the copy icon in the system library [#1702]
 
 ## 2.11.2
 
