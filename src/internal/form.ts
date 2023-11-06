@@ -178,9 +178,9 @@ export class FormControlController implements ReactiveController {
         reportValidityOverloads.delete(this.form);
       }
 
-      // Okay. This one is really confusing to me. I would assume `this.form` is not shared across instances, but when using
-      // the /cdn build locally, if this always sets the form to `undefined` outside of the formCollection.size check,
-      // it causes none of the validity checks to run.
+      // So it looks weird here to not always set the form to undefined. But I _think_ if we unattach this.form here,
+      // we end up in this fun spot where future validity checks don't have a reference to the form validity handler.
+      // First form element in sets the validity handler. So we can't clean up `this.form` until there are no other form elements in the form.
       this.form = undefined;
     }
   }
