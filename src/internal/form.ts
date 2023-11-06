@@ -152,10 +152,22 @@ export class FormControlController implements ReactiveController {
   }
 
   private detachForm() {
-    if (this.form) {
-      // Remove this element from the form's collection
-      formCollections.get(this.form)?.delete(this.host);
+    if (!this.form) return
 
+    const formCollection = formCollections.get(this.form)
+
+    if (!formCollection) {
+      return
+    }
+
+    // Remove this host from the form's collection
+    formCollection.delete(this.host);
+
+    // Check to make sure there's no other form controls in the collection. If we do this
+    // without checking if any other controls are still in the collection, then we will wipe out the
+    // validity checks for all other elements.
+    // see: https://github.com/shoelace-style/shoelace/issues/1703
+    if (formCollection.size <= 0) {
       this.form.removeEventListener('formdata', this.handleFormData);
       this.form.removeEventListener('submit', this.handleFormSubmit);
       this.form.removeEventListener('reset', this.handleFormReset);
@@ -165,9 +177,12 @@ export class FormControlController implements ReactiveController {
         this.form.reportValidity = reportValidityOverloads.get(this.form)!;
         reportValidityOverloads.delete(this.form);
       }
-    }
 
-    this.form = undefined;
+      // Okay. This one is really confusing to me. I would assume `this.form` is not shared across instances, but when using
+      // the /cdn build locally, if this always sets the form to `undefined` outside of the formCollection.size check,
+      // it causes none of the validity checks to run.
+      this.form = undefined;
+    }
   }
 
   private handleFormData = (event: FormDataEvent) => {
