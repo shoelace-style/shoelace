@@ -14,6 +14,7 @@ export const formCollections: WeakMap<HTMLFormElement, Set<ShoelaceFormControl>>
 // restore the original behavior when they disconnect.
 //
 const reportValidityOverloads: WeakMap<HTMLFormElement, () => boolean> = new WeakMap();
+const checkValidityOverloads: WeakMap<HTMLFormElement, () => boolean> = new WeakMap();
 
 //
 // We store a Set of controls that users have interacted with. This allows us to determine the interaction state
@@ -42,6 +43,12 @@ export interface FormControlControllerOptions {
    * prevent submission and trigger the browser's constraint violation warning.
    */
   reportValidity: (input: ShoelaceFormControl) => boolean;
+
+  /**
+   * A function that maps to the form control's `checkValidity()` function. When the control is invalid, this will return false.
+   *   this is helpful is you want to check validation without triggering the native browser constraint violation warning.
+   */
+  checkValidity: (input: ShoelaceFormControl) => boolean;
   /** A function that sets the form control's value */
   setValue: (input: ShoelaceFormControl, value: unknown) => void;
   /**
@@ -77,6 +84,7 @@ export class FormControlController implements ReactiveController {
       defaultValue: input => input.defaultValue,
       disabled: input => input.disabled ?? false,
       reportValidity: input => (typeof input.reportValidity === 'function' ? input.reportValidity() : true),
+      checkValidity: input => (typeof input.checkValidity === 'function' ? input.checkValidity() : true),
       setValue: (input, value: string) => (input.value = value),
       assumeInteractionOn: ['sl-input'],
       ...options
@@ -146,18 +154,24 @@ export class FormControlController implements ReactiveController {
         reportValidityOverloads.set(this.form, this.form.reportValidity);
         this.form.reportValidity = () => this.reportFormValidity();
       }
+
+      // Overload the form's checkValidity() method so it looks at Shoelace form controls
+      if (!checkValidityOverloads.has(this.form)) {
+        checkValidityOverloads.set(this.form, this.form.checkValidity);
+        this.form.checkValidity = () => this.checkFormValidity();
+      }
     } else {
       this.form = undefined;
     }
   }
 
   private detachForm() {
-    if (!this.form) return
+    if (!this.form) return;
 
-    const formCollection = formCollections.get(this.form)
+    const formCollection = formCollections.get(this.form);
 
     if (!formCollection) {
-      return
+      return;
     }
 
     // Remove this host from the form's collection
@@ -176,6 +190,11 @@ export class FormControlController implements ReactiveController {
       if (reportValidityOverloads.has(this.form)) {
         this.form.reportValidity = reportValidityOverloads.get(this.form)!;
         reportValidityOverloads.delete(this.form);
+      }
+
+      if (checkValidityOverloads.has(this.form)) {
+        this.form.checkValidity = checkValidityOverloads.get(this.form)!;
+        checkValidityOverloads.delete(this.form);
       }
 
       // So it looks weird here to not always set the form to undefined. But I _think_ if we unattach this.form here,
@@ -239,6 +258,34 @@ export class FormControlController implements ReactiveController {
     if (emittedEvents.length === this.options.assumeInteractionOn.length) {
       this.setUserInteracted(this.host, true);
     }
+  };
+
+  private checkFormValidity = () => {
+    //
+    // This is very similar to the `reportFormValidity` function, but it does not trigger native constraint validation
+    // Allow the user to simply check if the form is valid and handling validity in their own way.
+    //
+    // We preserve the original method in a WeakMap, but we don't call it from the overload because that would trigger
+    // validations in an unexpected order. When the element disconnects, we revert to the original behavior. This won't
+    // be necessary once we can use ElementInternals.
+    //
+    // Note that we're also honoring the form's novalidate attribute.
+    //
+    if (this.form && !this.form.noValidate) {
+      // This seems sloppy, but checking all elements will cover native inputs, Shoelace inputs, and other custom
+      // elements that support the constraint validation API.
+      const elements = this.form.querySelectorAll<HTMLInputElement>('*');
+
+      for (const element of elements) {
+        if (typeof element.checkValidity === 'function') {
+          if (!element.checkValidity()) {
+            return false;
+          }
+        }
+      }
+    }
+
+    return true;
   };
 
   private reportFormValidity = () => {
