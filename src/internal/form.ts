@@ -68,12 +68,16 @@ export class FormControlController implements ReactiveController {
     this.options = {
       form: input => {
         // If there's a form attribute, use it to find the target form by id
-        if (input.hasAttribute('form') && input.getAttribute('form') !== '') {
-          const root = input.getRootNode() as Document | ShadowRoot;
-          const formId = input.getAttribute('form');
+        // Controls may not always reflect the 'form' property. For example, `<sl-button>` doesn't reflect.
+        const formId = input.form;
 
-          if (formId) {
-            return root.getElementById(formId) as HTMLFormElement;
+        if (formId) {
+          const root = input.getRootNode() as Document | ShadowRoot;
+
+          const form = root.getElementById(formId);
+
+          if (form) {
+            return form as HTMLFormElement;
           }
         }
 
