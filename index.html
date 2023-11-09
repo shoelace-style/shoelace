@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Test</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/cdn/themes/light.css" />
+    <script type="module" src="/cdn/shoelace-autoloader.js"></script>
+  </head>
+  <body>
+    <div>
+      <sl-dialog label="Dialog 1" class="dialog-1">
+        <sl-button class="open-2b">Open Dialog 2</sl-button>
+        <sl-button slot="footer" variant="primary" class="close-1">Close</sl-button>
+      </sl-dialog>
+
+      <sl-dialog label="Dialog 2" class="dialog-2">
+        <sl-input autofocus placeholder="I will have focus when the dialog is opened"></sl-input>
+        <sl-input placeholder="Second input"></sl-input>
+        <sl-button slot="footer" variant="primary" class="close-2">Close</sl-button>
+      </sl-dialog>
+
+      <sl-button class="open-1">Open Dialog 1</sl-button>
+      <sl-button class="open-2a">Open Dialog 2</sl-button>
+    </div>
+    <script>
+      const dialog1 = document.querySelector('.dialog-1');
+      const openButton1 = document.querySelector('.open-1');
+      const closeButton1 = document.querySelector('.close-1');
+
+      const dialog2 = document.querySelector('.dialog-2');
+      const openButton2a = document.querySelector('.open-2a');
+      const openButton2b = document.querySelector('.open-2b');
+      const closeButton2 = document.querySelector('.close-2');
+
+      openButton1.addEventListener('click', () => dialog1.show());
+      closeButton1.addEventListener('click', () => dialog1.hide());
+
+      openButton2a.addEventListener('click', () => dialog2.show());
+      openButton2b.addEventListener('click', () => dialog2.show());
+      closeButton2.addEventListener('click', () => dialog2.hide());
+    </script>
+  </body>
+</html>
