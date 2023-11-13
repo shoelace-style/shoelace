@@ -6,6 +6,8 @@ import { html } from 'lit';
 import { sendKeys } from '@web/test-runner-commands';
 import type { SlDialog } from '../shoelace.js';
 
+import '../../../dist/shoelace.js';
+
 async function holdShiftKey(callback: () => Promise<void>) {
   await sendKeys({ down: 'Shift' });
   await callback();
@@ -62,7 +64,6 @@ it('Should allow tabbing to slotted elements', async () => {
     </tab-test-1>
   `);
 
-  await aTimeout(0);
   const drawer = el.shadowRoot?.querySelector('sl-drawer');
 
   if (drawer === null || drawer === undefined) throw Error('Could not find drawer inside of the test element');
