@@ -62,6 +62,7 @@ it('Should allow tabbing to slotted elements', async () => {
     </tab-test-1>
   `);
 
+  await aTimeout(0);
   const drawer = el.shadowRoot?.querySelector('sl-drawer');
 
   if (drawer === null || drawer === undefined) throw Error('Could not find drawer inside of the test element');
