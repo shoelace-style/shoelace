@@ -15,6 +15,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 ## Next
 
 - Added the ability to call `form.checkValidity()` and it will use Shoelace's custom `checkValidity()` handler. [#1708]
+- Fixed a bug where nested dialogs were not properly trapping focus. [#1711]
 - Fixed a bug with form controls removing the custom validity handlers from the form. [#1708]
 - Fixed a bug in form control components that used a `form` property, but not an attribute. [#1707]
 - Fixed a bug with bundled components using CDN builds not having translations on initial connect [#1696]
