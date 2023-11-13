@@ -63,11 +63,13 @@ export default class Modal {
   }
 
   private handleFocusIn = () => {
+    if (!this.isActive()) return;
     this.checkFocus();
   };
 
   private handleKeyDown = (event: KeyboardEvent) => {
     if (event.key !== 'Tab' || this.isExternalActivated) return;
+    if (!this.isActive()) return;
 
     if (event.shiftKey) {
       this.tabDirection = 'backward';
