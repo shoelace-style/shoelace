@@ -138,3 +138,69 @@ Here is an example:
   </div>
 </sl-drawer>
 ```
+
+### Register components global
+
+If you feel tired of importing each component manually, you can add a global component register function to avoid it, more details on the [Vue doc](https://vuejs.org/guide/components/registration.html#global-registration).
+
+Here is an example:
+
+- global register function
+
+```javascript
+const getComponentName = str => {
+  const strArr = str.split('-');
+
+  return strArr
+    .map((str, idx) => {
+      return `${str[0].toUpperCase()}${str.slice(1)}`;
+    })
+    .join('');
+};
+
+export default {
+  install(app) {
+    const baseComponents = import.meta.glob('./node_modules/@shoelace-style/shoelace/dist/components/**/*.js', {
+      eager: true
+    });
+
+    const registeredComponents = new Set();
+
+    Object.entries(baseComponents).forEach(([path, module]) => {
+      const componentName = getComponentName(path.split('/').at(-1).split('.')[0]);
+
+      if (!registeredComponents.has(componentName)) {
+        registeredComponents.add(componentName);
+        app.component(`Sl${componentName}`, module.default);
+      }
+    });
+  }
+};
+```
+
+- Add global register function in main.js
+
+```javascript
+import { createApp } from 'vue';
+import App from './App.vue';
+import '@shoelace-style/shoelace/dist/themes/light.css';
+import '@shoelace-style/shoelace/dist/themes/dark.css';
+import GlobalComponents from './path-to-function/global';
+
+const app = createApp(App);
+app.use(GlobalComponents);
+
+app.mount('#app');
+```
+
+- Try to add a button without import
+
+```html
+<template>
+  <div>
+    <sl-button>Button</sl-button>
+  </div>
+</template>
+
+<script setup></script>
+```
