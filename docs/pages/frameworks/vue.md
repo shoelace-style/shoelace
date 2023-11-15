@@ -145,33 +145,48 @@ If you feel tired of importing each component manually, you can add a global com
 
 Here is an example:
 
+- Add vite configuration to set shoelace path
+
+```javascript
+import { fileURLToPath, URL } from 'node:url';
+
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: tag => tag.startsWith('sl-')
+        }
+      }
+    })
+  ],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@shoelace': fileURLToPath(new URL('./node_modules/@shoelace-style/shoelace/dist', import.meta.url))
+    }
+  }
+});
+```
+
 - global register function
 
 ```javascript
-const getComponentName = str => {
-  const strArr = str.split('-');
-
-  return strArr
-    .map((str, idx) => {
-      return `${str[0].toUpperCase()}${str.slice(1)}`;
-    })
-    .join('');
-};
+import * as ShoelaceComponents from '@shoelace/shoelace.js';
 
 export default {
   install(app) {
-    const baseComponents = import.meta.glob('./node_modules/@shoelace-style/shoelace/dist/components/**/*.js', {
-      eager: true
-    });
+    Object.keys(ShoelaceComponents).forEach(componentName => {
+      if (componentName.startsWith('Sl')) {
+        if (componentName.toLowerCase().includes('button')) {
+          console.log(componentName);
+        }
 
-    const registeredComponents = new Set();
-
-    Object.entries(baseComponents).forEach(([path, module]) => {
-      const componentName = getComponentName(path.split('/').at(-1).split('.')[0]);
-
-      if (!registeredComponents.has(componentName)) {
-        registeredComponents.add(componentName);
-        app.component(`Sl${componentName}`, module.default);
+        app.component(componentName, ShoelaceComponents[componentName]);
       }
     });
   }
@@ -201,6 +216,4 @@ app.mount('#app');
     <sl-button>Button</sl-button>
   </div>
 </template>
-
-<script setup></script>
 ```
