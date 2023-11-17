@@ -21,8 +21,8 @@ export default {
   ],
   browsers: [
     playwrightLauncher({ product: 'chromium' }),
-    playwrightLauncher({ product: 'firefox' })
-    // playwrightLauncher({ product: 'webkit' }) // all tests currently fail on macOS Sonoma.
+    playwrightLauncher({ product: 'firefox' }),
+    playwrightLauncher({ product: 'webkit' })
   ],
   testRunnerHtml: testFramework => `
     <html lang="en-US">
