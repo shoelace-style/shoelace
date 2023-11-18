@@ -1246,7 +1246,7 @@ const App = () => {
             <img
               alt={`Thumbnail by ${i + 1}`}
               className={`thumbnails__image ${i === currentSlide ? 'active' : ''}`}
-              onCLick={() => handleThumbnailClick(i)}
+              onClick={() => handleThumbnailClick(i)}
               src={src}
             />
           )}
