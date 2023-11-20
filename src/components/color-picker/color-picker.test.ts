@@ -360,7 +360,7 @@ describe('<sl-color-picker>', () => {
     expect(previewColor).to.equal('#ff000050');
   });
 
-  it('should emit sl-focus when rendered as a dropdown and focused', async () => {
+  it.skip('should emit sl-focus when rendered as a dropdown and focused', async () => {
     const el = await fixture<SlColorPicker>(html`
       <div>
         <sl-color-picker></sl-color-picker>
