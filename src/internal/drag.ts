@@ -16,8 +16,8 @@ export function drag(container: HTMLElement, options?: Partial<DragOptions>) {
   function move(pointerEvent: PointerEvent) {
     const dims = container.getBoundingClientRect();
     const defaultView = container.ownerDocument.defaultView!;
-    const offsetX = dims.left + defaultView.pageXOffset;
-    const offsetY = dims.top + defaultView.pageYOffset;
+    const offsetX = dims.left + defaultView.scrollX;
+    const offsetY = dims.top + defaultView.scrollY;
     const x = pointerEvent.pageX - offsetX;
     const y = pointerEvent.pageY - offsetY;
 

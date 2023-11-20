@@ -12,6 +12,17 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## 2.12.0
+
+- Added the Italian translation [#1727]
+- Added the ability to call `form.checkValidity()` and it will use Shoelace's custom `checkValidity()` handler. [#1708]
+- Fixed a bug where nested dialogs were not properly trapping focus. [#1711]
+- Fixed a bug with form controls removing the custom validity handlers from the form. [#1708]
+- Fixed a bug in form control components that used a `form` property, but not an attribute. [#1707]
+- Fixed a bug with bundled components using CDN builds not having translations on initial connect [#1696]
+- Fixed a bug where the `"sl-change"` event would always fire simultaneously with `"sl-input"` event in `<sl-color-picker>`. The `<sl-change>` event now only fires when a user stops dragging a slider or stops dragging on the color canvas. [#1689]
+- Updated the copy icon in the system library [#1702]
+
 ## 2.11.2
 
 - Fixed a bug in `<sl-carousel>` component that caused an error to be thrown when rendered with Lit [#1684]

@@ -2,8 +2,8 @@ import { sendMouse } from '@web/test-runner-commands';
 
 function determineMousePosition(el: Element, position: string, offsetX: number, offsetY: number) {
   const { x, y, width, height } = el.getBoundingClientRect();
-  const centerX = Math.floor(x + window.pageXOffset + width / 2);
-  const centerY = Math.floor(y + window.pageYOffset + height / 2);
+  const centerX = Math.floor(x + window.scrollX + width / 2);
+  const centerY = Math.floor(y + window.scrollY + height / 2);
   let clickX: number;
   let clickY: number;
 
@@ -73,11 +73,21 @@ export async function dragElement(
   /** The horizontal distance to drag in pixels */
   deltaX = 0,
   /** The vertical distance to drag in pixels */
-  deltaY = 0
+  deltaY = 0,
+  callbacks: {
+    afterMouseDown?: () => void | Promise<void>;
+    afterMouseMove?: () => void | Promise<void>;
+  } = {}
 ): Promise<void> {
   await moveMouseOnElement(el);
   await sendMouse({ type: 'down' });
+
+  await callbacks.afterMouseDown?.();
+
   const { clickX, clickY } = determineMousePosition(el, 'center', deltaX, deltaY);
   await sendMouse({ type: 'move', position: [clickX, clickY] });
+
+  await callbacks.afterMouseMove?.();
+
   await sendMouse({ type: 'up' });
 }
