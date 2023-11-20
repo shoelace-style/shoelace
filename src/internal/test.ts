@@ -2,8 +2,8 @@ import { sendMouse } from '@web/test-runner-commands';
 
 function determineMousePosition(el: Element, position: string, offsetX: number, offsetY: number) {
   const { x, y, width, height } = el.getBoundingClientRect();
-  const centerX = Math.floor(x + window.pageXOffset + width / 2);
-  const centerY = Math.floor(y + window.pageYOffset + height / 2);
+  const centerX = Math.floor(x + window.scrollX + width / 2);
+  const centerY = Math.floor(y + window.scrollY + height / 2);
   let clickX: number;
   let clickY: number;
 
