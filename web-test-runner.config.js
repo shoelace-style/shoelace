@@ -7,7 +7,7 @@ export default {
   files: 'src/**/*.test.ts', // "default" group
   concurrentBrowsers: 3,
   nodeResolve: {
-    exportConditions: ["production", "default"]
+    exportConditions: ['production', 'default']
   },
   testFramework: {
     config: {
