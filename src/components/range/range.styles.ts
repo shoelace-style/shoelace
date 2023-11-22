@@ -117,8 +117,11 @@ export default css`
     border-radius: 50%;
     background-color: var(--sl-color-primary-600);
     border-color: var(--sl-color-primary-600);
-    transition: var(--sl-transition-fast) border-color, var(--sl-transition-fast) background-color,
-      var(--sl-transition-fast) color, var(--sl-transition-fast) box-shadow;
+    transition:
+      var(--sl-transition-fast) border-color,
+      var(--sl-transition-fast) background-color,
+      var(--sl-transition-fast) color,
+      var(--sl-transition-fast) box-shadow;
     cursor: pointer;
   }
 

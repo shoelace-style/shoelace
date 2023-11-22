@@ -1,4 +1,7 @@
 contact_links:
+  - name: Feature Requests
+    url: https://github.com/shoelace-style/shoelace/discussions/categories/ideas
+    about: All requests for new features should go here.
   - name: Help & Support
     url: https://github.com/shoelace-style/shoelace/discussions/categories/help
     about: Please don't create issues for personal help requests. Instead, ask your question on the discussion forum.

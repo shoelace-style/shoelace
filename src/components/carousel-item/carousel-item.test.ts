@@ -10,7 +10,7 @@ describe('<sl-carousel-item>', () => {
 
   it('should pass accessibility tests', async () => {
     // Arrange
-    const el = await fixture(html` <div role="list"><sl-carousel-item></sl-carousel-item></div> `);
+    const el = await fixture(html` <sl-carousel-item></sl-carousel-item> `);
 
     // Assert
     await expect(el).to.be.accessible();

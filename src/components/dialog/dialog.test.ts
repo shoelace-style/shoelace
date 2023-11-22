@@ -17,9 +17,9 @@ describe('<sl-dialog>', () => {
   });
 
   it('should not be visible without the open attribute', async () => {
-    const el = await fixture<SlDialog>(
-      html` <sl-dialog>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog> `
-    );
+    const el = await fixture<SlDialog>(html`
+      <sl-dialog>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-dialog>
+    `);
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(base.hidden).to.be.true;

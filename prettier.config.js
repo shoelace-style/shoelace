@@ -1,5 +1,5 @@
-/* eslint-env node */
-module.exports = {
+/** @type {import("prettier").Config} */
+const config = {
   arrowParens: 'avoid',
   bracketSpacing: true,
   htmlWhitespaceSensitivity: 'css',
@@ -16,3 +16,5 @@ module.exports = {
   trailingComma: 'none',
   useTabs: false
 };
+
+export default config;

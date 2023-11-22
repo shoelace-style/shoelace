@@ -87,7 +87,7 @@ async function buildTheDocs(watch = false) {
 // Builds the source with esbuild.
 //
 async function buildTheSource() {
-  const alwaysExternal = ['@lit-labs/react', 'react'];
+  const alwaysExternal = ['@lit/react', 'react'];
 
   const cdnConfig = {
     format: 'esm',
@@ -122,7 +122,7 @@ async function buildTheSource() {
     // We don't bundle certain dependencies in the unbundled build. This ensures we ship bare module specifiers,
     // allowing end users to better optimize when using a bundler. (Only packages that ship ESM can be external.)
     //
-    // We never bundle React or @lit-labs/react though!
+    // We never bundle React or @lit/react though!
     //
     external: alwaysExternal,
     splitting: true,

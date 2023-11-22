@@ -1,3 +1,5 @@
+import '../../internal/scrollend-polyfill.js';
+
 import { AutoplayController } from './autoplay-controller.js';
 import { clamp } from '../../internal/math.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -10,10 +12,10 @@ import { range } from 'lit/directives/range.js';
 import { ScrollController } from './scroll-controller.js';
 import { watch } from '../../internal/watch.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
-import SlCarouselItem from '../carousel-item/carousel-item.component.js';
 import SlIcon from '../icon/icon.component.js';
 import styles from './carousel.styles.js';
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValueMap } from 'lit';
+import type SlCarouselItem from '../carousel-item/carousel-item.component.js';
 
 /**
  * @summary Carousels display an arbitrary number of content slides along a horizontal or vertical axis.
@@ -40,7 +42,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart navigation-button--next - Applied to the next button.
  *
  * @cssproperty --slide-gap - The space between each slide.
- * @cssproperty --aspect-ratio - The aspect ratio of each slide.
+ * @cssproperty [--aspect-ratio=16/9] - The aspect ratio of each slide.
  * @cssproperty --scroll-hint - The amount of padding to apply to the scroll area, allowing adjacent slides to become
  *  partially visible as a scroll hint.
  */
@@ -68,7 +70,7 @@ export default class SlCarousel extends ShoelaceElement {
 
   /**
    * Specifies the number of slides the carousel will advance when scrolling, useful when specifying a `slides-per-page`
-   * greater than one.
+   * greater than one. It can't be higher than `slides-per-page`.
    */
   @property({ type: Number, attribute: 'slides-per-move' }) slidesPerMove = 1;
 
@@ -78,7 +80,6 @@ export default class SlCarousel extends ShoelaceElement {
   /** When set, it is possible to scroll through the slides by dragging them with the mouse. */
   @property({ type: Boolean, reflect: true, attribute: 'mouse-dragging' }) mouseDragging = false;
 
-  @query('slot:not([name])') defaultSlot: HTMLSlotElement;
   @query('.carousel__slides') scrollContainer: HTMLElement;
   @query('.carousel__pagination') paginationContainer: HTMLElement;
 
@@ -87,7 +88,6 @@ export default class SlCarousel extends ShoelaceElement {
 
   private autoplayController = new AutoplayController(this, () => this.next());
   private scrollController = new ScrollController(this);
-  private readonly slides = this.getElementsByTagName('sl-carousel-item');
   private intersectionObserver: IntersectionObserver; // determines which slide is displayed
   // A map containing the state of all the slides
   private readonly intersectionObserverEntries = new Map<Element, IntersectionObserverEntry>();
@@ -133,19 +133,45 @@ export default class SlCarousel extends ShoelaceElement {
   protected firstUpdated(): void {
     this.initializeSlides();
     this.mutationObserver = new MutationObserver(this.handleSlotChange);
-    this.mutationObserver.observe(this, { childList: true, subtree: false });
+    this.mutationObserver.observe(this, {
+      childList: true,
+      subtree: true
+    });
+  }
+
+  protected willUpdate(changedProperties: PropertyValueMap<SlCarousel> | Map<PropertyKey, unknown>): void {
+    // Ensure the slidesPerMove is never higher than the slidesPerPage
+    if (changedProperties.has('slidesPerMove') || changedProperties.has('slidesPerPage')) {
+      this.slidesPerMove = Math.min(this.slidesPerMove, this.slidesPerPage);
+    }
   }
 
   private getPageCount() {
-    return Math.ceil(this.getSlides().length / this.slidesPerPage);
+    const slidesCount = this.getSlides().length;
+    const { slidesPerPage, slidesPerMove, loop } = this;
+
+    const pages = loop ? slidesCount / slidesPerMove : (slidesCount - slidesPerPage) / slidesPerMove + 1;
+
+    return Math.ceil(pages);
   }
 
   private getCurrentPage() {
-    return Math.ceil(this.activeSlide / this.slidesPerPage);
+    return Math.ceil(this.activeSlide / this.slidesPerMove);
   }
 
+  private canScrollNext(): boolean {
+    return this.loop || this.getCurrentPage() < this.getPageCount() - 1;
+  }
+
+  private canScrollPrev(): boolean {
+    return this.loop || this.getCurrentPage() > 0;
+  }
+
+  /** @internal Gets all carousel items. */
   private getSlides({ excludeClones = true }: { excludeClones?: boolean } = {}) {
-    return [...this.slides].filter(slide => !excludeClones || !slide.hasAttribute('data-clone'));
+    return [...this.children].filter(
+      (el: HTMLElement) => this.isCarouselItem(el) && (!excludeClones || !el.hasAttribute('data-clone'))
+    ) as SlCarouselItem[];
   }
 
   private handleKeyDown(event: KeyboardEvent) {
@@ -201,20 +227,22 @@ export default class SlCarousel extends ShoelaceElement {
 
       // Scrolls to the original slide without animating, so the user won't notice that the position has changed
       this.goToSlide(clonePosition, 'auto');
-
-      return;
+    } else if (firstIntersecting) {
+      // Update the current index based on the first visible slide
+      const slideIndex = slides.indexOf(firstIntersecting.target as SlCarouselItem);
+      // Set the index to the first "snappable" slide
+      this.activeSlide = Math.ceil(slideIndex / this.slidesPerMove) * this.slidesPerMove;
     }
+  }
 
-    // Activate the first intersecting slide
-    if (firstIntersecting) {
-      this.activeSlide = slides.indexOf(firstIntersecting.target as SlCarouselItem);
-    }
+  private isCarouselItem(node: Node): node is SlCarouselItem {
+    return node instanceof Element && node.tagName.toLowerCase() === 'sl-carousel-item';
   }
 
   private handleSlotChange = (mutations: MutationRecord[]) => {
     const needsInitialization = mutations.some(mutation =>
       [...mutation.addedNodes, ...mutation.removedNodes].some(
-        node => SlCarouselItem.isCarouselItem(node) && !(node as HTMLElement).hasAttribute('data-clone')
+        (el: HTMLElement) => this.isCarouselItem(el) && !el.hasAttribute('data-clone')
       )
     );
 
@@ -222,13 +250,13 @@ export default class SlCarousel extends ShoelaceElement {
     if (needsInitialization) {
       this.initializeSlides();
     }
+
     this.requestUpdate();
   };
 
   @watch('loop', { waitUntilFirstUpdate: true })
   @watch('slidesPerPage', { waitUntilFirstUpdate: true })
   initializeSlides() {
-    const slides = this.getSlides();
     const intersectionObserver = this.intersectionObserver;
 
     this.intersectionObserverEntries.clear();
@@ -246,23 +274,11 @@ export default class SlCarousel extends ShoelaceElement {
       }
     });
 
+    this.updateSlidesSnap();
+
     if (this.loop) {
       // Creates clones to be placed before and after the original elements to simulate infinite scrolling
-      const slidesPerPage = this.slidesPerPage;
-      const lastSlides = slides.slice(-slidesPerPage);
-      const firstSlides = slides.slice(0, slidesPerPage);
-
-      lastSlides.reverse().forEach((slide, i) => {
-        const clone = slide.cloneNode(true) as HTMLElement;
-        clone.setAttribute('data-clone', String(slides.length - i - 1));
-        this.prepend(clone);
-      });
-
-      firstSlides.forEach((slide, i) => {
-        const clone = slide.cloneNode(true) as HTMLElement;
-        clone.setAttribute('data-clone', String(i));
-        this.append(clone);
-      });
+      this.createClones();
     }
 
     this.getSlides({ excludeClones: false }).forEach(slide => {
@@ -271,6 +287,26 @@ export default class SlCarousel extends ShoelaceElement {
 
     // Because the DOM may be changed, restore the scroll position to the active slide
     this.goToSlide(this.activeSlide, 'auto');
+  }
+
+  private createClones() {
+    const slides = this.getSlides();
+
+    const slidesPerPage = this.slidesPerPage;
+    const lastSlides = slides.slice(-slidesPerPage);
+    const firstSlides = slides.slice(0, slidesPerPage);
+
+    lastSlides.reverse().forEach((slide, i) => {
+      const clone = slide.cloneNode(true) as HTMLElement;
+      clone.setAttribute('data-clone', String(slides.length - i - 1));
+      this.prepend(clone);
+    });
+
+    firstSlides.forEach((slide, i) => {
+      const clone = slide.cloneNode(true) as HTMLElement;
+      clone.setAttribute('data-clone', String(i));
+      this.append(clone);
+    });
   }
 
   @watch('activeSlide')
@@ -292,12 +328,12 @@ export default class SlCarousel extends ShoelaceElement {
   }
 
   @watch('slidesPerMove')
-  handleSlidesPerMoveChange() {
-    const slides = this.getSlides({ excludeClones: false });
+  updateSlidesSnap() {
+    const slides = this.getSlides();
 
     const slidesPerMove = this.slidesPerMove;
     slides.forEach((slide, i) => {
-      const shouldSnap = Math.abs(i - slidesPerMove) % slidesPerMove === 0;
+      const shouldSnap = (i + slidesPerMove) % slidesPerMove === 0;
       if (shouldSnap) {
         slide.style.removeProperty('scroll-snap-align');
       } else {
@@ -325,15 +361,7 @@ export default class SlCarousel extends ShoelaceElement {
    * @param behavior - The behavior used for scrolling.
    */
   previous(behavior: ScrollBehavior = 'smooth') {
-    let previousIndex = this.activeSlide || this.activeSlide - this.slidesPerMove;
-    let canSnap = false;
-
-    while (!canSnap && previousIndex > 0) {
-      previousIndex -= 1;
-      canSnap = Math.abs(previousIndex - this.slidesPerMove) % this.slidesPerMove === 0;
-    }
-
-    this.goToSlide(previousIndex, behavior);
+    this.goToSlide(this.activeSlide - this.slidesPerMove, behavior);
   }
 
   /**
@@ -357,8 +385,13 @@ export default class SlCarousel extends ShoelaceElement {
     const slides = this.getSlides();
     const slidesWithClones = this.getSlides({ excludeClones: false });
 
+    // No need to do anything in case there are no items in the carousel
+    if (!slides.length) {
+      return;
+    }
+
     // Sets the next index without taking into account clones, if any.
-    const newActiveSlide = (index + slides.length) % slides.length;
+    const newActiveSlide = loop ? (index + slides.length) % slides.length : clamp(index, 0, slides.length - 1);
     this.activeSlide = newActiveSlide;
 
     // Get the index of the next slide. For looping carousel it adds `slidesPerPage`
@@ -377,11 +410,11 @@ export default class SlCarousel extends ShoelaceElement {
   }
 
   render() {
-    const { scrollController, slidesPerPage } = this;
+    const { scrollController, slidesPerMove } = this;
     const pagesCount = this.getPageCount();
     const currentPage = this.getCurrentPage();
-    const prevEnabled = this.loop || currentPage > 0;
-    const nextEnabled = this.loop || currentPage < pagesCount - 1;
+    const prevEnabled = this.canScrollPrev();
+    const nextEnabled = this.canScrollNext();
     const isLtr = this.localize.dir() === 'ltr';
 
     return html`
@@ -459,7 +492,7 @@ export default class SlCarousel extends ShoelaceElement {
                       aria-selected="${isActive ? 'true' : 'false'}"
                       aria-label="${this.localize.term('goToSlide', index + 1, pagesCount)}"
                       tabindex=${isActive ? '0' : '-1'}
-                      @click=${() => this.goToSlide(index * slidesPerPage)}
+                      @click=${() => this.goToSlide(index * slidesPerMove)}
                       @keydown=${this.handleKeyDown}
                     ></button>
                   `;

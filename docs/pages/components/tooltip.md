@@ -249,7 +249,7 @@ const App = () => (
 
 ### Manual Trigger
 
-Tooltips can be controller programmatically by setting the `trigger` attribute to `manual`. Use the `open` attribute to control when the tooltip is shown.
+Tooltips can be controlled programmatically by setting the `trigger` attribute to `manual`. Use the `open` attribute to control when the tooltip is shown.
 
 ```html:preview
 <sl-button style="margin-right: 4rem;">Toggle Manually</sl-button>

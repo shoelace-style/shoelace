@@ -235,7 +235,9 @@ code {
 kbd {
   background: var(--sl-color-neutral-100);
   border: solid 1px var(--sl-color-neutral-200);
-  box-shadow: inset 0 1px 0 0 var(--sl-color-neutral-0), inset 0 -1px 0 0 var(--sl-color-neutral-200);
+  box-shadow:
+    inset 0 1px 0 0 var(--sl-color-neutral-0),
+    inset 0 -1px 0 0 var(--sl-color-neutral-200);
   font-family: var(--sl-font-mono);
   font-size: 0.9125em;
   border-radius: var(--docs-border-radius);
@@ -511,7 +513,9 @@ pre .token.italic {
   right: 0;
   white-space: normal;
   color: var(--sl-color-neutral-800);
-  transition: 150ms opacity, 150ms scale;
+  transition:
+    150ms opacity,
+    150ms scale;
 }
 
 .copy-code-button::part(button) {
@@ -659,6 +663,7 @@ pre:hover .copy-code-button,
   margin: -1rem;
   cursor: pointer;
   user-select: none;
+  -webkit-user-select: none;
 }
 
 .content details summary span {
@@ -982,7 +987,9 @@ main {
   padding: 0.5rem;
   margin: 0;
   cursor: pointer;
-  transition: 250ms scale ease, 250ms rotate ease;
+  transition:
+    250ms scale ease,
+    250ms rotate ease;
 }
 
 @media screen and (max-width: 900px) {

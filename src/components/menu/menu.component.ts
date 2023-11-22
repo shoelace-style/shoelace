@@ -1,9 +1,9 @@
 import { html } from 'lit';
 import { query } from 'lit/decorators.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
-import SlMenuItem from '../menu-item/menu-item.component.js';
 import styles from './menu.styles.js';
 import type { CSSResultGroup } from 'lit';
+import type SlMenuItem from '../menu-item/menu-item.component.js';
 export interface MenuSelectEventDetail {
   item: SlMenuItem;
 }
@@ -29,11 +29,14 @@ export default class SlMenu extends ShoelaceElement {
   }
 
   private handleClick(event: MouseEvent) {
-    if (!(event.target instanceof SlMenuItem)) {
-      return;
-    }
+    const menuItemTypes = ['menuitem', 'menuitemcheckbox'];
 
-    const item: SlMenuItem = event.target;
+    const target = event.composedPath().find((el: Element) => menuItemTypes.includes(el?.getAttribute?.('role') || ''));
+
+    if (!target) return;
+
+    // This isn't true. But we use it for TypeScript checks below.
+    const item = target as SlMenuItem;
 
     if (item.type === 'checkbox') {
       item.checked = !item.checked;
