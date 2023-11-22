@@ -55,7 +55,9 @@ export default css`
     background-color: var(--sl-color-neutral-400);
     border: solid var(--sl-input-border-width) var(--sl-color-neutral-400);
     border-radius: var(--height);
-    transition: var(--sl-transition-fast) border-color, var(--sl-transition-fast) background-color;
+    transition:
+      var(--sl-transition-fast) border-color,
+      var(--sl-transition-fast) background-color;
   }
 
   .switch__control .switch__thumb {
@@ -65,8 +67,11 @@ export default css`
     border-radius: 50%;
     border: solid var(--sl-input-border-width) var(--sl-color-neutral-400);
     translate: calc((var(--width) - var(--height)) / -2);
-    transition: var(--sl-transition-fast) translate ease, var(--sl-transition-fast) background-color,
-      var(--sl-transition-fast) border-color, var(--sl-transition-fast) box-shadow;
+    transition:
+      var(--sl-transition-fast) translate ease,
+      var(--sl-transition-fast) background-color,
+      var(--sl-transition-fast) border-color,
+      var(--sl-transition-fast) box-shadow;
   }
 
   .switch__input {
@@ -148,6 +153,7 @@ export default css`
     line-height: var(--height);
     margin-inline-start: 0.5em;
     user-select: none;
+    -webkit-user-select: none;
   }
 
   :host([required]) .switch__label::after {

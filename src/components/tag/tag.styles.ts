@@ -15,6 +15,7 @@ export default css`
     line-height: 1;
     white-space: nowrap;
     user-select: none;
+    -webkit-user-select: none;
   }
 
   .tag__remove::part(base) {

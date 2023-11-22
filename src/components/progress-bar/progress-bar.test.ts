@@ -73,12 +73,10 @@ describe('<sl-progress-bar>', () => {
 
   describe('when provided a ariaLabelledBy, and value parameter', () => {
     before(async () => {
-      el = await fixture<SlProgressBar>(
-        html`
-          <label id="labelledby">Progress Ring Label</label>
-          <sl-progress-bar ariaLabelledBy="labelledby" value="25"></sl-progress-bar>
-        `
-      );
+      el = await fixture<SlProgressBar>(html`
+        <label id="labelledby">Progress Ring Label</label>
+        <sl-progress-bar ariaLabelledBy="labelledby" value="25"></sl-progress-bar>
+      `);
     });
 
     it('should pass accessibility tests', async () => {

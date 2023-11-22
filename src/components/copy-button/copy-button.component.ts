@@ -206,9 +206,9 @@ export default class SlCopyButton extends ShoelaceElement {
         ?disabled=${this.disabled}
         ?hoist=${this.hoist}
         exportparts="
-          base:tooltip__base
-          base__popup:tooltip__base__popup
-          base__arrow:tooltip__base__arrow
+          base:tooltip__base,
+          base__popup:tooltip__base__popup,
+          base__arrow:tooltip__base__arrow,
           body:tooltip__body
         "
       >

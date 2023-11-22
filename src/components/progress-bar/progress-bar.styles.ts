@@ -33,8 +33,11 @@ export default css`
     line-height: var(--height);
     white-space: nowrap;
     overflow: hidden;
-    transition: 400ms width, 400ms background-color;
+    transition:
+      400ms width,
+      400ms background-color;
     user-select: none;
+    -webkit-user-select: none;
   }
 
   /* Indeterminate */

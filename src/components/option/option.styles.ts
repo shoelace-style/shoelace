@@ -7,6 +7,7 @@ export default css`
   :host {
     display: block;
     user-select: none;
+    -webkit-user-select: none;
   }
 
   :host(:focus) {

@@ -7,6 +7,14 @@ export default css`
   :host {
     --submenu-offset: -2px;
 
+    /* Private */
+    --safe-triangle-cursor-x: 0;
+    --safe-triangle-cursor-y: 0;
+    --safe-triangle-submenu-start-x: 0;
+    --safe-triangle-submenu-start-y: 0;
+    --safe-triangle-submenu-end-x: 0;
+    --safe-triangle-submenu-end-y: 0;
+
     display: block;
   }
 
@@ -27,6 +35,7 @@ export default css`
     padding: var(--sl-spacing-2x-small) var(--sl-spacing-2x-small);
     transition: var(--sl-transition-fast) fill;
     user-select: none;
+    -webkit-user-select: none;
     white-space: nowrap;
     cursor: pointer;
   }
@@ -62,6 +71,22 @@ export default css`
 
   .menu-item .menu-item__suffix::slotted(*) {
     margin-inline-start: var(--sl-spacing-x-small);
+  }
+
+  /* Safe triangle */
+  .menu-item--submenu-expanded::after {
+    content: '';
+    position: fixed;
+    z-index: calc(var(--sl-z-index-dropdown) - 1);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    clip-path: polygon(
+      var(--safe-triangle-cursor-x) var(--safe-triangle-cursor-y),
+      var(--safe-triangle-submenu-start-x) var(--safe-triangle-submenu-start-y),
+      var(--safe-triangle-submenu-end-x) var(--safe-triangle-submenu-end-y)
+    );
   }
 
   :host(:focus-visible) {

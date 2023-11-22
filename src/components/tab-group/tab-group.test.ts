@@ -187,8 +187,10 @@ describe('<sl-tab-group>', () => {
     const generateTabs = (n: number): HTMLTemplateResult[] => {
       const result: HTMLTemplateResult[] = [];
       for (let i = 0; i < n; i++) {
-        result.push(html`<sl-tab slot="nav" panel="tab-${i}">Tab ${i}</sl-tab>
-          <sl-tab-panel name="tab-${i}">Content of tab ${i}0</sl-tab-panel> `);
+        result.push(
+          html`<sl-tab slot="nav" panel="tab-${i}">Tab ${i}</sl-tab>
+            <sl-tab-panel name="tab-${i}">Content of tab ${i}0</sl-tab-panel> `
+        );
       }
       return result;
     };

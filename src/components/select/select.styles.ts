@@ -46,7 +46,10 @@ export default css`
     vertical-align: middle;
     overflow: hidden;
     cursor: pointer;
-    transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow,
+    transition:
+      var(--sl-transition-fast) color,
+      var(--sl-transition-fast) border,
+      var(--sl-transition-fast) box-shadow,
       var(--sl-transition-fast) background-color;
   }
 
@@ -62,6 +65,10 @@ export default css`
     padding: 0;
     margin: 0;
     -webkit-appearance: none;
+  }
+
+  .select__display-input::placeholder {
+    color: var(--sl-input-placeholder-color);
   }
 
   .select:not(.select--disabled):hover .select__display-input {

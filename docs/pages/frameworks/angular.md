@@ -10,16 +10,41 @@ Angular [plays nice](https://custom-elements-everywhere.com/#angular) with custo
 
 ## Installation
 
+### Download the npm package
+
 To add Shoelace to your Angular app, install the package from npm.
 
 ```bash
 npm install @shoelace-style/shoelace
 ```
 
-Next, [include a theme](/getting-started/themes) and set the [base path](/getting-started/installation#setting-the-base-path) for icons and other assets. In this example, we'll import the light theme and use the CDN as a base path.
+### Update the Angular Configuration
+
+Next, [include a theme](/getting-started/themes). In this example, we'll import the light theme.
+
+Its also important to load the components by using a `<script>` tag into the index.html file. However, the Angular way to do it is by adding a script configurations into your angular.json file as follows:
+
+```json
+"architect": {
+  "build": {
+    ...
+    "options": {
+      ...
+      "styles": [
+        "src/styles.scss",
+        "@shoelace-style/shoelace/dist/themes/light.css"
+       ],
+      "scripts": [
+        "@shoelace-style/shoelace/dist/shoelace.js"
+      ]
+      ...
+```
+
+### Setting up the base path
+
+Next, set the [base path](/getting-started/installation#setting-the-base-path) for icons and other assets in the `main.ts`. In this example, we'll use the CDN as a base path.
 
 ```jsx
-import '@shoelace-style/shoelace/%NPMDIR%/themes/light.css';
 import { setBasePath } from '@shoelace-style/shoelace/%NPMDIR%/utilities/base-path';
 
 setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/');

@@ -205,6 +205,7 @@ export default {
     customElementJetBrainsPlugin({
       outdir: './dist',
       excludeCss: true,
+      packageJson: false,
       referencesTemplate: (_, tag) => {
         return {
           name: 'Documentation',

@@ -24,6 +24,7 @@ export default css`
     background-color: var(--sl-panel-background-color);
     border-radius: var(--sl-border-radius-medium);
     user-select: none;
+    -webkit-user-select: none;
   }
 
   .color-picker--inline {
@@ -245,7 +246,11 @@ export default css`
       linear-gradient(45deg, transparent 75%, var(--sl-color-neutral-300) 75%),
       linear-gradient(45deg, var(--sl-color-neutral-300) 25%, transparent 25%);
     background-size: 10px 10px;
-    background-position: 0 0, 0 0, -5px -5px, 5px 5px;
+    background-position:
+      0 0,
+      0 0,
+      -5px -5px,
+      5px 5px;
   }
 
   .color-picker--disabled {
@@ -311,7 +316,9 @@ export default css`
     height: 100%;
     border-radius: inherit;
     background-color: currentColor;
-    box-shadow: inset 0 0 0 2px var(--sl-input-border-color), inset 0 0 0 4px var(--sl-color-neutral-0);
+    box-shadow:
+      inset 0 0 0 2px var(--sl-input-border-color),
+      inset 0 0 0 4px var(--sl-color-neutral-0);
   }
 
   .color-dropdown__trigger--empty:before {

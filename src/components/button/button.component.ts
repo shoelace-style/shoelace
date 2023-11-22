@@ -45,20 +45,9 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
   };
 
   private readonly formControlController = new FormControlController(this, {
-    form: input => {
-      // Buttons support a form attribute that points to an arbitrary form, so if this attribute is set we need to query
-      // the form from the same root using its id
-      if (input.hasAttribute('form')) {
-        const doc = input.getRootNode() as Document | ShadowRoot;
-        const formId = input.getAttribute('form')!;
-        return doc.getElementById(formId) as HTMLFormElement;
-      }
-
-      // Fall back to the closest containing form
-      return input.closest('form');
-    },
     assumeInteractionOn: ['click']
   });
+
   private readonly hasSlotController = new HasSlotController(this, '[default]', 'prefix', 'suffix');
   private readonly localize = new LocalizeController(this);
 

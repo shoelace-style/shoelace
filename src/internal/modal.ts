@@ -1,4 +1,4 @@
-import { activeElements } from './active-elements.js';
+import { getDeepestActiveElement } from './active-elements.js';
 import { getTabbableElements } from './tabbable.js';
 
 let activeModals: HTMLElement[] = [];
@@ -63,27 +63,13 @@ export default class Modal {
   }
 
   private handleFocusIn = () => {
+    if (!this.isActive()) return;
     this.checkFocus();
   };
 
-  get currentFocusIndex() {
-    return getTabbableElements(this.element).findIndex(el => el === this.currentFocus);
-  }
-
-  // Checks if the `startElement` is already focused. This is important if the modal already has an existing focus prior
-  // to the first tab key.
-  private startElementAlreadyFocused(startElement: HTMLElement) {
-    for (const activeElement of activeElements()) {
-      if (startElement === activeElement) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
   private handleKeyDown = (event: KeyboardEvent) => {
     if (event.key !== 'Tab' || this.isExternalActivated) return;
+    if (!this.isActive()) return;
 
     if (event.shiftKey) {
       this.tabDirection = 'backward';
@@ -94,29 +80,30 @@ export default class Modal {
     event.preventDefault();
 
     const tabbableElements = getTabbableElements(this.element);
-    const start = tabbableElements[0];
 
-    // Sometimes we programmatically focus the first element in a modal.
-    // Lets make sure the start element isn't already focused.
-    let focusIndex = this.startElementAlreadyFocused(start) ? 0 : this.currentFocusIndex;
+    // Because sometimes focus can actually be taken over from outside sources,
+    // we don't want to rely on `this.currentFocus`. Instead we check the actual `activeElement` and
+    // recurse through shadowRoots.
+    const currentActiveElement = getDeepestActiveElement();
+    let currentFocusIndex = tabbableElements.findIndex(el => el === currentActiveElement);
 
-    if (focusIndex === -1) {
-      this.currentFocus = start;
-      this.currentFocus.focus({ preventScroll: true });
+    if (currentFocusIndex === -1) {
+      this.currentFocus = tabbableElements[0];
+      this.currentFocus?.focus({ preventScroll: true });
       return;
     }
 
     const addition = this.tabDirection === 'forward' ? 1 : -1;
 
-    if (focusIndex + addition >= tabbableElements.length) {
-      focusIndex = 0;
-    } else if (this.currentFocusIndex + addition < 0) {
-      focusIndex = tabbableElements.length - 1;
+    if (currentFocusIndex + addition >= tabbableElements.length) {
+      currentFocusIndex = 0;
+    } else if (currentFocusIndex + addition < 0) {
+      currentFocusIndex = tabbableElements.length - 1;
     } else {
-      focusIndex += addition;
+      currentFocusIndex += addition;
     }
 
-    this.currentFocus = tabbableElements[focusIndex];
+    this.currentFocus = tabbableElements[currentFocusIndex];
     this.currentFocus?.focus({ preventScroll: true });
 
     setTimeout(() => this.checkFocus());
