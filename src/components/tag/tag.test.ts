@@ -1,5 +1,6 @@
 import '../../../dist/shoelace.js';
 import { expect, fixture, html } from '@open-wc/testing';
+import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlTag from './tag';
 
@@ -58,6 +59,19 @@ describe('<sl-tag>', () => {
       el.addEventListener('sl-remove', spy, { once: true });
 
       removeButton.click();
+
+      expect(spy.called).to.equal(true);
+    });
+
+    it('should be clickable via keyboard', async () => {
+      const el = await fixture<SlTag>(html` <sl-tag removable>Test</sl-tag> `);
+
+      const spy = sinon.spy();
+
+      el.addEventListener('sl-remove', spy, { once: true });
+
+      await sendKeys({ press: 'Tab' });
+      await sendKeys({ press: 'Enter' });
 
       expect(spy.called).to.equal(true);
     });
