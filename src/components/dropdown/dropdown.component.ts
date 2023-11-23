@@ -60,7 +60,7 @@ export default class SlDropdown extends ShoelaceElement {
    * inside of the viewport.
    */
   @property({ reflect: true }) placement:
-    'top'
+    | 'top'
     | 'top-start'
     | 'top-end'
     | 'bottom'
@@ -398,9 +398,9 @@ export default class SlDropdown extends ShoelaceElement {
         auto-size="vertical"
         auto-size-padding="10"
         class=${classMap({
-      dropdown: true,
-      'dropdown--open': this.open
-    })}
+          dropdown: true,
+          'dropdown--open': this.open
+        })}
       >
         <slot
           name="trigger"
