@@ -58,7 +58,7 @@ export default class SlTooltip extends ShoelaceElement {
    * inside of the viewport.
    */
   @property() placement:
-    | 'top'
+    'top'
     | 'top-start'
     | 'top-end'
     | 'right'
@@ -253,9 +253,9 @@ export default class SlTooltip extends ShoelaceElement {
           arrow:base__arrow
         "
         class=${classMap({
-          tooltip: true,
-          'tooltip--open': this.open
-        })}
+      tooltip: true,
+      'tooltip--open': this.open
+    })}
         placement=${this.placement}
         distance=${this.distance}
         skidding=${this.skidding}

@@ -71,7 +71,7 @@ export default class SlPopup extends ShoelaceElement {
    * panel inside of the viewport.
    */
   @property({ reflect: true }) placement:
-    | 'top'
+    'top'
     | 'top-start'
     | 'top-end'
     | 'bottom'
@@ -457,11 +457,11 @@ export default class SlPopup extends ShoelaceElement {
       <div
         part="popup"
         class=${classMap({
-          popup: true,
-          'popup--active': this.active,
-          'popup--fixed': this.strategy === 'fixed',
-          'popup--has-arrow': this.arrow
-        })}
+      popup: true,
+      'popup--active': this.active,
+      'popup--fixed': this.strategy === 'fixed',
+      'popup--has-arrow': this.arrow
+    })}
       >
         <slot></slot>
         ${this.arrow ? html`<div part="arrow" class="popup__arrow" role="presentation"></div>` : ''}
