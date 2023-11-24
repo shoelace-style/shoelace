@@ -158,11 +158,13 @@ export default css`
 
   .menu-item--loading sl-spinner {
     --indicator-color: currentColor;
+    --track-width: 1px;
     position: absolute;
-    font-size: 1em;
+    font-size: 0.75em;
     height: 1em;
     width: 1em;
     top: calc(50% - 0.5em);
-    left: 0.45em;
+    left: calc(1rem - 1px);
+    transform: translateX(-50%);
   }
 `;
