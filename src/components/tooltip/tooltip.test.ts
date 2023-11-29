@@ -149,14 +149,15 @@ describe('<sl-tooltip>', () => {
     expect(body.hidden).to.be.false;
   });
 
-  it('should not accept pointer events on the tooltip', async () => {
+  it('should not accept user selection on the tooltip', async () => {
     const el = await fixture<SlTooltip>(html`
       <sl-tooltip content="This is a tooltip" open>
         <sl-button>Hover Me</sl-button>
       </sl-tooltip>
     `);
-    const popup = el.shadowRoot!.querySelector<SlPopup>('sl-popup')!;
+    const tooltipBody = el.shadowRoot!.querySelector('.tooltip__body')!;
+    const userSelect = getComputedStyle(tooltipBody).userSelect || getComputedStyle(tooltipBody).webkitUserSelect;
 
-    expect(getComputedStyle(popup.popup).pointerEvents).to.equal('none');
+    expect(userSelect).to.equal('none');
   });
 });
