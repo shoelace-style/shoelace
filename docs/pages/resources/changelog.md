@@ -12,6 +12,10 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## Next
+
+- Improved the accessibility of `<sl-tooltip>` so they get dismissed when [[Esc]] is pressed even when the target isn't focused [#1734]
+
 ## 2.12.0
 
 - Added the Italian translation [#1727]
