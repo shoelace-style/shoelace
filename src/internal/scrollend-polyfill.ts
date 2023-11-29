@@ -2,17 +2,6 @@ type GenericCallback = (this: unknown, ...args: unknown[]) => unknown;
 
 type MethodOf<T, K extends keyof T> = T[K] extends GenericCallback ? T[K] : never;
 
-const debounce = <T extends GenericCallback>(fn: T, delay: number) => {
-  let timerId = 0;
-
-  return function (this: unknown, ...args: unknown[]) {
-    window.clearTimeout(timerId);
-    timerId = window.setTimeout(() => {
-      fn.call(this, ...args);
-    }, delay);
-  };
-};
-
 const decorate = <T, M extends keyof T>(
   proto: T,
   method: M,
@@ -43,18 +32,24 @@ if (!isSupported) {
   document.addEventListener('pointerdown', handlePointerDown);
   document.addEventListener('pointerup', handlePointerUp);
 
+  // If the pointer is used for scrolling, the browser fires a pointercancel event because it determines
+  // that there are unlikely to be any more pointer events.
+  document.addEventListener('pointercancel', handlePointerUp);
+
   decorate(EventTarget.prototype, 'addEventListener', function (this: EventTarget, addEventListener, type) {
     if (type !== 'scroll') return;
 
-    const handleScrollEnd = debounce(() => {
+    const handleScrollEnd = () => {
       if (!pointers.size) {
         // If no pointer is active in the scroll area then the scroll has ended
         this.dispatchEvent(new Event('scrollend'));
       } else {
         // otherwise let's wait a bit more
-        handleScrollEnd();
+        setTimeout(() => {
+          handleScrollEnd();
+        }, 100);
       }
-    }, 100);
+    };
 
     addEventListener.call(this, 'scroll', handleScrollEnd, { passive: true });
     scrollHandlers.set(this, handleScrollEnd);
