@@ -14,7 +14,8 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
-- Improved the accessibility of `<sl-tooltip>` so they get dismissed when [[Esc]] is pressed even when the target isn't focused [#1734]
+- Added the `hover-bridge` feature to `<sl-popup>` to support better tooltip accessibility [#1734]
+- Improved the accessibility of `<sl-tooltip>` so they persist when hovering over the tooltip and dismiss when pressing [[Esc]] [#1734]
 
 ## 2.12.0
 

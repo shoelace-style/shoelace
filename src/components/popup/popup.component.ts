@@ -32,6 +32,7 @@ function isVirtualElement(e: unknown): e is VirtualElement {
  *  assigned dynamically as the popup moves. This is most useful for applying a background color to match the popup, and
  *  maybe a border or box shadow.
  * @csspart popup - The popup's container. Useful for setting a background color, box shadow, etc.
+ * @csspart hover-bridge - The hover bridge element. Only available when the `hover-bridge` option is enabled.
  *
  * @cssproperty [--arrow-size=6px] - The size of the arrow. Note that an arrow won't be shown unless the `arrow`
  *  attribute is used.
@@ -188,6 +189,14 @@ export default class SlPopup extends ShoelaceElement {
 
   /** The amount of padding, in pixels, to exceed before the auto-size behavior will occur. */
   @property({ attribute: 'auto-size-padding', type: Number }) autoSizePadding = 0;
+
+  /**
+   * When a gap exists between the anchor and the popup element, this option will add a "hover bridge" that fills the
+   * gap using an invisible element. This makes listening for events such as `mouseenter` and `mouseleave` more sane
+   * because the pointer never technically leaves the element. The hover bridge will only be drawn when the popover is
+   * active.
+   */
+  @property({ attribute: 'hover-bridge', type: Boolean }) hoverBridge = false;
 
   async connectedCallback() {
     super.connectedCallback();
@@ -447,12 +456,98 @@ export default class SlPopup extends ShoelaceElement {
       }
     });
 
+    // Wait until the new position is drawn before updating the hover bridge, otherwise it can get out of sync
+    requestAnimationFrame(() => this.updateHoverBridge());
+
     this.emit('sl-reposition');
   }
+
+  private updateHoverBridge = () => {
+    if (this.hoverBridge && this.anchorEl) {
+      const anchorRect = this.anchorEl.getBoundingClientRect();
+      const popupRect = this.popup.getBoundingClientRect();
+      const isVertical = this.placement.includes('top') || this.placement.includes('bottom');
+      let topLeftX = 0;
+      let topLeftY = 0;
+      let topRightX = 0;
+      let topRightY = 0;
+      let bottomLeftX = 0;
+      let bottomLeftY = 0;
+      let bottomRightX = 0;
+      let bottomRightY = 0;
+
+      if (isVertical) {
+        if (anchorRect.top < popupRect.top) {
+          // Anchor is above
+          topLeftX = anchorRect.left;
+          topLeftY = anchorRect.bottom;
+          topRightX = anchorRect.right;
+          topRightY = anchorRect.bottom;
+
+          bottomLeftX = popupRect.left;
+          bottomLeftY = popupRect.top;
+          bottomRightX = popupRect.right;
+          bottomRightY = popupRect.top;
+        } else {
+          // Anchor is below
+          topLeftX = popupRect.left;
+          topLeftY = popupRect.bottom;
+          topRightX = popupRect.right;
+          topRightY = popupRect.bottom;
+
+          bottomLeftX = anchorRect.left;
+          bottomLeftY = anchorRect.top;
+          bottomRightX = anchorRect.right;
+          bottomRightY = anchorRect.top;
+        }
+      } else {
+        if (anchorRect.left < popupRect.left) {
+          // Anchor is on the left
+          topLeftX = anchorRect.right;
+          topLeftY = anchorRect.top;
+          topRightX = popupRect.left;
+          topRightY = popupRect.top;
+
+          bottomLeftX = anchorRect.right;
+          bottomLeftY = anchorRect.bottom;
+          bottomRightX = popupRect.left;
+          bottomRightY = popupRect.bottom;
+        } else {
+          // Anchor is on the right
+          topLeftX = popupRect.right;
+          topLeftY = popupRect.top;
+          topRightX = anchorRect.left;
+          topRightY = anchorRect.top;
+
+          bottomLeftX = popupRect.right;
+          bottomLeftY = popupRect.bottom;
+          bottomRightX = anchorRect.left;
+          bottomRightY = anchorRect.bottom;
+        }
+      }
+
+      this.style.setProperty('--hover-bridge-top-left-x', `${topLeftX}px`);
+      this.style.setProperty('--hover-bridge-top-left-y', `${topLeftY}px`);
+      this.style.setProperty('--hover-bridge-top-right-x', `${topRightX}px`);
+      this.style.setProperty('--hover-bridge-top-right-y', `${topRightY}px`);
+      this.style.setProperty('--hover-bridge-bottom-left-x', `${bottomLeftX}px`);
+      this.style.setProperty('--hover-bridge-bottom-left-y', `${bottomLeftY}px`);
+      this.style.setProperty('--hover-bridge-bottom-right-x', `${bottomRightX}px`);
+      this.style.setProperty('--hover-bridge-bottom-right-y', `${bottomRightY}px`);
+    }
+  };
 
   render() {
     return html`
       <slot name="anchor" @slotchange=${this.handleAnchorChange}></slot>
+
+      <span
+        part="hover-bridge"
+        class=${classMap({
+          'popup-hover-bridge': true,
+          'popup-hover-bridge--visible': this.hoverBridge && this.active
+        })}
+      ></span>
 
       <div
         part="popup"

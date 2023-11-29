@@ -187,6 +187,7 @@ export default class SlTooltip extends ShoelaceElement {
       this.popup.active = true;
       const { keyframes, options } = getAnimation(this, 'tooltip.show', { dir: this.localize.dir() });
       await animateTo(this.popup.popup, keyframes, options);
+      this.popup.reposition();
 
       this.emit('sl-after-show');
     } else {
@@ -264,6 +265,7 @@ export default class SlTooltip extends ShoelaceElement {
         flip
         shift
         arrow
+        hover-bridge
       >
         ${'' /* eslint-disable-next-line lit-a11y/no-aria-slot */}
         <slot slot="anchor" aria-describedby="tooltip"></slot>
