@@ -81,7 +81,7 @@ export default css`
 
   .carousel__slides--dragging,
   .carousel__slides--dropping {
-    scroll-snap-type: unset;
+    scroll-snap-type: unset !important;
   }
 
   :host([vertical]) ::slotted(sl-carousel-item) {
