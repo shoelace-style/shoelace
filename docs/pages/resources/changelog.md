@@ -12,6 +12,11 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## Next
+
+- Focus trapping now scrolls elements into view. [#]
+- Further improvements to focus trapping performance. [#]
+
 ## 2.12.0
 
 - Added the Italian translation [#1727]
