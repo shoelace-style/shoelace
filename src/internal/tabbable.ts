@@ -132,4 +132,3 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
     return bTabindex - aTabindex;
   });
 }
-
