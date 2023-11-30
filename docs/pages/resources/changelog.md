@@ -14,8 +14,8 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
-- Focus trapping now scrolls elements into view. [#]
-- Further improvements to focus trapping performance. [#]
+- Focus trapping now scrolls elements into view. [#1750]
+- Further improvements to focus trapping performance. [#1750]
 
 ## 2.12.0
 
