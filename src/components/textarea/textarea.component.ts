@@ -262,8 +262,8 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
     end?: number,
     selectMode: 'select' | 'start' | 'end' | 'preserve' = 'preserve'
   ) {
-    const selectionStart = start; // ?? this.input.selectionStart;
-    const selectionEnd = end; // ?? this.input.selectionEnd;
+    const selectionStart = start ?? this.input.selectionStart;
+    const selectionEnd = end ?? this.input.selectionEnd;
 
     this.input.setRangeText(replacement, selectionStart, selectionEnd, selectMode);
 
