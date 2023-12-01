@@ -7,14 +7,6 @@ export default css`
   :host {
     --submenu-offset: -2px;
 
-    /* Private */
-    --safe-triangle-cursor-x: 0;
-    --safe-triangle-cursor-y: 0;
-    --safe-triangle-submenu-start-x: 0;
-    --safe-triangle-submenu-start-y: 0;
-    --safe-triangle-submenu-end-x: 0;
-    --safe-triangle-submenu-end-y: 0;
-
     display: block;
   }
 
@@ -82,10 +74,11 @@ export default css`
     right: 0;
     bottom: 0;
     left: 0;
+    background: tomato;
     clip-path: polygon(
-      var(--safe-triangle-cursor-x) var(--safe-triangle-cursor-y),
-      var(--safe-triangle-submenu-start-x) var(--safe-triangle-submenu-start-y),
-      var(--safe-triangle-submenu-end-x) var(--safe-triangle-submenu-end-y)
+      var(--safe-triangle-cursor-x, 0) var(--safe-triangle-cursor-y, 0),
+      var(--safe-triangle-submenu-start-x, 0) var(--safe-triangle-submenu-start-y, 0),
+      var(--safe-triangle-submenu-end-x, 0) var(--safe-triangle-submenu-end-y, 0)
     );
   }
 
