@@ -106,8 +106,9 @@ export default class SlTooltip extends ShoelaceElement {
     this.addEventListener('mouseout', this.handleMouseOut);
   }
 
-  connectedCallback() {
-    super.connectedCallback();
+  disconnectedCallback() {
+    // Cleanup this event in case the tooltip is removed while open
+    document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
   firstUpdated() {
