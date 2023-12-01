@@ -18,7 +18,6 @@ export default css`
   }
 
   .tooltip::part(popup) {
-    user-select: none;
     z-index: var(--sl-z-index-tooltip);
   }
 
