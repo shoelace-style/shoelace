@@ -295,5 +295,17 @@ describe('<sl-textarea>', () => {
     });
   });
 
+  describe('when using the setRangeText() function', () => {
+    it('should set replacement text in the correct location', async () => {
+      const el = await fixture<SlTextarea>(html` <sl-textarea value="test"></sl-textarea> `);
+
+      el.focus();
+      el.setSelectionRange(1, 3);
+      el.setRangeText('boom');
+      await el.updateComplete;
+      expect(el.value).to.equal('tboomt'); // cspell:disable-line
+    });
+  });
+
   runFormControlBaseTests('sl-textarea');
 });
