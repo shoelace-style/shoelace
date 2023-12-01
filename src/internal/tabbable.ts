@@ -1,14 +1,22 @@
-//
-// This doesn't technically check visibility, it checks if the element has been rendered and can maybe possibly be tabbed
-// to. This is a workaround for shadow roots not having an `offsetParent`.
-//
-// See https://stackoverflow.com/questions/19669786/check-if-element-is-visible-in-dom
-//
-// Previously, we used https://www.npmjs.com/package/composed-offset-position, but recursing up an entire node tree took
-// up a lot of CPU cycles and made focus traps unusable in Chrome / Edge.
-//
-function isTakingUpSpace(elem: HTMLElement): boolean {
-  return Boolean(elem.offsetParent || elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length);
+// Cached compute style calls. This is specifically for browsers that dont support `checkVisibility()`.
+// computedStyle calls are "live" so they only need to be retrieved once for an element.
+const computedStyleMap = new WeakMap<Element, CSSStyleDeclaration>();
+
+function isVisible(el: HTMLElement): boolean {
+  // This is the fastest check, but isn't supported in Safari.
+  if (typeof el.checkVisibility === 'function') {
+    return el.checkVisibility({ checkOpacity: false });
+  }
+
+  // Fallback "polyfill" for "checkVisibility"
+  let computedStyle: undefined | CSSStyleDeclaration = computedStyleMap.get(el);
+
+  if (!computedStyle) {
+    computedStyle = window.getComputedStyle(el, null);
+    computedStyleMap.set(el, computedStyle);
+  }
+
+  return computedStyle.visibility !== 'hidden' && computedStyle.display !== 'none';
 }
 
 /** Determines if the specified element is tabbable using heuristics inspired by https://github.com/focus-trap/tabbable */
@@ -30,13 +38,7 @@ function isTabbable(el: HTMLElement) {
     return false;
   }
 
-  // Elements that are hidden have no offsetParent and are not tabbable
-  if (!isTakingUpSpace(el)) {
-    return false;
-  }
-
-  // Elements without visibility are not tabbable
-  if (window.getComputedStyle(el).visibility === 'hidden') {
+  if (!isVisible(el)) {
     return false;
   }
 
@@ -73,7 +75,17 @@ export function getTabbableBoundary(root: HTMLElement | ShadowRoot) {
   return { start, end };
 }
 
+/**
+ * This looks funky. Basically a slot's children will always be picked up *if* they're within the `root` element.
+ * However, there is an edge case when, if the `root` is wrapped by another shadow DOM, it won't grab the children.
+ * This fixes that fun edge case.
+ */
+function getSlottedChildrenOutsideRootElement(slotElement: HTMLSlotElement, root: HTMLElement | ShadowRoot) {
+  return (slotElement.getRootNode({ composed: true }) as ShadowRoot | null)?.host !== root;
+}
+
 export function getTabbableElements(root: HTMLElement | ShadowRoot) {
+  const walkedEls = new WeakMap();
   const tabbableElements: HTMLElement[] = [];
 
   function walk(el: HTMLElement | ShadowRoot) {
@@ -83,19 +95,16 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
         return;
       }
 
+      if (walkedEls.has(el)) {
+        return;
+      }
+      walkedEls.set(el, true);
+
       if (!tabbableElements.includes(el) && isTabbable(el)) {
         tabbableElements.push(el);
       }
 
-      /**
-       * This looks funky. Basically a slot's children will always be picked up *if* they're within the `root` element.
-       * However, there is an edge case when, if the `root` is wrapped by another shadow DOM, it won't grab the children.
-       * This fixes that fun edge case.
-       */
-      const slotChildrenOutsideRootElement = (slotElement: HTMLSlotElement) =>
-        (slotElement.getRootNode({ composed: true }) as ShadowRoot | null)?.host !== root;
-
-      if (el instanceof HTMLSlotElement && slotChildrenOutsideRootElement(el)) {
+      if (el instanceof HTMLSlotElement && getSlottedChildrenOutsideRootElement(el, root)) {
         el.assignedElements({ flatten: true }).forEach((assignedEl: HTMLElement) => {
           walk(assignedEl);
         });
@@ -106,7 +115,9 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
       }
     }
 
-    [...el.children].forEach((e: HTMLElement) => walk(e));
+    for (const e of el.children) {
+      walk(e as HTMLElement);
+    }
   }
 
   // Collect all elements including the root

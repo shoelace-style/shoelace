@@ -14,6 +14,8 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- Fixed focus trapping not scrolling elements into view. [#1750]
+- Fixed more performance issues with focus trapping performance. [#1750]
 - Added the `hover-bridge` feature to `<sl-popup>` to support better tooltip accessibility [#1734]
 - Fixed a bug in `<sl-input>` and `<sl-textarea>` that made it work differently from `<input>` and `<textarea>` when using defaults [#1746]
 - Improved the accessibility of `<sl-tooltip>` so they persist when hovering over the tooltip and dismiss when pressing [[Esc]] [#1734]
