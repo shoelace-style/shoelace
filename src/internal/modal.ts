@@ -71,13 +71,25 @@ export default class Modal {
     if (event.key !== 'Tab' || this.isExternalActivated) return;
     if (!this.isActive()) return;
 
+    const elementsWithTabbableControls = [
+      "audio",
+      "video",
+      "iframe"
+    ]
+
+    const possiblyHasTabbableChildren = (element: HTMLElement) => {
+      return (
+        elementsWithTabbableControls.includes(element.tagName.toLowerCase())
+        || element.hasAttribute("controls")
+        // Should we add a data-attribute for people to set just in case they have an element where we don't know if it has possibly tabbable elements?
+      )
+    }
+
     if (event.shiftKey) {
       this.tabDirection = 'backward';
     } else {
       this.tabDirection = 'forward';
     }
-
-    event.preventDefault();
 
     const tabbableElements = getTabbableElements(this.element);
 
@@ -89,6 +101,14 @@ export default class Modal {
 
     if (currentFocusIndex === -1) {
       this.currentFocus = tabbableElements[0];
+
+      // We don't call event.preventDefault() here because it messes with tabbing to the <iframe> controls.
+      // We just wait until the current focus is no longer an element with possible hidden controls.
+      if (possiblyHasTabbableChildren(this.currentFocus)) {
+        return
+      }
+
+      event.preventDefault();
       this.currentFocus?.focus({ preventScroll: true });
       return;
     }
@@ -104,6 +124,14 @@ export default class Modal {
     }
 
     this.currentFocus = tabbableElements[currentFocusIndex];
+
+    // We don't call event.preventDefault() here because it messes with tabbing to the <iframe> controls.
+    // We just wait until the current focus is no longer an element with possible hidden controls.
+    if (possiblyHasTabbableChildren(this.currentFocus)) {
+      return
+    }
+
+    event.preventDefault()
     this.currentFocus?.focus({ preventScroll: true });
 
     setTimeout(() => this.checkFocus());

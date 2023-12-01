@@ -58,7 +58,7 @@ function isTabbable(el: HTMLElement) {
   }
 
   // At this point, the following elements are considered tabbable
-  return ['button', 'input', 'select', 'textarea', 'a', 'audio', 'video', 'summary'].includes(tag);
+  return ['button', 'input', 'select', 'textarea', 'a', 'audio', 'video', 'summary', 'iframe'].includes(tag);
 }
 
 /**
