@@ -545,5 +545,18 @@ describe('<sl-input>', () => {
     });
   });
 
+  describe('when using the setRangeText() function', () => {
+    it('should set replacement text in the correct location', async () => {
+      const el = await fixture<SlInput>(html` <sl-input value="test"></sl-input> `);
+
+      el.focus();
+      el.setSelectionRange(1, 3);
+      el.setRangeText('boom');
+      await el.updateComplete;
+      console.log(el.value);
+      expect(el.value).to.equal('tboomt'); // cspell:disable-line
+    });
+  });
+
   runFormControlBaseTests('sl-input');
 });
