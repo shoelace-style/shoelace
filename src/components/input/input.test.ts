@@ -553,7 +553,6 @@ describe('<sl-input>', () => {
       el.setSelectionRange(1, 3);
       el.setRangeText('boom');
       await el.updateComplete;
-      console.log(el.value);
       expect(el.value).to.equal('tboomt'); // cspell:disable-line
     });
   });
