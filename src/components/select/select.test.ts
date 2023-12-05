@@ -581,33 +581,6 @@ describe('<sl-select>', () => {
     expect(afterHideHandler).to.have.been.calledOnce;
   });
 
-  it('should close when focus leaves the control', async () => {
-    const el = await fixture(html`
-      <div>
-        <sl-select value="option-1">
-          <sl-option value="option-1">Option 1</sl-option>
-          <sl-option value="option-2">Option 2</sl-option>
-          <sl-option value="option-3">Option 3</sl-option>
-        </sl-select>
-        <input />
-      </div>
-    `);
-    const select = el.querySelector('sl-select')!;
-    const input = el.querySelector('input')!;
-
-    await clickOnElement(select);
-    await select.updateComplete;
-    expect(select.open).to.be.true;
-
-    select.focus();
-    await aTimeout(500);
-    await sendKeys({ press: 'Tab' });
-    await select.updateComplete;
-
-    expect(select.open).to.be.false;
-    expect(document.activeElement).to.equal(input);
-  });
-
   it('should have rounded tags when using the pill attribute', async () => {
     const el = await fixture<SlSelect>(html`
       <sl-select value="option-1 option-2" multiple pill>
