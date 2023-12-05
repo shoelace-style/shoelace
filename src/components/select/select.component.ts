@@ -221,8 +221,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     //
     // https://github.com/shoelace-style/shoelace/issues/1763
     //
-    // const root = this.getRootNode();
-    const root = document;
+    const root = this.getRootNode();
     root.addEventListener('focusin', this.handleDocumentFocusIn);
     root.addEventListener('keydown', this.handleDocumentKeyDown);
     root.addEventListener('mousedown', this.handleDocumentMouseDown);
