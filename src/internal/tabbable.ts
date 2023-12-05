@@ -5,7 +5,8 @@ const computedStyleMap = new WeakMap<Element, CSSStyleDeclaration>();
 function isVisible(el: HTMLElement): boolean {
   // This is the fastest check, but isn't supported in Safari.
   if (typeof el.checkVisibility === 'function') {
-    return el.checkVisibility({ checkOpacity: false });
+    // Opacity is focusable, visibility is not.
+    return el.checkVisibility({ checkOpacity: false, checkVisibilityCSS: true });
   }
 
   // Fallback "polyfill" for "checkVisibility"
@@ -23,8 +24,21 @@ function isVisible(el: HTMLElement): boolean {
 function isTabbable(el: HTMLElement) {
   const tag = el.tagName.toLowerCase();
 
-  // Elements with a -1 tab index are not tabbable
-  if (el.getAttribute('tabindex') === '-1') {
+  const tabindex = Number(el.getAttribute('tabindex'));
+  const hasTabindex = el.hasAttribute('tabindex');
+
+  // elements with a tabindex attribute that is either NaN or <= -1 are not tabbable
+  if (hasTabindex && (isNaN(tabindex) || tabindex <= -1)) {
+    return false;
+  }
+
+  // Elements with a disabled attribute are not tabbable
+  if (el.hasAttribute('disabled')) {
+    return false;
+  }
+
+  // If any parents have "inert", we aren't "tabbable"
+  if (el.closest('[inert]')) {
     return false;
   }
 
@@ -91,7 +105,7 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
   function walk(el: HTMLElement | ShadowRoot) {
     if (el instanceof Element) {
       // if the element has "inert" we can just no-op it.
-      if (el.hasAttribute('inert')) {
+      if (el.hasAttribute('inert') || el.closest('[inert]')) {
         return;
       }
 
