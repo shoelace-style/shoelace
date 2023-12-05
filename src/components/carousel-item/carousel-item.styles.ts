@@ -1,5 +1,5 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles';
+import componentStyles from '../../styles/component.styles.js';
 
 export default css`
   ${componentStyles}
@@ -19,8 +19,8 @@ export default css`
   }
 
   ::slotted(img) {
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: 100% !important;
     object-fit: cover;
   }
 `;

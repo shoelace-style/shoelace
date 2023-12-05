@@ -1,4 +1,4 @@
-import { registerIconLibrary } from './library';
+import { registerIconLibrary } from './library.js';
 
 /* Teamshares-specific icon libraries */
 export function registerExternalLibraries() {

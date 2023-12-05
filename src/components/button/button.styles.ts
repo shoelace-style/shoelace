@@ -1,5 +1,5 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles';
+import componentStyles from '../../styles/component.styles.js';
 
 export default css`
   ${componentStyles}
@@ -19,14 +19,18 @@ export default css`
     border-style: solid;
     border-width: var(--sl-input-border-width);
     font-family: var(--sl-input-font-family);
-    font-weight: var(--sl-font-weight-semibold);
+    font-weight: var(--ts-font-semibold);
     text-decoration: none;
     user-select: none;
+    -webkit-user-select: none;
     white-space: nowrap;
     vertical-align: middle;
     padding: 0;
-    transition: var(--sl-transition-x-fast) background-color, var(--sl-transition-x-fast) color,
-      var(--sl-transition-x-fast) border, var(--sl-transition-x-fast) box-shadow;
+    transition:
+      var(--sl-transition-x-fast) background-color,
+      var(--sl-transition-x-fast) color,
+      var(--sl-transition-x-fast) border,
+      var(--sl-transition-x-fast) box-shadow;
     cursor: inherit;
   }
 
@@ -75,21 +79,21 @@ export default css`
 
   /* Default */
   .button--standard.button--default {
-    background-color: var(--sl-color-neutral-0);
+    background-color: var(--sl-color-neutral-100);
     border-color: var(--sl-color-neutral-300);
-    color: var(--sl-color-neutral-700);
+    color: var(--ts-color-text-default);
   }
 
   .button--standard.button--default:hover:not(.button--disabled) {
-    background-color: var(--sl-color-primary-50);
-    border-color: var(--sl-color-primary-300);
-    color: var(--sl-color-primary-700);
+    background-color: var(--sl-color-neutral-200);
+    border-color: var(--sl-color-neutral-300);
+    color: var(--ts-color-text-default);
   }
 
   .button--standard.button--default:active:not(.button--disabled) {
-    background-color: var(--sl-color-primary-100);
-    border-color: var(--sl-color-primary-400);
-    color: var(--sl-color-primary-700);
+    background-color: var(--sl-color-neutral-300);
+    border-color: var(--sl-color-neutral-300);
+    color: var(--ts-color-text-default);
   }
 
   /* Primary */
@@ -100,13 +104,13 @@ export default css`
   }
 
   .button--standard.button--primary:hover:not(.button--disabled) {
-    background-color: var(--sl-color-primary-500);
-    border-color: var(--sl-color-primary-500);
+    background-color: var(--sl-color-primary-700);
+    border-color: var(--sl-color-primary-600);
     color: var(--sl-color-neutral-0);
   }
 
   .button--standard.button--primary:active:not(.button--disabled) {
-    background-color: var(--sl-color-primary-600);
+    background-color: var(--sl-color-primary-800);
     border-color: var(--sl-color-primary-600);
     color: var(--sl-color-neutral-0);
   }
@@ -151,38 +155,39 @@ export default css`
 
   /* Warning */
   .button--standard.button--warning {
-    background-color: var(--sl-color-warning-600);
-    border-color: var(--sl-color-warning-600);
-    color: var(--sl-color-neutral-0);
-  }
-  .button--standard.button--warning:hover:not(.button--disabled) {
     background-color: var(--sl-color-warning-500);
     border-color: var(--sl-color-warning-500);
-    color: var(--sl-color-neutral-0);
+    color: var(--ts-color-text-default);
+  }
+  .button--standard.button--warning:hover:not(.button--disabled) {
+    background-color: var(--sl-color-warning-600);
+    border-color: var(--sl-color-warning-500);
+    color: var(--ts-color-text-default);
   }
 
   .button--standard.button--warning:active:not(.button--disabled) {
     background-color: var(--sl-color-warning-600);
+    filter: brightness(0.95);
     border-color: var(--sl-color-warning-600);
-    color: var(--sl-color-neutral-0);
+    color: var(--ts-color-text-default);
   }
 
   /* Danger */
   .button--standard.button--danger {
-    background-color: var(--sl-color-danger-600);
-    border-color: var(--sl-color-danger-600);
+    background-color: var(--sl-color-danger-700);
+    border-color: var(--sl-color-danger-700);
     color: var(--sl-color-neutral-0);
   }
 
   .button--standard.button--danger:hover:not(.button--disabled) {
-    background-color: var(--sl-color-danger-500);
-    border-color: var(--sl-color-danger-500);
+    background-color: var(--sl-color-danger-800);
+    border-color: var(--sl-color-danger-700);
     color: var(--sl-color-neutral-0);
   }
 
   .button--standard.button--danger:active:not(.button--disabled) {
-    background-color: var(--sl-color-danger-600);
-    border-color: var(--sl-color-danger-600);
+    background-color: var(--sl-color-danger-900);
+    border-color: var(--sl-color-danger-700);
     color: var(--sl-color-neutral-0);
   }
 
@@ -197,39 +202,40 @@ export default css`
 
   /* Default */
   .button--outline.button--default {
-    border-color: var(--sl-color-neutral-300);
-    color: var(--sl-color-neutral-700);
+    border-color: var(--sl-color-neutral-400);
+    color: var(--ts-color-text-default);
   }
 
   .button--outline.button--default:hover:not(.button--disabled),
   .button--outline.button--default.button--checked:not(.button--disabled) {
-    border-color: var(--sl-color-primary-600);
-    background-color: var(--sl-color-primary-600);
-    color: var(--sl-color-neutral-0);
+    border-color: var(--sl-color-neutral-400);
+    background-color: var(--sl-color-neutral-200);
+    color: var(--ts-color-text-default);
   }
 
   .button--outline.button--default:active:not(.button--disabled) {
-    border-color: var(--sl-color-primary-700);
-    background-color: var(--sl-color-primary-700);
-    color: var(--sl-color-neutral-0);
+    border-color: var(--sl-color-neutral-400);
+    background-color: var(--sl-color-neutral-300);
+    color: var(--ts-color-text-default);
   }
 
   /* Primary */
   .button--outline.button--primary {
-    border-color: var(--sl-color-primary-600);
+    border-color: var(--sl-color-primary-200);
     color: var(--sl-color-primary-600);
   }
 
   .button--outline.button--primary:hover:not(.button--disabled),
   .button--outline.button--primary.button--checked:not(.button--disabled) {
-    background-color: var(--sl-color-primary-600);
-    color: var(--sl-color-neutral-0);
+    border-color: var(--sl-color-primary-200);
+    background-color: var(--sl-color-primary-100);
+    color: var(--sl-color-primary-600);
   }
 
   .button--outline.button--primary:active:not(.button--disabled) {
-    border-color: var(--sl-color-primary-700);
-    background-color: var(--sl-color-primary-700);
-    color: var(--sl-color-neutral-0);
+    border-color: var(--sl-color-primary-200);
+    background-color: var(--sl-color-primary-200);
+    color: var(--sl-color-primary-600);
   }
 
   /* Success */
@@ -270,38 +276,40 @@ export default css`
 
   /* Warning */
   .button--outline.button--warning {
-    border-color: var(--sl-color-warning-600);
-    color: var(--sl-color-warning-600);
+    border-color: var(--sl-color-warning-400);
+    color: var(--sl-color-warning-800);
   }
 
   .button--outline.button--warning:hover:not(.button--disabled),
   .button--outline.button--warning.button--checked:not(.button--disabled) {
-    background-color: var(--sl-color-warning-600);
-    color: var(--sl-color-neutral-0);
+    border-color: var(--sl-color-warning-400);
+    background-color: var(--sl-color-warning-100);
+    color: var(--sl-color-warning-800);
   }
 
   .button--outline.button--warning:active:not(.button--disabled) {
-    border-color: var(--sl-color-warning-700);
-    background-color: var(--sl-color-warning-700);
-    color: var(--sl-color-neutral-0);
+    border-color: var(--sl-color-warning-400);
+    background-color: var(--sl-color-warning-200);
+    color: var(--sl-color-warning-800);
   }
 
   /* Danger */
   .button--outline.button--danger {
-    border-color: var(--sl-color-danger-600);
-    color: var(--sl-color-danger-600);
+    border-color: var(--sl-color-danger-200);
+    color: var(--sl-color-danger-800);
   }
 
   .button--outline.button--danger:hover:not(.button--disabled),
   .button--outline.button--danger.button--checked:not(.button--disabled) {
-    background-color: var(--sl-color-danger-600);
-    color: var(--sl-color-neutral-0);
+    border-color: var(--sl-color-danger-200);
+    background-color: var(--sl-color-danger-100);
+    color: var(--sl-color-danger-800);
   }
 
   .button--outline.button--danger:active:not(.button--disabled) {
-    border-color: var(--sl-color-danger-700);
-    background-color: var(--sl-color-danger-700);
-    color: var(--sl-color-neutral-0);
+    border-color: var(--sl-color-danger-200);
+    background-color: var(--sl-color-danger-300);
+    color: var(--sl-color-danger-800);
   }
 
   @media (forced-colors: active) {
@@ -323,19 +331,19 @@ export default css`
   .button--text:hover:not(.button--disabled) {
     background-color: transparent;
     border-color: transparent;
-    color: var(--sl-color-primary-500);
+    color: var(--sl-color-primary-800);
   }
 
   .button--text:focus-visible:not(.button--disabled) {
     background-color: transparent;
     border-color: transparent;
-    color: var(--sl-color-primary-500);
+    color: var(--sl-color-primary-800);
   }
 
   .button--text:active:not(.button--disabled) {
     background-color: transparent;
     border-color: transparent;
-    color: var(--sl-color-primary-700);
+    color: var(--sl-color-primary-900);
   }
 
   /*
@@ -367,11 +375,30 @@ export default css`
   }
 
   .button--x-large {
-    font-size: var(--sl-button-font-size-x-large);
     height: var(--sl-input-height-x-large);
+    font-size: var(--sl-button-font-size-x-large);
     line-height: calc(var(--sl-input-height-x-large) - var(--sl-input-border-width) * 2);
     border-radius: var(--sl-input-height-x-large);
-    padding: 0 var(--sl-spacing-2x-large); /* 32px */
+  }
+
+  /*
+   * Size modifiers for caret icon
+   */
+
+  .button--small .button__caret {
+    font-size: var(--sl-font-size-small);
+  }
+
+  .button--medium .button__caret {
+    font-size: var(--sl-font-size-medium);
+  }
+
+  .button--large .button__caret {
+    font-size: var(--sl-font-size-medium);
+  }
+
+  .button--x-large .button__caret {
+    font-size: var(--sl-font-size-large);
   }
 
   /*
@@ -510,23 +537,23 @@ export default css`
    */
 
   .button--has-label.button--small .button__label {
-    padding: 0 var(--sl-spacing-small);
-  }
-
-  .button--has-label.button--medium .button__label {
     padding: 0 var(--sl-spacing-medium);
   }
 
+  .button--has-label.button--medium .button__label {
+    padding: 0 var(--ts-spacing-large);
+  }
+
   .button--has-label.button--large .button__label {
-    padding: 0 var(--sl-spacing-large);
+    padding: 0 var(--ts-spacing-2x-large);
   }
 
   .button--has-label.button--x-large .button__label {
-    padding: 0 var(--sl-spacing-x-large);
+    padding: 0 2.25rem;
   }
 
   .button--has-prefix.button--small {
-    padding-inline-start: var(--sl-spacing-x-small);
+    padding-inline-start: var(--sl-spacing-small);
   }
 
   .button--has-prefix.button--small .button__label {
@@ -534,7 +561,7 @@ export default css`
   }
 
   .button--has-prefix.button--medium {
-    padding-inline-start: var(--sl-spacing-small);
+    padding-inline-start: var(--sl-spacing-medium);
   }
 
   .button--has-prefix.button--medium .button__label {
@@ -542,15 +569,15 @@ export default css`
   }
 
   .button--has-prefix.button--large {
-    padding-inline-start: var(--sl-spacing-small);
+    padding-inline-start: var(--sl-spacing-large);
   }
 
   .button--has-prefix.button--large .button__label {
-    padding-inline-start: var(--sl-spacing-small);
+    padding-inline-start: var(--sl-spacing-medium);
   }
 
   .button--has-prefix.button--x-large {
-    padding-inline-start: var(--sl-spacing-medium);
+    padding-inline-start: var(--ts-spacing-large);
   }
 
   .button--has-prefix.button--x-large .button__label {
@@ -559,7 +586,7 @@ export default css`
 
   .button--has-suffix.button--small,
   .button--caret.button--small {
-    padding-inline-end: var(--sl-spacing-x-small);
+    padding-inline-end: var(--sl-spacing-small);
   }
 
   .button--has-suffix.button--small .button__label,
@@ -569,7 +596,7 @@ export default css`
 
   .button--has-suffix.button--medium,
   .button--caret.button--medium {
-    padding-inline-end: var(--sl-spacing-small);
+    padding-inline-end: var(--sl-spacing-medium);
   }
 
   .button--has-suffix.button--medium .button__label,
@@ -579,17 +606,17 @@ export default css`
 
   .button--has-suffix.button--large,
   .button--caret.button--large {
-    padding-inline-end: var(--sl-spacing-small);
+    padding-inline-end: var(--sl-spacing-large);
   }
 
   .button--has-suffix.button--large .button__label,
   .button--caret.button--large .button__label {
-    padding-inline-end: var(--sl-spacing-small);
+    padding-inline-end: var(--sl-spacing-medium);
   }
 
   .button--has-suffix.button--x-large,
-  .button--caret.button--large {
-    padding-inline-end: var(--sl-spacing-medium);
+  .button--caret.button--x-large {
+    padding-inline-end: var(--ts-spacing-large);
   }
 
   .button--has-suffix.button--x-large .button__label,

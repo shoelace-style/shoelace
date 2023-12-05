@@ -1,3 +1,4 @@
+import '../../../dist/shoelace.js';
 import { aTimeout, expect, fixture, html } from '@open-wc/testing';
 import type SlTabPanel from './tab-panel';
 

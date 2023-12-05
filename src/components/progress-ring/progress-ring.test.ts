@@ -1,3 +1,4 @@
+import '../../../dist/shoelace.js';
 import { expect, fixture, html } from '@open-wc/testing';
 import type SlProgressRing from './progress-ring';
 
@@ -51,12 +52,10 @@ describe('<sl-progress-ring>', () => {
 
   describe('when provided a ariaLabelledBy, and value parameter', () => {
     before(async () => {
-      el = await fixture<SlProgressRing>(
-        html`
-          <label id="labelledby">Progress Ring Label</label>
-          <sl-progress-ring ariaLabelledBy="labelledby" value="25"></sl-progress-ring>
-        `
-      );
+      el = await fixture<SlProgressRing>(html`
+        <label id="labelledby">Progress Ring Label</label>
+        <sl-progress-ring ariaLabelledBy="labelledby" value="25"></sl-progress-ring>
+      `);
     });
 
     it('should pass accessibility tests', async () => {

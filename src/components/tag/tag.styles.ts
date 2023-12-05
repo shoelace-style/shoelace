@@ -1,5 +1,5 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles';
+import componentStyles from '../../styles/component.styles.js';
 
 export default css`
   ${componentStyles}
@@ -16,6 +16,7 @@ export default css`
     line-height: 1;
     white-space: nowrap;
     user-select: none;
+    -webkit-user-select: none;
   }
 
   .tag:active > sl-icon-button {

@@ -1,5 +1,6 @@
+import '../../../dist/shoelace.js';
 import { expect, fixture, html } from '@open-wc/testing';
-import type SlBreadcrumbItem from './breadcrumb-item';
+import type SlBreadcrumbItem from './breadcrumb-item.js';
 
 describe('<sl-breadcrumb-item>', () => {
   let el: SlBreadcrumbItem;

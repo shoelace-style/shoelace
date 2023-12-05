@@ -1,8 +1,11 @@
-.DS_Store
+_site
 .cache
-docs/dist
-docs/search.json
+.DS_Store
+package.json
+package-lock.json
+cdn
 dist
+docs/assets/images/sprite.svg
 node_modules
 src/react
 .vscode/settings.json

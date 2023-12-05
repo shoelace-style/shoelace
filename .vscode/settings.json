@@ -4,5 +4,13 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "cSpell.words": ["Teamshares"]
+  "cSpell.words": ["Teamshares"],
+  "html.suggest.html5": true,
+  "emmet.includeLanguages": {
+    "njk": "html",
+    "nunjucks": "html"
+  },
+  "[nunjucks]": {
+    "editor.defaultFormatter": "okitavera.vscode-nunjucks-formatter"
+  }
 }

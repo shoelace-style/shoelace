@@ -1,4 +1,4 @@
-import '../translations/en';
+import '../translations/en.js';
 import { LocalizeController as DefaultLocalizationController } from '@shoelace-style/localize'; // Register English as the default/fallback language
 import type { Translation as DefaultTranslation } from '@shoelace-style/localize';
 
@@ -16,8 +16,10 @@ export interface Translation extends DefaultTranslation {
   carousel: string;
   clearEntry: string;
   close: string;
+  copied: string;
   copy: string;
   currentValue: string;
+  error: string;
   goToSlide: (slide: number, count: number) => string;
   hidePassword: string;
   loading: string;

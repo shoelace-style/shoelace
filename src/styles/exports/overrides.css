@@ -27,6 +27,9 @@
   --sl-spacing-large: var(--ts-spacing-large);
   --sl-spacing-2x-large: var(--ts-spacing-2x-large);
   --sl-spacing-4x-large: var(--ts-spacing-4x-large);
+  /* Button font size*/
+  --sl-button-font-size-large: var(--sl-font-size-small);
+  --sl-button-font-size-x-large: var(--sl-font-size-medium);
   /* Input font color */
   --sl-input-color: var(--ts-color-text-default);
   --sl-input-color-hover: var(--ts-color-text-default);
@@ -125,232 +128,6 @@ sl-select[multiple]:focus {
 /** Button */
 /** ****************** */
 
-:root,
-:host,
-sl-theme {
-  /* Button font size override */
-  --sl-button-font-size-large: var(--sl-font-size-small);
-}
-
-/* Button font weight */
-sl-button::part(label) {
-  font-weight: var(--ts-font-semibold);
-}
-
-/* Button custom colors */
-
-sl-button[variant='primary']::part(base):hover {
-  background-color: var(--sl-color-primary-700);
-  border-color: var(--sl-color-primary-600);
-}
-
-sl-button[variant='primary']::part(base):active {
-  background-color: var(--sl-color-primary-800);
-  border-color: var(--sl-color-primary-600);
-}
-
-sl-button[variant='default']::part(base) {
-  background-color: var(--sl-color-neutral-100);
-  border-color: var(--sl-color-neutral-300);
-  color: var(--ts-color-text-default);
-}
-
-sl-button[variant='default']::part(base):hover {
-  background-color: var(--sl-color-neutral-200);
-  border-color: var(--sl-color-neutral-300);
-  color: var(--ts-color-text-default);
-}
-
-sl-button[variant='default']::part(base):active {
-  background-color: var(--sl-color-neutral-300);
-  border-color: var(--sl-color-neutral-300);
-  color: var(--ts-color-text-default);
-}
-
-sl-button[variant='warning']::part(base) {
-  background-color: var(--sl-color-warning-500);
-  border-color: var(--sl-color-warning-500);
-}
-
-sl-button[variant='warning']::part(label),
-sl-button[variant='warning']::part(caret),
-sl-button[variant='warning']::part(prefix),
-sl-button[variant='warning']::part(suffix) {
-  color: var(--ts-color-text-default);
-}
-
-sl-button[variant='warning']::part(base):hover {
-  background-color: var(--sl-color-warning-600);
-  border-color: var(--sl-color-warning-500);
-}
-
-sl-button[variant='warning']::part(base):active {
-  background-color: var(--sl-color-warning-600);
-  border-color: var(--sl-color-warning-500);
-  filter: brightness(0.95);
-}
-
-sl-button[variant='danger']::part(base) {
-  background-color: var(--sl-color-danger-700);
-  border-color: var(--sl-color-danger-700);
-}
-
-sl-button[variant='danger']::part(base):hover {
-  background-color: var(--sl-color-danger-800);
-  border-color: var(--sl-color-danger-700);
-}
-
-sl-button[variant='danger']::part(base):active {
-  background-color: var(--sl-color-danger-900);
-  border-color: var(--sl-color-danger-700);
-}
-
-sl-button[variant='text']::part(base):hover {
-  color: var(--sl-color-primary-800);
-}
-
-sl-button[variant='text']::part(base):active {
-  color: var(--sl-color-primary-900);
-}
-
-/* Outline buttons */
-
-sl-button[outline]::part(base) {
-  background-color: transparent;
-}
-
-sl-button[variant='default'][outline]::part(base) {
-  border-color: var(--sl-color-neutral-400);
-}
-
-sl-button[variant='default'][outline]::part(base):hover {
-  background-color: var(--sl-color-neutral-200);
-  border-color: var(--sl-color-neutral-400);
-}
-
-sl-button[variant='default'][outline]::part(base):active {
-  background-color: var(--sl-color-neutral-300);
-  border-color: var(--sl-color-neutral-400);
-}
-
-sl-button[variant='primary'][outline]::part(label),
-sl-button[variant='primary'][outline]::part(prefix),
-sl-button[variant='primary'][outline]::part(suffix) {
-  color: var(--sl-color-primary-600);
-}
-
-sl-button[variant='primary'][outline]::part(base) {
-  border-color: var(--sl-color-primary-200);
-}
-
-sl-button[variant='primary'][outline]::part(base):hover {
-  background-color: var(--sl-color-primary-50);
-  border-color: var(--sl-color-primary-200);
-}
-
-sl-button[variant='primary'][outline]::part(base):active {
-  background-color: var(--sl-color-primary-100);
-  border-color: var(--sl-color-primary-200);
-}
-
-sl-button[variant='warning'][outline]::part(label),
-sl-button[variant='warning'][outline]::part(prefix),
-sl-button[variant='warning'][outline]::part(suffix) {
-  color: var(--sl-color-warning-800);
-}
-
-sl-button[variant='warning'][outline]::part(base) {
-  border-color: var(--sl-color-warning-400);
-}
-
-sl-button[variant='warning'][outline]::part(base):hover {
-  background-color: var(--sl-color-warning-100);
-  border-color: var(--sl-color-warning-400);
-}
-
-sl-button[variant='warning'][outline]::part(base):active {
-  background-color: var(--sl-color-warning-200);
-  border-color: var(--sl-color-warning-400);
-}
-
-sl-button[variant='danger'][outline]::part(label),
-sl-button[variant='danger'][outline]::part(prefix),
-sl-button[variant='danger'][outline]::part(suffix) {
-  color: var(--sl-color-danger-800);
-}
-
-sl-button[variant='danger'][outline]::part(base) {
-  border-color: var(--sl-color-danger-200);
-}
-
-sl-button[variant='danger'][outline]::part(base):hover {
-  background-color: var(--sl-color-danger-100);
-  border-color: var(--sl-color-danger-200);
-}
-
-sl-button[variant='danger'][outline]::part(base):active {
-  background-color: var(--sl-color-danger-300);
-  border-color: var(--sl-color-danger-200);
-}
-
-/* Button custom font size + padding */
-
-sl-button[size='medium']::part(base) {
-  padding: 0 var(--sl-spacing-medium);
-  /* 16px */
-}
-
-sl-button[size='medium']::part(label) {
-  padding: 0 var(--sl-spacing-x-small);
-  /* 8px */
-}
-
-sl-button[size='large']::part(base) {
-  padding: 0 20px;
-}
-
-sl-button[size='large']::part(label) {
-  padding: 0 var(--sl-spacing-small);
-  /* 12px */
-}
-
-sl-button[size='x-large']::part(base) {
-  padding: 0 var(--sl-spacing-2x-large);
-  /* 32px */
-}
-
-sl-button[size='x-large']::part(label) {
-  font-size: var(--ts-font-base);
-  /* 16px */
-  line-height: calc(var(--sl-spacing-4x-large) - var(--sl-input-border-width) * 2);
-  padding: 0 var(--sl-spacing-x-small);
-  /* 8px */
-}
-
-sl-button[size='medium']::part(caret),
-sl-button[size='medium']::part(prefix),
-sl-button[size='medium']::part(suffix),
-sl-button[size='medium'][circle]::part(label) {
-  font-size: var(--ts-font-base);
-  /* 16px */
-}
-
-sl-button[size='large']::part(caret),
-sl-button[size='large']::part(prefix),
-sl-button[size='large']::part(suffix),
-sl-button[size='large'][circle]::part(label) {
-  font-size: var(--ts-font-xl);
-  /* 20px */
-}
-
-sl-button[size='x-large']::part(caret),
-sl-button[size='x-large']::part(prefix),
-sl-button[size='x-large']::part(suffix),
-sl-button[size='x-large'][circle]::part(label) {
-  font-size: var(--ts-font-2xl);
-  /* 24px */
-}
-
 /* To remove default padding from split buttons */
 sl-button.no-pad-l::part(base) {
   padding-left: 0;
@@ -399,71 +176,7 @@ sl-details.no-border::part(base) {
 /** Dialog */
 /** ****************** */
 
-sl-dialog {
-  --body-spacing: 0 16px;
-  --footer-spacing: 16px;
-  --header-spacing: 24px 16px 16px;
-}
-
-sl-dialog::part(panel) {
-  border-radius: var(--sl-border-radius-x-large);
-  box-shadow: var(--sl-shadow-x-large);
-}
-
-sl-dialog::part(close-button) {
-  display: none;
-}
-
-sl-dialog::part(footer) {
-  display: flex;
-  gap: var(--sl-spacing-x-small);
-  justify-content: flex-end;
-}
-
-sl-dialog::part(title) {
-  /* ts-heading-6 */
-  font-size: var(--ts-font-xl);
-  /* 20px */
-  font-weight: var(--ts-font-medium);
-  /* 500 */
-  letter-spacing: var(--ts-tracking-tight);
-  /* -0.025em */
-  line-height: var(--ts-leading-6);
-  /* 1.5rem * 24px */
-}
-
-sl-dialog::part(body) {
-  color: var(--ts-color-text-subdued);
-  /* ts-body-1 */
-  font-size: var(--ts-font-base);
-  /* 16px */
-  font-weight: var(--ts-font-normal);
-  /* 400 */
-  letter-spacing: var(--ts-tracking-normal);
-  /* normal */
-  line-height: var(--ts-leading-6);
-  /* 1.5rem * 24px */
-}
-
-sl-dialog.small::part(body) {
-  color: var(--ts-color-text-subdued);
-  /* ts-body-2 */
-  font-size: var(--ts-font-sm);
-  /* 14px */
-  font-weight: var(--ts-font-normal);
-  /* 400 */
-  letter-spacing: var(--ts-tracking-normal);
-  /* normal */
-  line-height: var(--ts-leading-5);
-  /* 1.25rem * 20px */
-}
-
 @media (max-width: 400px) {
-  sl-dialog {
-    height: max-content;
-    max-height: 90vh;
-  }
-
   sl-dialog.has-icon > div {
     display: flex;
     flex-direction: column;
@@ -473,25 +186,12 @@ sl-dialog.small::part(body) {
     margin-bottom: var(--sl-spacing-medium);
     /* 16px */
   }
-
-  /* Make footer buttons go full width at < 400px */
-  sl-dialog::part(footer) {
-    flex: 1 0 100%;
-    flex-direction: column-reverse;
-    flex-wrap: wrap;
-  }
 }
 
 @media (min-width: 401px) {
-  sl-dialog {
-    --body-spacing: 0 32px;
-    --footer-spacing: 24px 32px;
-    --header-spacing: 32px 0 16px 32px;
-  }
-
   sl-dialog.has-icon {
     --body-spacing: 0 32px 0 80px;
-    --header-spacing: 32px 0 16px 24px;
+    /* --header-spacing: 32px 0 16px 24px; */
   }
 
   sl-dialog.has-icon > div {
@@ -502,32 +202,6 @@ sl-dialog.small::part(body) {
   sl-dialog.has-icon > div * {
     margin-right: var(--sl-spacing-medium);
     /* 16px */
-  }
-
-  sl-dialog::part(close-button) {
-    align-items: center;
-    display: flex;
-    flex: none;
-    padding: 24px 24px 16px 16px;
-  }
-
-  sl-dialog::part(close-button__base) {
-    font-size: 24px;
-    padding: var(--sl-spacing-2x-small);
-  }
-
-  /* Dialog widths, only apply at > 401px */
-
-  sl-dialog {
-    --width: 480px;
-  }
-
-  sl-dialog.small {
-    --width: 400px;
-  }
-
-  sl-dialog.large {
-    --width: 600px;
   }
 }
 
@@ -551,9 +225,9 @@ sl-drawer::part(panel) {
 /** ****************** */
 
 /* Prevent panel corners from peeking out past rounded edges. */
-sl-dropdown::part(panel) {
+/* sl-dropdown::part(panel) {
   overflow: hidden;
-}
+} */
 
 /** ****************** */
 /** Forms */
@@ -684,15 +358,15 @@ sl-dialog::part(close-button__base):active {
 
 /* Menu panel styling */
 
-::part(panel) {
+/* ::part(panel) {
   border-radius: var(--sl-border-radius-large);
   box-shadow: var(--sl-shadow-medium);
-}
+} */
 
 /* Control gap between dropdown & menu panel */
-sl-dropdown::part(panel) {
+/* sl-dropdown::part(panel) {
   margin-top: var(--sl-spacing-2x-small);
-}
+} */
 
 /* Menu item styling */
 
@@ -835,15 +509,4 @@ sl-range {
   /* 8px */
   --track-color-active: var(--sl-color-neutral-300);
   --track-color-inactive: var(--sl-color-neutral-300);
-}
-
-/** ****************** */
-/** Tooltip */
-/** ****************** */
-
-:root,
-:host,
-sl-theme {
-  /* Tooltip border radius override */
-  --sl-tooltip-border-radius: var(--ts-border-radius-x-small);
 }

@@ -1,5 +1,5 @@
-import { registerTranslation } from '../utilities/localize';
-import type { Translation } from '../utilities/localize';
+import { registerTranslation } from '../utilities/localize.js';
+import type { Translation } from '../utilities/localize.js';
 
 const translation: Translation = {
   $code: 'pl',
@@ -9,8 +9,10 @@ const translation: Translation = {
   carousel: 'Karuzela',
   clearEntry: 'Wyczyść wpis',
   close: 'Zamknij',
+  copied: 'Skopiowane',
   copy: 'Kopiuj',
   currentValue: 'Aktualna wartość',
+  error: 'Błąd',
   goToSlide: (slide, count) => `Przejdź do slajdu ${slide} z ${count}`,
   hidePassword: 'Ukryj hasło',
   loading: 'Ładowanie',

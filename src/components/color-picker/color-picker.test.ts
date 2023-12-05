@@ -1,10 +1,11 @@
+import '../../../dist/shoelace.js';
 import { aTimeout, expect, fixture, html, oneEvent } from '@open-wc/testing';
-import { clickOnElement } from '../../internal/test';
-import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
+import { clickOnElement } from '../../internal/test.js';
+import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests.js';
 import { sendKeys } from '@web/test-runner-commands';
-import { serialize } from '../../utilities/form';
+import { serialize } from '../../utilities/form.js';
 import sinon from 'sinon';
-import type SlColorPicker from './color-picker';
+import type SlColorPicker from './color-picker.js';
 
 describe('<sl-color-picker>', () => {
   describe('when the value changes', () => {
@@ -96,9 +97,9 @@ describe('<sl-color-picker>', () => {
     });
 
     it('should render the correct swatches when passing a string of color values', async () => {
-      const el = await fixture<SlColorPicker>(
-        html` <sl-color-picker swatches="red; #008000; rgb(0,0,255);"></sl-color-picker> `
-      );
+      const el = await fixture<SlColorPicker>(html`
+        <sl-color-picker swatches="red; #008000; rgb(0,0,255);"></sl-color-picker>
+      `);
       const swatches = [...el.shadowRoot!.querySelectorAll('[part~="swatch"] > div')];
 
       expect(swatches.length).to.equal(3);

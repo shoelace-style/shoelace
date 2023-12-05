@@ -1,5 +1,5 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles';
+import componentStyles from '../../styles/component.styles.js';
 
 export default css`
   ${componentStyles}
@@ -66,5 +66,6 @@ export default css`
     height: 100%;
     text-align: center;
     user-select: none;
+    -webkit-user-select: none;
   }
 `;

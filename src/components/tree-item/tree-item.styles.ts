@@ -1,5 +1,5 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles';
+import componentStyles from '../../styles/component.styles.js';
 
 export default css`
   ${componentStyles}
@@ -26,6 +26,7 @@ export default css`
     color: var(--sl-color-neutral-700);
     cursor: pointer;
     user-select: none;
+    -webkit-user-select: none;
   }
 
   .tree-item__checkbox {

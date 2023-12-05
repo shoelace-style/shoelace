@@ -1,5 +1,5 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles';
+import componentStyles from '../../styles/component.styles.js';
 
 export default css`
   ${componentStyles}
@@ -24,7 +24,9 @@ export default css`
 
   .tab-group__indicator {
     position: absolute;
-    transition: var(--sl-transition-fast) translate ease, var(--sl-transition-fast) width ease;
+    transition:
+      var(--sl-transition-fast) translate ease,
+      var(--sl-transition-fast) width ease;
   }
 
   .tab-group--has-scroll-controls .tab-group__nav-container {

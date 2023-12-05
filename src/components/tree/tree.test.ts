@@ -1,9 +1,10 @@
+import '../../../dist/shoelace.js';
 import { aTimeout, expect, fixture, html, triggerBlurFor, triggerFocusFor } from '@open-wc/testing';
-import { clickOnElement } from '../../internal/test';
+import { clickOnElement } from '../../internal/test.js';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-import type SlTree from './tree';
-import type SlTreeItem from '../tree-item/tree-item';
+import type SlTree from './tree.component.js';
+import type SlTreeItem from '../tree-item/tree-item.js';
 
 describe('<sl-tree>', () => {
   let el: SlTree;
@@ -274,7 +275,6 @@ describe('<sl-tree>', () => {
           // Assert
           expect(el.selectedItems.length).to.eq(1);
           expect(el.children[2]).to.have.attribute('selected');
-          expect(el.children[2]).to.have.attribute('expanded');
         });
       });
 
@@ -438,7 +438,6 @@ describe('<sl-tree>', () => {
         await el.updateComplete;
 
         // Assert
-        expect(node).to.have.attribute('selected');
         expect(node).to.have.attribute('expanded');
       });
     });

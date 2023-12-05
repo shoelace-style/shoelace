@@ -1,6 +1,6 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles';
-import formControlStyles from '../../styles/form-control.styles';
+import componentStyles from '../../styles/component.styles.js';
+import formControlStyles from '../../styles/form-control.styles.js';
 
 export default css`
   ${componentStyles}
@@ -23,7 +23,10 @@ export default css`
     vertical-align: middle;
     overflow: hidden;
     cursor: text;
-    transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow,
+    transition:
+      var(--sl-transition-fast) color,
+      var(--sl-transition-fast) border,
+      var(--sl-transition-fast) box-shadow,
       var(--sl-transition-fast) background-color;
   }
 
@@ -95,7 +98,7 @@ export default css`
     height: 100%;
     color: var(--sl-input-color);
     border: none;
-    background: none;
+    background: inherit;
     box-shadow: none;
     padding: 0;
     margin: 0;
@@ -129,6 +132,7 @@ export default css`
   .input__control::placeholder {
     color: var(--sl-input-placeholder-color);
     user-select: none;
+    -webkit-user-select: none;
   }
 
   .input:hover:not(.input--disabled) .input__control {
@@ -147,8 +151,8 @@ export default css`
     cursor: default;
   }
 
-  .input__prefix::slotted(sl-icon),
-  .input__suffix::slotted(sl-icon) {
+  .input__prefix ::slotted(sl-icon),
+  .input__suffix ::slotted(sl-icon) {
     color: var(--sl-input-icon-color);
   }
 
@@ -172,11 +176,11 @@ export default css`
     width: calc(1em + var(--sl-input-spacing-small) * 2);
   }
 
-  .input--small .input__prefix::slotted(*) {
+  .input--small .input__prefix ::slotted(*) {
     margin-inline-start: var(--sl-input-spacing-small);
   }
 
-  .input--small .input__suffix::slotted(*) {
+  .input--small .input__suffix ::slotted(*) {
     margin-inline-end: var(--sl-input-spacing-small);
   }
 
@@ -196,11 +200,11 @@ export default css`
     width: calc(1em + var(--sl-input-spacing-medium) * 2);
   }
 
-  .input--medium .input__prefix::slotted(*) {
+  .input--medium .input__prefix ::slotted(*) {
     margin-inline-start: var(--sl-input-spacing-medium);
   }
 
-  .input--medium .input__suffix::slotted(*) {
+  .input--medium .input__suffix ::slotted(*) {
     margin-inline-end: var(--sl-input-spacing-medium);
   }
 
@@ -220,11 +224,11 @@ export default css`
     width: calc(1em + var(--sl-input-spacing-large) * 2);
   }
 
-  .input--large .input__prefix::slotted(*) {
+  .input--large .input__prefix ::slotted(*) {
     margin-inline-start: var(--sl-input-spacing-large);
   }
 
-  .input--large .input__suffix::slotted(*) {
+  .input--large .input__suffix ::slotted(*) {
     margin-inline-end: var(--sl-input-spacing-large);
   }
 
@@ -247,6 +251,10 @@ export default css`
   /*
    * Clearable + Password Toggle
    */
+
+  .input__clear:not(.input__clear--visible) {
+    visibility: hidden;
+  }
 
   .input__clear,
   .input__password-toggle {

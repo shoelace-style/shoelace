@@ -1,5 +1,5 @@
-import { registerTranslation } from '../utilities/localize';
-import type { Translation } from '../utilities/localize';
+import { registerTranslation } from '../utilities/localize.js';
+import type { Translation } from '../utilities/localize.js';
 
 const translation: Translation = {
   $code: 'he',
@@ -9,8 +9,10 @@ const translation: Translation = {
   carousel: 'קרוסלה',
   clearEntry: 'נקה קלט',
   close: 'סגור',
+  copied: 'מוּעֲתָק',
   copy: 'העתק',
   currentValue: 'ערך נוכחי',
+  error: 'שְׁגִיאָה',
   goToSlide: (slide, count) => `עבור לשקופית ${slide} של ${count}`,
   hidePassword: 'הסתר סיסמא',
   loading: 'טוען',

@@ -1,8 +1,8 @@
-import { elementUpdated, expect, fixture, html, oneEvent } from '@open-wc/testing';
+import { aTimeout, elementUpdated, expect, fixture, html, oneEvent } from '@open-wc/testing';
 import { registerIconLibrary } from '../../../dist/shoelace.js';
-import type SlErrorEvent from '../../events/sl-error';
+import type { SlErrorEvent } from '../../events/sl-error';
+import type { SlLoadEvent } from '../../events/sl-load';
 import type SlIcon from './icon';
-import type SlLoadEvent from '../../events/sl-load';
 
 const testLibraryIcons = {
   'test-icon1': `
@@ -154,4 +154,79 @@ describe('<sl-icon>', () => {
       expect(ev).to.exist;
     });
   });
+
+  describe('svg sprite sheets', () => {
+    //  For some reason ESLint wants to fail in CI here, but works locally.
+    /* eslint-disable */
+    it('Should properly grab an SVG and render it from bootstrap icons', async () => {
+      registerIconLibrary('sprite', {
+        resolver: name => `/docs/assets/images/sprite.svg#${name}`,
+        mutator: svg => svg.setAttribute('fill', 'currentColor'),
+        spriteSheet: true
+      });
+
+      const el = await fixture<SlIcon>(html`<sl-icon name="arrow-left" library="sprite"></sl-icon>`);
+
+      await elementUpdated(el);
+
+      const svg = el.shadowRoot?.querySelector("svg[part='svg']");
+      const use = svg?.querySelector(`use[href='/docs/assets/images/sprite.svg#arrow-left']`);
+
+      expect(svg).to.be.instanceof(SVGElement);
+      expect(use).to.be.instanceof(SVGUseElement);
+
+      // This is kind of hacky...but with no way to check "load", we just use a timeout
+      await aTimeout(1000);
+
+      // Theres no way to really test that the icon rendered properly. We just gotta trust the browser to do it's thing :)
+      // However, we can check the <use> size. It should be greater than 0x0 if loaded properly.
+      const rect = use?.getBoundingClientRect();
+      expect(rect?.width).to.be.greaterThan(0);
+      expect(rect?.width).to.be.greaterThan(0);
+    });
+
+    it('Should render nothing if the sprite hash is wrong', async () => {
+      registerIconLibrary('sprite', {
+        resolver: name => `/docs/assets/images/sprite.svg#${name}`,
+        mutator: svg => svg.setAttribute('fill', 'currentColor'),
+        spriteSheet: true
+      });
+
+      const el = await fixture<SlIcon>(html`<sl-icon name="non-existent" library="sprite"></sl-icon>`);
+
+      await elementUpdated(el);
+
+      const svg = el.shadowRoot?.querySelector("svg[part='svg']");
+      const use = svg?.querySelector('use');
+
+      // TODO: Theres no way to really test that the icon rendered properly. We just gotta trust the browser to do it's thing :)
+      // However, we can check the <use> size. If it never loaded, it should be 0x0. Ideally, we could have error tracking...
+      const rect = use?.getBoundingClientRect();
+      expect(rect?.width).to.equal(0);
+      expect(rect?.width).to.equal(0);
+    });
+
+    // TODO: <use> svg icons don't emit a "load" or "error" event...if we can figure out how to get the event to emit errors.
+    // Once we figure out how to emit errors / loading perhaps we can actually test this?
+    it.skip("Should produce an error if the icon doesn't exist.", async () => {
+      registerIconLibrary('sprite', {
+        resolver(name) {
+          return `/docs/assets/images/sprite.svg#${name}`;
+        },
+        mutator(svg) {
+          return svg.setAttribute('fill', 'currentColor');
+        },
+        spriteSheet: true
+      });
+
+      const el = await fixture<SlIcon>(html`<sl-icon name="bad-icon" library="sprite"></sl-icon>`);
+      const listener = oneEvent(el, 'sl-error') as Promise<SlErrorEvent>;
+
+      el.name = 'bad-icon';
+      const ev = await listener;
+      await elementUpdated(el);
+      expect(ev).to.exist;
+    });
+  });
+  /* eslint-enable */
 });

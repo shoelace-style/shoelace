@@ -1,3 +1,4 @@
+import '../../../dist/shoelace.js';
 // cspell:dictionaries lorem-ipsum
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
@@ -15,9 +16,9 @@ describe('<sl-drawer>', () => {
   });
 
   it('should not be visible without the open attribute', async () => {
-    const el = await fixture<SlDrawer>(
-      html` <sl-drawer>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-drawer> `
-    );
+    const el = await fixture<SlDrawer>(html`
+      <sl-drawer>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sl-drawer>
+    `);
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(base.hidden).to.be.true;

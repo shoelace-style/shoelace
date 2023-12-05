@@ -35,6 +35,7 @@
   --ts-color-blue-950-rgb: 47, 54, 84;
   --ts-color-blue-1000-rgb: 47, 54, 84;
   /** gray */
+  --ts-color-gray-50: #f8fafc;
   --ts-color-gray-100: #f6f8fa;
   --ts-color-gray-200: #f0f0f0;
   --ts-color-gray-300: #e8e8e8;
@@ -44,6 +45,7 @@
   --ts-color-gray-700: #6d7176;
   --ts-color-gray-800: #444c59;
   --ts-color-gray-900: #2e333c;
+  --ts-color-gray-50-rgb: 248, 250, 252;
   --ts-color-gray-100-rgb: 246, 248, 250;
   --ts-color-gray-200-rgb: 240, 240, 240;
   --ts-color-gray-300-rgb: 232, 232, 232;
@@ -217,6 +219,7 @@
   --ts-color-danger-800: var(--ts-color-red-800);
   --ts-color-danger-900: var(--ts-color-red-900);
   /** neutral => gray */
+  --ts-color-neutral-50: var(--ts-color-gray-50);
   --ts-color-neutral-100: var(--ts-color-gray-100);
   --ts-color-neutral-200: var(--ts-color-gray-200);
   --ts-color-neutral-300: var(--ts-color-gray-300);

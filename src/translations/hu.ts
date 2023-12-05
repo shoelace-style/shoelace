@@ -1,5 +1,5 @@
-import { registerTranslation } from '../utilities/localize';
-import type { Translation } from '../utilities/localize';
+import { registerTranslation } from '../utilities/localize.js';
+import type { Translation } from '../utilities/localize.js';
 
 const translation: Translation = {
   $code: 'hu',
@@ -9,8 +9,10 @@ const translation: Translation = {
   carousel: 'Körhinta',
   clearEntry: 'Bejegyzés törlése',
   close: 'Bezárás',
+  copied: 'Másolva',
   copy: 'Másolás',
   currentValue: 'Aktuális érték',
+  error: 'Hiba',
   goToSlide: (slide, count) => `Ugrás a ${count}/${slide}. diára`,
   hidePassword: 'Jelszó elrejtése',
   loading: 'Betöltés',

@@ -1,5 +1,5 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles';
+import componentStyles from '../../styles/component.styles.js';
 
 export default css`
   ${componentStyles}
@@ -7,6 +7,7 @@ export default css`
   :host {
     display: block;
     user-select: none;
+    -webkit-user-select: none;
   }
 
   :host(:focus) {

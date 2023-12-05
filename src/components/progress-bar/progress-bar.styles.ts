@@ -1,5 +1,5 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles';
+import componentStyles from '../../styles/component.styles.js';
 
 export default css`
   ${componentStyles}
@@ -33,8 +33,11 @@ export default css`
     line-height: var(--height);
     white-space: nowrap;
     overflow: hidden;
-    transition: 400ms width, 400ms background-color;
+    transition:
+      400ms width,
+      400ms background-color;
     user-select: none;
+    -webkit-user-select: none;
   }
 
   /* Indeterminate */

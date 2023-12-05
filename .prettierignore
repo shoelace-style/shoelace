@@ -8,7 +8,9 @@ docs/assets/icons/tags.js
 src/components/icon/icons
 src/react/index.ts
 node_modules
+package.json
 package-lock.json
 tsconfig.json
 src/styles/exports/generated.css
-
+cdn
+_site

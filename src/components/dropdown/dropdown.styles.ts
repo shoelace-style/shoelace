@@ -1,5 +1,5 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles';
+import componentStyles from '../../styles/component.styles.js';
 
 export default css`
   ${componentStyles}
@@ -36,8 +36,9 @@ export default css`
     font-family: var(--sl-font-sans);
     font-size: var(--sl-font-size-medium);
     font-weight: var(--sl-font-weight-normal);
-    box-shadow: var(--sl-shadow-large);
-    border-radius: var(--sl-border-radius-medium);
+    box-shadow: var(--sl-shadow-medium);
+    border-radius: var(--sl-border-radius-large);
+    margin: var(--sl-spacing-2x-small) 0;
     pointer-events: none;
   }
 

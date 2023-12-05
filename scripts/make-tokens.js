@@ -100,12 +100,10 @@ cssContent +=
 
 cssContent += `}\n`;
 
-cssContent = prettier.format(cssContent, { parser: 'css' });
+cssContent = await prettier.format(cssContent, { parser: 'css' });
 
 // Write the CSS file
-try {
-  const fileName = path.join('./src/styles/exports', 'generated.css');
-  fs.writeFileSync(fileName, cssContent, 'utf8');
-} catch (err) {
-  console.error(chalk.red('Error writing CSS file:'), err);
-}
+
+const fileName = path.join('./src/styles/exports', 'generated.css');
+console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>.');
+fs.writeFileSync(fileName, cssContent, 'utf8');

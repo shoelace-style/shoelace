@@ -1,5 +1,5 @@
-import { registerTranslation } from '../utilities/localize';
-import type { Translation } from '../utilities/localize';
+import { registerTranslation } from '../utilities/localize.js';
+import type { Translation } from '../utilities/localize.js';
 
 const translation: Translation = {
   $code: 'de',
@@ -9,9 +9,11 @@ const translation: Translation = {
   carousel: 'Karussell',
   clearEntry: 'Eingabe löschen',
   close: 'Schließen',
+  copied: 'Kopiert',
   copy: 'Kopieren',
   currentValue: 'Aktueller Wert',
-  goToSlide: (slide, count) => `Gehen Sie zu Folie ${slide} von ${count}`,
+  error: 'Fehler',
+  goToSlide: (slide, count) => `Zu Folie ${slide} von ${count} gehen`,
   hidePassword: 'Passwort verbergen',
   loading: 'Wird geladen',
   nextSlide: 'Nächste Folie',
@@ -26,9 +28,9 @@ const translation: Translation = {
   resize: 'Größe ändern',
   scrollToEnd: 'Zum Ende scrollen',
   scrollToStart: 'Zum Anfang scrollen',
-  selectAColorFromTheScreen: 'Wähle eine Farbe vom Bildschirm',
+  selectAColorFromTheScreen: 'Farbe vom Bildschirm auswählen',
   showPassword: 'Passwort anzeigen',
-  slideNum: slide => `Gleiten ${slide}`,
+  slideNum: slide => `Folie ${slide}`,
   toggleColorFormat: 'Farbformat umschalten'
 };
 

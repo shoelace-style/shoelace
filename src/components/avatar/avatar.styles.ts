@@ -1,5 +1,5 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles';
+import componentStyles from '../../styles/component.styles.js';
 
 export default css`
   ${componentStyles}
@@ -23,6 +23,7 @@ export default css`
     font-weight: var(--sl-font-weight-normal);
     color: var(--sl-color-neutral-0);
     user-select: none;
+    -webkit-user-select: none;
     vertical-align: middle;
   }
 

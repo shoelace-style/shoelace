@@ -9,6 +9,7 @@
       "dom.Iterable",
       "es2020"
     ],
+    "emitDeclarationOnly": true,
     "declaration": true,
     "rootDir": ".",
     "strict": true,
@@ -23,11 +24,12 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "useDefineForClassFields": false, /* See https://lit.dev/docs/components/properties/#avoiding-issues-with-class-fields */
-    "removeComments": true,
+    "removeComments": false,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "useUnknownInCatchVariables": true,
-    "baseUrl": ".",
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
     "types": [
       "mocha",
       "user-agent-data-types"

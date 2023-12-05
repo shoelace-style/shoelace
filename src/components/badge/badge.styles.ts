@@ -1,5 +1,5 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles';
+import componentStyles from '../../styles/component.styles.js';
 
 export default css`
   ${componentStyles}
@@ -13,14 +13,15 @@ export default css`
     align-items: center;
     justify-content: center;
     font-size: max(12px, 0.75em);
-    font-weight: var(--sl-font-weight-semibold);
+    font-weight: var(--ts-font-semibold);
     letter-spacing: var(--sl-letter-spacing-normal);
     line-height: 1;
-    border-radius: var(--sl-border-radius-small);
+    border-radius: var(--sl-border-radius-pill);
     border: solid 1px var(--sl-color-neutral-0);
     white-space: nowrap;
-    padding: 0.35em 0.6em;
+    padding: var(--sl-spacing-2x-small) var(--sl-spacing-x-small);
     user-select: none;
+    -webkit-user-select: none;
     cursor: inherit;
   }
 
@@ -36,8 +37,9 @@ export default css`
   }
 
   .badge--neutral {
-    background-color: var(--sl-color-neutral-700);
-    color: var(--sl-color-neutral-0);
+    border-color: var(--sl-color-neutral-400);
+    background-color: var(--sl-color-neutral-0);
+    color: var(--sl-color-neutral-900);
   }
 
   .badge--warning {
@@ -46,13 +48,14 @@ export default css`
   }
 
   .badge--danger {
+    border-color: var(--sl-color-danger-900);
     background-color: var(--sl-color-danger-700);
     color: var(--sl-color-neutral-0);
   }
 
-  /* Pill modifier */
-  .badge--pill {
-    border-radius: var(--sl-border-radius-pill);
+  /* Square modifier */
+  .badge--square {
+    border-radius: var(--sl-border-radius-small);
   }
 
   /* Pulse modifier */

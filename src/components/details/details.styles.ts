@@ -1,5 +1,5 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles';
+import componentStyles from '../../styles/component.styles.js';
 
 export default css`
   ${componentStyles}
@@ -29,7 +29,12 @@ export default css`
     border-radius: inherit;
     padding: var(--sl-spacing-large);
     user-select: none;
+    -webkit-user-select: none;
     cursor: pointer;
+  }
+
+  .details__header::-webkit-details-marker {
+    display: none;
   }
 
   .details__header:focus {

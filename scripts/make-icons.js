@@ -7,8 +7,7 @@ import copy from 'recursive-copy';
 import { deleteAsync } from 'del';
 import download from 'download';
 import fm from 'front-matter';
-import { readFileSync, readdirSync, rename, mkdirSync, fstat } from 'fs';
-import { stat, readFile, writeFile } from 'fs/promises';
+import fs from 'fs/promises';
 import { globby } from 'globby';
 import path from 'path';
 import { exit } from 'process';
@@ -18,71 +17,62 @@ console.log('Make-icons');
 const { outdir } = commandLineArgs({ name: 'outdir', type: String });
 const iconDir = path.join(outdir, '/assets/icons');
 
-const iconPackageData = JSON.parse(readFileSync('./node_modules/heroicons/package.json', 'utf8'));
+const iconPackageData = JSON.parse(await fs.readFile('./node_modules/heroicons/package.json', 'utf8'));
 
-let numIcons = 0;
+const version = iconPackageData.version;
+const srcPath = `./.cache/icons/heroicons-${version}`;
+const url = `https://github.com/teamshares/heroicons/archive/v${version}.zip`;
 
-(async () => {
-  try {
-    const version = iconPackageData.version;
-    console.log('Version:', version);
-    const srcPath = `./.cache/icons/heroicons-${version}`;
-    const url = `https://github.com/teamshares/heroicons/archive/v${version}.zip`;
+try {
+  await fs.stat(`${srcPath}/LICENSE.md`);
+} catch {
+  // Download the source from GitHub (since not everything is published to npm)
+  await download(url, './.cache/icons', { extract: true });
+}
 
-    try {
-      await stat(`${srcPath}/LICENSE`);
-      console.log('Generating icons from cache');
-    } catch {
-      console.log(`Downloading and extracting Heroicons ${version} from GitHub 📦`);
-      await download(url, './.cache/icons', { extract: true });
+// Copy icons
+await deleteAsync([iconDir]);
+await fs.mkdir(iconDir, { recursive: true });
+await Promise.all([
+  copy(`${srcPath}/flattened`, iconDir),
+  copy(`${srcPath}/LICENSE`, path.join(iconDir, 'LICENSE.md')),
+  copy(`${srcPath}/heroicons-sprite.svg`, './docs/assets/images/sprite.svg', { overwrite: true }),
+  copy(`${srcPath}/data/tags.js`, './docs/assets/icons/tags.js', { overwrite: true })
+]);
+
+// Generate metadata
+
+const files = await globby(`${srcPath}/flattened`);
+const tagsFile = await import(path.resolve('./docs/assets/icons/tags.js'));
+const tagsHash = tagsFile.tags;
+const metadata = await Promise.all(
+  files.map(async file => {
+    const name = path.basename(file, path.extname(file));
+    // const data = fm(await fs.readFile(file, 'utf8')).attributes;
+    let type = '';
+    let categories = '';
+    const stripped = name.replace('-solid', '').replace('-mini', '');
+    let tags = tagsHash[stripped] || [];
+    if (name.includes('-solid')) {
+      type = 'fill';
+      categories = ['24px'];
+    } else if (name.includes('-mini')) {
+      type = 'fill';
+      categories = ['20px'];
+    } else {
+      type = 'outline';
+      categories = ['24px'];
     }
 
-    // Copy icons
-    console.log(`Copying icons and license`);
-    await deleteAsync([iconDir]);
-    mkdirSync(iconDir, { recursive: true });
-    await Promise.all([
-      copy(`${srcPath}/flattened`, iconDir),
-      copy(`${srcPath}/LICENSE`, path.join(iconDir, 'LICENSE.md')),
-      copy(`${srcPath}/heroicons-sprite.svg`, './docs/assets/icons/sprite.svg', { overwrite: true }),
-      copy(`${srcPath}/data/tags.js`, './docs/assets/icons/tags.js', { overwrite: true })
-    ]);
+    return {
+      name,
+      title: name.replace('-', ' '),
+      type,
+      categories,
+      tags: tags
+    };
+  })
+);
 
-    // Generate metadata
-    console.log(`Generating icon metadata`);
-    const tagsFile = await import(path.resolve('./docs/assets/icons/tags.js'));
-    const tagsHash = tagsFile.tags;
-    const metadata = [];
-    const files = readdirSync(`${srcPath}/flattened`);
-    numIcons = files.length;
-    files.forEach(fileName => {
-      const key = path.parse(fileName).name;
-      let type = '';
-      let categories = '';
-      const stripped = key.replace('-solid', '').replace('-mini', '');
-      let tags = tagsHash[stripped] || [];
-      if (key.includes('-solid')) {
-        type = 'fill';
-        categories = ['24px'];
-      } else if (key.includes('-mini')) {
-        type = 'fill';
-        categories = ['20px'];
-      } else {
-        type = 'outline';
-        categories = ['24px'];
-      }
-      metadata.push({
-        name: key,
-        title: key.replace('-', ' '),
-        type,
-        categories,
-        tags
-      });
-    });
-    await writeFile(path.join(iconDir, 'icons.json'), JSON.stringify(metadata, null, 2), 'utf8');
-
-    console.log(chalk.cyan(`Successfully processed ${numIcons} icons ✨\n`));
-  } catch (err) {
-    console.error(err);
-  }
-})();
+await fs.writeFile(path.join(iconDir, 'icons.json'), JSON.stringify(metadata, null, 2), 'utf8');
+console.log(chalk.cyan(`Successfully processed ${files.length} icons ✨\n`));

@@ -1,6 +1,5 @@
-import { debounce } from 'src/internal/debounce';
-import { prefersReducedMotion } from 'src/internal/animate';
-import { waitForEvent } from 'src/internal/event';
+import { prefersReducedMotion } from '../../internal/animate.js';
+import { waitForEvent } from '../../internal/event.js';
 import type { ReactiveController, ReactiveElement } from 'lit';
 
 interface ScrollHost extends ReactiveElement {
@@ -12,7 +11,6 @@ interface ScrollHost extends ReactiveElement {
  */
 export class ScrollController<T extends ScrollHost> implements ReactiveController {
   private host: T;
-  private pointers = new Set();
 
   dragging = false;
   scrolling = false;
@@ -20,16 +18,7 @@ export class ScrollController<T extends ScrollHost> implements ReactiveControlle
 
   constructor(host: T) {
     this.host = host;
-
     host.addController(this);
-
-    this.handleScroll = this.handleScroll.bind(this);
-    this.handlePointerDown = this.handlePointerDown.bind(this);
-    this.handlePointerMove = this.handlePointerMove.bind(this);
-    this.handlePointerUp = this.handlePointerUp.bind(this);
-    this.handlePointerUp = this.handlePointerUp.bind(this);
-    this.handleTouchStart = this.handleTouchStart.bind(this);
-    this.handleTouchEnd = this.handleTouchEnd.bind(this);
   }
 
   async hostConnected() {
@@ -39,11 +28,10 @@ export class ScrollController<T extends ScrollHost> implements ReactiveControlle
     const scrollContainer = host.scrollContainer;
 
     scrollContainer.addEventListener('scroll', this.handleScroll, { passive: true });
+    scrollContainer.addEventListener('scrollend', this.handleScrollEnd, true);
     scrollContainer.addEventListener('pointerdown', this.handlePointerDown);
     scrollContainer.addEventListener('pointerup', this.handlePointerUp);
     scrollContainer.addEventListener('pointercancel', this.handlePointerUp);
-    scrollContainer.addEventListener('touchstart', this.handleTouchStart, { passive: true });
-    scrollContainer.addEventListener('touchend', this.handleTouchEnd);
   }
 
   hostDisconnected(): void {
@@ -51,55 +39,41 @@ export class ScrollController<T extends ScrollHost> implements ReactiveControlle
     const scrollContainer = host.scrollContainer;
 
     scrollContainer.removeEventListener('scroll', this.handleScroll);
+    scrollContainer.removeEventListener('scrollend', this.handleScrollEnd, true);
     scrollContainer.removeEventListener('pointerdown', this.handlePointerDown);
     scrollContainer.removeEventListener('pointerup', this.handlePointerUp);
     scrollContainer.removeEventListener('pointercancel', this.handlePointerUp);
-    scrollContainer.removeEventListener('touchstart', this.handleTouchStart);
-    scrollContainer.removeEventListener('touchend', this.handleTouchEnd);
   }
 
-  handleScroll() {
+  handleScroll = () => {
     if (!this.scrolling) {
       this.scrolling = true;
       this.host.requestUpdate();
     }
-    this.handleScrollEnd();
-  }
+  };
 
-  @debounce(100)
-  handleScrollEnd() {
-    if (!this.pointers.size) {
-      // If no pointer is active in the scroll area then the scroll has ended
+  handleScrollEnd = () => {
+    if (this.scrolling && !this.dragging) {
       this.scrolling = false;
-      this.host.scrollContainer.dispatchEvent(
-        new CustomEvent('scrollend', {
-          bubbles: false,
-          cancelable: false
-        })
-      );
       this.host.requestUpdate();
-    } else {
-      // otherwise let's wait a bit more
-      this.handleScrollEnd();
     }
-  }
+  };
 
-  handlePointerDown(event: PointerEvent) {
+  handlePointerDown = (event: PointerEvent) => {
+    // Do not handle drag for touch interactions as scroll is natively supported
     if (event.pointerType === 'touch') {
       return;
     }
 
-    this.pointers.add(event.pointerId);
-
-    const canDrag = this.mouseDragging && !this.dragging && event.button === 0;
+    const canDrag = this.mouseDragging && event.button === 0;
     if (canDrag) {
       event.preventDefault();
 
       this.host.scrollContainer.addEventListener('pointermove', this.handlePointerMove);
     }
-  }
+  };
 
-  handlePointerMove(event: PointerEvent) {
+  handlePointerMove = (event: PointerEvent) => {
     const scrollContainer = this.host.scrollContainer;
 
     const hasMoved = !!event.movementX || !!event.movementY;
@@ -111,28 +85,13 @@ export class ScrollController<T extends ScrollHost> implements ReactiveControlle
       // Ignore pointers that we are not tracking
       this.handleDrag(event);
     }
-  }
+  };
 
-  handlePointerUp(event: PointerEvent) {
-    this.pointers.delete(event.pointerId);
+  handlePointerUp = (event: PointerEvent) => {
     this.host.scrollContainer.releasePointerCapture(event.pointerId);
 
-    if (this.pointers.size === 0) {
-      this.handleDragEnd();
-    }
-  }
-
-  handleTouchEnd(event: TouchEvent) {
-    for (const touch of event.changedTouches) {
-      this.pointers.delete(touch.identifier);
-    }
-  }
-
-  handleTouchStart(event: TouchEvent) {
-    for (const touch of event.touches) {
-      this.pointers.add(touch.identifier);
-    }
-  }
+    this.handleDragEnd();
+  };
 
   handleDragStart() {
     const host = this.host;
@@ -149,12 +108,11 @@ export class ScrollController<T extends ScrollHost> implements ReactiveControlle
     });
   }
 
-  async handleDragEnd() {
+  handleDragEnd() {
     const host = this.host;
     const scrollContainer = host.scrollContainer;
 
     scrollContainer.removeEventListener('pointermove', this.handlePointerMove);
-    this.dragging = false;
 
     const startLeft = scrollContainer.scrollLeft;
     const startTop = scrollContainer.scrollTop;
@@ -167,12 +125,16 @@ export class ScrollController<T extends ScrollHost> implements ReactiveControlle
     scrollContainer.scrollTo({ left: startLeft, top: startTop, behavior: 'auto' });
     scrollContainer.scrollTo({ left: finalLeft, top: finalTop, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
 
-    if (this.scrolling) {
-      await waitForEvent(scrollContainer, 'scrollend');
-    }
+    // Wait for scroll to be applied
+    requestAnimationFrame(async () => {
+      if (startLeft !== finalLeft || startTop !== finalTop) {
+        await waitForEvent(scrollContainer, 'scrollend');
+      }
 
-    scrollContainer.style.removeProperty('scroll-snap-type');
+      scrollContainer.style.removeProperty('scroll-snap-type');
 
-    host.requestUpdate();
+      this.dragging = false;
+      host.requestUpdate();
+    });
   }
 }

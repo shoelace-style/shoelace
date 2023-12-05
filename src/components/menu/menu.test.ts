@@ -1,10 +1,11 @@
-import { clickOnElement } from '../../internal/test';
+import '../../../dist/shoelace.js';
+import { clickOnElement } from '../../internal/test.js';
 import { expect, fixture } from '@open-wc/testing';
 import { html } from 'lit';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
+import type { SlSelectEvent } from '../../events/sl-select';
 import type SlMenu from './menu';
-import type SlSelectEvent from '../../events/sl-select';
 
 describe('<sl-menu>', () => {
   it('emits sl-select with the correct event detail when clicking an item', async () => {
@@ -99,4 +100,24 @@ describe('<sl-menu>', () => {
 
     expect(selectHandler).to.not.have.been.called;
   });
+});
+
+// @see https://github.com/shoelace-style/shoelace/issues/1596
+it('Should fire "sl-select" when clicking an element within a menu-item', async () => {
+  // eslint-disable-next-line
+  const selectHandler = sinon.spy(() => {});
+
+  const menu: SlMenu = await fixture(html`
+    <sl-menu>
+      <sl-menu-item>
+        <span>Menu item</span>
+      </sl-menu-item>
+    </sl-menu>
+  `);
+
+  menu.addEventListener('sl-select', selectHandler);
+  const span = menu.querySelector('span')!;
+  await clickOnElement(span);
+
+  expect(selectHandler).to.have.been.calledOnce;
 });

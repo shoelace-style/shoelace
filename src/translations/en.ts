@@ -1,5 +1,5 @@
-import { registerTranslation } from '../utilities/localize';
-import type { Translation } from '../utilities/localize';
+import { registerTranslation } from '@shoelace-style/localize';
+import type { Translation } from '../utilities/localize.js';
 
 const translation: Translation = {
   $code: 'en',
@@ -9,8 +9,10 @@ const translation: Translation = {
   carousel: 'Carousel',
   clearEntry: 'Clear entry',
   close: 'Close',
+  copied: 'Copied',
   copy: 'Copy',
   currentValue: 'Current value',
+  error: 'Error',
   goToSlide: (slide, count) => `Go to slide ${slide} of ${count}`,
   hidePassword: 'Hide password',
   loading: 'Loading',

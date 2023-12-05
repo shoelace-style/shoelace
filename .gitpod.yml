@@ -5,7 +5,7 @@ tasks:
 ports:
   - port: 3001
     onOpen: ignore
-  - port: 4000-4999
+  - port: 4001-4999
     onOpen: open-preview
 
 github:

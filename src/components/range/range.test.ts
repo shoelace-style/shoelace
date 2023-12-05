@@ -1,10 +1,11 @@
-import { clickOnElement } from '../../internal/test';
+import '../../../dist/shoelace.js';
+import { clickOnElement } from '../../internal/test.js';
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
-import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests';
+import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests.js';
 import { sendKeys } from '@web/test-runner-commands';
-import { serialize } from '../../utilities/form';
+import { serialize } from '../../utilities/form.js';
 import sinon from 'sinon';
-import type SlRange from './range';
+import type SlRange from './range.js';
 
 describe('<sl-range>', () => {
   it('should pass accessibility tests', async () => {

@@ -92,8 +92,15 @@ module.exports = {
         '@typescript-eslint/member-delimiter-style': 'warn',
         '@typescript-eslint/method-signature-style': 'warn',
         '@typescript-eslint/no-extraneous-class': 'error',
-        '@typescript-eslint/no-parameter-properties': 'error',
+        '@typescript-eslint/no-redundant-type-constituents': 'off',
+        '@typescript-eslint/parameter-properties': 'error',
         '@typescript-eslint/strict-boolean-expressions': 'off'
+      }
+    },
+    {
+      files: ['**/*.cjs'],
+      env: {
+        node: true
       }
     },
     {
@@ -177,6 +184,17 @@ module.exports = {
             message: 'Import from the source file instead.'
           }
         ]
+      }
+    ],
+    'import/extensions': [
+      'error',
+      'always',
+      {
+        ignorePackages: true,
+        pattern: {
+          js: 'always',
+          ts: 'never'
+        }
       }
     ],
     'import/no-duplicates': 'warn',

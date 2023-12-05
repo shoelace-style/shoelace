@@ -1,5 +1,5 @@
-import { registerTranslation } from '../utilities/localize';
-import type { Translation } from '../utilities/localize';
+import { registerTranslation } from '../utilities/localize.js';
+import type { Translation } from '../utilities/localize.js';
 
 const translation: Translation = {
   $code: 'tr',
@@ -9,8 +9,10 @@ const translation: Translation = {
   carousel: 'Atlıkarınca',
   clearEntry: 'Girişi sil',
   close: 'Kapat',
+  copied: 'Kopyalandı',
   copy: 'Kopya',
   currentValue: 'Mevcut değer',
+  error: 'Hata',
   goToSlide: (slide, count) => `${count} slayttan ${slide} slayta gidin`,
   hidePassword: 'Şifreyi sakla',
   loading: 'Yükleme',

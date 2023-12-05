@@ -1,5 +1,5 @@
-import { registerTranslation } from '../utilities/localize';
-import type { Translation } from '../utilities/localize';
+import { registerTranslation } from '../utilities/localize.js';
+import type { Translation } from '../utilities/localize.js';
 
 const translation: Translation = {
   $code: 'da',
@@ -9,8 +9,10 @@ const translation: Translation = {
   carousel: 'Karrusel',
   clearEntry: 'Ryd indtastning',
   close: 'Luk',
+  copied: 'Kopieret',
   copy: 'Kopier',
   currentValue: 'Nuværende værdi',
+  error: 'Fejl',
   goToSlide: (slide, count) => `Gå til dias ${slide} af ${count}`,
   hidePassword: 'Skjul adgangskode',
   loading: 'Indlæser',

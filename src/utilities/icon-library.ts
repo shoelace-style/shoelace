@@ -1,1 +1,1 @@
-export { registerIconLibrary, unregisterIconLibrary, registerExternalLibraries } from '../components/icon/library';
+export { registerIconLibrary, unregisterIconLibrary, registerExternalLibraries } from '../components/icon/library.js';

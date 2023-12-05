@@ -1,14 +1,15 @@
+import '../../../dist/shoelace.js';
 import { expect, fixture, html } from '@open-wc/testing';
-import type SlCard from './card';
+import type SlCard from './card.js';
 
 describe('<sl-card>', () => {
   let el: SlCard;
 
   describe('when provided no parameters', () => {
     before(async () => {
-      el = await fixture<SlCard>(
-        html` <sl-card>This is just a basic card. No image, no header, and no footer. Just your content.</sl-card> `
-      );
+      el = await fixture<SlCard>(html`
+        <sl-card>This is just a basic card. No image, no header, and no footer. Just your content.</sl-card>
+      `);
     });
 
     it('should pass accessibility tests', async () => {

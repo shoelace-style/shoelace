@@ -1,5 +1,5 @@
-import { registerTranslation } from '../utilities/localize';
-import type { Translation } from '../utilities/localize';
+import { registerTranslation } from '../utilities/localize.js';
+import type { Translation } from '../utilities/localize.js';
 
 const translation: Translation = {
   $code: 'fa',
@@ -9,8 +9,10 @@ const translation: Translation = {
   carousel: 'چرخ فلک',
   clearEntry: 'پاک کردن ورودی',
   close: 'بستن',
+  copied: 'کپی شد',
   copy: 'رونوشت',
   currentValue: 'مقدار فعلی',
+  error: 'خطا',
   goToSlide: (slide, count) => `رفتن به اسلاید ${slide} از ${count}`,
   hidePassword: 'پنهان کردن رمز',
   loading: 'بارگذاری',

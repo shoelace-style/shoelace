@@ -537,13 +537,13 @@
    */
 
   --sl-tooltip-border-radius: var(--sl-border-radius-medium);
-  --sl-tooltip-background-color: var(--sl-color-neutral-800);
+  --sl-tooltip-background-color: var(--sl-color-neutral-900);
   --sl-tooltip-color: var(--sl-color-neutral-0);
   --sl-tooltip-font-family: var(--sl-font-sans);
   --sl-tooltip-font-weight: var(--sl-font-weight-normal);
   --sl-tooltip-font-size: var(--sl-font-size-small);
   --sl-tooltip-line-height: var(--sl-line-height-dense);
-  --sl-tooltip-padding: var(--sl-spacing-2x-small) var(--sl-spacing-x-small);
+  --sl-tooltip-padding: var(--sl-spacing-x-small) var(--sl-spacing-small);
   --sl-tooltip-arrow-size: 6px;
 
   /*

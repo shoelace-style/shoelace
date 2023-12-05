@@ -1,4 +1,4 @@
-import type { IconLibrary } from './library';
+import type { IconLibrary } from './library.js';
 
 //
 // System icons are a separate library to ensure they're always available, regardless of how the default icon library is
@@ -16,7 +16,7 @@ const icons = {
   check: `
     <svg part="checked-icon" class="checkbox__icon" viewBox="0 0 16 16">
       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-        <g stroke="currentColor" stroke-width="2">
+        <g stroke="currentColor">
           <g transform="translate(3.428571, 3.428571)">
             <path d="M0,5.71428571 L3.42857143,9.14285714"></path>
             <path d="M9.14285714,0 L3.42857143,9.14285714"></path>
@@ -38,6 +38,11 @@ const icons = {
   'chevron-right': `
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
       <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+    </svg>
+  `,
+  copy: `
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-files" viewBox="0 0 16 16" part="svg">
+      <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"></path>
     </svg>
   `,
   eye: `
