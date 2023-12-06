@@ -3,8 +3,8 @@
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
     "target": "es2017",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "ES2020",
+    "moduleResolution": "Node",
     "lib": [
       "dom",
       "dom.Iterable",
