@@ -38,6 +38,25 @@ export default css`
     cursor: not-allowed;
   }
 
+  .menu-item.menu-item--loading {
+    outline: none;
+    cursor: wait;
+  }
+
+  .menu-item.menu-item--loading *:not(sl-spinner) {
+    opacity: 0.5;
+  }
+
+  .menu-item--loading sl-spinner {
+    --indicator-color: currentColor;
+    --track-width: 1px;
+    position: absolute;
+    font-size: 0.75em;
+    top: calc(50% - 0.5em);
+    left: 0.65rem;
+    opacity: 1;
+  }
+
   .menu-item .menu-item__label {
     flex: 1 1 auto;
     display: inline-block;
@@ -131,33 +150,5 @@ export default css`
       outline: dashed 1px SelectedItem;
       outline-offset: -1px;
     }
-  }
-
-  /*
-   * Loading modifier
-   */
-
-  .menu-item--loading {
-    position: relative;
-    cursor: wait;
-  }
-
-  .menu-item--loading .menu-item__prefix,
-  .menu-item--loading .menu-item__label,
-  .menu-item--loading .menu-item__suffix,
-  .menu-item--loading .menu-item__check {
-    opacity: 0.5;
-  }
-
-  .menu-item--loading sl-spinner {
-    --indicator-color: currentColor;
-    --track-width: 1px;
-    position: absolute;
-    font-size: 0.75em;
-    height: 1em;
-    width: 1em;
-    top: calc(50% - 0.5em);
-    left: calc(1rem - 1px);
-    transform: translateX(-50%);
   }
 `;

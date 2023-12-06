@@ -9,7 +9,7 @@ layout: component
 <sl-menu style="max-width: 200px;">
   <sl-menu-item>Option 1</sl-menu-item>
   <sl-menu-item>Option 2</sl-menu-item>
-  <sl-menu-item loading>Option 3</sl-menu-item>
+  <sl-menu-item>Option 3</sl-menu-item>
   <sl-divider></sl-divider>
   <sl-menu-item type="checkbox" checked>Checkbox</sl-menu-item>
   <sl-menu-item disabled>Disabled</sl-menu-item>
@@ -37,7 +37,7 @@ const App = () => (
   <SlMenu style={{ maxWidth: '200px' }}>
     <SlMenuItem>Option 1</SlMenuItem>
     <SlMenuItem>Option 2</SlMenuItem>
-    <SlMenuItem loading>Option 3</SlMenuItem>
+    <SlMenuItem>Option 3</SlMenuItem>
     <SlDivider />
     <SlMenuItem type="checkbox" checked>
       Checkbox
@@ -59,64 +59,6 @@ const App = () => (
 {% endraw %}
 
 ## Examples
-
-### Loading
-
-Use the `loading` attribute to make a menu item busy. Clicks will be suppressed until the loading state is removed.
-
-```html:preview
-<sl-menu style="max-width: 200px;">
-  <sl-menu-item>Option 1</sl-menu-item>
-  <sl-menu-item loading>Option 2</sl-menu-item>
-  <sl-menu-item>Option 3</sl-menu-item>
-</sl-menu>
-```
-
-{% raw %}
-
-```jsx:react
-import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
-
-const App = () => (
-  <SlMenu style={{ maxWidth: '200px' }}>
-    <SlMenuItem>Option 1</SlMenuItem>
-    <SlMenuItem loading>Option 2</SlMenuItem>
-    <SlMenuItem>Option 3</SlMenuItem>
-  </SlMenu>
-);
-```
-
-{% endraw %}
-
-### Disabled
-
-Add the `disabled` attribute to disable the menu item so it cannot be selected.
-
-```html:preview
-<sl-menu style="max-width: 200px;">
-  <sl-menu-item>Option 1</sl-menu-item>
-  <sl-menu-item disabled>Option 2</sl-menu-item>
-  <sl-menu-item>Option 3</sl-menu-item>
-</sl-menu>
-```
-
-{% raw %}
-
-```jsx:react
-import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
-
-const App = () => (
-  <SlMenu style={{ maxWidth: '200px' }}>
-    <SlMenuItem>Option 1</SlMenuItem>
-    <SlMenuItem disabled>Option 2</SlMenuItem>
-    <SlMenuItem>Option 3</SlMenuItem>
-  </SlMenu>
-);
-```
-
-{% endraw %}
 
 ### Prefix & Suffix
 
@@ -174,6 +116,64 @@ const App = () => (
       <SlIcon slot="prefix" name="gear" />
       Settings
     </SlMenuItem>
+  </SlMenu>
+);
+```
+
+{% endraw %}
+
+### Disabled
+
+Add the `disabled` attribute to disable the menu item so it cannot be selected.
+
+```html:preview
+<sl-menu style="max-width: 200px;">
+  <sl-menu-item>Option 1</sl-menu-item>
+  <sl-menu-item disabled>Option 2</sl-menu-item>
+  <sl-menu-item>Option 3</sl-menu-item>
+</sl-menu>
+```
+
+{% raw %}
+
+```jsx:react
+import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
+import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+
+const App = () => (
+  <SlMenu style={{ maxWidth: '200px' }}>
+    <SlMenuItem>Option 1</SlMenuItem>
+    <SlMenuItem disabled>Option 2</SlMenuItem>
+    <SlMenuItem>Option 3</SlMenuItem>
+  </SlMenu>
+);
+```
+
+{% endraw %}
+
+### Loading
+
+Use the `loading` attribute to indicate that a menu item is busy. Like a disabled menu item, clicks will be suppressed until the loading state is removed.
+
+```html:preview
+<sl-menu style="max-width: 200px;">
+  <sl-menu-item>Option 1</sl-menu-item>
+  <sl-menu-item loading>Option 2</sl-menu-item>
+  <sl-menu-item>Option 3</sl-menu-item>
+</sl-menu>
+```
+
+{% raw %}
+
+```jsx:react
+import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
+import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+
+const App = () => (
+  <SlMenu style={{ maxWidth: '200px' }}>
+    <SlMenuItem>Option 1</SlMenuItem>
+    <SlMenuItem loading>Option 2</SlMenuItem>
+    <SlMenuItem>Option 3</SlMenuItem>
   </SlMenu>
 );
 ```

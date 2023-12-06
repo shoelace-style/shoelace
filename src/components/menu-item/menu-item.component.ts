@@ -33,6 +33,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart label - The menu item label.
  * @csspart suffix - The suffix container.
  * @csspart spinner - The spinner that shows when the menu item is in the loading state.
+ * @csspart spinner__base - The spinner's base part.
  * @csspart submenu-icon - The submenu icon, visible only when the menu item has a submenu (not yet implemented).
  *
  * @cssproperty [--submenu-offset=-2px] - The distance submenus shift to overlap the parent menu.
@@ -186,7 +187,8 @@ export default class SlMenuItem extends ShoelaceElement {
           <sl-icon name=${isRtl ? 'chevron-left' : 'chevron-right'} library="system" aria-hidden="true"></sl-icon>
         </span>
 
-        ${this.submenuController.renderSubmenu()} ${this.loading ? html`<sl-spinner part="spinner"></sl-spinner>` : ''}
+        ${this.submenuController.renderSubmenu()}
+        ${this.loading ? html` <sl-spinner part="spinner" exportparts="base:spinner__base"></sl-spinner> ` : ''}
       </div>
     `;
   }
