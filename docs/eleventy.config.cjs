@@ -99,7 +99,7 @@ module.exports = function (eleventyConfig) {
   // Trims whitespace and pipes from the start and end of a string. Useful for CEM types, which can be pipe-delimited.
   // With Prettier 3, this means a leading pipe will exist if the line wraps.
   eleventyConfig.addFilter('trimPipes', content => {
-    return content.replace(/^(\s|\|)/g, '').replace(/(\s|\|)$/g, '');
+    return typeof content === 'string' ? content.replace(/^(\s|\|)/g, '').replace(/(\s|\|)$/g, '') : content;
   });
 
   eleventyConfig.addFilter('classNameToComponentName', className => {
