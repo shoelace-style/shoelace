@@ -1,4 +1,4 @@
-import type SlTreeItem from '../components/tree-item/tree-item';
+import type SlTreeItem from '../components/tree-item/tree-item.js';
 
 export type SlSelectionChangeEvent = CustomEvent<{ selection: SlTreeItem[] }>;
 
