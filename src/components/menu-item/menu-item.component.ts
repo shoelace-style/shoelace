@@ -186,8 +186,7 @@ export default class SlMenuItem extends ShoelaceElement {
           <sl-icon name=${isRtl ? 'chevron-left' : 'chevron-right'} library="system" aria-hidden="true"></sl-icon>
         </span>
 
-        ${this.submenuController.renderSubmenu()}
-        ${this.loading ? html`<sl-spinner part="spinner"></sl-spinner>` : ''}
+        ${this.submenuController.renderSubmenu()} ${this.loading ? html`<sl-spinner part="spinner"></sl-spinner>` : ''}
       </div>
     `;
   }
