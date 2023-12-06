@@ -38,6 +38,7 @@ export default {
         customElementsManifest.package = { name, description, version, author, homepage, license };
       }
     },
+
     // Infer tag names because we no longer use @customElement decorators.
     {
       name: 'shoelace-infer-tag-names',
@@ -66,6 +67,7 @@ export default {
         }
       }
     },
+
     // Parse custom jsDoc tags
     {
       name: 'shoelace-custom-tags',
@@ -137,6 +139,7 @@ export default {
         }
       }
     },
+
     {
       name: 'shoelace-react-event-names',
       analyzePhase({ ts, node, moduleDoc }) {
@@ -155,6 +158,7 @@ export default {
         }
       }
     },
+
     {
       name: 'shoelace-translate-module-paths',
       packageLinkPhase({ customElementsManifest }) {
@@ -191,6 +195,7 @@ export default {
         });
       }
     },
+
     // Generate custom VS Code data
     customElementVsCodePlugin({
       outdir,
@@ -202,6 +207,7 @@ export default {
         }
       ]
     }),
+
     customElementJetBrainsPlugin({
       outdir: './dist',
       excludeCss: true,

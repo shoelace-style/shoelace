@@ -160,7 +160,7 @@
             </td>
             <td>
               {% if prop.type.text %}
-                <code>{{ prop.type.text | markdownInline | safe }}</code>
+                <code>{{ prop.type.text | trimPipes | markdownInline | safe }}</code>
               {% else %}
                 -
               {% endif %}
@@ -211,7 +211,7 @@
             <td>{{ event.description | markdownInline | safe }}</td>
             <td>
               {% if event.type.text %}
-                <code>{{ event.type.text }}</code>
+                <code>{{ event.type.text | trimPipes  }}</code>
               {% else %}
                 -
               {% endif %}
@@ -245,7 +245,7 @@
               {% if method.parameters.length %}
                 <code>
                   {% for param in method.parameters %}
-                    {{ param.name }}: {{ param.type.text }}{% if not loop.last %},{% endif %}
+                    {{ param.name }}: {{ param.type.text | trimPipes }}{% if not loop.last %},{% endif %}
                   {% endfor %}
                 </code>
               {% else %}
