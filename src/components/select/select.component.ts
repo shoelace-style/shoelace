@@ -216,15 +216,22 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   }
 
   private addOpenListeners() {
-    document.addEventListener('focusin', this.handleDocumentFocusIn);
-    document.addEventListener('keydown', this.handleDocumentKeyDown);
-    document.addEventListener('mousedown', this.handleDocumentMouseDown);
+    //
+    // Listen on the root node instead of the document in case the elements are inside a shadow root
+    //
+    // https://github.com/shoelace-style/shoelace/issues/1763
+    //
+    const root = this.getRootNode();
+    root.addEventListener('focusin', this.handleDocumentFocusIn);
+    root.addEventListener('keydown', this.handleDocumentKeyDown);
+    root.addEventListener('mousedown', this.handleDocumentMouseDown);
   }
 
   private removeOpenListeners() {
-    document.removeEventListener('focusin', this.handleDocumentFocusIn);
-    document.removeEventListener('keydown', this.handleDocumentKeyDown);
-    document.removeEventListener('mousedown', this.handleDocumentMouseDown);
+    const root = this.getRootNode();
+    root.removeEventListener('focusin', this.handleDocumentFocusIn);
+    root.removeEventListener('keydown', this.handleDocumentKeyDown);
+    root.removeEventListener('mousedown', this.handleDocumentMouseDown);
   }
 
   private handleFocus() {
