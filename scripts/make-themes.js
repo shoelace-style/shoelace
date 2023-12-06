@@ -47,7 +47,7 @@ files.forEach(async file => {
     { parser: 'babel-ts' }
   );
 
-  let dTs =  await prettier.format(
+  let dTs = await prettier.format(
     `
     declare const _default: import("lit").CSSResult;
     export default _default;
