@@ -47,9 +47,19 @@ files.forEach(async file => {
     { parser: 'babel-ts' }
   );
 
+  let dTs = await prettier.format(
+    `
+    declare const _default: import("lit").CSSResult;
+    export default _default;
+  `,
+    { parser: 'babel-ts' }
+  );
+
   const cssFile = path.join(themesDir, path.basename(file));
   const jsFile = path.join(themesDir, path.basename(file).replace('.css', '.styles.js'));
+  const dTsFile = path.join(themesDir, path.basename(file).replace('.css', '.styles.d.ts'));
 
   fs.writeFileSync(cssFile, css, 'utf8');
   fs.writeFileSync(jsFile, js, 'utf8');
+  fs.writeFileSync(dTsFile, dTs, 'utf8');
 });

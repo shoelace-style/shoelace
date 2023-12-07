@@ -96,6 +96,12 @@ module.exports = function (eleventyConfig) {
     return shoelaceFlavoredMarkdown.renderInline(content);
   });
 
+  // Trims whitespace and pipes from the start and end of a string. Useful for CEM types, which can be pipe-delimited.
+  // With Prettier 3, this means a leading pipe will exist if the line wraps.
+  eleventyConfig.addFilter('trimPipes', content => {
+    return typeof content === 'string' ? content.replace(/^(\s|\|)/g, '').replace(/(\s|\|)$/g, '') : content;
+  });
+
   eleventyConfig.addFilter('classNameToComponentName', className => {
     let name = capitalCase(className.replace(/^Sl/, ''));
     if (name === 'Qr Code') name = 'QR Code'; // manual override
