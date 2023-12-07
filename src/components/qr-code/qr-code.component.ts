@@ -52,7 +52,7 @@ export default class SlQrCode extends ShoelaceElement {
     }
 
     // For some reason, when changing to "NodeNext", it has the wrong type for QrCreator.
-    QrCreator.render(
+    (QrCreator as unknown as typeof QrCreator.default).render(
       {
         text: this.value,
         radius: this.radius,

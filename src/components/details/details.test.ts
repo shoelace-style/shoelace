@@ -2,9 +2,9 @@ import '../../../dist/shoelace.js';
 // cspell:dictionaries lorem-ipsum
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import sinon from 'sinon';
-import type { SlHideEvent } from '../../events/sl-hide';
-import type { SlShowEvent } from '../../events/sl-show';
-import type SlDetails from './details';
+import type { SlHideEvent } from '../../events/sl-hide.js';
+import type { SlShowEvent } from '../../events/sl-show.js';
+import type SlDetails from './details.js';
 
 describe('<sl-details>', () => {
   describe('accessibility', () => {

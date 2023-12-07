@@ -1,6 +1,6 @@
 import '../../../dist/shoelace.js';
 import { expect, fixture, html } from '@open-wc/testing';
-import type SlSpinner from './spinner';
+import type SlSpinner from './spinner.js';
 
 describe('<sl-spinner>', () => {
   describe('when provided no parameters', () => {
