@@ -4,7 +4,7 @@ import { getFormControls, serialize } from '../../../dist/shoelace.js';
 import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests.js';
 import { sendKeys } from '@web/test-runner-commands'; // must come from the same module
 import sinon from 'sinon';
-import type SlInput from './input';
+import type SlInput from './input.js';
 
 describe('<sl-input>', () => {
   it('should pass accessibility tests', async () => {

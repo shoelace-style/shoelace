@@ -3,7 +3,7 @@ import '../../../dist/shoelace.js';
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-import type SlDrawer from './drawer';
+import type SlDrawer from './drawer.js';
 
 describe('<sl-drawer>', () => {
   it('should be visible with the open attribute', async () => {

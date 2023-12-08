@@ -4,8 +4,8 @@ import { expect, fixture } from '@open-wc/testing';
 import { html } from 'lit';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-import type { SlSelectEvent } from '../../events/sl-select';
-import type SlMenu from './menu';
+import type { SlSelectEvent } from '../../events/sl-select.js';
+import type SlMenu from './menu.js';
 
 describe('<sl-menu>', () => {
   it('emits sl-select with the correct event detail when clicking an item', async () => {

@@ -1,7 +1,7 @@
 import '../../../dist/shoelace.js';
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import sinon from 'sinon';
-import type SlTooltip from './tooltip';
+import type SlTooltip from './tooltip.js';
 
 describe('<sl-tooltip>', () => {
   it('should be visible with the open attribute', async () => {

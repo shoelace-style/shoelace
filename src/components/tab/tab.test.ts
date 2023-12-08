@@ -1,9 +1,9 @@
 import '../../../dist/shoelace.js';
 import { expect, fixture, html } from '@open-wc/testing';
 import sinon from 'sinon';
-import type SlIconButton from '../icon-button/icon-button';
-import type SlTab from './tab';
-import type SlTabGroup from '../tab-group/tab-group';
+import type SlIconButton from '../icon-button/icon-button.js';
+import type SlTab from './tab.js';
+import type SlTabGroup from '../tab-group/tab-group.js';
 
 describe('<sl-tab>', () => {
   it('passes accessibility test', async () => {

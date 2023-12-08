@@ -1,7 +1,7 @@
 import '../../../dist/shoelace.js';
 import { aTimeout, expect, fixture, html, waitUntil } from '@open-wc/testing';
 import sinon from 'sinon';
-import type SlOption from './option';
+import type SlOption from './option.js';
 
 describe('<sl-option>', () => {
   it('passes accessibility test', async () => {

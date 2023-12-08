@@ -1,4 +1,4 @@
-import type SlCarouselItem from '../components/carousel-item/carousel-item';
+import type SlCarouselItem from '../components/carousel-item/carousel-item.js';
 
 export type SlSlideChangeEvent = CustomEvent<{ index: number; slide: SlCarouselItem }>;
 
