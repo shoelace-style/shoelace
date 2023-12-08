@@ -300,9 +300,9 @@ export default class SlDialog extends ShoelaceElement {
               `
             : ''}
           ${
-            '' /* The tabindex="-1" is here because the body is technically scrollable if overflowing. However, if there's no focusable elements inside, you won't actually be able to scroll it via keyboard. */
+            '' /* The tabindex="-1" is here because the body is technically scrollable if overflowing. However, if there's no focusable elements inside, you won't actually be able to scroll it via keyboard. Previously this was just a <slot>, but tabindex="-1" on the slot causes children to not be focusable. https://github.com/shoelace-style/shoelace/issues/1753#issuecomment-1836803277 */
           }
-          <slot part="body" class="dialog__body" tabindex="-1"></slot>
+          <div part="body" class="dialog__body" tabindex="-1"><slot></slot></div>
 
           <footer part="footer" class="dialog__footer">
             <slot name="footer"></slot>
