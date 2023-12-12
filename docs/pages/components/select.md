@@ -233,7 +233,7 @@ import SlOption from '@shoelace-style/shoelace/dist/react/option';
 import SlSelect from '@shoelace-style/shoelace/dist/react/select';
 
 const App = () => (
-  <SlSelect label="Select a Few" value="option-1 option-2 option-3" multiple clearable>
+  <SlSelect label="Select a Few" value={["option-1", "option-2", "option-3"]} multiple clearable>
     <SlOption value="option-1">Option 1</SlOption>
     <SlOption value="option-2">Option 2</SlOption>
     <SlOption value="option-3">Option 3</SlOption>
@@ -269,7 +269,7 @@ import SlOption from '@shoelace-style/shoelace/dist/react/option';
 import SlSelect from '@shoelace-style/shoelace/dist/react/select';
 
 const App = () => (
-  <SlSelect value="option-1 option-2" multiple clearable>
+  <SlSelect value={["option-1", "option-2"]} multiple clearable>
     <SlOption value="option-1">Option 1</SlOption>
     <SlOption value="option-2">Option 2</SlOption>
     <SlOption value="option-3">Option 3</SlOption>
