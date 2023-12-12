@@ -45,30 +45,8 @@ export function stopAnimations(el: HTMLElement) {
   return Promise.all(
     el.getAnimations().map(animation => {
       return new Promise(resolve => {
-        const requestId = requestAnimationFrame(timestamp => {
-          animation.oncancel = null;
-          animation.onfinish = null;
-          resolve(timestamp);
-        });
-
-        animation.addEventListener(
-          'cancel',
-          () => {
-            cancelAnimationFrame(requestId);
-            resolve('canceled');
-          },
-          { once: true }
-        );
-        animation.addEventListener(
-          'finish',
-          () => {
-            cancelAnimationFrame(requestId);
-            resolve('finished');
-          },
-          { once: true }
-        );
-        
         animation.cancel();
+        requestAnimationFrame(resolve);
       });
     })
   );
