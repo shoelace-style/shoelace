@@ -81,6 +81,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   private readonly localize = new LocalizeController(this);
   private typeToSelectString = '';
   private typeToSelectTimeout: number;
+  private closeWatcher: CloseWatcher | null;
 
   @query('.select') popup: SlPopup;
   @query('.select__combobox') combobox: HTMLSlotElement;
@@ -222,6 +223,16 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     // https://github.com/shoelace-style/shoelace/issues/1763
     //
     const root = this.getRootNode();
+    if ('CloseWatcher' in window) {
+      this.closeWatcher?.destroy();
+      this.closeWatcher = new CloseWatcher();
+      this.closeWatcher.onclose = () => {
+        if (this.open) {
+          this.hide();
+          this.displayInput.focus({ preventScroll: true });
+        }
+      }
+    }
     root.addEventListener('focusin', this.handleDocumentFocusIn);
     root.addEventListener('keydown', this.handleDocumentKeyDown);
     root.addEventListener('mousedown', this.handleDocumentMouseDown);
@@ -232,6 +243,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     root.removeEventListener('focusin', this.handleDocumentFocusIn);
     root.removeEventListener('keydown', this.handleDocumentKeyDown);
     root.removeEventListener('mousedown', this.handleDocumentMouseDown);
+    this.closeWatcher?.destroy();
   }
 
   private handleFocus() {
@@ -264,7 +276,8 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     }
 
     // Close when pressing escape
-    if (event.key === 'Escape' && this.open) {
+    if (event.key === 'Escape' && this.open && !this.closeWatcher) {
+      console.log('foo');
       event.preventDefault();
       event.stopPropagation();
       this.hide();

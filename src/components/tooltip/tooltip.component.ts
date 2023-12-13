@@ -45,6 +45,7 @@ export default class SlTooltip extends ShoelaceElement {
 
   private hoverTimeout: number;
   private readonly localize = new LocalizeController(this);
+  private closeWatcher: CloseWatcher | null;
 
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
   @query('.tooltip__body') body: HTMLElement;
@@ -108,6 +109,7 @@ export default class SlTooltip extends ShoelaceElement {
 
   disconnectedCallback() {
     // Cleanup this event in case the tooltip is removed while open
+    this.closeWatcher?.destroy();
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
@@ -181,7 +183,13 @@ export default class SlTooltip extends ShoelaceElement {
 
       // Show
       this.emit('sl-show');
-      document.addEventListener('keydown', this.handleDocumentKeyDown);
+      if ('CloseWatcher' in window) {
+        this.closeWatcher?.destroy();
+        this.closeWatcher = new CloseWatcher();
+        this.closeWatcher.onclose = () => { this.hide() };
+      } else {
+        document.addEventListener('keydown', this.handleDocumentKeyDown);
+      }
 
       await stopAnimations(this.body);
       this.body.hidden = false;
@@ -194,6 +202,7 @@ export default class SlTooltip extends ShoelaceElement {
     } else {
       // Hide
       this.emit('sl-hide');
+      this.closeWatcher?.destroy();
       document.removeEventListener('keydown', this.handleDocumentKeyDown);
 
       await stopAnimations(this.body);

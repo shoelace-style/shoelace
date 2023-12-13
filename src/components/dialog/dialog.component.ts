@@ -75,6 +75,7 @@ export default class SlDialog extends ShoelaceElement {
   private readonly localize = new LocalizeController(this);
   private originalTrigger: HTMLElement | null;
   public modal = new Modal(this);
+  private closeWatcher: CloseWatcher | null;
 
   @query('.dialog') dialog: HTMLElement;
   @query('.dialog__panel') panel: HTMLElement;
@@ -112,6 +113,7 @@ export default class SlDialog extends ShoelaceElement {
     super.disconnectedCallback();
     this.modal.deactivate();
     unlockBodyScrolling(this);
+    this.closeWatcher?.destroy();
   }
 
   private requestClose(source: 'close-button' | 'keyboard' | 'overlay') {
@@ -130,10 +132,17 @@ export default class SlDialog extends ShoelaceElement {
   }
 
   private addOpenListeners() {
-    document.addEventListener('keydown', this.handleDocumentKeyDown);
+    if ('CloseWatcher' in window) {
+      this.closeWatcher?.destroy();
+      this.closeWatcher = new CloseWatcher();
+      this.closeWatcher.onclose = () => this.requestClose('keyboard');
+    } else {
+      document.addEventListener('keydown', this.handleDocumentKeyDown);
+    }
   }
 
   private removeOpenListeners() {
+    this.closeWatcher?.destroy();
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
