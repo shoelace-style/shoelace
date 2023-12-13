@@ -1,11 +1,10 @@
 import { css } from 'lit';
 import componentStyles from '../../styles/component.styles.js';
 
-// Note on flex:none on the :host
-// Resizing a spinner element using anything but font-size will break the animation
-// mostly because the animation uses em units. Therefore, if a spinner is used in a flex container,
-// without flex:none applied, the spinner can grow/shrink and break the animation
-// flex:none hopes to prevent this by always having the spinner sized according to its actual dimensions
+// Resizing a spinner element using anything but font-size will break the animation because the animation uses em units.
+// Therefore, if a spinner is used in a flex container without `flex: none` applied, the spinner can grow/shrink and
+// break the animation. The use of `flex: none` on the host element prevents this by always having the spinner sized
+// according to its actual dimensions.
 
 export default css`
   ${componentStyles}
