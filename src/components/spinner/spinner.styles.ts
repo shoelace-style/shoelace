@@ -7,7 +7,6 @@ import componentStyles from '../../styles/component.styles.js';
 // without flex:none applied, the spinner can grow/shrink and break the animation
 // flex:none hopes to prevent this by always having the spinner sized according to its actual dimensions
 
-
 export default css`
   ${componentStyles}
 
