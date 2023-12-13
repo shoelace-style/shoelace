@@ -27,5 +27,12 @@ describe('<sl-spinner>', () => {
       //
       expect(getComputedStyle(indicator).transform).to.equal('matrix(1, 0, 0, 1, 0, 0)');
     });
+
+    it('should have flex:none to prevent flex re-sizing', async () => {
+      const spinner = await fixture<SlSpinner>(html` <sl-spinner></sl-spinner> `);
+
+      // 0 0 auto is a comiled value for `none`
+      expect(getComputedStyle(spinner).flex).to.equal('0 0 auto');
+    });
   });
 });
