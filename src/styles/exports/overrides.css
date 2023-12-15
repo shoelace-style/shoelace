@@ -65,6 +65,8 @@
   --sl-panel-background-color: var(--sl-color-neutral-0);
   --sl-panel-border-color: var(--sl-color-neutral-300);
   --sl-panel-border-width: 1px;
+  /* Tooltip */
+  --sl-tooltip-border-radius: var(--ts-border-radius-x-small);
 }
 
 /** *********************************** */
