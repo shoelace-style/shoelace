@@ -1,6 +1,7 @@
 import * as path from 'path';
 import { customElementJetBrainsPlugin } from 'custom-element-jet-brains-integration';
 import { customElementVsCodePlugin } from 'custom-element-vs-code-integration';
+import { customElementVuejsPlugin } from "custom-element-vuejs-integration";
 import { parse } from 'comment-parser';
 import { pascalCase } from 'pascal-case';
 import commandLineArgs from 'command-line-args';
@@ -218,6 +219,12 @@ export default {
           url: `https://shoelace.style/components/${tag.replace('sl-', '')}`
         };
       }
+    }),
+
+    customElementVuejsPlugin({
+      outdir: './dist/types/vue',
+      fileName: 'index.d.ts',
+      componentTypePath: (_, tag) => `../../components/${tag.replace('sl-', '')}/${tag.replace('sl-', '')}.component.js`,
     })
   ]
 };
