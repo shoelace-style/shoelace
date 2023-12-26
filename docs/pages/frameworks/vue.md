@@ -46,8 +46,8 @@ Once you have configured you application for custom elements, you should be able
 ```json
 {
   "compilerOptions": {
-    "types": ["@shoelace-style/shoelace/dist/types/vue"],
-  },
+    "types": ["@shoelace-style/shoelace/dist/types/vue"]
+  }
 }
 ```
 
