@@ -79,11 +79,6 @@ export default css`
     overflow-x: hidden;
   }
 
-  .carousel__slides--dragging,
-  .carousel__slides--dropping {
-    scroll-snap-type: unset !important;
-  }
-
   :host([vertical]) ::slotted(sl-carousel-item) {
     height: 100%;
   }

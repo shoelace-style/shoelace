@@ -48,10 +48,6 @@ if (!isSupported) {
   document.addEventListener('touchend', handlePointerUp, true);
   document.addEventListener('touchcancel', handlePointerUp, true);
 
-  // If the pointer is used for scrolling, the browser fires a pointercancel event because it determines
-  // that there are unlikely to be any more pointer events.
-  // document.addEventListener('pointercancel', handlePointerUp);
-
   decorate(EventTarget.prototype, 'addEventListener', function (this: EventTarget, addEventListener, type) {
     if (type !== 'scrollend') return;
 

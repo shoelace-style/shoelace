@@ -219,11 +219,12 @@ export default class SlCarousel extends ShoelaceElement {
     }
   }
 
-  handleDrag = (event: MouseEvent) => {
+  handleMouseDrag = (event: MouseEvent) => {
     const hasMoved = !!event.movementX || !!event.movementY;
     if (!this.dragging && hasMoved) {
       // Start dragging if it hasn't yet
       this.dragging = true;
+      this.scrollContainer.style.setProperty('scroll-snap-type', 'unset');
     } else {
       this.scrollContainer.scrollBy({
         left: -event.movementX,
@@ -232,29 +233,46 @@ export default class SlCarousel extends ShoelaceElement {
     }
   };
 
-  handleDragStart(event: MouseEvent) {
+  handleMouseDragStart(event: MouseEvent) {
     const canDrag = this.mouseDragging && event.button === 0;
     if (canDrag) {
       event.preventDefault();
 
-      document.addEventListener('mousemove', this.handleDrag);
-      document.addEventListener('mouseup', this.handleDragEnd, { once: true });
+      document.addEventListener('mousemove', this.handleMouseDrag, { passive: true });
+      document.addEventListener('mouseup', this.handleMouseDragEnd, { once: true });
     }
   }
 
-  handleDragEnd = async () => {
-    document.removeEventListener('mousemove', this.handleDrag);
+  handleMouseDragEnd = () => {
+    const scrollContainer = this.scrollContainer;
 
-    const nearestSlide = [...this.intersectionObserverEntries.values()]
-      .sort((a, b) => a.intersectionRatio - b.intersectionRatio)
-      .pop();
+    document.removeEventListener('mousemove', this.handleMouseDrag);
 
-    if (nearestSlide?.target instanceof HTMLElement) {
-      await this.scrollToSlide(nearestSlide.target);
-    }
+    const startLeft = scrollContainer.scrollLeft;
+    const startTop = scrollContainer.scrollTop;
 
-    this.dragging = false;
-    this.handleScrollEnd();
+    scrollContainer.style.removeProperty('scroll-snap-type');
+    const finalLeft = scrollContainer.scrollLeft;
+    const finalTop = scrollContainer.scrollTop;
+
+    scrollContainer.style.setProperty('scroll-snap-type', 'unset');
+    scrollContainer.scrollTo({ left: startLeft, top: startTop, behavior: 'instant' });
+    scrollContainer.scrollTo({
+      left: finalLeft,
+      top: finalTop,
+      behavior: prefersReducedMotion() ? 'instant' : 'smooth'
+    });
+
+    requestAnimationFrame(async () => {
+      if (startLeft !== finalLeft || startTop !== finalTop) {
+        await waitForEvent(scrollContainer, 'scrollend');
+      }
+
+      scrollContainer.style.removeProperty('scroll-snap-type');
+
+      this.dragging = false;
+      this.handleScrollEnd();
+    });
   };
 
   @eventOptions({ passive: true })
@@ -263,9 +281,8 @@ export default class SlCarousel extends ShoelaceElement {
   }
 
   private handleScrollEnd() {
-    if (this.dragging) return;
+    if (!this.scrolling || this.dragging) return;
 
-    const slides = this.getSlides();
     const entries = [...this.intersectionObserverEntries.values()];
 
     const firstIntersecting: IntersectionObserverEntry | undefined = entries.find(entry => entry.isIntersecting);
@@ -274,8 +291,10 @@ export default class SlCarousel extends ShoelaceElement {
       const clonePosition = Number(firstIntersecting.target.getAttribute('data-clone'));
 
       // Scrolls to the original slide without animating, so the user won't notice that the position has changed
-      this.goToSlide(clonePosition, 'auto');
+      this.goToSlide(clonePosition, 'instant');
     } else if (firstIntersecting) {
+      const slides = this.getSlides();
+
       // Update the current index based on the first visible slide
       const slideIndex = slides.indexOf(firstIntersecting.target as SlCarouselItem);
       // Set the index to the first "snappable" slide
@@ -424,7 +443,7 @@ export default class SlCarousel extends ShoelaceElement {
    * @param index - The slide index.
    * @param behavior - The behavior used for scrolling.
    */
-  goToSlide(index: number, behavior: ScrollBehavior = 'smooth') {
+  goToSlide(index: number, behavior: ScrollBehavior = 'smooth'): Promise<void> {
     const { slidesPerPage, loop } = this;
 
     const slides = this.getSlides();
@@ -432,7 +451,7 @@ export default class SlCarousel extends ShoelaceElement {
 
     // No need to do anything in case there are no items in the carousel
     if (!slides.length) {
-      return;
+      return Promise.resolve();
     }
 
     // Sets the next index without taking into account clones, if any.
@@ -444,21 +463,27 @@ export default class SlCarousel extends ShoelaceElement {
     const nextSlideIndex = clamp(index + (loop ? slidesPerPage : 0), 0, slidesWithClones.length - 1);
     const nextSlide = slidesWithClones[nextSlideIndex];
 
-    this.scrollToSlide(nextSlide, prefersReducedMotion() ? 'auto' : behavior);
+    return this.scrollToSlide(nextSlide, prefersReducedMotion() ? 'auto' : behavior);
   }
 
-  scrollToSlide(slide: HTMLElement, behavior: ScrollBehavior = 'smooth') {
+  async scrollToSlide(slide: HTMLElement, behavior: ScrollBehavior = 'smooth') {
     const scrollContainer = this.scrollContainer;
     const scrollContainerRect = scrollContainer.getBoundingClientRect();
     const nextSlideRect = slide.getBoundingClientRect();
 
-    scrollContainer.scrollTo({
-      left: nextSlideRect.left - scrollContainerRect.left + scrollContainer.scrollLeft,
-      top: nextSlideRect.top - scrollContainerRect.top + scrollContainer.scrollTop,
-      behavior
-    });
+    const nextLeft = nextSlideRect.left - scrollContainerRect.left;
+    const nextTop = nextSlideRect.top - scrollContainerRect.top;
 
-    return waitForEvent(scrollContainer, 'scrollend');
+    // If the slide is already in view, don't need to scroll
+    if (nextLeft !== scrollContainer.scrollLeft || nextTop !== scrollContainer.scrollTop) {
+      scrollContainer.scrollTo({
+        left: nextLeft + scrollContainer.scrollLeft,
+        top: nextTop + scrollContainer.scrollTop,
+        behavior
+      });
+
+      await waitForEvent(scrollContainer, 'scrollend');
+    }
   }
 
   render() {
@@ -485,7 +510,7 @@ export default class SlCarousel extends ShoelaceElement {
           aria-atomic="true"
           tabindex="0"
           @keydown=${this.handleKeyDown}
-          @mousedown="${this.handleDragStart}"
+          @mousedown="${this.handleMouseDragStart}"
           @scroll="${this.handleScroll}"
           @scrollend=${this.handleScrollEnd}
         >
