@@ -219,12 +219,22 @@ export default class SlCarousel extends ShoelaceElement {
     }
   }
 
+  handleMouseDragStart(event: MouseEvent) {
+    const canDrag = this.mouseDragging && event.button === 0;
+    if (canDrag) {
+      event.preventDefault();
+
+      document.addEventListener('mousemove', this.handleMouseDrag, { passive: true });
+      document.addEventListener('mouseup', this.handleMouseDragEnd, { once: true, passive: true });
+    }
+  }
+
   handleMouseDrag = (event: MouseEvent) => {
     const hasMoved = !!event.movementX || !!event.movementY;
     if (!this.dragging && hasMoved) {
       // Start dragging if it hasn't yet
       this.dragging = true;
-      this.scrollContainer.style.setProperty('scroll-snap-type', 'unset');
+      this.scrollContainer.style.setProperty('scroll-snap-type', 'none');
     } else {
       this.scrollContainer.scrollBy({
         left: -event.movementX,
@@ -232,16 +242,6 @@ export default class SlCarousel extends ShoelaceElement {
       });
     }
   };
-
-  handleMouseDragStart(event: MouseEvent) {
-    const canDrag = this.mouseDragging && event.button === 0;
-    if (canDrag) {
-      event.preventDefault();
-
-      document.addEventListener('mousemove', this.handleMouseDrag, { passive: true });
-      document.addEventListener('mouseup', this.handleMouseDragEnd, { once: true });
-    }
-  }
 
   handleMouseDragEnd = () => {
     const scrollContainer = this.scrollContainer;
@@ -252,19 +252,23 @@ export default class SlCarousel extends ShoelaceElement {
     const startTop = scrollContainer.scrollTop;
 
     scrollContainer.style.removeProperty('scroll-snap-type');
+    // fix(safari): forcing a style recalculation doesn't seem to immediately update the scroll
+    // position in Safari. Setting "overflow" to "hidden" should force this behavior.
+    scrollContainer.style.setProperty('overflow', 'hidden');
     const finalLeft = scrollContainer.scrollLeft;
     const finalTop = scrollContainer.scrollTop;
 
-    scrollContainer.style.setProperty('scroll-snap-type', 'unset');
+    scrollContainer.style.removeProperty('overflow');
+    scrollContainer.style.setProperty('scroll-snap-type', 'none');
     scrollContainer.scrollTo({ left: startLeft, top: startTop, behavior: 'instant' });
-    scrollContainer.scrollTo({
-      left: finalLeft,
-      top: finalTop,
-      behavior: prefersReducedMotion() ? 'instant' : 'smooth'
-    });
 
     requestAnimationFrame(async () => {
       if (startLeft !== finalLeft || startTop !== finalTop) {
+        scrollContainer.scrollTo({
+          left: finalLeft,
+          top: finalTop,
+          behavior: prefersReducedMotion() ? 'auto' : 'smooth'
+        });
         await waitForEvent(scrollContainer, 'scrollend');
       }
 
