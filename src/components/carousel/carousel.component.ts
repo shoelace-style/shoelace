@@ -219,7 +219,7 @@ export default class SlCarousel extends ShoelaceElement {
     }
   }
 
-  handleMouseDragStart(event: MouseEvent) {
+  private handleMouseDragStart(event: MouseEvent) {
     const canDrag = this.mouseDragging && event.button === 0;
     if (canDrag) {
       event.preventDefault();
@@ -229,13 +229,11 @@ export default class SlCarousel extends ShoelaceElement {
     }
   }
 
-  handleMouseDrag = (event: MouseEvent) => {
-    const hasMoved = !!event.movementX || !!event.movementY;
-    if (!this.dragging && hasMoved) {
+  private handleMouseDrag = (event: MouseEvent) => {
+    if (!this.dragging) {
       // Start dragging if it hasn't yet
-      this.dragging = true;
       this.scrollContainer.style.setProperty('scroll-snap-type', 'none');
-    } else {
+      this.dragging = true;
       this.scrollContainer.scrollBy({
         left: -event.movementX,
         top: -event.movementY
@@ -243,21 +241,27 @@ export default class SlCarousel extends ShoelaceElement {
     }
   };
 
-  handleMouseDragEnd = () => {
+  private handleMouseDragEnd = () => {
     const scrollContainer = this.scrollContainer;
 
     document.removeEventListener('mousemove', this.handleMouseDrag);
 
+    // get the current scroll position
     const startLeft = scrollContainer.scrollLeft;
     const startTop = scrollContainer.scrollTop;
 
+    // remove the scroll-snap-type property so that the browser will snap the slide to the correct position
     scrollContainer.style.removeProperty('scroll-snap-type');
+
     // fix(safari): forcing a style recalculation doesn't seem to immediately update the scroll
     // position in Safari. Setting "overflow" to "hidden" should force this behavior.
     scrollContainer.style.setProperty('overflow', 'hidden');
+
+    // get the final scroll position to the slide snapped by the browser
     const finalLeft = scrollContainer.scrollLeft;
     const finalTop = scrollContainer.scrollTop;
 
+    // restore the scroll position to the original one, so that it can be smoothly animated if needed
     scrollContainer.style.removeProperty('overflow');
     scrollContainer.style.setProperty('scroll-snap-type', 'none');
     scrollContainer.scrollTo({ left: startLeft, top: startTop, behavior: 'instant' });
