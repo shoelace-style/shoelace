@@ -255,19 +255,16 @@ export default class SlCarousel extends ShoelaceElement {
     // remove the scroll-snap-type property so that the browser will snap the slide to the correct position
     scrollContainer.style.removeProperty('scroll-snap-type');
 
-    // fix(safari): safari doesn't seem to immediately update the scroll position after
-    // setting the scroll nap. Scrolling to the current position should force this behavior.
-    scrollContainer.scrollTo({
-      left: startLeft,
-      top: startTop,
-      behavior: 'instant'
-    });
+    // fix(safari): forcing a style recalculation doesn't seem to immediately update the scroll
+    // position in Safari. Setting "overflow" to "hidden" should force this behavior.
+    scrollContainer.style.setProperty('overflow', 'hidden');
 
     // get the final scroll position to the slide snapped by the browser
     const finalLeft = scrollContainer.scrollLeft;
     const finalTop = scrollContainer.scrollTop;
 
     // restore the scroll position to the original one, so that it can be smoothly animated if needed
+    scrollContainer.style.removeProperty('overflow');
     scrollContainer.style.setProperty('scroll-snap-type', 'none');
     scrollContainer.scrollTo({ left: startLeft, top: startTop, behavior: 'instant' });
 
