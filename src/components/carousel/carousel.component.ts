@@ -219,32 +219,34 @@ export default class SlCarousel extends ShoelaceElement {
     }
   }
 
-  private handleMouseDragStart(event: MouseEvent) {
+  private handleMouseDragStart(event: PointerEvent) {
     const canDrag = this.mouseDragging && event.button === 0;
     if (canDrag) {
       event.preventDefault();
 
-      document.addEventListener('mousemove', this.handleMouseDrag, { passive: true });
-      document.addEventListener('mouseup', this.handleMouseDragEnd, { once: true, passive: true });
+      document.addEventListener('pointermove', this.handleMouseDrag, { capture: true, passive: true });
+      document.addEventListener('pointerup', this.handleMouseDragEnd, { capture: true, once: true });
     }
   }
 
-  private handleMouseDrag = (event: MouseEvent) => {
+  private handleMouseDrag = (event: PointerEvent) => {
     if (!this.dragging) {
       // Start dragging if it hasn't yet
       this.scrollContainer.style.setProperty('scroll-snap-type', 'none');
       this.dragging = true;
-      this.scrollContainer.scrollBy({
-        left: -event.movementX,
-        top: -event.movementY
-      });
     }
+
+    this.scrollContainer.scrollBy({
+      left: -event.movementX,
+      top: -event.movementY,
+      behavior: 'instant'
+    });
   };
 
   private handleMouseDragEnd = () => {
     const scrollContainer = this.scrollContainer;
 
-    document.removeEventListener('mousemove', this.handleMouseDrag);
+    document.removeEventListener('pointermove', this.handleMouseDrag, { capture: true });
 
     // get the current scroll position
     const startLeft = scrollContainer.scrollLeft;
@@ -253,16 +255,19 @@ export default class SlCarousel extends ShoelaceElement {
     // remove the scroll-snap-type property so that the browser will snap the slide to the correct position
     scrollContainer.style.removeProperty('scroll-snap-type');
 
-    // fix(safari): forcing a style recalculation doesn't seem to immediately update the scroll
-    // position in Safari. Setting "overflow" to "hidden" should force this behavior.
-    scrollContainer.style.setProperty('overflow', 'hidden');
+    // fix(safari): safari doesn't seem to immediately update the scroll position after
+    // setting the scroll nap. Scrolling to the current position should force this behavior.
+    scrollContainer.scrollTo({
+      left: startLeft,
+      top: startTop,
+      behavior: 'instant'
+    });
 
     // get the final scroll position to the slide snapped by the browser
     const finalLeft = scrollContainer.scrollLeft;
     const finalTop = scrollContainer.scrollTop;
 
     // restore the scroll position to the original one, so that it can be smoothly animated if needed
-    scrollContainer.style.removeProperty('overflow');
     scrollContainer.style.setProperty('scroll-snap-type', 'none');
     scrollContainer.scrollTo({ left: startLeft, top: startTop, behavior: 'instant' });
 

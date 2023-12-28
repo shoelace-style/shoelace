@@ -3,7 +3,7 @@ import { clickOnElement, dragElement, moveMouseOnElement } from '../../internal/
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import { map } from 'lit/directives/map.js';
 import { range } from 'lit/directives/range.js';
-import { resetMouse, sendMouse } from '@web/test-runner-commands';
+import { resetMouse } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlCarousel from './carousel.js';
 
@@ -424,16 +424,17 @@ describe('<sl-carousel>', () => {
           <sl-carousel-item>Node 3</sl-carousel-item>
         </sl-carousel>
       `);
-      const carouselItem = el.querySelector('sl-carousel-item') as HTMLElement;
 
       // Act
-      await dragElement(carouselItem, -Math.round(carouselItem.offsetWidth * 0.75));
-
+      await dragElement(el, -Math.round(el.offsetWidth * 0.75));
       await oneEvent(el.scrollContainer, 'scrollend');
+      await dragElement(el, -Math.round(el.offsetWidth * 0.75));
+      await oneEvent(el.scrollContainer, 'scrollend');
+
       await el.updateComplete;
 
       // Assert
-      expect(el.activeSlide).to.be.equal(1);
+      expect(el.activeSlide).to.be.equal(2);
     });
 
     it('should be possible to interact with clickable elements', async () => {
