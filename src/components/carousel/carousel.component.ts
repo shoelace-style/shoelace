@@ -453,7 +453,7 @@ export default class SlCarousel extends ShoelaceElement {
    * @param index - The slide index.
    * @param behavior - The behavior used for scrolling.
    */
-  goToSlide(index: number, behavior: ScrollBehavior = 'smooth'): Promise<void> {
+  goToSlide(index: number, behavior: ScrollBehavior = 'smooth') {
     const { slidesPerPage, loop } = this;
 
     const slides = this.getSlides();
@@ -461,7 +461,7 @@ export default class SlCarousel extends ShoelaceElement {
 
     // No need to do anything in case there are no items in the carousel
     if (!slides.length) {
-      return Promise.resolve();
+      return;
     }
 
     // Sets the next index without taking into account clones, if any.
@@ -473,10 +473,10 @@ export default class SlCarousel extends ShoelaceElement {
     const nextSlideIndex = clamp(index + (loop ? slidesPerPage : 0), 0, slidesWithClones.length - 1);
     const nextSlide = slidesWithClones[nextSlideIndex];
 
-    return this.scrollToSlide(nextSlide, prefersReducedMotion() ? 'auto' : behavior);
+    this.scrollToSlide(nextSlide, prefersReducedMotion() ? 'auto' : behavior);
   }
 
-  async scrollToSlide(slide: HTMLElement, behavior: ScrollBehavior = 'smooth') {
+  private async scrollToSlide(slide: HTMLElement, behavior: ScrollBehavior = 'smooth') {
     const scrollContainer = this.scrollContainer;
     const scrollContainerRect = scrollContainer.getBoundingClientRect();
     const nextSlideRect = slide.getBoundingClientRect();
