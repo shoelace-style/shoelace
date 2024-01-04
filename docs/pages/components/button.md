@@ -561,10 +561,10 @@ const App = () => (
 Use the `loading` attribute to make a button busy. The width will remain the same as before, preventing adjacent elements from moving around. Clicks will be suppressed until the loading state is removed.
 
 ```html:preview
-<sl-button variant="default" loading>Default</sl-button>
-<sl-button variant="primary" loading>Primary</sl-button>
-<sl-button variant="warning" loading>Warning</sl-button>
-<sl-button variant="danger" loading>Danger</sl-button>
+<sl-button variant="default" size="small" loading>Default</sl-button>
+<sl-button variant="primary" size="medium" loading>Primary</sl-button>
+<sl-button variant="warning" size="large" loading>Warning</sl-button>
+<sl-button variant="danger" size="x-large" loading>Danger</sl-button>
 ```
 
 ```pug:slim

@@ -505,7 +505,8 @@ export default css`
   }
 
   .button--loading sl-spinner {
-    --indicator-color: currentColor;
+    --track-width: 2px;
+    --speed: 3s;
     position: absolute;
     font-size: 1em;
     height: 1em;
