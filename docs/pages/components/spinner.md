@@ -32,10 +32,10 @@ const App = () => <SlSpinner />;
 
 ### Size
 
-Use the `size` property to display the spinner in a pre-defined size.
+Use the `size` property to display the spinner in one of 4 pre-defined sizes: `small` (16px), `medium` (32px), `large` (48px), and `x-large` (64px).
 
 :::warning
-**Note:** If the pre-defined sizes don't work for your use case, you have the option to set a custom size for the spinner using the `customSize` property (also shown in the example below). Please check with the design team before using this option, so that the team can review the pattern and determine whether the existing size set should be updated.
+**Note:** If the pre-defined sizes don't work for your use case, you can set a custom size using the `customSize` property (as shown in the example below). Please consult the design team before using this option, so that the team can review the pattern and determine whether the existing size set should be updated.
 :::
 
 ```html:preview
@@ -70,20 +70,20 @@ const App = () => (
 
 {% endraw %}
 
-### Track Width
+### Styling the Spinner
 
-The width of the spinner's track can be changed by setting the `--track-width` custom property.
+The spinner's track width, track color, and indicator color can be customized with the `--track-width`, `--track-color`, and `--indicator-color` custom properties.
 
 :::warning
-**Note:** Please check with the design team before using this option, so that the team can review the pattern and determine whether the spinner's default styling should be updated.
+**Note:** In general, you shouldn’t need to do this. If you are working on a design that requires custom styling, please ensure that there’s not a standard spinner in the design system that would work instead. If you really do need a non-standard spinner, please consult the design team before implementing a custom spinner, so that the team can determine whether the existing pattern should be updated.
 :::
 
 ```html:preview
-<sl-spinner style="--track-width: 8px;" size="x-large"></sl-spinner>
+<sl-spinner style="--track-width: 8px; --indicator-color: teal; --track-color: paleturquoise;" size="x-large"></sl-spinner>
 ```
 
 ```pug:slim
-sl-spinner style="--track-width: 8px;" size="x-large"
+sl-spinner style="--track-width: 8px; --indicator-color: teal; --track-color: paleturquoise;" size="x-large"
 ```
 
 {% raw %}
@@ -96,40 +96,6 @@ const App = () => (
     style={{
       fontSize: '3rem',
       '--track-width': '6px'
-    }}
-  />
-);
-```
-
-{% endraw %}
-
-### Color
-
-The spinner's colors can be changed by setting the `--indicator-color` and `--track-color` custom properties.
-
-:::warning
-**Note:** Please check with the design team before using this option, so that the team can review the pattern and determine whether the spinner's default styling should be updated.
-:::
-
-```html:preview
-<sl-spinner style="font-size: 3rem; --indicator-color: deeppink; --track-color: pink;"></sl-spinner>
-```
-
-```pug:slim
-sl-spinner style="font-size: 3rem; --indicator-color: deeppink; --track-color: pink;"
-```
-
-{% raw %}
-
-```jsx:react
-import SlSpinner from '@teamshares/shoelace/dist/react/spinner';
-
-const App = () => (
-  <SlSpinner
-    style={{
-      fontSize: '3rem',
-      '--indicator-color': 'deeppink',
-      '--track-color': 'pink'
     }}
   />
 );
