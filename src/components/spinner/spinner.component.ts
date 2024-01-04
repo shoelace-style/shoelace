@@ -1,5 +1,6 @@
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
+import { property } from 'lit/decorators.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './spinner.styles.js';
 import type { CSSResultGroup } from 'lit';
@@ -9,6 +10,8 @@ import type { CSSResultGroup } from 'lit';
  * @documentation https://shoelace.style/components/spinner
  * @status stable
  * @since 2.0
+ * @pattern stable
+ * @figma ready
  *
  * @csspart base - The component's base wrapper.
  *
@@ -22,11 +25,38 @@ export default class SlSpinner extends ShoelaceElement {
 
   private readonly localize = new LocalizeController(this);
 
+  /** The spinner's size. If left unset, the spinner will inherit the parent element's font size. Alternatively you can also set a custom size by passing a value to the `customSize` property. */
+  @property({ reflect: true }) size: 'small' | 'medium' | 'large' | 'x-large' | 'custom' = 'custom';
+
+  /** Can be used to set a custom size either in pixels or rems. Whenever possible, avoid using this option and stick to the pre-defined size options. */
+  @property() customSize: '';
+
   render() {
+    const svgSizes = {
+      small: '16px',
+      medium: '32px',
+      large: '48px',
+      'x-large': '64px',
+      custom: this.customSize ? this.customSize : '1em'
+    };
+
     return html`
-      <svg part="base" class="spinner" role="progressbar" aria-label=${this.localize.term('loading')}>
+      <svg
+        part="base"
+        class="spinner"
+        role="progressbar"
+        aria-label=${this.localize.term('loading')}
+        width=${svgSizes[this.size]}
+        height=${svgSizes[this.size]}
+        font-size=${svgSizes[this.size]}
+      >
         <circle class="spinner__track"></circle>
-        <circle class="spinner__indicator"></circle>
+        <mask id="mask">
+          <circle class="spinner__indicator"></circle>
+        </mask>
+        <foreignObject x="0" y="0" width="100%" height="100%" mask="url(#mask)">
+          <div class="indicator__gradient"></div>
+        </foreignObject>
       </svg>
     `;
   }

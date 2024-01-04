@@ -9,12 +9,19 @@ layout: component
 
 ### Basic Spinner
 
+By default a spinner inherits its parent element's font size.
+
 ```html:preview
 <sl-spinner></sl-spinner>
+<div style="font-size: 32px;">
+  <sl-spinner></sl-spinner>
+</div>
 ```
 
 ```pug:slim
 sl-spinner
+div style="font-size: 32px;"
+  sl-spinner
 ```
 
 ```jsx:react
@@ -25,18 +32,26 @@ const App = () => <SlSpinner />;
 
 ### Size
 
-Spinners are sized based on the current font size. To change their size, set the `font-size` property on the spinner itself or on a parent element as shown below.
+Use the `size` property to display the spinner in a pre-defined size.
+
+:::warning
+**Note:** If the pre-defined sizes don't work for your use case, you have the option to set a custom size for the spinner using the `customSize` property (also shown in the example below). Please check with the design team before using this option, so that the team can review the pattern and determine whether the existing size set should be updated.
+:::
 
 ```html:preview
-<sl-spinner></sl-spinner>
-<sl-spinner style="font-size: 2rem;"></sl-spinner>
-<sl-spinner style="font-size: 3rem;"></sl-spinner>
+<sl-spinner size="small"></sl-spinner>
+<sl-spinner size="medium"></sl-spinner>
+<sl-spinner size="large"></sl-spinner>
+<sl-spinner size="x-large"></sl-spinner>
+<sl-spinner customSize="88px"></sl-spinner>
 ```
 
 ```pug:slim
-sl-spinner
-sl-spinner style="font-size: 2rem;"
-sl-spinner style="font-size: 3rem;"
+sl-spinner size="small"
+sl-spinner size="medium"
+sl-spinner size="large"
+sl-spinner size="x-large"
+sl-spinner customSize="88px"
 ```
 
 {% raw %}
@@ -59,12 +74,16 @@ const App = () => (
 
 The width of the spinner's track can be changed by setting the `--track-width` custom property.
 
+:::warning
+**Note:** Please check with the design team before using this option, so that the team can review the pattern and determine whether the spinner's default styling should be updated.
+:::
+
 ```html:preview
-<sl-spinner style="font-size: 50px; --track-width: 10px;"></sl-spinner>
+<sl-spinner style="--track-width: 8px;" size="x-large"></sl-spinner>
 ```
 
 ```pug:slim
-sl-spinner style="font-size: 50px; --track-width: 10px;"
+sl-spinner style="--track-width: 8px;" size="x-large"
 ```
 
 {% raw %}
@@ -87,6 +106,10 @@ const App = () => (
 ### Color
 
 The spinner's colors can be changed by setting the `--indicator-color` and `--track-color` custom properties.
+
+:::warning
+**Note:** Please check with the design team before using this option, so that the team can review the pattern and determine whether the spinner's default styling should be updated.
+:::
 
 ```html:preview
 <sl-spinner style="font-size: 3rem; --indicator-color: deeppink; --track-color: pink;"></sl-spinner>
