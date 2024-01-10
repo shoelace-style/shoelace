@@ -112,29 +112,31 @@ export default class Modal {
       }
 
       event.preventDefault();
-      currentFocusIndex = 0
+      currentFocusIndex = 0;
 
       // Check to make sure we actually focused.
+      // eslint-disable-next-line
       while (true) {
         this.currentFocus = tabbableElements[currentFocusIndex];
         this.currentFocus?.focus({ preventScroll: false });
 
         if (currentFocusIndex >= tabbableElements.length) {
-          break
+          break;
         }
 
         // Focusing can fail silently. This prevents us from getting "stuck".
-        if ([...activeElements()].includes(this.currentFocus!) === false) {
-          break
+        if (![...activeElements()].includes(this.currentFocus)) {
+          break;
         }
 
-        currentFocusIndex += 1
+        currentFocusIndex += 1;
       }
       return;
     }
 
     const addition = this.tabDirection === 'forward' ? 1 : -1;
 
+    // eslint-disable-next-line
     while (true) {
       if (currentFocusIndex + addition >= tabbableElements.length) {
         currentFocusIndex = 0;
@@ -164,7 +166,9 @@ export default class Modal {
       this.currentFocus?.focus({ preventScroll: false });
 
       // Check to make sure the element we tried to focus actually focused. `.focus()` can fail silently.
-      if ([...activeElements()].includes(this.currentFocus)) { break }
+      if ([...activeElements()].includes(this.currentFocus)) {
+        break;
+      }
     }
 
     setTimeout(() => this.checkFocus());
@@ -174,4 +178,3 @@ export default class Modal {
     this.tabDirection = 'forward';
   };
 }
-
