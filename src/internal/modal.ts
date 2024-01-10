@@ -136,7 +136,7 @@ export default class Modal {
       this.currentFocus?.focus({ preventScroll: false });
 
       // Check to make sure focus actually changed. It may not always be the next focus, we just don't want it to be the previousFocus.
-      if (!([...activeElements()].includes(this.previousFocus))) {
+      if (![...activeElements()].includes(this.previousFocus)) {
         break;
       }
     }
