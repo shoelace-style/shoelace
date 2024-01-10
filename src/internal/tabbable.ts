@@ -80,11 +80,6 @@ function isTabbable(el: HTMLElement) {
     return false;
   }
 
-  // Elements with a disabled attribute are not tabbable
-  if (el.hasAttribute('disabled')) {
-    return false;
-  }
-
   // Radios without a checked attribute are not tabbable
   if (tag === 'input' && el.getAttribute('type') === 'radio' && !el.hasAttribute('checked')) {
     return false;
