@@ -104,36 +104,6 @@ export default class Modal {
 
     this.previousFocus = this.currentFocus;
 
-    if (currentFocusIndex === -1) {
-      // We don't call event.preventDefault() here because it messes with tabbing to the <iframe> controls.
-      // We just wait until the current focus is no longer an element with possible hidden controls.
-      if (Boolean(this.previousFocus) && this.possiblyHasTabbableChildren(this.previousFocus!)) {
-        return;
-      }
-
-      event.preventDefault();
-      currentFocusIndex = 0;
-
-      // Check to make sure we actually focused.
-      // eslint-disable-next-line
-      while (true) {
-        this.currentFocus = tabbableElements[currentFocusIndex];
-        this.currentFocus?.focus({ preventScroll: false });
-
-        if (currentFocusIndex >= tabbableElements.length) {
-          break;
-        }
-
-        // Focusing can fail silently. This prevents us from getting "stuck".
-        if (![...activeElements()].includes(this.currentFocus)) {
-          break;
-        }
-
-        currentFocusIndex += 1;
-      }
-      return;
-    }
-
     const addition = this.tabDirection === 'forward' ? 1 : -1;
 
     // eslint-disable-next-line
@@ -165,8 +135,8 @@ export default class Modal {
       this.currentFocus = nextFocus;
       this.currentFocus?.focus({ preventScroll: false });
 
-      // Check to make sure the element we tried to focus actually focused. `.focus()` can fail silently.
-      if ([...activeElements()].includes(this.currentFocus)) {
+      // Check to make sure focus actually changed. It may not always be the next focus, we just don't want it to be the previousFocus.
+      if (!([...activeElements()].includes(this.previousFocus))) {
         break;
       }
     }

@@ -211,7 +211,7 @@ describe('<sl-dialog>', () => {
     // Opens modal.
     const openModalButton = container.shadowRoot?.querySelector('sl-button');
 
-    if (openModalButton) openModalButton.click();
+    openModalButton!.click();
 
     // Test tab cycling
     await pressTab();
