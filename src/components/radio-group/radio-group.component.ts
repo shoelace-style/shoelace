@@ -122,7 +122,13 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
   }
 
   private getAllRadios() {
-    return [...this.querySelectorAll<SlRadio | SlRadioButton>('sl-radio, sl-radio-button')];
+    const slot = this.querySelector('slot');
+
+    if (slot) {
+      return slot.assignedElements({ flatten: true }) as SlRadio[] | SlRadioButton[];
+    } else {
+      return [...this.querySelectorAll<SlRadio | SlRadioButton>('sl-radio, sl-radio-button')];
+    }
   }
 
   private handleRadioClick(event: MouseEvent) {
