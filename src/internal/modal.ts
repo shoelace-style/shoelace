@@ -137,10 +137,7 @@ export default class Modal {
 
       // Check to make sure focus actually changed. It may not always be the next focus, we just don't want it to be the previousFocus.
       const allActiveElements = [...activeElements()];
-      if (
-        allActiveElements.includes(this.currentFocus) ||
-        !allActiveElements.includes(this.previousFocus!)
-      ) {
+      if (allActiveElements.includes(this.currentFocus) || !allActiveElements.includes(this.previousFocus!)) {
         break;
       }
     }
