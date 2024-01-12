@@ -8,18 +8,18 @@ export function serialize(form: HTMLFormElement) {
   const formData = new FormData(form);
   const object: Record<string, unknown> = {};
 
-	for (const [key, value] of formData) {
-		if (Object.hasOwn(object, key)) {
-			const entry = object[key]
-			if (Array.isArray(entry)) {
-				entry.push(value)
-			} else {
-				object[key] = [object[key], value]
-			}
-		} else {
-			object[key] = value
-		}
-	}
+  for (const [key, value] of formData) {
+    if (Object.hasOwn(object, key)) {
+      const entry = object[key]
+      if (Array.isArray(entry)) {
+        entry.push(value)
+      } else {
+        object[key] = [object[key], value]
+      }
+    } else {
+      object[key] = value
+    }
+  }
 
   return object;
 }
