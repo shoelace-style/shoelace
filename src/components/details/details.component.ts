@@ -97,6 +97,15 @@ export default class SlDetails extends ShoelaceElement {
   }
 
   private handleSummaryClick(event: MouseEvent) {
+    const htmlElement = event.target as HTMLElement;
+    if (htmlElement) {
+      // If the element has its own behavior, return without calling preventDefault or toggling the visibility.
+      const hasHref = htmlElement.getAttribute('href');
+      const hasOnClick = typeof htmlElement.onclick === 'function';
+      if (hasHref || hasOnClick) {
+        return;
+      }
+    }
     event.preventDefault();
 
     if (!this.disabled) {

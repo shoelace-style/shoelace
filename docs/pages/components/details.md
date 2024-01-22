@@ -154,6 +154,39 @@ const App = () => (
 );
 ```
 
+### Header Actions
+
+You can now include anchor tags and buttons with `onClick` handlers within the `summary` slot.
+
+```html:preview
+<sl-details summary="Toggle Me">
+  <div slot="summary">
+    <a href="https://google.com">Link</a>
+    <sl-button href="https://google.com" size="small">Button with href</sl-button>
+    <sl-button size="small" onclick="() => {console.log('onClick called')}">Button with onClick</sl-button>
+  </div>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+</sl-details>
+```
+
+```pug:slim
+sl-details summary="Toggle Me"
+  | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+  | aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+```
+
+```jsx:react
+import SlDetails from '@teamshares/shoelace/dist/react/details';
+
+const App = () => (
+  <SlDetails summary="Toggle Me">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </SlDetails>
+);
+```
+
 ### Grouping Details
 
 Details are designed to function independently, but you can simulate a group or "accordion" where only one is shown at a time by listening for the `sl-show` event.

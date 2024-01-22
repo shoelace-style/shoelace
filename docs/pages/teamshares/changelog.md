@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1
+
+- Fix: Support for clickable links and buttons in the `summary` slot of `sl-details`.
+
 ## 2.0.0
 
 - **MASSIVE** set of changes from upstream (jumping from 2.5.0 > 2.11.2). This included a big restructuring of the codebase in upstream 2.6.0, which moved the component code into separate `name.component.ts` files. Lots of other files got moved around, the build process changed, and the docs site is now using eleventy. Please see the upstream change logs for more details.
