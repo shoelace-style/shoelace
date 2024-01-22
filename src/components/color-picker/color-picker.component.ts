@@ -667,7 +667,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
 
   /** Generates a hex string from HSV values. Hue must be 0-360. All other arguments must be 0-100. */
   private getHexString(hue: number, saturation: number, brightness: number, alpha = 100) {
-    const color = new TinyColor(`hsva(${hue}, ${saturation}, ${brightness}, ${alpha / 100})`);
+    const color = new TinyColor(`hsva(${hue}, ${saturation}%, ${brightness}%, ${alpha / 100})`);
     if (!color.isValid) {
       return '';
     }
