@@ -277,7 +277,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
     // Close when pressing escape
     if (event.key === 'Escape' && this.open && !this.closeWatcher) {
-      console.log('foo');
       event.preventDefault();
       event.stopPropagation();
       this.hide();
