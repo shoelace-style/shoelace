@@ -14,7 +14,7 @@ declare namespace Chai {
 interface HTMLInputElement {
   showPicker: () => void;
 }
-
+/* eslint-disable */
 interface CloseWatcher extends EventTarget {
   new (options?: CloseWatcherOptions): CloseWatcher;
   requestClose(): void;
@@ -34,3 +34,4 @@ interface CloseWatcherOptions {
 declare interface Window {
   CloseWatcher?: CloseWatcher;
 }
+/* eslint-enable */
