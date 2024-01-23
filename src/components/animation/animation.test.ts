@@ -1,5 +1,6 @@
 import '../../../dist/shoelace.js';
-import { aTimeout, expect, fixture, html, oneEvent } from '@open-wc/testing';
+import { aTimeout, expect, fixture, oneEvent } from '@open-wc/testing';
+import { html } from 'lit';
 import type SlAnimation from './animation.js';
 
 describe('<sl-animation>', () => {

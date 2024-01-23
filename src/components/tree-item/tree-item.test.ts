@@ -1,7 +1,7 @@
 import '../../../dist/shoelace.js';
 import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import sinon from 'sinon';
-import type SlTreeItem from './tree-item';
+import type SlTreeItem from './tree-item.js';
 
 describe('<sl-tree-item>', () => {
   let leafItem: SlTreeItem;

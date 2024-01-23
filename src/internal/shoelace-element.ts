@@ -9,9 +9,9 @@ type EventTypeRequiresDetail<T> = T extends keyof GlobalEventHandlersEventMap
       GlobalEventHandlersEventMap[T] extends CustomEvent<Record<PropertyKey, never>>
       ? never
       : // ...and has at least one non-optional property
-      Partial<GlobalEventHandlersEventMap[T]['detail']> extends GlobalEventHandlersEventMap[T]['detail']
-      ? never
-      : T
+        Partial<GlobalEventHandlersEventMap[T]['detail']> extends GlobalEventHandlersEventMap[T]['detail']
+        ? never
+        : T
     : never
   : never;
 
@@ -21,8 +21,8 @@ type EventTypeDoesNotRequireDetail<T> = T extends keyof GlobalEventHandlersEvent
     ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<PropertyKey, never>>
       ? T
       : Partial<GlobalEventHandlersEventMap[T]['detail']> extends GlobalEventHandlersEventMap[T]['detail']
-      ? T
-      : never
+        ? T
+        : never
     : T
   : T;
 
@@ -47,8 +47,8 @@ type SlEventInit<T> = T extends keyof GlobalEventHandlersEventMap
     ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<PropertyKey, never>>
       ? CustomEventInit<GlobalEventHandlersEventMap[T]['detail']>
       : Partial<GlobalEventHandlersEventMap[T]['detail']> extends GlobalEventHandlersEventMap[T]['detail']
-      ? CustomEventInit<GlobalEventHandlersEventMap[T]['detail']>
-      : WithRequired<CustomEventInit<GlobalEventHandlersEventMap[T]['detail']>, 'detail'>
+        ? CustomEventInit<GlobalEventHandlersEventMap[T]['detail']>
+        : WithRequired<CustomEventInit<GlobalEventHandlersEventMap[T]['detail']>, 'detail'>
     : CustomEventInit
   : CustomEventInit;
 

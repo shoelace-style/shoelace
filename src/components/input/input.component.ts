@@ -347,10 +347,12 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
     replacement: string,
     start?: number,
     end?: number,
-    selectMode?: 'select' | 'start' | 'end' | 'preserve'
+    selectMode: 'select' | 'start' | 'end' | 'preserve' = 'preserve'
   ) {
-    // @ts-expect-error - start, end, and selectMode are optional
-    this.input.setRangeText(replacement, start, end, selectMode);
+    const selectionStart = start ?? this.input.selectionStart!;
+    const selectionEnd = end ?? this.input.selectionEnd!;
+
+    this.input.setRangeText(replacement, selectionStart, selectionEnd, selectMode);
 
     if (this.value !== this.input.value) {
       this.value = this.input.value;

@@ -12,6 +12,29 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## 2.13.0
+
+- Added the `hover-bridge` feature to `<sl-popup>` to support better tooltip accessibility [#1734]
+- Added the `loading` attribute and the `spinner` and `spinner__base` part to `<sl-menu-item>` [#1700]
+- Fixed files that did not have `.js` extensions. [#1770]
+- Fixed `<sl-dialog>` not accounting for elements with hidden dialog controls like `<video>` [#1755]
+- Fixed focus trapping not scrolling elements into view. [#1750]
+- Fixed more performance issues with focus trapping performance. [#1750]
+- Fixed a bug in `<sl-input>` and `<sl-textarea>` that made it work differently from `<input>` and `<textarea>` when using defaults [#1746]
+- Fixed a bug in `<sl-select>` that prevented it from closing when tabbing to another select inside a shadow root [#1763]
+- Fixed a bug in `<sl-spinner>` that caused the animation to appear strange in certain circumstances [#1787]
+- Fixed a bug in `<sl-dialog>` with focus trapping [#1813]
+- Fixed a bug that caused form controls to submit even after they were removed from the DOM [#1823]
+- Fixed a bug that caused empty `<sl-radio-group>` elements to log an error in the console [#1795]
+- Fixed a bug that caused modal scroll locking to conflict with the `scrollbar-gutter` property [#1805]
+- Fixed a bug in `<sl-option>` that caused slotted content to show up when calling `getTextLabel()` [#1730]
+- Fixed a bug in `<sl-color-picker>` that caused picker values to not match the preview color [#1831]
+- Fixed a bug in `<sl-carousel>` where pagination dots don't update when swiping slide in iOS Safari [#1748]
+- Fixed a bug in`<sl-carousel>` where trying to swipe doesn't change the slide in Firefox for Android [#1748]
+- Improved the accessibility of `<sl-tooltip>` so they persist when hovering over the tooltip and dismiss when pressing [[Esc]] [#1734]
+- Improved "close" behavior of multiple components in supportive browsers using the `CloseWatcher` API [#1788]
+- Removed the scroll controller from the experimental `<sl-carousel>` and moved all mouse related logic into the component [#1748]
+
 ## 2.12.0
 
 - Added the Italian translation [#1727]

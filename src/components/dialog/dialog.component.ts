@@ -75,6 +75,7 @@ export default class SlDialog extends ShoelaceElement {
   private readonly localize = new LocalizeController(this);
   private originalTrigger: HTMLElement | null;
   public modal = new Modal(this);
+  private closeWatcher: CloseWatcher | null;
 
   @query('.dialog') dialog: HTMLElement;
   @query('.dialog__panel') panel: HTMLElement;
@@ -112,6 +113,7 @@ export default class SlDialog extends ShoelaceElement {
     super.disconnectedCallback();
     this.modal.deactivate();
     unlockBodyScrolling(this);
+    this.closeWatcher?.destroy();
   }
 
   private requestClose(source: 'close-button' | 'keyboard' | 'overlay') {
@@ -130,10 +132,17 @@ export default class SlDialog extends ShoelaceElement {
   }
 
   private addOpenListeners() {
-    document.addEventListener('keydown', this.handleDocumentKeyDown);
+    if ('CloseWatcher' in window) {
+      this.closeWatcher?.destroy();
+      this.closeWatcher = new CloseWatcher();
+      this.closeWatcher.onclose = () => this.requestClose('keyboard');
+    } else {
+      document.addEventListener('keydown', this.handleDocumentKeyDown);
+    }
   }
 
   private removeOpenListeners() {
+    this.closeWatcher?.destroy();
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
@@ -300,9 +309,9 @@ export default class SlDialog extends ShoelaceElement {
               `
             : ''}
           ${
-            '' /* The tabindex="-1" is here because the body is technically scrollable if overflowing. However, if there's no focusable elements inside, you won't actually be able to scroll it via keyboard. */
+            '' /* The tabindex="-1" is here because the body is technically scrollable if overflowing. However, if there's no focusable elements inside, you won't actually be able to scroll it via keyboard. Previously this was just a <slot>, but tabindex="-1" on the slot causes children to not be focusable. https://github.com/shoelace-style/shoelace/issues/1753#issuecomment-1836803277 */
           }
-          <slot part="body" class="dialog__body" tabindex="-1"></slot>
+          <div part="body" class="dialog__body" tabindex="-1"><slot></slot></div>
 
           <footer part="footer" class="dialog__footer">
             <slot name="footer"></slot>

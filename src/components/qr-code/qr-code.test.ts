@@ -1,6 +1,6 @@
 import '../../../dist/shoelace.js';
 import { expect, fixture, html } from '@open-wc/testing';
-import type SlQrCode from './qr-code';
+import type SlQrCode from './qr-code.js';
 
 const getCanvas = (qrCode: SlQrCode): HTMLCanvasElement => {
   const possibleCanvas = qrCode.shadowRoot?.querySelector<HTMLCanvasElement>('.qr-code');

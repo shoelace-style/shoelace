@@ -2,8 +2,8 @@ import '../../../dist/shoelace.js';
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-import type { SlSelectEvent } from '../../events/sl-select';
-import type SlMenuItem from './menu-item';
+import type { SlSelectEvent } from '../../events/sl-select.js';
+import type SlMenuItem from './menu-item.js';
 
 describe('<sl-menu-item>', () => {
   it('should pass accessibility tests', async () => {
@@ -40,12 +40,20 @@ describe('<sl-menu-item>', () => {
 
     expect(el.value).to.equal('');
     expect(el.disabled).to.be.false;
+    expect(el.loading).to.equal(false);
     expect(el.getAttribute('aria-disabled')).to.equal('false');
   });
 
   it('should render the correct aria attributes when disabled', async () => {
     const el = await fixture<SlMenuItem>(html` <sl-menu-item disabled>Test</sl-menu-item> `);
     expect(el.getAttribute('aria-disabled')).to.equal('true');
+  });
+
+  describe('when loading', () => {
+    it('should have a spinner present', async () => {
+      const el = await fixture<SlMenuItem>(html` <sl-menu-item loading>Menu Item Label</sl-menu-item> `);
+      expect(el.shadowRoot!.querySelector('sl-spinner')).to.exist;
+    });
   });
 
   it('should return a text label when calling getTextLabel()', async () => {

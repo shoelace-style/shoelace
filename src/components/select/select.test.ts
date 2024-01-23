@@ -156,6 +156,7 @@ describe('<sl-select>', () => {
       await el.updateComplete;
       await sendKeys({ press: 'ArrowDown' }); // move selection to the third option
       await el.updateComplete;
+      el.focus(); // For some reason, the browser loses focus before we press enter. Refocus the select.
       await sendKeys({ press: 'Enter' }); // commit the selection
       await el.updateComplete;
 
@@ -443,8 +444,7 @@ describe('<sl-select>', () => {
   });
 
   describe('when resetting a form', () => {
-    // NOTE: Firefox is failing locally for me even though manual tests show this is working fine
-    it.skip('should reset the element to its initial value', async () => {
+    it('should reset the element to its initial value', async () => {
       const form = await fixture<HTMLFormElement>(html`
         <form>
           <sl-select value="option-1">

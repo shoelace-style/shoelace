@@ -45,6 +45,7 @@ export default class SlTooltip extends ShoelaceElement {
 
   private hoverTimeout: number;
   private readonly localize = new LocalizeController(this);
+  private closeWatcher: CloseWatcher | null;
 
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
   @query('.tooltip__body') body: HTMLElement;
@@ -102,13 +103,14 @@ export default class SlTooltip extends ShoelaceElement {
     this.addEventListener('blur', this.handleBlur, true);
     this.addEventListener('focus', this.handleFocus, true);
     this.addEventListener('click', this.handleClick);
-    this.addEventListener('keydown', this.handleKeyDown);
     this.addEventListener('mouseover', this.handleMouseOver);
     this.addEventListener('mouseout', this.handleMouseOut);
   }
 
-  connectedCallback() {
-    super.connectedCallback();
+  disconnectedCallback() {
+    // Cleanup this event in case the tooltip is removed while open
+    this.closeWatcher?.destroy();
+    document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
   firstUpdated() {
@@ -143,9 +145,9 @@ export default class SlTooltip extends ShoelaceElement {
     }
   };
 
-  private handleKeyDown = (event: KeyboardEvent) => {
-    // Pressing escape when the target element has focus should dismiss the tooltip
-    if (this.open && !this.disabled && event.key === 'Escape') {
+  private handleDocumentKeyDown = (event: KeyboardEvent) => {
+    // Pressing escape when a tooltip is open should dismiss it
+    if (event.key === 'Escape') {
       event.stopPropagation();
       this.hide();
     }
@@ -181,17 +183,29 @@ export default class SlTooltip extends ShoelaceElement {
 
       // Show
       this.emit('sl-show');
+      if ('CloseWatcher' in window) {
+        this.closeWatcher?.destroy();
+        this.closeWatcher = new CloseWatcher();
+        this.closeWatcher.onclose = () => {
+          this.hide();
+        };
+      } else {
+        document.addEventListener('keydown', this.handleDocumentKeyDown);
+      }
 
       await stopAnimations(this.body);
       this.body.hidden = false;
       this.popup.active = true;
       const { keyframes, options } = getAnimation(this, 'tooltip.show', { dir: this.localize.dir() });
       await animateTo(this.popup.popup, keyframes, options);
+      this.popup.reposition();
 
       this.emit('sl-after-show');
     } else {
       // Hide
       this.emit('sl-hide');
+      this.closeWatcher?.destroy();
+      document.removeEventListener('keydown', this.handleDocumentKeyDown);
 
       await stopAnimations(this.body);
       const { keyframes, options } = getAnimation(this, 'tooltip.hide', { dir: this.localize.dir() });
@@ -263,6 +277,7 @@ export default class SlTooltip extends ShoelaceElement {
         flip
         shift
         arrow
+        hover-bridge
       >
         ${'' /* eslint-disable-next-line lit-a11y/no-aria-slot */}
         <slot slot="anchor" aria-describedby="tooltip"></slot>

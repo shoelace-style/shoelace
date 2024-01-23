@@ -1,22 +1,72 @@
-//
-// This doesn't technically check visibility, it checks if the element has been rendered and can maybe possibly be tabbed
-// to. This is a workaround for shadow roots not having an `offsetParent`.
-//
-// See https://stackoverflow.com/questions/19669786/check-if-element-is-visible-in-dom
-//
-// Previously, we used https://www.npmjs.com/package/composed-offset-position, but recursing up an entire node tree took
-// up a lot of CPU cycles and made focus traps unusable in Chrome / Edge.
-//
-function isTakingUpSpace(elem: HTMLElement): boolean {
-  return Boolean(elem.offsetParent || elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length);
+// Cached compute style calls. This is specifically for browsers that dont support `checkVisibility()`.
+// computedStyle calls are "live" so they only need to be retrieved once for an element.
+const computedStyleMap = new WeakMap<Element, CSSStyleDeclaration>();
+
+function getCachedComputedStyle(el: HTMLElement): CSSStyleDeclaration {
+  let computedStyle: undefined | CSSStyleDeclaration = computedStyleMap.get(el);
+
+  if (!computedStyle) {
+    computedStyle = window.getComputedStyle(el, null);
+    computedStyleMap.set(el, computedStyle);
+  }
+
+  return computedStyle;
+}
+
+function isVisible(el: HTMLElement): boolean {
+  // This is the fastest check, but isn't supported in Safari.
+  if (typeof el.checkVisibility === 'function') {
+    // Opacity is focusable, visibility is not.
+    return el.checkVisibility({ checkOpacity: false, checkVisibilityCSS: true });
+  }
+
+  // Fallback "polyfill" for "checkVisibility"
+  const computedStyle = getCachedComputedStyle(el);
+
+  return computedStyle.visibility !== 'hidden' && computedStyle.display !== 'none';
+}
+
+// While this behavior isn't standard in Safari / Chrome yet, I think it's the most reasonable
+// way of handling tabbable overflow areas. Browser sniffing seems gross, and it's the most
+// accessible way of handling overflow areas. [Konnor]
+function isOverflowingAndTabbable(el: HTMLElement): boolean {
+  const computedStyle = getCachedComputedStyle(el);
+
+  const { overflowY, overflowX } = computedStyle;
+
+  if (overflowY === 'scroll' || overflowX === 'scroll') {
+    return true;
+  }
+
+  if (overflowY !== 'auto' || overflowX !== 'auto') {
+    return false;
+  }
+
+  // Always overflow === "auto" by this point
+  const isOverflowingY = el.scrollHeight > el.clientHeight;
+
+  if (isOverflowingY && overflowY === 'auto') {
+    return true;
+  }
+
+  const isOverflowingX = el.scrollWidth > el.clientWidth;
+
+  if (isOverflowingX && overflowX === 'auto') {
+    return true;
+  }
+
+  return false;
 }
 
 /** Determines if the specified element is tabbable using heuristics inspired by https://github.com/focus-trap/tabbable */
 function isTabbable(el: HTMLElement) {
   const tag = el.tagName.toLowerCase();
 
-  // Elements with a -1 tab index are not tabbable
-  if (el.getAttribute('tabindex') === '-1') {
+  const tabindex = Number(el.getAttribute('tabindex'));
+  const hasTabindex = el.hasAttribute('tabindex');
+
+  // elements with a tabindex attribute that is either NaN or <= -1 are not tabbable
+  if (hasTabindex && (isNaN(tabindex) || tabindex <= -1)) {
     return false;
   }
 
@@ -25,18 +75,17 @@ function isTabbable(el: HTMLElement) {
     return false;
   }
 
+  // If any parents have "inert", we aren't "tabbable"
+  if (el.closest('[inert]')) {
+    return false;
+  }
+
   // Radios without a checked attribute are not tabbable
   if (tag === 'input' && el.getAttribute('type') === 'radio' && !el.hasAttribute('checked')) {
     return false;
   }
 
-  // Elements that are hidden have no offsetParent and are not tabbable
-  if (!isTakingUpSpace(el)) {
-    return false;
-  }
-
-  // Elements without visibility are not tabbable
-  if (window.getComputedStyle(el).visibility === 'hidden') {
+  if (!isVisible(el)) {
     return false;
   }
 
@@ -56,7 +105,24 @@ function isTabbable(el: HTMLElement) {
   }
 
   // At this point, the following elements are considered tabbable
-  return ['button', 'input', 'select', 'textarea', 'a', 'audio', 'video', 'summary'].includes(tag);
+  const isNativelyTabbable = [
+    'button',
+    'input',
+    'select',
+    'textarea',
+    'a',
+    'audio',
+    'video',
+    'summary',
+    'iframe'
+  ].includes(tag);
+
+  if (isNativelyTabbable) {
+    return true;
+  }
+
+  // We save the overflow checks for last, because they're the most expensive
+  return isOverflowingAndTabbable(el);
 }
 
 /**
@@ -73,29 +139,36 @@ export function getTabbableBoundary(root: HTMLElement | ShadowRoot) {
   return { start, end };
 }
 
+/**
+ * This looks funky. Basically a slot's children will always be picked up *if* they're within the `root` element.
+ * However, there is an edge case when, if the `root` is wrapped by another shadow DOM, it won't grab the children.
+ * This fixes that fun edge case.
+ */
+function getSlottedChildrenOutsideRootElement(slotElement: HTMLSlotElement, root: HTMLElement | ShadowRoot) {
+  return (slotElement.getRootNode({ composed: true }) as ShadowRoot | null)?.host !== root;
+}
+
 export function getTabbableElements(root: HTMLElement | ShadowRoot) {
+  const walkedEls = new WeakMap();
   const tabbableElements: HTMLElement[] = [];
 
   function walk(el: HTMLElement | ShadowRoot) {
     if (el instanceof Element) {
       // if the element has "inert" we can just no-op it.
-      if (el.hasAttribute('inert')) {
+      if (el.hasAttribute('inert') || el.closest('[inert]')) {
         return;
       }
+
+      if (walkedEls.has(el)) {
+        return;
+      }
+      walkedEls.set(el, true);
 
       if (!tabbableElements.includes(el) && isTabbable(el)) {
         tabbableElements.push(el);
       }
 
-      /**
-       * This looks funky. Basically a slot's children will always be picked up *if* they're within the `root` element.
-       * However, there is an edge case when, if the `root` is wrapped by another shadow DOM, it won't grab the children.
-       * This fixes that fun edge case.
-       */
-      const slotChildrenOutsideRootElement = (slotElement: HTMLSlotElement) =>
-        (slotElement.getRootNode({ composed: true }) as ShadowRoot | null)?.host !== root;
-
-      if (el instanceof HTMLSlotElement && slotChildrenOutsideRootElement(el)) {
+      if (el instanceof HTMLSlotElement && getSlottedChildrenOutsideRootElement(el, root)) {
         el.assignedElements({ flatten: true }).forEach((assignedEl: HTMLElement) => {
           walk(assignedEl);
         });
@@ -106,7 +179,9 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
       }
     }
 
-    [...el.children].forEach((e: HTMLElement) => walk(e));
+    for (const e of el.children) {
+      walk(e as HTMLElement);
+    }
   }
 
   // Collect all elements including the root

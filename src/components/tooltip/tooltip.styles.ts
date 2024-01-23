@@ -18,7 +18,6 @@ export default css`
   }
 
   .tooltip::part(popup) {
-    pointer-events: none;
     z-index: var(--sl-z-index-tooltip);
   }
 
