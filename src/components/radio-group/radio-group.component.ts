@@ -218,7 +218,7 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
 
     this.hasButtonGroup = radios.some(radio => radio.tagName.toLowerCase() === 'sl-radio-button');
 
-    if (!radios.some(radio => radio.checked)) {
+    if (radios.length > 0 && !radios.some(radio => radio.checked)) {
       if (this.hasButtonGroup) {
         const buttonRadio = radios[0].shadowRoot?.querySelector('button');
 
