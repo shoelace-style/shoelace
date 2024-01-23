@@ -28,7 +28,10 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug that caused modal scroll locking to conflict with the `scrollbar-gutter` property [#1805]
 - Fixed a bug in `<sl-option>` that caused slotted content to show up when calling `getTextLabel()` [#1730]
 - Fixed a bug in `<sl-color-picker>` that caused picker values to not match the preview color [#1831]
+- Fixed a bug in `<sl-carousel>` where pagination dots don't update when swiping slide in iOS Safari [#1748]
+- Fixed a bug in`<sl-carousel>` where trying to swipe doesn't change the slide in Firefox for Android [#1748]
 - Improved the accessibility of `<sl-tooltip>` so they persist when hovering over the tooltip and dismiss when pressing [[Esc]] [#1734]
+- Removed the scroll controller from the experimental `<sl-carousel>` and moved all mouse related logic into the component [#1748]
 
 ## 2.12.0
 
