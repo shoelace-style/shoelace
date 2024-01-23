@@ -186,7 +186,9 @@ export default class SlTooltip extends ShoelaceElement {
       if ('CloseWatcher' in window) {
         this.closeWatcher?.destroy();
         this.closeWatcher = new CloseWatcher();
-        this.closeWatcher.onclose = () => { this.hide() };
+        this.closeWatcher.onclose = () => {
+          this.hide();
+        };
       } else {
         document.addEventListener('keydown', this.handleDocumentKeyDown);
       }

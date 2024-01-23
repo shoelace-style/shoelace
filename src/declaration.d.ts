@@ -21,8 +21,8 @@ interface CloseWatcher extends EventTarget {
   close(): void;
   destroy(): void;
 
-  oncancel: ((event: Event) => void | null);
-  onclose: ((event: Event) => void | null);
+  oncancel: (event: Event) => void | null;
+  onclose: (event: Event) => void | null;
 }
 
 declare const CloseWatcher: CloseWatcher;

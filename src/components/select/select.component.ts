@@ -231,7 +231,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
           this.hide();
           this.displayInput.focus({ preventScroll: true });
         }
-      }
+      };
     }
     root.addEventListener('focusin', this.handleDocumentFocusIn);
     root.addEventListener('keydown', this.handleDocumentKeyDown);
