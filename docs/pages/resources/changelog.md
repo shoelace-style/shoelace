@@ -14,15 +14,16 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- Added the `hover-bridge` feature to `<sl-popup>` to support better tooltip accessibility [#1734]
+- Added the `loading` attribute and the `spinner` and `spinner__base` part to `<sl-menu-item>` [#1700]
 - Fixed files that did not have `.js` extensions. [#1770]
 - Fixed `<sl-dialog>` not accounting for elements with hidden dialog controls like `<video>` [#1755]
-- Added the `loading` attribute and the `spinner` and `spinner__base` part to `<sl-menu-item>` [#1700]
 - Fixed focus trapping not scrolling elements into view. [#1750]
 - Fixed more performance issues with focus trapping performance. [#1750]
-- Added the `hover-bridge` feature to `<sl-popup>` to support better tooltip accessibility [#1734]
 - Fixed a bug in `<sl-input>` and `<sl-textarea>` that made it work differently from `<input>` and `<textarea>` when using defaults [#1746]
 - Fixed a bug in `<sl-select>` that prevented it from closing when tabbing to another select inside a shadow root [#1763]
 - Fixed a bug in `<sl-spinner>` that caused the animation to appear strange in certain circumstances [#1787]
+- Fixed a bug that caused form controls to submit even after they were removed from the DOM [#1823]
 - Fixed a bug that caused empty `<sl-radio-group>` elements to log an error in the console [#1795]
 - Fixed a bug that caused modal scroll locking to conflict with the `scrollbar-gutter` property [#1805]
 - Fixed a bug in `<sl-option>` that caused slotted content to show up when calling `getTextLabel()` [#1730]
