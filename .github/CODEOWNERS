@@ -1,0 +1,13 @@
+# Auto-assign the DS team
+* @teamshares/design-system
+
+# Ping platform team for visibility into infrastructure updates
+.github/ @teamshares/platform
+
+# Ping Daross for visibility into build and scripting changes
+/scripts/ @crookedgrin
+/src/ @crookedgrin @teamshares/design-system
+
+# Ping Sara and Daross for docs changes
+/docs/ @slhinyc @crookedgrin
+*.md @slhinyc @crookedgrin
