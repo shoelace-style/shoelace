@@ -81,6 +81,7 @@ export default class SlDrawer extends ShoelaceElement {
   private readonly localize = new LocalizeController(this);
   private originalTrigger: HTMLElement | null;
   public modal = new Modal(this);
+  private closeWatcher: CloseWatcher | null;
 
   @query('.drawer') drawer: HTMLElement;
   @query('.drawer__panel') panel: HTMLElement;
@@ -129,6 +130,7 @@ export default class SlDrawer extends ShoelaceElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     unlockBodyScrolling(this);
+    this.closeWatcher?.destroy();
   }
 
   private requestClose(source: 'close-button' | 'keyboard' | 'overlay') {
@@ -147,11 +149,20 @@ export default class SlDrawer extends ShoelaceElement {
   }
 
   private addOpenListeners() {
-    document.addEventListener('keydown', this.handleDocumentKeyDown);
+    if ('CloseWatcher' in window) {
+      this.closeWatcher?.destroy();
+      if (!this.contained) {
+        this.closeWatcher = new CloseWatcher();
+        this.closeWatcher.onclose = () => this.requestClose('keyboard');
+      }
+    } else {
+      document.addEventListener('keydown', this.handleDocumentKeyDown);
+    }
   }
 
   private removeOpenListeners() {
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
+    this.closeWatcher?.destroy();
   }
 
   private handleDocumentKeyDown = (event: KeyboardEvent) => {
