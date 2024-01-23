@@ -106,7 +106,22 @@ export default class SlOption extends ShoelaceElement {
 
   /** Returns a plain text label based on the option's content. */
   getTextLabel() {
-    return (this.textContent ?? '').trim();
+    const nodes = this.childNodes;
+    let label = '';
+
+    [...nodes].forEach(node => {
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        if (!(node as HTMLElement).hasAttribute('slot')) {
+          label += (node as HTMLElement).outerHTML;
+        }
+      }
+
+      if (node.nodeType === Node.TEXT_NODE) {
+        label += node.textContent;
+      }
+    });
+
+    return label.trim();
   }
 
   render() {

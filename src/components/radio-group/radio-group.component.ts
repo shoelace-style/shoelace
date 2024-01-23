@@ -28,6 +28,7 @@ import type SlRadioButton from '../radio-button/radio-button.js';
  * @slot - The default slot where `<sl-radio>` or `<sl-radio-button>` elements are placed.
  * @slot label - The radio group's label. Required for proper accessibility. Alternatively, you can use the `label`
  *  attribute.
+ * @slot help-text - Text that describes how to use the radio group. Alternatively, you can use the `help-text` attribute.
  *
  * @event sl-change - Emitted when the radio group's selected value changes.
  * @event sl-input - Emitted when the radio group receives user input.
@@ -218,7 +219,7 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
 
     this.hasButtonGroup = radios.some(radio => radio.tagName.toLowerCase() === 'sl-radio-button');
 
-    if (!radios.some(radio => radio.checked)) {
+    if (radios.length > 0 && !radios.some(radio => radio.checked)) {
       if (this.hasButtonGroup) {
         const buttonRadio = radios[0].shadowRoot?.querySelector('button');
 

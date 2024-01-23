@@ -4,9 +4,18 @@
  * to reduce the possibility of collisions.
  */
 
-.sl-scroll-lock {
-  padding-right: var(--sl-scroll-lock-size) !important;
-  overflow: hidden !important;
+@supports (scrollbar-gutter: stable) {
+  .sl-scroll-lock {
+    scrollbar-gutter: stable !important;
+    overflow: hidden !important;
+  }
+}
+
+@supports not (scrollbar-gutter: stable) {
+  .sl-scroll-lock {
+    padding-right: var(--sl-scroll-lock-size) !important;
+    overflow: hidden !important;
+  }
 }
 
 .sl-toast-stack {
