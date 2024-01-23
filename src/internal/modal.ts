@@ -1,4 +1,4 @@
-import { getDeepestActiveElement } from './active-elements.js';
+import { activeElements, getDeepestActiveElement } from './active-elements.js';
 import { getTabbableElements } from './tabbable.js';
 
 let activeModals: HTMLElement[] = [];
@@ -104,48 +104,43 @@ export default class Modal {
 
     this.previousFocus = this.currentFocus;
 
-    if (currentFocusIndex === -1) {
-      this.currentFocus = tabbableElements[0];
+    const addition = this.tabDirection === 'forward' ? 1 : -1;
 
-      // We don't call event.preventDefault() here because it messes with tabbing to the <iframe> controls.
-      // We just wait until the current focus is no longer an element with possible hidden controls.
-      if (Boolean(this.previousFocus) && this.possiblyHasTabbableChildren(this.previousFocus!)) {
+    // eslint-disable-next-line
+    while (true) {
+      if (currentFocusIndex + addition >= tabbableElements.length) {
+        currentFocusIndex = 0;
+      } else if (currentFocusIndex + addition < 0) {
+        currentFocusIndex = tabbableElements.length - 1;
+      } else {
+        currentFocusIndex += addition;
+      }
+
+      this.previousFocus = this.currentFocus;
+      const nextFocus = /** @type {HTMLElement} */ tabbableElements[currentFocusIndex];
+
+      // This is a special case. We need to make sure we're not calling .focus() if we're already focused on an element
+      // that possibly has "controls"
+      if (this.tabDirection === 'backward') {
+        if (this.previousFocus && this.possiblyHasTabbableChildren(this.previousFocus)) {
+          return;
+        }
+      }
+
+      if (nextFocus && this.possiblyHasTabbableChildren(nextFocus)) {
         return;
       }
 
       event.preventDefault();
+      this.currentFocus = nextFocus;
       this.currentFocus?.focus({ preventScroll: false });
-      return;
-    }
 
-    const addition = this.tabDirection === 'forward' ? 1 : -1;
-
-    if (currentFocusIndex + addition >= tabbableElements.length) {
-      currentFocusIndex = 0;
-    } else if (currentFocusIndex + addition < 0) {
-      currentFocusIndex = tabbableElements.length - 1;
-    } else {
-      currentFocusIndex += addition;
-    }
-
-    this.previousFocus = this.currentFocus;
-    const nextFocus = /** @type {HTMLElement} */ tabbableElements[currentFocusIndex];
-
-    // This is a special case. We need to make sure we're not calling .focus() if we're already focused on an element
-    // that possibly has "controls"
-    if (this.tabDirection === 'backward') {
-      if (this.previousFocus && this.possiblyHasTabbableChildren(this.previousFocus)) {
-        return;
+      // Check to make sure focus actually changed. It may not always be the next focus, we just don't want it to be the previousFocus.
+      const allActiveElements = [...activeElements()];
+      if (allActiveElements.includes(this.currentFocus) || !allActiveElements.includes(this.previousFocus!)) {
+        break;
       }
     }
-
-    if (nextFocus && this.possiblyHasTabbableChildren(nextFocus)) {
-      return;
-    }
-
-    event.preventDefault();
-    this.currentFocus = nextFocus;
-    this.currentFocus?.focus({ preventScroll: true });
 
     setTimeout(() => this.checkFocus());
   };

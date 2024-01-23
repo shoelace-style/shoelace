@@ -2,6 +2,17 @@
 // computedStyle calls are "live" so they only need to be retrieved once for an element.
 const computedStyleMap = new WeakMap<Element, CSSStyleDeclaration>();
 
+function getCachedComputedStyle(el: HTMLElement): CSSStyleDeclaration {
+  let computedStyle: undefined | CSSStyleDeclaration = computedStyleMap.get(el);
+
+  if (!computedStyle) {
+    computedStyle = window.getComputedStyle(el, null);
+    computedStyleMap.set(el, computedStyle);
+  }
+
+  return computedStyle;
+}
+
 function isVisible(el: HTMLElement): boolean {
   // This is the fastest check, but isn't supported in Safari.
   if (typeof el.checkVisibility === 'function') {
@@ -10,14 +21,41 @@ function isVisible(el: HTMLElement): boolean {
   }
 
   // Fallback "polyfill" for "checkVisibility"
-  let computedStyle: undefined | CSSStyleDeclaration = computedStyleMap.get(el);
-
-  if (!computedStyle) {
-    computedStyle = window.getComputedStyle(el, null);
-    computedStyleMap.set(el, computedStyle);
-  }
+  const computedStyle = getCachedComputedStyle(el);
 
   return computedStyle.visibility !== 'hidden' && computedStyle.display !== 'none';
+}
+
+// While this behavior isn't standard in Safari / Chrome yet, I think it's the most reasonable
+// way of handling tabbable overflow areas. Browser sniffing seems gross, and it's the most
+// accessible way of handling overflow areas. [Konnor]
+function isOverflowingAndTabbable(el: HTMLElement): boolean {
+  const computedStyle = getCachedComputedStyle(el);
+
+  const { overflowY, overflowX } = computedStyle;
+
+  if (overflowY === 'scroll' || overflowX === 'scroll') {
+    return true;
+  }
+
+  if (overflowY !== 'auto' || overflowX !== 'auto') {
+    return false;
+  }
+
+  // Always overflow === "auto" by this point
+  const isOverflowingY = el.scrollHeight > el.clientHeight;
+
+  if (isOverflowingY && overflowY === 'auto') {
+    return true;
+  }
+
+  const isOverflowingX = el.scrollWidth > el.clientWidth;
+
+  if (isOverflowingX && overflowX === 'auto') {
+    return true;
+  }
+
+  return false;
 }
 
 /** Determines if the specified element is tabbable using heuristics inspired by https://github.com/focus-trap/tabbable */
@@ -39,11 +77,6 @@ function isTabbable(el: HTMLElement) {
 
   // If any parents have "inert", we aren't "tabbable"
   if (el.closest('[inert]')) {
-    return false;
-  }
-
-  // Elements with a disabled attribute are not tabbable
-  if (el.hasAttribute('disabled')) {
     return false;
   }
 
@@ -72,7 +105,24 @@ function isTabbable(el: HTMLElement) {
   }
 
   // At this point, the following elements are considered tabbable
-  return ['button', 'input', 'select', 'textarea', 'a', 'audio', 'video', 'summary', 'iframe'].includes(tag);
+  const isNativelyTabbable = [
+    'button',
+    'input',
+    'select',
+    'textarea',
+    'a',
+    'audio',
+    'video',
+    'summary',
+    'iframe'
+  ].includes(tag);
+
+  if (isNativelyTabbable) {
+    return true;
+  }
+
+  // We save the overflow checks for last, because they're the most expensive
+  return isOverflowingAndTabbable(el);
 }
 
 /**

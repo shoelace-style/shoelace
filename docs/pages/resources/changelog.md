@@ -23,6 +23,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-input>` and `<sl-textarea>` that made it work differently from `<input>` and `<textarea>` when using defaults [#1746]
 - Fixed a bug in `<sl-select>` that prevented it from closing when tabbing to another select inside a shadow root [#1763]
 - Fixed a bug in `<sl-spinner>` that caused the animation to appear strange in certain circumstances [#1787]
+- Fixed a bug in `<sl-dialog>` with focus trapping [#1813]
 - Fixed a bug that caused form controls to submit even after they were removed from the DOM [#1823]
 - Fixed a bug that caused empty `<sl-radio-group>` elements to log an error in the console [#1795]
 - Fixed a bug that caused modal scroll locking to conflict with the `scrollbar-gutter` property [#1805]

@@ -409,6 +409,10 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   }
 
   private handleComboboxKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Tab') {
+      return;
+    }
+
     event.stopPropagation();
     this.handleDocumentKeyDown(event);
   }
