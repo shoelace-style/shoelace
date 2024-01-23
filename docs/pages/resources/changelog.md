@@ -12,7 +12,7 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
-## Next
+## 2.13.0
 
 - Added the `hover-bridge` feature to `<sl-popup>` to support better tooltip accessibility [#1734]
 - Added the `loading` attribute and the `spinner` and `spinner__base` part to `<sl-menu-item>` [#1700]
@@ -32,6 +32,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-carousel>` where pagination dots don't update when swiping slide in iOS Safari [#1748]
 - Fixed a bug in`<sl-carousel>` where trying to swipe doesn't change the slide in Firefox for Android [#1748]
 - Improved the accessibility of `<sl-tooltip>` so they persist when hovering over the tooltip and dismiss when pressing [[Esc]] [#1734]
+- Improved "close" behavior of multiple components in supportive browsers using the `CloseWatcher` API [#1788]
 - Removed the scroll controller from the experimental `<sl-carousel>` and moved all mouse related logic into the component [#1748]
 
 ## 2.12.0
