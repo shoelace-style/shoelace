@@ -1,6 +1,6 @@
 import '../../../dist/shoelace.js';
-import { aTimeout, expect, fixture, html, waitUntil } from '@open-wc/testing';
 import { clickOnElement } from '../../internal/test.js';
+import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 import { sendKeys, sendMouse } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlDropdown from './dropdown.js';
