@@ -27,6 +27,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug that caused empty `<sl-radio-group>` elements to log an error in the console [#1795]
 - Fixed a bug that caused modal scroll locking to conflict with the `scrollbar-gutter` property [#1805]
 - Fixed a bug in `<sl-option>` that caused slotted content to show up when calling `getTextLabel()` [#1730]
+- Fixed a bug in `<sl-color-picker>` that caused picker values to not match the preview color [#1831]
 - Improved the accessibility of `<sl-tooltip>` so they persist when hovering over the tooltip and dismiss when pressing [[Esc]] [#1734]
 
 ## 2.12.0
