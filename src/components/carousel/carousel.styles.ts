@@ -79,9 +79,7 @@ export default css`
     overflow-x: hidden;
   }
 
-  .carousel__slides--dragging,
-  .carousel__slides--dropping {
-    scroll-snap-type: unset;
+  .carousel__slides--dragging {
   }
 
   :host([vertical]) ::slotted(sl-carousel-item) {

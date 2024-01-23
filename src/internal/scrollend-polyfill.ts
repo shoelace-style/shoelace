@@ -32,19 +32,24 @@ if (!isSupported) {
   const pointers = new Set();
   const scrollHandlers = new WeakMap<EventTarget, EventListenerOrEventListenerObject>();
 
-  const handlePointerDown = (event: PointerEvent) => {
-    pointers.add(event.pointerId);
+  const handlePointerDown = (event: TouchEvent) => {
+    for (const touch of event.changedTouches) {
+      pointers.add(touch.identifier);
+    }
   };
 
-  const handlePointerUp = (event: PointerEvent) => {
-    pointers.delete(event.pointerId);
+  const handlePointerUp = (event: TouchEvent) => {
+    for (const touch of event.changedTouches) {
+      pointers.delete(touch.identifier);
+    }
   };
 
-  document.addEventListener('pointerdown', handlePointerDown);
-  document.addEventListener('pointerup', handlePointerUp);
+  document.addEventListener('touchstart', handlePointerDown, true);
+  document.addEventListener('touchend', handlePointerUp, true);
+  document.addEventListener('touchcancel', handlePointerUp, true);
 
   decorate(EventTarget.prototype, 'addEventListener', function (this: EventTarget, addEventListener, type) {
-    if (type !== 'scroll') return;
+    if (type !== 'scrollend') return;
 
     const handleScrollEnd = debounce(() => {
       if (!pointers.size) {
@@ -61,7 +66,7 @@ if (!isSupported) {
   });
 
   decorate(EventTarget.prototype, 'removeEventListener', function (this: EventTarget, removeEventListener, type) {
-    if (type !== 'scroll') return;
+    if (type !== 'scrollend') return;
 
     const scrollHandler = scrollHandlers.get(this);
     if (scrollHandler) {

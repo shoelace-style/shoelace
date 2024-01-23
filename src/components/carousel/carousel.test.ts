@@ -1,12 +1,17 @@
 import '../../../dist/shoelace.js';
-import { clickOnElement } from '../../internal/test.js';
+import { clickOnElement, dragElement, moveMouseOnElement } from '../../internal/test.js';
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import { map } from 'lit/directives/map.js';
 import { range } from 'lit/directives/range.js';
+import { resetMouse } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlCarousel from './carousel.js';
 
 describe('<sl-carousel>', () => {
+  afterEach(async () => {
+    await resetMouse();
+  });
+
   it('should render a carousel with default configuration', async () => {
     // Arrange
     const el = await fixture(html`
@@ -406,6 +411,53 @@ describe('<sl-carousel>', () => {
         expect(el.scrollContainer.scrollWidth).to.be.greaterThan(el.scrollContainer.clientWidth);
         expect(el.scrollContainer.scrollHeight).to.be.equal(el.scrollContainer.clientHeight);
       });
+    });
+  });
+
+  describe('when `mouse-dragging` attribute is provided', () => {
+    // TODO(alenaksu): skipping because failing in webkit, PointerEvent.movementX and PointerEvent.movementY seem to return incorrect values
+    it.skip('should be possible to drag the carousel using the mouse', async () => {
+      // Arrange
+      const el = await fixture<SlCarousel>(html`
+        <sl-carousel mouse-dragging>
+          <sl-carousel-item>Node 1</sl-carousel-item>
+          <sl-carousel-item>Node 2</sl-carousel-item>
+          <sl-carousel-item>Node 3</sl-carousel-item>
+        </sl-carousel>
+      `);
+
+      // Act
+      await dragElement(el, -Math.round(el.offsetWidth * 0.75));
+      await oneEvent(el.scrollContainer, 'scrollend');
+      await dragElement(el, -Math.round(el.offsetWidth * 0.75));
+      await oneEvent(el.scrollContainer, 'scrollend');
+
+      await el.updateComplete;
+
+      // Assert
+      expect(el.activeSlide).to.be.equal(2);
+    });
+
+    it('should be possible to interact with clickable elements', async () => {
+      // Arrange
+      const el = await fixture<SlCarousel>(html`
+        <sl-carousel mouse-dragging>
+          <sl-carousel-item><button>click me</button></sl-carousel-item>
+          <sl-carousel-item>Node 2</sl-carousel-item>
+          <sl-carousel-item>Node 3</sl-carousel-item>
+        </sl-carousel>
+      `);
+      const button = el.querySelector('button')!;
+
+      const clickSpy = sinon.spy();
+      button.addEventListener('click', clickSpy);
+
+      // Act
+      await moveMouseOnElement(button);
+      await clickOnElement(button);
+
+      // Assert
+      expect(clickSpy).to.have.been.called;
     });
   });
 
