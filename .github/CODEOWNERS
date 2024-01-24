@@ -1,5 +1,5 @@
 # Auto-assign the DS team
-* @teamshares/design-system
+* @teamshares/design-system-admins
 
 # Ping platform team for visibility into infrastructure updates
 .github/ @teamshares/platform
