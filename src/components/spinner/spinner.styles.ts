@@ -5,14 +5,12 @@ export default css`
   ${componentStyles}
 
   :host {
-    --track-width: 2px;
-    --track-color: rgb(128 128 128 / 25%);
+    --track-width: 3.5px;
+    --track-color: var(--sl-color-primary-100);
     --indicator-color: var(--sl-color-primary-600);
-    --speed: 2s;
+    --speed: 4s;
 
     display: inline-flex;
-    width: 1em;
-    height: 1em;
   }
 
   .spinner {
@@ -37,16 +35,28 @@ export default css`
   }
 
   .spinner__indicator {
-    stroke: var(--indicator-color);
+    stroke: white;
     stroke-linecap: round;
-    stroke-dasharray: 150% 75%;
     animation: spin var(--speed) linear infinite;
+  }
+
+  .indicator__gradient {
+    background: conic-gradient(
+      from 270deg,
+      var(--indicator-color) 5%,
+      var(--track-color) 35% 60%,
+      var(--indicator-color) 95%
+    );
+    width: 100%;
+    height: 100%;
+    transform-origin: 50% 50%;
+    animation: spin-gradient var(--speed) linear infinite;
   }
 
   @keyframes spin {
     0% {
       transform: rotate(0deg);
-      stroke-dasharray: 0.01em, 2.75em;
+      stroke-dasharray: 1.375em, 1.375em;
     }
 
     50% {
@@ -56,7 +66,21 @@ export default css`
 
     100% {
       transform: rotate(1080deg);
-      stroke-dasharray: 0.01em, 2.75em;
+      stroke-dasharray: 1.375em, 1.375em;
+    }
+  }
+
+  @keyframes spin-gradient {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    50% {
+      transform: rotate(180deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
     }
   }
 `;
