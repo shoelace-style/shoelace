@@ -505,7 +505,7 @@ export default css`
   }
 
   .button--loading sl-spinner {
-    --track-color: rgb(147 153 158 / 35%);
+    --track-color: rgba(var(--ts-color-gray-600-rgb), 0.35);
     --indicator-color: white;
     --track-width: 2px;
     --speed: 3s;
