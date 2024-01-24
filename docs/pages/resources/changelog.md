@@ -12,6 +12,10 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## 2.13.1
+
+- Fixed a bug where the safe triangle was always visible when selecting nested `<sl-menu>` elements [#1835]
+
 ## 2.13.0
 
 - Added the `hover-bridge` feature to `<sl-popup>` to support better tooltip accessibility [#1734]
