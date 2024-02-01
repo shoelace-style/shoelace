@@ -31,9 +31,38 @@ If you don't include `enable_wrapper`, the component will not receive the auto-g
 
 ### 2. Automatic application of styles and controller
 
-If you _do_ enable the wrapper, the component will get wrapped with the `<ts-wrapper>` tag, which will have the generated controller and scoped CSS class applied to it.
+If you _do_ enable the wrapper, the component will get wrapped with the `<ts-wrapper>` tag, which will have the generated controller and scoped CSS class applied to it. A component with this code:
 
----
+`component.html.slim`
+
+```
+.bar data-controller="some-controller"
+  .baz Some text
+```
+
+`component.rb`
+
+```
+class Foo::Component < ApplicationComponent
+  enable_wrapper
+
+  def some_method
+    ...
+  end
+end
+```
+
+Will yield the following raw HTML:
+
+```
+<ts-wrapper class="c-foo" data-controller="components--foo">
+  <div class="bar" data-controller="some-controller">
+    <div class="baz">Some text content</div>
+  </div>
+</ts-wrapper>
+```
+
+<!-- ---
 
 #### Coming soon (once the latest PR into `design-system is merged`):
 
@@ -67,8 +96,8 @@ A component with this file structure and code:
 `component.html.slim`
 
 ```
-.cursor-pointer data-controller="some-controller"
-  .bar Some text
+.bar data-controller="some-controller"
+  .baz Some text
 ```
 
 `component.rb`
@@ -90,7 +119,7 @@ end
   @apply flex items-center;
 }
 
-.bar {
+.baz {
   @apply m-8;
 }
 ```
@@ -99,8 +128,8 @@ Will yield the following raw HTML:
 
 ```
 <ts-wrapper class="c-foo" data-controller="components--foo">
-  <div class="center" data-controller="some-controller">
-    <div class="bar">Some text content</div>
+  <div class="bar" data-controller="some-controller">
+    <div class="baz">Some text content</div>
   </div>
 </ts-wrapper>
 ```
@@ -108,8 +137,8 @@ Will yield the following raw HTML:
 ...which, once it's been added to the DOM and `connectedCallback` has been called on the `ts-wrapper`, will become this final HTML:
 
 ```
-<div class="c-foo center" data-controller="components--foo some-controller">
-  <div class="bar">Some text content</div>
+<div class="c-foo bar" data-controller="components--foo some-controller">
+  <div class="baz">Some text content</div>
 </div>
 ```
 
@@ -120,7 +149,7 @@ Will yield the following raw HTML:
   display: flex;
   align-items: center;
 }
-.c-foo .bar {
+.c-foo .baz {
   margin: 2rem;
 }
-```
+``` -->
