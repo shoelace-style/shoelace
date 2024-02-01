@@ -8,3 +8,5 @@ Cypress provides a convenience method for accessing the shadow dom via the [`.sh
 cy.get('sl-button[href]').shadow().find('a'); // Will find the anchor tag within a link button
 cy.get('[data-test-id="some_sl_button"]').click(); // Should work fine on a button where id is set at the top level
 ```
+
+More tips coming soon! (And remember, _you too_ are free to contribute to this guide!)
