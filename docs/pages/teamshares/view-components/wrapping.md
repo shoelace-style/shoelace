@@ -31,7 +31,13 @@ If you don't include `enable_wrapper`, the component will not receive the auto-g
 
 ### 2. Automatic application of styles and controller
 
-If you _do_ enable the wrapper, the component will get wrapped with the `<ts-wrapper>` tag, but that tag will be removed as soon as the component hits the DOM, after first applying its properties to the component itself. Effectively, it will appear as though the controller and CSS were applied directly to the top-level element of the View Component.
+If you _do_ enable the wrapper, the component will get wrapped with the `<ts-wrapper>` tag, which will have the generated controller and scoped CSS class applied to it.
+
+---
+
+#### Coming soon (once the latest PR into `design-system is merged`):
+
+Using the magic of the `connectedCallback()` method of web components, the `<ts-wrapper>` tag will be removed as soon as the component hits the DOM, after first applying its properties to the component itself. Effectively, it will appear as though the controller and CSS were applied directly to the top-level element of the View Component.
 
 > Caveat: If your component doesn't have a single top-level element, the code will automatically create a new `<div>` and wrap the contents of your view in it. This is so that it can apply the controller and CSS parent class.
 
