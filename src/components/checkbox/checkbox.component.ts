@@ -103,7 +103,10 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
   private handleClick() {
     this.checked = !this.checked;
     this.indeterminate = false;
-    this.emit('sl-change');
+    // Emit after updating
+    this.updateComplete.then(() => {
+      this.emit('sl-change');
+    });
   }
 
   private handleBlur() {
