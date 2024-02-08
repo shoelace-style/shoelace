@@ -112,7 +112,7 @@ export default class SlOption extends ShoelaceElement {
     [...nodes].forEach(node => {
       if (node.nodeType === Node.ELEMENT_NODE) {
         if (!(node as HTMLElement).hasAttribute('slot')) {
-          label += (node as HTMLElement).outerHTML;
+          label += (node as HTMLElement).textContent;
         }
       }
 

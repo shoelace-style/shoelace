@@ -12,6 +12,10 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## Next
+
+- Fixed a bug in `<sl-option>` that caused HTML tags to be included in `getTextLabel()`
+
 ## 2.13.1
 
 - Fixed a bug where the safe triangle was always visible when selecting nested `<sl-menu>` elements [#1835]
