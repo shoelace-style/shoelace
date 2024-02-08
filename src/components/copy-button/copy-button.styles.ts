@@ -1,9 +1,6 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles.js';
 
 export default css`
-  ${componentStyles}
-
   :host {
     --error-color: var(--sl-color-danger-600);
     --success-color: var(--sl-color-success-600);

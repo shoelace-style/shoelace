@@ -1,5 +1,6 @@
 import { property } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
+import componentStyles from '../../styles/component.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './divider.styles.js';
 import type { CSSResultGroup } from 'lit';
@@ -15,7 +16,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --spacing - The spacing of the divider.
  */
 export default class SlDivider extends ShoelaceElement {
-  static styles: CSSResultGroup = styles;
+  static styles: CSSResultGroup = [componentStyles, styles];
 
   /** Draws the divider in a vertical orientation. */
   @property({ type: Boolean, reflect: true }) vertical = false;

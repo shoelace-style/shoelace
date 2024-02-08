@@ -9,6 +9,7 @@ import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll.js
 import { property, query } from 'lit/decorators.js';
 import { waitForEvent } from '../../internal/event.js';
 import { watch } from '../../internal/watch.js';
+import componentStyles from '../../styles/component.styles.js';
 import Modal from '../../internal/modal.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import SlIconButton from '../icon-button/icon-button.component.js';
@@ -66,7 +67,7 @@ import type { CSSResultGroup } from 'lit';
  *   the third-party modal opens. Upon closing, call `modal.deactivateExternal()` to restore Shoelace's focus trapping.
  */
 export default class SlDialog extends ShoelaceElement {
-  static styles: CSSResultGroup = styles;
+  static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = {
     'sl-icon-button': SlIconButton
   };

@@ -1,5 +1,4 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles.js';
 
 // Resizing a spinner element using anything but font-size will break the animation because the animation uses em units.
 // Therefore, if a spinner is used in a flex container without `flex: none` applied, the spinner can grow/shrink and
@@ -7,8 +6,6 @@ import componentStyles from '../../styles/component.styles.js';
 // according to its actual dimensions.
 
 export default css`
-  ${componentStyles}
-
   :host {
     --track-width: 2px;
     --track-color: rgb(128 128 128 / 25%);

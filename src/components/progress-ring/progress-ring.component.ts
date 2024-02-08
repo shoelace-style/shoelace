@@ -1,6 +1,7 @@
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
 import { property, query, state } from 'lit/decorators.js';
+import componentStyles from '../../styles/component.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './progress-ring.styles.js';
 import type { CSSResultGroup } from 'lit';
@@ -24,7 +25,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --indicator-transition-duration - The duration of the indicator's transition when the value changes.
  */
 export default class SlProgressRing extends ShoelaceElement {
-  static styles: CSSResultGroup = styles;
+  static styles: CSSResultGroup = [componentStyles, styles];
 
   private readonly localize = new LocalizeController(this);
 

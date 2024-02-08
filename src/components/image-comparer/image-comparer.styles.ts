@@ -1,9 +1,6 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles.js';
 
 export default css`
-  ${componentStyles}
-
   :host {
     --divider-width: 2px;
     --handle-size: 2.5rem;

@@ -1,6 +1,7 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { html } from 'lit';
 import { property } from 'lit/decorators.js';
+import componentStyles from '../../styles/component.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './skeleton.styles.js';
 import type { CSSResultGroup } from 'lit';
@@ -19,7 +20,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --sheen-color - The sheen color when the skeleton is in its loading state.
  */
 export default class SlSkeleton extends ShoelaceElement {
-  static styles: CSSResultGroup = styles;
+  static styles: CSSResultGroup = [componentStyles, styles];
 
   /** Determines which effect the skeleton will use. */
   @property() effect: 'pulse' | 'sheen' | 'none' = 'none';

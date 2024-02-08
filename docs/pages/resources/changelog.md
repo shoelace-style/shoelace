@@ -15,6 +15,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 ## Next
 
 - Fixed a bug in `<sl-option>` that caused HTML tags to be included in `getTextLabel()`
+- Refactored component styles to be consumed more efficiently [#1692]
 
 ## 2.13.1
 

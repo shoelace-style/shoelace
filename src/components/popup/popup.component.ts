@@ -3,6 +3,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { html } from 'lit';
 import { offsetParent } from 'composed-offset-position';
 import { property, query } from 'lit/decorators.js';
+import componentStyles from '../../styles/component.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './popup.styles.js';
 import type { CSSResultGroup } from 'lit';
@@ -45,7 +46,7 @@ function isVirtualElement(e: unknown): e is VirtualElement {
  *  available when using `auto-size`.
  */
 export default class SlPopup extends ShoelaceElement {
-  static styles: CSSResultGroup = styles;
+  static styles: CSSResultGroup = [componentStyles, styles];
 
   private anchorEl: Element | VirtualElement | null;
   private cleanup: ReturnType<typeof autoUpdate> | undefined;
