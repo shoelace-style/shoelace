@@ -84,6 +84,8 @@ Add descriptive help text to a switch with the `help-text` attribute. For help t
 ```
 
 ```jsx:react
+import SlSwitch from '@shoelace-style/shoelace/dist/react/checkbox';
+
 const App = () => <SlSwitch help-text="What should the user know about the switch?">Label</SlSwitch>;
 ```
 

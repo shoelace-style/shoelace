@@ -18,6 +18,8 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## 2.13.1
 
+- Added help text to `<sl-checkbox>`
+- Added help text to `<sl-switch>` [#1800]
 - Fixed a bug where the safe triangle was always visible when selecting nested `<sl-menu>` elements [#1835]
 
 ## 2.13.0
