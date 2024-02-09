@@ -228,6 +228,7 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
             .disabled=${this.disabled}
             .required=${this.required}
             aria-checked=${this.checked ? 'true' : 'false'}
+            aria-describedby="help-text"
             @click=${this.handleClick}
             @input=${this.handleInput}
             @invalid=${this.handleInvalid}

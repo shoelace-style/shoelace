@@ -14,13 +14,15 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- Added the Arabic translation [#1852]
+- Added help text to `<sl-checkbox>` [#1860]
+- Added help text to `<sl-switch>` [#1800]
 - Fixed a bug in `<sl-option>` that caused HTML tags to be included in `getTextLabel()`
+- Fixed a bug in `<sl-carousel>` that caused slides to not switch correctly [#1862]
 - Refactored component styles to be consumed more efficiently [#1692]
 
 ## 2.13.1
 
-- Added help text to `<sl-checkbox>`
-- Added help text to `<sl-switch>` [#1800]
 - Fixed a bug where the safe triangle was always visible when selecting nested `<sl-menu>` elements [#1835]
 
 ## 2.13.0
