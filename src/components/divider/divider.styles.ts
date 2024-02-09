@@ -1,9 +1,6 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles.js';
 
 export default css`
-  ${componentStyles}
-
   :host {
     --color: var(--sl-panel-border-color);
     --width: var(--sl-panel-border-width);

@@ -1,9 +1,6 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles.js';
 
 export default css`
-  ${componentStyles}
-
   :host {
     /*
      * These are actually used by tree item, but we define them here so they can more easily be set and all tree items

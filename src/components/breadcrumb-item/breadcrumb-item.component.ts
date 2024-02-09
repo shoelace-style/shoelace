@@ -3,6 +3,7 @@ import { HasSlotController } from '../../internal/slot.js';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { property } from 'lit/decorators.js';
+import componentStyles from '../../styles/component.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './breadcrumb-item.styles.js';
 import type { CSSResultGroup } from 'lit';
@@ -26,7 +27,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart separator - The container that wraps the separator.
  */
 export default class SlBreadcrumbItem extends ShoelaceElement {
-  static styles: CSSResultGroup = styles;
+  static styles: CSSResultGroup = [componentStyles, styles];
 
   private readonly hasSlotController = new HasSlotController(this, 'prefix', 'suffix');
 

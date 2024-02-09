@@ -7,6 +7,8 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { property, query, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
+import componentStyles from '../../styles/component.styles.js';
+import formControlStyles from '../../styles/form-control.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './switch.styles.js';
 import type { CSSResultGroup } from 'lit';
@@ -38,7 +40,7 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  * @cssproperty --thumb-size - The size of the thumb.
  */
 export default class SlSwitch extends ShoelaceElement implements ShoelaceFormControl {
-  static styles: CSSResultGroup = styles;
+  static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
 
   private readonly formControlController = new FormControlController(this, {
     value: (control: SlSwitch) => (control.checked ? control.value || 'on' : undefined),

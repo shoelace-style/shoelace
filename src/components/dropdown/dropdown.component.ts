@@ -7,6 +7,7 @@ import { LocalizeController } from '../../utilities/localize.js';
 import { property, query } from 'lit/decorators.js';
 import { waitForEvent } from '../../internal/event.js';
 import { watch } from '../../internal/watch.js';
+import componentStyles from '../../styles/component.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import SlPopup from '../popup/popup.component.js';
 import styles from './dropdown.styles.js';
@@ -40,7 +41,7 @@ import type SlMenu from '../menu/menu.js';
  * @animation dropdown.hide - The animation to use when hiding the dropdown.
  */
 export default class SlDropdown extends ShoelaceElement {
-  static styles: CSSResultGroup = styles;
+  static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = { 'sl-popup': SlPopup };
 
   @query('.dropdown') popup: SlPopup;

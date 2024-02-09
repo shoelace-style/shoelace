@@ -24,7 +24,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --example - An example CSS custom property.
  */
 export default class {{ properCase tag }} extends ShoelaceElement {
-  static styles: CSSResultGroup = styles;
+    static styles: CSSResultGroup = [componentStyles, styles];
 
   private readonly localize = new LocalizeController(this);
 

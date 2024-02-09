@@ -7,6 +7,7 @@ import { LocalizeController } from '../../utilities/localize.js';
 import { property, query, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import { when } from 'lit/directives/when.js';
+import componentStyles from '../../styles/component.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import SlCheckbox from '../checkbox/checkbox.component.js';
 import SlIcon from '../icon/icon.component.js';
@@ -57,7 +58,7 @@ import type { CSSResultGroup, PropertyValueMap } from 'lit';
  * @csspart checkbox__label - The checkbox's exported `label` part.
  */
 export default class SlTreeItem extends ShoelaceElement {
-  static styles: CSSResultGroup = styles;
+  static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = {
     'sl-checkbox': SlCheckbox,
     'sl-icon': SlIcon,

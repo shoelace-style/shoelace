@@ -1,4 +1,5 @@
 import { html } from 'lit';
+import componentStyles from '../../styles/component.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './carousel-item.styles.js';
 import type { CSSResultGroup } from 'lit';
@@ -15,7 +16,7 @@ import type { CSSResultGroup } from 'lit';
  *
  */
 export default class SlCarouselItem extends ShoelaceElement {
-  static styles: CSSResultGroup = styles;
+  static styles: CSSResultGroup = [componentStyles, styles];
 
   connectedCallback() {
     super.connectedCallback();
