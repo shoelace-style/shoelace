@@ -476,7 +476,7 @@ export default class SlCarousel extends ShoelaceElement {
     this.scrollToSlide(nextSlide, prefersReducedMotion() ? 'auto' : behavior);
   }
 
-  private async scrollToSlide(slide: HTMLElement, behavior: ScrollBehavior = 'smooth') {
+  private scrollToSlide(slide: HTMLElement, behavior: ScrollBehavior = 'smooth') {
     const scrollContainer = this.scrollContainer;
     const scrollContainerRect = scrollContainer.getBoundingClientRect();
     const nextSlideRect = slide.getBoundingClientRect();
@@ -484,16 +484,11 @@ export default class SlCarousel extends ShoelaceElement {
     const nextLeft = nextSlideRect.left - scrollContainerRect.left;
     const nextTop = nextSlideRect.top - scrollContainerRect.top;
 
-    // If the slide is already in view, don't need to scroll
-    if (nextLeft !== scrollContainer.scrollLeft || nextTop !== scrollContainer.scrollTop) {
-      scrollContainer.scrollTo({
-        left: nextLeft + scrollContainer.scrollLeft,
-        top: nextTop + scrollContainer.scrollTop,
-        behavior
-      });
-
-      await waitForEvent(scrollContainer, 'scrollend');
-    }
+    scrollContainer.scrollTo({
+      left: nextLeft + scrollContainer.scrollLeft,
+      top: nextTop + scrollContainer.scrollTop,
+      behavior
+    });
   }
 
   render() {
