@@ -539,18 +539,13 @@ export default class SlPopup extends ShoelaceElement {
   };
 
   render() {
-    return html`
-      <slot name="anchor" @slotchange=${this.handleAnchorChange}></slot>
-
-      <span
+    return html`<slot name="anchor" @slotchange=${this.handleAnchorChange}></slot><span
         part="hover-bridge"
         class=${classMap({
           'popup-hover-bridge': true,
           'popup-hover-bridge--visible': this.hoverBridge && this.active
         })}
-      ></span>
-
-      <div
+      ></span><div
         part="popup"
         class=${classMap({
           popup: true,
@@ -558,10 +553,7 @@ export default class SlPopup extends ShoelaceElement {
           'popup--fixed': this.strategy === 'fixed',
           'popup--has-arrow': this.arrow
         })}
-      >
-        <slot></slot>
-        ${this.arrow ? html`<div part="arrow" class="popup__arrow" role="presentation"></div>` : ''}
-      </div>
-    `;
+      ><slot></slot
+      >${this.arrow ? html`<div part="arrow" class="popup__arrow" role="presentation"></div>` : ''}</div>`;
   }
 }

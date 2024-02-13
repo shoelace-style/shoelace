@@ -26,6 +26,13 @@ const App = () => (
 );
 ```
 
+Tooltips also won't add extra spaces when used as inline elements.
+
+```html:preview
+The bold p<sl-tooltip content="This is a tooltip"><b>art of this
+sen</b></sl-tooltip>tence has a tooltip.
+```
+
 ## Examples
 
 ### Placement

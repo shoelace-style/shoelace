@@ -260,8 +260,7 @@ export default class SlTooltip extends ShoelaceElement {
   // element, otherwise positioning is incorrect.
   //
   render() {
-    return html`
-      <sl-popup
+    return html`<sl-popup
         part="base"
         exportparts="
           popup:base__popup,
@@ -279,16 +278,11 @@ export default class SlTooltip extends ShoelaceElement {
         shift
         arrow
         hover-bridge
-      >
-        ${'' /* eslint-disable-next-line lit-a11y/no-aria-slot */}
-        <slot slot="anchor" aria-describedby="tooltip"></slot>
-
-        ${'' /* eslint-disable-next-line lit-a11y/accessible-name */}
-        <div part="body" id="tooltip" class="tooltip__body" role="tooltip" aria-live=${this.open ? 'polite' : 'off'}>
+      >${'' /* eslint-disable-next-line lit-a11y/no-aria-slot */
+      }<slot slot="anchor" aria-describedby="tooltip"></slot>${'' /* eslint-disable-next-line lit-a11y/accessible-name */
+      }<div part="body" id="tooltip" class="tooltip__body" role="tooltip" aria-live=${this.open ? 'polite' : 'off'}>
           <slot name="content">${this.content}</slot>
-        </div>
-      </sl-popup>
-    `;
+        </div></sl-popup>`;
   }
 }
 
