@@ -1839,3 +1839,15 @@ const App = () => {
   );
 };
 ```
+
+Sometimes the `getBoundingClientRects` might be derived from a real element. In this case provide the anchor element as context to ensure clipping and position updates for the popup work well.
+
+```ts
+const virtualElement = {
+  getBoundingClientRect() {
+    // ...
+    return { width, height, x, y, top, left, right, bottom };
+  },
+  contextElement: anchorElement
+};
+```
