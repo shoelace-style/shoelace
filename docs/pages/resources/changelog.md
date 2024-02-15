@@ -12,7 +12,7 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
-## Next
+## 2.14.0
 
 - Added the Arabic translation [#1852]
 - Added help text to `<sl-checkbox>` [#1860]
