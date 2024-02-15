@@ -2,6 +2,7 @@ import { animations } from './animations.js';
 import { html } from 'lit';
 import { property, queryAsync } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
+import componentStyles from '../../styles/component.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './animation.styles.js';
 import type { CSSResultGroup } from 'lit';
@@ -20,7 +21,7 @@ import type { CSSResultGroup } from 'lit';
  *  animate multiple elements, either wrap them in a single container or use multiple `<sl-animation>` elements.
  */
 export default class SlAnimation extends ShoelaceElement {
-  static styles: CSSResultGroup = styles;
+  static styles: CSSResultGroup = [componentStyles, styles];
 
   private animation?: Animation;
   private hasStarted = false;

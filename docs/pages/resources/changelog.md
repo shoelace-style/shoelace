@@ -12,6 +12,15 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## 2.14.0
+
+- Added the Arabic translation [#1852]
+- Added help text to `<sl-checkbox>` [#1860]
+- Added help text to `<sl-switch>` [#1800]
+- Fixed a bug in `<sl-option>` that caused HTML tags to be included in `getTextLabel()`
+- Fixed a bug in `<sl-carousel>` that caused slides to not switch correctly [#1862]
+- Refactored component styles to be consumed more efficiently [#1692]
+
 ## 2.13.1
 
 - Fixed a bug where the safe triangle was always visible when selecting nested `<sl-menu>` elements [#1835]

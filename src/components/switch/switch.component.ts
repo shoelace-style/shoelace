@@ -1,11 +1,14 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { defaultValue } from '../../internal/default-value.js';
 import { FormControlController } from '../../internal/form.js';
+import { HasSlotController } from '../../internal/slot.js';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { property, query, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
+import componentStyles from '../../styles/component.styles.js';
+import formControlStyles from '../../styles/form-control.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './switch.styles.js';
 import type { CSSResultGroup } from 'lit';
@@ -18,6 +21,7 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  * @since 2.0
  *
  * @slot - The switch's label.
+ * @slot help-text - Text that describes how to use the switch. Alternatively, you can use the `help-text` attribute.
  *
  * @event sl-blur - Emitted when the control loses focus.
  * @event sl-change - Emitted when the control's checked state changes.
@@ -29,19 +33,21 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  * @csspart control - The control that houses the switch's thumb.
  * @csspart thumb - The switch's thumb.
  * @csspart label - The switch's label.
+ * @csspart form-control-help-text - The help text's wrapper.
  *
  * @cssproperty --width - The width of the switch.
  * @cssproperty --height - The height of the switch.
  * @cssproperty --thumb-size - The size of the thumb.
  */
 export default class SlSwitch extends ShoelaceElement implements ShoelaceFormControl {
-  static styles: CSSResultGroup = styles;
+  static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
 
   private readonly formControlController = new FormControlController(this, {
     value: (control: SlSwitch) => (control.checked ? control.value || 'on' : undefined),
     defaultValue: (control: SlSwitch) => control.defaultChecked,
     setValue: (control: SlSwitch, checked: boolean) => (control.checked = checked)
   });
+  private readonly hasSlotController = new HasSlotController(this, 'help-text');
 
   @query('input[type="checkbox"]') input: HTMLInputElement;
 
@@ -75,6 +81,9 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
 
   /** Makes the switch a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
+
+  /** The switch's help text. If you need to display HTML, use the `help-text` slot instead. */
+  @property({ attribute: 'help-text' }) helpText = '';
 
   /** Gets the validity state object */
   get validity() {
@@ -179,46 +188,69 @@ export default class SlSwitch extends ShoelaceElement implements ShoelaceFormCon
   }
 
   render() {
+    const hasHelpTextSlot = this.hasSlotController.test('help-text');
+    const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
+
     return html`
-      <label
-        part="base"
+      <div
         class=${classMap({
-          switch: true,
-          'switch--checked': this.checked,
-          'switch--disabled': this.disabled,
-          'switch--focused': this.hasFocus,
-          'switch--small': this.size === 'small',
-          'switch--medium': this.size === 'medium',
-          'switch--large': this.size === 'large'
+          'form-control': true,
+          'form-control--small': this.size === 'small',
+          'form-control--medium': this.size === 'medium',
+          'form-control--large': this.size === 'large',
+          'form-control--has-help-text': hasHelpText
         })}
       >
-        <input
-          class="switch__input"
-          type="checkbox"
-          title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
-          name=${this.name}
-          value=${ifDefined(this.value)}
-          .checked=${live(this.checked)}
-          .disabled=${this.disabled}
-          .required=${this.required}
-          role="switch"
-          aria-checked=${this.checked ? 'true' : 'false'}
-          @click=${this.handleClick}
-          @input=${this.handleInput}
-          @invalid=${this.handleInvalid}
-          @blur=${this.handleBlur}
-          @focus=${this.handleFocus}
-          @keydown=${this.handleKeyDown}
-        />
+        <label
+          part="base"
+          class=${classMap({
+            switch: true,
+            'switch--checked': this.checked,
+            'switch--disabled': this.disabled,
+            'switch--focused': this.hasFocus,
+            'switch--small': this.size === 'small',
+            'switch--medium': this.size === 'medium',
+            'switch--large': this.size === 'large'
+          })}
+        >
+          <input
+            class="switch__input"
+            type="checkbox"
+            title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
+            name=${this.name}
+            value=${ifDefined(this.value)}
+            .checked=${live(this.checked)}
+            .disabled=${this.disabled}
+            .required=${this.required}
+            role="switch"
+            aria-checked=${this.checked ? 'true' : 'false'}
+            aria-describedby="help-text"
+            @click=${this.handleClick}
+            @input=${this.handleInput}
+            @invalid=${this.handleInvalid}
+            @blur=${this.handleBlur}
+            @focus=${this.handleFocus}
+            @keydown=${this.handleKeyDown}
+          />
 
-        <span part="control" class="switch__control">
-          <span part="thumb" class="switch__thumb"></span>
-        </span>
+          <span part="control" class="switch__control">
+            <span part="thumb" class="switch__thumb"></span>
+          </span>
 
-        <div part="label" class="switch__label">
-          <slot></slot>
+          <div part="label" class="switch__label">
+            <slot></slot>
+          </div>
+        </label>
+
+        <div
+          aria-hidden=${hasHelpText ? 'false' : 'true'}
+          class="form-control__help-text"
+          id="help-text"
+          part="form-control-help-text"
+        >
+          <slot name="help-text">${this.helpText}</slot>
         </div>
-      </label>
+      </div>
     `;
   }
 }

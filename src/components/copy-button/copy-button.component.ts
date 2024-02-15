@@ -3,6 +3,7 @@ import { getAnimation, setDefaultAnimation } from '../../utilities/animation-reg
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
 import { property, query, state } from 'lit/decorators.js';
+import componentStyles from '../../styles/component.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import SlIcon from '../icon/icon.component.js';
 import SlTooltip from '../tooltip/tooltip.component.js';
@@ -41,7 +42,7 @@ import type { CSSResultGroup } from 'lit';
  * @animation copy.out - The animation to use when feedback icons animate out.
  */
 export default class SlCopyButton extends ShoelaceElement {
-  static styles: CSSResultGroup = styles;
+  static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = {
     'sl-icon': SlIcon,
     'sl-tooltip': SlTooltip

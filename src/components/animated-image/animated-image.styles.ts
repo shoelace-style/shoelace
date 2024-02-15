@@ -1,9 +1,6 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles.js';
 
 export default css`
-  ${componentStyles}
-
   :host {
     --control-box-size: 3rem;
     --icon-size: calc(var(--control-box-size) * 0.625);

@@ -52,4 +52,9 @@ describe('<sl-option>', () => {
 
     expect(el.value).to.equal('10');
   });
+
+  it('should escape HTML when calling getTextLabel()', async () => {
+    const el = await fixture<SlOption>(html` <sl-option><strong>Option</strong></sl-option> `);
+    expect(el.getTextLabel()).to.equal('Option');
+  });
 });

@@ -11,6 +11,7 @@ import { prefersReducedMotion } from '../../internal/animate.js';
 import { range } from 'lit/directives/range.js';
 import { waitForEvent } from '../../internal/event.js';
 import { watch } from '../../internal/watch.js';
+import componentStyles from '../../styles/component.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import SlIcon from '../icon/icon.component.js';
 import styles from './carousel.styles.js';
@@ -47,7 +48,7 @@ import type SlCarouselItem from '../carousel-item/carousel-item.component.js';
  *  partially visible as a scroll hint.
  */
 export default class SlCarousel extends ShoelaceElement {
-  static styles: CSSResultGroup = styles;
+  static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = { 'sl-icon': SlIcon };
 
   /** When set, allows the user to navigate the carousel in the same direction indefinitely. */
@@ -476,7 +477,7 @@ export default class SlCarousel extends ShoelaceElement {
     this.scrollToSlide(nextSlide, prefersReducedMotion() ? 'auto' : behavior);
   }
 
-  private async scrollToSlide(slide: HTMLElement, behavior: ScrollBehavior = 'smooth') {
+  private scrollToSlide(slide: HTMLElement, behavior: ScrollBehavior = 'smooth') {
     const scrollContainer = this.scrollContainer;
     const scrollContainerRect = scrollContainer.getBoundingClientRect();
     const nextSlideRect = slide.getBoundingClientRect();
@@ -484,16 +485,11 @@ export default class SlCarousel extends ShoelaceElement {
     const nextLeft = nextSlideRect.left - scrollContainerRect.left;
     const nextTop = nextSlideRect.top - scrollContainerRect.top;
 
-    // If the slide is already in view, don't need to scroll
-    if (nextLeft !== scrollContainer.scrollLeft || nextTop !== scrollContainer.scrollTop) {
-      scrollContainer.scrollTo({
-        left: nextLeft + scrollContainer.scrollLeft,
-        top: nextTop + scrollContainer.scrollTop,
-        behavior
-      });
-
-      await waitForEvent(scrollContainer, 'scrollend');
-    }
+    scrollContainer.scrollTo({
+      left: nextLeft + scrollContainer.scrollLeft,
+      top: nextTop + scrollContainer.scrollTop,
+      behavior
+    });
   }
 
   render() {

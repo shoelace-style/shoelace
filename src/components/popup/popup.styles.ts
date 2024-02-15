@@ -1,9 +1,6 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles.js';
 
 export default css`
-  ${componentStyles}
-
   :host {
     --arrow-color: var(--sl-color-neutral-1000);
     --arrow-size: 6px;

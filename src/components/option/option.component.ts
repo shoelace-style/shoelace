@@ -3,6 +3,7 @@ import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
 import { property, query, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
+import componentStyles from '../../styles/component.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import SlIcon from '../icon/icon.component.js';
 import styles from './option.styles.js';
@@ -27,7 +28,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart suffix - The container that wraps the suffix.
  */
 export default class SlOption extends ShoelaceElement {
-  static styles: CSSResultGroup = styles;
+  static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = { 'sl-icon': SlIcon };
 
   private cachedTextLabel: string;
@@ -112,7 +113,7 @@ export default class SlOption extends ShoelaceElement {
     [...nodes].forEach(node => {
       if (node.nodeType === Node.ELEMENT_NODE) {
         if (!(node as HTMLElement).hasAttribute('slot')) {
-          label += (node as HTMLElement).outerHTML;
+          label += (node as HTMLElement).textContent;
         }
       }
 

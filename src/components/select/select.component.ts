@@ -11,6 +11,8 @@ import { scrollIntoView } from '../../internal/scroll.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { waitForEvent } from '../../internal/event.js';
 import { watch } from '../../internal/watch.js';
+import componentStyles from '../../styles/component.styles.js';
+import formControlStyles from '../../styles/form-control.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import SlIcon from '../icon/icon.component.js';
 import SlPopup from '../popup/popup.component.js';
@@ -67,7 +69,7 @@ import type SlOption from '../option/option.component.js';
  * @csspart expand-icon - The container that wraps the expand icon.
  */
 export default class SlSelect extends ShoelaceElement implements ShoelaceFormControl {
-  static styles: CSSResultGroup = styles;
+  static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
   static dependencies = {
     'sl-icon': SlIcon,
     'sl-popup': SlPopup,

@@ -1,9 +1,6 @@
 import { css } from 'lit';
-import componentStyles from '../../styles/component.styles.js';
 
 export default css`
-  ${componentStyles}
-
   :host(:not(:focus-within)) {
     position: absolute !important;
     width: 1px !important;

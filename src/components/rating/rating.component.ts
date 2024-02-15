@@ -6,6 +6,7 @@ import { LocalizeController } from '../../utilities/localize.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { watch } from '../../internal/watch.js';
+import componentStyles from '../../styles/component.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import SlIcon from '../icon/icon.component.js';
 import styles from './rating.styles.js';
@@ -32,7 +33,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --symbol-spacing - The spacing to use around symbols.
  */
 export default class SlRating extends ShoelaceElement {
-  static styles: CSSResultGroup = styles;
+  static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = { 'sl-icon': SlIcon };
 
   private readonly localize = new LocalizeController(this);

@@ -6,6 +6,7 @@ import { LocalizeController } from '../../utilities/localize.js';
 import { property, query } from 'lit/decorators.js';
 import { waitForEvent } from '../../internal/event.js';
 import { watch } from '../../internal/watch.js';
+import componentStyles from '../../styles/component.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import SlPopup from '../popup/popup.component.js';
 import styles from './tooltip.styles.js';
@@ -40,7 +41,7 @@ import type { CSSResultGroup } from 'lit';
  * @animation tooltip.hide - The animation to use when hiding the tooltip.
  */
 export default class SlTooltip extends ShoelaceElement {
-  static styles: CSSResultGroup = styles;
+  static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = { 'sl-popup': SlPopup };
 
   private hoverTimeout: number;
