@@ -236,15 +236,15 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
       };
     }
     root.addEventListener('focusin', this.handleDocumentFocusIn);
-    root.addEventListener('keydown', this.handleDocumentKeyDown);
-    root.addEventListener('mousedown', this.handleDocumentMouseDown);
+    document.addEventListener('keydown', this.handleDocumentKeyDown);
+    document.addEventListener('mousedown', this.handleDocumentMouseDown);
   }
 
   private removeOpenListeners() {
     const root = this.getRootNode();
     root.removeEventListener('focusin', this.handleDocumentFocusIn);
-    root.removeEventListener('keydown', this.handleDocumentKeyDown);
-    root.removeEventListener('mousedown', this.handleDocumentMouseDown);
+    document.removeEventListener('keydown', this.handleDocumentKeyDown);
+    document.removeEventListener('mousedown', this.handleDocumentMouseDown);
     this.closeWatcher?.destroy();
   }
 
