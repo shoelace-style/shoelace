@@ -57,6 +57,7 @@ export default css`
 
   .rating__symbol {
     transition: var(--sl-transition-fast) scale;
+    pointer-events: none;
   }
 
   .rating__symbol--hover {
