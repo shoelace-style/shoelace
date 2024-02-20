@@ -14,6 +14,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- Added support for `contextElement` to `VirtualElements` in `<sl-popup>` [#1874]
 - Fixed a bug in `<sl-rating>` that caused the rating to not reset in some circumstances [#1877]
 
 ## 2.14.0
