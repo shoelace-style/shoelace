@@ -224,7 +224,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     //
     // https://github.com/shoelace-style/shoelace/issues/1763
     //
-    const root = this.getRootNode();
     if ('CloseWatcher' in window) {
       this.closeWatcher?.destroy();
       this.closeWatcher = new CloseWatcher();
@@ -235,16 +234,25 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
         }
       };
     }
-    root.addEventListener('focusin', this.handleDocumentFocusIn);
-    root.addEventListener('keydown', this.handleDocumentKeyDown);
-    root.addEventListener('mousedown', this.handleDocumentMouseDown);
+    document.addEventListener('focusin', this.handleDocumentFocusIn);
+    document.addEventListener('keydown', this.handleDocumentKeyDown);
+    document.addEventListener('mousedown', this.handleDocumentMouseDown);
+
+    // If the component is rendered in a shadow root, we need to attach the focusin listener there too
+    if (this.getRootNode() !== document) {
+      this.getRootNode().addEventListener('focusin', this.handleDocumentFocusIn);
+    }
   }
 
   private removeOpenListeners() {
-    const root = this.getRootNode();
-    root.removeEventListener('focusin', this.handleDocumentFocusIn);
-    root.removeEventListener('keydown', this.handleDocumentKeyDown);
-    root.removeEventListener('mousedown', this.handleDocumentMouseDown);
+    document.removeEventListener('focusin', this.handleDocumentFocusIn);
+    document.removeEventListener('keydown', this.handleDocumentKeyDown);
+    document.removeEventListener('mousedown', this.handleDocumentMouseDown);
+
+    if (this.getRootNode() !== document) {
+      this.getRootNode().removeEventListener('focusin', this.handleDocumentFocusIn);
+    }
+
     this.closeWatcher?.destroy();
   }
 
