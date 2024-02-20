@@ -14,7 +14,12 @@ export interface VirtualElement {
 }
 
 function isVirtualElement(e: unknown): e is VirtualElement {
-  return e !== null && typeof e === 'object' && 'getBoundingClientRect' in e && ('contextElement' in e ? e instanceof Element : true);
+  return (
+    e !== null &&
+    typeof e === 'object' &&
+    'getBoundingClientRect' in e &&
+    ('contextElement' in e ? e instanceof Element : true)
+  );
 }
 
 /**
