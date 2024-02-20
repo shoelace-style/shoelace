@@ -224,6 +224,15 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     //
     // https://github.com/shoelace-style/shoelace/issues/1763
     //
+    document.addEventListener('focusin', this.handleDocumentFocusIn);
+    document.addEventListener('keydown', this.handleDocumentKeyDown);
+    document.addEventListener('mousedown', this.handleDocumentMouseDown);
+
+    // If the component is rendered in a shadow root, we need to attach the focusin listener there too
+    if (this.getRootNode() !== document) {
+      this.getRootNode().addEventListener('focusin', this.handleDocumentFocusIn);
+    }
+
     if ('CloseWatcher' in window) {
       this.closeWatcher?.destroy();
       this.closeWatcher = new CloseWatcher();
@@ -233,14 +242,6 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
           this.displayInput.focus({ preventScroll: true });
         }
       };
-    }
-    document.addEventListener('focusin', this.handleDocumentFocusIn);
-    document.addEventListener('keydown', this.handleDocumentKeyDown);
-    document.addEventListener('mousedown', this.handleDocumentMouseDown);
-
-    // If the component is rendered in a shadow root, we need to attach the focusin listener there too
-    if (this.getRootNode() !== document) {
-      this.getRootNode().addEventListener('focusin', this.handleDocumentFocusIn);
     }
   }
 
