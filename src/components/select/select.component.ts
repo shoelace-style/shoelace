@@ -617,7 +617,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
         </div>`;
       } else if (index === this.maxOptionsVisible) {
         // Hit tag limit
-        return html`<sl-tag>+${this.selectedOptions.length - index}</sl-tag>`;
+        return html`<sl-tag size=${this.size}>+${this.selectedOptions.length - index}</sl-tag>`;
       }
       return html``;
     });
