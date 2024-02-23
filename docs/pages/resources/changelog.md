@@ -20,6 +20,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-tree>` that caused a new stacking context resulting in tooltips being clipped [#1709]
 - Fixed a bug in `<sl-tab-group>` that caused the scroll controls to toggle indefinitely when zoomed in Safari [#1839]
 - Fixed a bug in the submenu controller that allowed two submenus to be open at the same time [#1880]
+- Fixed a bug in `<sl-select>` where the tag size wouldn't update with the control's size [#1886]
 
 ## 2.14.0
 
