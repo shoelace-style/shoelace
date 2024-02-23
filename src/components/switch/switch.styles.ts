@@ -155,6 +155,7 @@ export default css`
 
   :host([required]) .switch__label::after {
     content: var(--sl-input-required-content);
+    color: var(--sl-input-required-content-color);
     margin-inline-start: var(--sl-input-required-content-offset);
   }
 
