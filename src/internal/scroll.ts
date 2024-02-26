@@ -11,14 +11,14 @@ function getScrollbarWidth() {
 /**
  * Used in conjunction with `scrollbarWidth` to set proper body padding in case the user has padding already on the `<body>` element.
  */
-function getExistingBodyPadding () {
-   const padding = Number(getComputedStyle(document.body).paddingRight.replace(/px/, ""))
+function getExistingBodyPadding() {
+  const padding = Number(getComputedStyle(document.body).paddingRight.replace(/px/, ''));
 
-   if (isNaN(padding) || !padding) {
-     return 0
-   }
+  if (isNaN(padding) || !padding) {
+    return 0;
+  }
 
-   return padding
+  return padding;
 }
 
 /**

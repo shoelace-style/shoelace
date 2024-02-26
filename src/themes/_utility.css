@@ -4,7 +4,6 @@
  * to reduce the possibility of collisions.
  */
 
-
 @supports (scrollbar-gutter: stable) {
   .sl-scroll-lock {
     scrollbar-gutter: stable !important;
