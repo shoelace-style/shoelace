@@ -4,6 +4,7 @@
  * to reduce the possibility of collisions.
  */
 
+
 @supports (scrollbar-gutter: stable) {
   .sl-scroll-lock {
     scrollbar-gutter: stable !important;
@@ -12,7 +13,7 @@
 }
 
 @supports not (scrollbar-gutter: stable) {
-  .sl-scroll-lock {
+  .sl-scroll-lock body {
     padding-right: var(--sl-scroll-lock-size) !important;
     overflow: hidden !important;
   }
