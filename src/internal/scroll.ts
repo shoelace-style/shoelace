@@ -31,8 +31,8 @@ export function lockBodyScrolling(lockingEl: HTMLElement) {
   // When the first lock is created, set the scroll lock size to match the scrollbar's width to prevent content from
   // shifting. We only do this on the first lock because the scrollbar width will measure zero after overflow is hidden.
   if (!document.documentElement.classList.contains('sl-scroll-lock')) {
+    /** Scrollbar width + body padding calculation can go away once Safari has scrollbar-gutter support. */
     const scrollbarWidth = getScrollbarWidth() + getExistingBodyPadding(); // must be measured before the `sl-scroll-lock` class is applied
-
     document.documentElement.classList.add('sl-scroll-lock');
     document.documentElement.style.setProperty('--sl-scroll-lock-size', `${scrollbarWidth}px`);
   }
