@@ -22,6 +22,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in the submenu controller that allowed two submenus to be open at the same time [#1880]
 - Fixed a bug in `<sl-select>` where the tag size wouldn't update with the control's size [#1886]
 - Fixed a bug in `<sl-checkbox>` and `<sl-switch>` where the color of the required content wasn't applying correctly
+- Fixed a bug in `<sl-checkbox>` where help text was incorrectly styled [#1897]
 
 ## 2.14.0
 
