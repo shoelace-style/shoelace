@@ -24,6 +24,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-select>` where the tag size wouldn't update with the control's size [#1886]
 - Fixed a bug in `<sl-checkbox>` and `<sl-switch>` where the color of the required content wasn't applying correctly
 - Fixed a bug in `<sl-checkbox>` where help text was incorrectly styled [#1897]
+- Fixed a bug in `<sl-input>` that prevented the control from receiving focus when clicking over the clear button
 
 ## 2.14.0
 
