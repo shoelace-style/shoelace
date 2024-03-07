@@ -1,9 +1,9 @@
-const MarkdownIt = require('markdown-it');
-const markdownItContainer = require('markdown-it-container');
-const markdownItIns = require('markdown-it-ins');
-const markdownItKbd = require('markdown-it-kbd');
-const markdownItMark = require('markdown-it-mark');
-const markdownItReplaceIt = require('markdown-it-replace-it');
+import MarkdownIt from 'markdown-it';
+import markdownItContainer from 'markdown-it-container';
+import markdownItIns from 'markdown-it-ins';
+import markdownItKbd from 'markdown-it-kbd';
+import markdownItMark from 'markdown-it-mark';
+import markdownItReplaceIt from 'markdown-it-replace-it';
 
 const markdown = MarkdownIt({
   html: true,
@@ -64,4 +64,4 @@ markdownItReplaceIt.replacements.push({
   default: true
 });
 
-module.exports = markdown;
+export default markdown;

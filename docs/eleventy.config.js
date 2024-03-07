@@ -1,22 +1,21 @@
 /* eslint-disable no-invalid-this */
-const fs = require('fs');
-const path = require('path');
-const lunr = require('lunr');
-const { capitalCase } = require('change-case');
-const { JSDOM } = require('jsdom');
-const { customElementsManifest, getAllComponents } = require('./_utilities/cem.cjs');
-const shoelaceFlavoredMarkdown = require('./_utilities/markdown.cjs');
-const activeLinks = require('./_utilities/active-links.cjs');
-const anchorHeadings = require('./_utilities/anchor-headings.cjs');
-const codePreviews = require('./_utilities/code-previews.cjs');
-const copyCodeButtons = require('./_utilities/copy-code-buttons.cjs');
-const externalLinks = require('./_utilities/external-links.cjs');
-const highlightCodeBlocks = require('./_utilities/highlight-code.cjs');
-const tableOfContents = require('./_utilities/table-of-contents.cjs');
-const prettier = require('./_utilities/prettier.cjs');
-const scrollingTables = require('./_utilities/scrolling-tables.cjs');
-const typography = require('./_utilities/typography.cjs');
-const replacer = require('./_utilities/replacer.cjs');
+import { activeLinksPlugin } from './_utilities/active-links.js';
+import { anchorHeadingsPlugin } from './_utilities/anchor-headings.js';
+import { capitalCase } from 'change-case';
+import { codePreviewsPlugin } from './_utilities/code-previews.js';
+import { copyCodeButtonsPlugin } from './_utilities/copy-code-buttons.js';
+import { customElementsManifest, getAllComponents } from './_utilities/cem.js';
+import { externalLinksPlugin } from './_utilities/external-links.js';
+import { highlightCodePlugin } from './_utilities/highlight-code.js';
+import { parse } from 'node-html-parser';
+// import { prettierPlugin } from './_utilities/prettier.js';
+import { replacerPlugin } from './_utilities/replacer.js';
+import { scrollingTablesPlugin } from './_utilities/scrolling-tables.js';
+import { tableOfContentsPlugin } from './_utilities/table-of-contents.js';
+import fs from 'fs';
+import lunr from 'lunr';
+import path from 'path';
+import shoelaceFlavoredMarkdown from './_utilities/markdown.js';
 
 const assetsDir = 'assets';
 const cdndir = 'cdn';
@@ -24,7 +23,7 @@ const npmdir = 'dist';
 const allComponents = getAllComponents();
 let hasBuiltSearchIndex = false;
 
-module.exports = function (eleventyConfig) {
+export default function (eleventyConfig) {
   //
   // Global data
   //
@@ -113,47 +112,40 @@ module.exports = function (eleventyConfig) {
   });
 
   //
-  // Transforms
+  // Plugins
   //
-  eleventyConfig.addTransform('html-transform', function (content) {
-    // Parse the template and get a Document object
-    const doc = new JSDOM(content, {
-      // We must set a default URL so links are parsed with a hostname. Let's use a bogus TLD so we can easily
-      // identify which ones are internal and which ones are external.
-      url: `https://internal/`
-    }).window.document;
-
-    // DOM transforms
-    activeLinks(doc, { pathname: this.page.url });
-    anchorHeadings(doc, {
-      within: '#content .content__body',
-      levels: ['h2', 'h3', 'h4', 'h5']
-    });
-    tableOfContents(doc, {
+  eleventyConfig.addPlugin(
+    anchorHeadingsPlugin({
+      container: '#content .content__body',
+      selector: 'h2, h3, h4, h5'
+    })
+  );
+  eleventyConfig.addPlugin(activeLinksPlugin());
+  eleventyConfig.addPlugin(codePreviewsPlugin());
+  eleventyConfig.addPlugin(externalLinksPlugin());
+  // eleventyConfig.addPlugin(highlightCodePlugin());
+  eleventyConfig.addPlugin(
+    tableOfContentsPlugin({
       levels: ['h2', 'h3'],
       container: '#content .content__toc > ul',
       within: '#content .content__body'
-    });
-    codePreviews(doc);
-    externalLinks(doc, { target: '_blank' });
-    highlightCodeBlocks(doc);
-    scrollingTables(doc);
-    copyCodeButtons(doc); // must be after codePreviews + highlightCodeBlocks
-    typography(doc, '#content');
-    replacer(doc, [
+    })
+  );
+  eleventyConfig.addPlugin(scrollingTablesPlugin());
+  eleventyConfig.addPlugin(copyCodeButtonsPlugin()); // must be after codePreviews + highlightCodeBlocks
+  eleventyConfig.addPlugin(
+    replacerPlugin([
       { pattern: '%VERSION%', replacement: customElementsManifest.package.version },
       { pattern: '%CDNDIR%', replacement: cdndir },
       { pattern: '%NPMDIR%', replacement: npmdir }
-    ]);
+    ])
+  );
 
-    // Serialize the Document object to an HTML string and prepend the doctype
-    content = `<!DOCTYPE html>\n${doc.documentElement.outerHTML}`;
-
-    // String transforms
-    content = prettier(content);
-
-    return content;
-  });
+  //
+  // TODO - only run this at build
+  //
+  // eleventyConfig.addPlugin(prettierPlugin());
+  //
 
   //
   // Build a search index
@@ -181,12 +173,9 @@ module.exports = function (eleventyConfig) {
           .join('/', path.relative(eleventyConfig.dir.output, result.outputPath))
           .replace(/\\/g, '/') // convert backslashes to forward slashes
           .replace(/\/index.html$/, '/'); // convert trailing /index.html to /
-        const doc = new JSDOM(result.content, {
-          // We must set a default URL so links are parsed with a hostname. Let's use a bogus TLD so we can easily
-          // identify which ones are internal and which ones are external.
-          url: `https://internal/`
-        }).window.document;
+        const doc = parse(result.content);
         const content = doc.querySelector('#content');
+        if (!content) return;
 
         // Get title and headings
         const title = (doc.querySelector('title')?.textContent || path.basename(result.outputPath)).trim();
@@ -242,4 +231,4 @@ module.exports = function (eleventyConfig) {
     markdownTemplateEngine: 'njk', // use Nunjucks instead of Liquid for markdown files
     templateEngineOverride: ['njk'] // just Nunjucks and then markdown
   };
-};
+}

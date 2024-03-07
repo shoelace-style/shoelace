@@ -77,7 +77,7 @@
     "qr-creator": "^1.0.0"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.1",
+    "@11ty/eleventy": "3.0.0-alpha.5",
     "@custom-elements-manifest/analyzer": "^0.8.4",
     "@open-wc/testing": "^3.2.0",
     "@types/mocha": "^10.0.2",
@@ -124,6 +124,7 @@
     "markdown-it-kbd": "^2.2.2",
     "markdown-it-mark": "^3.0.1",
     "markdown-it-replace-it": "^1.0.0",
+    "node-html-parser": "^6.1.12",
     "npm-check-updates": "^16.14.6",
     "ora": "^7.0.1",
     "pascal-case": "^3.1.2",
@@ -133,12 +134,13 @@
     "react": "^18.2.0",
     "recursive-copy": "^2.0.14",
     "sinon": "^16.1.0",
-    "smartquotes": "^2.3.2",
+    "slugify": "^1.6.6",
     "source-map": "^0.7.4",
     "strip-css-comments": "^5.0.0",
     "tslib": "^2.6.2",
     "typescript": "^5.2.2",
-    "user-agent-data-types": "^0.3.1"
+    "user-agent-data-types": "^0.3.1",
+    "uuid": "^9.0.1"
   },
   "lint-staged": {
     "*.{ts,js}": [

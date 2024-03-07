@@ -1,14 +1,21 @@
-const customElementsManifest = require('../../dist/custom-elements.json');
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+import fs from 'fs';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const rootDir = dirname(dirname(__dirname));
+
+const customElementsManifest = JSON.parse(fs.readFileSync(join(rootDir, 'dist/custom-elements.json'), 'utf-8'));
 
 //
 // Export it here so we can import it elsewhere and use the same version
 //
-module.exports.customElementsManifest = customElementsManifest;
+export { customElementsManifest };
 
 //
 // Gets all components from custom-elements.json and returns them in a more documentation-friendly format.
 //
-module.exports.getAllComponents = function () {
+export function getAllComponents() {
   const allComponents = [];
 
   customElementsManifest.modules?.forEach(module => {
@@ -68,4 +75,4 @@ module.exports.getAllComponents = function () {
     if (a.name > b.name) return 1;
     return 0;
   });
-};
+}
