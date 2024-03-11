@@ -96,6 +96,7 @@ export default class SlMultiRange extends ShoelaceElement {
   @queryAll('.handle') handles: NodeListOf<HTMLDivElement>;
 
   #hasSlotController = new HasSlotController(this, 'help-text', 'label');
+  #resizeObserver: ResizeObserver | null = null;
   #value: readonly number[] = [0, 100];
   #sliderValues = new Map<number, number>();
   #hasFocus = false;
@@ -162,6 +163,16 @@ export default class SlMultiRange extends ShoelaceElement {
 
   protected override willUpdate(changedProperties: PropertyValues): void {
     super.willUpdate(changedProperties);
+
+    if (this.tooltip !== 'none' && !this.#resizeObserver) {
+      this.#resizeObserver = new ResizeObserver(this.#onResize.bind(this));
+      this.updateComplete.then(() => {
+        this.#resizeObserver?.observe(this.baseDiv);
+      });
+    } else if (this.tooltip === 'none' && this.#resizeObserver) {
+      this.#resizeObserver.disconnect();
+      this.#resizeObserver = null;
+    }
 
     if (this.min > this.max) {
       [this.min, this.max] = [this.max, this.min];
@@ -352,7 +363,7 @@ export default class SlMultiRange extends ShoelaceElement {
     handle.setAttribute('aria-valuetext', this.tooltipFormatter(value));
     const pos = (value - this.min) / (this.max - this.min);
     handle.style.left = `calc( ${100 * pos}% - var(--thumb-size) * ${pos} )`;
-    this.#updateTooltip(+handle.dataset.sliderId!);
+    this.#updateTooltip(handle);
   }
 
   #onFocus(): void {
@@ -371,7 +382,8 @@ export default class SlMultiRange extends ShoelaceElement {
     this.#hasFocus = false;
   }
 
-  #updateTooltip(sliderId: number): void {
+  #updateTooltip(handle: HTMLDivElement): void {
+    const sliderId = +handle.dataset.sliderId!;
     if (!this.tooltipElem) return;
     if (!this.#sliderValues.has(sliderId)) return;
     const value = this.#sliderValues.get(sliderId)!;
@@ -384,6 +396,11 @@ export default class SlMultiRange extends ShoelaceElement {
     if (this.disabled) return;
     const handle = event.target as HTMLDivElement;
     if (!handle?.dataset?.sliderId) return;
-    this.#updateTooltip(+handle.dataset.sliderId);
+    this.#updateTooltip(handle);
+  }
+
+  #onResize(): void {
+    const handle = this.shadowRoot?.querySelector('.tooltip-visible .handle:focus');
+    if (handle) this.#updateTooltip(handle as HTMLDivElement);
   }
 }
