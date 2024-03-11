@@ -93,7 +93,9 @@ export default class SlMultiRange extends ShoelaceElement implements ShoelaceFor
   set valueAsArray(value: readonly number[] | null) {
     const oldValue = this.#value;
     this.#value = value || [];
-    this.requestUpdate('value', oldValue.join(','));
+    if (arraysDiffer(oldValue, this.#value)) {
+      this.requestUpdate('value', oldValue.join(','));
+    }
   }
   get valueAsArray() {
     return this.#value;
