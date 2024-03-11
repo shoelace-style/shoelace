@@ -102,3 +102,17 @@ const App = () => <SlRange value={[25,50,75]} style={{
 ```
 
 {% endraw %}
+
+### Label and Help Text
+
+You can add an accessible label and/or descriptive help text using the `label` and `help-text` attributes or slots.
+
+```html:preview
+<sl-multi-range label="Difficulty Range" help-text="Search for challenges within the desired difficulty range"></sl-multi-range>
+```
+
+```jsx:react
+import SlRange from '@shoelace-style/shoelace/dist/react/multi-range';
+
+const App = () => <SlRange label="Difficulty Range" help-text"Search for challenges within the desired difficulty range" />;
+```

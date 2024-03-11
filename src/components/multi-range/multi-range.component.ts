@@ -1,6 +1,9 @@
+import { classMap } from 'lit/directives/class-map.js';
+import { HasSlotController } from '../../internal/slot.js';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { property, query, queryAll } from 'lit/decorators.js';
+import formControlStyles from '../../styles/form-control.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './multi-range.styles.js';
 import type { CSSResultGroup, PropertyValues } from 'lit';
@@ -25,6 +28,9 @@ const arraysDiffer = function (a: readonly number[], b: readonly number[]): bool
  * @status experimental
  * @since next
  *
+ * @slot label - The range's label. Alternatively, you can use the `label` attribute.
+ * @slot help-text - Text that describes how to use the input. Alternatively, you can use the `help-text` attribute.
+ *
  * @event sl-change - Emitted when an alteration to the control's value is committed by the user.
  * @event sl-input - Emitted when the control receives input.
  *
@@ -34,10 +40,13 @@ const arraysDiffer = function (a: readonly number[], b: readonly number[]): bool
  * @cssproperty --track-height - The height of the track.
  */
 export default class SlMultiRange extends ShoelaceElement {
-  static styles: CSSResultGroup = [styles];
+  static styles: CSSResultGroup = [formControlStyles, styles];
 
-  /** The range's label. */
+  /** The range's label. If you need to display HTML, use the `label` slot instead. */
   @property() label = '';
+
+  /** The range's help text. If you need to display HTML, use the help-text slot instead. */
+  @property({ attribute: 'help-text' }) helpText = '';
 
   /** Disables the range. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -70,11 +79,15 @@ export default class SlMultiRange extends ShoelaceElement {
   @query('.active-track') activeTrack: HTMLDivElement;
   @queryAll('.handle') handles: NodeListOf<HTMLDivElement>;
 
+  #hasSlotController = new HasSlotController(this, 'help-text', 'label');
   #value: readonly number[] = [0, 100];
   #sliderValues = new Map<number, number>();
   #nextId = 1;
 
   override render(): unknown {
+    const hasLabel = !!(this.label || this.#hasSlotController.test('label'));
+    const hasHelpText = !!(this.helpText || this.#hasSlotController.test('help-text'));
+
     this.#sliderValues.clear();
     const handles = this.#value.map(value => {
       const sliderId = this.#nextId++;
@@ -84,7 +97,7 @@ export default class SlMultiRange extends ShoelaceElement {
           class="handle"
           tabindex="${this.disabled ? -1 : 0}"
           role="slider"
-          aria-label="${this.label}"
+          aria-labelledby=${ifDefined(hasLabel ? "label" : undefined)}
           aria-valuemin="${this.min}"
           aria-valuemax="${this.max}"
           aria-disabled=${ifDefined(this.disabled ? 'true' : undefined)}
@@ -100,11 +113,23 @@ export default class SlMultiRange extends ShoelaceElement {
     });
 
     return html`
-      <label ?hidden=${!this.label}>${this.label}</label>
-      <div class="base">
-        <div class="track"></div>
-        <div class="active-track"></div>
-        ${handles}
+      <div class=${classMap({
+          'form-control': true,
+          'form-control--medium': true, // range only has one size
+          'form-control--has-label': hasLabel,
+          'form-control--has-help-text': hasHelpText
+      })}>
+        <label id="label" class="form-control__label" aria-hidden=${hasLabel ? 'false' : 'true'}>
+          <slot name="label">${this.label}</slot>
+        </label>
+        <div class="base">
+          <div class="track"></div>
+          <div class="active-track"></div>
+          ${handles}
+        </div>
+        <div class="form-control__help-text" aria-hidden=${hasHelpText ? 'false' : 'true'}>
+          <slot name="help-text">${this.helpText}</slot>
+        </div>
       </div>
     `;
   }

@@ -6,21 +6,13 @@ export default css`
     --track-color-active: var(--sl-color-neutral-200);
     --track-color-inactive: var(--sl-color-neutral-200);
     --track-height: 6px;
+  }
 
+  .form-control {
     display: flex;
     flex-direction: column;
     align-items: stretch;
     box-sizing: border-box;
-  }
-
-  label {
-    display: inline-block;
-    color: var(--sl-input-label-color);
-    margin-bottom: var(--sl-spacing-3x-small);
-  }
-
-  label[hidden] {
-    display: none;
   }
 
   .base {
