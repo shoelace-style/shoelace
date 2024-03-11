@@ -1,12 +1,16 @@
 import { classMap } from 'lit/directives/class-map.js';
+import { defaultValue } from '../../internal/default-value.js';
+import { FormControlController } from '../../internal/form.js';
 import { HasSlotController } from '../../internal/slot.js';
 import { html, nothing } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { property, query, queryAll } from 'lit/decorators.js';
+import componentStyles from '../../styles/component.styles.js';
 import formControlStyles from '../../styles/form-control.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './multi-range.styles.js';
 import type { CSSResultGroup, PropertyValues } from 'lit';
+import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
 
 const numericSort = function (a: number, b: number): number {
   return a - b;
@@ -42,8 +46,11 @@ const arraysDiffer = function (a: readonly number[], b: readonly number[]): bool
  * @cssproperty --track-color-inactive - The of the portion of the track that represents the remaining value.
  * @cssproperty --track-height - The height of the track.
  */
-export default class SlMultiRange extends ShoelaceElement {
-  static styles: CSSResultGroup = [formControlStyles, styles];
+export default class SlMultiRange extends ShoelaceElement implements ShoelaceFormControl {
+  static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
+
+  /** The name of the range, submitted as a name/value pair with form data. */
+  @property() name = '';
 
   /** The range's label. If you need to display HTML, use the `label` slot instead. */
   @property() label = '';
@@ -84,6 +91,9 @@ export default class SlMultiRange extends ShoelaceElement {
     return this.#value;
   }
 
+  /** The default value of the form control. Primarily used for resetting the form control. */
+  @defaultValue() defaultValue = '0,100';
+
   /**
    * A function used to format the tooltip's value. The range's value is passed as the first and only argument. The
    * function should return a string to display in the tooltip.
@@ -96,10 +106,12 @@ export default class SlMultiRange extends ShoelaceElement {
   @queryAll('.handle') handles: NodeListOf<HTMLDivElement>;
 
   #hasSlotController = new HasSlotController(this, 'help-text', 'label');
+  #formControlController = new FormControlController(this, { assumeInteractionOn: ['sl-change'] });
   #resizeObserver: ResizeObserver | null = null;
   #value: readonly number[] = [0, 100];
   #sliderValues = new Map<number, number>();
   #hasFocus = false;
+  #validationError = '';
   #nextId = 1;
 
   override render(): unknown {
@@ -143,7 +155,6 @@ export default class SlMultiRange extends ShoelaceElement {
           'tooltip-top': this.tooltip === 'top',
           'tooltip-bottom': this.tooltip === 'bottom'
         })}
-        @focusin=${this.#onFocus}
         @focusout=${this.#onBlur}
       >
         <label id="label" class="form-control__label" aria-hidden=${hasLabel ? 'false' : 'true'}>
@@ -223,10 +234,55 @@ export default class SlMultiRange extends ShoelaceElement {
     }
   }
 
+  /** Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid. */
+  public checkValidity(): boolean {
+    return !this.#validationError;
+  }
+
+  /** Checks for validity and shows the browser's validation message if the control is invalid. */
+  public reportValidity(): boolean {
+    this.#validationError = '';
+    return true;
+  }
+
+  /** Sets a custom validation message. Pass an empty string to restore validity. */
+  public setCustomValidity(message: string): void {
+    this.#validationError = message;
+    this.#formControlController.updateValidity();
+  }
+
+  /** Gets the associated form, if one exists. */
+  public getForm(): HTMLFormElement | null {
+    return this.#formControlController.getForm();
+  }
+
+  /** Gets the validity state object */
+  public get validity(): ValidityState {
+    return {
+      badInput: false,
+      customError: !!this.#validationError,
+      patternMismatch: false,
+      rangeOverflow: false,
+      rangeUnderflow: false,
+      stepMismatch: false,
+      tooLong: false,
+      tooShort: false,
+      typeMismatch: false,
+      valid: !!this.#validationError,
+      valueMissing: false
+    };
+  }
+
+  /** Gets the validation message */
+  public get validationMessage(): string {
+    return this.#validationError;
+  }
+
   #onClickHandle(event: PointerEvent): void {
     if (this.disabled) return;
     this.baseDiv?.classList?.add('tooltip-visible');
     const handle = event.target as HTMLDivElement;
+    this.#updateTooltip(handle);
 
     if (handle.dataset.pointerId) {
       handle.releasePointerCapture(+handle.dataset.pointerId);
@@ -366,14 +422,6 @@ export default class SlMultiRange extends ShoelaceElement {
     this.#updateTooltip(handle);
   }
 
-  #onFocus(): void {
-    if (this.disabled) return;
-    this.baseDiv?.classList?.add('tooltip-visible');
-    if (this.#hasFocus) return;
-    this.emit('sl-focus');
-    this.#hasFocus = true;
-  }
-
   #onBlur(event: FocusEvent): void {
     this.baseDiv?.classList?.remove('tooltip-visible');
     this.baseDiv?.classList?.remove('keyboard-focus');
@@ -385,6 +433,7 @@ export default class SlMultiRange extends ShoelaceElement {
   #updateTooltip(handle: HTMLDivElement): void {
     const sliderId = +handle.dataset.sliderId!;
     if (!this.tooltipElem) return;
+    if (!this.baseDiv?.classList?.contains('tooltip-visible')) return;
     if (!this.#sliderValues.has(sliderId)) return;
     const value = this.#sliderValues.get(sliderId)!;
     const pos = (value - this.min) / (this.max - this.min);
@@ -394,8 +443,13 @@ export default class SlMultiRange extends ShoelaceElement {
 
   #onFocusHandle(event: FocusEvent): void {
     if (this.disabled) return;
+    if (!this.#hasFocus) {
+      this.#hasFocus = true;
+      this.emit('sl-focus');
+    }
     const handle = event.target as HTMLDivElement;
     if (!handle?.dataset?.sliderId) return;
+    this.baseDiv?.classList?.add('tooltip-visible');
     this.#updateTooltip(handle);
   }
 
