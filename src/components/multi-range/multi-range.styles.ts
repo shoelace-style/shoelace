@@ -3,7 +3,7 @@ import { css } from 'lit';
 export default css`
   :host {
     --thumb-size: 20px;
-    --track-color-active: var(--sl-color-neutral-200);
+    --track-color-active: var(--sl-color-primary-300);
     --track-color-inactive: var(--sl-color-neutral-200);
     --track-height: 6px;
   }

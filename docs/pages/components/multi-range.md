@@ -17,33 +17,6 @@ const App = () => <SlRange />;
 
 ## Examples
 
-### Custom Track Colors
-
-You can customize the active and inactive portions of the track using the `--track-color-active` and `--track-color-inactive` custom properties.
-
-```html:preview
-<sl-multi-range
-	value="[25,75]"
-	style="
-		--track-color-active: var(--sl-color-primary-300);
-		--track-color-inactive: var(--sl-color-neutral-200);
-	"
-></sl-multi-range>
-```
-
-{% raw %}
-
-```jsx:react
-import SlRange from '@shoelace-style/shoelace/dist/react/multi-range';
-
-const App = () => <SlRange value={[25,75]} style={{
-	'--track-color-active': 'var(--sl-color-primary-300)',
-	'--track-color-inactive': 'var(--sl-color-neutral-200)'
-}}/>;
-```
-
-{% endraw %}
-
 ### Min, Max, and Step
 
 Use the `min` and `max` attributes to set the range's minimum and maximum values, respectively. The `step` attribute determines the value's interval when increasing and decreasing.
@@ -81,13 +54,7 @@ const App = () => <SlRange disabled />;
 You can use any number of handles on the slider. The slider will have one handle for every element in the value array.
 
 ```html:preview
-<sl-multi-range
-	value="[25,50,75]"
-	style="
-		--track-color-active: var(--sl-color-primary-300);
-		--track-color-inactive: var(--sl-color-neutral-200);
-	"
-></sl-multi-range>
+<sl-multi-range value="[25,50,75]"></sl-multi-range>
 ```
 
 {% raw %}
@@ -95,10 +62,7 @@ You can use any number of handles on the slider. The slider will have one handle
 ```jsx:react
 import SlRange from '@shoelace-style/shoelace/dist/react/multi-range';
 
-const App = () => <SlRange value={[25,50,75]} style={{
-	'--track-color-active': 'var(--sl-color-primary-300)',
-	'--track-color-inactive': 'var(--sl-color-neutral-200)'
-}}/>;
+const App = () => <SlRange value={[25,50,75]} />;
 ```
 
 {% endraw %}
@@ -116,3 +80,30 @@ import SlRange from '@shoelace-style/shoelace/dist/react/multi-range';
 
 const App = () => <SlRange label="Difficulty Range" help-text"Search for challenges within the desired difficulty range" />;
 ```
+
+### Custom Track Colors
+
+You can customize the active and inactive portions of the track using the `--track-color-active` and `--track-color-inactive` custom properties.
+
+```html:preview
+<sl-multi-range
+	value="[25,75]"
+	style="
+		--track-color-active: var(--sl-color-green-300);
+		--track-color-inactive: var(--sl-color-red-300);
+	"
+></sl-multi-range>
+```
+
+{% raw %}
+
+```jsx:react
+import SlRange from '@shoelace-style/shoelace/dist/react/multi-range';
+
+const App = () => <SlRange value={[25,75]} style={{
+	'--track-color-active': 'var(--sl-color-green-300)',
+	'--track-color-inactive': 'var(--sl-color-red-300)'
+}}/>;
+```
+
+{% endraw %}
