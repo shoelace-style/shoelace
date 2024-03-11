@@ -22,6 +22,11 @@ const arraysDiffer = function (a: readonly number[], b: readonly number[]): bool
   return false;
 };
 
+const csvToArray = function (a: string | null): readonly number[] {
+  if (!a) return [];
+  return a.split(',').map(n => +n);
+};
+
 /**
  * @summary Multi-Ranges allow the user to select multiple values within a given range using a slider with multiple handles.
  * @documentation https://shoelace.style/components/multi-range
@@ -67,7 +72,7 @@ export default class SlMultiRange extends ShoelaceElement {
   @property() tooltip: 'top' | 'bottom' | 'none' = 'top';
 
   /** The current values of the range */
-  @property({ type: Array })
+  @property({ converter: csvToArray })
   set value(value: readonly number[]) {
     this.#value = value || [];
   }
