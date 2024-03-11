@@ -40,6 +40,12 @@ const arraysDiffer = function (a: readonly number[], b: readonly number[]): bool
  * @event sl-focus - Emitted when the control gains focus.
  * @event sl-input - Emitted when the control receives input.
  *
+ * @csspart form-control - The form control that wraps the label, input, and help text.
+ * @csspart form-control-label - The label's wrapper.
+ * @csspart form-control-help-text - The help text's wrapper.
+ * @csspart base - The component's base wrapper.
+ * @csspart tooltip - The range's tooltip.
+ *
  * @cssproperty --thumb-size - The size of the thumb.
  * @cssproperty --tooltip-offset - The vertical distance the tooltip is offset from the track.
  * @cssproperty --track-color-active - The color of the portion of the track that represents the current value.
@@ -118,7 +124,8 @@ export default class SlMultiRange extends ShoelaceElement implements ShoelaceFor
     const hasLabel = !!(this.label || this.#hasSlotController.test('label'));
     const hasHelpText = !!(this.helpText || this.#hasSlotController.test('help-text'));
 
-    const tooltip = this.tooltip !== 'none' ? html`<div class="tooltip" aria-hidden="true"></div>` : nothing;
+    const tooltip =
+      this.tooltip !== 'none' ? html`<div class="tooltip" part="tooltip" aria-hidden="true"></div>` : nothing;
 
     this.#sliderValues.clear();
     const handles = this.#value.map(value => {
@@ -147,6 +154,7 @@ export default class SlMultiRange extends ShoelaceElement implements ShoelaceFor
 
     return html`
       <div
+        part="form-control"
         class=${classMap({
           'form-control': true,
           'form-control--medium': true, // range only has one size
@@ -157,15 +165,24 @@ export default class SlMultiRange extends ShoelaceElement implements ShoelaceFor
         })}
         @focusout=${this.#onBlur}
       >
-        <label id="label" class="form-control__label" aria-hidden=${hasLabel ? 'false' : 'true'}>
+        <label
+          id="label"
+          part="form-control-label"
+          class="form-control__label"
+          aria-hidden=${hasLabel ? 'false' : 'true'}
+        >
           <slot name="label">${this.label}</slot>
         </label>
-        <div class="base">
+        <div class="base" part="base">
           <div class="track"></div>
           <div class="active-track"></div>
           ${handles} ${tooltip}
         </div>
-        <div class="form-control__help-text" aria-hidden=${hasHelpText ? 'false' : 'true'}>
+        <div
+          part="form-control-help-text"
+          class="form-control__help-text"
+          aria-hidden=${hasHelpText ? 'false' : 'true'}
+        >
           <slot name="help-text">${this.helpText}</slot>
         </div>
       </div>
