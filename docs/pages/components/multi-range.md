@@ -30,7 +30,7 @@ Use the `min` and `max` attributes to set the range's minimum and maximum values
 ```jsx:react
 import SlRange from '@shoelace-style/shoelace/dist/react/multi-range';
 
-const App = () => <SlRange min={1} max={10} step={1} value={[0,10]}/>;
+const App = () => <SlRange min={1} max={10} step={1} value={'0,10'}/>;
 ```
 
 {% endraw %}
@@ -62,7 +62,7 @@ You can use any number of handles on the slider. The slider will have one handle
 ```jsx:react
 import SlRange from '@shoelace-style/shoelace/dist/react/multi-range';
 
-const App = () => <SlRange value={[25,50,75]} />;
+const App = () => <SlRange value={'25,50,75'} />;
 ```
 
 {% endraw %}
@@ -100,7 +100,7 @@ You can customize the active and inactive portions of the track using the `--tra
 ```jsx:react
 import SlRange from '@shoelace-style/shoelace/dist/react/multi-range';
 
-const App = () => <SlRange value={[25,75]} style={{
+const App = () => <SlRange value={'25,75'} style={{
 	'--track-color-active': 'var(--sl-color-green-300)',
 	'--track-color-inactive': 'var(--sl-color-red-300)'
 }}/>;

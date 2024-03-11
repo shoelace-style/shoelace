@@ -22,11 +22,6 @@ const arraysDiffer = function (a: readonly number[], b: readonly number[]): bool
   return false;
 };
 
-const csvToArray = function (a: string | null): readonly number[] {
-  if (!a) return [];
-  return a.split(',').map(n => +n);
-};
-
 /**
  * @summary Multi-Ranges allow the user to select multiple values within a given range using a slider with multiple handles.
  * @documentation https://shoelace.style/components/multi-range
@@ -71,12 +66,21 @@ export default class SlMultiRange extends ShoelaceElement {
   /** The preferred placement of the range's tooltip. */
   @property() tooltip: 'top' | 'bottom' | 'none' = 'top';
 
-  /** The current values of the range */
-  @property({ converter: csvToArray })
-  set value(value: readonly number[]) {
+  /** The current values of the input (in ascending order) as a string of comma-separated values */
+  @property({ type: String })
+  set value(value: string | null) {
+    this.#value = value ? value.split(',').map(n => +n) : [];
+  }
+
+  get value() {
+    return this.#value.join(',');
+  }
+
+  /** Gets of sets the current values of the range as an array of numbers */
+  set valueAsArray(value: readonly number[] | null) {
     this.#value = value || [];
   }
-  get value() {
+  get valueAsArray() {
     return this.#value;
   }
 
@@ -182,7 +186,7 @@ export default class SlMultiRange extends ShoelaceElement {
       .sort(numericSort);
 
     if (arraysDiffer(this.#value, adjustedValue)) {
-      this.value = adjustedValue;
+      this.#value = adjustedValue;
       if (!changedProperties.has('value')) {
         this.emit('sl-change');
       }
@@ -263,15 +267,15 @@ export default class SlMultiRange extends ShoelaceElement {
     const activeTrack = this.activeTrack;
     if (!activeTrack) return;
 
-    if (this.min === this.max || this.value.length < 2) {
+    if (this.min === this.max || this.#value.length < 2) {
       activeTrack.style.display = 'none';
       activeTrack.style.left = '0';
       activeTrack.style.width = '0';
       return;
     }
 
-    const start = (100 * (this.value[0] - this.min)) / (this.max - this.min);
-    const span = (100 * (this.value[this.value.length - 1] - this.value[0])) / (this.max - this.min);
+    const start = (100 * (this.#value[0] - this.min)) / (this.max - this.min);
+    const span = (100 * (this.#value[this.#value.length - 1] - this.#value[0])) / (this.max - this.min);
 
     activeTrack.style.display = 'inline-block';
     activeTrack.style.left = `${start}%`;
