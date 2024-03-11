@@ -297,6 +297,8 @@ export default class SlMultiRange extends ShoelaceElement {
         return;
     }
 
+    this.baseDiv.classList.add('keyboard-focus');
+
     if (value !== this.#sliderValues.get(sliderId)) {
       this.#moveHandle(handle, value);
 
@@ -331,14 +333,13 @@ export default class SlMultiRange extends ShoelaceElement {
 
   #onFocus(): void {
     if (this.#hasFocus) return;
-    console.info('sl-focus');
     this.emit('sl-focus');
     this.#hasFocus = true;
   }
 
   #onBlur(event: FocusEvent): void {
+    this.baseDiv?.classList?.remove('keyboard-focus');
     if (event.relatedTarget && this.shadowRoot?.contains(event.relatedTarget as Node)) return;
-    console.info('sl-blur');
     this.emit('sl-blur');
     this.#hasFocus = false;
   }
