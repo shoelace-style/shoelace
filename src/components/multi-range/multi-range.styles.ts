@@ -63,7 +63,8 @@ export default css`
     cursor: grabbing;
   }
 
-  .handle:focus-visible, .keyboard-focus .handle:focus {
+  .handle:focus-visible,
+  .keyboard-focus .handle:focus {
     outline: var(--sl-focus-ring);
     outline-offset: var(--sl-focus-ring-offset);
   }
