@@ -31,7 +31,9 @@ const arraysDiffer = function (a: readonly number[], b: readonly number[]): bool
  * @slot label - The range's label. Alternatively, you can use the `label` attribute.
  * @slot help-text - Text that describes how to use the input. Alternatively, you can use the `help-text` attribute.
  *
+ * @event sl-blur - Emitted when the control loses focus.
  * @event sl-change - Emitted when an alteration to the control's value is committed by the user.
+ * @event sl-focus - Emitted when the control gains focus.
  * @event sl-input - Emitted when the control receives input.
  *
  * @cssproperty --thumb-size - The size of the thumb.
@@ -82,6 +84,7 @@ export default class SlMultiRange extends ShoelaceElement {
   #hasSlotController = new HasSlotController(this, 'help-text', 'label');
   #value: readonly number[] = [0, 100];
   #sliderValues = new Map<number, number>();
+  #hasFocus = false;
   #nextId = 1;
 
   override render(): unknown {
@@ -97,7 +100,7 @@ export default class SlMultiRange extends ShoelaceElement {
           class="handle"
           tabindex="${this.disabled ? -1 : 0}"
           role="slider"
-          aria-labelledby=${ifDefined(hasLabel ? "label" : undefined)}
+          aria-labelledby=${ifDefined(hasLabel ? 'label' : undefined)}
           aria-valuemin="${this.min}"
           aria-valuemax="${this.max}"
           aria-disabled=${ifDefined(this.disabled ? 'true' : undefined)}
@@ -113,12 +116,16 @@ export default class SlMultiRange extends ShoelaceElement {
     });
 
     return html`
-      <div class=${classMap({
+      <div
+        class=${classMap({
           'form-control': true,
           'form-control--medium': true, // range only has one size
           'form-control--has-label': hasLabel,
           'form-control--has-help-text': hasHelpText
-      })}>
+        })}
+        @focusin=${this.#onFocus}
+        @focusout=${this.#onBlur}
+      >
         <label id="label" class="form-control__label" aria-hidden=${hasLabel ? 'false' : 'true'}>
           <slot name="label">${this.label}</slot>
         </label>
@@ -320,5 +327,19 @@ export default class SlMultiRange extends ShoelaceElement {
     handle.setAttribute('aria-valuetext', this.tooltipFormatter(value));
     const pos = (value - this.min) / (this.max - this.min);
     handle.style.left = `calc( ${100 * pos}% - var(--thumb-size) * ${pos} )`;
+  }
+
+  #onFocus(): void {
+    if (this.#hasFocus) return;
+    console.info('sl-focus');
+    this.emit('sl-focus');
+    this.#hasFocus = true;
+  }
+
+  #onBlur(event: FocusEvent): void {
+    if (event.relatedTarget && this.shadowRoot?.contains(event.relatedTarget as Node)) return;
+    console.info('sl-blur');
+    this.emit('sl-blur');
+    this.#hasFocus = false;
   }
 }
