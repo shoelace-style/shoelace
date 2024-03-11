@@ -89,7 +89,7 @@ export default class SlMultiRange extends ShoelaceElement implements ShoelaceFor
     return this.#value.join(',');
   }
 
-  /** Gets of sets the current values of the range as an array of numbers */
+  /** Gets or sets the current values of the range as an array of numbers */
   set valueAsArray(value: readonly number[] | null) {
     const oldValue = this.#value;
     this.#value = value || [];
@@ -97,6 +97,7 @@ export default class SlMultiRange extends ShoelaceElement implements ShoelaceFor
       this.requestUpdate('value', oldValue.join(','));
     }
   }
+
   get valueAsArray() {
     return this.#value;
   }
