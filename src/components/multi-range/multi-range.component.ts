@@ -290,7 +290,7 @@ export default class SlMultiRange extends ShoelaceElement implements ShoelaceFor
       tooLong: false,
       tooShort: false,
       typeMismatch: false,
-      valid: !!this.#validationError,
+      valid: !this.#validationError,
       valueMissing: false
     };
   }
