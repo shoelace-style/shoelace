@@ -3,6 +3,7 @@ import { css } from 'lit';
 export default css`
   :host {
     --thumb-size: 20px;
+    --tooltip-offset: 10px;
     --track-color-active: var(--sl-color-primary-300);
     --track-color-inactive: var(--sl-color-neutral-200);
     --track-height: 6px;
@@ -72,5 +73,59 @@ export default css`
   :host([disabled]) .handle,
   :host([disabled]) .handle.grabbed {
     cursor: not-allowed;
+  }
+
+  .tooltip {
+    position: absolute;
+    z-index: var(--sl-z-index-tooltip);
+    left: 0;
+    border-radius: var(--sl-tooltip-border-radius);
+    background-color: var(--sl-tooltip-background-color);
+    font-family: var(--sl-tooltip-font-family);
+    font-size: var(--sl-tooltip-font-size);
+    font-weight: var(--sl-tooltip-font-weight);
+    line-height: var(--sl-tooltip-line-height);
+    color: var(--sl-tooltip-color);
+    opacity: 0;
+    padding: var(--sl-tooltip-padding);
+    transition: var(--sl-transition-fast) opacity;
+    pointer-events: none;
+  }
+
+  .tooltip:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 50%;
+    translate: calc(-1 * var(--sl-tooltip-arrow-size));
+  }
+
+  .tooltip-visible .tooltip {
+    opacity: 1;
+  }
+
+  /* Tooltip on top */
+  .tooltip-top .tooltip {
+    top: calc(-1 * var(--thumb-size) - var(--tooltip-offset));
+  }
+
+  .tooltip-top .tooltip:after {
+    border-top: var(--sl-tooltip-arrow-size) solid var(--sl-tooltip-background-color);
+    border-left: var(--sl-tooltip-arrow-size) solid transparent;
+    border-right: var(--sl-tooltip-arrow-size) solid transparent;
+    top: 100%;
+  }
+
+  /* Tooltip on bottom */
+  .tooltip-bottom .tooltip {
+    bottom: calc(-1 * var(--thumb-size) - var(--tooltip-offset));
+  }
+
+  .tooltip-bottom .tooltip:after {
+    border-bottom: var(--sl-tooltip-arrow-size) solid var(--sl-tooltip-background-color);
+    border-left: var(--sl-tooltip-arrow-size) solid transparent;
+    border-right: var(--sl-tooltip-arrow-size) solid transparent;
+    bottom: 100%;
   }
 `;

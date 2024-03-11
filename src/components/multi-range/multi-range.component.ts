@@ -1,6 +1,6 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { HasSlotController } from '../../internal/slot.js';
-import { html } from 'lit';
+import { html, nothing } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { property, query, queryAll } from 'lit/decorators.js';
 import formControlStyles from '../../styles/form-control.styles.js';
@@ -37,6 +37,7 @@ const arraysDiffer = function (a: readonly number[], b: readonly number[]): bool
  * @event sl-input - Emitted when the control receives input.
  *
  * @cssproperty --thumb-size - The size of the thumb.
+ * @cssproperty --tooltip-offset - The vertical distance the tooltip is offset from the track.
  * @cssproperty --track-color-active - The color of the portion of the track that represents the current value.
  * @cssproperty --track-color-inactive - The of the portion of the track that represents the remaining value.
  * @cssproperty --track-height - The height of the track.
@@ -62,6 +63,9 @@ export default class SlMultiRange extends ShoelaceElement {
   /** The interval at which the range will increase and decrease. */
   @property({ type: Number }) step = 1;
 
+  /** The preferred placement of the range's tooltip. */
+  @property() tooltip: 'top' | 'bottom' | 'none' = 'top';
+
   /** The current values of the range */
   @property({ type: Array })
   set value(value: readonly number[]) {
@@ -79,6 +83,7 @@ export default class SlMultiRange extends ShoelaceElement {
 
   @query('.base') baseDiv: HTMLDivElement;
   @query('.active-track') activeTrack: HTMLDivElement;
+  @query('.tooltip') tooltipElem: HTMLDivElement | undefined;
   @queryAll('.handle') handles: NodeListOf<HTMLDivElement>;
 
   #hasSlotController = new HasSlotController(this, 'help-text', 'label');
@@ -90,6 +95,8 @@ export default class SlMultiRange extends ShoelaceElement {
   override render(): unknown {
     const hasLabel = !!(this.label || this.#hasSlotController.test('label'));
     const hasHelpText = !!(this.helpText || this.#hasSlotController.test('help-text'));
+
+    const tooltip = this.tooltip !== 'none' ? html`<div class="tooltip" aria-hidden="true"></div>` : nothing;
 
     this.#sliderValues.clear();
     const handles = this.#value.map(value => {
@@ -111,6 +118,7 @@ export default class SlMultiRange extends ShoelaceElement {
           @pointerup=${this.#onReleaseHandle}
           @pointercancel=${this.#onReleaseHandle}
           @keydown=${this.#onKeyPress}
+          @focus=${this.#onFocusHandle}
         ></div>
       `;
     });
@@ -121,7 +129,9 @@ export default class SlMultiRange extends ShoelaceElement {
           'form-control': true,
           'form-control--medium': true, // range only has one size
           'form-control--has-label': hasLabel,
-          'form-control--has-help-text': hasHelpText
+          'form-control--has-help-text': hasHelpText,
+          'tooltip-top': this.tooltip === 'top',
+          'tooltip-bottom': this.tooltip === 'bottom'
         })}
         @focusin=${this.#onFocus}
         @focusout=${this.#onBlur}
@@ -132,7 +142,7 @@ export default class SlMultiRange extends ShoelaceElement {
         <div class="base">
           <div class="track"></div>
           <div class="active-track"></div>
-          ${handles}
+          ${handles} ${tooltip}
         </div>
         <div class="form-control__help-text" aria-hidden=${hasHelpText ? 'false' : 'true'}>
           <slot name="help-text">${this.helpText}</slot>
@@ -194,6 +204,8 @@ export default class SlMultiRange extends ShoelaceElement {
   }
 
   #onClickHandle(event: PointerEvent): void {
+    if (this.disabled) return;
+    this.baseDiv?.classList?.add('tooltip-visible');
     const handle = event.target as HTMLDivElement;
 
     if (handle.dataset.pointerId) {
@@ -315,6 +327,8 @@ export default class SlMultiRange extends ShoelaceElement {
   }
 
   #onReleaseHandle(event: PointerEvent) {
+    this.baseDiv?.classList?.remove('tooltip-visible');
+
     const handle = event.target as HTMLDivElement;
     if (!handle.dataset.pointerId || event.pointerId !== +handle.dataset.pointerId) return;
 
@@ -329,18 +343,38 @@ export default class SlMultiRange extends ShoelaceElement {
     handle.setAttribute('aria-valuetext', this.tooltipFormatter(value));
     const pos = (value - this.min) / (this.max - this.min);
     handle.style.left = `calc( ${100 * pos}% - var(--thumb-size) * ${pos} )`;
+    this.#updateTooltip(+handle.dataset.sliderId!);
   }
 
   #onFocus(): void {
+    if (this.disabled) return;
+    this.baseDiv?.classList?.add('tooltip-visible');
     if (this.#hasFocus) return;
     this.emit('sl-focus');
     this.#hasFocus = true;
   }
 
   #onBlur(event: FocusEvent): void {
+    this.baseDiv?.classList?.remove('tooltip-visible');
     this.baseDiv?.classList?.remove('keyboard-focus');
     if (event.relatedTarget && this.shadowRoot?.contains(event.relatedTarget as Node)) return;
     this.emit('sl-blur');
     this.#hasFocus = false;
+  }
+
+  #updateTooltip(sliderId: number): void {
+    if (!this.tooltipElem) return;
+    if (!this.#sliderValues.has(sliderId)) return;
+    const value = this.#sliderValues.get(sliderId)!;
+    const pos = (value - this.min) / (this.max - this.min);
+    this.tooltipElem.style.translate = `calc( ${pos} * ( ${this.baseDiv.offsetWidth}px - var(--thumb-size) ) - 50% + (var(--thumb-size) / 2) )`;
+    this.tooltipElem.innerText = this.tooltipFormatter(value);
+  }
+
+  #onFocusHandle(event: FocusEvent): void {
+    if (this.disabled) return;
+    const handle = event.target as HTMLDivElement;
+    if (!handle?.dataset?.sliderId) return;
+    this.#updateTooltip(+handle.dataset.sliderId);
   }
 }
