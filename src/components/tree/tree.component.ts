@@ -144,9 +144,9 @@ export default class SlTree extends ShoelaceElement {
       .forEach((status: 'expand' | 'collapse') => {
         const existingIcon = item.querySelector(`[slot="${status}-icon"]`);
 
-        const expandButtonIcon = this.getExpandButtonIcon(status)
+        const expandButtonIcon = this.getExpandButtonIcon(status);
 
-        if (!expandButtonIcon) return
+        if (!expandButtonIcon) return;
 
         if (existingIcon === null) {
           // No separator exists, add one
