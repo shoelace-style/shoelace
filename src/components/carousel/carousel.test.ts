@@ -649,7 +649,7 @@ describe('<sl-carousel>', () => {
             // wait scroll to actual item
             await oneEvent(el.scrollContainer, 'scrollend');
 
-            await aTimeout(500);
+            await intersectionObserverCallbacks();
 
             // Assert
             expect(previousButton).to.have.attribute('aria-disabled', 'false');

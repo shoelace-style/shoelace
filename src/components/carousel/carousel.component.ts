@@ -92,7 +92,6 @@ export default class SlCarousel extends ShoelaceElement {
   @state() dragging = false;
 
   private autoplayController = new AutoplayController(this, () => this.next());
-  // A map containing the state of all the slides
   private readonly localize = new LocalizeController(this);
   private mutationObserver: MutationObserver;
 
