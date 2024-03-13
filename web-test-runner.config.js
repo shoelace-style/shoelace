@@ -23,9 +23,7 @@ export default {
   ],
   browsers: [
     playwrightLauncher({ product: 'chromium' }),
-    // Firefox started failing randomly so we're temporarily disabling it here. This could be a rogue test, not really
-    // sure what's happening.
-    // playwrightLauncher({ product: 'firefox' }),
+    playwrightLauncher({ product: 'firefox' }),
     playwrightLauncher({ product: 'webkit' })
   ],
   testRunnerHtml: testFramework => `
