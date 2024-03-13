@@ -44,6 +44,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Added the `hover-bridge` feature to `<sl-popup>` to support better tooltip accessibility [#1734]
 - Added the `loading` attribute and the `spinner` and `spinner__base` part to `<sl-menu-item>` [#1700]
 - Fixed files that did not have `.js` extensions. [#1770]
+- Fixed a bug in `<sl-tree>` when providing custom expand / collapse icons. [#1922]
 - Fixed `<sl-dialog>` not accounting for elements with hidden dialog controls like `<video>` [#1755]
 - Fixed focus trapping not scrolling elements into view. [#1750]
 - Fixed more performance issues with focus trapping performance. [#1750]
