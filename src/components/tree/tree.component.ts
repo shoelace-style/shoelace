@@ -120,7 +120,7 @@ export default class SlTree extends ShoelaceElement {
   // Generates a clone of the expand icon element to use for each tree item
   private getExpandButtonIcon(status: 'expand' | 'collapse') {
     const slot = status === 'expand' ? this.expandedIconSlot : this.collapsedIconSlot;
-    const icon = slot.assignedElements({ flatten: true })[0] as HTMLElement;
+    const icon = slot.assignedElements()[0] as HTMLElement;
 
     // Clone it, remove ids, and slot it
     if (icon) {
@@ -140,9 +140,9 @@ export default class SlTree extends ShoelaceElement {
     item.selectable = this.selection === 'multiple';
 
     ['expand', 'collapse']
-      .filter(status => !!this.querySelector(`[slot="${status}-icon"]`))
+      .filter(status => !!this.querySelector(`:scope > [slot="${status}-icon"]`))
       .forEach((status: 'expand' | 'collapse') => {
-        const existingIcon = item.querySelector(`[slot="${status}-icon"]`);
+        const existingIcon = item.querySelector(`:scope > [slot="${status}-icon"]`);
 
         if (existingIcon === null) {
           // No separator exists, add one

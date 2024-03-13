@@ -7,11 +7,13 @@ layout: component
 
 ```html:preview
 <sl-tree>
+  <sl-icon name="android" slot="expand-icon"></sl-icon>
   <sl-tree-item>
     Deciduous
     <sl-tree-item>Birch</sl-tree-item>
     <sl-tree-item>
       Maple
+      <sl-icon name="pencil" slot="expand-icon"></sl-icon>
       <sl-tree-item>Field maple</sl-tree-item>
       <sl-tree-item>Red maple</sl-tree-item>
       <sl-tree-item>Sugar maple</sl-tree-item>
