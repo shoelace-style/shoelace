@@ -46,18 +46,17 @@ export default class SlIcon extends ShoelaceElement {
         <use part="use" href="${url}"></use>
       </svg>`;
 
-
       // Using a templateResult requires the SVG to be written to the DOM first before we can grab the SVGElement
       // to be passed to the library's mutator function.
-      await this.updateComplete
+      await this.updateComplete;
 
-      const svg = this.shadowRoot?.querySelector("[part='svg']") as SVGSVGElement
+      const svg = this.shadowRoot!.querySelector("[part='svg']")!;
 
-      if (typeof library.mutator === "function") {
-        library.mutator(svg)
+      if (typeof library.mutator === 'function') {
+        library.mutator(svg as SVGElement);
       }
 
-      return this.svg
+      return this.svg;
     }
 
     try {
