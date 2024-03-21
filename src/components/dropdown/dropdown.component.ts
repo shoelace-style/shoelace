@@ -218,7 +218,12 @@ export default class SlDropdown extends ShoelaceElement {
   async handleTriggerKeyDown(event: KeyboardEvent) {
     // When spacebar/enter is pressed, show the panel but don't focus on the menu. This let's the user press the same
     // key again to hide the menu in case they don't want to make a selection.
-    if ([' ', 'Enter'].includes(event.key)) {
+    let toggleShowKeys = [' ', 'Enter'];
+    if (this.trigger?.assignedElements().length > 0 && this.trigger?.assignedElements()[0].tagName === 'SL-INPUT') {
+      // If the trigger is a sl-input, then don't hijack the space character
+      toggleShowKeys = ['Enter'];
+    }
+    if (toggleShowKeys.includes(event.key)) {
       event.preventDefault();
       this.handleTriggerClick();
       return;
