@@ -4,6 +4,7 @@ import { FormControlController } from '../../internal/form.js';
 import { HasSlotController } from '../../internal/slot.js';
 import { html, nothing } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { LocalizeController } from '../../utilities/localize.js';
 import { property, query, queryAll } from 'lit/decorators.js';
 import componentStyles from '../../styles/component.styles.js';
 import formControlStyles from '../../styles/form-control.styles.js';
@@ -118,12 +119,17 @@ export default class SlMultiRange extends ShoelaceElement implements ShoelaceFor
 
   #hasSlotController = new HasSlotController(this, 'help-text', 'label');
   #formControlController = new FormControlController(this, { assumeInteractionOn: ['sl-change'] });
+  #localize = new LocalizeController(this);
   #resizeObserver: ResizeObserver | null = null;
   #value: readonly number[] = [0, 100];
   #sliderValues = new Map<number, number>();
   #hasFocus = false;
   #validationError = '';
   #nextId = 1;
+
+  get #rtl() {
+    return this.#localize.dir() === 'rtl';
+  }
 
   override render(): unknown {
     const hasLabel = !!(this.label || this.#hasSlotController.test('label'));
@@ -347,9 +353,10 @@ export default class SlMultiRange extends ShoelaceElement implements ShoelaceFor
     const size = bounds.width - handle.clientWidth;
     if (size <= 0) return 0;
     x -= bounds.left + handle.clientWidth / 2;
-    if (x <= 0) return 0;
-    if (x >= size) return 1;
-    return x / size;
+    if (x <= 0) return this.#rtl ? 1 : 0;
+    if (x >= size) return this.#rtl ? 0 : 1;
+    x /= size;
+    return this.#rtl ? 1.0 - x : x;
   }
 
   #updateActiveTrack(): void {
@@ -358,7 +365,7 @@ export default class SlMultiRange extends ShoelaceElement implements ShoelaceFor
 
     if (this.min === this.max || this.#value.length < 2) {
       activeTrack.style.display = 'none';
-      activeTrack.style.left = '0';
+      activeTrack.style.insetInlineStart = '0';
       activeTrack.style.width = '0';
       return;
     }
@@ -367,7 +374,7 @@ export default class SlMultiRange extends ShoelaceElement implements ShoelaceFor
     const span = (100 * (this.#value[this.#value.length - 1] - this.#value[0])) / (this.max - this.min);
 
     activeTrack.style.display = 'inline-block';
-    activeTrack.style.left = `${start}%`;
+    activeTrack.style.insetInlineStart = `${start}%`;
     activeTrack.style.width = `${span}%`;
   }
 
@@ -380,16 +387,20 @@ export default class SlMultiRange extends ShoelaceElement implements ShoelaceFor
 
     switch (event.key) {
       case 'ArrowUp':
-      case 'ArrowRight':
       case 'Up':
-      case 'Right':
         value = Math.min(value + this.step, this.max);
         break;
       case 'ArrowDown':
-      case 'ArrowLeft':
       case 'Down':
-      case 'Left':
         value = Math.max(value - this.step, this.min);
+        break;
+      case 'ArrowLeft':
+      case 'Left':
+        value = this.#rtl ? Math.min(value + this.step, this.max) : Math.max(value - this.step, this.min);
+        break;
+      case 'ArrowRight':
+      case 'Right':
+        value = this.#rtl ? Math.max(value - this.step, this.min) : Math.min(value + this.step, this.max);
         break;
       case 'PageUp':
         value = Math.min(value + 10 * this.step, this.max);
@@ -440,7 +451,7 @@ export default class SlMultiRange extends ShoelaceElement implements ShoelaceFor
     handle.setAttribute('aria-valuenow', value.toString());
     handle.setAttribute('aria-valuetext', this.tooltipFormatter(value));
     const pos = (value - this.min) / (this.max - this.min);
-    handle.style.left = `calc( ${100 * pos}% - var(--thumb-size) * ${pos} )`;
+    handle.style.insetInlineStart = `calc( ${100 * pos}% - var(--thumb-size) * ${pos} )`;
     this.#updateTooltip(handle);
   }
 
@@ -458,7 +469,8 @@ export default class SlMultiRange extends ShoelaceElement implements ShoelaceFor
     if (!this.baseDiv?.classList?.contains('tooltip-visible')) return;
     if (!this.#sliderValues.has(sliderId)) return;
     const value = this.#sliderValues.get(sliderId)!;
-    const pos = (value - this.min) / (this.max - this.min);
+    let pos = (value - this.min) / (this.max - this.min);
+    if (this.#rtl) pos = 1.0 - pos;
     this.tooltipElem.style.translate = `calc( ${pos} * ( ${this.baseDiv.offsetWidth}px - var(--thumb-size) ) - 50% + (var(--thumb-size) / 2) )`;
     this.tooltipElem.innerText = this.tooltipFormatter(value);
   }

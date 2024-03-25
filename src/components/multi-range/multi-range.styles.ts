@@ -14,6 +14,7 @@ export default css`
     flex-direction: column;
     align-items: stretch;
     box-sizing: border-box;
+    writing-mode: horizontal-tb;
   }
 
   .base {
