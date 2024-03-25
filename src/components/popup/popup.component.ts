@@ -10,10 +10,16 @@ import type { CSSResultGroup } from 'lit';
 
 export interface VirtualElement {
   getBoundingClientRect: () => DOMRect;
+  contextElement?: Element;
 }
 
 function isVirtualElement(e: unknown): e is VirtualElement {
-  return e !== null && typeof e === 'object' && 'getBoundingClientRect' in e;
+  return (
+    e !== null &&
+    typeof e === 'object' &&
+    'getBoundingClientRect' in e &&
+    ('contextElement' in e ? e instanceof Element : true)
+  );
 }
 
 /**

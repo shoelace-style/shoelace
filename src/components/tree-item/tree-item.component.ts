@@ -46,6 +46,8 @@ import type { CSSResultGroup, PropertyValueMap } from 'lit';
  * @csspart item--selected - Applied when the tree item is selected.
  * @csspart indentation - The tree item's indentation container.
  * @csspart expand-button - The container that wraps the tree item's expand button and spinner.
+ * @csspart spinner - The spinner that shows when a lazy tree item is in the loading state.
+ * @csspart spinner__base - The spinner's base part.
  * @csspart label - The tree item's label.
  * @csspart children - The container that wraps the tree item's nested children.
  * @csspart checkbox - The checkbox that shows when using multiselect.
@@ -257,7 +259,10 @@ export default class SlTreeItem extends ShoelaceElement {
             })}
             aria-hidden="true"
           >
-            ${when(this.loading, () => html` <sl-spinner></sl-spinner> `)}
+            ${when(
+              this.loading,
+              () => html` <sl-spinner part="spinner" exportparts="base:spinner__base"></sl-spinner> `
+            )}
             <slot class="tree-item__expand-icon-slot" name="expand-icon">
               <sl-icon library="system" name=${isRtl ? 'chevron-left' : 'chevron-right'}></sl-icon>
             </slot>

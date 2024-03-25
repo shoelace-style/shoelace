@@ -92,9 +92,6 @@ export default class SlCarousel extends ShoelaceElement {
   @state() dragging = false;
 
   private autoplayController = new AutoplayController(this, () => this.next());
-  private intersectionObserver: IntersectionObserver; // determines which slide is displayed
-  // A map containing the state of all the slides
-  private readonly intersectionObserverEntries = new Map<Element, IntersectionObserverEntry>();
   private readonly localize = new LocalizeController(this);
   private mutationObserver: MutationObserver;
 
@@ -102,35 +99,10 @@ export default class SlCarousel extends ShoelaceElement {
     super.connectedCallback();
     this.setAttribute('role', 'region');
     this.setAttribute('aria-label', this.localize.term('carousel'));
-
-    const intersectionObserver = new IntersectionObserver(
-      (entries: IntersectionObserverEntry[]) => {
-        entries.forEach(entry => {
-          // Store all the entries in a map to be processed when scrolling ends
-          this.intersectionObserverEntries.set(entry.target, entry);
-
-          const slide = entry.target;
-          slide.toggleAttribute('inert', !entry.isIntersecting);
-          slide.classList.toggle('--in-view', entry.isIntersecting);
-          slide.setAttribute('aria-hidden', entry.isIntersecting ? 'false' : 'true');
-        });
-      },
-      {
-        root: this,
-        threshold: 0.6
-      }
-    );
-    this.intersectionObserver = intersectionObserver;
-
-    // Store the initial state of each slide
-    intersectionObserver.takeRecords().forEach(entry => {
-      this.intersectionObserverEntries.set(entry.target, entry);
-    });
   }
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
-    this.intersectionObserver.disconnect();
     this.mutationObserver.disconnect();
   }
 
@@ -291,26 +263,52 @@ export default class SlCarousel extends ShoelaceElement {
     this.scrolling = true;
   }
 
+  /** @internal Synchronizes the slides with the IntersectionObserver API. */
+  private synchronizeSlides() {
+    const io = new IntersectionObserver(
+      entries => {
+        io.disconnect();
+
+        for (const entry of entries) {
+          const slide = entry.target;
+          slide.toggleAttribute('inert', !entry.isIntersecting);
+          slide.classList.toggle('--in-view', entry.isIntersecting);
+          slide.setAttribute('aria-hidden', entry.isIntersecting ? 'false' : 'true');
+        }
+
+        const firstIntersecting = entries.find(entry => entry.isIntersecting);
+
+        if (firstIntersecting) {
+          if (this.loop && firstIntersecting.target.hasAttribute('data-clone')) {
+            const clonePosition = Number(firstIntersecting.target.getAttribute('data-clone'));
+
+            // Scrolls to the original slide without animating, so the user won't notice that the position has changed
+            this.goToSlide(clonePosition, 'instant');
+          } else {
+            const slides = this.getSlides();
+
+            // Update the current index based on the first visible slide
+            const slideIndex = slides.indexOf(firstIntersecting.target as SlCarouselItem);
+            // Set the index to the first "snappable" slide
+            this.activeSlide = Math.ceil(slideIndex / this.slidesPerMove) * this.slidesPerMove;
+          }
+        }
+      },
+      {
+        root: this.scrollContainer,
+        threshold: 0.6
+      }
+    );
+
+    this.getSlides({ excludeClones: false }).forEach(slide => {
+      io.observe(slide);
+    });
+  }
+
   private handleScrollEnd() {
     if (!this.scrolling || this.dragging) return;
 
-    const entries = [...this.intersectionObserverEntries.values()];
-
-    const firstIntersecting: IntersectionObserverEntry | undefined = entries.find(entry => entry.isIntersecting);
-
-    if (this.loop && firstIntersecting?.target.hasAttribute('data-clone')) {
-      const clonePosition = Number(firstIntersecting.target.getAttribute('data-clone'));
-
-      // Scrolls to the original slide without animating, so the user won't notice that the position has changed
-      this.goToSlide(clonePosition, 'instant');
-    } else if (firstIntersecting) {
-      const slides = this.getSlides();
-
-      // Update the current index based on the first visible slide
-      const slideIndex = slides.indexOf(firstIntersecting.target as SlCarouselItem);
-      // Set the index to the first "snappable" slide
-      this.activeSlide = Math.ceil(slideIndex / this.slidesPerMove) * this.slidesPerMove;
-    }
+    this.synchronizeSlides();
 
     this.scrolling = false;
   }
@@ -337,14 +335,8 @@ export default class SlCarousel extends ShoelaceElement {
   @watch('loop', { waitUntilFirstUpdate: true })
   @watch('slidesPerPage', { waitUntilFirstUpdate: true })
   initializeSlides() {
-    const intersectionObserver = this.intersectionObserver;
-
-    this.intersectionObserverEntries.clear();
-
     // Removes all the cloned elements from the carousel
     this.getSlides({ excludeClones: false }).forEach((slide, index) => {
-      intersectionObserver.unobserve(slide);
-
       slide.classList.remove('--in-view');
       slide.classList.remove('--is-active');
       slide.setAttribute('aria-label', this.localize.term('slideNum', index + 1));
@@ -361,9 +353,7 @@ export default class SlCarousel extends ShoelaceElement {
       this.createClones();
     }
 
-    this.getSlides({ excludeClones: false }).forEach(slide => {
-      intersectionObserver.observe(slide);
-    });
+    this.synchronizeSlides();
 
     // Because the DOM may be changed, restore the scroll position to the active slide
     this.goToSlide(this.activeSlide, 'auto');

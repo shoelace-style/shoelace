@@ -204,6 +204,10 @@ describe('<sl-icon>', () => {
       const rect = use?.getBoundingClientRect();
       expect(rect?.width).to.equal(0);
       expect(rect?.width).to.equal(0);
+
+      // Make sure the mutator is applied.
+      // https://github.com/shoelace-style/shoelace/issues/1925
+      expect(svg?.getAttribute('fill')).to.equal('currentColor');
     });
 
     // TODO: <use> svg icons don't emit a "load" or "error" event...if we can figure out how to get the event to emit errors.

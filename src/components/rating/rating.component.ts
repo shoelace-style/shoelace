@@ -264,7 +264,6 @@ export default class SlRating extends ShoelaceElement {
                     'rating__symbol--hover': this.isHovering && Math.ceil(displayValue) === index + 1
                   })}
                   role="presentation"
-                  @mouseenter=${this.handleMouseEnter}
                 >
                   <div
                     style=${styleMap({
@@ -297,7 +296,6 @@ export default class SlRating extends ShoelaceElement {
                   'rating__symbol--active': displayValue >= index + 1
                 })}
                 role="presentation"
-                @mouseenter=${this.handleMouseEnter}
               >
                 ${unsafeHTML(this.getSymbol(index + 1))}
               </span>
