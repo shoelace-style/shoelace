@@ -60,7 +60,10 @@ export default class SlButtonGroup extends ShoelaceElement {
         button.toggleAttribute('data-sl-button-group__button--first', index === 0);
         button.toggleAttribute('data-sl-button-group__button--inner', index > 0 && index < slottedElements.length - 1);
         button.toggleAttribute('data-sl-button-group__button--last', index === slottedElements.length - 1);
-        button.toggleAttribute('data-sl-button-group__button--radio', button.tagName.toLowerCase() === 'sl-radio-button');
+        button.toggleAttribute(
+          'data-sl-button-group__button--radio',
+          button.tagName.toLowerCase() === 'sl-radio-button'
+        );
       }
     });
   }
