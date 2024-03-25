@@ -259,7 +259,10 @@ export default class SlTreeItem extends ShoelaceElement {
             })}
             aria-hidden="true"
           >
-            ${when(this.loading, () => html` <sl-spinner part="spinner" exportparts="base:spinner__base"></sl-spinner> `)}
+            ${when(
+              this.loading,
+              () => html` <sl-spinner part="spinner" exportparts="base:spinner__base"></sl-spinner> `
+            )}
             <slot class="tree-item__expand-icon-slot" name="expand-icon">
               <sl-icon library="system" name=${isRtl ? 'chevron-left' : 'chevron-right'}></sl-icon>
             </slot>
