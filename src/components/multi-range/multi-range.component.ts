@@ -110,7 +110,7 @@ export default class SlMultiRange extends ShoelaceElement implements ShoelaceFor
    * A function used to format the tooltip's value. The range's value is passed as the first and only argument. The
    * function should return a string to display in the tooltip.
    */
-  @property({ attribute: false }) tooltipFormatter: (value: number) => string = (value: number) => value.toString();
+  @property({ attribute: false }) tooltipFormatter: (value: number) => string;
 
   @query('.base') baseDiv: HTMLDivElement;
   @query('.active-track') activeTrack: HTMLDivElement;
@@ -129,6 +129,11 @@ export default class SlMultiRange extends ShoelaceElement implements ShoelaceFor
 
   get #rtl() {
     return this.#localize.dir() === 'rtl';
+  }
+
+  constructor() {
+    super();
+    this.tooltipFormatter = this.#localize.number.bind(this.#localize);
   }
 
   override render(): unknown {
