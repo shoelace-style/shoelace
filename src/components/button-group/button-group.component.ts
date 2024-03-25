@@ -45,7 +45,7 @@ export default class SlButtonGroup extends ShoelaceElement {
 
   private handleMouseOut(event: Event) {
     const button = findButton(event.target as HTMLElement);
-    button?.toggleAttribute('data-sl-button-group__button--hover', true);
+    button?.toggleAttribute('data-sl-button-group__button--hover', false);
   }
 
   private handleSlotChange() {
