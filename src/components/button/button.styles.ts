@@ -546,30 +546,30 @@ export default css`
    * buttons and we style them here instead.
    */
 
-  :host(.sl-button-group__button--first:not(.sl-button-group__button--last)) .button {
+  :host([data-sl-button-group__button--first]:not([data-sl-button-group__button--last])) .button {
     border-start-end-radius: 0;
     border-end-end-radius: 0;
   }
 
-  :host(.sl-button-group__button--inner) .button {
+  :host([data-sl-button-group__button--inner]) .button {
     border-radius: 0;
   }
 
-  :host(.sl-button-group__button--last:not(.sl-button-group__button--first)) .button {
+  :host([data-sl-button-group__button--last]:not([data-sl-button-group__button--first])) .button {
     border-start-start-radius: 0;
     border-end-start-radius: 0;
   }
 
   /* All except the first */
-  :host(.sl-button-group__button:not(.sl-button-group__button--first)) {
+  :host([data-sl-button-group__button]:not([data-sl-button-group__button--first])) {
     margin-inline-start: calc(-1 * var(--sl-input-border-width));
   }
 
   /* Add a visual separator between solid buttons */
   :host(
-      .sl-button-group__button:not(
-          .sl-button-group__button--first,
-          .sl-button-group__button--radio,
+      [data-sl-button-group__button]:not(
+          [data-sl-button-group__button--first],
+          [data-sl-button-group__button--radio],
           [variant='default']
         ):not(:hover)
     )
@@ -584,13 +584,13 @@ export default css`
   }
 
   /* Bump hovered, focused, and checked buttons up so their focus ring isn't clipped */
-  :host(.sl-button-group__button--hover) {
+  :host([data-sl-button-group__button--hover]) {
     z-index: 1;
   }
 
   /* Focus and checked are always on top */
-  :host(.sl-button-group__button--focus),
-  :host(.sl-button-group__button[checked]) {
+  :host([data-sl-button-group__button--focus]),
+  :host([data-sl-button-group__button[checked]]) {
     z-index: 2;
   }
 `;
