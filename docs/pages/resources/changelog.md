@@ -16,6 +16,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 - Added the Slovenian translation [#1893]
 - Added support for `contextElement` to `VirtualElements` in `<sl-popup>` [#1874]
+- Added the `spinner` and `spinner__base` parts to `<sl-tree-item>` [#1937]
 - Fixed a bug in `<sl-icon>` that did not properly apply mutators to spritesheets [#1927]
 - Fixed a bug in `.sl-scroll-lock` causing layout shifts [#1895]
 - Fixed a bug in `<sl-rating>` that caused the rating to not reset in some circumstances [#1877]
