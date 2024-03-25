@@ -752,4 +752,29 @@ describe('<sl-tree>', () => {
       });
     });
   });
+
+  // https://github.com/shoelace-style/shoelace/issues/1916
+  it("Should not render 'null' if it can't find a custom icon", async () => {
+    const tree = await fixture<SlTree>(html`
+      <sl-tree>
+        <sl-tree-item>
+          Item 1
+          <sl-icon name="1-circle" slot="expand-icon"></sl-icon>
+          <sl-tree-item> Item A </sl-tree-item>
+        </sl-tree-item>
+        <sl-tree-item>
+          Item 2
+          <sl-tree-item>Item A</sl-tree-item>
+          <sl-tree-item>Item B</sl-tree-item>
+        </sl-tree-item>
+        <sl-tree-item>
+          Item 3
+          <sl-tree-item>Item A</sl-tree-item>
+          <sl-tree-item>Item B</sl-tree-item>
+        </sl-tree-item>
+      </sl-tree>
+    `);
+
+    expect(tree.textContent).to.not.includes('null');
+  });
 });

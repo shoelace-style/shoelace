@@ -1,21 +1,39 @@
 import '../../../dist/shoelace.js';
+import { aTimeout, expect, fixture, html, nextFrame, oneEvent, waitUntil } from '@open-wc/testing';
 import { clickOnElement, dragElement, moveMouseOnElement } from '../../internal/test.js';
-import { expect, fixture, html, nextFrame, oneEvent } from '@open-wc/testing';
 import { map } from 'lit/directives/map.js';
 import { range } from 'lit/directives/range.js';
 import { resetMouse } from '@web/test-runner-commands';
 import sinon from 'sinon';
+import type { SinonStub } from 'sinon';
 import type SlCarousel from './carousel.js';
 
 describe('<sl-carousel>', () => {
   const sandbox = sinon.createSandbox();
+  const ioCallbacks = new Map<IntersectionObserver, SinonStub>();
+  const intersectionObserverCallbacks = () => {
+    const callbacks = [...ioCallbacks.values()];
+    return waitUntil(() => callbacks.every(callback => callback.called));
+  };
+  const OriginalIntersectionObserver = globalThis.IntersectionObserver;
+
+  beforeEach(() => {
+    globalThis.IntersectionObserver = class IntersectionObserverMock extends OriginalIntersectionObserver {
+      constructor(callback: IntersectionObserverCallback, options?: IntersectionObserverInit) {
+        const stubCallback = sandbox.stub().callsFake(callback);
+
+        super(stubCallback, options);
+
+        ioCallbacks.set(this, stubCallback);
+      }
+    };
+  });
 
   afterEach(async () => {
     await resetMouse();
-  });
-
-  afterEach(() => {
     sandbox.restore();
+    globalThis.IntersectionObserver = OriginalIntersectionObserver;
+    ioCallbacks.clear();
   });
 
   it('should render a carousel with default configuration', async () => {
@@ -311,6 +329,7 @@ describe('<sl-carousel>', () => {
       await clickOnElement(nextButton);
 
       await oneEvent(el.scrollContainer, 'scrollend');
+      await intersectionObserverCallbacks();
       await el.updateComplete;
 
       // Assert
@@ -337,13 +356,19 @@ describe('<sl-carousel>', () => {
 
       // Act
       await clickOnElement(nextButton);
+      await aTimeout(50);
       await clickOnElement(nextButton);
+      await aTimeout(50);
       await clickOnElement(nextButton);
+      await aTimeout(50);
       await clickOnElement(nextButton);
+      await aTimeout(50);
       await clickOnElement(nextButton);
+      await aTimeout(50);
       await clickOnElement(nextButton);
 
       await oneEvent(el.scrollContainer, 'scrollend');
+      await intersectionObserverCallbacks();
       await el.updateComplete;
 
       // Assert
@@ -502,6 +527,7 @@ describe('<sl-carousel>', () => {
 
           el.goToSlide(2, 'auto');
           await oneEvent(el.scrollContainer, 'scrollend');
+          await intersectionObserverCallbacks();
           await el.updateComplete;
 
           // Act
@@ -536,6 +562,9 @@ describe('<sl-carousel>', () => {
             await oneEvent(el.scrollContainer, 'scrollend');
             // wait scroll to actual item
             await oneEvent(el.scrollContainer, 'scrollend');
+
+            await intersectionObserverCallbacks();
+            await el.updateComplete;
 
             // Assert
             expect(nextButton).to.have.attribute('aria-disabled', 'false');
@@ -620,6 +649,8 @@ describe('<sl-carousel>', () => {
             // wait scroll to actual item
             await oneEvent(el.scrollContainer, 'scrollend');
 
+            await intersectionObserverCallbacks();
+
             // Assert
             expect(previousButton).to.have.attribute('aria-disabled', 'false');
             expect(el.activeSlide).to.be.equal(2);
@@ -673,6 +704,7 @@ describe('<sl-carousel>', () => {
         el.goToSlide(1);
 
         await oneEvent(el.scrollContainer, 'scrollend');
+        await intersectionObserverCallbacks();
         await nextFrame();
 
         sandbox.spy(el, 'goToSlide');
@@ -680,6 +712,7 @@ describe('<sl-carousel>', () => {
         // Act
         el.previous();
         await oneEvent(el.scrollContainer, 'scrollend');
+        await intersectionObserverCallbacks();
 
         const containerRect = el.scrollContainer.getBoundingClientRect();
         const itemRect = expectedCarouselItem.getBoundingClientRect();
@@ -706,6 +739,7 @@ describe('<sl-carousel>', () => {
         // Act
         el.goToSlide(2);
         await oneEvent(el.scrollContainer, 'scrollend');
+        await intersectionObserverCallbacks();
         await el.updateComplete;
 
         // Assert
