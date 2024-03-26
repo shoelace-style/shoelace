@@ -189,6 +189,14 @@ export default class SlSplitPanel extends ShoelaceElement {
     const { width, height } = entries[0].contentRect;
     this.size = this.vertical ? height : width;
 
+    // There's some weird logic that gets `this.cachedPositionInPixels = NaN` or `this.position === Infinity` when
+    // a split-panel goes from `display: none;` to showing.
+    if (isNaN(this.cachedPositionInPixels) || this.position === Infinity) {
+      this.cachedPositionInPixels = Number(this.getAttribute('position-in-pixels'));
+      this.positionInPixels = Number(this.getAttribute('position-in-pixels'));
+      this.position = this.pixelsToPercentage(this.positionInPixels);
+    }
+
     // Resize when a primary panel is set
     if (this.primary) {
       this.position = this.pixelsToPercentage(this.cachedPositionInPixels);
