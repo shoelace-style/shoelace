@@ -290,4 +290,19 @@ describe('<sl-split-panel>', () => {
       expect(positionInPixelsAfterDrag).to.be.equal(positionInPixels - 40);
     });
   });
+
+  it('correctly handles being hidden', async () => {
+    const splitPanel = await fixture<SlSplitPanel>(
+      html`<sl-split-panel style="display: none;" position-in-pixels="100">
+        <div slot="start">Start</div>
+        <div slot="end">End</div>
+      </sl-split-panel>`
+    );
+
+    splitPanel.style.display = 'block';
+    await new Promise(r => setTimeout(r, 1));
+
+    const positionInPixelsAfterShow = splitPanel.positionInPixels;
+    expect(positionInPixelsAfterShow).to.be.equal(100);
+  });
 });
