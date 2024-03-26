@@ -192,8 +192,8 @@ export default class SlSplitPanel extends ShoelaceElement {
     // There's some weird logic that gets `this.cachedPositionInPixels = NaN` or `this.position === Infinity` when
     // a split-panel goes from `display: none;` to showing.
     if (isNaN(this.cachedPositionInPixels) || this.position === Infinity) {
-      this.cachedPositionInPixels = Number(this.getAttribute("position-in-pixels"))
-      this.positionInPixels = Number(this.getAttribute("position-in-pixels"))
+      this.cachedPositionInPixels = Number(this.getAttribute('position-in-pixels'));
+      this.positionInPixels = Number(this.getAttribute('position-in-pixels'));
       this.position = this.pixelsToPercentage(this.positionInPixels);
     }
 
