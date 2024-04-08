@@ -34,12 +34,12 @@ export function lockBodyScrolling(lockingEl: HTMLElement) {
     /** Scrollbar width + body padding calculation can go away once Safari has scrollbar-gutter support. */
     const scrollbarWidth = getScrollbarWidth() + getExistingBodyPadding(); // must be measured before the `sl-scroll-lock` class is applied
 
-    let scrollbarGutterProperty = "stable"
+    let scrollbarGutterProperty = 'stable';
     if (scrollbarWidth <= 0) {
       // if there's no scrollbar, just set it to "revert" so whatever the user has set gets used.
-      scrollbarGutterProperty = "revert";
+      scrollbarGutterProperty = 'revert';
     }
-    document.documentElement.style.setProperty("--sl-scroll-lock-gutter", scrollbarGutterProperty)
+    document.documentElement.style.setProperty('--sl-scroll-lock-gutter', scrollbarGutterProperty);
     document.documentElement.classList.add('sl-scroll-lock');
     document.documentElement.style.setProperty('--sl-scroll-lock-size', `${scrollbarWidth}px`);
   }
