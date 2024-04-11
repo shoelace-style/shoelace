@@ -34,11 +34,11 @@ export function lockBodyScrolling(lockingEl: HTMLElement) {
     /** Scrollbar width + body padding calculation can go away once Safari has scrollbar-gutter support. */
     const scrollbarWidth = getScrollbarWidth() + getExistingBodyPadding(); // must be measured before the `sl-scroll-lock` class is applied
 
-    let scrollbarGutterProperty = getComputedStyle(document.documentElement).scrollbarGutter
+    let scrollbarGutterProperty = getComputedStyle(document.documentElement).scrollbarGutter;
 
     // default is auto, unsupported browsers is "undefined"
-    if (!scrollbarGutterProperty || scrollbarGutterProperty === "auto") {
-      scrollbarGutterProperty = "stable"
+    if (!scrollbarGutterProperty || scrollbarGutterProperty === 'auto') {
+      scrollbarGutterProperty = 'stable';
     }
 
     if (scrollbarWidth <= 0) {
