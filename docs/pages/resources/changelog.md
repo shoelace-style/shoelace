@@ -14,7 +14,8 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
-- Fixed a bug in `<sl-split-panel>` that caused it not to recalculate it's position when going from being `display: none;` to its original display value. [#]
+- Fixed a bug in `<sl-split-panel>` that caused it not to recalculate it's position when going from being `display: none;` to its original display value. [#1942]
+- Fixed a bug in `<sl-tooltip>` that allowed unwanted text properties to leak in [#1947]
 
 ## 2.15.0
 
