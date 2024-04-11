@@ -14,6 +14,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- Fixed a bug in `<dialog>` where when it showed it would create a layout shift. [#1967]
 - Fixed a bug in `<sl-tooltip>` that allowed unwanted text properties to leak in [#1947]
 
 ## 2.15.0

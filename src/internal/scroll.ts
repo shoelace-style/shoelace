@@ -34,9 +34,15 @@ export function lockBodyScrolling(lockingEl: HTMLElement) {
     /** Scrollbar width + body padding calculation can go away once Safari has scrollbar-gutter support. */
     const scrollbarWidth = getScrollbarWidth() + getExistingBodyPadding(); // must be measured before the `sl-scroll-lock` class is applied
 
-    let scrollbarGutterProperty = 'stable';
+    let scrollbarGutterProperty = getComputedStyle(document.documentElement).scrollbarGutter
+
+    // default is auto, unsupported browsers is "undefined"
+    if (!scrollbarGutterProperty || scrollbarGutterProperty === "auto") {
+      scrollbarGutterProperty = "stable"
+    }
+
     if (scrollbarWidth <= 0) {
-      // if there's no scrollbar, just set it to "revert" so whatever the user has set gets used.
+      // if there's no scrollbar, just set it to "revert" so whatever the user has set gets used. This is useful is the page is not overflowing and showing a scrollbar, or if the user has overflow: hidden, or any other reason a scrollbar may not be showing.
       scrollbarGutterProperty = 'revert';
     }
     document.documentElement.style.setProperty('--sl-scroll-lock-gutter', scrollbarGutterProperty);
