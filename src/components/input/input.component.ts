@@ -54,6 +54,8 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
   static dependencies = { 'sl-icon': SlIcon };
 
+  protected static __sharedInput: null | HTMLInputElement = null
+
   private readonly formControlController = new FormControlController(this, {
     assumeInteractionOn: ['sl-blur', 'sl-input']
   });
@@ -65,8 +67,23 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   @state() private hasFocus = false;
   @property() title = ''; // make reactive to pass through
 
-  private __numberInput = Object.assign(document.createElement('input'), { type: 'number' });
-  private __dateInput = Object.assign(document.createElement('input'), { type: 'date' });
+  private get __numberInput () {
+    const ctor = (this.constructor as unknown as typeof SlInput)
+    if (ctor.__sharedInput === null) ctor.__sharedInput = document.createElement("input")
+
+    const input = ctor.__sharedInput
+    input.type = "number"
+    return input
+  }
+
+  private get __dateInput () {
+    const ctor = (this.constructor as unknown as typeof SlInput)
+    if (ctor.__sharedInput === null) ctor.__sharedInput = document.createElement("input")
+
+    const input = ctor.__sharedInput
+    input.type = "date"
+    return input
+  }
 
   /**
    * The type of input. Works the same as a native `<input>` element, but only a subset of types are supported. Defaults

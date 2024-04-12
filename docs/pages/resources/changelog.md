@@ -14,6 +14,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- `<sl-input>` now lazily evaluates and shares hidden date / number inputs across components to improve performance. [#19]
 - Fixed a bug in `<sl-split-panel>` that caused it not to recalculate it's position when going from being `display: none;` to its original display value. [#1942]
 - Fixed a bug in `<dialog>` where when it showed it would cause a layout shift. [#1967]
 - Fixed a bug in `<sl-tooltip>` that allowed unwanted text properties to leak in [#1947]
