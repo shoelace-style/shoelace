@@ -54,6 +54,7 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
   static dependencies = { 'sl-icon': SlIcon };
 
+  // Protected to make TS happy.
   protected static __sharedInput: null | HTMLInputElement = null;
 
   private readonly formControlController = new FormControlController(this, {
