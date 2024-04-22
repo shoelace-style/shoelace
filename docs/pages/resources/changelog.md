@@ -18,6 +18,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<dialog>` where when it showed it would cause a layout shift. [#1967]
 - Fixed a bug in `<sl-tooltip>` that allowed unwanted text properties to leak in [#1947]
 - Fixed a bug in `<sl-button-group>` classes [#1974]
+- Fixed a bug in `<sl-textarea>` that may throw errors on `disconnectedCallback` in test environments [#1985]
 
 ## 2.15.0
 
