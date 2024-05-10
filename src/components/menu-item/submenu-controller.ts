@@ -283,6 +283,8 @@ export class SubmenuController implements ReactiveController {
         flip-fallback-strategy="best-fit"
         skidding="${this.skidding}"
         strategy="fixed"
+        auto-size="vertical"
+        auto-size-padding="10"
       >
         <slot name="submenu"></slot>
       </sl-popup>
