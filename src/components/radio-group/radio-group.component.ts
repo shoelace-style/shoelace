@@ -133,6 +133,7 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     const radios = this.getAllRadios();
     const oldValue = this.value;
 
+    if (!target) { return }
     if (target.disabled) {
       return;
     }
