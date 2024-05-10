@@ -2,11 +2,11 @@ import { clamp } from '../../internal/math.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { defaultValue } from '../../internal/default-value.js';
 import { drag } from '../../internal/drag.js';
+import { eventOptions, property, query, state } from 'lit/decorators.js';
 import { FormControlController } from '../../internal/form.js';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LocalizeController } from '../../utilities/localize.js';
-import { property, query, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { TinyColor } from '@ctrl/tinycolor';
 import { watch } from '../../internal/watch.js';
@@ -488,6 +488,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     this.formControlController.emitInvalidEvent(event);
   }
 
+  @eventOptions({ passive: false })
   private handleTouchMove(event: TouchEvent) {
     event.preventDefault();
   }
