@@ -21,6 +21,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-textarea>` that may throw errors on `disconnectedCallback` in test environments [#1985]
 - Fixed a bug in `<sl-color-picker>` that would log a non-passive event listener warning [#2005]
 - Fixed a bug in the submenu controller that allowed submenus to go offscreen and not be scrollable [#2001]
+- Fixed a bug in `<sl-range>` that caused the tooltip position to be incorrect in some cases [#1979]
 
 ## 2.15.0
 
