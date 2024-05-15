@@ -14,6 +14,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- Added support for using `<sl-dropdown>` in `<sl-breadcrumb-item>` default slot [#2015]
 - Fixed a bug in `<sl-radio-group>` where if a click did not contain a `<sl-radio>` it would show a console error. [#2009]
 - Fixed a bug in `<sl-split-panel>` that caused it not to recalculate it's position when going from being `display: none;` to its original display value. [#1942]
 - Fixed a bug in `<dialog>` where when it showed it would cause a layout shift. [#1967]

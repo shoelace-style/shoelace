@@ -3,6 +3,7 @@ import { HasSlotController } from '../../internal/slot.js';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { property, query, state } from 'lit/decorators.js';
+import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './breadcrumb-item.styles.js';
@@ -47,12 +48,21 @@ export default class SlBreadcrumbItem extends ShoelaceElement {
   /** The `rel` attribute to use on the link. Only used when `href` is set. */
   @property() rel = 'noreferrer noopener';
 
-  handleSlotChange() {
+  private setRenderType() {
     const hasDropdown =
       this.defaultSlot.assignedElements({ flatten: true }).filter(i => i.tagName.toLowerCase() === 'sl-dropdown')
         .length > 0;
 
     this.renderType = this.href ? 'link' : hasDropdown ? 'drop-down' : 'button';
+  }
+
+  @watch('href', { waitUntilFirstUpdate: true })
+  hrefChanged() {
+    this.setRenderType();
+  }
+
+  handleSlotChange() {
+    this.setRenderType();
   }
 
   render() {

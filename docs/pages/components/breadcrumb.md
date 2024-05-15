@@ -295,10 +295,7 @@ import {
 const App = () => (
   <SlBreadcrumb>
     <SlBreadcrumbItem>Homepage</SlBreadcrumbItem>
-    <SlBreadcrumbItem>Our Services</SlBreadcrumbItem>
-    <SlBreadcrumbItem>Digital Media</SlBreadcrumbItem>
     <SlBreadcrumbItem>
-      Web Design
       <SlDropdown slot="suffix">
         <SlButton slot="trigger" size="small" circle>
           <SlIcon label="More options" name="three-dots"></SlIcon>
@@ -312,6 +309,8 @@ const App = () => (
         </SlMenu>
       </SlDropdown>
     </SlBreadcrumbItem>
+    <SlBreadcrumbItem>Our Services</SlBreadcrumbItem>
+    <SlBreadcrumbItem>Digital Media</SlBreadcrumbItem>
   </SlBreadcrumb>
 );
 ```
