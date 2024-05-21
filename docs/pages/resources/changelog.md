@@ -12,7 +12,7 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
-## Next
+## 2.15.1
 
 - Fixed a bug in `<sl-radio-group>` where if a click did not contain a `<sl-radio>` it would show a console error. [#2009]
 - Fixed a bug in `<sl-split-panel>` that caused it not to recalculate it's position when going from being `display: none;` to its original display value. [#1942]
