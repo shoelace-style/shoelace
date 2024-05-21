@@ -590,7 +590,7 @@ export default css`
 
   /* Focus and checked are always on top */
   :host([data-sl-button-group__button--focus]),
-  :host([data-sl-button-group__button[checked]]) {
+  :host([data-sl-button-group__button][checked]) {
     z-index: 2;
   }
 `;
