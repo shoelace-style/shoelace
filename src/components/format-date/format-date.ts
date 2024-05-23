@@ -7,7 +7,7 @@ import { LocalizeController } from '../../utilities/localize';
  * @status stable
  */
 @customElement('sl-format-date')
-export default class SlFormatDate extends LitElement {
+export default class SlFormatDatem extends LitElement {
   private readonly localize = new LocalizeController(this);
 
   /** The date/time to format. If not set, the current date and time will be used. */
