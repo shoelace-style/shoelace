@@ -177,7 +177,7 @@ export default class SlTabGroup extends ShoelaceElement {
     // Move focus left or right
     if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
       const activeEl = this.tabs.find(t => t.matches(':focus'));
-      const isRtl = this.localize.dir() === 'rtl';
+      const isRtl = this.matches(':dir(rtl)');
 
       if (activeEl?.tagName.toLowerCase() === 'sl-tab') {
         let index = this.tabs.indexOf(activeEl);
@@ -292,7 +292,7 @@ export default class SlTabGroup extends ShoelaceElement {
 
     const width = currentTab.clientWidth;
     const height = currentTab.clientHeight;
-    const isRtl = this.localize.dir() === 'rtl';
+    const isRtl = this.matches(':dir(rtl)');
 
     // We can't used offsetLeft/offsetTop here due to a shadow parent issue where neither can getBoundingClientRect
     // because it provides invalid values for animating elements: https://bugs.chromium.org/p/chromium/issues/detail?id=920069
@@ -370,7 +370,7 @@ export default class SlTabGroup extends ShoelaceElement {
   }
 
   render() {
-    const isRtl = this.localize.dir() === 'rtl';
+    const isRtl = this.matches(':dir(rtl)');
 
     return html`
       <div

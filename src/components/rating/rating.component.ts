@@ -80,7 +80,7 @@ export default class SlRating extends ShoelaceElement {
   }
 
   private getValueFromXCoordinate(coordinate: number) {
-    const isRtl = this.localize.dir() === 'rtl';
+    const isRtl = this.matches(':dir(rtl)');
     const { left, right, width } = this.rating.getBoundingClientRect();
     const value = isRtl
       ? this.roundToPrecision(((right - coordinate) / width) * this.max, this.precision)
@@ -109,7 +109,7 @@ export default class SlRating extends ShoelaceElement {
 
   private handleKeyDown(event: KeyboardEvent) {
     const isLtr = this.localize.dir() === 'ltr';
-    const isRtl = this.localize.dir() === 'rtl';
+    const isRtl = this.matches(':dir(rtl)');
     const oldValue = this.value;
 
     if (this.disabled || this.readonly) {
@@ -214,7 +214,7 @@ export default class SlRating extends ShoelaceElement {
   }
 
   render() {
-    const isRtl = this.localize.dir() === 'rtl';
+    const isRtl = this.matches(':dir(rtl)');
     const counter = Array.from(Array(this.max).keys());
     let displayValue = 0;
 

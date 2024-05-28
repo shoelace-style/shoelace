@@ -226,7 +226,7 @@ export default class SlTree extends ShoelaceElement {
 
     const items = this.getFocusableItems();
     const isLtr = this.localize.dir() === 'ltr';
-    const isRtl = this.localize.dir() === 'rtl';
+    const isRtl = this.matches(':dir(rtl)');
 
     if (items.length > 0) {
       event.preventDefault();

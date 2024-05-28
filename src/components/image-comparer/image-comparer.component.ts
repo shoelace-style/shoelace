@@ -49,7 +49,7 @@ export default class SlImageComparer extends ShoelaceElement {
 
   private handleDrag(event: PointerEvent) {
     const { width } = this.base.getBoundingClientRect();
-    const isRtl = this.localize.dir() === 'rtl';
+    const isRtl = this.matches(':dir(rtl)');
 
     event.preventDefault();
 
@@ -64,7 +64,7 @@ export default class SlImageComparer extends ShoelaceElement {
 
   private handleKeyDown(event: KeyboardEvent) {
     const isLtr = this.localize.dir() === 'ltr';
-    const isRtl = this.localize.dir() === 'rtl';
+    const isRtl = this.matches(':dir(rtl)');
 
     if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
       const incr = event.shiftKey ? 10 : 1;
@@ -96,7 +96,7 @@ export default class SlImageComparer extends ShoelaceElement {
   }
 
   render() {
-    const isRtl = this.localize.dir() === 'rtl';
+    const isRtl = this.matches(':dir(rtl)');
 
     return html`
       <div

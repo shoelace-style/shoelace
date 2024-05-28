@@ -175,7 +175,7 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
       const inputWidth = this.input.offsetWidth;
       const tooltipWidth = this.output.offsetWidth;
       const thumbSize = getComputedStyle(this.input).getPropertyValue('--thumb-size');
-      const isRtl = this.localize.dir() === 'rtl';
+      const isRtl = this.matches(':dir(rtl)');
       const percentAsWidth = inputWidth * percent;
 
       // The calculations are used to "guess" where the thumb is located. Since we're using the native range control

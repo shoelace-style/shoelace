@@ -102,7 +102,7 @@ export default class SlSplitPanel extends ShoelaceElement {
   }
 
   private handleDrag(event: PointerEvent) {
-    const isRtl = this.localize.dir() === 'rtl';
+    const isRtl = this.matches(':dir(rtl)');
 
     if (this.disabled) {
       return;
@@ -223,7 +223,7 @@ export default class SlSplitPanel extends ShoelaceElement {
   render() {
     const gridTemplate = this.vertical ? 'gridTemplateRows' : 'gridTemplateColumns';
     const gridTemplateAlt = this.vertical ? 'gridTemplateColumns' : 'gridTemplateRows';
-    const isRtl = this.localize.dir() === 'rtl';
+    const isRtl = this.matches(':dir(rtl)');
     const primary = `
       clamp(
         0%,
