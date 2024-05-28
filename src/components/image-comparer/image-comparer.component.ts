@@ -2,7 +2,6 @@ import { clamp } from '../../internal/math.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { drag } from '../../internal/drag.js';
 import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize.js';
 import { property, query } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { watch } from '../../internal/watch.js';
@@ -38,8 +37,6 @@ import type { CSSResultGroup } from 'lit';
 export default class SlImageComparer extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];
   static scopedElement = { 'sl-icon': SlIcon };
-
-  private readonly localize = new LocalizeController(this);
 
   @query('.image-comparer') base: HTMLElement;
   @query('.image-comparer__handle') handle: HTMLElement;
