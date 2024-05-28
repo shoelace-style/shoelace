@@ -147,7 +147,19 @@ export default class SlCopyButton extends ShoelaceElement {
       this.emit('sl-error');
     } else {
       try {
-        await navigator.clipboard.writeText(valueToCopy);
+        if (navigator.clipboard) {
+          await navigator.clipboard.writeText(valueToCopy);
+        } else {
+          // Fallback for older browsers
+          const textarea = document.createElement('textarea');
+          textarea.value = valueToCopy;
+          textarea.style.position = 'fixed';
+          textarea.style.top = '-9999px';
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+        }
         this.showStatus('success');
         this.emit('sl-copy', {
           detail: {
