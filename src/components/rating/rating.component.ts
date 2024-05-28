@@ -108,7 +108,7 @@ export default class SlRating extends ShoelaceElement {
   }
 
   private handleKeyDown(event: KeyboardEvent) {
-    const isLtr = this.localize.dir() === 'ltr';
+    const isLtr = this.matches(':dir(ltr)');
     const isRtl = this.matches(':dir(rtl)');
     const oldValue = this.value;
 

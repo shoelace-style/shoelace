@@ -488,7 +488,7 @@ export default class SlCarousel extends ShoelaceElement {
     const currentPage = this.getCurrentPage();
     const prevEnabled = this.canScrollPrev();
     const nextEnabled = this.canScrollNext();
-    const isLtr = this.localize.dir() === 'ltr';
+    const isLtr = this.matches(':dir(ltr)');
 
     return html`
       <div part="base" class="carousel">

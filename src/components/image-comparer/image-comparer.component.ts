@@ -63,7 +63,7 @@ export default class SlImageComparer extends ShoelaceElement {
   }
 
   private handleKeyDown(event: KeyboardEvent) {
-    const isLtr = this.localize.dir() === 'ltr';
+    const isLtr = this.matches(':dir(ltr)');
     const isRtl = this.matches(':dir(rtl)');
 
     if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
