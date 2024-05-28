@@ -2,7 +2,6 @@ import { clamp } from '../../internal/math.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { eventOptions, property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { watch } from '../../internal/watch.js';
@@ -35,8 +34,6 @@ import type { CSSResultGroup } from 'lit';
 export default class SlRating extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = { 'sl-icon': SlIcon };
-
-  private readonly localize = new LocalizeController(this);
 
   @query('.rating') rating: HTMLElement;
 

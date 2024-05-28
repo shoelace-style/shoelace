@@ -1,6 +1,5 @@
 import { clamp } from '../../internal/math.js';
 import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize.js';
 import { property, query } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
@@ -88,7 +87,6 @@ export default class SlTree extends ShoelaceElement {
   // automatically updated when the underlying document is changed.
   //
   private lastFocusedItem: SlTreeItem | null;
-  private readonly localize = new LocalizeController(this);
   private mutationObserver: MutationObserver;
   private clickTarget: SlTreeItem | null = null;
 
