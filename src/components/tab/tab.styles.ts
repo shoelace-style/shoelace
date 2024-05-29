@@ -27,15 +27,15 @@ export default css`
     color: var(--sl-color-primary-600);
   }
 
-  .tab:focus {
-    outline: none;
+  :host(:focus) {
+    outline: transparent;
   }
 
-  .tab:focus-visible:not(.tab--disabled) {
+  :host:focus-visible:not([disabled]) {
     color: var(--sl-color-primary-600);
   }
 
-  .tab:focus-visible {
+  :host(:focus-visible) {
     outline: var(--sl-focus-ring);
     outline-offset: calc(-1 * var(--sl-focus-ring-width) - var(--sl-focus-ring-offset));
   }

@@ -206,11 +206,14 @@ export default class SlTabGroup extends ShoelaceElement {
           index = 0;
         }
 
+        this.tabs[index].tabIndex = 0
         this.tabs[index].focus({ preventScroll: true });
 
         if (this.activation === 'auto') {
           this.setActiveTab(this.tabs[index], { scrollBehavior: 'smooth' });
         }
+
+        this.syncTabsAndPanels()
 
         if (['top', 'bottom'].includes(this.placement)) {
           scrollIntoView(this.tabs[index], this.nav, 'horizontal');
@@ -253,7 +256,9 @@ export default class SlTabGroup extends ShoelaceElement {
       this.activeTab = tab;
 
       // Sync active tab and panel
-      this.tabs.forEach(el => (el.active = el === this.activeTab));
+      this.tabs.forEach(el => {
+        el.active = el === this.activeTab
+      });
       this.panels.forEach(el => (el.active = el.name === this.activeTab?.panel));
       this.syncIndicator();
 
@@ -326,7 +331,29 @@ export default class SlTabGroup extends ShoelaceElement {
   // This stores tabs and panels so we can refer to a cache instead of calling querySelectorAll() multiple times.
   private syncTabsAndPanels() {
     this.tabs = this.getAllTabs({ includeDisabled: false });
+
+    if (!this.activeTab) {
+      this.activeTab = this.getActiveTab()
+    }
+
+    if (!this.activeTab) {
+      this.activeTab = this.tabs[0]
+    }
+
+    this.tabs.forEach((tab) => {
+      if (tab === this.activeTab) {
+        tab.tabIndex = 0
+      } else {
+        tab.tabIndex = -1
+      }
+    })
+
     this.panels = this.getAllPanels();
+
+    this.tabs.forEach(el => {
+      el.active = el === this.activeTab
+    });
+    this.panels.forEach(el => (el.active = el.name === this.activeTab?.panel));
     this.syncIndicator();
 
     // After updating, show or hide scroll controls as needed
