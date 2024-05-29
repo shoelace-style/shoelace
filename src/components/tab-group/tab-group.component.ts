@@ -206,14 +206,14 @@ export default class SlTabGroup extends ShoelaceElement {
           index = 0;
         }
 
-        this.tabs[index].tabIndex = 0
+        this.tabs[index].tabIndex = 0;
         this.tabs[index].focus({ preventScroll: true });
 
         if (this.activation === 'auto') {
           this.setActiveTab(this.tabs[index], { scrollBehavior: 'smooth' });
         }
 
-        this.syncTabsAndPanels()
+        this.syncTabsAndPanels();
 
         if (['top', 'bottom'].includes(this.placement)) {
           scrollIntoView(this.tabs[index], this.nav, 'horizontal');
@@ -257,8 +257,8 @@ export default class SlTabGroup extends ShoelaceElement {
 
       // Sync active tab and panel
       this.tabs.forEach(el => {
-        el.active = el === this.activeTab
-        el.tabIndex = el === this.activeTab ? 0 : -1
+        el.active = el === this.activeTab;
+        el.tabIndex = el === this.activeTab ? 0 : -1;
       });
       this.panels.forEach(el => (el.active = el.name === this.activeTab?.panel));
       this.syncIndicator();
@@ -333,15 +333,15 @@ export default class SlTabGroup extends ShoelaceElement {
   private syncTabsAndPanels() {
     this.tabs = this.getAllTabs({ includeDisabled: false });
 
-    this.activeTab = this.getActiveTab()
+    this.activeTab = this.getActiveTab();
 
     if (!this.activeTab) {
-      this.activeTab = this.tabs[0]
+      this.activeTab = this.tabs[0];
     }
 
     this.tabs.forEach(el => {
-      el.active = el === this.activeTab
-      el.tabIndex = el === this.activeTab ? 0 : -1
+      el.active = el === this.activeTab;
+      el.tabIndex = el === this.activeTab ? 0 : -1;
     });
 
     this.panels = this.getAllPanels();
