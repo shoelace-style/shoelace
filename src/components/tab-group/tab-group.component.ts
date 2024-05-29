@@ -258,6 +258,7 @@ export default class SlTabGroup extends ShoelaceElement {
       // Sync active tab and panel
       this.tabs.forEach(el => {
         el.active = el === this.activeTab
+        el.tabIndex = el === this.activeTab ? 0 : -1
       });
       this.panels.forEach(el => (el.active = el.name === this.activeTab?.panel));
       this.syncIndicator();
@@ -332,27 +333,19 @@ export default class SlTabGroup extends ShoelaceElement {
   private syncTabsAndPanels() {
     this.tabs = this.getAllTabs({ includeDisabled: false });
 
-    if (!this.activeTab) {
-      this.activeTab = this.getActiveTab()
-    }
+    this.activeTab = this.getActiveTab()
 
     if (!this.activeTab) {
       this.activeTab = this.tabs[0]
     }
 
-    this.tabs.forEach((tab) => {
-      if (tab === this.activeTab) {
-        tab.tabIndex = 0
-      } else {
-        tab.tabIndex = -1
-      }
-    })
+    this.tabs.forEach(el => {
+      el.active = el === this.activeTab
+      el.tabIndex = el === this.activeTab ? 0 : -1
+    });
 
     this.panels = this.getAllPanels();
 
-    this.tabs.forEach(el => {
-      el.active = el === this.activeTab
-    });
     this.panels.forEach(el => (el.active = el.name === this.activeTab?.panel));
     this.syncIndicator();
 
