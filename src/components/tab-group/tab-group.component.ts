@@ -206,10 +206,16 @@ export default class SlTabGroup extends ShoelaceElement {
           index = 0;
         }
 
-        this.tabs[index].focus({ preventScroll: true });
+        const currentTab = this.tabs[index];
+        currentTab.tabIndex = 0;
+        currentTab.focus({ preventScroll: true });
 
         if (this.activation === 'auto') {
-          this.setActiveTab(this.tabs[index], { scrollBehavior: 'smooth' });
+          this.setActiveTab(currentTab, { scrollBehavior: 'smooth' });
+        } else {
+          this.tabs.forEach(tabEl => {
+            tabEl.tabIndex = tabEl === currentTab ? 0 : -1;
+          });
         }
 
         if (['top', 'bottom'].includes(this.placement)) {
@@ -253,7 +259,10 @@ export default class SlTabGroup extends ShoelaceElement {
       this.activeTab = tab;
 
       // Sync active tab and panel
-      this.tabs.forEach(el => (el.active = el === this.activeTab));
+      this.tabs.forEach(el => {
+        el.active = el === this.activeTab;
+        el.tabIndex = el === this.activeTab ? 0 : -1;
+      });
       this.panels.forEach(el => (el.active = el.name === this.activeTab?.panel));
       this.syncIndicator();
 
@@ -326,6 +335,7 @@ export default class SlTabGroup extends ShoelaceElement {
   // This stores tabs and panels so we can refer to a cache instead of calling querySelectorAll() multiple times.
   private syncTabsAndPanels() {
     this.tabs = this.getAllTabs({ includeDisabled: false });
+
     this.panels = this.getAllPanels();
     this.syncIndicator();
 
