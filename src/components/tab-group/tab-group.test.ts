@@ -84,7 +84,7 @@ describe('<sl-tab-group>', () => {
     expect(tabGroup).to.be.visible;
   });
 
-  it.only('is accessible', async () => {
+  it('is accessible', async () => {
     const tabGroup = await fixture<SlTabGroup>(html`
       <sl-tab-group>
         <sl-tab slot="nav" panel="general">General</sl-tab>
