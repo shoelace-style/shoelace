@@ -206,16 +206,16 @@ export default class SlTabGroup extends ShoelaceElement {
           index = 0;
         }
 
-        const currentTab = this.tabs[index]
+        const currentTab = this.tabs[index];
         currentTab.tabIndex = 0;
         currentTab.focus({ preventScroll: true });
 
         if (this.activation === 'auto') {
           this.setActiveTab(currentTab, { scrollBehavior: 'smooth' });
         } else {
-          this.tabs.forEach((tabEl) => {
-            tabEl.tabIndex = tabEl === currentTab ? 0 : -1
-          })
+          this.tabs.forEach(tabEl => {
+            tabEl.tabIndex = tabEl === currentTab ? 0 : -1;
+          });
         }
 
         if (['top', 'bottom'].includes(this.placement)) {
