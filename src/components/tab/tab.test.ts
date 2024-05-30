@@ -65,7 +65,7 @@ describe('<sl-tab>', () => {
   });
 
   describe('focus', () => {
-    it('should focus itself div', async () => {
+    it('should focus itself', async () => {
       const el = await fixture<SlTab>(html` <sl-tab>Test</sl-tab> `);
 
       el.focus();
