@@ -13,7 +13,7 @@ describe('<sl-tab>', () => {
       </sl-tab-group>
     `);
 
-    await expect(el).to.be.accessible()
+    await expect(el).to.be.accessible();
   });
 
   it('should render default tab', async () => {
