@@ -92,8 +92,6 @@ describe('<sl-tab-group>', () => {
       </sl-tab-group>
     `);
 
-    await tabGroup.updateComplete;
-
     await expect(tabGroup).to.be.accessible();
   });
 
