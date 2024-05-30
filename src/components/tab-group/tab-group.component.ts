@@ -213,8 +213,6 @@ export default class SlTabGroup extends ShoelaceElement {
           this.setActiveTab(this.tabs[index], { scrollBehavior: 'smooth' });
         }
 
-        this.syncTabsAndPanels();
-
         if (['top', 'bottom'].includes(this.placement)) {
           scrollIntoView(this.tabs[index], this.nav, 'horizontal');
         }
