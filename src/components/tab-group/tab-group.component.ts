@@ -333,16 +333,11 @@ export default class SlTabGroup extends ShoelaceElement {
   private syncTabsAndPanels() {
     this.tabs = this.getAllTabs({ includeDisabled: false });
 
-    this.activeTab = this.getActiveTab();
+    this.panels = this.getAllPanels();
+    this.syncIndicator();
 
-    if (!this.activeTab) {
-      this.activeTab = this.tabs[0];
-    }
-
-    this.tabs.forEach(el => {
-      el.active = el === this.activeTab;
-      el.tabIndex = el === this.activeTab ? 0 : -1;
-    });
+    // After updating, show or hide scroll controls as needed
+    this.updateComplete.then(() => this.updateScrollControls());
 
     this.panels = this.getAllPanels();
 
