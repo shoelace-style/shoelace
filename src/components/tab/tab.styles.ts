@@ -31,7 +31,7 @@ export default css`
     outline: transparent;
   }
 
-  :host:focus-visible:not([disabled]) {
+  :host(:focus-visible):not([disabled]) {
     color: var(--sl-color-primary-600);
   }
 
