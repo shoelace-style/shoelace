@@ -341,14 +341,6 @@ export default class SlTabGroup extends ShoelaceElement {
 
     // After updating, show or hide scroll controls as needed
     this.updateComplete.then(() => this.updateScrollControls());
-
-    this.panels = this.getAllPanels();
-
-    this.panels.forEach(el => (el.active = el.name === this.activeTab?.panel));
-    this.syncIndicator();
-
-    // After updating, show or hide scroll controls as needed
-    this.updateComplete.then(() => this.updateScrollControls());
   }
 
   @watch('noScrollControls', { waitUntilFirstUpdate: true })
