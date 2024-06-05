@@ -327,7 +327,7 @@ export default class SlTabGroup extends ShoelaceElement {
 
   // This stores tabs and panels so we can refer to a cache instead of calling querySelectorAll() multiple times.
   private syncTabsAndPanels() {
-    this.tabs = this.getAllTabs({ includeDisabled: false });
+    this.tabs = this.getAllTabs();
     this.focusableTabs = this.tabs.filter(el => !el.disabled);
 
     this.panels = this.getAllPanels();
