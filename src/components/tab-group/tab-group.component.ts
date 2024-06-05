@@ -127,7 +127,7 @@ export default class SlTabGroup extends ShoelaceElement {
   private getAllTabs() {
     const slot = this.shadowRoot!.querySelector<HTMLSlotElement>('slot[name="nav"]')!;
 
-    return slot.assignedElements() as SlTab[]
+    return slot.assignedElements() as SlTab[];
   }
 
   private getAllPanels() {
@@ -175,28 +175,30 @@ export default class SlTabGroup extends ShoelaceElement {
     if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
       const activeEl = this.tabs.find(t => t.matches(':focus'));
       const isRtl = this.matches(':dir(rtl)');
-      let nextTab: null | SlTab = null
+      let nextTab: null | SlTab = null;
 
       if (activeEl?.tagName.toLowerCase() === 'sl-tab') {
         if (event.key === 'Home') {
-          nextTab = this.focusableTabs[0]
+          nextTab = this.focusableTabs[0];
         } else if (event.key === 'End') {
-          nextTab = this.focusableTabs[this.focusableTabs.length - 1]
+          nextTab = this.focusableTabs[this.focusableTabs.length - 1];
         } else if (
           (['top', 'bottom'].includes(this.placement) && event.key === (isRtl ? 'ArrowRight' : 'ArrowLeft')) ||
           (['start', 'end'].includes(this.placement) && event.key === 'ArrowUp')
         ) {
           const currentIndex = this.tabs.findIndex(el => el === activeEl);
-          nextTab = this.findNextFocusableTab(currentIndex, "backward")
+          nextTab = this.findNextFocusableTab(currentIndex, 'backward');
         } else if (
           (['top', 'bottom'].includes(this.placement) && event.key === (isRtl ? 'ArrowLeft' : 'ArrowRight')) ||
           (['start', 'end'].includes(this.placement) && event.key === 'ArrowDown')
         ) {
           const currentIndex = this.tabs.findIndex(el => el === activeEl);
-          nextTab = this.findNextFocusableTab(currentIndex, "forward")
+          nextTab = this.findNextFocusableTab(currentIndex, 'forward');
         }
 
-        if (!nextTab) { return }
+        if (!nextTab) {
+          return;
+        }
 
         nextTab.tabIndex = 0;
         nextTab.focus({ preventScroll: true });

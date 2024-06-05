@@ -72,7 +72,7 @@ export default class SlTab extends ShoelaceElement {
     this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
 
     if (this.disabled && !this.active) {
-        this.tabIndex = -1;
+      this.tabIndex = -1;
     } else {
       this.tabIndex = 0;
     }
