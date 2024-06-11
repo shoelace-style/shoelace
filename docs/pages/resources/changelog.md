@@ -14,9 +14,30 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- `<sl-tab>` `closable` property now reflects. [#2041]
+- `<sl-tab-group>` now implements a proper "roving tabindex" and `<sl-tab>` is no longer tabbable by default. This aligns closer to the APG pattern for tabs. [#2041]
+- Fixed a bug in the submenu controller that prevented submenus from rendering in RTL without explicitly setting `dir` on the parent menu item [#1992]
+
+## 2.15.1
+
+- Fixed a bug in `<sl-radio-group>` where if a click did not contain a `<sl-radio>` it would show a console error. [#2009]
+- Fixed a bug in `<sl-split-panel>` that caused it not to recalculate it's position when going from being `display: none;` to its original display value. [#1942]
+- Fixed a bug in `<dialog>` where when it showed it would cause a layout shift. [#1967]
+- Fixed a bug in `<sl-tooltip>` that allowed unwanted text properties to leak in [#1947]
+- Fixed a bug in `<sl-button-group>` classes [#1974]
+- Fixed a bug in `<sl-textarea>` that may throw errors on `disconnectedCallback` in test environments [#1985]
+- Fixed a bug in `<sl-color-picker>` that would log a non-passive event listener warning [#2005]
+- Fixed a bug in the submenu controller that allowed submenus to go offscreen and not be scrollable [#2001]
+- Fixed a bug in `<sl-range>` that caused the tooltip position to be incorrect in some cases [#1979]
+
+## 2.15.0
+
 - Added the Slovenian translation [#1893]
 - Added support for `contextElement` to `VirtualElements` in `<sl-popup>` [#1874]
-- Fixed a bug in `.sl-scroll-lock` causing layout shifts. [#1895]
+- Added the `spinner` and `spinner__base` parts to `<sl-tree-item>` [#1937]
+- Added the `sync` property to `<sl-dropdown>` so the menu can easily sync sizes with the trigger element [#1935]
+- Fixed a bug in `<sl-icon>` that did not properly apply mutators to spritesheets [#1927]
+- Fixed a bug in `.sl-scroll-lock` causing layout shifts [#1895]
 - Fixed a bug in `<sl-rating>` that caused the rating to not reset in some circumstances [#1877]
 - Fixed a bug in `<sl-select>` that caused the menu to not close when rendered in a shadow root [#1878]
 - Fixed a bug in `<sl-tree>` that caused a new stacking context resulting in tooltips being clipped [#1709]
@@ -25,6 +46,9 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-select>` where the tag size wouldn't update with the control's size [#1886]
 - Fixed a bug in `<sl-checkbox>` and `<sl-switch>` where the color of the required content wasn't applying correctly
 - Fixed a bug in `<sl-checkbox>` where help text was incorrectly styled [#1897]
+- Fixed a bug in `<sl-input>` that prevented the control from receiving focus when clicking over the clear button
+- Fixed a bug in `<sl-carousel>` that caused the carousel to be out of sync when used with reduced motion settings [#1887]
+- Fixed a bug in `<sl-button-group>` that caused styles to stop working when using `className` on buttons in React [#1926]
 
 ## 2.14.0
 
@@ -44,6 +68,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Added the `hover-bridge` feature to `<sl-popup>` to support better tooltip accessibility [#1734]
 - Added the `loading` attribute and the `spinner` and `spinner__base` part to `<sl-menu-item>` [#1700]
 - Fixed files that did not have `.js` extensions. [#1770]
+- Fixed a bug in `<sl-tree>` when providing custom expand / collapse icons [#1922]
 - Fixed `<sl-dialog>` not accounting for elements with hidden dialog controls like `<video>` [#1755]
 - Fixed focus trapping not scrolling elements into view. [#1750]
 - Fixed more performance issues with focus trapping performance. [#1750]

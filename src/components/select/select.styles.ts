@@ -318,10 +318,11 @@ export default css`
   }
 
   .select__listbox ::slotted(small) {
+    display: block;
     font-size: var(--sl-font-size-small);
     font-weight: var(--sl-font-weight-semibold);
     color: var(--sl-color-neutral-500);
-    padding-block: var(--sl-spacing-x-small);
+    padding-block: var(--sl-spacing-2x-small);
     padding-inline: var(--sl-spacing-x-large);
   }
 `;

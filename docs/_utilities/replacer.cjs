@@ -9,11 +9,14 @@
  */
 
 /**
- * @param {Document} content
+ * @param {String} rawContent
  * @param {Replacements} replacements
  */
-module.exports = function (content, replacements) {
+module.exports = function (rawContent, replacements) {
+  let content = rawContent;
   replacements.forEach(replacement => {
-    content.body.innerHTML = content.body.innerHTML.replaceAll(replacement.pattern, replacement.replacement);
+    content = content.replaceAll(replacement.pattern, replacement.replacement);
   });
+
+  return content;
 };

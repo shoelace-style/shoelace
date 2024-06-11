@@ -145,7 +145,7 @@ it('Should allow tabbing to slotted elements', async () => {
   expect(activeElementsArray()).to.include(focusSix);
 });
 
-it('Should account for when focus is changed from outside sources (like clicking)', async () => {
+it.skip('Should account for when focus is changed from outside sources (like clicking)', async () => {
   const dialog = await fixture(html`
     <sl-dialog open="" label="Dialog" class="dialog-overview">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit.

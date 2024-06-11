@@ -2,7 +2,6 @@ import { clamp } from '../../internal/math.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { drag } from '../../internal/drag.js';
 import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize.js';
 import { property, query } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { watch } from '../../internal/watch.js';
@@ -39,8 +38,6 @@ export default class SlImageComparer extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];
   static scopedElement = { 'sl-icon': SlIcon };
 
-  private readonly localize = new LocalizeController(this);
-
   @query('.image-comparer') base: HTMLElement;
   @query('.image-comparer__handle') handle: HTMLElement;
 
@@ -49,7 +46,7 @@ export default class SlImageComparer extends ShoelaceElement {
 
   private handleDrag(event: PointerEvent) {
     const { width } = this.base.getBoundingClientRect();
-    const isRtl = this.localize.dir() === 'rtl';
+    const isRtl = this.matches(':dir(rtl)');
 
     event.preventDefault();
 
@@ -63,8 +60,8 @@ export default class SlImageComparer extends ShoelaceElement {
   }
 
   private handleKeyDown(event: KeyboardEvent) {
-    const isLtr = this.localize.dir() === 'ltr';
-    const isRtl = this.localize.dir() === 'rtl';
+    const isLtr = this.matches(':dir(ltr)');
+    const isRtl = this.matches(':dir(rtl)');
 
     if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
       const incr = event.shiftKey ? 10 : 1;
@@ -96,7 +93,7 @@ export default class SlImageComparer extends ShoelaceElement {
   }
 
   render() {
-    const isRtl = this.localize.dir() === 'rtl';
+    const isRtl = this.matches(':dir(rtl)');
 
     return html`
       <div

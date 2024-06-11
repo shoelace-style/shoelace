@@ -30,22 +30,22 @@ export default class SlButtonGroup extends ShoelaceElement {
 
   private handleFocus(event: Event) {
     const button = findButton(event.target as HTMLElement);
-    button?.classList.add('sl-button-group__button--focus');
+    button?.toggleAttribute('data-sl-button-group__button--focus', true);
   }
 
   private handleBlur(event: Event) {
     const button = findButton(event.target as HTMLElement);
-    button?.classList.remove('sl-button-group__button--focus');
+    button?.toggleAttribute('data-sl-button-group__button--focus', false);
   }
 
   private handleMouseOver(event: Event) {
     const button = findButton(event.target as HTMLElement);
-    button?.classList.add('sl-button-group__button--hover');
+    button?.toggleAttribute('data-sl-button-group__button--hover', true);
   }
 
   private handleMouseOut(event: Event) {
     const button = findButton(event.target as HTMLElement);
-    button?.classList.remove('sl-button-group__button--hover');
+    button?.toggleAttribute('data-sl-button-group__button--hover', false);
   }
 
   private handleSlotChange() {
@@ -56,11 +56,14 @@ export default class SlButtonGroup extends ShoelaceElement {
       const button = findButton(el);
 
       if (button) {
-        button.classList.add('sl-button-group__button');
-        button.classList.toggle('sl-button-group__button--first', index === 0);
-        button.classList.toggle('sl-button-group__button--inner', index > 0 && index < slottedElements.length - 1);
-        button.classList.toggle('sl-button-group__button--last', index === slottedElements.length - 1);
-        button.classList.toggle('sl-button-group__button--radio', button.tagName.toLowerCase() === 'sl-radio-button');
+        button.toggleAttribute('data-sl-button-group__button', true);
+        button.toggleAttribute('data-sl-button-group__button--first', index === 0);
+        button.toggleAttribute('data-sl-button-group__button--inner', index > 0 && index < slottedElements.length - 1);
+        button.toggleAttribute('data-sl-button-group__button--last', index === slottedElements.length - 1);
+        button.toggleAttribute(
+          'data-sl-button-group__button--radio',
+          button.tagName.toLowerCase() === 'sl-radio-button'
+        );
       }
     });
   }
