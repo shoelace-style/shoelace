@@ -27,8 +27,8 @@ describe('<sl-button-group>', () => {
     });
   });
 
-  describe('slotted button classes', () => {
-    it('slotted buttons have the right classes applied based on their order', async () => {
+  describe('slotted button data attributes', () => {
+    it('slotted buttons have the right data attributes applied based on their order', async () => {
       const group = await fixture<SlButtonGroup>(html`
         <sl-button-group>
           <sl-button>Button 1 Label</sl-button>
@@ -38,19 +38,19 @@ describe('<sl-button-group>', () => {
       `);
 
       const allButtons = group.querySelectorAll('sl-button');
-      const hasGroupClass = Array.from(allButtons).every(button =>
-        button.classList.contains('sl-button-group__button')
+      const hasGroupAttrib = Array.from(allButtons).every(button =>
+        button.hasAttribute('data-sl-button-group__button')
       );
-      expect(hasGroupClass).to.be.true;
+      expect(hasGroupAttrib).to.be.true;
 
-      expect(allButtons[0]).to.have.class('sl-button-group__button--first');
-      expect(allButtons[1]).to.have.class('sl-button-group__button--inner');
-      expect(allButtons[2]).to.have.class('sl-button-group__button--last');
+      expect(allButtons[0]).to.have.attribute('data-sl-button-group__button--first');
+      expect(allButtons[1]).to.have.attribute('data-sl-button-group__button--inner');
+      expect(allButtons[2]).to.have.attribute('data-sl-button-group__button--last');
     });
   });
 
   describe('focus and blur events', () => {
-    it('toggles focus class to slotted buttons on focus/blur', async () => {
+    it('toggles focus data attribute to slotted buttons on focus/blur', async () => {
       const group = await fixture<SlButtonGroup>(html`
         <sl-button-group>
           <sl-button>Button 1 Label</sl-button>
@@ -63,16 +63,16 @@ describe('<sl-button-group>', () => {
       allButtons[0].dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
 
       await elementUpdated(allButtons[0]);
-      expect(allButtons[0].classList.contains('sl-button-group__button--focus')).to.be.true;
+      expect(allButtons[0]).to.have.attribute('data-sl-button-group__button--focus');
 
       allButtons[0].dispatchEvent(new FocusEvent('focusout', { bubbles: true }));
       await elementUpdated(allButtons[0]);
-      expect(allButtons[0].classList.contains('sl-button-group__button--focus')).not.to.be.true;
+      expect(allButtons[0]).to.not.have.attribute('data-sl-button-group__button--focus');
     });
   });
 
   describe('mouseover and mouseout events', () => {
-    it('toggles hover class to slotted buttons on mouseover/mouseout', async () => {
+    it('toggles hover data attribute to slotted buttons on mouseover/mouseout', async () => {
       const group = await fixture<SlButtonGroup>(html`
         <sl-button-group>
           <sl-button>Button 1 Label</sl-button>
@@ -85,11 +85,12 @@ describe('<sl-button-group>', () => {
 
       allButtons[0].dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
       await elementUpdated(allButtons[0]);
-      expect(allButtons[0].classList.contains('sl-button-group__button--hover')).to.be.true;
+      expect(allButtons[0]).to.have.attribute('data-sl-button-group__button--hover');
 
       allButtons[0].dispatchEvent(new MouseEvent('mouseout', { bubbles: true }));
       await elementUpdated(allButtons[0]);
-      expect(allButtons[0].classList.contains('sl-button-group__button--hover')).not.to.be.true;
+      console.log(allButtons[0]);
+      expect(allButtons[0]).to.not.have.attribute('data-sl-button-group__button--hover');
     });
   });
 });

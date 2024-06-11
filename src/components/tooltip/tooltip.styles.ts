@@ -44,6 +44,8 @@ export default css`
     font-size: var(--sl-tooltip-font-size);
     font-weight: var(--sl-tooltip-font-weight);
     line-height: var(--sl-tooltip-line-height);
+    text-align: start;
+    white-space: normal;
     color: var(--sl-tooltip-color);
     padding: var(--sl-tooltip-padding);
     pointer-events: none;

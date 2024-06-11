@@ -247,10 +247,6 @@ export default css`
    * Clearable + Password Toggle
    */
 
-  .input__clear:not(.input__clear--visible) {
-    visibility: hidden;
-  }
-
   .input__clear,
   .input__password-toggle {
     display: inline-flex;
@@ -273,10 +269,6 @@ export default css`
   .input__clear:focus,
   .input__password-toggle:focus {
     outline: none;
-  }
-
-  .input--empty .input__clear {
-    visibility: hidden;
   }
 
   /* Don't show the browser's password toggle in Edge */

@@ -21,7 +21,7 @@ describe('<sl-radio-button>', () => {
     expect(radio2.checked).to.be.false;
   });
 
-  it('should receive positional classes from <sl-button-group>', async () => {
+  it('should receive positional data attributes from <sl-button-group>', async () => {
     const radioGroup = await fixture<SlRadioGroup>(html`
       <sl-radio-group value="1">
         <sl-radio-button id="radio-1" value="1"></sl-radio-button>
@@ -35,11 +35,11 @@ describe('<sl-radio-button>', () => {
 
     await Promise.all([radioGroup.updateComplete, radio1.updateComplete, radio2.updateComplete, radio3.updateComplete]);
 
-    expect(radio1.classList.contains('sl-button-group__button')).to.be.true;
-    expect(radio1.classList.contains('sl-button-group__button--first')).to.be.true;
-    expect(radio2.classList.contains('sl-button-group__button')).to.be.true;
-    expect(radio2.classList.contains('sl-button-group__button--inner')).to.be.true;
-    expect(radio3.classList.contains('sl-button-group__button')).to.be.true;
-    expect(radio3.classList.contains('sl-button-group__button--last')).to.be.true;
+    expect(radio1).to.have.attribute('data-sl-button-group__button');
+    expect(radio1).to.have.attribute('data-sl-button-group__button--first');
+    expect(radio2).to.have.attribute('data-sl-button-group__button');
+    expect(radio2).to.have.attribute('data-sl-button-group__button--inner');
+    expect(radio3).to.have.attribute('data-sl-button-group__button');
+    expect(radio3).to.have.attribute('data-sl-button-group__button--last');
   });
 });

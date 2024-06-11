@@ -6,10 +6,10 @@ const translation: Translation = {
   $name: '正體中文',
   $dir: 'ltr',
 
-  carousel: '旋轉木馬',
+  carousel: '幻燈片',
   clearEntry: '清空',
   close: '關閉',
-  copied: '已復制',
+  copied: '已複製',
   copy: '複製',
   currentValue: '當前值',
   error: '錯誤',

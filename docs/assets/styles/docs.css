@@ -1413,3 +1413,95 @@ body[data-page^='/tokens/'] .table-wrapper td:first-child code {
     grid-column-start: span 6;
   }
 }
+
+.ks-banner {
+  display: flex;
+  gap: 1rem;
+  position: absolute;
+  top: 1rem;
+  width: 950px;
+  left: calc(50% - 475px);
+  font-size: 0.9375rem;
+  align-items: center;
+  justify-content: space-between;
+  background: #1a3256;
+  border-radius: var(--sl-border-radius-large);
+  padding: 1rem 1.25rem;
+  color: #fdfdfd;
+  text-decoration: none;
+  line-height: 1.4;
+  z-index: 2;
+  margin-left: 160px;
+}
+
+.ks-banner:hover {
+  color: #fdfdfd;
+}
+
+.ks-banner > span {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ks-banner svg {
+  flex: 0 0 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.ks-banner .faux-button {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  background: white;
+  border: solid 1px #d4d4d4;
+  border-radius: var(--sl-border-radius-medium);
+  font-size: 0.8375rem;
+  color: #353439;
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+}
+
+.ks-banner.with-toc {
+  width: 1100px;
+  left: calc(50% - 550px);
+  margin-left: 140px;
+}
+
+main {
+  margin-top: 70px;
+}
+
+@media screen and (max-width: 1650px) {
+  .ks-banner,
+  .ks-banner.with-toc {
+    width: 540px !important;
+    top: 50px;
+    left: calc(50% - 270px);
+  }
+
+  main {
+    margin-top: 140px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .ks-banner,
+  .ks-banner.with-toc {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .ks-banner,
+  .ks-banner.with-toc {
+    width: calc(100% - 2rem) !important;
+    left: 1rem;
+    flex-direction: column;
+  }
+
+  main {
+    margin-top: 150px;
+  }
+}
