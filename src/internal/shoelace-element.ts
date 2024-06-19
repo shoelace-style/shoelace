@@ -104,6 +104,8 @@ export default class ShoelaceElement extends LitElement {
       | typeof ShoelaceElement;
 
     if (!currentlyRegisteredConstructor) {
+      // We try to register as the actual class first. If for some reason that fails, we fall back to anonymous classes.
+      // customElements can only have 1 class of the same "object id" per registry, so that is why the try {} catch {} exists.
       try {
         customElements.define(name, elementConstructor, options);
       } catch (_err) {
