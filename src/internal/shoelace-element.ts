@@ -104,7 +104,11 @@ export default class ShoelaceElement extends LitElement {
       | typeof ShoelaceElement;
 
     if (!currentlyRegisteredConstructor) {
-      customElements.define(name, class extends elementConstructor {} as unknown as CustomElementConstructor, options);
+      try {
+        customElements.define(name, elementConstructor, options);
+      } catch (_err) {
+        customElements.define(name, class extends elementConstructor {}, options);
+      }
       return;
     }
 
