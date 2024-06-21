@@ -18,6 +18,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - `<sl-tab>` `closable` property now reflects. [#2041]
 - `<sl-tab-group>` now implements a proper "roving tabindex" and `<sl-tab>` is no longer tabbable by default. This aligns closer to the APG pattern for tabs. [#2041]
 - Fixed a bug in the submenu controller that prevented submenus from rendering in RTL without explicitly setting `dir` on the parent menu item [#1992]
+- When calling `customElements.define` we no longer register with anonymous classes by default [#2079]
 
 ## 2.15.1
 

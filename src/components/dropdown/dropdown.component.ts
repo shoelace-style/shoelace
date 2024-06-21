@@ -34,7 +34,8 @@ import type SlMenu from '../menu/menu.js';
  * @event sl-hide - Emitted when the dropdown closes.
  * @event sl-after-hide - Emitted after the dropdown closes and all animations are complete.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart base - The component's base wrapper, an `<sl-popup>` element.
+ * @csspart base__popup - The popup's exported `popup` part. Use this to target the tooltip's popup container.
  * @csspart trigger - The container that wraps the trigger.
  * @csspart panel - The panel that gets shown when the dropdown is open.
  *
@@ -406,6 +407,7 @@ export default class SlDropdown extends ShoelaceElement {
     return html`
       <sl-popup
         part="base"
+        exportparts="popup:base__popup"
         id="dropdown"
         placement=${this.placement}
         distance=${this.distance}
