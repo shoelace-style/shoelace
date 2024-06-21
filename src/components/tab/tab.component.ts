@@ -52,7 +52,7 @@ export default class SlTab extends ShoelaceElement {
 
   /**
    * @internal
-   * Need to wrap in a `@property()` otherwise NextJS blows up.
+   * Need to wrap in a `@property()` otherwise CustomElement throws a "The result must not have attributes" runtime error.
    */
   @property({ type: Number, reflect: true }) tabIndex = 0;
 
