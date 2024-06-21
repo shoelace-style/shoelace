@@ -24,7 +24,7 @@ describe('<sl-tab>', () => {
     expect(el.getAttribute('role')).to.equal('tab');
     expect(el.getAttribute('aria-disabled')).to.equal('false');
     expect(el.getAttribute('aria-selected')).to.equal('false');
-    expect(el.getAttribute('tabindex')).to.equal('-1');
+    expect(el.getAttribute('tabindex')).to.equal('0');
     expect(base.getAttribute('class')).to.equal(' tab ');
     expect(el.active).to.equal(false);
     expect(el.closable).to.equal(false);
@@ -50,7 +50,7 @@ describe('<sl-tab>', () => {
     expect(el.active).to.equal(true);
     expect(el.getAttribute('aria-selected')).to.equal('true');
     expect(base.getAttribute('class')).to.equal(' tab tab--active ');
-    expect(el.getAttribute('tabindex')).to.equal('-1');
+    expect(el.getAttribute('tabindex')).to.equal('0');
   });
 
   it('should set closable by attribute', async () => {

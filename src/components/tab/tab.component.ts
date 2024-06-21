@@ -50,7 +50,11 @@ export default class SlTab extends ShoelaceElement {
   /** Disables the tab and prevents selection. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  tabIndex = -1;
+  /**
+   * @internal
+   * Need to wrap in a `@property()` otherwise CustomElement throws a "The result must not have attributes" runtime error.
+   */
+  @property({ type: Number, reflect: true }) tabIndex = 0;
 
   connectedCallback() {
     super.connectedCallback();
@@ -70,7 +74,12 @@ export default class SlTab extends ShoelaceElement {
   @watch('disabled')
   handleDisabledChange() {
     this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
-    this.tabIndex = -1;
+
+    if (this.disabled && !this.active) {
+      this.tabIndex = -1;
+    } else {
+      this.tabIndex = 0;
+    }
   }
 
   render() {
