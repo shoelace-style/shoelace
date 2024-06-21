@@ -50,7 +50,11 @@ export default class SlTab extends ShoelaceElement {
   /** Disables the tab and prevents selection. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  tabIndex = 0;
+  /**
+   * @internal
+   * Need to wrap in a `@property()` otherwise NextJS blows up.
+   */
+  @property({ type: Number, reflect: true }) tabIndex = 0;
 
   connectedCallback() {
     super.connectedCallback();
