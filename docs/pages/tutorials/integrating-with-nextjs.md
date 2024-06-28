@@ -67,20 +67,17 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: { esmExternals: "loose" },
+  experimental: { esmExternals: 'loose' },
   webpack: (config, options) => {
     config.plugins.push(
-        new CopyPlugin({
-            patterns: [
-                {
-                    from: resolve(
-                        __dirname,
-                        "node_modules/@shoelace-style/shoelace/dist/assets/"
-                    ),
-                    to: resolve(__dirname, "public/shoelace-assets/assets/"),
-                },
-            ],
-        })
+      new CopyPlugin({
+        patterns: [
+          {
+            from: resolve(__dirname, 'node_modules/@shoelace-style/shoelace/dist/assets/'),
+            to: resolve(__dirname, 'public/shoelace-assets/assets/')
+          }
+        ]
+      })
     );
     return config;
   }
@@ -99,8 +96,8 @@ Once we've got our webpack config / next config setup, lets modify our `app/layo
 
 ```javascript
 // app/layout.tsx
-import "./globals.css";
-import "@shoelace-style/shoelace/dist/themes/light.css";
+import './globals.css';
+import '@shoelace-style/shoelace/dist/themes/light.css';
 // We can also import the dark theme here as well.
 // import "@shoelace-style/shoelace/dist/themes/dark.css";
 ```
@@ -299,7 +296,6 @@ function MyApp({ Component, pageProps, URL }) {
   );
 }
 ```
-
 
 ## Additional Resources
 
