@@ -46,7 +46,7 @@ export default css`
 
   .tag--neutral {
     background-color: var(--sl-color-neutral-50);
-    border-color: var(--sl-color-neutral-300);
+    border-color: var(--sl-color-neutral-200);
     color: var(--sl-color-neutral-800);
   }
 
