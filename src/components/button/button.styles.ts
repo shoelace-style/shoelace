@@ -77,13 +77,13 @@ export default css`
   /* Default */
   .button--standard.button--default {
     background-color: var(--sl-color-neutral-0);
-    border-color: var(--sl-color-neutral-300);
+    border-color: var(--sl-color-neutral-400);
     color: var(--sl-color-neutral-700);
   }
 
   .button--standard.button--default:hover:not(.button--disabled) {
     background-color: var(--sl-color-primary-50);
-    border-color: var(--sl-color-primary-300);
+    border-color: var(--sl-color-primary-400);
     color: var(--sl-color-primary-700);
   }
 
