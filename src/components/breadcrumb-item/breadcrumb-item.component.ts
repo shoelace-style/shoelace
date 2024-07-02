@@ -109,7 +109,7 @@ export default class SlBreadcrumbItem extends ShoelaceElement {
               </button>
             `
           : ''}
-        ${this.renderType === 'drop-down'
+        ${this.renderType === 'dropdown'
           ? html`
               <div part="label" class="breadcrumb-item__label breadcrumb-item__label--drop-down">
                 <slot @slotchange=${this.handleSlotChange}></slot>
