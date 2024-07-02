@@ -34,7 +34,7 @@ export default class SlBreadcrumbItem extends ShoelaceElement {
 
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
 
-  @state() private renderType: 'button' | 'link' | 'drop-down' = 'button';
+  @state() private renderType: 'button' | 'link' | 'dropdown' = 'button';
 
   /**
    * Optional URL to direct the user to when the breadcrumb item is activated. When set, a link will be rendered
