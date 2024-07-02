@@ -53,17 +53,17 @@ export default class SlBreadcrumbItem extends ShoelaceElement {
       this.defaultSlot.assignedElements({ flatten: true }).filter(i => i.tagName.toLowerCase() === 'sl-dropdown')
         .length > 0;
 
-   if (this.href) {
-      this.renderType = "link"
-      return
-   }
+    if (this.href) {
+      this.renderType = 'link';
+      return;
+    }
 
-   if (hasDropdown) {
-     this.renderType = "dropdown"
-     return
-   }
+    if (hasDropdown) {
+      this.renderType = 'dropdown';
+      return;
+    }
 
-   this.renderType = "button"
+    this.renderType = 'button';
   }
 
   @watch('href', { waitUntilFirstUpdate: true })
