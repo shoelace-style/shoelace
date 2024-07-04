@@ -24,16 +24,6 @@ To get started using Shoelace with Astro, the following packages must be install
 npm install @shoelace-style/shoelace
 ```
 
-### Enabling ESM
-
-Because Shoelace utilizes ESM, we need to modify our `package.json` to support ESM packages. Simply add the following to
-your root of `package.json`:
-
-```
-"type": "module"
-```
-
-There's one more step to enable ESM in Astro, but we'll tackle that in our Next configuration modification.
 
 ### Importing the Default Theme
 
