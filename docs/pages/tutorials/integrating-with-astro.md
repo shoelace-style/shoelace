@@ -97,4 +97,30 @@ setBasePath("dist/assets");
 </script>
 
 ```
+## Modifying Astro Config
 
+You'll notice the above steps never added our icons into our `/public` directory. To solve this, we can install `rollup-plugin-copy` to copy Shoelace's assets into your public directory.
+
+Here's what your Astro config should look like:
+
+```js
+// astro.config.mjs
+
+import { defineConfig } from 'astro/config';
+import copy from 'rollup-plugin-copy'
+
+// https://astro.build/config
+export default defineConfig({
+  vite: {
+    plugins: [
+      copy({
+        // Copy only on first build. We dont want to trigger additional server reloads.
+        copyOnce: true,
+        hook: "buildStart",
+        targets: [
+          { src: 'node_modules/@shoelace-style/shoelace/dist/assets/*', dest: 'public/shoelace-assets/assets/' },
+        ]
+      })
+    ]
+  }
+});
