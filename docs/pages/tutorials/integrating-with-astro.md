@@ -11,7 +11,11 @@ This page explains how to integrate Shoelace with an Astro app.
 :::tip
 This is a community-maintained document. Please [ask the community](/resources/community) if you have questions about this integration. You can also [suggest improvements](https://github.com/shoelace-style/shoelace/blob/next/docs/tutorials/integrating-with-astro.md) to make it better.
 :::
+## SSR and client scripts
 
+In the following tutorial you will notice that Shoelace cannot be imported in the frontmatter of Astro files. This is because Shoelace relies on globals from the DOM to be present.
+
+There is a [Lit + Astro integration for SSR](https://docs.astro.build/en/guides/integrations-guide/lit/) , however it will not work with Shoelace in its current state due to some reliance on DOM APIs that aren't shimmed. We are working to resolve this.
 ## Instructions - Astro 4.11.3
 
 - Node: v18.17.1 or v20.3.0 or higher. ( v19 is not supported.)
