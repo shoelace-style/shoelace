@@ -25,13 +25,6 @@ npm install @shoelace-style/shoelace
 ```
 
 
-### Importing the Default Theme
-
-The next step is to import Shoelace's default theme (stylesheet) in your `/src/styles/global.css` file:
-
-```css
-@import "@shoelace-style/shoelace/dist/themes/light.css";
-```
 
 ### Importing components
 
