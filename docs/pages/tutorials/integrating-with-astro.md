@@ -82,6 +82,11 @@ setBasePath("dist/assets");
 </html>
 
 <script>
+  // setBasePath to tell Shoelace where to load icons from.
+  import { setBasePath } from "@shoelace-style/shoelace/dist/utilities/base-path.js";
+  setBasePath("/shoelace-assets/");
+  
+  // Load all components.
   import "@shoelace-style/shoelace"
 
   const duration = 3000;
