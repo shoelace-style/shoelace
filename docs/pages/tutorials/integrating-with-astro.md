@@ -32,8 +32,8 @@ In `/src/pages/index.astro`, set the base path and import Shoelace.
 
 ```html
 ---
-import { setBasePath } from "@shoelace-style/shoelace/dist/utilities/base-path.js";
-setBasePath("dist/assets");
+// import default stylesheet
+import "@shoelace-style/shoelace/dist/themes/light.css";
 ---
 
 <html>
