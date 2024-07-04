@@ -47,6 +47,11 @@ import "@shoelace-style/shoelace/dist/themes/light.css";
 </html>
 
 <script>
+  // setBasePath to tell Shoelace where to load icons from.
+  import { setBasePath } from "@shoelace-style/shoelace/dist/utilities/base-path.js";
+  setBasePath("/shoelace-assets/");
+
+  // Load all components.
   import "@shoelace-style/shoelace"
 </script>
 
