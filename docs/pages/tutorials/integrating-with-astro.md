@@ -25,7 +25,7 @@ There is a [Lit + Astro integration for SSR](https://docs.astro.build/en/guides/
 To get started using Shoelace with Astro, the following packages must be installed.
 
 ```bash
-npm install @shoelace-style/shoelace
+npm install @shoelace-style/shoelace rollup-plugin-copy
 ```
 
 
