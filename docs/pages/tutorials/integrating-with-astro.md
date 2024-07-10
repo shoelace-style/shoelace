@@ -11,11 +11,13 @@ This page explains how to integrate Shoelace with an Astro app.
 :::tip
 This is a community-maintained document. Please [ask the community](/resources/community) if you have questions about this integration. You can also [suggest improvements](https://github.com/shoelace-style/shoelace/blob/next/docs/tutorials/integrating-with-astro.md) to make it better.
 :::
+
 ## SSR and client scripts
 
 In the following tutorial you will notice that Shoelace cannot be imported in the frontmatter of Astro files. This is because Shoelace relies on globals from the DOM to be present.
 
 There is a [Lit + Astro integration for SSR](https://docs.astro.build/en/guides/integrations-guide/lit/) , however it will not work with Shoelace in its current state due to some reliance on DOM APIs that aren't shimmed. We are working to resolve this.
+
 ## Instructions - Astro 4.11.3
 
 - Node: v18.17.1 or v20.3.0 or higher. ( v19 is not supported.)
@@ -27,8 +29,6 @@ To get started using Shoelace with Astro, the following packages must be install
 ```bash
 npm install @shoelace-style/shoelace rollup-plugin-copy
 ```
-
-
 
 ### Importing components
 
@@ -48,13 +48,12 @@ import "@shoelace-style/shoelace/dist/themes/light.css";
 
 <script>
   // setBasePath to tell Shoelace where to load icons from.
-  import { setBasePath } from "@shoelace-style/shoelace/dist/utilities/base-path.js";
-  setBasePath("/shoelace-assets/");
+  import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.js';
+  setBasePath('/shoelace-assets/');
 
   // Load all components.
-  import "@shoelace-style/shoelace"
+  import '@shoelace-style/shoelace';
 </script>
-
 ```
 
 :::tip
@@ -83,25 +82,25 @@ setBasePath("dist/assets");
 
 <script>
   // setBasePath to tell Shoelace where to load icons from.
-  import { setBasePath } from "@shoelace-style/shoelace/dist/utilities/base-path.js";
-  setBasePath("/shoelace-assets/");
-  
+  import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.js';
+  setBasePath('/shoelace-assets/');
+
   // Load all components.
-  import "@shoelace-style/shoelace"
+  import '@shoelace-style/shoelace';
 
   const duration = 3000;
-  import { setDefaultAnimation } from "@shoelace-style/shoelace/dist/utilities/animation-registry.js";
-  
-  setDefaultAnimation("tooltip.show", {
-  keyframes: [
-   { opacity: 0, scale: 0.8 },
-   { opacity: 1, scale: 1 },
-  ],
-    options: { duration: duration, easing: "ease" },
+  import { setDefaultAnimation } from '@shoelace-style/shoelace/dist/utilities/animation-registry.js';
+
+  setDefaultAnimation('tooltip.show', {
+    keyframes: [
+      { opacity: 0, scale: 0.8 },
+      { opacity: 1, scale: 1 }
+    ],
+    options: { duration: duration, easing: 'ease' }
   });
 </script>
-
 ```
+
 ## Modifying Astro Config
 
 You'll notice the above steps never added our icons into our `/public` directory. To solve this, we can install `rollup-plugin-copy` to copy Shoelace's assets into your public directory.
@@ -112,7 +111,7 @@ Here's what your Astro config should look like:
 // astro.config.mjs
 
 import { defineConfig } from 'astro/config';
-import copy from 'rollup-plugin-copy'
+import copy from 'rollup-plugin-copy';
 
 // https://astro.build/config
 export default defineConfig({
@@ -121,11 +120,12 @@ export default defineConfig({
       copy({
         // Copy only on first build. We dont want to trigger additional server reloads.
         copyOnce: true,
-        hook: "buildStart",
+        hook: 'buildStart',
         targets: [
-          { src: 'node_modules/@shoelace-style/shoelace/dist/assets/*', dest: 'public/shoelace-assets/assets/' },
+          { src: 'node_modules/@shoelace-style/shoelace/dist/assets/*', dest: 'public/shoelace-assets/assets/' }
         ]
       })
     ]
   }
 });
+```
