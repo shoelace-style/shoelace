@@ -1,6 +1,6 @@
 import '../../../dist/shoelace.js';
 import { clickOnElement } from '../../internal/test.js';
-import { aTimeout, expect, fixture } from '@open-wc/testing';
+import { expect, fixture } from '@open-wc/testing';
 import { html } from 'lit';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
@@ -123,7 +123,7 @@ it('Should fire "sl-select" when clicking an element within a menu-item', async 
   expect(selectHandler).to.have.been.calledOnce;
 });
 
-it.only("Should be able to check a checkbox menu item in a submenu", async () => {
+it.only('Should be able to check a checkbox menu item in a submenu', async () => {
   const menu: SlMenu = await fixture(html`
     <sl-menu style="max-width: 200px;">
       <sl-menu-item>
@@ -135,14 +135,13 @@ it.only("Should be able to check a checkbox menu item in a submenu", async () =>
     </sl-menu>
   `);
 
+  const menuItem = menu.querySelector<SlMenuItem>('sl-menu-item')!;
+  const checkbox = menu.querySelector<SlMenuItem>("[type='checkbox']")!;
 
-  const menuItem = menu.querySelector<SlMenuItem>("sl-menu-item")!
-  const checkbox = menu.querySelector<SlMenuItem>("[type='checkbox']")!
-
-  expect(checkbox.checked).to.equal(true)
-  await clickOnElement(menuItem) // Focus the menu item
-  await sendKeys({ press: "ArrowRight" }) // Open the submenu
-  await clickOnElement(checkbox) // Click the checkbox
-  await checkbox.updateComplete
-  expect(checkbox.checked).to.equal(false)
-})
+  expect(checkbox.checked).to.equal(true);
+  await clickOnElement(menuItem); // Focus the menu item
+  await sendKeys({ press: 'ArrowRight' }); // Open the submenu
+  await clickOnElement(checkbox); // Click the checkbox
+  await checkbox.updateComplete;
+  expect(checkbox.checked).to.equal(false);
+});
