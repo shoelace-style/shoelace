@@ -33,9 +33,14 @@ export default class SlMenu extends ShoelaceElement {
   private handleClick(event: MouseEvent) {
     const menuItemTypes = ['menuitem', 'menuitemcheckbox'];
 
-    const target = event.composedPath().find((el: Element) => menuItemTypes.includes(el?.getAttribute?.('role') || ''));
+    const composedPath = event.composedPath()
+    const target = composedPath.find((el: Element) => menuItemTypes.includes(el?.getAttribute?.('role') || ''));
 
     if (!target) return;
+
+    const closestMenu = composedPath.find((el: Element) => el?.getAttribute?.("role") === "menu")
+    const clickHasSubmenu = closestMenu !== this
+    if (clickHasSubmenu) return
 
     // This isn't true. But we use it for TypeScript checks below.
     const item = target as SlMenuItem;
