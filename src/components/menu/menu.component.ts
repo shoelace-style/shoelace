@@ -40,6 +40,8 @@ export default class SlMenu extends ShoelaceElement {
 
     const closestMenu = composedPath.find((el: Element) => el?.getAttribute?.('role') === 'menu');
     const clickHasSubmenu = closestMenu !== this;
+
+    // Make sure we're the menu thats supposed to be handling the click event.
     if (clickHasSubmenu) return;
 
     // This isn't true. But we use it for TypeScript checks below.
