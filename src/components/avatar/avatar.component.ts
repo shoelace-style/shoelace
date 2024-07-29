@@ -15,7 +15,7 @@ import type { CSSResultGroup } from 'lit';
  * @since 2.0
  *
  * @dependency sl-icon
- * 
+ *
  * @event sl-error - The image could not be loaded. This may because of an invalid URL, a temporary network condition, or some
  * unknown cause.
  *
