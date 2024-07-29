@@ -156,10 +156,16 @@ describe('<sl-avatar>', () => {
     el = await fixture<SlAvatar>(html`<sl-avatar></sl-avatar>`);
     el.image = 'bad_image';
 
+    let wasEventCalled = false;
+    el.addEventListener('sl-error', () => {
+      wasEventCalled = true;
+    });
+
     await aTimeout(0);
 
     await waitUntil(() => el.shadowRoot!.querySelector('img') === null);
     expect(el.shadowRoot!.querySelector('img')).to.be.null;
+    expect(wasEventCalled).to.be.ok;
   });
 
   it('should show a valid image after being passed an invalid image initially', async () => {
