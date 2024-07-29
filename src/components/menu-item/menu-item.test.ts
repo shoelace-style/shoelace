@@ -146,8 +146,7 @@ describe('<sl-menu-item>', () => {
     await menu.updateComplete;
     await sendKeys({ press: 'Enter' });
     await menu.updateComplete;
-    // Once for each menu element.
-    expect(selectHandler).to.have.been.calledTwice;
+    expect(selectHandler).to.have.been.calledOnce;
   });
 
   it('should focus on outer menu if ArrowRight is pressed on nested menuitem', async () => {
