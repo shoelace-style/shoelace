@@ -146,4 +146,3 @@ describe('<sl-menu>', () => {
     expect(checkbox.checked).to.equal(false);
   });
 });
-
