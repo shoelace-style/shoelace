@@ -16,6 +16,9 @@ import type { CSSResultGroup } from 'lit';
  *
  * @dependency sl-icon
  *
+ * @event sl-error - The image could not be loaded. This may because of an invalid URL, a temporary network condition, or some
+ * unknown cause.
+ *
  * @slot icon - The default icon to use when no image or initials are present. Works best with `<sl-icon>`.
  *
  * @csspart base - The component's base wrapper.
@@ -54,6 +57,11 @@ export default class SlAvatar extends ShoelaceElement {
     this.hasError = false;
   }
 
+  private handleImageLoadError() {
+    this.hasError = true;
+    this.emit('sl-error');
+  }
+
   render() {
     const avatarWithImage = html`
       <img
@@ -62,7 +70,7 @@ export default class SlAvatar extends ShoelaceElement {
         src="${this.image}"
         loading="${this.loading}"
         alt=""
-        @error="${() => (this.hasError = true)}"
+        @error="${this.handleImageLoadError}"
       />
     `;
 

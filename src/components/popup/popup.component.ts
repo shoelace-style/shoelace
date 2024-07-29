@@ -413,7 +413,7 @@ export default class SlPopup extends ShoelaceElement {
       //
       // Source: https://github.com/floating-ui/floating-ui/blob/cb3b6ab07f95275730d3e6e46c702f8d4908b55c/packages/dom/src/utils/getDocumentRect.ts#L31
       //
-      const isRtl = getComputedStyle(this).direction === 'rtl';
+      const isRtl = this.matches(':dir(rtl)');
       const staticSide = { top: 'bottom', right: 'left', bottom: 'top', left: 'right' }[placement.split('-')[0]]!;
 
       this.setAttribute('data-current-placement', placement);

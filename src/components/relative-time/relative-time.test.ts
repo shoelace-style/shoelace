@@ -1,6 +1,5 @@
 import '../../../dist/shoelace.js';
 import { expect, fixture, html } from '@open-wc/testing';
-import { LocalizeController } from '@shoelace-style/localize';
 import sinon from 'sinon';
 import type SlRelativeTime from './relative-time.js';
 
@@ -25,20 +24,6 @@ const createRelativeTimeWithDate = async (relativeDate: Date): Promise<SlRelativ
   `);
   relativeTime.date = relativeDate;
   return relativeTime;
-};
-
-const expectTitleToMatchLocalizedTimeString = (relativeTime: SlRelativeTime) => {
-  const localize = new LocalizeController(relativeTime);
-  const titleTime = localize.date(yesterday, {
-    month: 'long',
-    year: 'numeric',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    timeZoneName: 'short'
-  });
-  const timeElement = extractTimeElement(relativeTime);
-  expect(timeElement?.title).to.equal(titleTime);
 };
 
 const minuteInSeconds = 60_000;
@@ -145,7 +130,6 @@ describe('sl-relative-time', () => {
       await relativeTime.updateComplete;
       const timeElement = extractTimeElement(relativeTime);
       expect(timeElement?.dateTime).to.equal(yesterday.toISOString());
-      expectTitleToMatchLocalizedTimeString(relativeTime);
     });
 
     it('allows to use a short form of the unit', async () => {

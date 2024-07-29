@@ -30,7 +30,6 @@ export default class SlRelativeTime extends ShoelaceElement {
 
   @state() private isoTime = '';
   @state() private relativeTime = '';
-  @state() private titleTime = '';
 
   /**
    * The date from which to calculate time from. If not set, the current date and time will be used. When passing a
@@ -71,14 +70,6 @@ export default class SlRelativeTime extends ShoelaceElement {
     const { unit, value } = availableUnits.find(singleUnit => Math.abs(diff) < singleUnit.max)!;
 
     this.isoTime = then.toISOString();
-    this.titleTime = this.localize.date(then, {
-      month: 'long',
-      year: 'numeric',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      timeZoneName: 'short'
-    });
 
     this.relativeTime = this.localize.relativeTime(Math.round(diff / value), unit, {
       numeric: this.numeric,
@@ -108,7 +99,7 @@ export default class SlRelativeTime extends ShoelaceElement {
       this.updateTimeout = window.setTimeout(() => this.requestUpdate(), nextInterval);
     }
 
-    return html` <time datetime=${this.isoTime} title=${this.titleTime}>${this.relativeTime}</time> `;
+    return html` <time datetime=${this.isoTime} title=${this.relativeTime}>${this.relativeTime}</time> `;
   }
 }
 
