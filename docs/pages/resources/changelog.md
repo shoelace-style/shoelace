@@ -22,6 +22,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in the submenu controller that prevented submenus from rendering in RTL without explicitly setting `dir` on the parent menu item [#1992]
 - Fixed a bug where `<sl-relative-time>` would announce the full time instead of the relative time in screen readers
 - When calling `customElements.define` we no longer register with anonymous classes by default [#2079]
+- When avatar image load fails, send error event [#2122]
 
 ## 2.15.1
 
