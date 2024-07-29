@@ -57,7 +57,7 @@ export default class SlAvatar extends ShoelaceElement {
     this.hasError = false;
   }
 
-  private onImageLoadError() {
+  private handleImageLoadError() {
     this.hasError = true;
     this.emit('sl-error');
   }
@@ -70,7 +70,7 @@ export default class SlAvatar extends ShoelaceElement {
         src="${this.image}"
         loading="${this.loading}"
         alt=""
-        @error="${this.onImageLoadError}"
+        @error="${this.handleImageLoadError}"
       />
     `;
 
