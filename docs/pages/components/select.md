@@ -422,6 +422,33 @@ Use the `prefix` slot to prepend an icon to the control.
 </sl-select>
 ```
 
+### Suffix Icons
+
+Use the `suffix` slot to append an icon to the control.
+
+```html:preview
+<sl-select placeholder="Small" size="small" clearable>
+  <sl-icon name="house" slot="suffix"></sl-icon>
+  <sl-option value="option-1">Option 1</sl-option>
+  <sl-option value="option-2">Option 2</sl-option>
+  <sl-option value="option-3">Option 3</sl-option>
+</sl-select>
+<br />
+<sl-select placeholder="Medium" size="medium" clearable>
+  <sl-icon name="house" slot="suffix"></sl-icon>
+  <sl-option value="option-1">Option 1</sl-option>
+  <sl-option value="option-2">Option 2</sl-option>
+  <sl-option value="option-3">Option 3</sl-option>
+</sl-select>
+<br />
+<sl-select placeholder="Large" size="large" clearable>
+  <sl-icon name="house" slot="suffix"></sl-icon>
+  <sl-option value="option-1">Option 1</sl-option>
+  <sl-option value="option-2">Option 2</sl-option>
+  <sl-option value="option-3">Option 3</sl-option>
+</sl-select>
+```
+
 ```jsx:react
 import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
 import SlOption from '@shoelace-style/shoelace/dist/react/option';

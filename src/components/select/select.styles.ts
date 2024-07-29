@@ -256,6 +256,14 @@ export default css`
     color: var(--sl-input-placeholder-color);
   }
 
+  /* Suffix */
+  .select__suffix {
+    flex: 0;
+    display: inline-flex;
+    align-items: center;
+    color: var(--sl-input-placeholder-color);
+  }
+
   /* Clear button */
   .select__clear {
     display: inline-flex;
