@@ -16,6 +16,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 - Added the Czech translation [#2084]
 - Added the `base__popup` part to `<sl-dropdown>` [#2078]
+- Added the `suffix` slot and corresponding part to `<sl-select>` [#2063]
 - `<sl-tab>` `closable` property now reflects. [#2041]
 - `<sl-tab-group>` now implements a proper "roving tabindex" and `<sl-tab>` is no longer tabbable by default. This aligns closer to the APG pattern for tabs. [#2041]
 - Fixed a bug in `<sl-menu>` that did not allow checkboxes to be checked that were in submenus. [#2116]
