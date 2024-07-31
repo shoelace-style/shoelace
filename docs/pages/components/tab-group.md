@@ -413,7 +413,7 @@ const App = () => (
 
 ### Auto hide scroll controls 
 
-Scroll control is hidden when there are no more tabs to show on its end.
+When tabs are scrolled all the way to one side, the scroll button on that side can't be clicked. Add the `auto-hide-scroll-buttons` attribute to the tab group to hide the effected button in that case.
 
 ```html:preview
 <sl-tab-group auto-hide-scroll-buttons>

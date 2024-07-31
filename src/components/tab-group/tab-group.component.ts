@@ -61,6 +61,7 @@ export default class SlTabGroup extends ShoelaceElement {
   @state() private hasScrollControls = false;
 
   @state() private hideScrollStartButton = false;
+
   @state() private hideScrollEndButton = false;
 
   /** The placement of the tabs. */
