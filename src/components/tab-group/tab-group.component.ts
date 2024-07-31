@@ -60,6 +60,9 @@ export default class SlTabGroup extends ShoelaceElement {
 
   @state() private hasScrollControls = false;
 
+  @state() private hideScrollStartButton = false;
+  @state() private hideScrollEndButton = false;
+
   /** The placement of the tabs. */
   @property() placement: 'top' | 'bottom' | 'start' | 'end' = 'top';
 
@@ -71,6 +74,9 @@ export default class SlTabGroup extends ShoelaceElement {
 
   /** Disables the scroll arrows that appear when tabs overflow. */
   @property({ attribute: 'no-scroll-controls', type: Boolean }) noScrollControls = false;
+
+  /** Hide scroll buttons when inactive. */
+  @property({ attribute: 'auto-hide-scroll-buttons', type: Boolean }) autoHideScrollButtons = false;
 
   connectedCallback() {
     const whenAllDefined = Promise.all([
@@ -365,6 +371,21 @@ export default class SlTabGroup extends ShoelaceElement {
     return nextTab;
   }
 
+  private updateScrollButtons() {
+    if (this.hasScrollControls && this.autoHideScrollButtons) {
+      this.hideScrollStartButton = !this.doesHaveTabsPassedScrollStart();
+      this.hideScrollEndButton = !this.doesHaveTabsPassScrollEnd();
+    }
+  }
+
+  private doesHaveTabsPassedScrollStart() {
+    return Math.abs(this.nav.scrollLeft) > 0;
+  }
+
+  private doesHaveTabsPassScrollEnd() {
+    return (Math.abs(this.nav.scrollLeft) + this.nav.clientWidth) < this.nav.scrollWidth;
+  }
+
   @watch('noScrollControls', { waitUntilFirstUpdate: true })
   updateScrollControls() {
     if (this.noScrollControls) {
@@ -378,6 +399,8 @@ export default class SlTabGroup extends ShoelaceElement {
       this.hasScrollControls =
         ['top', 'bottom'].includes(this.placement) && this.nav.scrollWidth > this.nav.clientWidth + 1;
     }
+
+    this.updateScrollButtons();
   }
 
   @watch('placement', { waitUntilFirstUpdate: true })
@@ -425,7 +448,11 @@ export default class SlTabGroup extends ShoelaceElement {
                 <sl-icon-button
                   part="scroll-button scroll-button--start"
                   exportparts="base:scroll-button__base"
-                  class="tab-group__scroll-button tab-group__scroll-button--start"
+                  class=${classMap({
+                    "tab-group__scroll-button": true,
+                    "tab-group__scroll-button--start": true,
+                    "tab-group__scroll-button--start--hidden": this.hideScrollStartButton
+                  })}
                   name=${isRtl ? 'chevron-right' : 'chevron-left'}
                   library="system"
                   label=${this.localize.term('scrollToStart')}
@@ -434,7 +461,7 @@ export default class SlTabGroup extends ShoelaceElement {
               `
             : ''}
 
-          <div class="tab-group__nav">
+          <div class="tab-group__nav"  @scrollend=${this.updateScrollButtons}>
             <div part="tabs" class="tab-group__tabs" role="tablist">
               <div part="active-tab-indicator" class="tab-group__indicator"></div>
               <slot name="nav" @slotchange=${this.syncTabsAndPanels}></slot>
@@ -446,7 +473,11 @@ export default class SlTabGroup extends ShoelaceElement {
                 <sl-icon-button
                   part="scroll-button scroll-button--end"
                   exportparts="base:scroll-button__base"
-                  class="tab-group__scroll-button tab-group__scroll-button--end"
+                  class=${classMap({
+                    "tab-group__scroll-button": true,
+                    "tab-group__scroll-button--end": true,
+                    "tab-group__scroll-button--end--hidden": this.hideScrollEndButton
+                  })}
                   name=${isRtl ? 'chevron-left' : 'chevron-right'}
                   library="system"
                   label=${this.localize.term('scrollToEnd')}

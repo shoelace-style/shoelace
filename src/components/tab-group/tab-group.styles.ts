@@ -31,6 +31,12 @@ export default css`
     padding: 0 var(--sl-spacing-x-large);
   }
 
+  .tab-group--has-scroll-controls .tab-group__scroll-button--start--hidden,
+  .tab-group--has-scroll-controls .tab-group__scroll-button--end--hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
   .tab-group__body {
     display: block;
     overflow: auto;
