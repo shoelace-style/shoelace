@@ -372,15 +372,21 @@ export default class SlTabGroup extends ShoelaceElement {
     return nextTab;
   }
 
+  /**
+   * The reality of the browser means that we can't expect the scroll position to be exactly what we want it to be, so
+   * we add one pixel of wiggle room to our calculations.
+   */
+  private scrollOffset = 1;
+
   private updateScrollButtons() {
     if (this.hasScrollControls && this.autoHideScrollButtons) {
-      this.shouldHideScrollStartButton = this.scrollFromStart() <= 0;
+      this.shouldHideScrollStartButton = this.scrollFromStart() <= this.scrollOffset;
       this.shouldHideScrollEndButton = this.isScrolledToEnd();
     }
   }
 
   private isScrolledToEnd() {
-    return (this.scrollFromStart() + this.nav.clientWidth) >= this.nav.scrollWidth;
+    return (this.scrollFromStart() + this.nav.clientWidth) >= this.nav.scrollWidth - this.scrollOffset;
   }
 
   private scrollFromStart() {
