@@ -60,9 +60,9 @@ export default class SlTabGroup extends ShoelaceElement {
 
   @state() private hasScrollControls = false;
 
-  @state() private hideScrollStartButton = false;
+  @state() private shouldHideScrollStartButton = false;
 
-  @state() private hideScrollEndButton = false;
+  @state() private shouldHideScrollEndButton = false;
 
   /** The placement of the tabs. */
   @property() placement: 'top' | 'bottom' | 'start' | 'end' = 'top';
@@ -374,17 +374,45 @@ export default class SlTabGroup extends ShoelaceElement {
 
   private updateScrollButtons() {
     if (this.hasScrollControls && this.autoHideScrollButtons) {
-      this.hideScrollStartButton = !this.doesHaveTabsPassedScrollStart();
-      this.hideScrollEndButton = !this.doesHaveTabsPassScrollEnd();
+      const isRtl = this.localize.dir() === 'rtl';
+      const doesHaveTabsPassedScrollStart = () => {
+        return isRtl ?
+          this.canScrollRight(isRtl) :
+          this.canScrollLeft(isRtl);
+      }
+
+      const doesHaveTabsPassScrollEnd = () => {
+        return isRtl ?
+          this.canScrollLeft(isRtl) :
+          this.canScrollRight(isRtl);
+      }
+
+      this.shouldHideScrollStartButton = !doesHaveTabsPassedScrollStart();
+      this.shouldHideScrollEndButton = !doesHaveTabsPassScrollEnd();
     }
   }
 
-  private doesHaveTabsPassedScrollStart() {
-    return Math.abs(this.nav.scrollLeft) > 0;
+  /**
+   * Are there tabs overflowing the left side of the {@link nav} container that can be scrolled into view
+   */
+  private canScrollLeft(isRtl: boolean) {
+    // for 'rtl' this correlates with tabs overflowing the 'end' of the container
+    if (isRtl) {
+      const tolerance = 1; // Tolerance added to handle potential sub-pixel calculations and rounding errors
+      return Math.abs(this.nav.scrollLeft) + tolerance < this.nav.scrollWidth - this.nav.clientWidth;
+    }
+    return this.nav.scrollLeft > 0;
   }
 
-  private doesHaveTabsPassScrollEnd() {
-    return (Math.abs(this.nav.scrollLeft) + this.nav.clientWidth) < this.nav.scrollWidth;
+  /**
+   * Are there tabs overflowing the right side of the {@link nav} container that can be scrolled into view
+   */
+  private canScrollRight(isRtl: boolean) {
+    // for 'rtl' this correlates with tabs overflowing the 'start' of the container
+    if (isRtl) {
+      return this.nav.scrollLeft < 0;
+    }
+    return (this.nav.clientWidth + this.nav.scrollLeft) < this.nav.scrollWidth;
   }
 
   @watch('noScrollControls', { waitUntilFirstUpdate: true })
@@ -452,7 +480,7 @@ export default class SlTabGroup extends ShoelaceElement {
                   class=${classMap({
                     "tab-group__scroll-button": true,
                     "tab-group__scroll-button--start": true,
-                    "tab-group__scroll-button--start--hidden": this.hideScrollStartButton
+                    "tab-group__scroll-button--start--hidden": this.shouldHideScrollStartButton
                   })}
                   name=${isRtl ? 'chevron-right' : 'chevron-left'}
                   library="system"
@@ -477,7 +505,7 @@ export default class SlTabGroup extends ShoelaceElement {
                   class=${classMap({
                     "tab-group__scroll-button": true,
                     "tab-group__scroll-button--end": true,
-                    "tab-group__scroll-button--end--hidden": this.hideScrollEndButton
+                    "tab-group__scroll-button--end--hidden": this.shouldHideScrollEndButton
                   })}
                   name=${isRtl ? 'chevron-left' : 'chevron-right'}
                   library="system"
