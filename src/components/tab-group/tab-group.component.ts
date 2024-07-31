@@ -374,45 +374,17 @@ export default class SlTabGroup extends ShoelaceElement {
 
   private updateScrollButtons() {
     if (this.hasScrollControls && this.autoHideScrollButtons) {
-      const isRtl = this.localize.dir() === 'rtl';
-      const doesHaveTabsPassedScrollStart = () => {
-        return isRtl ?
-          this.canScrollRight(isRtl) :
-          this.canScrollLeft(isRtl);
-      }
-
-      const doesHaveTabsPassScrollEnd = () => {
-        return isRtl ?
-          this.canScrollLeft(isRtl) :
-          this.canScrollRight(isRtl);
-      }
-
-      this.shouldHideScrollStartButton = !doesHaveTabsPassedScrollStart();
-      this.shouldHideScrollEndButton = !doesHaveTabsPassScrollEnd();
+      this.shouldHideScrollStartButton = this.scrollFromStart() <= 0;
+      this.shouldHideScrollEndButton = this.isScrolledToEnd();
     }
   }
 
-  /**
-   * Are there tabs overflowing the left side of the {@link nav} container that can be scrolled into view
-   */
-  private canScrollLeft(isRtl: boolean) {
-    // for 'rtl' this correlates with tabs overflowing the 'end' of the container
-    if (isRtl) {
-      const tolerance = 1; // Tolerance added to handle potential sub-pixel calculations and rounding errors
-      return Math.abs(this.nav.scrollLeft) + tolerance < this.nav.scrollWidth - this.nav.clientWidth;
-    }
-    return this.nav.scrollLeft > 0;
+  private isScrolledToEnd() {
+    return (this.scrollFromStart() + this.nav.clientWidth) >= this.nav.scrollWidth;
   }
 
-  /**
-   * Are there tabs overflowing the right side of the {@link nav} container that can be scrolled into view
-   */
-  private canScrollRight(isRtl: boolean) {
-    // for 'rtl' this correlates with tabs overflowing the 'start' of the container
-    if (isRtl) {
-      return this.nav.scrollLeft < 0;
-    }
-    return (this.nav.clientWidth + this.nav.scrollLeft) < this.nav.scrollWidth;
+  private scrollFromStart() {
+    return this.localize.dir() === 'rtl' ? -this.nav.scrollLeft : this.nav.scrollLeft;
   }
 
   @watch('noScrollControls', { waitUntilFirstUpdate: true })
