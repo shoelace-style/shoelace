@@ -33,8 +33,7 @@ export default css`
 
   .tab-group--has-scroll-controls .tab-group__scroll-button--start--hidden,
   .tab-group--has-scroll-controls .tab-group__scroll-button--end--hidden {
-    opacity: 0;
-    pointer-events: none;
+    visibility: hidden;
   }
 
   .tab-group__body {

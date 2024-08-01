@@ -1,7 +1,8 @@
+import '../../internal/scrollend-polyfill.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { eventOptions, property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
-import { property, query, state } from 'lit/decorators.js';
 import { scrollIntoView } from '../../internal/scroll.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
@@ -61,7 +62,6 @@ export default class SlTabGroup extends ShoelaceElement {
   @state() private hasScrollControls = false;
 
   @state() private shouldHideScrollStartButton = false;
-
   @state() private shouldHideScrollEndButton = false;
 
   /** The placement of the tabs. */
@@ -378,6 +378,7 @@ export default class SlTabGroup extends ShoelaceElement {
    */
   private scrollOffset = 1;
 
+  @eventOptions({ passive: true })
   private updateScrollButtons() {
     if (this.hasScrollControls && this.autoHideScrollButtons) {
       this.shouldHideScrollStartButton = this.scrollFromStart() <= this.scrollOffset;
