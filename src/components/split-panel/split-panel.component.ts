@@ -85,7 +85,7 @@ export default class SlSplitPanel extends ShoelaceElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.resizeObserver.unobserve(this);
+    this.resizeObserver?.unobserve(this);
   }
 
   private detectSize() {
