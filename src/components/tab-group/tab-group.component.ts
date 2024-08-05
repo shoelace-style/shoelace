@@ -77,7 +77,7 @@ export default class SlTabGroup extends ShoelaceElement {
   @property({ attribute: 'no-scroll-controls', type: Boolean }) noScrollControls = false;
 
   /** Hide scroll buttons when inactive. */
-  @property({ attribute: 'auto-hide-scroll-buttons', type: Boolean }) autoHideScrollButtons = false;
+  @property({ attribute: 'auto-hide-scroll-buttons', type: Boolean }) autoHideScrollButtons = true;
 
   connectedCallback() {
     const whenAllDefined = Promise.all([
