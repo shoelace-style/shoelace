@@ -199,7 +199,63 @@ const App = () => (
 
 ### With Dropdowns
 
-Dropdown menus can be placed in a prefix or suffix slot to provide additional options.
+Dropdown menus can be placed in the default slot to provide additional options.
+
+```html:preview
+<sl-breadcrumb>
+  <sl-breadcrumb-item>Homepage</sl-breadcrumb-item>
+  <sl-breadcrumb-item>
+    <sl-dropdown>
+      <sl-button slot="trigger" size="small" circle>
+        <sl-icon label="More options" name="three-dots"></sl-icon>
+      </sl-button>
+      <sl-menu>
+        <sl-menu-item type="checkbox" checked>Web Design</sl-menu-item>
+        <sl-menu-item type="checkbox">Web Development</sl-menu-item>
+        <sl-menu-item type="checkbox">Marketing</sl-menu-item>
+      </sl-menu>
+    </sl-dropdown>
+  </sl-breadcrumb-item>
+  <sl-breadcrumb-item>Our Services</sl-breadcrumb-item>
+  <sl-breadcrumb-item>Digital Media</sl-breadcrumb-item>
+</sl-breadcrumb>
+```
+
+```jsx:react
+import {
+  SlBreadcrumb,
+  SlBreadcrumbItem,
+  SlButton,
+  SlDropdown,
+  SlIcon,
+  SlMenu,
+  SlMenuItem
+} from '@shoelace-style/shoelace/dist/react';
+
+const App = () => (
+  <SlBreadcrumb>
+    <SlBreadcrumbItem>Homepage</SlBreadcrumbItem>
+    <SlBreadcrumbItem>
+      <SlDropdown slot="suffix">
+        <SlButton slot="trigger" size="small" circle>
+          <SlIcon label="More options" name="three-dots"></SlIcon>
+        </SlButton>
+        <SlMenu>
+          <SlMenuItem type="checkbox" checked>
+            Web Design
+          </SlMenuItem>
+          <SlMenuItem type="checkbox">Web Development</SlMenuItem>
+          <SlMenuItem type="checkbox">Marketing</SlMenuItem>
+        </SlMenu>
+      </SlDropdown>
+    </SlBreadcrumbItem>
+    <SlBreadcrumbItem>Our Services</SlBreadcrumbItem>
+    <SlBreadcrumbItem>Digital Media</SlBreadcrumbItem>
+  </SlBreadcrumb>
+);
+```
+
+Alternatively, you can place dropdown menus in a prefix or suffix slot.
 
 ```html:preview
 <sl-breadcrumb>

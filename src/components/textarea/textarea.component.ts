@@ -164,7 +164,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
   disconnectedCallback() {
     super.disconnectedCallback();
     if (this.input) {
-      this.resizeObserver.unobserve(this.input);
+      this.resizeObserver?.unobserve(this.input);
     }
   }
 
