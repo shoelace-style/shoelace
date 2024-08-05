@@ -76,8 +76,8 @@ export default class SlTabGroup extends ShoelaceElement {
   /** Disables the scroll arrows that appear when tabs overflow. */
   @property({ attribute: 'no-scroll-controls', type: Boolean }) noScrollControls = false;
 
-  /** Hide scroll buttons when inactive. */
-  @property({ attribute: 'auto-hide-scroll-buttons', type: Boolean }) autoHideScrollButtons = true;
+  /** Prevent scroll buttons from being hidden when inactive. */
+  @property({ attribute: 'fixed-scroll-controls', type: Boolean }) fixedScrollControls = false;
 
   connectedCallback() {
     const whenAllDefined = Promise.all([
@@ -380,7 +380,7 @@ export default class SlTabGroup extends ShoelaceElement {
 
   @eventOptions({ passive: true })
   private updateScrollButtons() {
-    if (this.hasScrollControls && this.autoHideScrollButtons) {
+    if (this.hasScrollControls && !this.fixedScrollControls) {
       this.shouldHideScrollStartButton = this.scrollFromStart() <= this.scrollOffset;
       this.shouldHideScrollEndButton = this.isScrolledToEnd();
     }

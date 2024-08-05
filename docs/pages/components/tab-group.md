@@ -411,12 +411,12 @@ const App = () => (
 );
 ```
 
-### Auto hide scroll controls
+### Fixed scroll controls
 
-When tabs are scrolled all the way to one side, the scroll button on that side can't be clicked. Add the `auto-hide-scroll-buttons` attribute to the tab group to hide the effected button in that case.
+When tabs are scrolled all the way to one side, the scroll button on that side can't be clicked. Set the `fixed-scroll-controls` attribute to keep the effected button visible in that case.
 
 ```html:preview
-<sl-tab-group auto-hide-scroll-buttons>
+<sl-tab-group fixed-scroll-controls>
   <sl-tab slot="nav" panel="tab-1">Tab 1</sl-tab>
   <sl-tab slot="nav" panel="tab-2">Tab 2</sl-tab>
   <sl-tab slot="nav" panel="tab-3">Tab 3</sl-tab>
