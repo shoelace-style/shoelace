@@ -387,7 +387,7 @@ export default class SlTabGroup extends ShoelaceElement {
   }
 
   private isScrolledToEnd() {
-    return (this.scrollFromStart() + this.nav.clientWidth) >= this.nav.scrollWidth - this.scrollOffset;
+    return this.scrollFromStart() + this.nav.clientWidth >= this.nav.scrollWidth - this.scrollOffset;
   }
 
   private scrollFromStart() {
@@ -457,9 +457,9 @@ export default class SlTabGroup extends ShoelaceElement {
                   part="scroll-button scroll-button--start"
                   exportparts="base:scroll-button__base"
                   class=${classMap({
-                    "tab-group__scroll-button": true,
-                    "tab-group__scroll-button--start": true,
-                    "tab-group__scroll-button--start--hidden": this.shouldHideScrollStartButton
+                    'tab-group__scroll-button': true,
+                    'tab-group__scroll-button--start': true,
+                    'tab-group__scroll-button--start--hidden': this.shouldHideScrollStartButton
                   })}
                   name=${isRtl ? 'chevron-right' : 'chevron-left'}
                   library="system"
@@ -469,7 +469,7 @@ export default class SlTabGroup extends ShoelaceElement {
               `
             : ''}
 
-          <div class="tab-group__nav"  @scrollend=${this.updateScrollButtons}>
+          <div class="tab-group__nav" @scrollend=${this.updateScrollButtons}>
             <div part="tabs" class="tab-group__tabs" role="tablist">
               <div part="active-tab-indicator" class="tab-group__indicator"></div>
               <slot name="nav" @slotchange=${this.syncTabsAndPanels}></slot>
@@ -482,9 +482,9 @@ export default class SlTabGroup extends ShoelaceElement {
                   part="scroll-button scroll-button--end"
                   exportparts="base:scroll-button__base"
                   class=${classMap({
-                    "tab-group__scroll-button": true,
-                    "tab-group__scroll-button--end": true,
-                    "tab-group__scroll-button--end--hidden": this.shouldHideScrollEndButton
+                    'tab-group__scroll-button': true,
+                    'tab-group__scroll-button--end': true,
+                    'tab-group__scroll-button--end--hidden': this.shouldHideScrollEndButton
                   })}
                   name=${isRtl ? 'chevron-left' : 'chevron-right'}
                   library="system"
