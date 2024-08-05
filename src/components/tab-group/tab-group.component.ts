@@ -463,6 +463,8 @@ export default class SlTabGroup extends ShoelaceElement {
                   })}
                   name=${isRtl ? 'chevron-right' : 'chevron-left'}
                   library="system"
+                  tabindex="-1"
+                  aria-hidden="true"
                   label=${this.localize.term('scrollToStart')}
                   @click=${this.handleScrollToStart}
                 ></sl-icon-button>
@@ -488,6 +490,8 @@ export default class SlTabGroup extends ShoelaceElement {
                   })}
                   name=${isRtl ? 'chevron-left' : 'chevron-right'}
                   library="system"
+                  tabindex="-1"
+                  aria-hidden="true"
                   label=${this.localize.term('scrollToEnd')}
                   @click=${this.handleScrollToEnd}
                 ></sl-icon-button>
