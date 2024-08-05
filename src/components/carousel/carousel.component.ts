@@ -103,7 +103,7 @@ export default class SlCarousel extends ShoelaceElement {
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
-    this.mutationObserver.disconnect();
+    this.mutationObserver?.disconnect();
   }
 
   protected firstUpdated(): void {
