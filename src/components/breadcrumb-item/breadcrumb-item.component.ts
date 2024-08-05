@@ -2,7 +2,8 @@ import { classMap } from 'lit/directives/class-map.js';
 import { HasSlotController } from '../../internal/slot.js';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { property } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
+import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './breadcrumb-item.styles.js';
@@ -31,6 +32,10 @@ export default class SlBreadcrumbItem extends ShoelaceElement {
 
   private readonly hasSlotController = new HasSlotController(this, 'prefix', 'suffix');
 
+  @query('slot:not([name])') defaultSlot: HTMLSlotElement;
+
+  @state() private renderType: 'button' | 'link' | 'dropdown' = 'button';
+
   /**
    * Optional URL to direct the user to when the breadcrumb item is activated. When set, a link will be rendered
    * internally. When unset, a button will be rendered instead.
@@ -43,9 +48,34 @@ export default class SlBreadcrumbItem extends ShoelaceElement {
   /** The `rel` attribute to use on the link. Only used when `href` is set. */
   @property() rel = 'noreferrer noopener';
 
-  render() {
-    const isLink = this.href ? true : false;
+  private setRenderType() {
+    const hasDropdown =
+      this.defaultSlot.assignedElements({ flatten: true }).filter(i => i.tagName.toLowerCase() === 'sl-dropdown')
+        .length > 0;
 
+    if (this.href) {
+      this.renderType = 'link';
+      return;
+    }
+
+    if (hasDropdown) {
+      this.renderType = 'dropdown';
+      return;
+    }
+
+    this.renderType = 'button';
+  }
+
+  @watch('href', { waitUntilFirstUpdate: true })
+  hrefChanged() {
+    this.setRenderType();
+  }
+
+  handleSlotChange() {
+    this.setRenderType();
+  }
+
+  render() {
     return html`
       <div
         part="base"
@@ -59,7 +89,7 @@ export default class SlBreadcrumbItem extends ShoelaceElement {
           <slot name="prefix"></slot>
         </span>
 
-        ${isLink
+        ${this.renderType === 'link'
           ? html`
               <a
                 part="label"
@@ -68,14 +98,24 @@ export default class SlBreadcrumbItem extends ShoelaceElement {
                 target="${ifDefined(this.target ? this.target : undefined)}"
                 rel=${ifDefined(this.target ? this.rel : undefined)}
               >
-                <slot></slot>
+                <slot @slotchange=${this.handleSlotChange}></slot>
               </a>
             `
-          : html`
+          : ''}
+        ${this.renderType === 'button'
+          ? html`
               <button part="label" type="button" class="breadcrumb-item__label breadcrumb-item__label--button">
-                <slot></slot>
+                <slot @slotchange=${this.handleSlotChange}></slot>
               </button>
-            `}
+            `
+          : ''}
+        ${this.renderType === 'dropdown'
+          ? html`
+              <div part="label" class="breadcrumb-item__label breadcrumb-item__label--drop-down">
+                <slot @slotchange=${this.handleSlotChange}></slot>
+              </div>
+            `
+          : ''}
 
         <span part="suffix" class="breadcrumb-item__suffix">
           <slot name="suffix"></slot>
