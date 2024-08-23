@@ -16,6 +16,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 - Added support for using `<sl-dropdown>` in `<sl-breadcrumb-item>` default slot [#2015]
 - Fixed a bug that caused errors to show in the console when components disconnect before before `firstUpdated()` executes [#2127]
+- Fixed a bug in `<sl-select>` that made the suffix slot collide with the clear button [#2145]
 
 ## 2.16.0
 
