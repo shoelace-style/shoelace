@@ -260,7 +260,7 @@ export default css`
     border-radius: var(--sl-input-height-large);
   }
 
-  /* Prefix */
+  /* Prefix and Suffix */
   .select__prefix,
   .select__suffix {
     flex: 0;
