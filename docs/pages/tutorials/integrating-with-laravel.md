@@ -9,7 +9,7 @@ meta:
 This page explains how to integrate Shoelace with a [Laravel 9](https://laravel.com) app using Vite. For additional details refer to the [Bundling Assets (Vite)](https://laravel.com/docs/9.x/vite) section in the official Laravel docs.
 
 :::tip
-This is a community-maintained document. Please [ask the community](/resources/community) if you have questions about this integration. You can also [suggest improvements](https://github.com/shoelace-style/shoelace/blob/next/docs/tutorials/integrating-with-laravel.md) to make it better.
+This is a community-maintained document. Please [ask the community](/resources/community) if you have questions about this integration. You can also [suggest improvements](https://github.com/shoelace-style/shoelace/blob/next/docs/pages/tutorials/integrating-with-laravel.md) to make it better.
 :::
 
 ## Requirements
