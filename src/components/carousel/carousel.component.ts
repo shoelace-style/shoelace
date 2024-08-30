@@ -456,12 +456,14 @@ export default class SlCarousel extends ShoelaceElement {
     }
 
     // Sets the next index without taking into account clones, if any.
-    const newActiveSlide = loop ? (index + slides.length) % slides.length : clamp(index, 0, slides.length - 1);
+    const newActiveSlide = loop
+      ? (index + slides.length) % slides.length
+      : clamp(index, 0, slides.length - slidesPerPage);
     this.activeSlide = newActiveSlide;
 
     // Get the index of the next slide. For looping carousel it adds `slidesPerPage`
     // to normalize the starting index in order to ignore the first nth clones.
-    const nextSlideIndex = clamp(index + (loop ? slidesPerPage : 0), 0, slidesWithClones.length - 1);
+    const nextSlideIndex = clamp(index + (loop ? slidesPerPage : 0), 0, slidesWithClones.length - slidesPerPage);
     const nextSlide = slidesWithClones[nextSlideIndex];
 
     this.scrollToSlide(nextSlide, prefersReducedMotion() ? 'auto' : behavior);
