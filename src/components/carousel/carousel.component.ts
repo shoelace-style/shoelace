@@ -461,9 +461,17 @@ export default class SlCarousel extends ShoelaceElement {
       : clamp(index, 0, slides.length - slidesPerPage);
     this.activeSlide = newActiveSlide;
 
+    const isRtl = this.matches(':dir(rtl)');
+
     // Get the index of the next slide. For looping carousel it adds `slidesPerPage`
     // to normalize the starting index in order to ignore the first nth clones.
-    const nextSlideIndex = clamp(index + (loop ? slidesPerPage : 0), 0, slidesWithClones.length - slidesPerPage);
+    // For RTL it needs to scroll to the last slide of the page.
+    const nextSlideIndex = clamp(
+      index + (loop ? slidesPerPage : 0) + (isRtl ? slidesPerPage - 1 : 0),
+      0,
+      slidesWithClones.length - 1
+    );
+
     const nextSlide = slidesWithClones[nextSlideIndex];
 
     this.scrollToSlide(nextSlide, prefersReducedMotion() ? 'auto' : behavior);
