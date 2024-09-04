@@ -256,7 +256,7 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
 
   render() {
     const isLink = this.isLink();
-    const tag = isLink ? literal`a` : literal`button`;
+    const tag = (isLink && !this.disabled) ? literal`a` : literal`button`;
 
     /* eslint-disable lit/no-invalid-html */
     /* eslint-disable lit/binding-positions */
