@@ -116,7 +116,7 @@
     "globby": "^13.2.2",
     "husky": "^8.0.3",
     "jsdom": "^22.1.0",
-    "jsonata": "^2.0.3",
+    "jsonata": "^2.0.4",
     "lint-staged": "^14.0.1",
     "lunr": "^2.3.9",
     "markdown-it-container": "^3.0.0",
