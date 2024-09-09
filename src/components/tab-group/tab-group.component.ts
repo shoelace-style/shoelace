@@ -7,10 +7,10 @@ import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import SlIconButton from '../icon-button/icon-button.component.js';
+import SlResizeObserver from '../resize-observer/resize-observer.component.js';
 import styles from './tab-group.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type SlTab from '../tab/tab.js';
-import SlResizeObserver from '../resize-observer/resize-observer.component.js';
 import type SlTabPanel from '../tab-panel/tab-panel.js';
 
 /**
