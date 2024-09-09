@@ -436,12 +436,12 @@ export default class SlTabGroup extends ShoelaceElement {
             : ''}
 
           <div class="tab-group__nav">
-              <div part="tabs" class="tab-group__tabs" role="tablist">
-                <div part="active-tab-indicator" class="tab-group__indicator"></div>
-                <sl-resize-observer @sl-resize=${this.syncIndicator}>
-                  <slot name="nav" @slotchange=${this.syncTabsAndPanels}></slot>
-                </sl-resize-observer>
-              </div>
+            <div part="tabs" class="tab-group__tabs" role="tablist">
+              <div part="active-tab-indicator" class="tab-group__indicator"></div>
+              <sl-resize-observer @sl-resize=${this.syncIndicator}>
+                <slot name="nav" @slotchange=${this.syncTabsAndPanels}></slot>
+              </sl-resize-observer>
+            </div>
           </div>
 
           ${this.hasScrollControls
