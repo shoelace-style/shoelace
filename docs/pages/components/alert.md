@@ -247,6 +247,69 @@ const App = () => {
 };
 ```
 
+### Countdown
+
+Set the `countdown` attribute to display a loading bar that indicates the alert remaining time. This is useful for alerts with relatively long duration.
+
+```html:preview
+<div class="alert-countdown">
+  <sl-button variant="primary">Show Alert</sl-button>
+
+  <sl-alert variant="primary" duration="10000" countdown="rtl" closable>
+    <sl-icon slot="icon" name="info-circle"></sl-icon>
+    You're not stuck, the alert will close after a pretty long duration.
+  </sl-alert>
+</div>
+
+<script>
+  const container = document.querySelector('.alert-countdown');
+  const button = container.querySelector('sl-button');
+  const alert = container.querySelector('sl-alert');
+
+  button.addEventListener('click', () => alert.show());
+</script>
+
+<style>
+  .alert-countdown sl-alert {
+    margin-top: var(--sl-spacing-medium);
+  }
+</style>
+```
+
+```jsx:react
+import { useState } from 'react';
+import SlAlert from '@shoelace-style/shoelace/dist/react/alert';
+import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
+
+const css = `
+  .alert-countdown sl-alert {
+    margin-top: var(--sl-spacing-medium);
+  }
+`;
+
+const App = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <div className="alert-countdown">
+        <SlButton variant="primary" onClick={() => setOpen(true)}>
+          Show Alert
+        </SlButton>
+
+        <SlAlert variant="primary" duration="3000" countdown="rtl" open={open} closable onSlAfterHide={() => setOpen(false)}>
+          <SlIcon slot="icon" name="info-circle" />
+          You're not stuck, the alert will close after a pretty long duration.
+        </SlAlert>
+      </div>
+
+      <style>{css}</style>
+    </>
+  );
+};
+```
+
 ### Toast Notifications
 
 To display an alert as a toast notification, or "toast", create the alert and call its `toast()` method. This will move the alert out of its position in the DOM and into [the toast stack](#the-toast-stack) where it will be shown. Once dismissed, it will be removed from the DOM completely. To reuse a toast, store a reference to it and call `toast()` again later on.
