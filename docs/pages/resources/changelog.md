@@ -18,6 +18,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Added the `countdown` attribute to `<sl-alert>` to show a visual indicator before the toast disappears [#1899]
 - Fixed a bug that caused errors to show in the console when components disconnect before before `firstUpdated()` executes [#2127]
 - Fixed a bug that made pagination work incorrectly in `<sl-carousel>` [#2155]
+- Fixed a bug in `<sl-tab-group>` that caused the active tab indicator to be the wrong size when the tab's content changes [#2164]
 
 ## 2.16.0
 
