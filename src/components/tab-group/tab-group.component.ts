@@ -7,6 +7,7 @@ import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import SlIconButton from '../icon-button/icon-button.component.js';
+import SlResizeObserver from '../resize-observer/resize-observer.component.js';
 import styles from './tab-group.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type SlTab from '../tab/tab.js';
@@ -42,7 +43,7 @@ import type SlTabPanel from '../tab-panel/tab-panel.js';
  */
 export default class SlTabGroup extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];
-  static dependencies = { 'sl-icon-button': SlIconButton };
+  static dependencies = { 'sl-icon-button': SlIconButton, 'sl-resize-observer': SlResizeObserver };
 
   private readonly localize = new LocalizeController(this);
 
@@ -437,7 +438,9 @@ export default class SlTabGroup extends ShoelaceElement {
           <div class="tab-group__nav">
             <div part="tabs" class="tab-group__tabs" role="tablist">
               <div part="active-tab-indicator" class="tab-group__indicator"></div>
-              <slot name="nav" @slotchange=${this.syncTabsAndPanels}></slot>
+              <sl-resize-observer @sl-resize=${this.syncIndicator}>
+                <slot name="nav" @slotchange=${this.syncTabsAndPanels}></slot>
+              </sl-resize-observer>
             </div>
           </div>
 
