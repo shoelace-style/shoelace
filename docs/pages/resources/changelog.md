@@ -14,6 +14,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- Scroll buttons for `<sl-tab-group>` auto hide when they are not clickable. The `fixed-scroll-controls` attribute can be included to prevent this behavior. [#2128]
 - Added support for using `<sl-dropdown>` in `<sl-breadcrumb-item>` default slot [#2015]
 - Added the `countdown` attribute to `<sl-alert>` to show a visual indicator before the toast disappears [#1899]
 - Fixed a bug that caused errors to show in the console when components disconnect before before `firstUpdated()` executes [#2127]
