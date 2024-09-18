@@ -176,10 +176,6 @@ export default css`
     margin-inline-end: var(--sl-input-spacing-small);
   }
 
-  .select--small .select__suffix::slotted(*) {
-    margin-inline-start: var(--sl-input-spacing-small);
-  }
-
   .select--small.select--multiple:not(.select--placeholder-visible) .select__combobox {
     padding-block: 2px;
     padding-inline-start: 0;
@@ -205,10 +201,6 @@ export default css`
     margin-inline-end: var(--sl-input-spacing-medium);
   }
 
-  .select--medium .select__suffix::slotted(*) {
-    margin-inline-start: var(--sl-input-spacing-medium);
-  }
-
   .select--medium.select--multiple:not(.select--placeholder-visible) .select__combobox {
     padding-inline-start: 0;
     padding-block: 3px;
@@ -232,10 +224,6 @@ export default css`
 
   .select--large .select__prefix::slotted(*) {
     margin-inline-end: var(--sl-input-spacing-large);
-  }
-
-  .select--large .select__suffix::slotted(*) {
-    margin-inline-start: var(--sl-input-spacing-large);
   }
 
   .select--large.select--multiple:not(.select--placeholder-visible) .select__combobox {
@@ -267,6 +255,10 @@ export default css`
     display: inline-flex;
     align-items: center;
     color: var(--sl-input-placeholder-color);
+  }
+
+  .select__suffix::slotted(*) {
+    margin-inline-start: var(--sl-spacing-small);
   }
 
   /* Clear button */
