@@ -15,6 +15,63 @@ describe('<sl-button>', () => {
       });
     });
   });
+  describe('when an attribute is removed', () => {
+    it("should return to 'default' when attribute removed with no initial attribute", async () => {
+      const el = await fixture<SlButton>(html`<sl-button>Button label</sl-button>`);
+
+      expect(el.variant).to.equal('default');
+      expect(el.getAttribute('variant')).to.equal('default');
+
+      el.removeAttribute('variant');
+      await el.updateComplete;
+
+      expect(el.variant).to.equal('default');
+      expect(el.getAttribute('variant')).to.equal('default');
+    });
+
+    it("should return to 'default' when attribute removed with an initial attribute", async () => {
+      const el = await fixture<SlButton>(html`<sl-button variant="primary">Button label</sl-button>`);
+
+      expect(el.variant).to.equal('primary');
+      expect(el.getAttribute('variant')).to.equal('primary');
+
+      el.removeAttribute('variant');
+      await el.updateComplete;
+
+      expect(el.variant).to.equal('default');
+      expect(el.getAttribute('variant')).to.equal('default');
+    });
+  });
+
+  describe('when a property is set to null', () => {
+    it("should return to 'default' when property set to null with no initial attribute", async () => {
+      const el = await fixture<SlButton>(html`<sl-button>Button label</sl-button>`);
+
+      expect(el.variant).to.equal('default');
+      expect(el.getAttribute('variant')).to.equal('default');
+
+      // @ts-expect-error Its a test. Stop.
+      el.variant = null;
+      await el.updateComplete;
+
+      expect(el.variant).to.equal('default');
+      expect(el.getAttribute('variant')).to.equal('default');
+    });
+
+    it("should return to 'default' when property set to null with an initial attribute", async () => {
+      const el = await fixture<SlButton>(html`<sl-button variant="primary">Button label</sl-button>`);
+
+      expect(el.variant).to.equal('primary');
+      expect(el.getAttribute('variant')).to.equal('primary');
+
+      // @ts-expect-error Its a test. Stop.
+      el.variant = null;
+      await el.updateComplete;
+
+      expect(el.variant).to.equal('default');
+      expect(el.getAttribute('variant')).to.equal('default');
+    });
+  });
 
   describe('when provided no parameters', () => {
     it('passes accessibility test', async () => {
