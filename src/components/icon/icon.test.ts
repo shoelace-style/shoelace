@@ -200,17 +200,17 @@ describe('<sl-icon>', () => {
         </div>
       `);
 
-      const icons = [...el.querySelectorAll<SlIcon>("sl-icon")]
+      const icons = [...el.querySelectorAll<SlIcon>('sl-icon')];
 
-      await Promise.allSettled(icons.map((el) => elementUpdated(el)));
+      await Promise.allSettled(icons.map(el => elementUpdated(el)));
 
       // This is kind of hacky...but with no way to check "load", we just use a timeout
       await aTimeout(1000);
-      const icon1 = icons[0]
-      const icon2 = icons[1]
+      const icon1 = icons[0];
+      const icon2 = icons[1];
 
-      expect(icon1.shadowRoot?.querySelector("svg")?.getAttribute("fill")).to.equal("pink")
-      expect(icon2.shadowRoot?.querySelector("svg")?.getAttribute("fill")).to.equal("pink")
+      expect(icon1.shadowRoot?.querySelector('svg')?.getAttribute('fill')).to.equal('pink');
+      expect(icon2.shadowRoot?.querySelector('svg')?.getAttribute('fill')).to.equal('pink');
     });
 
     it('Should render nothing if the sprite hash is wrong', async () => {
