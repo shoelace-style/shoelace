@@ -89,7 +89,6 @@ describe('<sl-button-group>', () => {
 
       allButtons[0].dispatchEvent(new MouseEvent('mouseout', { bubbles: true }));
       await elementUpdated(allButtons[0]);
-      console.log(allButtons[0]);
       expect(allButtons[0]).to.not.have.attribute('data-sl-button-group__button--hover');
     });
   });
