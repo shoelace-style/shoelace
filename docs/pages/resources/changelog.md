@@ -12,7 +12,7 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
-## Next
+## 2.17.0
 
 - Added the `fixed-scroll-controls` attribute to `<sl-tab-group>` [#2128]
 - Added support for using `<sl-dropdown>` in `<sl-breadcrumb-item>` default slot [#2015]
