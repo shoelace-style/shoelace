@@ -395,13 +395,14 @@ const App = () => (
 );
 ```
 
-### Prefix Icons
+### Prefix & Suffix
 
-Use the `prefix` slot to prepend an icon to the control.
+Use the `prefix` and `suffix` slots to add presentational icons and text. Avoid slotting in interactive elements, such as buttons, links, etc.
 
 ```html:preview
 <sl-select placeholder="Small" size="small" clearable>
   <sl-icon name="house" slot="prefix"></sl-icon>
+  <sl-badge slot="suffix">New</sl-badge>
   <sl-option value="option-1">Option 1</sl-option>
   <sl-option value="option-2">Option 2</sl-option>
   <sl-option value="option-3">Option 3</sl-option>
@@ -409,6 +410,7 @@ Use the `prefix` slot to prepend an icon to the control.
 <br />
 <sl-select placeholder="Medium" size="medium" clearable>
   <sl-icon name="house" slot="prefix"></sl-icon>
+  <sl-badge slot="suffix">New</sl-badge>
   <sl-option value="option-1">Option 1</sl-option>
   <sl-option value="option-2">Option 2</sl-option>
   <sl-option value="option-3">Option 3</sl-option>
@@ -416,33 +418,7 @@ Use the `prefix` slot to prepend an icon to the control.
 <br />
 <sl-select placeholder="Large" size="large" clearable>
   <sl-icon name="house" slot="prefix"></sl-icon>
-  <sl-option value="option-1">Option 1</sl-option>
-  <sl-option value="option-2">Option 2</sl-option>
-  <sl-option value="option-3">Option 3</sl-option>
-</sl-select>
-```
-
-### Suffix Icons
-
-Use the `suffix` slot to append an icon to the control.
-
-```html:preview
-<sl-select placeholder="Small" size="small" clearable>
-  <sl-icon name="house" slot="suffix"></sl-icon>
-  <sl-option value="option-1">Option 1</sl-option>
-  <sl-option value="option-2">Option 2</sl-option>
-  <sl-option value="option-3">Option 3</sl-option>
-</sl-select>
-<br />
-<sl-select placeholder="Medium" size="medium" clearable>
-  <sl-icon name="house" slot="suffix"></sl-icon>
-  <sl-option value="option-1">Option 1</sl-option>
-  <sl-option value="option-2">Option 2</sl-option>
-  <sl-option value="option-3">Option 3</sl-option>
-</sl-select>
-<br />
-<sl-select placeholder="Large" size="large" clearable>
-  <sl-icon name="house" slot="suffix"></sl-icon>
+  <sl-badge slot="suffix">New</sl-badge>
   <sl-option value="option-1">Option 1</sl-option>
   <sl-option value="option-2">Option 2</sl-option>
   <sl-option value="option-3">Option 3</sl-option>

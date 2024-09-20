@@ -132,7 +132,7 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.resizeObserver.unobserve(this.input);
+    this.resizeObserver?.unobserve(this.input);
   }
 
   private handleChange() {

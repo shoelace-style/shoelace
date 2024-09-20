@@ -103,6 +103,30 @@ describe('<sl-breadcrumb-item>', () => {
     });
   });
 
+  describe('when rendering a sl-dropdown in the default slot', () => {
+    it('should not render a link or button tag, but a div wrapper', async () => {
+      el = await fixture<SlBreadcrumbItem>(html`
+        <sl-breadcrumb-item>
+          <sl-dropdown>
+            <sl-button slot="trigger" size="small" circle>
+              <sl-icon label="More options" name="three-dots"></sl-icon>
+            </sl-button>
+            <sl-menu>
+              <sl-menu-item type="checkbox" checked>Web Design</sl-menu-item>
+              <sl-menu-item type="checkbox">Web Development</sl-menu-item>
+              <sl-menu-item type="checkbox">Marketing</sl-menu-item>
+            </sl-menu>
+          </sl-dropdown>
+        </sl-breadcrumb-item>
+      `);
+
+      await expect(el).to.be.accessible();
+      expect(el.shadowRoot!.querySelector('a')).to.be.null;
+      expect(el.shadowRoot!.querySelector('button')).to.be.null;
+      expect(el.shadowRoot!.querySelector('div.breadcrumb-item__label--drop-down')).not.to.be.null;
+    });
+  });
+
   describe('when provided an element in the slot "prefix" to support prefix icons', () => {
     before(async () => {
       el = await fixture<SlBreadcrumbItem>(html`

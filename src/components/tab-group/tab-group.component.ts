@@ -1,12 +1,14 @@
+import '../../internal/scrollend-polyfill.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { eventOptions, property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
-import { property, query, state } from 'lit/decorators.js';
 import { scrollIntoView } from '../../internal/scroll.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
 import SlIconButton from '../icon-button/icon-button.component.js';
+import SlResizeObserver from '../resize-observer/resize-observer.component.js';
 import styles from './tab-group.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type SlTab from '../tab/tab.js';
@@ -42,7 +44,7 @@ import type SlTabPanel from '../tab-panel/tab-panel.js';
  */
 export default class SlTabGroup extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];
-  static dependencies = { 'sl-icon-button': SlIconButton };
+  static dependencies = { 'sl-icon-button': SlIconButton, 'sl-resize-observer': SlResizeObserver };
 
   private readonly localize = new LocalizeController(this);
 
@@ -60,6 +62,9 @@ export default class SlTabGroup extends ShoelaceElement {
 
   @state() private hasScrollControls = false;
 
+  @state() private shouldHideScrollStartButton = false;
+  @state() private shouldHideScrollEndButton = false;
+
   /** The placement of the tabs. */
   @property() placement: 'top' | 'bottom' | 'start' | 'end' = 'top';
 
@@ -71,6 +76,9 @@ export default class SlTabGroup extends ShoelaceElement {
 
   /** Disables the scroll arrows that appear when tabs overflow. */
   @property({ attribute: 'no-scroll-controls', type: Boolean }) noScrollControls = false;
+
+  /** Prevent scroll buttons from being hidden when inactive. */
+  @property({ attribute: 'fixed-scroll-controls', type: Boolean }) fixedScrollControls = false;
 
   connectedCallback() {
     const whenAllDefined = Promise.all([
@@ -120,8 +128,8 @@ export default class SlTabGroup extends ShoelaceElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.mutationObserver.disconnect();
-    this.resizeObserver.unobserve(this.nav);
+    this.mutationObserver?.disconnect();
+    this.resizeObserver?.unobserve(this.nav);
   }
 
   private getAllTabs() {
@@ -365,6 +373,28 @@ export default class SlTabGroup extends ShoelaceElement {
     return nextTab;
   }
 
+  /**
+   * The reality of the browser means that we can't expect the scroll position to be exactly what we want it to be, so
+   * we add one pixel of wiggle room to our calculations.
+   */
+  private scrollOffset = 1;
+
+  @eventOptions({ passive: true })
+  private updateScrollButtons() {
+    if (this.hasScrollControls && !this.fixedScrollControls) {
+      this.shouldHideScrollStartButton = this.scrollFromStart() <= this.scrollOffset;
+      this.shouldHideScrollEndButton = this.isScrolledToEnd();
+    }
+  }
+
+  private isScrolledToEnd() {
+    return this.scrollFromStart() + this.nav.clientWidth >= this.nav.scrollWidth - this.scrollOffset;
+  }
+
+  private scrollFromStart() {
+    return this.localize.dir() === 'rtl' ? -this.nav.scrollLeft : this.nav.scrollLeft;
+  }
+
   @watch('noScrollControls', { waitUntilFirstUpdate: true })
   updateScrollControls() {
     if (this.noScrollControls) {
@@ -378,6 +408,8 @@ export default class SlTabGroup extends ShoelaceElement {
       this.hasScrollControls =
         ['top', 'bottom'].includes(this.placement) && this.nav.scrollWidth > this.nav.clientWidth + 1;
     }
+
+    this.updateScrollButtons();
   }
 
   @watch('placement', { waitUntilFirstUpdate: true })
@@ -425,19 +457,27 @@ export default class SlTabGroup extends ShoelaceElement {
                 <sl-icon-button
                   part="scroll-button scroll-button--start"
                   exportparts="base:scroll-button__base"
-                  class="tab-group__scroll-button tab-group__scroll-button--start"
+                  class=${classMap({
+                    'tab-group__scroll-button': true,
+                    'tab-group__scroll-button--start': true,
+                    'tab-group__scroll-button--start--hidden': this.shouldHideScrollStartButton
+                  })}
                   name=${isRtl ? 'chevron-right' : 'chevron-left'}
                   library="system"
+                  tabindex="-1"
+                  aria-hidden="true"
                   label=${this.localize.term('scrollToStart')}
                   @click=${this.handleScrollToStart}
                 ></sl-icon-button>
               `
             : ''}
 
-          <div class="tab-group__nav">
+          <div class="tab-group__nav" @scrollend=${this.updateScrollButtons}>
             <div part="tabs" class="tab-group__tabs" role="tablist">
               <div part="active-tab-indicator" class="tab-group__indicator"></div>
-              <slot name="nav" @slotchange=${this.syncTabsAndPanels}></slot>
+              <sl-resize-observer @sl-resize=${this.syncIndicator}>
+                <slot name="nav" @slotchange=${this.syncTabsAndPanels}></slot>
+              </sl-resize-observer>
             </div>
           </div>
 
@@ -446,9 +486,15 @@ export default class SlTabGroup extends ShoelaceElement {
                 <sl-icon-button
                   part="scroll-button scroll-button--end"
                   exportparts="base:scroll-button__base"
-                  class="tab-group__scroll-button tab-group__scroll-button--end"
+                  class=${classMap({
+                    'tab-group__scroll-button': true,
+                    'tab-group__scroll-button--end': true,
+                    'tab-group__scroll-button--end--hidden': this.shouldHideScrollEndButton
+                  })}
                   name=${isRtl ? 'chevron-left' : 'chevron-right'}
                   library="system"
+                  tabindex="-1"
+                  aria-hidden="true"
                   label=${this.localize.term('scrollToEnd')}
                   @click=${this.handleScrollToEnd}
                 ></sl-icon-button>

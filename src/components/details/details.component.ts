@@ -89,7 +89,7 @@ export default class SlDetails extends ShoelaceElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.detailsObserver.disconnect();
+    this.detailsObserver?.disconnect();
   }
 
   private handleSummaryClick(event: MouseEvent) {
