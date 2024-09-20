@@ -14,7 +14,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
-- Fixed a bug in `<sl-icon>` not applying the mutator when loading multiple icons of the same name from a spritesheet. [#]
+- Fixed a bug in `<sl-icon>` not applying the mutator when loading multiple icons of the same name from a spritesheet. [#2178]
 
 ## 2.17.0
 
