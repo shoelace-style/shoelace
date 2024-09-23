@@ -377,7 +377,6 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
             <div
               part="textarea-adjuster"
               class="textarea__size-adjuster"
-              aria-hidden="true"
               ?hidden=${this.resize !== 'auto'}
             ></div>
           </div>
