@@ -260,20 +260,17 @@ export default css`
     border-radius: var(--sl-input-height-large);
   }
 
-  /* Prefix */
-  .select__prefix {
+  /* Prefix and Suffix */
+  .select__prefix,
+  .select__suffix {
     flex: 0;
     display: inline-flex;
     align-items: center;
     color: var(--sl-input-placeholder-color);
   }
 
-  /* Suffix */
-  .select__suffix {
-    flex: 0;
-    display: inline-flex;
-    align-items: center;
-    color: var(--sl-input-placeholder-color);
+  .select__suffix::slotted(*) {
+    margin-inline-start: var(--sl-spacing-small);
   }
 
   /* Clear button */
