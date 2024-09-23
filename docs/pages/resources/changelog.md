@@ -12,6 +12,12 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## 2.17.1
+
+- Fixed a bug in `<sl-icon>` not applying the mutator when loading multiple icons of the same name from a spritesheet. [#2178]
+- Fixed a bug in `<sl-select>` that made the suffix slot collide with the clear button [#2145]
+- Improved performance of `<sl-popup>` by waiting for the active state before spinning up the positioning library [#2179]
+
 ## 2.17.0
 
 - Added the `fixed-scroll-controls` attribute to `<sl-tab-group>` [#2128]
