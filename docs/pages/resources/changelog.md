@@ -16,7 +16,6 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 - Fixed a bug in `<sl-select>` that made the suffix slot collide with the clear button [#2145]
 
-
 ## 2.17.0
 
 - Added the `fixed-scroll-controls` attribute to `<sl-tab-group>` [#2128]
