@@ -16,6 +16,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 - Fixed a bug in `<sl-icon>` not applying the mutator when loading multiple icons of the same name from a spritesheet. [#2178]
 - Fixed a bug in `<sl-select>` that made the suffix slot collide with the clear button [#2145]
+- Improved performance of `<sl-popup>` by waiting for the active state before spinning up the positioning library [#2179]
 
 ## 2.17.0
 
