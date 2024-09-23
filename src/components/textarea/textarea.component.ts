@@ -374,11 +374,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
               @blur=${this.handleBlur}
             ></textarea>
             <!-- This "adjuster" exists to prevent layout shifting. https://github.com/shoelace-style/shoelace/issues/2180 -->
-            <div
-              part="textarea-adjuster"
-              class="textarea__size-adjuster"
-              ?hidden=${this.resize !== 'auto'}
-            ></div>
+            <div part="textarea-adjuster" class="textarea__size-adjuster" ?hidden=${this.resize !== 'auto'}></div>
           </div>
         </div>
 
