@@ -15,6 +15,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 ## Next
 
 - Improved performance of `<sl-popup>` by waiting for the active state before spinning up the positioning library [#2179]
+- Fixed a bug in `<sl-select>` that made the suffix slot collide with the clear button [#2145]
 
 ## 2.17.0
 
