@@ -14,12 +14,20 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- Fixed a bug in `<sl-select>` that made the suffix slot collide with the clear button [#2145]
+
+
+## 2.17.0
+
+- Added the `fixed-scroll-controls` attribute to `<sl-tab-group>` [#2128]
 - Added support for using `<sl-dropdown>` in `<sl-breadcrumb-item>` default slot [#2015]
 - Added the `countdown` attribute to `<sl-alert>` to show a visual indicator before the toast disappears [#1899]
+- Fixed a bug with morphing and DOM diffing that would cause elements with reflected initial attributes to not reset. [#2177]
 - Fixed a bug that caused errors to show in the console when components disconnect before before `firstUpdated()` executes [#2127]
 - Fixed a bug that made pagination work incorrectly in `<sl-carousel>` [#2155]
 - Fixed a bug in `<sl-tab-group>` that caused the active tab indicator to be the wrong size when the tab's content changes [#2164]
-- Fixed a bug in `<sl-select>` that made the suffix slot collide with the clear button [#2145]
+- Fixed a bug in `<sl-select>` that caused the prefix icon to have incorrect spacing [#2167]
+- Fixed a bug in `<sl-button>` that prevented link buttons from being disabled [#2151]
 
 ## 2.16.0
 

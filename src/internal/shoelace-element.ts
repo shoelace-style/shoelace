@@ -146,6 +146,42 @@ export default class ShoelaceElement extends LitElement {
       (this.constructor as typeof ShoelaceElement).define(name, component);
     });
   }
+
+  #hasRecordedInitialProperties = false;
+
+  // Store the constructor value of all `static properties = {}`
+  initialReflectedProperties: Map<string, unknown> = new Map();
+
+  attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
+    if (!this.#hasRecordedInitialProperties) {
+      (this.constructor as typeof ShoelaceElement).elementProperties.forEach(
+        (obj, prop: keyof typeof this & string) => {
+          // eslint-disable-next-line
+          if (obj.reflect && this[prop] != null) {
+            this.initialReflectedProperties.set(prop, this[prop]);
+          }
+        }
+      );
+
+      this.#hasRecordedInitialProperties = true;
+    }
+
+    super.attributeChangedCallback(name, oldValue, newValue);
+  }
+
+  protected willUpdate(changedProperties: Parameters<LitElement['willUpdate']>[0]): void {
+    super.willUpdate(changedProperties);
+
+    // Run the morph fixing *after* willUpdate.
+    this.initialReflectedProperties.forEach((value, prop: string & keyof typeof this) => {
+      // If a prop changes to `null`, we assume this happens via an attribute changing to `null`.
+      // eslint-disable-next-line
+      if (changedProperties.has(prop) && this[prop] == null) {
+        // Silly type gymnastics to appease the compiler.
+        (this as Record<string, unknown>)[prop] = value;
+      }
+    });
+  }
 }
 
 export interface ShoelaceFormControl extends ShoelaceElement {
