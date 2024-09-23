@@ -46,6 +46,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
   private resizeObserver: ResizeObserver;
 
   @query('.textarea__control') input: HTMLTextAreaElement;
+  @query('.textarea__size-adjuster') sizeAdjuster: HTMLTextAreaElement;
 
   @state() private hasFocus = false;
   @property() title = ''; // make reactive to pass through
@@ -196,6 +197,8 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
 
   private setTextareaHeight() {
     if (this.resize === 'auto') {
+      // This prevents layout shifts. We use `clientHeight` instead of `scrollHeight` to account for if the `<textarea>` has a max-height set on it. In my tests, this has worked fine. Im not aware of any edge cases. [Konnor]
+      this.sizeAdjuster.style.height = `${this.input.clientHeight}px`
       this.input.style.height = 'auto';
       this.input.style.height = `${this.input.scrollHeight}px`;
     } else {
@@ -370,6 +373,13 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
               @focus=${this.handleFocus}
               @blur=${this.handleBlur}
             ></textarea>
+            <!-- This "adjuster" exists to prevent layout shifting. https://github.com/shoelace-style/shoelace/issues/2180 -->
+            <div
+              part="textarea-adjuster"
+              class="textarea__size-adjuster"
+              aria-hidden="true"
+              ?hidden=${this.resize !== "auto"}
+            ></div>
           </div>
         </div>
 
