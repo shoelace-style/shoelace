@@ -12,6 +12,10 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## Next
+
+- Improved performance of `<sl-popup>` by waiting for the active state before spinning up the positioning library [#2179]
+
 ## 2.17.0
 
 - Added the `fixed-scroll-controls` attribute to `<sl-tab-group>` [#2128]
