@@ -153,7 +153,7 @@ export default class SlCarousel extends ShoelaceElement {
   private handleKeyDown(event: KeyboardEvent) {
     if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
       const target = event.target as HTMLElement;
-      const isRtl = this.matches(':dir(rtl)');
+      const isRtl = this.localize.dir() === 'rtl';
       const isFocusInPagination = target.closest('[part~="pagination-item"]') !== null;
       const isNext =
         event.key === 'ArrowDown' || (!isRtl && event.key === 'ArrowRight') || (isRtl && event.key === 'ArrowLeft');
@@ -461,7 +461,7 @@ export default class SlCarousel extends ShoelaceElement {
       : clamp(index, 0, slides.length - slidesPerPage);
     this.activeSlide = newActiveSlide;
 
-    const isRtl = this.matches(':dir(rtl)');
+    const isRtl = this.localize.dir() === 'rtl';
 
     // Get the index of the next slide. For looping carousel it adds `slidesPerPage`
     // to normalize the starting index in order to ignore the first nth clones.

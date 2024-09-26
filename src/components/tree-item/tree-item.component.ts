@@ -223,7 +223,7 @@ export default class SlTreeItem extends ShoelaceElement {
   }
 
   render() {
-    const isRtl = this.matches(':dir(rtl)');
+    const isRtl = this.localize.dir() === 'rtl';
     const showExpandButton = !this.loading && (!this.isLeaf || this.lazy);
 
     return html`
