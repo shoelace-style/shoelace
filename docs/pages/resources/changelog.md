@@ -15,6 +15,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 ## Next
 
 - Fixed a bug in `<sl-relative-time>` where the title attribute would show with redundant info [#2184]
+- Fixed a bug in `<sl-select>` that caused multi-selects without placeholders to have the wrong padding [#2194]
 
 ## 2.17.1
 
