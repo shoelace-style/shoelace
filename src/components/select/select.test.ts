@@ -593,6 +593,128 @@ describe('<sl-select>', () => {
 
     expect(tag.hasAttribute('pill')).to.be.true;
   });
+  describe('With lazily loaded options', () => {
+    describe('With no existing options', () => {
+      it('Should wait to select the option when the option exists for single select', async () => {
+        const form = await fixture<HTMLFormElement>(
+          html`<form><sl-select name="select" value="option-1"></sl-select></form>`
+        );
+        const el = form.querySelector<SlSelect>('sl-select')!;
+
+        expect(el.value).to.equal('');
+        expect(new FormData(form).get('select')).equal('');
+
+        const option = document.createElement('sl-option');
+        option.value = 'option-1';
+        option.innerText = 'Option 1';
+        el.append(option);
+
+        await aTimeout(10);
+        await el.updateComplete;
+        expect(el.value).to.equal('option-1');
+        expect(new FormData(form).get('select')).equal('option-1');
+      });
+
+      it('Should wait to select the option when the option exists for multiple select', async () => {
+        const form = await fixture<HTMLFormElement>(
+          html`<form><sl-select name="select" value="option-1" multiple></sl-select></form>`
+        );
+
+        const el = form.querySelector<SlSelect>('sl-select')!;
+        expect(Array.isArray(el.value)).to.equal(true);
+        expect(el.value!.length).to.equal(0);
+
+        const option = document.createElement('sl-option');
+        option.value = 'option-1';
+        option.innerText = 'Option 1';
+        el.append(option);
+
+        await aTimeout(10);
+        await el.updateComplete;
+        expect(el.value!.length).to.equal(1);
+        expect(el.value).to.have.members(['option-1']);
+        expect(new FormData(form).getAll('select')).have.members(['option-1']);
+      });
+    });
+
+    describe('With existing options', () => {
+      it('Should not select the option if options already exist for single select', async () => {
+        const form = await fixture<HTMLFormElement>(
+          html` <form>
+            <sl-select name="select" value="foo">
+              <sl-option value="bar">Bar</sl-option>
+              <sl-option value="baz">Baz</sl-option>
+            </sl-select>
+          </form>`
+        );
+
+        const el = form.querySelector<SlSelect>('sl-select')!;
+        expect(el.value).to.equal('');
+        expect(new FormData(form).get('select')).to.equal('');
+
+        const option = document.createElement('sl-option');
+        option.value = 'foo';
+        option.innerText = 'Foo';
+        el.append(option);
+
+        await aTimeout(10);
+        await el.updateComplete;
+        expect(el.value).to.equal('foo');
+        expect(new FormData(form).get('select')).to.equal('foo');
+      });
+
+      it('Should not select the option if options already exists for multiple select', async () => {
+        const form = await fixture<HTMLFormElement>(
+          html` <form>
+            <sl-select name="select" value="foo" multiple>
+              <sl-option value="bar">Bar</sl-option>
+              <sl-option value="baz">Baz</sl-option>
+            </sl-select>
+          </form>`
+        );
+
+        const el = form.querySelector<SlSelect>('sl-select')!;
+        expect(el.value).to.be.an('array');
+        expect(el.value!.length).to.equal(0);
+
+        const option = document.createElement('sl-option');
+        option.value = 'foo';
+        option.innerText = 'Foo';
+        el.append(option);
+
+        await aTimeout(10);
+        await el.updateComplete;
+        expect(el.value).to.have.members(['foo']);
+        expect(new FormData(form).getAll('select')).to.have.members(['foo']);
+      });
+
+      it('Should only select the existing options if options already exists for multiple select', async () => {
+        const form = await fixture<HTMLFormElement>(
+          html` <form>
+            <sl-select name="select" value="foo bar baz" multiple>
+              <sl-option value="bar">Bar</sl-option>
+              <sl-option value="baz">Baz</sl-option>
+            </sl-select>
+          </form>`
+        );
+
+        const el = form.querySelector<SlSelect>('sl-select')!;
+        expect(el.value).to.have.members(['bar', 'baz']);
+        expect(el.value.length).to.equal(2);
+        expect(new FormData(form).getAll('select')).to.have.members(['bar', 'baz']);
+
+        const option = document.createElement('sl-option');
+        option.value = 'foo';
+        option.innerText = 'Foo';
+        el.append(option);
+
+        await aTimeout(10);
+        await el.updateComplete;
+        expect(el.value).to.have.members(['foo', 'bar', 'baz']);
+        expect(new FormData(form).getAll('select')).to.have.members(['foo', 'bar', 'baz']);
+      });
+    });
+  });
 
   runFormControlBaseTests('sl-select');
 });
