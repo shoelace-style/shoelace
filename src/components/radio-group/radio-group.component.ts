@@ -191,21 +191,8 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     event.preventDefault();
   }
 
-  private handleFocus(options?: FocusOptions) {
-    const radios = this.getAllRadios();
-    const checked = radios.find(radio => radio.checked);
-    const firstEnabledRadio = radios.find(radio => !radio.disabled);
-    const radioToFocus = checked || firstEnabledRadio;
-
-    // Call focus for the checked radio
-    // If no radio is checked, focus the first one that is not disabled
-    if (radioToFocus) {
-      radioToFocus.focus(options);
-    }
-  }
-
   private handleLabelClick() {
-    this.handleFocus();
+    this.focus();
   }
 
   private handleInvalid(event: Event) {
@@ -332,8 +319,17 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
   }
 
   /** Sets focus on the radio-group. */
-  focus(options?: FocusOptions) {
-    this.handleFocus(options);
+  public focus(options?: FocusOptions) {
+    const radios = this.getAllRadios();
+    const checked = radios.find(radio => radio.checked);
+    const firstEnabledRadio = radios.find(radio => !radio.disabled);
+    const radioToFocus = checked || firstEnabledRadio;
+
+    // Call focus for the checked radio
+    // If no radio is checked, focus the first one that is not disabled
+    if (radioToFocus) {
+      radioToFocus.focus(options);
+    }
   }
 
   render() {
