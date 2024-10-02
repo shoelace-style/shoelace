@@ -512,7 +512,7 @@ Here are the following conditions:
 
 EX: `<wa-select value="foo">` will have a value of `""` until `<wa-option value="foo">Foo</wa-option>` connects, at which point its value will become `"foo"` when submitting.
 
-- If a `<wa-select multiple>` with an initial value has multiple values, but only some of the options are present, it will only respect the options that are present, and if a selected option is loaded in later, *AND* the value of the select has not changed via user interaction or direct property assignment, it will add the selected option to the form value and to the `.value` of the select.
+- If a `<wa-select multiple>` with an initial value has multiple values, but only some of the options are present, it will only respect the options that are present, and if a selected option is loaded in later, _AND_ the value of the select has not changed via user interaction or direct property assignment, it will add the selected option to the form value and to the `.value` of the select.
 
 This can be hard to conceptualize, so heres a fairly large example showing how lazy loaded options work with `<wa-select>` and `<wa-select multiple>` when given initial value attributes. Feel free to play around with it in a codepen.
 

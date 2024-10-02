@@ -96,11 +96,10 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   @state() displayLabel = '';
   @state() currentOption: SlOption;
   @state() selectedOptions: SlOption[] = [];
-  @state() private valueHasChanged: boolean = false
+  @state() private valueHasChanged: boolean = false;
 
   /** The name of the select, submitted as a name/value pair with form data. */
   @property() name = '';
-
 
   private _defaultValue: string | string[] = '';
 
@@ -240,8 +239,8 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     super.connectedCallback();
 
     setTimeout(() => {
-      this.handleDefaultSlotChange()
-    })
+      this.handleDefaultSlotChange();
+    });
 
     // Because this is a form control, it shouldn't be opened initially
     this.open = false;
@@ -337,7 +336,7 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
 
       // If it is open, update the value based on the current selection and close it
       if (this.currentOption && !this.currentOption.disabled) {
-        this.valueHasChanged = true
+        this.valueHasChanged = true;
         if (this.multiple) {
           this.toggleOptionSelection(this.currentOption);
         } else {
@@ -632,7 +631,8 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     } else {
       const selectedOption = this.selectedOptions[0];
       this.value = selectedOption?.value ?? '';
-      this.displayLabel = selectedOption?.getTextLabel?.() ?? '';}
+      this.displayLabel = selectedOption?.getTextLabel?.() ?? '';
+    }
 
     // Update validity
     this.updateComplete.then(() => {
