@@ -14,7 +14,8 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
-- Fixed a bug in `<sl-textarea>` causing scroll jumping when using `resize="auto"` [#]
+- Fixed a bug in `<sl-textarea>` causing scroll jumping when using `resize="auto"` [#2182]
+- Fixed a bug in `<sl-relative-time>` where the title attribute would show with redundant info [#2184]
 
 ## 2.17.1
 
