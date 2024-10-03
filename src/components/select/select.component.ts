@@ -1,5 +1,6 @@
 import { animateTo, stopAnimations } from '../../internal/animate.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { defaultValue } from '../../internal/default-value.js';
 import { FormControlController } from '../../internal/form.js';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
 import { HasSlotController } from '../../internal/slot.js';
@@ -101,43 +102,21 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   /** The name of the select, submitted as a name/value pair with form data. */
   @property() name = '';
 
-  private _defaultValue: string | string[] = '';
-
+  /**
+   * The current value of the select, submitted as a name/value pair with form data. When `multiple` is enabled, the
+   * value attribute will be a space-delimited list of values based on the options selected, and the value property will
+   * be an array. **For this reason, values must not contain spaces.**
+   */
   @property({
-    attribute: 'value',
-    reflect: true,
     converter: {
       fromAttribute: (value: string) => value.split(' '),
-      toAttribute: (value: string | string[]) => (Array.isArray(value) ? value.join(' ') : value)
+      toAttribute: (value: string[]) => value.join(' ')
     }
   })
-  set defaultValue(val: string | string[]) {
-    this._defaultValue = this.convertDefaultValue(val);
-  }
+  value: string | string[] = '';
 
-  get defaultValue() {
-    if (!this.hasUpdated) {
-      this._defaultValue = this.convertDefaultValue(this._defaultValue);
-    }
-    return this._defaultValue;
-  }
-
-  /**
-   * @private
-   * A converter for defaultValue from array to string if its multiple. Also fixes some hydration issues.
-   */
-  private convertDefaultValue(val: typeof this.defaultValue) {
-    // For some reason this can go off before we've fully updated. So check the attribute too.
-    const isMultiple = this.multiple || this.hasAttribute('multiple');
-
-    if (!isMultiple && Array.isArray(val)) {
-      val = val.join(' ');
-    }
-
-    return val;
-  }
-
-  @property({ attribute: false }) value: string | string[] | null = null;
+  /** The default value of the form control. Primarily used for resetting the form control. */
+  @defaultValue() defaultValue: string | string[] = '';
 
   /** The select's size. */
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
