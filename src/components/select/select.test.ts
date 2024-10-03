@@ -622,7 +622,7 @@ describe('<sl-select>', () => {
 
         const el = form.querySelector<SlSelect>('sl-select')!;
         expect(Array.isArray(el.value)).to.equal(true);
-        expect(el.value!.length).to.equal(0);
+        expect(el.value.length).to.equal(0);
 
         const option = document.createElement('sl-option');
         option.value = 'option-1';
@@ -631,7 +631,7 @@ describe('<sl-select>', () => {
 
         await aTimeout(10);
         await el.updateComplete;
-        expect(el.value!.length).to.equal(1);
+        expect(el.value.length).to.equal(1);
         expect(el.value).to.have.members(['option-1']);
         expect(new FormData(form).getAll('select')).have.members(['option-1']);
       });
@@ -675,7 +675,7 @@ describe('<sl-select>', () => {
 
         const el = form.querySelector<SlSelect>('sl-select')!;
         expect(el.value).to.be.an('array');
-        expect(el.value!.length).to.equal(0);
+        expect(el.value.length).to.equal(0);
 
         const option = document.createElement('sl-option');
         option.value = 'foo';
