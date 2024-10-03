@@ -758,8 +758,8 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
     const hasHelpTextSlot = this.hasSlotController.test('help-text');
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
-    const hasClearIcon = this.clearable && !this.disabled && this.value && this.value.length > 0;
-    const isPlaceholderVisible = Boolean(this.placeholder && this.value && this.value.length <= 0);
+    const hasClearIcon = this.clearable && !this.disabled && this.value.length > 0;
+    const isPlaceholderVisible = this.placeholder && this.value.length < 0;
 
     return html`
       <div
