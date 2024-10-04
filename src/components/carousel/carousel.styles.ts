@@ -152,11 +152,10 @@ export default css`
 
   @supports (animation-timeline: view()) {
     .carousel__pagination-item {
-        animation: pagination-item-active linear;
-        animation-timeline: --carousel;
-        animation-range: 
-          calc(var(--index) * calc(100% / var(--pages))) 
-          calc((var(--index) + 1) * calc(100% / var(--pages) + 1px));
+      animation: pagination-item-active linear;
+      animation-timeline: --carousel;
+      animation-range: calc(var(--index) * calc(100% / var(--pages)))
+        calc((var(--index) + 1) * calc(100% / var(--pages) + 1px));
     }
   }
 
