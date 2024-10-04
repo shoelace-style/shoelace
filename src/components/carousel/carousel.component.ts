@@ -261,6 +261,7 @@ export default class SlCarousel extends ShoelaceElement {
   @eventOptions({ passive: true })
   private handleScroll() {
     this.scrolling = true;
+    this.synchronizeSlides();
   }
 
   /** @internal Synchronizes the slides with the IntersectionObserver API. */
