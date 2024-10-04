@@ -17,6 +17,7 @@ import SlIcon from '../icon/icon.component.js';
 import styles from './carousel.styles.js';
 import type { CSSResultGroup, PropertyValueMap } from 'lit';
 import type SlCarouselItem from '../carousel-item/carousel-item.component.js';
+import { styleMap } from 'lit/directives/style-map.js';
 
 /**
  * @summary Carousels display an arbitrary number of content slides along a horizontal or vertical axis.
@@ -506,11 +507,11 @@ export default class SlCarousel extends ShoelaceElement {
           id="scroll-container"
           part="scroll-container"
           class="${classMap({
-            carousel__slides: true,
-            'carousel__slides--horizontal': this.orientation === 'horizontal',
-            'carousel__slides--vertical': this.orientation === 'vertical',
-            'carousel__slides--dragging': this.dragging
-          })}"
+      carousel__slides: true,
+      'carousel__slides--horizontal': this.orientation === 'horizontal',
+      'carousel__slides--vertical': this.orientation === 'vertical',
+      'carousel__slides--dragging': this.dragging
+    })}"
           style="--slides-per-page: ${this.slidesPerPage};"
           aria-busy="${scrolling ? 'true' : 'false'}"
           aria-atomic="true"
@@ -524,15 +525,15 @@ export default class SlCarousel extends ShoelaceElement {
         </div>
 
         ${this.navigation
-          ? html`
+        ? html`
               <div part="navigation" class="carousel__navigation">
                 <button
                   part="navigation-button navigation-button--previous"
                   class="${classMap({
-                    'carousel__navigation-button': true,
-                    'carousel__navigation-button--previous': true,
-                    'carousel__navigation-button--disabled': !prevEnabled
-                  })}"
+          'carousel__navigation-button': true,
+          'carousel__navigation-button--previous': true,
+          'carousel__navigation-button--disabled': !prevEnabled
+        })}"
                   aria-label="${this.localize.term('previousSlide')}"
                   aria-controls="scroll-container"
                   aria-disabled="${prevEnabled ? 'false' : 'true'}"
@@ -546,10 +547,10 @@ export default class SlCarousel extends ShoelaceElement {
                 <button
                   part="navigation-button navigation-button--next"
                   class=${classMap({
-                    'carousel__navigation-button': true,
-                    'carousel__navigation-button--next': true,
-                    'carousel__navigation-button--disabled': !nextEnabled
-                  })}
+          'carousel__navigation-button': true,
+          'carousel__navigation-button--next': true,
+          'carousel__navigation-button--disabled': !nextEnabled
+        })}
                   aria-label="${this.localize.term('nextSlide')}"
                   aria-controls="scroll-container"
                   aria-disabled="${nextEnabled ? 'false' : 'true'}"
@@ -561,19 +562,21 @@ export default class SlCarousel extends ShoelaceElement {
                 </button>
               </div>
             `
-          : ''}
+        : ''}
         ${this.pagination
-          ? html`
-              <div part="pagination" role="tablist" class="carousel__pagination" aria-controls="scroll-container">
+        ? html`
+              <div part="pagination" role="tablist" class="carousel__pagination" aria-controls="scroll-container" style="${styleMap({
+          '--pages': pagesCount
+        })}">
                 ${map(range(pagesCount), index => {
-                  const isActive = index === currentPage;
-                  return html`
+          const isActive = index === currentPage;
+          return html`
                     <button
                       part="pagination-item ${isActive ? 'pagination-item--active' : ''}"
-                      class="${classMap({
-                        'carousel__pagination-item': true,
-                        'carousel__pagination-item--active': isActive
-                      })}"
+                      class="carousel__pagination-item"
+                      style="${styleMap({
+            '--index': index
+          })}"
                       role="tab"
                       aria-selected="${isActive ? 'true' : 'false'}"
                       aria-label="${this.localize.term('goToSlide', index + 1, pagesCount)}"
@@ -582,10 +585,10 @@ export default class SlCarousel extends ShoelaceElement {
                       @keydown=${this.handleKeyDown}
                     ></button>
                   `;
-                })}
+        })}
               </div>
             `
-          : ''}
+        : ''}
       </div>
     `;
   }

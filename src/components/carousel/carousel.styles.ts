@@ -10,6 +10,7 @@ export default css`
   }
 
   .carousel {
+    timeline-scope: --carousel;
     display: grid;
     grid-template-columns: min-content 1fr min-content;
     grid-template-rows: 1fr min-content;
@@ -33,7 +34,6 @@ export default css`
 
   .carousel__slides {
     grid-area: slides;
-
     display: grid;
     height: 100%;
     width: 100%;
@@ -55,6 +55,7 @@ export default css`
   }
 
   .carousel__slides--horizontal {
+    scroll-timeline: --carousel x;
     grid-auto-flow: column;
     grid-auto-columns: var(--slide-size);
     grid-auto-rows: 100%;
@@ -66,6 +67,7 @@ export default css`
   }
 
   .carousel__slides--vertical {
+    scroll-timeline: --carousel y;
     grid-auto-flow: row;
     grid-auto-columns: 100%;
     grid-auto-rows: var(--slide-size);
@@ -140,9 +142,22 @@ export default css`
     margin: 0;
   }
 
-  .carousel__pagination-item--active {
-    background-color: var(--sl-color-neutral-700);
-    transform: scale(1.2);
+  @keyframes pagination-item-active {
+    0%,
+    100% {
+      background-color: var(--sl-color-neutral-700);
+      transform: scale(1.2);
+    }
+  }
+
+  @supports (animation-timeline: view()) {
+    .carousel__pagination-item {
+        animation: pagination-item-active linear;
+        animation-timeline: --carousel;
+        animation-range: 
+          calc(var(--index) * calc(100% / var(--pages))) 
+          calc((var(--index) + 1) * calc(100% / var(--pages) + 1px));
+    }
   }
 
   /* Focus styles */
