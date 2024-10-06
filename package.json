@@ -23,6 +23,7 @@
     "./dist/utilities/*": "./dist/utilities/*",
     "./dist/react": "./dist/react/index.js",
     "./dist/react/*": "./dist/react/*",
+    "./dist/translations": "./dist/translations",
     "./dist/translations/*": "./dist/translations/*"
   },
   "files": [
