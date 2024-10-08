@@ -280,7 +280,7 @@ export default class SlCarousel extends ShoelaceElement {
         const firstIntersecting = entries.find(entry => entry.isIntersecting);
 
         if (firstIntersecting) {
-          if (this.loop && firstIntersecting.target.hasAttribute('data-clone')) {
+          if (!this.scrolling && this.loop && firstIntersecting.target.hasAttribute('data-clone')) {
             const clonePosition = Number(firstIntersecting.target.getAttribute('data-clone'));
 
             // Scrolls to the original slide without animating, so the user won't notice that the position has changed
@@ -291,7 +291,8 @@ export default class SlCarousel extends ShoelaceElement {
             // Update the current index based on the first visible slide
             const slideIndex = slides.indexOf(firstIntersecting.target as SlCarouselItem);
             // Set the index to the first "snappable" slide
-            this.activeSlide = Math.ceil(slideIndex / this.slidesPerMove) * this.slidesPerMove;
+            this.activeSlide =
+              (Math.ceil(slideIndex / this.slidesPerMove) * this.slidesPerMove + slides.length) % slides.length;
           }
         }
       },
