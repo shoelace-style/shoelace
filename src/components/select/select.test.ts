@@ -601,7 +601,7 @@ describe('<sl-select>', () => {
         );
         const el = form.querySelector<SlSelect>('sl-select')!;
 
-        await aTimeout(10)
+        await aTimeout(10);
         expect(el.value).to.equal('');
         expect(new FormData(form).get('select')).equal('');
 
