@@ -46,14 +46,13 @@ export default class SlTabGroup extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = { 'sl-icon-button': SlIconButton, 'sl-resize-observer': SlResizeObserver };
 
-  private readonly localize = new LocalizeController(this);
-
   private activeTab?: SlTab;
   private mutationObserver: MutationObserver;
   private resizeObserver: ResizeObserver;
   private tabs: SlTab[] = [];
   private focusableTabs: SlTab[] = [];
   private panels: SlTabPanel[] = [];
+  private readonly localize = new LocalizeController(this);
 
   @query('.tab-group') tabGroup: HTMLElement;
   @query('.tab-group__body') body: HTMLSlotElement;
@@ -182,7 +181,7 @@ export default class SlTabGroup extends ShoelaceElement {
     // Move focus left or right
     if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
       const activeEl = this.tabs.find(t => t.matches(':focus'));
-      const isRtl = this.matches(':dir(rtl)');
+      const isRtl = this.localize.dir() === 'rtl';
       let nextTab: null | SlTab = null;
 
       if (activeEl?.tagName.toLowerCase() === 'sl-tab') {
@@ -302,7 +301,7 @@ export default class SlTabGroup extends ShoelaceElement {
 
     const width = currentTab.clientWidth;
     const height = currentTab.clientHeight;
-    const isRtl = this.matches(':dir(rtl)');
+    const isRtl = this.localize.dir() === 'rtl';
 
     // We can't used offsetLeft/offsetTop here due to a shadow parent issue where neither can getBoundingClientRect
     // because it provides invalid values for animating elements: https://bugs.chromium.org/p/chromium/issues/detail?id=920069
@@ -434,7 +433,7 @@ export default class SlTabGroup extends ShoelaceElement {
   }
 
   render() {
-    const isRtl = this.matches(':dir(rtl)');
+    const isRtl = this.localize.dir() === 'rtl';
 
     return html`
       <div

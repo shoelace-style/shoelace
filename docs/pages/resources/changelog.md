@@ -14,6 +14,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
+- Updated all checks for directionality to use `this.localize.dir()` instead of `el.matches(:dir(rtl))` so older browsers don't error out [#2188]
 - Added Finnish translations [#2211]
 - Added the `.focus` function to `<sl-radio-group>` [#2192]
 - Fixed a bug with with `<sl-select>` not respecting its initial value. [#2204]
