@@ -15,6 +15,9 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 ## Next
 
 - Updated all checks for directionality to use `this.localize.dir()` instead of `el.matches(:dir(rtl))` so older browsers don't error out [#2188]
+- Added Finnish translations [#2211]
+- Fixed a bug with with `<sl-select>` not respecting its initial value. [#2204]
+- Fixed a bug with certain bundlers when using dynamic imports [#2210]
 - Fixed a bug in `<sl-textarea>` causing scroll jumping when using `resize="auto"` [#2182]
 - Fixed a bug in `<sl-relative-time>` where the title attribute would show with redundant info [#2184]
 - Fixed a bug in `<sl-select>` that caused multi-selects without placeholders to have the wrong padding [#2194]
