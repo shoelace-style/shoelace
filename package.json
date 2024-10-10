@@ -18,11 +18,15 @@
     "./dist/custom-elements.json": "./dist/custom-elements.json",
     "./dist/shoelace.js": "./dist/shoelace.js",
     "./dist/shoelace-autoloader.js": "./dist/shoelace-autoloader.js",
+    "./dist/themes": "./dist/themes",
     "./dist/themes/*": "./dist/themes/*",
+    "./dist/components": "./dist/components",
     "./dist/components/*": "./dist/components/*",
+    "./dist/utilities": "./dist/utilities",
     "./dist/utilities/*": "./dist/utilities/*",
     "./dist/react": "./dist/react/index.js",
     "./dist/react/*": "./dist/react/*",
+    "./dist/translations": "./dist/translations",
     "./dist/translations/*": "./dist/translations/*"
   },
   "files": [
