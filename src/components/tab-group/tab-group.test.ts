@@ -84,6 +84,15 @@ describe('<sl-tab-group>', () => {
     expect(tabGroup).to.be.visible;
   });
 
+  it('should not throw error when unmounted too fast', async () => {
+    const el = await fixture(html`
+      <div></div>
+    `);
+
+    el.innerHTML = '<sl-tab-group></sl-tab-group>';
+    el.innerHTML = '';
+  });
+
   it('is accessible', async () => {
     const tabGroup = await fixture<SlTabGroup>(html`
       <sl-tab-group>
