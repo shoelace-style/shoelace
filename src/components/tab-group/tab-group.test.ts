@@ -85,9 +85,7 @@ describe('<sl-tab-group>', () => {
   });
 
   it('should not throw error when unmounted too fast', async () => {
-    const el = await fixture(html`
-      <div></div>
-    `);
+    const el = await fixture(html` <div></div> `);
 
     el.innerHTML = '<sl-tab-group></sl-tab-group>';
     el.innerHTML = '';
