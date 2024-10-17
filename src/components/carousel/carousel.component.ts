@@ -94,6 +94,7 @@ export default class SlCarousel extends ShoelaceElement {
   private autoplayController = new AutoplayController(this, () => this.next());
   private readonly localize = new LocalizeController(this);
   private mutationObserver: MutationObserver;
+  private pendingInteraction = false;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -261,7 +262,9 @@ export default class SlCarousel extends ShoelaceElement {
   @eventOptions({ passive: true })
   private handleScroll() {
     this.scrolling = true;
-    this.synchronizeSlides();
+    if (!this.pendingInteraction) {
+      this.synchronizeSlides();
+    }
   }
 
   /** @internal Synchronizes the slides with the IntersectionObserver API. */
@@ -278,21 +281,28 @@ export default class SlCarousel extends ShoelaceElement {
         }
 
         const firstIntersecting = entries.find(entry => entry.isIntersecting);
+        if (!firstIntersecting) {
+          return;
+        }
 
-        if (firstIntersecting) {
-          if (!this.scrolling && this.loop && firstIntersecting.target.hasAttribute('data-clone')) {
+        const slidesWithClones = this.getSlides({ excludeClones: false });
+        const slidesCount = this.getSlides().length;
+
+        // Update the current index based on the first visible slide
+        const slideIndex = slidesWithClones.indexOf(firstIntersecting.target as SlCarouselItem);
+        // Normalize the index to ignore clones
+        const normalizedIndex = this.loop ? slideIndex - this.slidesPerPage : slideIndex;
+
+        // Set the index to the closest "snappable" slide
+        this.activeSlide =
+          (Math.ceil(normalizedIndex / this.slidesPerMove) * this.slidesPerMove + slidesCount) % slidesCount;
+
+        if (!this.scrolling) {
+          if (this.loop && firstIntersecting.target.hasAttribute('data-clone')) {
             const clonePosition = Number(firstIntersecting.target.getAttribute('data-clone'));
 
             // Scrolls to the original slide without animating, so the user won't notice that the position has changed
             this.goToSlide(clonePosition, 'instant');
-          } else {
-            const slides = this.getSlides();
-
-            // Update the current index based on the first visible slide
-            const slideIndex = slides.indexOf(firstIntersecting.target as SlCarouselItem);
-            // Set the index to the first "snappable" slide
-            this.activeSlide =
-              (Math.ceil(slideIndex / this.slidesPerMove) * this.slidesPerMove + slides.length) % slides.length;
           }
         }
       },
@@ -309,10 +319,9 @@ export default class SlCarousel extends ShoelaceElement {
 
   private handleScrollEnd() {
     if (!this.scrolling || this.dragging) return;
-
-    this.synchronizeSlides();
-
     this.scrolling = false;
+    this.pendingInteraction = false;
+    this.synchronizeSlides();
   }
 
   private isCarouselItem(node: Node): node is SlCarouselItem {
@@ -382,7 +391,7 @@ export default class SlCarousel extends ShoelaceElement {
   }
 
   @watch('activeSlide')
-  handelSlideChange() {
+  handleSlideChange() {
     const slides = this.getSlides();
     slides.forEach((slide, i) => {
       slide.classList.toggle('--is-active', i === this.activeSlide);
@@ -487,6 +496,7 @@ export default class SlCarousel extends ShoelaceElement {
     const nextLeft = nextSlideRect.left - scrollContainerRect.left;
     const nextTop = nextSlideRect.top - scrollContainerRect.top;
 
+    this.pendingInteraction = true;
     scrollContainer.scrollTo({
       left: nextLeft + scrollContainer.scrollLeft,
       top: nextTop + scrollContainer.scrollTop,
