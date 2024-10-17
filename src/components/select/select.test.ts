@@ -206,6 +206,29 @@ describe('<sl-select>', () => {
 
       expect(handler).to.be.calledTwice;
     });
+
+    // this can happen in on ms-edge autofilling an associated input element in the same form
+    // https://github.com/shoelace-style/shoelace/issues/2117
+    it('should not throw on incomplete events', async () => {
+      const el = await fixture<SlSelect>(html`
+        <sl-select required>
+          <sl-option value="option-1">Option 1</sl-option>
+        </sl-select>
+      `);
+
+      const event = new KeyboardEvent('keydown');
+      Object.defineProperty(event, 'target', { writable: false, value: el });
+      Object.defineProperty(event, 'key', { writable: false, value: undefined });
+
+      /**
+       * If Edge does autofill, it creates a broken KeyboardEvent
+       * which is missing the key value.
+       * Using the normal dispatch mechanism does not allow to do this
+       * Thus passing the event directly to the private method for testing
+       *
+       * @ts-expect-error */
+      el.handleDocumentKeyDown(event);
+    });
   });
 
   it('should open the listbox when any letter key is pressed with sl-select is on focus', async () => {
