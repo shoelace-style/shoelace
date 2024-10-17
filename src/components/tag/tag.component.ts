@@ -84,7 +84,6 @@ export default class SlTag extends ShoelaceElement {
                 label=${this.localize.term('remove')}
                 class="tag__remove"
                 @click=${this.handleRemoveClick}
-                tabindex="-1"
               ></sl-icon-button>
             `
           : ''}
