@@ -94,7 +94,7 @@ export default class SlCarousel extends ShoelaceElement {
   private autoplayController = new AutoplayController(this, () => this.next());
   private readonly localize = new LocalizeController(this);
   private mutationObserver: MutationObserver;
-  private pendingInteraction = false;
+  private pendingInteractionScroll = false;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -262,7 +262,7 @@ export default class SlCarousel extends ShoelaceElement {
   @eventOptions({ passive: true })
   private handleScroll() {
     this.scrolling = true;
-    if (!this.pendingInteraction) {
+    if (!this.pendingInteractionScroll) {
       this.synchronizeSlides();
     }
   }
@@ -320,7 +320,7 @@ export default class SlCarousel extends ShoelaceElement {
   private handleScrollEnd() {
     if (!this.scrolling || this.dragging) return;
     this.scrolling = false;
-    this.pendingInteraction = false;
+    this.pendingInteractionScroll = false;
     this.synchronizeSlides();
   }
 
@@ -496,7 +496,7 @@ export default class SlCarousel extends ShoelaceElement {
     const nextLeft = nextSlideRect.left - scrollContainerRect.left;
     const nextTop = nextSlideRect.top - scrollContainerRect.top;
 
-    this.pendingInteraction = true;
+    this.pendingInteractionScroll = true;
     scrollContainer.scrollTo({
       left: nextLeft + scrollContainer.scrollLeft,
       top: nextTop + scrollContainer.scrollTop,
