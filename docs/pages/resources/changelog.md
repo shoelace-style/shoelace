@@ -14,7 +14,6 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## Next
 
-- Updated all checks for directionality to use `this.localize.dir()` instead of `el.matches(:dir(rtl))` so older browsers don't error out [#2188]
 - Added Finnish translations [#2211]
 - Added the `.focus` function to `<sl-radio-group>` [#2192]
 - Fixed a bug in `<sl-tab-group>` when removed from the DOM too quickly. [#2218]
@@ -23,6 +22,8 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-textarea>` causing scroll jumping when using `resize="auto"` [#2182]
 - Fixed a bug in `<sl-relative-time>` where the title attribute would show with redundant info [#2184]
 - Fixed a bug in `<sl-select>` that caused multi-selects without placeholders to have the wrong padding [#2194]
+- Fixed a bug in `<sl-tooltip>` that caused a memory leak in disconnected elements [#2226]
+- Updated all checks for directionality to use `this.localize.dir()` instead of `el.matches(:dir(rtl))` so older browsers don't error out [#2188]
 
 ## 2.17.1
 
