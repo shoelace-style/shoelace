@@ -12,6 +12,21 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## 2.18.0
+
+- Added Finnish translations [#2211]
+- Added the `.focus` function to `<sl-radio-group>` [#2192]
+- Fixed a bug in `<sl-tab-group>` when removed from the DOM too quickly. [#2218]
+- Fixed a bug with `<sl-select>` not respecting its initial value. [#2204]
+- Fixed a bug with certain bundlers when using dynamic imports [#2210]
+- Fixed a bug in `<sl-textarea>` causing scroll jumping when using `resize="auto"` [#2182]
+- Fixed a bug in `<sl-relative-time>` where the title attribute would show with redundant info [#2184]
+- Fixed a bug in `<sl-select>` that caused multi-selects without placeholders to have the wrong padding [#2194]
+- Fixed a bug in `<sl-tooltip>` that caused a memory leak in disconnected elements [#2226]
+- Fixed a bug in `<sl-select>` that caused an exception in an edge case using Edge + autofill [#2221]
+- Improved the behavior of navigation dots in `<sl-carousel>` [#2220]
+- Updated all checks for directionality to use `this.localize.dir()` instead of `el.matches(:dir(rtl))` so older browsers don't error out [#2188]
+
 ## 2.17.1
 
 - Fixed a bug in `<sl-icon>` not applying the mutator when loading multiple icons of the same name from a spritesheet. [#2178]

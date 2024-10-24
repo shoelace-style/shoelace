@@ -1,6 +1,7 @@
 import { arrow, autoUpdate, computePosition, flip, offset, platform, shift, size } from '@floating-ui/dom';
 import { classMap } from 'lit/directives/class-map.js';
 import { html } from 'lit';
+import { LocalizeController } from '../../utilities/localize.js';
 import { offsetParent } from 'composed-offset-position';
 import { property, query } from 'lit/decorators.js';
 import componentStyles from '../../styles/component.styles.js';
@@ -56,6 +57,7 @@ export default class SlPopup extends ShoelaceElement {
 
   private anchorEl: Element | VirtualElement | null;
   private cleanup: ReturnType<typeof autoUpdate> | undefined;
+  private readonly localize = new LocalizeController(this);
 
   /** A reference to the internal popup container. Useful for animating and styling the popup with JavaScript. */
   @query('.popup') popup: HTMLElement;
@@ -413,7 +415,7 @@ export default class SlPopup extends ShoelaceElement {
       //
       // Source: https://github.com/floating-ui/floating-ui/blob/cb3b6ab07f95275730d3e6e46c702f8d4908b55c/packages/dom/src/utils/getDocumentRect.ts#L31
       //
-      const isRtl = this.matches(':dir(rtl)');
+      const isRtl = this.localize.dir() === 'rtl';
       const staticSide = { top: 'bottom', right: 'left', bottom: 'top', left: 'right' }[placement.split('-')[0]]!;
 
       this.setAttribute('data-current-placement', placement);

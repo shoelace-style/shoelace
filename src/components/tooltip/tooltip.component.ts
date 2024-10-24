@@ -109,6 +109,7 @@ export default class SlTooltip extends ShoelaceElement {
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback();
     // Cleanup this event in case the tooltip is removed while open
     this.closeWatcher?.destroy();
     document.removeEventListener('keydown', this.handleDocumentKeyDown);

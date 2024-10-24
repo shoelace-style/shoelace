@@ -2,6 +2,7 @@ import { clamp } from '../../internal/math.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { eventOptions, property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
+import { LocalizeController } from '../../utilities/localize.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { watch } from '../../internal/watch.js';
@@ -34,6 +35,8 @@ import type { CSSResultGroup } from 'lit';
 export default class SlRating extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = { 'sl-icon': SlIcon };
+
+  private readonly localize = new LocalizeController(this);
 
   @query('.rating') rating: HTMLElement;
 
@@ -77,7 +80,7 @@ export default class SlRating extends ShoelaceElement {
   }
 
   private getValueFromXCoordinate(coordinate: number) {
-    const isRtl = this.matches(':dir(rtl)');
+    const isRtl = this.localize.dir() === 'rtl';
     const { left, right, width } = this.rating.getBoundingClientRect();
     const value = isRtl
       ? this.roundToPrecision(((right - coordinate) / width) * this.max, this.precision)
@@ -105,8 +108,8 @@ export default class SlRating extends ShoelaceElement {
   }
 
   private handleKeyDown(event: KeyboardEvent) {
-    const isLtr = this.matches(':dir(ltr)');
-    const isRtl = this.matches(':dir(rtl)');
+    const isLtr = this.localize.dir() === 'ltr';
+    const isRtl = this.localize.dir() === 'rtl';
     const oldValue = this.value;
 
     if (this.disabled || this.readonly) {
@@ -211,7 +214,7 @@ export default class SlRating extends ShoelaceElement {
   }
 
   render() {
-    const isRtl = this.matches(':dir(rtl)');
+    const isRtl = this.localize.dir() === 'rtl';
     const counter = Array.from(Array(this.max).keys());
     let displayValue = 0;
 

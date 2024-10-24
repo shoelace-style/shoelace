@@ -1,5 +1,6 @@
 import { clamp } from '../../internal/math.js';
 import { html } from 'lit';
+import { LocalizeController } from '../../utilities/localize.js';
 import { property, query } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
@@ -89,6 +90,7 @@ export default class SlTree extends ShoelaceElement {
   private lastFocusedItem: SlTreeItem | null;
   private mutationObserver: MutationObserver;
   private clickTarget: SlTreeItem | null = null;
+  private readonly localize = new LocalizeController(this);
 
   constructor() {
     super();
@@ -222,8 +224,8 @@ export default class SlTree extends ShoelaceElement {
     }
 
     const items = this.getFocusableItems();
-    const isLtr = this.matches(':dir(ltr)');
-    const isRtl = this.matches(':dir(rtl)');
+    const isLtr = this.localize.dir() === 'ltr';
+    const isRtl = this.localize.dir() === 'rtl';
 
     if (items.length > 0) {
       event.preventDefault();

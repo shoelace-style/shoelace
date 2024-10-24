@@ -195,7 +195,7 @@ Avoid using `setTimeout()` or `requestAnimationFrame()` in situations like this.
 
 ### VS Code
 
-Shoelace ships with a file called `vscode.html-custom-data.json` that can be used to describe it's custom elements to Visual Studio Code. This enables code completion for Shoelace components (also known as "code hinting" or "IntelliSense"). To enable it, you need to tell VS Code where the file is.
+Shoelace ships with a file called `vscode.html-custom-data.json` that can be used to describe its custom elements to Visual Studio Code. This enables code completion for Shoelace components (also known as "code hinting" or "IntelliSense"). To enable it, you need to tell VS Code where the file is.
 
 1. [Install Shoelace locally](/getting-started/installation#local-installation)
 2. If it doesn't already exist, create a folder called `.vscode` at the root of your project
