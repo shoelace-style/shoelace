@@ -23,6 +23,8 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Fixed a bug in `<sl-relative-time>` where the title attribute would show with redundant info [#2184]
 - Fixed a bug in `<sl-select>` that caused multi-selects without placeholders to have the wrong padding [#2194]
 - Fixed a bug in `<sl-tooltip>` that caused a memory leak in disconnected elements [#2226]
+- Fixed a bug in `<sl-select>` that caused an exception in an edge case using Edge + autofill [#2221]
+- Improved the behavior of navigation dots in `<sl-carousel>` [#2220]
 - Updated all checks for directionality to use `this.localize.dir()` instead of `el.matches(:dir(rtl))` so older browsers don't error out [#2188]
 
 ## 2.17.1
