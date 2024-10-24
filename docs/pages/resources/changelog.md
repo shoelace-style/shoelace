@@ -14,7 +14,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## 2.18.0
 
-- Added Finnish translations [#2211]
+- Added Finnish translation [#2211]
 - Added the `.focus` function to `<sl-radio-group>` [#2192]
 - Fixed a bug in `<sl-tab-group>` when removed from the DOM too quickly. [#2218]
 - Fixed a bug with `<sl-select>` not respecting its initial value. [#2204]
