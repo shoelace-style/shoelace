@@ -30,6 +30,7 @@ export { default as SlInput } from './components/input/input.js';
 export { default as SlMenu } from './components/menu/menu.js';
 export { default as SlMenuItem } from './components/menu-item/menu-item.js';
 export { default as SlMenuLabel } from './components/menu-label/menu-label.js';
+export { default as SlMultiRange } from './components/multi-range/multi-range.js';
 export { default as SlMutationObserver } from './components/mutation-observer/mutation-observer.js';
 export { default as SlOption } from './components/option/option.js';
 export { default as SlPopup } from './components/popup/popup.js';
