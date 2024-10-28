@@ -1053,7 +1053,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
       <sl-dropdown
         class="color-dropdown"
         aria-disabled=${this.disabled ? 'true' : 'false'}
-        .containing-element=${this}
+        .containingElement=${this}
         ?disabled=${this.disabled}
         ?hoist=${this.hoist}
         @sl-after-hide=${this.handleAfterHide}
