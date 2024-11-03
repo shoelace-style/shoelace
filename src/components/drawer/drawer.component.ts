@@ -131,7 +131,7 @@ export default class SlDrawer extends ShoelaceElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     unlockBodyScrolling(this);
-    this.closeWatcher?.destroy();
+    this.removeOpenListeners();
   }
 
   private requestClose(source: 'close-button' | 'keyboard' | 'overlay') {
