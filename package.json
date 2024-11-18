@@ -105,7 +105,7 @@
     "custom-element-vs-code-integration": "^1.2.1",
     "custom-element-vuejs-integration": "^1.0.0",
     "del": "^7.1.0",
-    "download": "^3.3.0",
+    "download": "^8.0.0",
     "esbuild": "^0.19.4",
     "esbuild-plugin-replace": "^1.4.0",
     "eslint": "^8.51.0",
