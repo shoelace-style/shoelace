@@ -506,20 +506,27 @@ export default class SlCarousel extends ShoelaceElement {
   }
 
   private scrollToSlide(slide: HTMLElement, behavior: ScrollBehavior = 'smooth') {
-    const scrollContainer = this.scrollContainer;
-    const scrollContainerRect = scrollContainer.getBoundingClientRect();
-    const nextSlideRect = slide.getBoundingClientRect();
-
-    const nextLeft = nextSlideRect.left - scrollContainerRect.left;
-    const nextTop = nextSlideRect.top - scrollContainerRect.top;
-
-    if (nextLeft || nextTop) {
-      this.pendingSlideChange = true;
-      scrollContainer.scrollTo({
-        left: nextLeft + scrollContainer.scrollLeft,
-        top: nextTop + scrollContainer.scrollTop,
-        behavior
-      });
+    const doWork = () => {
+      const scrollContainer = this.scrollContainer;
+      const scrollContainerRect = scrollContainer.getBoundingClientRect();
+      const nextSlideRect = slide.getBoundingClientRect();
+      
+      const nextLeft = nextSlideRect.left - scrollContainerRect.left;
+      const nextTop = nextSlideRect.top - scrollContainerRect.top;
+      
+      if (nextLeft || nextTop) {
+        this.pendingSlideChange = true;
+        scrollContainer.scrollTo({
+          left: nextLeft + scrollContainer.scrollLeft,
+          top: nextTop + scrollContainer.scrollTop,
+          behavior
+        });
+      }
+    }
+    if ('requestAnimationFrame' in window) {
+      window.requestAnimationFrame(doWork);
+    } else {
+      doWork();
     }
   }
 
