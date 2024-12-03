@@ -506,6 +506,9 @@ export default class SlCarousel extends ShoelaceElement {
   }
 
   private scrollToSlide(slide: HTMLElement, behavior: ScrollBehavior = 'smooth') {
+    // Since the geometry doesn't happen until rAF, we don't know if we'll be scrolling or not...
+    // It's best to assume that we will and cleanup in the else case below if we didn't need to
+    this.pendingSlideChange = true;
     window.requestAnimationFrame(() => {
       const scrollContainer = this.scrollContainer;
       const scrollContainerRect = scrollContainer.getBoundingClientRect();
@@ -515,12 +518,16 @@ export default class SlCarousel extends ShoelaceElement {
       const nextTop = nextSlideRect.top - scrollContainerRect.top;
       
       if (nextLeft || nextTop) {
+        // This is here just in case someone set it back to false
+        // between rAF being requested and the callback actually running
         this.pendingSlideChange = true;
         scrollContainer.scrollTo({
           left: nextLeft + scrollContainer.scrollLeft,
           top: nextTop + scrollContainer.scrollTop,
           behavior
         });
+      } else {
+        this.pendingSlideChange = false;
       }
     });
   }
