@@ -506,7 +506,7 @@ export default class SlCarousel extends ShoelaceElement {
   }
 
   private scrollToSlide(slide: HTMLElement, behavior: ScrollBehavior = 'smooth') {
-    const doWork = () => {
+    window.requestAnimationFrame(() => {
       const scrollContainer = this.scrollContainer;
       const scrollContainerRect = scrollContainer.getBoundingClientRect();
       const nextSlideRect = slide.getBoundingClientRect();
@@ -522,12 +522,7 @@ export default class SlCarousel extends ShoelaceElement {
           behavior
         });
       }
-    }
-    if ('requestAnimationFrame' in window) {
-      window.requestAnimationFrame(doWork);
-    } else {
-      doWork();
-    }
+    });
   }
 
   render() {
