@@ -101,6 +101,14 @@ export default class SlTabGroup extends ShoelaceElement {
       // Sync tabs when disabled states change
       if (mutations.some(m => m.attributeName === 'disabled')) {
         this.syncTabsAndPanels();
+        // sync tabs when active state on tab changes
+      } else if (mutations.some(m => m.attributeName === 'active')) {
+        const tabs = mutations.filter(m => m.attributeName === 'active' && (m.target as HTMLElement).tagName.toLowerCase() === 'sl-tab').map(m => m.target as SlTab);
+        const newActiveTab = tabs.find(tab => tab.active);
+
+        if (newActiveTab) {
+          this.setActiveTab(newActiveTab);
+        }
       }
     });
 

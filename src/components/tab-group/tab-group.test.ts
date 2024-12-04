@@ -357,6 +357,31 @@ describe('<sl-tab-group>', () => {
       return expectCustomTabToBeActiveAfter(tabGroup, () => clickOnElement(customHeader!));
     });
 
+    it('selects a tab by changing it via active property', async () => {
+      const tabGroup = await fixture<SlTabGroup>(html`
+        <sl-tab-group>
+          <sl-tab slot="nav" panel="general" data-testid="general-header">General</sl-tab>
+          <sl-tab slot="nav" panel="custom" data-testid="custom-header">Custom</sl-tab>
+          <sl-tab-panel name="general">This is the general tab panel.</sl-tab-panel>
+          <sl-tab-panel name="custom" data-testid="custom-tab-content">This is the custom tab panel.</sl-tab-panel>
+        </sl-tab-group>
+      `);
+
+      const customHeader = queryByTestId<SlTab>(tabGroup, 'custom-header')!;
+      const generalHeader = await waitForHeaderToBeActive(tabGroup, 'general-header');
+      generalHeader.focus();
+
+      expect(customHeader).not.to.have.attribute('active');
+
+      const showEventPromise = oneEvent(tabGroup, 'sl-tab-show') as Promise<SlTabShowEvent>;
+      customHeader.active = true;
+
+      await tabGroup.updateComplete;
+      expect(customHeader).to.have.attribute('active');
+      await expectPromiseToHaveName(showEventPromise, 'custom');
+      return expectOnlyOneTabPanelToBeActive(tabGroup, 'custom-tab-content');
+    });
+
     it('does not change if the active tab is reselected', async () => {
       const tabGroup = await fixture<SlTabGroup>(html`
         <sl-tab-group>
