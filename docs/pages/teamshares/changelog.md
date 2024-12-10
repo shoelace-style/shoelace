@@ -5,6 +5,10 @@ meta:
 
 # Changelog
 
+## 2.3.1
+
+- Dependency update for package security patch
+
 ## 2.3.0
 
 - Documentation and Figma Code Connect updates (no visible changes to components)
