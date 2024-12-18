@@ -34,6 +34,8 @@ export default class SlOption extends ShoelaceElement {
   // @ts-expect-error - Controller is currently unused
   private readonly localize = new LocalizeController(this);
 
+  private isInitialized = false;
+
   @query('.option__label') defaultSlot: HTMLSlotElement;
 
   @state() current = false; // the user has keyed into the option, but hasn't selected it yet (shows a highlight)
@@ -57,13 +59,17 @@ export default class SlOption extends ShoelaceElement {
   }
 
   private handleDefaultSlotChange() {
-    // When the label changes, tell the controller to update
-    customElements.whenDefined('sl-select').then(() => {
-      const controller = this.closest('sl-select');
-      if (controller) {
-        controller.handleDefaultSlotChange();
-      }
-    });
+    if (this.isInitialized) {
+      // When the label changes, tell the controller to update
+      customElements.whenDefined('sl-select').then(() => {
+        const controller = this.closest('sl-select');
+        if (controller) {
+          controller.handleDefaultSlotChange();
+        }
+      });
+    } else {
+      this.isInitialized = true;
+    }
   }
 
   private handleMouseEnter() {
