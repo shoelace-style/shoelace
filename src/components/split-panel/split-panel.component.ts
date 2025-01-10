@@ -4,6 +4,7 @@ import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LocalizeController } from '../../utilities/localize.js';
 import { property, query } from 'lit/decorators.js';
+import { SNAP_NONE, type SnapFunction, toSnapFunction } from './utility.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
 import ShoelaceElement from '../../internal/shoelace-element.js';
@@ -67,11 +68,30 @@ export default class SlSplitPanel extends ShoelaceElement {
    */
   @property() primary?: 'start' | 'end';
 
+  // Returned when the property is queried, so that string 'snap's are preserved.
+  private snapValue: string | SnapFunction = '';
+  // Actually used for computing snap points. All string snaps are converted via `toSnapFunction`.
+  private snapFunction: SnapFunction = SNAP_NONE;
+
   /**
-   * One or more space-separated values at which the divider should snap. Values can be in pixels or percentages, e.g.
-   * `"100px 50%"`.
+   * One of the following:
+   * - One or more space-separated values at which the divider should snap, in pixels or percentages, e.g. `'100px 50% 500px'`.
+   * - A repeat expression containing a single pixel or percentage snap interval, e.g. `'repeat(16px)'`
+   * - A function which takes in a position, and then returns a snapped position, e.g. ({ pos }) => Math.round(pos / 8) * 8
    */
-  @property() snap?: string;
+  @property({ reflect: true })
+  set snap(snap: string | SnapFunction | null | undefined) {
+    this.snapValue = snap ?? ''
+    if (snap) {
+      this.snapFunction = typeof snap === 'string' ? toSnapFunction(snap) : snap;
+    } else {
+      this.snapFunction = SNAP_NONE;
+    }
+  }
+
+  get snap(): string | SnapFunction {
+    return this.snapValue;
+  }
 
   /** How close the divider must be to a snap point until snapping occurs. */
   @property({ type: Number, attribute: 'snap-threshold' }) snapThreshold = 12;
@@ -125,30 +145,16 @@ export default class SlSplitPanel extends ShoelaceElement {
         }
 
         // Check snap points
-        if (this.snap) {
-          const snaps = this.snap.split(' ');
-
-          snaps.forEach(value => {
-            let snapPoint: number;
-
-            if (value.endsWith('%')) {
-              snapPoint = this.size * (parseFloat(value) / 100);
-            } else {
-              snapPoint = parseFloat(value);
-            }
-
-            if (isRtl && !this.vertical) {
-              snapPoint = this.size - snapPoint;
-            }
-
-            if (
-              newPositionInPixels >= snapPoint - this.snapThreshold &&
-              newPositionInPixels <= snapPoint + this.snapThreshold
-            ) {
-              newPositionInPixels = snapPoint;
-            }
-          });
-        }
+        newPositionInPixels =
+          this.snapFunction({
+            pos: newPositionInPixels,
+            size: this.size,
+            snapThreshold: this.snapThreshold,
+            isRtl: isRtl,
+            vertical: this.vertical,
+            pixelsToPercent: this.pixelsToPercentage,
+            percentToPixels: this.percentageToPixels,
+          }) ?? newPositionInPixels;
 
         this.position = clamp(this.pixelsToPercentage(newPositionInPixels), 0, 100);
       },
