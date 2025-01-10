@@ -75,9 +75,9 @@ export default class SlSplitPanel extends ShoelaceElement {
 
   /**
    * One of the following:
-   * - One or more space-separated values at which the divider should snap, in pixels or percentages, e.g. `'100px 50% 500px'`.
-   * - A repeat expression containing a single pixel or percentage snap interval, e.g. `'repeat(16px)'`
-   * - A function which takes in a position, and then returns a snapped position, e.g. ({ pos }) => Math.round(pos / 8) * 8
+   * One or more space-separated values at which the divider should snap, in pixels or percentages, e.g. `'100px 50% 500px'`.
+   * A `repeat()` expression containing a single pixel or percentage interval, e.g. `'repeat(16px)'`.
+   * A function which takes in a `SnapFunctionParams`, and returns a position to snap to, e.g. `({ pos }) => Math.round(pos / 8) * 8`.
    */
   @property({ reflect: true })
   set snap(snap: string | SnapFunction | null | undefined) {
@@ -151,9 +151,7 @@ export default class SlSplitPanel extends ShoelaceElement {
             size: this.size,
             snapThreshold: this.snapThreshold,
             isRtl: isRtl,
-            vertical: this.vertical,
-            pixelsToPercent: this.pixelsToPercentage,
-            percentToPixels: this.percentageToPixels,
+            vertical: this.vertical
           }) ?? newPositionInPixels;
 
         this.position = clamp(this.pixelsToPercentage(newPositionInPixels), 0, 100);

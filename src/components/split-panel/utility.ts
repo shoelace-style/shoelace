@@ -1,16 +1,18 @@
-/** Options that get passed into a `SnapFunction`. */
-interface SnapFunctionOpts {
+export interface SnapFunctionParams {
+  /** The position the divider has been dragged to, in pixels. */
   pos: number;
+  /** The size of the split-panel across its primary axis, in pixels. */
   size: number;
+  /** The snap-threshold passed to the split-panel, in pixels. May be infinity. */
   snapThreshold: number;
+  /** Whether or not the user-agent is RTL. */
   isRtl: boolean;
+  /** Whether or not the split panel is vertical. */
   vertical: boolean;
-  pixelsToPercent: (px: number) => number;
-  percentToPixels: (percent: number) => number;
 }
 
 /** Used by sl-split-panel to convert an input position into a snapped position. */
-export type SnapFunction = (opt: SnapFunctionOpts) => number | null;
+export type SnapFunction = (opt: SnapFunctionParams) => number | null;
 
 /** A SnapFunction which performs no snapping. */
 export const SNAP_NONE = () => null;
