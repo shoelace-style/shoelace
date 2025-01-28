@@ -15,6 +15,22 @@ import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
 const App = () => <SlDivider />;
 ```
 
+:::tip
+Using TailwindCSS with Shoelace [may override divider styles](https://github.com/shoelace-style/shoelace/issues/2088), making them invisible. As a workaround, add this to your TailwindCSS input file:
+
+```css
+@layer base {
+  sl-divider:not([vertical]) {
+      border-top: solid var(--width) var(--color);
+  }
+
+  sl-divider[vertical] {
+      border-left: solid var(--width) var(--color);
+  }
+}
+```
+:::
+
 ## Examples
 
 ### Width
