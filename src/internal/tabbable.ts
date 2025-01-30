@@ -80,20 +80,19 @@ function isTabbable(el: HTMLElement) {
     return false;
   }
 
+  if (tag === 'input' && el.getAttribute('type') === 'radio') {
+    const rootNode = el.getRootNode() as HTMLElement;
 
-  if (tag === 'input' && el.getAttribute("type") === "radio") {
-    const rootNode = (el.getRootNode() as HTMLElement)
-
-    const findRadios = `input[type='radio'][name="${el.getAttribute("name")}"]`
-    const firstChecked = rootNode.querySelector(`${findRadios}:checked`)
+    const findRadios = `input[type='radio'][name="${el.getAttribute('name')}"]`;
+    const firstChecked = rootNode.querySelector(`${findRadios}:checked`);
 
     if (firstChecked) {
-      return firstChecked === el
+      return firstChecked === el;
     }
 
-    const firstRadio = rootNode.querySelector(findRadios)
+    const firstRadio = rootNode.querySelector(findRadios);
 
-    return firstRadio === el
+    return firstRadio === el;
   }
 
   if (!isVisible(el)) {
