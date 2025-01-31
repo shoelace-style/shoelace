@@ -55,7 +55,6 @@ export default class SlAlert extends ShoelaceElement {
       this.currentToastStack = Object.assign(document.createElement('div'), {
         className: 'sl-toast-stack'
       });
-      console.log('created');
     }
     return this.currentToastStack;
   }
