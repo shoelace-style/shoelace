@@ -16,8 +16,8 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 - Improved performance of `<sl-select>` when using a large number of options [#2318]
 - Updated the Japanese translation [#2329]
-- Adjust `<sl-alert>` to create the toast stack when used only, making it usable in SSR environments.
-- Adjust `scrollend-polyfill` so it only runs on the client to make it usable in SSR environments.
+- Adjust `<sl-alert>` to create the toast stack when used only, making it usable in SSR environments. [#2359]
+- Adjust `scrollend-polyfill` so it only runs on the client to make it usable in SSR environments. [#2359]
 
 ## 2.19.1
 
