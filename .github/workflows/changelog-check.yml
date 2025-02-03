@@ -34,8 +34,8 @@ jobs:
         with:
           script: |
             github.rest.issues.createComment({
-              issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.name,
+              issue_number: context.issue.number,
               body: '⚠️ This PR is missing a changelog entry. Please add an entry to `docs/pages/resources/changelog.md` describing your changes.'
             })
