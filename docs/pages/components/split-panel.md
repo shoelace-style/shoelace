@@ -200,7 +200,7 @@ const App = () => (
 
 ### Snapping
 
-To snap panels at specific positions while dragging, you can use the `snap` attribute. You can either provide one or more space-separated pixel or percentage values to set fixed snap points, or a `repeat()` expression containing a single pixel or percentage value which will be repeated along the length of the panel. You can also customize how close the divider must be before snapping with the `snap-threshold` attribute.
+To snap panels at specific positions while dragging, you can use the `snap` attribute. You can provide one or more space-separated pixel or percentage values, either as single values or within a `repeat()` expression, which will be repeated along the length of the panel. You can also customize how close the divider must be before snapping with the `snap-threshold` attribute.
 
 For example, to snap the panel at `100px` and `50%`, use `snap="100px 50%"`.
 
@@ -251,11 +251,11 @@ For example, to snap the panel at `100px` and `50%`, use `snap="100px 50%"`.
 </style>
 ```
 
-Or, if you want to snap the panel to every `16px` interval, you can use `snap="repeat(16px)"`.
+Or, if you want to snap the panel to every `100px` interval, as well as at 50% of the panel's size, you can use `snap="repeat(100px) 50%"`.
 
 ```html:preview
 <div class="split-panel-snapping-repeat">
-  <sl-split-panel snap="repeat(16px)">
+  <sl-split-panel snap="repeat(16px) 50%">
     <div
       slot="start"
       style="height: 150px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
