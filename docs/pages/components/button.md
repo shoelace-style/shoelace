@@ -5,6 +5,8 @@ meta:
 layout: component
 ---
 
+TEST
+
 ```html:preview
 <sl-button>Button</sl-button>
 ```
