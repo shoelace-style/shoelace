@@ -255,7 +255,7 @@ Or, if you want to snap the panel to every `100px` interval, as well as at 50% o
 
 ```html:preview
 <div class="split-panel-snapping-repeat">
-  <sl-split-panel snap="repeat(16px) 50%">
+  <sl-split-panel snap="repeat(100px) 50%">
     <div
       slot="start"
       style="height: 150px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
@@ -278,9 +278,12 @@ Or, if you want to snap the panel to every `100px` interval, as well as at 50% o
 </style>
 ```
 
+### Using a Custom Snap Function
+
 You can also implement a custom snap function which controls the snapping manually. To do this, you need to acquire a reference to the element in Javascript and set the `snap` property. For example, if you want to snap the divider to either `100px` from the left or `100px` from the right, you can set the `snap` property to a function encoding that logic.
 
-```panel.snap = ({ pos, size }) => (pos < size / 2) ? 100 : (size - 100)```
+```js
+panel.snap = ({ pos, size }) => (pos < size / 2) ? 100 : (size - 100)
 
 Note that the `snap-threshold` property will not automatically be applied if `snap` is set to a function. Instead, the function itself must handle applying the threshold if desired, and is passed a `snapThreshold` member with its parameters.
 

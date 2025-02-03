@@ -97,7 +97,6 @@ export default class SlSplitPanel extends ShoelaceElement {
    * @param snap - The snap string.
    * @returns a `SnapFunction` representing the snap string's logic.
    */
-
   private toSnapFunction(snap: string): SnapFunction {
     const snapPoints = snap.split(" ");
 
