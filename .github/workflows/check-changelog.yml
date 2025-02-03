@@ -1,5 +1,5 @@
 - name: Check changelog
   uses: GiulioRomualdi/yet-another-changelog-checker@v1
-    with:
-      changelog: docs/pages/resources/changelog.md
-      should-add-comment: 'true'
+  with:
+    changelog: docs/pages/resources/changelog.md
+    should-add-comment: 'true'
