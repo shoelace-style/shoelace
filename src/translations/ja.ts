@@ -7,20 +7,19 @@ const translation: Translation = {
   $dir: 'ltr',
 
   carousel: 'カルーセル',
-  clearEntry: 'クリアエントリ',
+  clearEntry: 'クリア',
   close: '閉じる',
-  copied: 'コピーされました',
+  copied: 'コピーしました',
   copy: 'コピー',
-  currentValue: '現在の価値',
+  currentValue: '現在の値',
   error: 'エラー',
   goToSlide: (slide, count) => `${count} 枚中 ${slide} 枚のスライドに移動`,
   hidePassword: 'パスワードを隠す',
   loading: '読み込み中',
   nextSlide: '次のスライド',
   numOptionsSelected: num => {
-    if (num === 0) return 'オプションが選択されていません';
-    if (num === 1) return '1 つのオプションが選択されました';
-    return `${num} つのオプションが選択されました`;
+    if (num === 0) return '項目が選択されていません';
+    return `${num} 個の項目が選択されました`;
   },
   previousSlide: '前のスライド',
   progress: '進行',

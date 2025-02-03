@@ -10,6 +10,25 @@ import ShoelaceElement from '../../internal/shoelace-element.js';
 import styles from './split-panel.styles.js';
 import type { CSSResultGroup } from 'lit';
 
+export interface SnapFunctionParams {
+  /** The position the divider has been dragged to, in pixels. */
+  pos: number;
+  /** The size of the split-panel across its primary axis, in pixels. */
+  size: number;
+  /** The snap-threshold passed to the split-panel, in pixels. May be infinity. */
+  snapThreshold: number;
+  /** Whether or not the user-agent is RTL. */
+  isRtl: boolean;
+  /** Whether or not the split panel is vertical. */
+  vertical: boolean;
+}
+
+/** Used by sl-split-panel to convert an input position into a snapped position. */
+export type SnapFunction = (opt: SnapFunctionParams) => number | null;
+
+/** A SnapFunction which performs no snapping. */
+export const SNAP_NONE = () => null;
+
 /**
  * @summary Split panels display two adjacent panels, allowing the user to reposition them.
  * @documentation https://shoelace.style/components/split-panel
@@ -67,11 +86,72 @@ export default class SlSplitPanel extends ShoelaceElement {
    */
   @property() primary?: 'start' | 'end';
 
+  // Returned when the property is queried, so that string 'snap's are preserved.
+  private snapValue: string | SnapFunction = '';
+  // Actually used for computing snap points. All string snaps are converted via `toSnapFunction`.
+  private snapFunction: SnapFunction = SNAP_NONE;
+
   /**
-   * One or more space-separated values at which the divider should snap. Values can be in pixels or percentages, e.g.
-   * `"100px 50%"`.
+   * Converts a string containing either a series of fixed/repeated snap points (e.g. "repeat(20%)", "100px 200px 800px", or "10% 50% repeat(10px)") into a SnapFunction. `SnapFunction`s take in a `SnapFunctionOpts` and return the position that the split panel should snap to.
+   *
+   * @param snap - The snap string.
+   * @returns a `SnapFunction` representing the snap string's logic.
    */
-  @property() snap?: string;
+  private toSnapFunction(snap: string): SnapFunction {
+    const snapPoints = snap.split(' ');
+
+    return ({ pos, size, snapThreshold, isRtl, vertical }) => {
+      let newPos = pos;
+      let minDistance = Number.POSITIVE_INFINITY;
+
+      snapPoints.forEach(value => {
+        let snapPoint: number;
+
+        if (value.startsWith('repeat(')) {
+          const repeatVal = snap.substring('repeat('.length, snap.length - 1);
+          const isPercent = repeatVal.endsWith('%');
+          const repeatNum = Number.parseFloat(repeatVal);
+          const snapIntervalPx = isPercent ? size * (repeatNum / 100) : repeatNum;
+          snapPoint = Math.round((isRtl && !vertical ? size - pos : pos) / snapIntervalPx) * snapIntervalPx;
+        } else if (value.endsWith('%')) {
+          snapPoint = size * (Number.parseFloat(value) / 100);
+        } else {
+          snapPoint = Number.parseFloat(value);
+        }
+
+        if (isRtl && !vertical) {
+          snapPoint = size - snapPoint;
+        }
+
+        const distance = Math.abs(pos - snapPoint);
+
+        if (distance <= snapThreshold && distance < minDistance) {
+          newPos = snapPoint;
+          minDistance = distance;
+        }
+      });
+
+      return newPos;
+    };
+  }
+
+  /**
+   * Either one or more space-separated values at which the divider should snap, in pixels, percentages, or repeat expressions e.g. `'100px 50% 500px' or `repeat(50%) 10px`,
+   * or a function which takes in a `SnapFunctionParams`, and returns a position to snap to, e.g. `({ pos }) => Math.round(pos / 8) * 8`.
+   */
+  @property({ reflect: true })
+  set snap(snap: string | SnapFunction | null | undefined) {
+    this.snapValue = snap ?? '';
+    if (snap) {
+      this.snapFunction = typeof snap === 'string' ? this.toSnapFunction(snap) : snap;
+    } else {
+      this.snapFunction = SNAP_NONE;
+    }
+  }
+
+  get snap(): string | SnapFunction {
+    return this.snapValue;
+  }
 
   /** How close the divider must be to a snap point until snapping occurs. */
   @property({ type: Number, attribute: 'snap-threshold' }) snapThreshold = 12;
@@ -125,30 +205,14 @@ export default class SlSplitPanel extends ShoelaceElement {
         }
 
         // Check snap points
-        if (this.snap) {
-          const snaps = this.snap.split(' ');
-
-          snaps.forEach(value => {
-            let snapPoint: number;
-
-            if (value.endsWith('%')) {
-              snapPoint = this.size * (parseFloat(value) / 100);
-            } else {
-              snapPoint = parseFloat(value);
-            }
-
-            if (isRtl && !this.vertical) {
-              snapPoint = this.size - snapPoint;
-            }
-
-            if (
-              newPositionInPixels >= snapPoint - this.snapThreshold &&
-              newPositionInPixels <= snapPoint + this.snapThreshold
-            ) {
-              newPositionInPixels = snapPoint;
-            }
-          });
-        }
+        newPositionInPixels =
+          this.snapFunction({
+            pos: newPositionInPixels,
+            size: this.size,
+            snapThreshold: this.snapThreshold,
+            isRtl: isRtl,
+            vertical: this.vertical
+          }) ?? newPositionInPixels;
 
         this.position = clamp(this.pixelsToPercentage(newPositionInPixels), 0, 100);
       },

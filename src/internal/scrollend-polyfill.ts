@@ -26,54 +26,61 @@ const decorate = <T, M extends keyof T>(
   } as MethodOf<T, M>;
 };
 
-const isSupported = 'onscrollend' in window;
+(() => {
+  // SSR environments should not apply the polyfill
+  if (typeof window === 'undefined') {
+    return;
+  }
 
-if (!isSupported) {
-  const pointers = new Set();
-  const scrollHandlers = new WeakMap<EventTarget, EventListenerOrEventListenerObject>();
+  const isSupported = 'onscrollend' in window;
 
-  const handlePointerDown = (event: TouchEvent) => {
-    for (const touch of event.changedTouches) {
-      pointers.add(touch.identifier);
-    }
-  };
+  if (!isSupported) {
+    const pointers = new Set();
+    const scrollHandlers = new WeakMap<EventTarget, EventListenerOrEventListenerObject>();
 
-  const handlePointerUp = (event: TouchEvent) => {
-    for (const touch of event.changedTouches) {
-      pointers.delete(touch.identifier);
-    }
-  };
-
-  document.addEventListener('touchstart', handlePointerDown, true);
-  document.addEventListener('touchend', handlePointerUp, true);
-  document.addEventListener('touchcancel', handlePointerUp, true);
-
-  decorate(EventTarget.prototype, 'addEventListener', function (this: EventTarget, addEventListener, type) {
-    if (type !== 'scrollend') return;
-
-    const handleScrollEnd = debounce(() => {
-      if (!pointers.size) {
-        // If no pointer is active in the scroll area then the scroll has ended
-        this.dispatchEvent(new Event('scrollend'));
-      } else {
-        // otherwise let's wait a bit more
-        handleScrollEnd();
+    const handlePointerDown = (event: TouchEvent) => {
+      for (const touch of event.changedTouches) {
+        pointers.add(touch.identifier);
       }
-    }, 100);
+    };
 
-    addEventListener.call(this, 'scroll', handleScrollEnd, { passive: true });
-    scrollHandlers.set(this, handleScrollEnd);
-  });
+    const handlePointerUp = (event: TouchEvent) => {
+      for (const touch of event.changedTouches) {
+        pointers.delete(touch.identifier);
+      }
+    };
 
-  decorate(EventTarget.prototype, 'removeEventListener', function (this: EventTarget, removeEventListener, type) {
-    if (type !== 'scrollend') return;
+    document.addEventListener('touchstart', handlePointerDown, true);
+    document.addEventListener('touchend', handlePointerUp, true);
+    document.addEventListener('touchcancel', handlePointerUp, true);
 
-    const scrollHandler = scrollHandlers.get(this);
-    if (scrollHandler) {
-      removeEventListener.call(this, 'scroll', scrollHandler, { passive: true } as unknown as EventListenerOptions);
-    }
-  });
-}
+    decorate(EventTarget.prototype, 'addEventListener', function (this: EventTarget, addEventListener, type) {
+      if (type !== 'scrollend') return;
+
+      const handleScrollEnd = debounce(() => {
+        if (!pointers.size) {
+          // If no pointer is active in the scroll area then the scroll has ended
+          this.dispatchEvent(new Event('scrollend'));
+        } else {
+          // otherwise let's wait a bit more
+          handleScrollEnd();
+        }
+      }, 100);
+
+      addEventListener.call(this, 'scroll', handleScrollEnd, { passive: true });
+      scrollHandlers.set(this, handleScrollEnd);
+    });
+
+    decorate(EventTarget.prototype, 'removeEventListener', function (this: EventTarget, removeEventListener, type) {
+      if (type !== 'scrollend') return;
+
+      const scrollHandler = scrollHandlers.get(this);
+      if (scrollHandler) {
+        removeEventListener.call(this, 'scroll', scrollHandler, { passive: true } as unknown as EventListenerOptions);
+      }
+    });
+  }
+})();
 
 // Without an import or export, TypeScript sees vars in this file as global
 export {};

@@ -67,9 +67,9 @@ When binding complex data such as objects and arrays, use the `.prop` modifier t
 One caveat is there's currently [no support for v-model on custom elements](https://github.com/vuejs/vue/issues/7830), but you can still achieve two-way binding manually.
 
 ```html
-<!-- This doesn't work -->
+<!-- ❌ This doesn't work -->
 <sl-input v-model="name"></sl-input>
-<!-- This works, but it's a bit longer -->
+<!-- ✅ This works, but it's a bit longer -->
 <sl-input :value="name" @input="name = $event.target.value"></sl-input>
 ```
 

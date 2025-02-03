@@ -80,9 +80,19 @@ function isTabbable(el: HTMLElement) {
     return false;
   }
 
-  // Radios without a checked attribute are not tabbable
-  if (tag === 'input' && el.getAttribute('type') === 'radio' && !el.hasAttribute('checked')) {
-    return false;
+  if (tag === 'input' && el.getAttribute('type') === 'radio') {
+    const rootNode = el.getRootNode() as HTMLElement;
+
+    const findRadios = `input[type='radio'][name="${el.getAttribute('name')}"]`;
+    const firstChecked = rootNode.querySelector(`${findRadios}:checked`);
+
+    if (firstChecked) {
+      return firstChecked === el;
+    }
+
+    const firstRadio = rootNode.querySelector(findRadios);
+
+    return firstRadio === el;
   }
 
   if (!isVisible(el)) {

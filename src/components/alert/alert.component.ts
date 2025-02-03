@@ -13,8 +13,6 @@ import SlIconButton from '../icon-button/icon-button.component.js';
 import styles from './alert.styles.js';
 import type { CSSResultGroup } from 'lit';
 
-const toastStack = Object.assign(document.createElement('div'), { className: 'sl-toast-stack' });
-
 /**
  * @summary Alerts are used to display important messages inline or as toast notifications.
  * @documentation https://shoelace.style/components/alert
@@ -49,6 +47,17 @@ export default class SlAlert extends ShoelaceElement {
   private countdownAnimation?: Animation;
   private readonly hasSlotController = new HasSlotController(this, 'icon', 'suffix');
   private readonly localize = new LocalizeController(this);
+
+  private static currentToastStack: HTMLDivElement;
+
+  private static get toastStack() {
+    if (!this.currentToastStack) {
+      this.currentToastStack = Object.assign(document.createElement('div'), {
+        className: 'sl-toast-stack'
+      });
+    }
+    return this.currentToastStack;
+  }
 
   @query('[part~="base"]') base: HTMLElement;
 
@@ -195,11 +204,11 @@ export default class SlAlert extends ShoelaceElement {
   async toast() {
     return new Promise<void>(resolve => {
       this.handleCountdownChange();
-      if (toastStack.parentElement === null) {
-        document.body.append(toastStack);
+      if (SlAlert.toastStack.parentElement === null) {
+        document.body.append(SlAlert.toastStack);
       }
 
-      toastStack.appendChild(this);
+      SlAlert.toastStack.appendChild(this);
 
       // Wait for the toast stack to render
       requestAnimationFrame(() => {
@@ -211,12 +220,12 @@ export default class SlAlert extends ShoelaceElement {
       this.addEventListener(
         'sl-after-hide',
         () => {
-          toastStack.removeChild(this);
+          SlAlert.toastStack.removeChild(this);
           resolve();
 
           // Remove the toast stack from the DOM when there are no more alerts
-          if (toastStack.querySelector('sl-alert') === null) {
-            toastStack.remove();
+          if (SlAlert.toastStack.querySelector('sl-alert') === null) {
+            SlAlert.toastStack.remove();
           }
         },
         { once: true }

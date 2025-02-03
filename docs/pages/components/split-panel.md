@@ -200,20 +200,22 @@ const App = () => (
 
 ### Snapping
 
-To snap panels at specific positions while dragging, add the `snap` attribute with one or more space-separated values. Values must be in pixels or percentages. For example, to snap the panel at `100px` and `50%`, use `snap="100px 50%"`. You can also customize how close the divider must be before snapping with the `snap-threshold` attribute.
+To snap panels at specific positions while dragging, you can use the `snap` attribute. You can provide one or more space-separated pixel or percentage values, either as single values or within a `repeat()` expression, which will be repeated along the length of the panel. You can also customize how close the divider must be before snapping with the `snap-threshold` attribute.
+
+For example, to snap the panel at `100px` and `50%`, use `snap="100px 50%"`.
 
 ```html:preview
 <div class="split-panel-snapping">
   <sl-split-panel snap="100px 50%">
     <div
       slot="start"
-      style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
+      style="height: 150px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
     >
       Start
     </div>
     <div
       slot="end"
-      style="height: 200px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
+      style="height: 150px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
     >
       End
     </div>
@@ -239,14 +241,104 @@ To snap panels at specific positions while dragging, add the `snap` attribute wi
     transform: translateX(-3px);
   }
 
-  .split-panel-snapping-dots::before {
+  .split-panel-snapping .split-panel-snapping-dots::before {
     left: 100px;
   }
 
-  .split-panel-snapping-dots::after {
+  .split-panel-snapping .split-panel-snapping-dots::after {
     left: 50%;
   }
 </style>
+```
+
+Or, if you want to snap the panel to every `100px` interval, as well as at 50% of the panel's size, you can use `snap="repeat(100px) 50%"`.
+
+```html:preview
+<div class="split-panel-snapping-repeat">
+  <sl-split-panel snap="repeat(100px) 50%">
+    <div
+      slot="start"
+      style="height: 150px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
+    >
+      Start
+    </div>
+    <div
+      slot="end"
+      style="height: 150px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
+    >
+      End
+    </div>
+  </sl-split-panel>
+</div>
+
+<style>
+  .split-panel-snapping-repeat {
+    position: relative;
+  }
+</style>
+```
+
+### Using a Custom Snap Function
+
+You can also implement a custom snap function which controls the snapping manually. To do this, you need to acquire a reference to the element in Javascript and set the `snap` property. For example, if you want to snap the divider to either `100px` from the left or `100px` from the right, you can set the `snap` property to a function encoding that logic.
+
+```js
+panel.snap = ({ pos, size }) => (pos < size / 2 ? 100 : size - 100);
+```
+
+Note that the `snap-threshold` property will not automatically be applied if `snap` is set to a function. Instead, the function itself must handle applying the threshold if desired, and is passed a `snapThreshold` member with its parameters.
+
+```html:preview
+<div class="split-panel-snapping-fn">
+  <sl-split-panel>
+    <div
+      slot="start"
+      style="height: 150px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
+    >
+      Start
+    </div>
+    <div
+      slot="end"
+      style="height: 150px; background: var(--sl-color-neutral-50); display: flex; align-items: center; justify-content: center; overflow: hidden;"
+    >
+      End
+    </div>
+  </sl-split-panel>
+
+  <div class="split-panel-snapping-dots"></div>
+</div>
+
+<style>
+  .split-panel-snapping-fn {
+    position: relative;
+  }
+
+  .split-panel-snapping-fn .split-panel-snapping-dots::before,
+  .split-panel-snapping-fn .split-panel-snapping-dots::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--sl-color-neutral-400);
+    transform: translateX(-3px);
+  }
+
+  .split-panel-snapping-fn .split-panel-snapping-dots::before {
+    left: 100px;
+  }
+
+  .split-panel-snapping-fn .split-panel-snapping-dots::after {
+    left: calc(100% - 100px);
+  }
+</style>
+
+<script>
+  const container = document.querySelector('.split-panel-snapping-fn');
+  const splitPanel = container.querySelector('sl-split-panel');
+  splitPanel.snap = ({ pos, size }) => (pos < size / 2) ? 100 : (size - 100);
+</script>
 ```
 
 {% raw %}
