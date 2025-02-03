@@ -18,6 +18,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 - Updated the Japanese translation [#2329]
 - Adjust `<sl-alert>` to create the toast stack when used only, making it usable in SSR environments. [#2359]
 - Adjust `scrollend-polyfill` so it only runs on the client to make it usable in SSR environments. [#2359]
+- Fixed a bug with radios in `<sl-dialog>` focus trapping.
 
 ## 2.19.1
 
