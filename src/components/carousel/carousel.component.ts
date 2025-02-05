@@ -371,10 +371,10 @@ export default class SlCarousel extends ShoelaceElement {
       slide.setAttribute('aria-label', this.localize.term('slideNum', index + 1));
 
       if (this.pagination) {
+        slide.setAttribute('id', `slide-${index + 1}`);
         slide.setAttribute('role', 'tabpanel');
         slide.removeAttribute('aria-label');
         slide.setAttribute('aria-labelledby', `tab-${index + 1}`);
-        slide.setAttribute('id', `slide-${index + 1}`);
       }
 
       if (slide.hasAttribute('data-clone')) {
@@ -633,11 +633,9 @@ export default class SlCarousel extends ShoelaceElement {
                       id="tab-${index + 1}"
                       aria-controls="slide-${index + 1}"
                       aria-selected="${isActive ? 'true' : 'false'}"
-                      ${isActive
-                        ? ''
-                        : `aria-label="${this.localize.term('goToSlide', index + 1, pagesCount)}"`
-                      }
-                      aria-label="${this.localize.term('goToSlide', index + 1, pagesCount)}"
+                      aria-label="${isActive
+                        ? this.localize.term('slideNum', index + 1)
+                        : this.localize.term('goToSlide', index + 1, pagesCount)}"
                       tabindex=${isActive ? '0' : '-1'}
                       @click=${() => this.goToSlide(index * slidesPerMove)}
                       @keydown=${this.handleKeyDown}

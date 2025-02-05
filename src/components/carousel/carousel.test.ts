@@ -768,11 +768,15 @@ describe('<sl-carousel>', () => {
       expect(el.scrollContainer).to.have.attribute('aria-atomic', 'true');
 
       expect(pagination).to.have.attribute('role', 'tablist');
-      expect(pagination).to.have.attribute('aria-controls', el.scrollContainer.id);
+      let paginationItemIndex = 0;
       for (const paginationItem of pagination.querySelectorAll('.carousel__pagination-item')) {
+        const slide = el.querySelector(`sl-carousel-item[id="slide-${paginationItemIndex + 1}"]`)!;
+        expect(paginationItem).to.have.attribute('id', `tab-${paginationItemIndex + 1}`);
         expect(paginationItem).to.have.attribute('role', 'tab');
+        expect(paginationItem).to.have.attribute('aria-controls', slide.id);
         expect(paginationItem).to.have.attribute('aria-selected');
         expect(paginationItem).to.have.attribute('aria-label');
+        paginationItemIndex++
       }
 
       for (const navigationItem of navigation.querySelectorAll('.carousel__navigation-item')) {
