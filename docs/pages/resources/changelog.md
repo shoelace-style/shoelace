@@ -14,7 +14,7 @@ New versions of Shoelace are released as-needed and generally occur when a criti
 
 ## next
 
-- Fixed a bug that prevented `<sl-tab-group>` to be activated properly when rendered in another `<sl-tab-group>` (#NR)
+- Fixed a bug that prevented `<sl-tab-group>` to be activated properly when rendered in another `<sl-tab-group>` (#2367)
 
 ## 2.20.0
 
