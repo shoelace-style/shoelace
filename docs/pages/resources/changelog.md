@@ -12,6 +12,10 @@ Components with the <sl-badge variant="warning" pill>Experimental</sl-badge> bad
 
 New versions of Shoelace are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.shoelace.style](https://next.shoelace.style).
 
+## next
+
+- Fixed a bug that prevented `<sl-tab-group>` to be activated properly when rendered in another `<sl-tab-group>` (#NR)
+
 ## 2.20.0
 
 - Added the ability to set a custom snap function and use `repeat(n)` to `<sl-split-panel>` [#2340]
