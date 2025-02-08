@@ -180,6 +180,12 @@ export default class SlDropdown extends ShoelaceElement {
         return computeActiveElement(element?.shadowRoot?.activeElement);
       };
 
+      const computeClosestContaining = (element: Element | null, tagName: string) => {
+        const closest = element?.closest(tagName);
+        if (closest !== null) return closest;
+        return computeClosestContaining((element?.getRootNode() as ShadowRoot).host, tagName);
+      };
+
       // Tabbing outside of the containing element closes the panel
       //
       // If the dropdown is used within a shadow DOM, we need to obtain the activeElement within that shadowRoot,
@@ -192,7 +198,8 @@ export default class SlDropdown extends ShoelaceElement {
 
         if (
           !this.containingElement ||
-          activeElement?.closest(this.containingElement.tagName.toLowerCase()) !== this.containingElement
+          computeClosestContaining(activeElement, this.containingElement.tagName.toLowerCase()) !==
+            this.containingElement
         ) {
           this.hide();
         }

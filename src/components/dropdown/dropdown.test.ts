@@ -402,4 +402,53 @@ describe('<sl-dropdown>', () => {
       expect(dropdown.open).to.be.true;
     });
   });
+
+  describe('when arbitrary content is provided and the dropdown is opened', () => {
+    beforeEach(() => {
+      @customElement('custom-wrapper-arbitrary')
+      class WrapperArbitrary extends LitElement {
+        render() {
+          return html`<nested-dropdown-arbitrary></nested-dropdown-arbitrary>`;
+        }
+      }
+      // eslint-disable-next-line chai-friendly/no-unused-expressions
+      WrapperArbitrary;
+
+      @customElement('nested-dropdown-arbitrary')
+      class NestedDropdownArbitrary extends LitElement {
+        render() {
+          return html`
+            <sl-dropdown>
+              <sl-button slot="trigger" caret>Toggle</sl-button>
+              <ul>
+                <li><a href="/settings">Settings</a></li>
+                <li><a href="/profile">Profile</a></li>
+              </ul>
+            </sl-dropdown>
+          `;
+        }
+      }
+      // eslint-disable-next-line chai-friendly/no-unused-expressions
+      NestedDropdownArbitrary;
+    });
+
+    it('should remain open on tab key', async () => {
+      const el = await fixture<SlDropdown>(html`<custom-wrapper-arbitrary></custom-wrapper-arbitrary>`);
+
+      const dropdown = el
+        .shadowRoot!.querySelector('nested-dropdown-arbitrary')!
+        .shadowRoot!.querySelector('sl-dropdown')!;
+
+      const trigger = dropdown.querySelector('sl-button')!;
+
+      trigger.focus();
+      await dropdown.updateComplete;
+      await sendKeys({ press: 'Enter' });
+      await dropdown.updateComplete;
+      await sendKeys({ press: 'Tab' });
+      await dropdown.updateComplete;
+
+      expect(dropdown.open).to.be.true;
+    });
+  });
 });
