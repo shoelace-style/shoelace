@@ -175,6 +175,11 @@ export default class SlDropdown extends ShoelaceElement {
         return;
       }
 
+      const computeActiveElement = (element: Element | null) => {
+        if (!element?.shadowRoot?.activeElement) return element;
+        return computeActiveElement(element?.shadowRoot?.activeElement);
+      };
+
       // Tabbing outside of the containing element closes the panel
       //
       // If the dropdown is used within a shadow DOM, we need to obtain the activeElement within that shadowRoot,
@@ -182,7 +187,7 @@ export default class SlDropdown extends ShoelaceElement {
       setTimeout(() => {
         const activeElement =
           this.containingElement?.getRootNode() instanceof ShadowRoot
-            ? document.activeElement?.shadowRoot?.activeElement
+            ? computeActiveElement(document.activeElement)
             : document.activeElement;
 
         if (
