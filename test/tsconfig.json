@@ -1,0 +1,9 @@
+/* This tsconfig.json is used to check the compiled files in dist/ */
+{
+  "extends": "../tsconfig",
+
+  /* These paths are relative to this file, but must be within the extended
+     tsconfig's rootDir */
+  "include": ["../dist", "../test"],
+  "exclude": []
+}

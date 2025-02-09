@@ -111,6 +111,13 @@ module.exports = {
         '@typescript-eslint/no-unsafe-call': 'off',
         '@typescript-eslint/no-unused-expressions': 'off'
       }
+    },
+    {
+      files: ['test/**/*.ts'],
+      parserOptions: {
+        project: ['tsconfig.json'],
+        tsconfigRootDir: `${__dirname}/test`
+      }
     }
   ],
   rules: {

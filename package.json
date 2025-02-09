@@ -16,18 +16,54 @@
       "import": "./dist/shoelace.js"
     },
     "./dist/custom-elements.json": "./dist/custom-elements.json",
-    "./dist/shoelace.js": "./dist/shoelace.js",
-    "./dist/shoelace-autoloader.js": "./dist/shoelace-autoloader.js",
-    "./dist/themes": "./dist/themes",
-    "./dist/themes/*": "./dist/themes/*",
-    "./dist/components": "./dist/components",
-    "./dist/components/*": "./dist/components/*",
-    "./dist/utilities": "./dist/utilities",
-    "./dist/utilities/*": "./dist/utilities/*",
-    "./dist/react": "./dist/react/index.js",
-    "./dist/react/*": "./dist/react/*",
-    "./dist/translations": "./dist/translations",
-    "./dist/translations/*": "./dist/translations/*"
+    "./dist/shoelace.js": {
+      "types": "./dist/shoelace.d.ts",
+      "import": "./dist/shoelace.js"
+    },
+    "./dist/shoelace-autoloader.js": {
+      "types": "./dist/shoelace-autoloader.d.ts",
+      "import": "./dist/shoelace-autoloader.js"
+    },
+    "./dist/themes": {
+      "types": "./dist/themes.d.ts",
+      "import": "./dist/themes.js"
+    },
+    "./dist/themes/*": {
+      "types": "./dist/themes/*.d.ts",
+      "import": "./dist/themes/*.js"
+    },
+    "./dist/components": {
+      "types": "./dist/components.d.ts",
+      "import": "./dist/components.js"
+    },
+    "./dist/components/*": {
+      "types": "./dist/components/*.d.ts",
+      "import": "./dist/components/*.js"
+    },
+    "./dist/utilities": {
+      "types": "./dist/utilities.d.ts",
+      "import": "./dist/utilities.js"
+    },
+    "./dist/utilities/*": {
+      "types": "./dist/utilities/*.d.ts",
+      "import": "./dist/utilities/*.js"
+    },
+    "./dist/react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js"
+    },
+    "./dist/react/*": {
+      "types": "./dist/react/*/index.d.ts",
+      "import": "./dist/react/*/index.js"
+    },
+    "./dist/translations": {
+      "types": "./dist/translations.d.ts",
+      "import": "./dist/translations.js"
+    },
+    "./dist/translations/*": {
+      "types": "./dist/translations/*.d.ts",
+      "import": "./dist/translations/*.js"
+    }
   },
   "files": [
     "dist",
@@ -52,7 +88,7 @@
   "scripts": {
     "start": "node scripts/build.js --serve",
     "build": "node scripts/build.js",
-    "verify": "npm run prettier:check && npm run lint && npm run build && npm run test",
+    "verify": "npm run prettier:check && npm run lint && npm run build && npm run typecheck:dist && npm run test",
     "prepare": "npx playwright install",
     "prepublishOnly": "npm run verify",
     "prettier": "prettier --write --log-level=warn .",
@@ -63,6 +99,7 @@
     "test": "web-test-runner --group default",
     "test:component": "web-test-runner -- --watch --group",
     "test:watch": "web-test-runner --watch --group default",
+    "typecheck:dist": "tsc --noEmit --project test/tsconfig.json",
     "spellcheck": "cspell \"**/*.{js,ts,json,html,css,md}\" --no-progress",
     "check-updates": "npx npm-check-updates --interactive --format group"
   },
