@@ -136,7 +136,7 @@ export default class SlTabGroup extends ShoelaceElement {
 
       this.mutationObserver.observe(this, {
         attributes: true,
-        attributeFilter: ['active', 'aria-labelledby', 'aria-controls', 'disabled'],
+        attributeFilter: ['active', 'disabled', 'name', 'panel'],
         childList: true,
         subtree: true
       });
