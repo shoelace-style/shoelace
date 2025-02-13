@@ -47,7 +47,7 @@ export async function clickOnElement(
 ) {
   const { clickX, clickY } = determineMousePosition(el, position, offsetX, offsetY);
 
-  await sendMouse({ type: 'click', position: [clickX, clickY] });
+  await sendMouse({ type: 'click', position: [Math.round(clickX), Math.round(clickY)] });
 }
 
 /** A testing utility that moves the mouse onto an element. */
