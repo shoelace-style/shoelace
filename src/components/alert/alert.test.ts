@@ -140,10 +140,14 @@ describe('<sl-alert>', () => {
     });
 
     it('clicking above close button does not close the alert', async () => {
-      const wrapper = await fixture<HTMLDivElement>(html`<div class="wrapper" style="padding: 24px; background-color:red;"><sl-alert open closable>I am an alert</sl-alert></div>`);
+      const wrapper = await fixture<HTMLDivElement>(
+        html`<div class="wrapper" style="padding: 24px; background-color:red;">
+          <sl-alert open closable>I am an alert</sl-alert>
+        </div>`
+      );
       const alert = wrapper.querySelector('sl-alert')!;
 
-      const clickTargetPromise = new Promise<HTMLElement>((resolve) => {
+      const clickTargetPromise = new Promise<HTMLElement>(resolve => {
         const clickHandler = sinon.spy((event: MouseEvent) => {
           resolve(event.target as HTMLElement);
         });
@@ -156,14 +160,19 @@ describe('<sl-alert>', () => {
       const clickTarget = await clickTargetPromise;
       await expect(clickTarget.tagName.toLowerCase()).to.not.be.equal('sl-icon-button');
       expect(clickTarget.classList.contains('alert')).to.be.true;
-      expect(clickTarget.classList.contains('wrapper'), 'The click should happen in the alert and not outside of it').to.be.false;
+      expect(clickTarget.classList.contains('wrapper'), 'The click should happen in the alert and not outside of it').to
+        .be.false;
     });
 
     it('clicking under close button does not close the alert', async () => {
-      const wrapper = await fixture<HTMLDivElement>(html`<div class="wrapper" style="padding: 24px; background-color:red;"><sl-alert open closable>I am an alert</sl-alert></div>`);
+      const wrapper = await fixture<HTMLDivElement>(
+        html`<div class="wrapper" style="padding: 24px; background-color:red;">
+          <sl-alert open closable>I am an alert</sl-alert>
+        </div>`
+      );
       const alert = wrapper.querySelector('sl-alert')!;
 
-      const clickTargetPromise = new Promise<HTMLElement>((resolve) => {
+      const clickTargetPromise = new Promise<HTMLElement>(resolve => {
         const clickHandler = sinon.spy((event: MouseEvent) => {
           resolve(event.target as HTMLElement);
         });
@@ -177,14 +186,19 @@ describe('<sl-alert>', () => {
 
       await expect(clickTarget.tagName.toLowerCase()).to.not.be.equal('sl-icon-button');
       expect(clickTarget.classList.contains('alert')).to.be.true;
-      expect(clickTarget.classList.contains('wrapper'), 'The click should happen in the alert and not outside of it').to.be.false;
+      expect(clickTarget.classList.contains('wrapper'), 'The click should happen in the alert and not outside of it').to
+        .be.false;
     });
 
     it('clicking on the right side of the close button does not close the alert', async () => {
-      const wrapper = await fixture<HTMLDivElement>(html`<div class="wrapper" style="padding: 24px; background-color:red;"><sl-alert open closable>I am an alert</sl-alert></div>`);
+      const wrapper = await fixture<HTMLDivElement>(
+        html`<div class="wrapper" style="padding: 24px; background-color:red;">
+          <sl-alert open closable>I am an alert</sl-alert>
+        </div>`
+      );
       const alert = wrapper.querySelector('sl-alert')!;
 
-      const clickTargetPromise = new Promise<HTMLElement>((resolve) => {
+      const clickTargetPromise = new Promise<HTMLElement>(resolve => {
         const clickHandler = sinon.spy((event: MouseEvent) => {
           resolve(event.target as HTMLElement);
         });
@@ -198,7 +212,8 @@ describe('<sl-alert>', () => {
 
       await expect(clickTarget.tagName.toLowerCase()).to.not.be.equal('sl-icon-button');
       expect(clickTarget.classList.contains('alert')).to.be.true;
-      expect(clickTarget.classList.contains('wrapper'), 'The click should happen in the alert and not outside of it').to.be.false;
+      expect(clickTarget.classList.contains('wrapper'), 'The click should happen in the alert and not outside of it').to
+        .be.false;
     });
   });
 
