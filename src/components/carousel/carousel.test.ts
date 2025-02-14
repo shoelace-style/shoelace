@@ -775,7 +775,7 @@ describe('<sl-carousel>', () => {
         expect(paginationItem).to.have.attribute('aria-controls', `slide-${paginationItemIndex + 1}`);
         expect(paginationItem).to.have.attribute('aria-selected');
         expect(paginationItem).to.have.attribute('aria-label');
-        paginationItemIndex++
+        paginationItemIndex++;
       }
 
       for (const navigationItem of navigation.querySelectorAll('.carousel__navigation-item')) {
@@ -784,7 +784,7 @@ describe('<sl-carousel>', () => {
         expect(navigationItem).to.have.attribute('aria-label');
       }
 
-      await expect(el).to.be.accessible({ ignoredRules: ['aria-valid-attr-value']});
+      await expect(el).to.be.accessible({ ignoredRules: ['aria-valid-attr-value'] });
     });
 
     describe('when scrolling', () => {
