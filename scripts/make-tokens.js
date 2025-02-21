@@ -4,7 +4,7 @@ import chalk from 'chalk';
 import fs from 'fs';
 import path from 'path';
 import prettier from 'prettier';
-import tokens from './../src/styles/tokens.json' assert { type: 'json' };
+import tokens from './../src/styles/tokens.json' with { type: 'json' };
 
 const colorFamilies = ['blue', 'gray', 'red', 'green', 'yellow', 'teal', 'purple', 'fuchsia'];
 const colors = tokens.colors;
