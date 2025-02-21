@@ -229,6 +229,47 @@ describe('<sl-select>', () => {
        * @ts-expect-error */
       el.handleDocumentKeyDown(event);
     });
+
+    describe('#2384: should not break on invalid values of the "value" prop when "multiple" is set', () => {
+      it('should support an empty string', async () => {
+        const el = await fixture<SlSelect>('<sl-select multiple></sl-select>');
+        el.value = '';
+        await expect(el.value).to.eql(['']);
+      });
+
+      it('should support a string', async () => {
+        const el = await fixture<SlSelect>('<sl-select multiple></sl-select>');
+        el.value = 'value';
+        await expect(el.value).to.eql(['value']);
+      });
+
+      it('should support none falsy values', async () => {
+        const el = await fixture<SlSelect>('<sl-select multiple></sl-select>');
+        // @ts-expect-error Testing for invalid values
+        el.value = 1;
+        await expect(el.value).to.eql([1]);
+      });
+
+      it('should not allow falsy values', async () => {
+        const el = await fixture<SlSelect>('<sl-select multiple></sl-select>');
+        // @ts-expect-error Testing for invalid values
+        el.value = false;
+        await expect(el.value).to.eql([]);
+      });
+
+      it('should not allow undefined values', async () => {
+        const el = await fixture<SlSelect>('<sl-select multiple></sl-select>');
+        // @ts-expect-error Testing for invalid values
+        el.value = undefined;
+        await expect(el.value).to.eql([]);
+      });
+
+      it('should support an array of strings', async () => {
+        const el = await fixture<SlSelect>('<sl-select multiple></sl-select>');
+        el.value = ['a', 'b', 'c'];
+        await expect(el.value).to.eql(['a', 'b', 'c']);
+      });
+    });
   });
 
   it('should open the listbox when any letter key is pressed with sl-select is on focus', async () => {
