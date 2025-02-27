@@ -5,6 +5,7 @@ import { clamp } from '../../internal/math.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { eventOptions, property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
+import { literal, html as staticHtml, unsafeStatic } from 'lit/static-html.js';
 import { LocalizeController } from '../../utilities/localize.js';
 import { map } from 'lit/directives/map.js';
 import { prefersReducedMotion } from '../../internal/animate.js';
@@ -122,6 +123,13 @@ export default class SlCarousel extends ShoelaceElement {
     if (changedProperties.has('slidesPerMove') || changedProperties.has('slidesPerPage')) {
       this.slidesPerMove = Math.min(this.slidesPerMove, this.slidesPerPage);
     }
+  }
+
+  protected get internalTagNames() {
+    return {
+      icon: 'sl-icon',
+      carouselItem: 'sl-carousel-item'
+    };
   }
 
   private getPageCount() {
@@ -342,7 +350,7 @@ export default class SlCarousel extends ShoelaceElement {
   }
 
   private isCarouselItem(node: Node): node is SlCarouselItem {
-    return node instanceof Element && node.tagName.toLowerCase() === 'sl-carousel-item';
+    return node instanceof Element && node.tagName.toLowerCase() === this.internalTagNames.carouselItem;
   }
 
   private handleSlotChange = (mutations: MutationRecord[]) => {
@@ -586,7 +594,10 @@ export default class SlCarousel extends ShoelaceElement {
                   @click=${prevEnabled ? () => this.previous() : null}
                 >
                   <slot name="previous-icon">
-                    <sl-icon library="system" name="${isLtr ? 'chevron-left' : 'chevron-right'}"></sl-icon>
+                    ${staticHtml`<${literal`${unsafeStatic(this.internalTagNames.icon)}`} 
+                      library="system"
+                      name="${isLtr ? 'chevron-left' : 'chevron-right'}"
+                    ></${literal`${unsafeStatic(this.internalTagNames.icon)}`}>`}
                   </slot>
                 </button>
 
@@ -603,7 +614,10 @@ export default class SlCarousel extends ShoelaceElement {
                   @click=${nextEnabled ? () => this.next() : null}
                 >
                   <slot name="next-icon">
-                    <sl-icon library="system" name="${isLtr ? 'chevron-right' : 'chevron-left'}"></sl-icon>
+                    ${staticHtml`<${literal`${unsafeStatic(this.internalTagNames.icon)}`} 
+                      library="system"
+                      name="${isLtr ? 'chevron-right' : 'chevron-left'}"
+                    ></${literal`${unsafeStatic(this.internalTagNames.icon)}`}>`}
                   </slot>
                 </button>
               </div>

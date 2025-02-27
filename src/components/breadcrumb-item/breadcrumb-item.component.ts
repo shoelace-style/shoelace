@@ -48,10 +48,17 @@ export default class SlBreadcrumbItem extends ShoelaceElement {
   /** The `rel` attribute to use on the link. Only used when `href` is set. */
   @property() rel = 'noreferrer noopener';
 
+  protected get internalTagNames() {
+    return {
+      dropdown: 'sl-dropdown'
+    };
+  }
+
   private setRenderType() {
     const hasDropdown =
-      this.defaultSlot.assignedElements({ flatten: true }).filter(i => i.tagName.toLowerCase() === 'sl-dropdown')
-        .length > 0;
+      this.defaultSlot
+        .assignedElements({ flatten: true })
+        .filter(i => i.tagName.toLowerCase() === this.internalTagNames.dropdown).length > 0;
 
     if (this.href) {
       this.renderType = 'link';

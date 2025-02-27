@@ -1,4 +1,5 @@
 import { html } from 'lit';
+import { literal, html as staticHtml, unsafeStatic } from 'lit/static-html.js';
 import { property, query, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
@@ -43,6 +44,12 @@ export default class SlAnimatedImage extends ShoelaceElement {
 
   /** Plays the animation. When this attribute is remove, the animation will pause. */
   @property({ type: Boolean, reflect: true }) play: boolean;
+
+  protected get internalTagNames() {
+    return {
+      icon: 'sl-icon'
+    };
+  }
 
   private handleClick() {
     this.play = !this.play;
@@ -106,8 +113,18 @@ export default class SlAnimatedImage extends ShoelaceElement {
               />
 
               <div part="control-box" class="animated-image__control-box">
-                <slot name="play-icon"><sl-icon name="play-fill" library="system"></sl-icon></slot>
-                <slot name="pause-icon"><sl-icon name="pause-fill" library="system"></sl-icon></slot>
+                <slot name="play-icon"
+                  >${staticHtml`<${literal`${unsafeStatic(this.internalTagNames.icon)}`} 
+                    name="play-fill" 
+                    library="system"
+                  ></${literal`${unsafeStatic(this.internalTagNames.icon)}`}>`}</slot
+                >
+                <slot name="pause-icon"
+                  >${staticHtml`<${literal`${unsafeStatic(this.internalTagNames.icon)}`}
+                    name="pause-fill"
+                    library="system"
+                  ></${literal`${unsafeStatic(this.internalTagNames.icon)}`}>`}</slot
+                >
               </div>
             `
           : ''}

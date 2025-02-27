@@ -28,23 +28,30 @@ export default class SlButtonGroup extends ShoelaceElement {
    */
   @property() label = '';
 
+  protected get internalTagNames() {
+    return {
+      button: 'sl-button',
+      radioButton: 'sl-radio-button'
+    };
+  }
+
   private handleFocus(event: Event) {
-    const button = findButton(event.target as HTMLElement);
+    const button = this.findButton(event.target as HTMLElement);
     button?.toggleAttribute('data-sl-button-group__button--focus', true);
   }
 
   private handleBlur(event: Event) {
-    const button = findButton(event.target as HTMLElement);
+    const button = this.findButton(event.target as HTMLElement);
     button?.toggleAttribute('data-sl-button-group__button--focus', false);
   }
 
   private handleMouseOver(event: Event) {
-    const button = findButton(event.target as HTMLElement);
+    const button = this.findButton(event.target as HTMLElement);
     button?.toggleAttribute('data-sl-button-group__button--hover', true);
   }
 
   private handleMouseOut(event: Event) {
-    const button = findButton(event.target as HTMLElement);
+    const button = this.findButton(event.target as HTMLElement);
     button?.toggleAttribute('data-sl-button-group__button--hover', false);
   }
 
@@ -53,7 +60,7 @@ export default class SlButtonGroup extends ShoelaceElement {
 
     slottedElements.forEach(el => {
       const index = slottedElements.indexOf(el);
-      const button = findButton(el);
+      const button = this.findButton(el);
 
       if (button) {
         button.toggleAttribute('data-sl-button-group__button', true);
@@ -62,10 +69,17 @@ export default class SlButtonGroup extends ShoelaceElement {
         button.toggleAttribute('data-sl-button-group__button--last', index === slottedElements.length - 1);
         button.toggleAttribute(
           'data-sl-button-group__button--radio',
-          button.tagName.toLowerCase() === 'sl-radio-button'
+          button.tagName.toLowerCase() === this.internalTagNames.radioButton
         );
       }
     });
+  }
+
+  private findButton(el: HTMLElement) {
+    const selector = `${this.internalTagNames.button}, ${this.internalTagNames.radioButton}`;
+
+    // The button could be the target element or a child of it (e.g. a dropdown or tooltip anchor)
+    return el.closest(selector) ?? el.querySelector(selector);
   }
 
   render() {
@@ -85,11 +99,4 @@ export default class SlButtonGroup extends ShoelaceElement {
       </div>
     `;
   }
-}
-
-function findButton(el: HTMLElement) {
-  const selector = 'sl-button, sl-radio-button';
-
-  // The button could be the target element or a child of it (e.g. a dropdown or tooltip anchor)
-  return el.closest(selector) ?? el.querySelector(selector);
 }

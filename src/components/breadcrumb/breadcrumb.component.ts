@@ -1,4 +1,5 @@
 import { html } from 'lit';
+import { literal, html as staticHtml, unsafeStatic } from 'lit/static-html.js';
 import { LocalizeController } from '../../utilities/localize.js';
 import { property, query } from 'lit/decorators.js';
 import componentStyles from '../../styles/component.styles.js';
@@ -37,6 +38,13 @@ export default class SlBreadcrumb extends ShoelaceElement {
    */
   @property() label = '';
 
+  protected get internalTagNames() {
+    return {
+      icon: 'sl-icon',
+      breadcrumbItem: 'sl-breadcrumb-item'
+    };
+  }
+
   // Generates a clone of the separator element to use for each breadcrumb item
   private getSeparator() {
     const separator = this.separatorSlot.assignedElements({ flatten: true })[0] as HTMLElement;
@@ -52,7 +60,7 @@ export default class SlBreadcrumb extends ShoelaceElement {
 
   private handleSlotChange() {
     const items = [...this.defaultSlot.assignedElements({ flatten: true })].filter(
-      item => item.tagName.toLowerCase() === 'sl-breadcrumb-item'
+      item => item.tagName.toLowerCase() === this.internalTagNames.breadcrumbItem
     ) as SlBreadcrumbItem[];
 
     items.forEach((item, index) => {
@@ -93,7 +101,10 @@ export default class SlBreadcrumb extends ShoelaceElement {
 
       <span hidden aria-hidden="true">
         <slot name="separator">
-          <sl-icon name=${this.localize.dir() === 'rtl' ? 'chevron-left' : 'chevron-right'} library="system"></sl-icon>
+          ${staticHtml`<${literal`${unsafeStatic(this.internalTagNames.icon)}`} 
+            name=${this.localize.dir() === 'rtl' ? 'chevron-left' : 'chevron-right'} 
+            library="system"
+          ></${literal`${unsafeStatic(this.internalTagNames.icon)}`}>`}
         </slot>
       </span>
     `;

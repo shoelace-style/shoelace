@@ -1,5 +1,6 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { html } from 'lit';
+import { literal, html as staticHtml, unsafeStatic } from 'lit/static-html.js';
 import { property, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
@@ -57,6 +58,12 @@ export default class SlAvatar extends ShoelaceElement {
     this.hasError = false;
   }
 
+  protected get internalTagNames() {
+    return {
+      icon: 'sl-icon'
+    };
+  }
+
   private handleImageLoadError() {
     this.hasError = true;
     this.emit('sl-error');
@@ -82,7 +89,10 @@ export default class SlAvatar extends ShoelaceElement {
       avatarWithoutImage = html`
         <div part="icon" class="avatar__icon" aria-hidden="true">
           <slot name="icon">
-            <sl-icon name="person-fill" library="system"></sl-icon>
+            ${staticHtml`<${literal`${unsafeStatic(this.internalTagNames.icon)}`} 
+              name="person-fill" 
+              library="system"
+            ></${literal`${unsafeStatic(this.internalTagNames.icon)}`}>`}
           </slot>
         </div>
       `;

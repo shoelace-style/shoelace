@@ -76,10 +76,8 @@ export default css`
     overflow-x: hidden;
   }
 
-  .carousel__slides--dragging {
-  }
-
-  :host([vertical]) ::slotted(sl-carousel-item) {
+  :host([vertical]) ::slotted(sl-carousel-item),
+  :host([vertical]) ::slotted(.carousel__item) {
     height: 100%;
   }
 

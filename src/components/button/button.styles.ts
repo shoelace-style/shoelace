@@ -66,7 +66,7 @@ export default css`
     display: inline-block;
   }
 
-  .button__label::slotted(sl-icon) {
+  .button__label::slotted(.button__caret) {
     vertical-align: -2px;
   }
 
@@ -441,7 +441,7 @@ export default css`
     visibility: hidden;
   }
 
-  .button--loading sl-spinner {
+  .button--loading .button__spinner {
     --indicator-color: currentColor;
     position: absolute;
     font-size: 1em;
@@ -455,7 +455,8 @@ export default css`
    * Badges
    */
 
-  .button ::slotted(sl-badge) {
+  .button ::slotted(sl-badge),
+  .button ::slotted(.button__badge) {
     position: absolute;
     top: 0;
     right: 0;
@@ -463,7 +464,8 @@ export default css`
     pointer-events: none;
   }
 
-  .button--rtl ::slotted(sl-badge) {
+  .button--rtl ::slotted(sl-badge),
+  .button--rtl ::slotted(.button__badge) {
     right: auto;
     left: 0;
     translate: -50% -50%;

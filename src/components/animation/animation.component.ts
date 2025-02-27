@@ -28,7 +28,9 @@ export default class SlAnimation extends ShoelaceElement {
 
   @queryAsync('slot') defaultSlot: Promise<HTMLSlotElement>;
 
-  /** The name of the built-in animation to use. For custom animations, use the `keyframes` prop. */
+  /**
+   * The name of the built-in animation to use. For custom animations, use the `keyframes` prop.
+   */
   @property() name = 'none';
 
   /**

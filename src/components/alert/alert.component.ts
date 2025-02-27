@@ -3,6 +3,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
 import { HasSlotController } from '../../internal/slot.js';
 import { html } from 'lit';
+import { literal, html as staticHtml, unsafeStatic } from 'lit/static-html.js';
 import { LocalizeController } from '../../utilities/localize.js';
 import { property, query, state } from 'lit/decorators.js';
 import { waitForEvent } from '../../internal/event.js';
@@ -92,6 +93,13 @@ export default class SlAlert extends ShoelaceElement {
 
   firstUpdated() {
     this.base.hidden = !this.open;
+  }
+
+  protected get internalTagNames() {
+    return {
+      iconButton: `sl-icon-button`,
+      self: 'sl-alert'
+    };
   }
 
   private restartAutoHide() {
@@ -224,7 +232,7 @@ export default class SlAlert extends ShoelaceElement {
           resolve();
 
           // Remove the toast stack from the DOM when there are no more alerts
-          if (SlAlert.toastStack.querySelector('sl-alert') === null) {
+          if (SlAlert.toastStack.querySelector(this.internalTagNames.self) === null) {
             SlAlert.toastStack.remove();
           }
         },
@@ -263,8 +271,8 @@ export default class SlAlert extends ShoelaceElement {
         </div>
 
         ${this.closable
-          ? html`
-              <sl-icon-button
+          ? staticHtml`
+              <${literal`${unsafeStatic(this.internalTagNames.iconButton)}`}
                 part="close-button"
                 exportparts="base:close-button__base"
                 class="alert__close-button"
@@ -272,7 +280,7 @@ export default class SlAlert extends ShoelaceElement {
                 library="system"
                 label=${this.localize.term('close')}
                 @click=${this.handleCloseClick}
-              ></sl-icon-button>
+              ></${literal`${unsafeStatic(this.internalTagNames.iconButton)}`}>
             `
           : ''}
 

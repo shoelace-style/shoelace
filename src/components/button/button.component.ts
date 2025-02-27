@@ -1,7 +1,7 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { FormControlController, validValidityState } from '../../internal/form.js';
 import { HasSlotController } from '../../internal/slot.js';
-import { html, literal } from 'lit/static-html.js';
+import { html, literal, unsafeStatic } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LocalizeController } from '../../utilities/localize.js';
 import { property, query, state } from 'lit/decorators.js';
@@ -167,6 +167,13 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
     }
   }
 
+  protected get internalTagNames() {
+    return {
+      icon: 'sl-icon',
+      spinner: 'sl-spinner'
+    };
+  }
+
   private handleBlur() {
     this.hasFocus = false;
     this.emit('sl-blur');
@@ -309,9 +316,25 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
         <slot part="label" class="button__label"></slot>
         <slot name="suffix" part="suffix" class="button__suffix"></slot>
         ${
-          this.caret ? html` <sl-icon part="caret" class="button__caret" library="system" name="caret"></sl-icon> ` : ''
+          this.caret
+            ? html`
+                <${literal`${unsafeStatic(this.internalTagNames.icon)}`} 
+                  part="caret"
+                  class="button__caret"
+                  library="system"
+                  name="caret"
+                ></${literal`${unsafeStatic(this.internalTagNames.icon)}`}>
+              `
+            : ''
         }
-        ${this.loading ? html`<sl-spinner part="spinner"></sl-spinner>` : ''}
+        ${
+          this.loading
+            ? html`
+              <${literal`${unsafeStatic(this.internalTagNames.spinner)}`} class="button__spinner" part="spinner">
+              </${literal`${unsafeStatic(this.internalTagNames.spinner)}`}>
+            `
+            : ''
+        }
       </${tag}>
     `;
     /* eslint-enable lit/no-invalid-html */
