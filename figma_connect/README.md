@@ -78,3 +78,15 @@ figma.connect(
 ```
 
 2. Once Code Connect files are published, they work immediately with components in the Teamshares UI library.
+
+### To check the current version of Code Connect
+
+```
+npm list @figma/code-connect
+```
+
+### To update to the latest version of Code Connect
+
+```
+npm install @figma/code-connect@latest
+```
