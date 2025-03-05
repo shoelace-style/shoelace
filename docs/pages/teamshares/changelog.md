@@ -5,6 +5,10 @@ meta:
 
 # Changelog
 
+## 2.3.2
+
+- Dependency update (Figma Code Connect to 1.3.1)
+
 ## 2.3.1
 
 - Dependency update for package security patch
