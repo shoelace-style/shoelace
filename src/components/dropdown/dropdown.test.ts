@@ -358,7 +358,7 @@ describe('<sl-dropdown>', () => {
   });
 
   describe('when a sl-menu is provided and the dropdown is opened', () => {
-    beforeEach(() => {
+    before(() => {
       @customElement('custom-wrapper')
       class Wrapper extends LitElement {
         render() {
@@ -404,7 +404,7 @@ describe('<sl-dropdown>', () => {
   });
 
   describe('when arbitrary content is provided and the dropdown is opened', () => {
-    beforeEach(() => {
+    before(() => {
       @customElement('custom-wrapper-arbitrary')
       class WrapperArbitrary extends LitElement {
         render() {

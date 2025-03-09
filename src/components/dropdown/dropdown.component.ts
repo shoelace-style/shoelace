@@ -1,6 +1,7 @@
 import { animateTo, stopAnimations } from '../../internal/animate.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
+import { getDeepestActiveElement } from '../../internal/active-elements.js';
 import { getTabbableBoundary } from '../../internal/tabbable.js';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -175,15 +176,18 @@ export default class SlDropdown extends ShoelaceElement {
         return;
       }
 
-      const computeActiveElement = (element: Element | null) => {
-        if (!element?.shadowRoot?.activeElement) return element;
-        return computeActiveElement(element?.shadowRoot?.activeElement);
-      };
+      const computeClosestContaining = (element: Element | null | undefined, tagName: string): Element | null => {
+        if (!element) return null;
 
-      const computeClosestContaining = (element: Element | null, tagName: string) => {
-        const closest = element?.closest(tagName);
-        if (closest !== null) return closest;
-        return computeClosestContaining((element?.getRootNode() as ShadowRoot).host, tagName);
+        const closest = element.closest(tagName);
+        if (closest) return closest;
+
+        const rootNode = element.getRootNode();
+        if (rootNode instanceof ShadowRoot) {
+          return computeClosestContaining(rootNode.host, tagName);
+        }
+
+        return null;
       };
 
       // Tabbing outside of the containing element closes the panel
@@ -193,7 +197,7 @@ export default class SlDropdown extends ShoelaceElement {
       setTimeout(() => {
         const activeElement =
           this.containingElement?.getRootNode() instanceof ShadowRoot
-            ? computeActiveElement(document.activeElement)
+            ? getDeepestActiveElement()
             : document.activeElement;
 
         if (
