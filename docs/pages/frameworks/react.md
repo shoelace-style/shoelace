@@ -21,7 +21,7 @@ Next, [include a theme](/getting-started/themes) and set the [base path](/gettin
 ```jsx
 // App.jsx
 import '@shoelace-style/shoelace/%NPMDIR%/themes/light.css';
-import { setBasePath } from '@shoelace-style/shoelace/%NPMDIR%/utilities/base-path';
+import { setBasePath } from '@shoelace-style/shoelace/%NPMDIR%/utilities/base-path.js';
 
 setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/');
 ```
@@ -43,7 +43,7 @@ Preact users facing type errors using components may benefit from setting "paths
 Every Shoelace component is available to import as a React component. Note that we're importing the `<SlButton>` _React component_ instead of the `<sl-button>` _custom element_ in the example below.
 
 ```jsx
-import SlButton from '@shoelace-style/shoelace/%NPMDIR%/react/button';
+import SlButton from '@shoelace-style/shoelace/%NPMDIR%/react/button/index.js';
 
 const MyComponent = () => <SlButton variant="primary">Click me</SlButton>;
 
@@ -62,7 +62,7 @@ However, tree-shaking extra Shoelace components proved to be a challenge. As a r
 
 ```diff
 - import { SlButton } from '@shoelace-style/shoelace/%NPMDIR%/react';
-+ import SlButton from '@shoelace-style/shoelace/%NPMDIR%/react/button';
++ import SlButton from '@shoelace-style/shoelace/%NPMDIR%/react/button/index.js';
 ```
 
 You can find a copy + paste import for each component in the "importing" section of its documentation.
@@ -75,7 +75,7 @@ Here's how you can bind the input's value to a state variable.
 
 ```jsx
 import { useState } from 'react';
-import SlInput from '@shoelace-style/shoelace/%NPMDIR%/react/input';
+import SlInput from '@shoelace-style/shoelace/%NPMDIR%/react/input/index.js';
 
 function MyComponent() {
   const [value, setValue] = useState('');
@@ -90,8 +90,8 @@ If you're using TypeScript, it's important to note that `event.target` will be a
 
 ```tsx
 import { useState } from 'react';
-import SlInput from '@shoelace-style/shoelace/%NPMDIR%/react/input';
-import type SlInputElement from '@shoelace-style/shoelace/%NPMDIR%/components/input/input';
+import SlInput from '@shoelace-style/shoelace/%NPMDIR%/react/input/index.js';
+import type SlInputElement from '@shoelace-style/shoelace/%NPMDIR%/components/input/input.js';
 
 function MyComponent() {
   const [value, setValue] = useState('');
@@ -106,8 +106,8 @@ You can also import the event type for use in your callbacks, shown below.
 
 ```tsx
 import { useCallback, useState } from 'react';
-import SlInput, { type SlInputEvent } from '@shoelace-style/shoelace/%NPMDIR%/react/input';
-import type SlInputElement from '@shoelace-style/shoelace/%NPMDIR%/components/input/input';
+import SlInput, { type SlInputEvent } from '@shoelace-style/shoelace/%NPMDIR%/react/input/index.js';
+import type SlInputElement from '@shoelace-style/shoelace/%NPMDIR%/components/input/input.js';
 
 function MyComponent() {
   const [value, setValue] = useState('');

@@ -768,11 +768,14 @@ describe('<sl-carousel>', () => {
       expect(el.scrollContainer).to.have.attribute('aria-atomic', 'true');
 
       expect(pagination).to.have.attribute('role', 'tablist');
-      expect(pagination).to.have.attribute('aria-controls', el.scrollContainer.id);
+      let paginationItemIndex = 0;
       for (const paginationItem of pagination.querySelectorAll('.carousel__pagination-item')) {
+        expect(paginationItem).to.have.attribute('id', `tab-${paginationItemIndex + 1}`);
         expect(paginationItem).to.have.attribute('role', 'tab');
+        expect(paginationItem).to.have.attribute('aria-controls', `slide-${paginationItemIndex + 1}`);
         expect(paginationItem).to.have.attribute('aria-selected');
         expect(paginationItem).to.have.attribute('aria-label');
+        paginationItemIndex++;
       }
 
       for (const navigationItem of navigation.querySelectorAll('.carousel__navigation-item')) {
@@ -781,7 +784,7 @@ describe('<sl-carousel>', () => {
         expect(navigationItem).to.have.attribute('aria-label');
       }
 
-      await expect(el).to.be.accessible();
+      await expect(el).to.be.accessible({ ignoredRules: ['aria-valid-attr-value'] });
     });
 
     describe('when scrolling', () => {

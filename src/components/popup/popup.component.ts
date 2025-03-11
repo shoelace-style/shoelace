@@ -19,7 +19,7 @@ function isVirtualElement(e: unknown): e is VirtualElement {
     e !== null &&
     typeof e === 'object' &&
     'getBoundingClientRect' in e &&
-    ('contextElement' in e ? e instanceof Element : true)
+    ('contextElement' in e ? e.contextElement instanceof Element : true)
   );
 }
 

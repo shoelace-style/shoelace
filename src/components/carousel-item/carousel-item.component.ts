@@ -20,7 +20,6 @@ export default class SlCarouselItem extends ShoelaceElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.setAttribute('role', 'group');
   }
 
   render() {

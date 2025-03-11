@@ -94,7 +94,8 @@ export default css`
     display: flex;
     align-items: center;
     font-size: var(--sl-font-size-medium);
-    padding-inline-end: var(--sl-spacing-medium);
+    margin-inline-end: var(--sl-spacing-medium);
+    align-self: center;
   }
 
   .alert__countdown {

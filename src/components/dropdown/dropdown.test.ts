@@ -1,6 +1,8 @@
 import '../../../dist/shoelace.js';
 import { clickOnElement } from '../../internal/test.js';
+import { customElement } from 'lit/decorators.js';
 import { expect, fixture, html, waitUntil } from '@open-wc/testing';
+import { LitElement } from 'lit';
 import { sendKeys, sendMouse } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type SlDropdown from './dropdown.js';
@@ -353,5 +355,100 @@ describe('<sl-dropdown>', () => {
     await el.updateComplete;
 
     expect(el.open).to.be.false;
+  });
+
+  describe('when a sl-menu is provided and the dropdown is opened', () => {
+    before(() => {
+      @customElement('custom-wrapper')
+      class Wrapper extends LitElement {
+        render() {
+          return html`<nested-dropdown></nested-dropdown>`;
+        }
+      }
+      // eslint-disable-next-line chai-friendly/no-unused-expressions
+      Wrapper;
+
+      @customElement('nested-dropdown')
+      class NestedDropdown extends LitElement {
+        render() {
+          return html`
+            <sl-dropdown>
+              <sl-button slot="trigger" caret>Toggle</sl-button>
+              <sl-menu>
+                <sl-menu-item>Item 1</sl-menu-item>
+              </sl-menu>
+            </sl-dropdown>
+          `;
+        }
+      }
+      // eslint-disable-next-line chai-friendly/no-unused-expressions
+      NestedDropdown;
+    });
+
+    it('should remain open on tab key', async () => {
+      const el = await fixture<SlDropdown>(html`<custom-wrapper></custom-wrapper>`);
+
+      const dropdown = el.shadowRoot!.querySelector('nested-dropdown')!.shadowRoot!.querySelector('sl-dropdown')!;
+
+      const trigger = dropdown.querySelector('sl-button')!;
+
+      trigger.focus();
+      await dropdown.updateComplete;
+      await sendKeys({ press: 'Enter' });
+      await dropdown.updateComplete;
+      await sendKeys({ press: 'Tab' });
+      await dropdown.updateComplete;
+
+      expect(dropdown.open).to.be.true;
+    });
+  });
+
+  describe('when arbitrary content is provided and the dropdown is opened', () => {
+    before(() => {
+      @customElement('custom-wrapper-arbitrary')
+      class WrapperArbitrary extends LitElement {
+        render() {
+          return html`<nested-dropdown-arbitrary></nested-dropdown-arbitrary>`;
+        }
+      }
+      // eslint-disable-next-line chai-friendly/no-unused-expressions
+      WrapperArbitrary;
+
+      @customElement('nested-dropdown-arbitrary')
+      class NestedDropdownArbitrary extends LitElement {
+        render() {
+          return html`
+            <sl-dropdown>
+              <sl-button slot="trigger" caret>Toggle</sl-button>
+              <ul>
+                <li><a href="/settings">Settings</a></li>
+                <li><a href="/profile">Profile</a></li>
+              </ul>
+            </sl-dropdown>
+          `;
+        }
+      }
+      // eslint-disable-next-line chai-friendly/no-unused-expressions
+      NestedDropdownArbitrary;
+    });
+
+    it('should remain open on tab key', async () => {
+      const el = await fixture<SlDropdown>(html`<custom-wrapper-arbitrary></custom-wrapper-arbitrary>`);
+
+      const dropdown = el
+        .shadowRoot!.querySelector('nested-dropdown-arbitrary')!
+        .shadowRoot!.querySelector('sl-dropdown')!;
+
+      const trigger = dropdown.querySelector('sl-button')!;
+
+      trigger.focus();
+      await dropdown.updateComplete;
+      await sendKeys({ press: 'Enter' });
+      await dropdown.updateComplete;
+      await sendKeys({ press: 'Tab' });
+      await dropdown.updateComplete;
+
+      expect(dropdown.open).to.be.true;
+    });
   });
 });
