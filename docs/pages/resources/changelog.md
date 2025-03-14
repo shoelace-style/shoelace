@@ -1622,7 +1622,7 @@ The component API remains the same except for the changes noted below. Thanks fo
 - Added `spellcheck` attribute to `<sl-input>`
 - Added `<sl-icon-library>` to allow custom icon library registration
 - Added `library` attribute to `<sl-icon>` and `<sl-icon-button>`
-- Added "Integrating with Rails" tutorial to the docs, courtesy of [ParamagicDev](https://github.com/ParamagicDev)
+- Added "Integrating with Rails" tutorial to the docs, courtesy of [KonnorRogers](https://github.com/KonnorRogers)
 - Fixed a bug where `<sl-progress-ring>` rendered incorrectly when zoomed in Safari [#227]
 - Fixed a bug where tabbing into slotted elements closes `<sl-dropdown>` when used in a shadow root [#223]
 - Fixed a bug where scroll anchoring caused undesirable scrolling when `<sl-details>` are grouped
