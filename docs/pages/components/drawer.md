@@ -497,7 +497,7 @@ The header shows a functional close button by default. You can use the `header-a
 
 ```html:preview
 <sl-drawer label="Drawer" class="drawer-header-actions">
-  <sl-icon-button class="new-window" slot="header-actions" name="arrow-top-right-on-square"></sl-icon-button>
+  <sl-icon-button library="fa" class="new-window" slot="header-actions" name="arrow-up-right-from-square"></sl-icon-button>
   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
   <sl-button slot="footer" variant="primary">Close</sl-button>
 </sl-drawer>
