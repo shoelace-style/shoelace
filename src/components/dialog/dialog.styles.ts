@@ -149,6 +149,18 @@ export default css`
     align-items: center;
     display: flex;
     flex: none;
+    border-radius: var(--sl-border-radius-circle);
+    color: var(--ts-color-text-subdued);
+  }
+
+  .dialog__close:hover {
+    background-color: var(--sl-color-neutral-200);
+    color: var(--ts-color-text-default);
+  }
+
+  .dialog__close:active {
+    background-color: var(--sl-color-neutral-300);
+    color: var(--ts-color-text-default);
   }
 
   .dialog--announcement .dialog__header-actions {

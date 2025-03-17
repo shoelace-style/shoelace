@@ -12,7 +12,7 @@ export default css`
     align-items: center;
     background: none;
     border: none;
-    border-radius: var(--sl-border-radius-medium);
+    border-radius: var(--sl-border-radius-circle);
     font-size: inherit;
     color: inherit;
     padding: var(--sl-spacing-x-small);
@@ -23,11 +23,11 @@ export default css`
 
   .icon-button:hover:not(.icon-button--disabled),
   .icon-button:focus-visible:not(.icon-button--disabled) {
-    color: var(--sl-color-primary-600);
+    background-color: var(--sl-color-neutral-200);
   }
 
   .icon-button:active:not(.icon-button--disabled) {
-    color: var(--sl-color-primary-700);
+    background-color: var(--sl-color-neutral-300);
   }
 
   .icon-button:focus {
