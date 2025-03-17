@@ -82,6 +82,7 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
     | 'datetime-local'
     | 'email'
     | 'number'
+    | 'percentage'
     | 'password'
     | 'search'
     | 'tel'
@@ -488,7 +489,7 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
               'input--disabled': this.disabled,
               'input--focused': this.hasFocus,
               'input--empty': !this.value,
-              'input--no-spin-buttons': this.noSpinButtons || this.type === 'currency'
+              'input--no-spin-buttons': this.noSpinButtons || this.type === 'currency' || this.type === 'percentage'
             })}
           >
             <span part="prefix" class="input__prefix">
@@ -510,7 +511,7 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
               class="input__control"
               type=${this.type === 'password' && this.passwordVisible
                 ? 'text'
-                : this.type === 'currency'
+                : this.type === 'currency' || this.type === 'percentage' || this.type === 'number'
                   ? 'number'
                   : this.type}
               title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
@@ -587,7 +588,11 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
               : ''}
 
             <span part="suffix" class="input__suffix">
-              ${this.type === 'currency' ? html`<span class="input__suffix-default">USD</span>` : ''}
+              ${this.type === 'currency'
+                ? html`<span class="input__suffix-default">USD</span>`
+                : this.type === 'percentage'
+                  ? html`<span class="input__suffix-default">%</span>`
+                  : ''}
               <slot name="suffix"></slot>
             </span>
           </div>
