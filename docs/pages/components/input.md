@@ -571,6 +571,8 @@ The `type` attribute controls the type of input the browser renders. As shown in
     <div slot="help-text">Use the <code>no-spin-buttons</code> attribute to hide the browser's default increment/decrement buttons for number inputs</div>
 </sl-input>
 <br />
+<sl-input type="percentage" label="Input type: Percentage"></sl-input>
+<br />
 <sl-input type="search" label="Input type: Search" clearable><div slot="help-text">Has a search icon by default. Use the <code>clearable</code> attribute to make the input clearable</div></sl-input>
 <br />
 ```

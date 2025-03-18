@@ -296,27 +296,6 @@ sl-icon.contained {
   padding: var(--sl-spacing-x-small);
 }
 
-/** ********** **/
-/* Icon button custom */
-/** ********** **/
-sl-icon-button::part(base),
-sl-dialog::part(close-button__base) {
-  border-radius: var(--sl-border-radius-circle);
-  color: var(--ts-color-text-subdued);
-}
-
-sl-icon-button::part(base):hover,
-sl-dialog::part(close-button__base):hover {
-  background-color: var(--sl-color-neutral-200);
-  color: var(--ts-color-text-default);
-}
-
-sl-icon-button::part(base):active,
-sl-dialog::part(close-button__base):active {
-  background-color: var(--sl-color-neutral-300);
-  color: var(--ts-color-text-default);
-}
-
 /** ****************** */
 /* Range */
 /** ****************** */

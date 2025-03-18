@@ -96,10 +96,10 @@ export default css`
   }
 
   .drawer__header-actions {
-    flex-shrink: 0;
+    flex: 0 0 auto;
     display: flex;
-    flex-wrap: wrap;
     justify-content: end;
+    align-items: center;
     gap: var(--sl-spacing-2x-small);
     padding: 0 var(--header-spacing);
   }
@@ -112,9 +112,26 @@ export default css`
     font-size: var(--sl-font-size-medium);
   }
 
+  .drawer__close {
+    border-radius: var(--sl-border-radius-circle);
+    color: var(--ts-color-text-subdued);
+  }
+
+  .drawer__close:hover {
+    background-color: var(--sl-color-neutral-200);
+    color: var(--ts-color-text-default);
+  }
+
+  .drawer__close:active {
+    background-color: var(--sl-color-neutral-300);
+    color: var(--ts-color-text-default);
+  }
+
   .drawer__body {
     flex: 1 1 auto;
     display: block;
+    border-top: 1px solid var(--sl-color-neutral-300);
+    border-bottom: 1px solid var(--sl-color-neutral-300);
     padding: var(--body-spacing);
     overflow: auto;
     -webkit-overflow-scrolling: touch;

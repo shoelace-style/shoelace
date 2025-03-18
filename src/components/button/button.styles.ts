@@ -138,13 +138,13 @@ export default css`
   }
 
   .button--standard.button--success:hover:not(.button--disabled) {
-    background-color: var(--sl-color-success-500);
-    border-color: var(--sl-color-success-500);
+    background-color: var(--sl-color-success-700);
+    border-color: var(--sl-color-success-600);
     color: var(--sl-color-neutral-0);
   }
 
   .button--standard.button--success:active:not(.button--disabled) {
-    background-color: var(--sl-color-success-600);
+    background-color: var(--sl-color-success-800);
     border-color: var(--sl-color-success-600);
     color: var(--sl-color-neutral-0);
   }
@@ -255,20 +255,20 @@ export default css`
 
   /* Success */
   .button--outline.button--success {
-    border-color: var(--sl-color-success-600);
-    color: var(--sl-color-success-600);
+    border-color: var(--sl-color-success-200);
+    color: var(--sl-color-success-700);
   }
 
   .button--outline.button--success:hover:not(.button--disabled),
   .button--outline.button--success.button--checked:not(.button--disabled) {
-    background-color: var(--sl-color-success-600);
-    color: var(--sl-color-neutral-0);
+    background-color: var(--sl-color-success-100);
+    color: var(--sl-color-success-700);
   }
 
   .button--outline.button--success:active:not(.button--disabled) {
-    border-color: var(--sl-color-success-700);
-    background-color: var(--sl-color-success-700);
-    color: var(--sl-color-neutral-0);
+    border-color: var(--sl-color-success-200);
+    background-color: var(--sl-color-success-200);
+    color: var(--sl-color-success-700);
   }
 
   /* Neutral */

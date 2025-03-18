@@ -5,6 +5,14 @@ meta:
 
 # Changelog
 
+## 2.4.0
+
+- Add `percentage` type to `sl-input` to make it easier to add a `%` suffix for inputs rendered with `ts_form_for`
+- Add documentation for `UI::Drawer::Component` to the Drawer component docs
+- Fix small UI bug for Drawer component close icon
+- Move `sl-icon-button` styles from the overrides stylesheet into the `sl-dialog` and `sl-drawer` stylesheets
+- Update styles for `sl-button variant="success" outline` to match other variants
+
 ## 2.3.2
 
 - Dependency update (Figma Code Connect to 1.3.1)
