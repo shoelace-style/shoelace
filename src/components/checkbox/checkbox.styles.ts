@@ -60,9 +60,19 @@ export default css`
 
   .checkbox__checked-icon,
   .checkbox__indeterminate-icon {
-    display: inline-flex;
+    display: flex;
     width: var(--toggle-size);
     height: var(--toggle-size);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .checkbox__icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
   }
 
   /* Hover */
