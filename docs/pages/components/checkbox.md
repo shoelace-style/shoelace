@@ -176,3 +176,49 @@ const App = () => {
 ```
 
 {% endraw %}
+
+### Custom checked icon
+
+Add a custom checked icon using the `checked-icon` slot.
+
+```html:preview
+  <sl-checkbox >
+    <sl-icon slot="checked-icon" name="patch-check"></sl-icon>
+    Check me
+  </sl-checkbox>
+```
+
+```jsx:react
+import SlCheckbox from '@shoelace-style/shoelace/dist/react/checkbox';
+import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
+
+const App = () => (
+  <SlCheckbox>
+    <SlIcon slot="checked-icon" name="patch-check" />
+    Check me
+  </SlCheckbox>
+);
+```
+
+### Custom indeterminate icon
+
+Add a custom indeterminate icon using the `indeterminate-icon` slot.
+
+```html:preview
+  <sl-checkbox indeterminate>
+    <sl-icon slot="indeterminate-icon" name="code-slash"></sl-icon>
+    Check me
+  </sl-checkbox>
+```
+
+```jsx:react
+import SlCheckbox from '@shoelace-style/shoelace/dist/react/checkbox';
+import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
+
+const App = () => (
+  <SlCheckbox indeterminate>
+    <SlIcon slot="indeterminate-icon" name="code-slash" />
+    Check me
+  </SlCheckbox>
+);
+```
