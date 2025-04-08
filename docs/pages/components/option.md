@@ -80,3 +80,51 @@ Add icons to the start and end of menu items using the `prefix` and `suffix` slo
   </sl-option>
 </sl-select>
 ```
+
+### Custom checked icon
+
+Add a custom checked icon using the `checked-icon` slot.
+
+```html:preview
+<sl-select label="Select one">
+  <sl-option value="option-1">
+    <sl-icon slot="checked-icon" name="patch-check"></sl-icon>
+    Option 1
+  </sl-option>
+
+  <sl-option value="option-2">
+    Option 2
+    <sl-icon slot="checked-icon" name="patch-check"></sl-icon>
+  </sl-option>
+
+  <sl-option value="option-3">
+    Option 3
+    <sl-icon slot="checked-icon" name="patch-check"></sl-icon>
+  </sl-option>
+</sl-select>
+```
+
+```jsx:react
+import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
+import SlOption from '@shoelace-style/shoelace/dist/react/option';
+import SlSelect from '@shoelace-style/shoelace/dist/react/select';
+
+const App = () => (
+  <SlSelect label="Select one">
+    <SlOption value="option-1">
+      <SlIcon slot="checked-icon" name="patch-check" />
+      Option 1
+    </SlOption>
+
+    <SlOption value="option-2">
+      Option 2
+      <SlIcon slot="checked-icon" name="patch-check" />
+    </SlOption>
+
+    <SlOption value="option-3">
+      Option 3
+      <SlIcon slot="checked-icon" name="patch-check" />
+    </SlOption>
+  </SlSelect>
+);
+```
