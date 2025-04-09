@@ -89,8 +89,11 @@ export default css`
   .drawer__title {
     flex: 1 1 auto;
     font: inherit;
-    font-size: var(--sl-font-size-large);
-    line-height: var(--sl-line-height-dense);
+    /* ts-heading-6 */
+    font-size: var(--ts-font-xl); /* 20px */
+    font-weight: var(--ts-font-medium); /* 500 */
+    letter-spacing: var(--ts-tracking-tight); /* -0.025em */
+    line-height: var(--ts-leading-6); /* 1.5rem * 24px */
     padding: var(--header-spacing);
     margin: 0;
   }
