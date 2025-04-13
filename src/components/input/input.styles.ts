@@ -168,7 +168,7 @@ export default css`
 
   .input--small .input__clear,
   .input--small .input__password-toggle {
-    width: calc(1em + var(--sl-input-spacing-small) * 2);
+    min-width: calc(1em + var(--sl-input-spacing-small) * 2);
   }
 
   .input--small .input__prefix ::slotted(*) {
@@ -192,7 +192,7 @@ export default css`
 
   .input--medium .input__clear,
   .input--medium .input__password-toggle {
-    width: calc(1em + var(--sl-input-spacing-medium) * 2);
+    min-width: calc(1em + var(--sl-input-spacing-medium) * 2);
   }
 
   .input--medium .input__prefix ::slotted(*) {
@@ -216,7 +216,7 @@ export default css`
 
   .input--large .input__clear,
   .input--large .input__password-toggle {
-    width: calc(1em + var(--sl-input-spacing-large) * 2);
+    min-width: calc(1em + var(--sl-input-spacing-large) * 2);
   }
 
   .input--large .input__prefix ::slotted(*) {
