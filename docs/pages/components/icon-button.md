@@ -9,14 +9,16 @@ layout: component
 
 ### Basic Icon Button
 
-For a full list of icons that come bundled with Shoelace, refer to the [icon component](/components/icon).
+Our official Design System icon set is Font Awesome. Use Font Awesome icons when displaying Icon Buttons by setting the `sl-icon-button`'s `library` attribute to `fa` and passing the icon's name to the `name` attribute.
+
+This will display `Regular` style icons by default:
 
 ```html:preview
-<sl-icon-button name="cog-6-tooth" label="Settings"></sl-icon-button>
+<sl-icon-button library="fa" name="cog" label="Settings"></sl-icon-button>
 ```
 
 ```pug:slim
-sl-icon-button name="cog-6-tooth" label="Settings"
+sl-icon-button library="fa" name="cog" label="Settings"
 ```
 
 ```jsx:react
@@ -30,15 +32,15 @@ const App = () => <SlIconButton name="cog-6-tooth" label="Settings" />;
 Icon buttons inherit their parent element's `font-size`.
 
 ```html:preview
-<sl-icon-button name="pencil" label="Edit" style="font-size: 1.5rem;"></sl-icon-button>
-<sl-icon-button name="pencil" label="Edit" style="font-size: 2rem;"></sl-icon-button>
-<sl-icon-button name="pencil" label="Edit" style="font-size: 2.5rem;"></sl-icon-button>
+<sl-icon-button library="fa" name="pencil" label="Edit" style="font-size: 1rem;"></sl-icon-button>
+<sl-icon-button library="fa" name="pencil" label="Edit" style="font-size: 1.25rem;"></sl-icon-button>
+<sl-icon-button library="fa" name="pencil" label="Edit" style="font-size: 1.5rem;"></sl-icon-button>
 ```
 
 ```pug:slim
-sl-icon-button name="pencil" label="Edit" style="font-size: 1.5rem;"
-sl-icon-button name="pencil" label="Edit" style="font-size: 2rem;"
-sl-icon-button name="pencil" label="Edit" style="font-size: 2.5rem;"
+sl-icon-button library="fa" name="pencil" label="Edit" style="font-size: 1rem;"
+sl-icon-button library="fa" name="pencil" label="Edit" style="font-size: 1.25rem;"
+sl-icon-button library="fa" name="pencil" label="Edit" style="font-size: 1.5rem;"
 ```
 
 {% raw %}
@@ -61,47 +63,51 @@ const App = () => (
 
 Icon buttons are designed to have a uniform appearance, so their color is not inherited. However, you can still customize them by styling the `base` part.
 
+:::warning
+**Note:** In general, you shouldn't need to do this. If you are working on a design that requires an icon button to have a color other than the standard `gray-700`, please consult the design team before implementing, so that the team can determine whether the existing pattern should be updated.
+:::
+
 ```html:preview
 <div class="icon-button-color">
-  <sl-icon-button name="at-symbol" label="Bold"></sl-icon-button>
-  <sl-icon-button name="bolt" label="Italic"></sl-icon-button>
-  <sl-icon-button name="no-symbol" label="Underline"></sl-icon-button>
+  <sl-icon-button library="fa" name="envelope" label="Send email"></sl-icon-button>
+  <sl-icon-button library="fa" name="building" label="Company"></sl-icon-button>
+  <sl-icon-button library="fa" name="user-plus" label="Add employee"></sl-icon-button>
 </div>
 
 <style>
   .icon-button-color sl-icon-button::part(base) {
-    color: #b00091;
+    color: #6339ac;
   }
 
   .icon-button-color sl-icon-button::part(base):hover,
   .icon-button-color sl-icon-button::part(base):focus {
-    color: #c913aa;
+    color: #6339ac;
   }
 
   .icon-button-color sl-icon-button::part(base):active {
-    color: #960077;
+    color: #6339ac;
   }
 </style>
 ```
 
 ```pug:slim
 div.icon-button-color
-  sl-icon-button name="at-symbol" label="Bold"
-  sl-icon-button name="bolt" label="Italic"
-  sl-icon-button name="no-symbol" label="Underline"
+  sl-icon-button library="fa" name="envelope" label="Send email"
+  sl-icon-button library="fa" name="building" label="Company"
+  sl-icon-button library="fa" name="user-plus" label="Add employee"
 
 css:
   .icon-button-color sl-icon-button::part(base) {
-    color: #b00091;
+    color: #6339ac;
   }
 
   .icon-button-color sl-icon-button::part(base):hover,
   .icon-button-color sl-icon-button::part(base):focus {
-    color: #c913aa;
+    color: #6339ac;
   }
 
   .icon-button-color sl-icon-button::part(base):active {
-    color: #960077;
+    color: #6339ac;
   }
 ```
 
@@ -141,11 +147,11 @@ const App = () => (
 Use the `href` attribute to convert the button to a link.
 
 ```html:preview
-<sl-icon-button name="cog-6-tooth" label="Settings" href="https://example.com" target="_blank"></sl-icon-button>
+<sl-icon-button library="fa" name="arrow-up-right-from-square" label="Open link" href="https://example.com" target="_blank"></sl-icon-button>
 ```
 
 ```pug:slim
-sl-icon-button name="cog-6-tooth" label="Settings" href="https://example.com" target="_blank"
+sl-icon-button library="fa" name="arrow-up-right-from-square" label="Open link" href="https://example.com" target="_blank"
 ```
 
 ```jsx:react
@@ -159,14 +165,14 @@ const App = () => <SlIconButton name="cog-6-tooth" label="Settings" href="https:
 Wrap a tooltip around an icon button to provide contextual information to the user.
 
 ```html:preview
-<sl-tooltip content="Settings">
-  <sl-icon-button name="cog-6-tooth" label="Settings"></sl-icon-button>
+<sl-tooltip content="Update settings">
+  <sl-icon-button library="fa" name="cog" label="Settings"></sl-icon-button>
 </sl-tooltip>
 ```
 
 ```pug:slim
-sl-tooltip content="Settings"
-  sl-icon-button name="cog-6-tooth" label="Settings"
+sl-tooltip content="Update settings"
+  sl-icon-button library="fa" name="cog" label="Settings"
 ```
 
 ```jsx:react
@@ -185,7 +191,7 @@ const App = () => (
 Use the `disabled` attribute to disable the icon button.
 
 ```html:preview
-<sl-icon-button name="cog-6-tooth" label="Settings" disabled></sl-icon-button>
+<sl-icon-button library="fa" name="cog" label="Settings" disabled></sl-icon-button>
 ```
 
 ```pug:slim
