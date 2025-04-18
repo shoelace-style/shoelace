@@ -26,7 +26,52 @@ describe('<sl-card>', () => {
     });
   });
 
-  describe('when provided an element in the slot "header" to render a header', () => {
+  describe('when noShadow', () => {
+    before(async () => {
+      el = await fixture<SlCard>(html` <sl-card noShadow>This card has no shadow.</sl-card> `);
+    });
+
+    it('should pass accessibility tests', async () => {
+      await expect(el).to.be.accessible();
+    });
+
+    it('should contain the class card--no-shadow', () => {
+      const card = el.shadowRoot!.querySelector('.card')!;
+      expect(card.classList.value.trim()).to.eq('card card--no-shadow');
+    });
+  });
+
+  describe('when loading', () => {
+    before(async () => {
+      el = await fixture<SlCard>(html` <sl-card loading>This card is loading.</sl-card> `);
+    });
+
+    it('should pass accessibility tests', async () => {
+      await expect(el).to.be.accessible();
+    });
+
+    it('should have a spinner present', () => {
+      const spinner = el.shadowRoot!.querySelector('sl-spinner')!;
+      expect(spinner).to.exist;
+    });
+  });
+
+  describe('when emptyState', () => {
+    before(async () => {
+      el = await fixture<SlCard>(html` <sl-card emptyState>This card has an empty state style.</sl-card> `);
+    });
+
+    it('should pass accessibility tests', async () => {
+      await expect(el).to.be.accessible();
+    });
+
+    it('should contain the class card--empty-state', () => {
+      const card = el.shadowRoot!.querySelector('.card')!;
+      expect(card.classList.value.trim()).to.eq('card card--empty-state');
+    });
+  });
+
+  describe('when provided an element in the slot "header" to render a header and actionHeader is false', () => {
     before(async () => {
       el = await fixture<SlCard>(
         html`<sl-card>
@@ -60,9 +105,50 @@ describe('<sl-card>', () => {
       const card = el.shadowRoot!.querySelector('.card')!;
       expect(card.classList.value.trim()).to.eq('card card--has-header');
     });
+
+    it('should not contain the class card--action-header.', () => {
+      const card = el.shadowRoot!.querySelector('.card')!;
+      expect(card.classList.contains('card--action-header')).not.to.be.true;
+    });
   });
 
-  describe('when provided an element in the slot "footer" to render a footer', () => {
+  describe('when provided an element in the slot "header" to render a header and actionHeader is true', () => {
+    before(async () => {
+      el = await fixture<SlCard>(
+        html`<sl-card actionHeader>
+          <div slot="header">Header Title</div>
+          This card has a header. You can put all sorts of things in it!
+        </sl-card>`
+      );
+    });
+
+    it('should pass accessibility tests', async () => {
+      await expect(el).to.be.accessible();
+    });
+
+    it('should render the child content provided.', () => {
+      expect(el.innerText).to.contain('This card has a header. You can put all sorts of things in it!');
+    });
+
+    it('render the header content provided.', () => {
+      const header = el.querySelector<HTMLElement>('div[slot=header]')!;
+      expect(header.innerText).eq('Header Title');
+    });
+
+    it('accept "header" as an assigned child in the shadow root.', () => {
+      const slot = el.shadowRoot!.querySelector<HTMLSlotElement>('slot[name=header]')!;
+      const childNodes = slot.assignedNodes({ flatten: true });
+
+      expect(childNodes.length).to.eq(1);
+    });
+
+    it('should contain the classes card--has-header and card--action-header.', () => {
+      const card = el.shadowRoot!.querySelector('.card')!;
+      expect(card.classList.value.trim()).to.eq('card card--has-header card--action-header');
+    });
+  });
+
+  describe('when provided an element in the slot "footer" to render a footer and buttonFooter is false', () => {
     before(async () => {
       el = await fixture<SlCard>(
         html`<sl-card>
@@ -96,6 +182,69 @@ describe('<sl-card>', () => {
     it('should contain the class card--has-footer.', () => {
       const card = el.shadowRoot!.querySelector('.card')!;
       expect(card.classList.value.trim()).to.eq('card card--has-footer');
+    });
+
+    it('should not contain the class card--button-footer.', () => {
+      const card = el.shadowRoot!.querySelector('.card')!;
+      expect(card.classList.contains('card--button-footer')).not.to.be.true;
+    });
+  });
+
+  describe('when provided an element in the slot "footer" to render a footer and buttonFooter is true', () => {
+    before(async () => {
+      el = await fixture<SlCard>(
+        html`<sl-card buttonFooter>
+          This card has a footer. You can put all sorts of things in it!
+
+          <div slot="footer">Footer Content</div>
+        </sl-card>`
+      );
+    });
+
+    it('should pass accessibility tests', async () => {
+      await expect(el).to.be.accessible();
+    });
+
+    it('should render the child content provided.', () => {
+      expect(el.innerText).to.contain('This card has a footer. You can put all sorts of things in it!');
+    });
+
+    it('render the footer content provided.', () => {
+      const footer = el.querySelector<HTMLElement>('div[slot=footer]')!;
+      expect(footer.innerText).eq('Footer Content');
+    });
+
+    it('accept "footer" as an assigned child in the shadow root.', () => {
+      const slot = el.shadowRoot!.querySelector<HTMLSlotElement>('slot[name=footer]')!;
+      const childNodes = slot.assignedNodes({ flatten: true });
+
+      expect(childNodes.length).to.eq(1);
+    });
+
+    it('should contain the classes card--has-footer and card--button-footer.', () => {
+      const card = el.shadowRoot!.querySelector('.card')!;
+      expect(card.classList.value.trim()).to.eq('card card--has-footer card--button-footer');
+    });
+  });
+
+  describe('when compact', () => {
+    before(async () => {
+      el = await fixture<SlCard>(
+        html`<sl-card compact>
+          <div slot="header">Header Title</div>
+          This is a compact card has with a header, body, and footer
+          <div slot="footer">Footer Content</div>
+        </sl-card> `
+      );
+    });
+
+    it('should pass accessibility tests', async () => {
+      await expect(el).to.be.accessible();
+    });
+
+    it('should contain the class card--compact', () => {
+      const card = el.shadowRoot!.querySelector('.card')!;
+      expect(card.classList.contains('card--compact')).to.be.true;
     });
   });
 
