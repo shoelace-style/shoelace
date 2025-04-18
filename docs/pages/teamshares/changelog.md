@@ -13,8 +13,8 @@ meta:
   - `compact`: Remove borders and reduce spacing between card header, body, and footer
   - `actionHeader`: Apply flex layout to card header for showing a title and action icon or button
   - `buttonFooter`: Apply flex layout to card footer for showing one or more right-aligned buttons
-- Update Icon Button documentation to user Font Awesome icons
-- Explicitly set `sl-drawer` title to `ts-heading-6` styles for consistency (otherwise they inherit & are inconsistent)
+- Update Icon Button documentation to use Font Awesome icons
+- Explicitly set `sl-drawer` title to `ts-heading-6` styles for consistency (otherwise they inherit & are inconsistent from page to page)
 - Fix to display `sl-divider` again even with Tailwind border resets
 - Fix `disconnectedCallback` error for `sl-textarea`
 
