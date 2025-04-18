@@ -5,6 +5,19 @@ meta:
 
 # Changelog
 
+## 2.5.0
+
+- Update `sl-card` to include new properties:
+  - `loading`: Show card in loading state
+  - `emptyState`: Show card with empty state styling
+  - `compact`: Remove borders and reduce spacing between card header, body, and footer
+  - `actionHeader`: Apply flex layout to card header for showing a title and action icon or button
+  - `buttonFooter`: Apply flex layout to card footer for showing one or more right-aligned buttons
+- Update Icon Button documentation to user Font Awesome icons
+- Explicitly set `sl-drawer` title to `ts-heading-6` styles for consistency (otherwise they inherit & are inconsistent)
+- Fix to display `sl-divider` again even with Tailwind border resets
+- Fix `disconnectedCallback` error for `sl-textarea`
+
 ## 2.4.0
 
 - Add `percentage` type to `sl-input` to make it easier to add a `%` suffix for inputs rendered with `ts_form_for`
