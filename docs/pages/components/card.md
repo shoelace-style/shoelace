@@ -529,7 +529,7 @@ To optionally apply a `flex/flex-end` layout to a footer with one or more button
     div slot="footer"
       a href="#" class="ts-body-2 ts-text-link" Use for links or whatever!
   sl-card.card-footer buttonFooter=true
-    | Thi s card is using the
+    | This card is using the
     code buttonFooter
     |  property, which applies a
     code flex/flex-end
