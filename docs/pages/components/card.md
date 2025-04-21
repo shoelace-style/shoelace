@@ -502,7 +502,7 @@ To optionally apply a `flex/flex-end` layout to a footer with one or more button
     </div>
   </sl-card>
   <sl-card class="card-footer" buttonFooter>
-    This card is using the <code>buttonFooter</code> property, which applies a <code>flex/flex-end</code> layout and <code>8 px gap</code>to footer elements.
+    This card is using the <code>buttonFooter</code> property, which applies a <code>flex/flex-end</code> layout and <code>8px gap</code>to footer elements.
     <div slot="footer">
       <sl-button variant="default">Default</sl-button>
       <sl-button variant="primary">Primary</sl-button>
@@ -534,7 +534,7 @@ To optionally apply a `flex/flex-end` layout to a footer with one or more button
     |  property, which applies a
     code flex/flex-end
     |  layout and
-    code 8 px gap
+    code 8px gap
     |  to footer elements.
     div slot="footer"
       sl-button variant="default" Default
