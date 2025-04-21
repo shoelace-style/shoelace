@@ -39,6 +39,21 @@ export default class SlCard extends ShoelaceElement {
   /** Option to remove the card's default box shadow. */
   @property({ type: Boolean, reflect: true }) noShadow = false;
 
+  /** Option to apply a flex/space-between layout for header elements. Useful for displaying a header with a title on the left and action buttons on the right. */
+  @property({ type: Boolean, reflect: true }) actionHeader = false;
+
+  /** Option to apply a flex/flex-end layout to footer elements. Useful for displaying a card footer with one or more buttons. */
+  @property({ type: Boolean, reflect: true }) buttonFooter = false;
+
+  /** Option to reduce spacing and remove the borders between the header, body, and footer. */
+  @property({ type: Boolean, reflect: true }) compact = false;
+
+  /** Option to show the card in a loading state. */
+  @property({ type: Boolean, reflect: true }) loading = false;
+
+  /** Option to style the card for an empty state. */
+  @property({ type: Boolean, reflect: true }) emptyState = false;
+
   render() {
     return html`
       <div
@@ -48,13 +63,24 @@ export default class SlCard extends ShoelaceElement {
           'card--has-footer': this.hasSlotController.test('footer'),
           'card--has-image': this.hasSlotController.test('image'),
           'card--has-header': this.hasSlotController.test('header'),
-          'card--no-shadow': this.noShadow
+          'card--no-shadow': this.noShadow,
+          'card--action-header': this.actionHeader,
+          'card--button-footer': this.buttonFooter,
+          'card--compact': this.compact,
+          'card--loading': this.loading,
+          'card--empty-state': this.emptyState
         })}
       >
         <slot name="image" part="image" class="card__image"></slot>
         <slot name="header" part="header" class="card__header"></slot>
         <slot part="body" class="card__body"></slot>
         <slot name="footer" part="footer" class="card__footer"></slot>
+
+        ${this.loading
+          ? html`<div class="spinner-overlay">
+        <sl-spinner style="position: absolute" size="x-large">
+      </div>`
+          : ''}
       </div>
     `;
   }
