@@ -29,6 +29,7 @@ export default {
     playwrightLauncher({ product: 'webkit' })
   ],
   testRunnerHtml: testFramework => `
+    <!DOCTYPE html>
     <html lang="en-US">
       <head></head>
       <body>
