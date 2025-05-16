@@ -259,6 +259,7 @@ export default css`
     padding: 0;
     transition: var(--sl-transition-fast) color;
     cursor: pointer;
+    flex-shrink: 0;
   }
 
   .input__clear:hover,
