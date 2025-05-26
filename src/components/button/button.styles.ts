@@ -81,10 +81,12 @@ export default css`
     color: var(--sl-color-neutral-700);
   }
 
-  .button--standard.button--default:hover:not(.button--disabled) {
-    background-color: var(--sl-color-primary-50);
-    border-color: var(--sl-color-primary-300);
-    color: var(--sl-color-primary-700);
+  @media (hover: hover) {
+    .button--standard.button--default:hover:not(.button--disabled) {
+      background-color: var(--sl-color-primary-50);
+      border-color: var(--sl-color-primary-300);
+      color: var(--sl-color-primary-700);
+    }
   }
 
   .button--standard.button--default:active:not(.button--disabled) {
@@ -100,10 +102,12 @@ export default css`
     color: var(--sl-color-neutral-0);
   }
 
-  .button--standard.button--primary:hover:not(.button--disabled) {
-    background-color: var(--sl-color-primary-500);
-    border-color: var(--sl-color-primary-500);
-    color: var(--sl-color-neutral-0);
+  @media (hover: hover) {
+    .button--standard.button--primary:hover:not(.button--disabled) {
+      background-color: var(--sl-color-primary-500);
+      border-color: var(--sl-color-primary-500);
+      color: var(--sl-color-neutral-0);
+    }
   }
 
   .button--standard.button--primary:active:not(.button--disabled) {
@@ -119,10 +123,12 @@ export default css`
     color: var(--sl-color-neutral-0);
   }
 
-  .button--standard.button--success:hover:not(.button--disabled) {
-    background-color: var(--sl-color-success-500);
-    border-color: var(--sl-color-success-500);
-    color: var(--sl-color-neutral-0);
+  @media (hover: hover) {
+    .button--standard.button--success:hover:not(.button--disabled) {
+      background-color: var(--sl-color-success-500);
+      border-color: var(--sl-color-success-500);
+      color: var(--sl-color-neutral-0);
+    }
   }
 
   .button--standard.button--success:active:not(.button--disabled) {
@@ -138,10 +144,12 @@ export default css`
     color: var(--sl-color-neutral-0);
   }
 
-  .button--standard.button--neutral:hover:not(.button--disabled) {
-    background-color: var(--sl-color-neutral-500);
-    border-color: var(--sl-color-neutral-500);
-    color: var(--sl-color-neutral-0);
+  @media (hover: hover) {
+    .button--standard.button--neutral:hover:not(.button--disabled) {
+      background-color: var(--sl-color-neutral-500);
+      border-color: var(--sl-color-neutral-500);
+      color: var(--sl-color-neutral-0);
+    }
   }
 
   .button--standard.button--neutral:active:not(.button--disabled) {
@@ -156,10 +164,13 @@ export default css`
     border-color: var(--sl-color-warning-600);
     color: var(--sl-color-neutral-0);
   }
-  .button--standard.button--warning:hover:not(.button--disabled) {
-    background-color: var(--sl-color-warning-500);
-    border-color: var(--sl-color-warning-500);
-    color: var(--sl-color-neutral-0);
+
+  @media (hover: hover) {
+    .button--standard.button--warning:hover:not(.button--disabled) {
+      background-color: var(--sl-color-warning-500);
+      border-color: var(--sl-color-warning-500);
+      color: var(--sl-color-neutral-0);
+    }
   }
 
   .button--standard.button--warning:active:not(.button--disabled) {
@@ -175,10 +186,12 @@ export default css`
     color: var(--sl-color-neutral-0);
   }
 
-  .button--standard.button--danger:hover:not(.button--disabled) {
-    background-color: var(--sl-color-danger-500);
-    border-color: var(--sl-color-danger-500);
-    color: var(--sl-color-neutral-0);
+  @media (hover: hover) {
+    .button--standard.button--danger:hover:not(.button--disabled) {
+      background-color: var(--sl-color-danger-500);
+      border-color: var(--sl-color-danger-500);
+      color: var(--sl-color-neutral-0);
+    }
   }
 
   .button--standard.button--danger:active:not(.button--disabled) {
@@ -202,7 +215,14 @@ export default css`
     color: var(--sl-color-neutral-700);
   }
 
-  .button--outline.button--default:hover:not(.button--disabled),
+  @media (hover: hover) {
+    .button--outline.button--default:hover:not(.button--disabled) {
+      border-color: var(--sl-color-primary-600);
+      background-color: var(--sl-color-primary-600);
+      color: var(--sl-color-neutral-0);
+    }
+  }
+
   .button--outline.button--default.button--checked:not(.button--disabled) {
     border-color: var(--sl-color-primary-600);
     background-color: var(--sl-color-primary-600);
@@ -221,7 +241,13 @@ export default css`
     color: var(--sl-color-primary-600);
   }
 
-  .button--outline.button--primary:hover:not(.button--disabled),
+  @media (hover: hover) {
+    .button--outline.button--primary:hover:not(.button--disabled) {
+      background-color: var(--sl-color-primary-600);
+      color: var(--sl-color-neutral-0);
+    }
+  }
+
   .button--outline.button--primary.button--checked:not(.button--disabled) {
     background-color: var(--sl-color-primary-600);
     color: var(--sl-color-neutral-0);
@@ -239,7 +265,13 @@ export default css`
     color: var(--sl-color-success-600);
   }
 
-  .button--outline.button--success:hover:not(.button--disabled),
+  @media (hover: hover) {
+    .button--outline.button--success:hover:not(.button--disabled) {
+      background-color: var(--sl-color-success-600);
+      color: var(--sl-color-neutral-0);
+    }
+  }
+
   .button--outline.button--success.button--checked:not(.button--disabled) {
     background-color: var(--sl-color-success-600);
     color: var(--sl-color-neutral-0);
@@ -257,7 +289,13 @@ export default css`
     color: var(--sl-color-neutral-600);
   }
 
-  .button--outline.button--neutral:hover:not(.button--disabled),
+  @media (hover: hover) {
+    .button--outline.button--neutral:hover:not(.button--disabled) {
+      background-color: var(--sl-color-neutral-600);
+      color: var(--sl-color-neutral-0);
+    }
+  }
+
   .button--outline.button--neutral.button--checked:not(.button--disabled) {
     background-color: var(--sl-color-neutral-600);
     color: var(--sl-color-neutral-0);
@@ -275,7 +313,13 @@ export default css`
     color: var(--sl-color-warning-600);
   }
 
-  .button--outline.button--warning:hover:not(.button--disabled),
+  @media (hover: hover) {
+    .button--outline.button--warning:hover:not(.button--disabled) {
+      background-color: var(--sl-color-warning-600);
+      color: var(--sl-color-neutral-0);
+    }
+  }
+
   .button--outline.button--warning.button--checked:not(.button--disabled) {
     background-color: var(--sl-color-warning-600);
     color: var(--sl-color-neutral-0);
@@ -293,7 +337,13 @@ export default css`
     color: var(--sl-color-danger-600);
   }
 
-  .button--outline.button--danger:hover:not(.button--disabled),
+  @media (hover: hover) {
+    .button--outline.button--danger:hover:not(.button--disabled) {
+      background-color: var(--sl-color-danger-600);
+      color: var(--sl-color-neutral-0);
+    }
+  }
+
   .button--outline.button--danger.button--checked:not(.button--disabled) {
     background-color: var(--sl-color-danger-600);
     color: var(--sl-color-neutral-0);
@@ -321,10 +371,12 @@ export default css`
     color: var(--sl-color-primary-600);
   }
 
-  .button--text:hover:not(.button--disabled) {
-    background-color: transparent;
-    border-color: transparent;
-    color: var(--sl-color-primary-500);
+  @media (hover: hover) {
+    .button--text:hover:not(.button--disabled) {
+      background-color: transparent;
+      border-color: transparent;
+      color: var(--sl-color-primary-500);
+    }
   }
 
   .button--text:focus-visible:not(.button--disabled) {
