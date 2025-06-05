@@ -77,7 +77,7 @@ export default class SlDialog extends ShoelaceElement {
   private readonly localize = new LocalizeController(this);
   private originalTrigger: HTMLElement | null;
   private closeWatcher: CloseWatcher | null;
-  
+
   /** @internal */
   public modal = new Modal(this);
 

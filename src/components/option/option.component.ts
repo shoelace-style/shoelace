@@ -41,7 +41,7 @@ export default class SlOption extends ShoelaceElement {
 
   /** @internal the user has keyed into the option, but hasn't selected it yet (shows a highlight) */
   @state() current = false;
-  
+
   /** @internal the option is selected and has aria-selected="true" */
   @state() selected = false;
 

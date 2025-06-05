@@ -2,7 +2,7 @@ import * as path from 'path';
 import { customElementJetBrainsPlugin } from 'custom-element-jet-brains-integration';
 import { customElementVsCodePlugin } from 'custom-element-vs-code-integration';
 import { customElementVuejsPlugin } from 'custom-element-vuejs-integration';
-import { jsxTypesPlugin } from "@wc-toolkit/jsx-types";
+import { jsxTypesPlugin } from '@wc-toolkit/jsx-types';
 import { parse } from 'comment-parser';
 import { pascalCase } from 'pascal-case';
 import commandLineArgs from 'command-line-args';
@@ -232,7 +232,8 @@ export default {
       fileName: 'index.d.ts',
       allowUnknownProps: true,
       defaultExport: true,
-      componentTypePath: (_, tag) => `../../components/${tag?.replace('sl-', '')}/${tag?.replace('sl-', '')}.component.js`
+      componentTypePath: (_, tag) =>
+        `../../components/${tag?.replace('sl-', '')}/${tag?.replace('sl-', '')}.component.js`
     })
   ]
 };

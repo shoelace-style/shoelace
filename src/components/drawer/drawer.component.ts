@@ -83,7 +83,7 @@ export default class SlDrawer extends ShoelaceElement {
   private readonly localize = new LocalizeController(this);
   private originalTrigger: HTMLElement | null;
   private closeWatcher: CloseWatcher | null;
-  
+
   /** @internal */
   public modal = new Modal(this);
 
