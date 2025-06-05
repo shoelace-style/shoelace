@@ -52,10 +52,12 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
   });
   private readonly hasSlotController = new HasSlotController(this, 'help-text');
 
+  /** @internal */
   @query('input[type="checkbox"]') input: HTMLInputElement;
 
   @state() private hasFocus = false;
 
+  /** @internal */
   @property() title = ''; // make reactive to pass through
 
   /** The name of the checkbox, submitted as a name/value pair with form data. */

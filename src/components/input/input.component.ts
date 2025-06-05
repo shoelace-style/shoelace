@@ -60,9 +60,12 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
   private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
   private readonly localize = new LocalizeController(this);
 
+  /** @internal */
   @query('.input__control') input: HTMLInputElement;
 
   @state() private hasFocus = false;
+
+  /** @internal */
   @property() title = ''; // make reactive to pass through
 
   private __numberInput = Object.assign(document.createElement('input'), { type: 'number' });
@@ -303,12 +306,14 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
     this.passwordVisible = !this.passwordVisible;
   }
 
+  /** @internal */
   @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     // Disabled form controls are always valid
     this.formControlController.setValidity(this.disabled);
   }
 
+  /** @internal */
   @watch('step', { waitUntilFirstUpdate: true })
   handleStepChange() {
     // If step changes, the value may become invalid so we need to recheck after the update. We set the new step
@@ -317,18 +322,19 @@ export default class SlInput extends ShoelaceElement implements ShoelaceFormCont
     this.formControlController.updateValidity();
   }
 
+  /** @internal */
   @watch('value', { waitUntilFirstUpdate: true })
   async handleValueChange() {
     await this.updateComplete;
     this.formControlController.updateValidity();
   }
 
-  /** Sets focus on the input. */
+  /** @internal Sets focus on the input. */
   focus(options?: FocusOptions) {
     this.input.focus(options);
   }
 
-  /** Removes focus from the input. */
+  /** @internal Removes focus from the input. */
   blur() {
     this.input.blur();
   }

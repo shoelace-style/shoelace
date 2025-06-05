@@ -30,9 +30,13 @@ export default class SlAnimatedImage extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = { 'sl-icon': SlIcon };
 
+  /** @internal */
   @query('.animated-image__animated') animatedImage: HTMLImageElement;
 
+  /** @internal */
   @state() frozenFrame: string;
+
+  /** @internal */
   @state() isLoaded = false;
 
   /** The path to the image to load. */

@@ -90,6 +90,7 @@ export default class SlMutationObserver extends ShoelaceElement {
     this.mutationObserver.disconnect();
   }
 
+  /** @internal */
   @watch('disabled')
   handleDisabledChange() {
     if (this.disabled) {
@@ -99,6 +100,7 @@ export default class SlMutationObserver extends ShoelaceElement {
     }
   }
 
+  /** @internal */
   @watch('attr', { waitUntilFirstUpdate: true })
   @watch('attr-old-value', { waitUntilFirstUpdate: true })
   @watch('char-data', { waitUntilFirstUpdate: true })

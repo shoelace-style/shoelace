@@ -47,8 +47,13 @@ export default class SlDropdown extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = { 'sl-popup': SlPopup };
 
+  /** @internal */
   @query('.dropdown') popup: SlPopup;
+
+  /** @internal */
   @query('.dropdown__trigger') trigger: HTMLSlotElement;
+
+  /** @internal */
   @query('.dropdown__panel') panel: HTMLSlotElement;
 
   private readonly localize = new LocalizeController(this);
@@ -229,7 +234,7 @@ export default class SlDropdown extends ShoelaceElement {
     }
   };
 
-  handleTriggerClick() {
+  private handleTriggerClick() {
     if (this.open) {
       this.hide();
     } else {
@@ -238,7 +243,7 @@ export default class SlDropdown extends ShoelaceElement {
     }
   }
 
-  async handleTriggerKeyDown(event: KeyboardEvent) {
+  private async handleTriggerKeyDown(event: KeyboardEvent) {
     // When spacebar/enter is pressed, show the panel but don't focus on the menu. This let's the user press the same
     // key again to hide the menu in case they don't want to make a selection.
     if ([' ', 'Enter'].includes(event.key)) {
@@ -286,14 +291,14 @@ export default class SlDropdown extends ShoelaceElement {
     }
   }
 
-  handleTriggerKeyUp(event: KeyboardEvent) {
+  private handleTriggerKeyUp(event: KeyboardEvent) {
     // Prevent space from triggering a click event in Firefox
     if (event.key === ' ') {
       event.preventDefault();
     }
   }
 
-  handleTriggerSlotChange() {
+  private handleTriggerSlotChange() {
     this.updateAccessibleTrigger();
   }
 
@@ -307,7 +312,7 @@ export default class SlDropdown extends ShoelaceElement {
   //
   // To determine this, we assume the first tabbable element in the trigger slot is the "accessible trigger."
   //
-  updateAccessibleTrigger() {
+  private updateAccessibleTrigger() {
     const assignedElements = this.trigger.assignedElements({ flatten: true }) as HTMLElement[];
     const accessibleTrigger = assignedElements.find(el => getTabbableBoundary(el).start);
     let target: HTMLElement;
@@ -357,7 +362,7 @@ export default class SlDropdown extends ShoelaceElement {
     this.popup.reposition();
   }
 
-  addOpenListeners() {
+  private addOpenListeners() {
     this.panel.addEventListener('sl-select', this.handlePanelSelect);
     if ('CloseWatcher' in window) {
       this.closeWatcher?.destroy();
@@ -373,7 +378,7 @@ export default class SlDropdown extends ShoelaceElement {
     document.addEventListener('mousedown', this.handleDocumentMouseDown);
   }
 
-  removeOpenListeners() {
+  private removeOpenListeners() {
     if (this.panel) {
       this.panel.removeEventListener('sl-select', this.handlePanelSelect);
       this.panel.removeEventListener('keydown', this.handleKeyDown);
@@ -383,6 +388,7 @@ export default class SlDropdown extends ShoelaceElement {
     this.closeWatcher?.destroy();
   }
 
+  /** @internal */
   @watch('open', { waitUntilFirstUpdate: true })
   async handleOpenChange() {
     if (this.disabled) {

@@ -31,6 +31,7 @@ export default class SlRadio extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = { 'sl-icon': SlIcon };
 
+  /** @internal */
   @state() checked = false;
   @state() protected hasFocus = false;
 
@@ -80,12 +81,14 @@ export default class SlRadio extends ShoelaceElement {
     this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
   }
 
+  /** @internal */
   @watch('checked')
   handleCheckedChange() {
     this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
     this.setAttribute('tabindex', this.checked ? '0' : '-1');
   }
 
+  /** @internal */
   @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');

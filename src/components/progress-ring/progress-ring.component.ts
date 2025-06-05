@@ -29,8 +29,10 @@ export default class SlProgressRing extends ShoelaceElement {
 
   private readonly localize = new LocalizeController(this);
 
+  /** @internal */
   @query('.progress-ring__indicator') indicator: SVGCircleElement;
 
+  /** @internal */
   @state() indicatorOffset: string;
 
   /** The current progress as a percentage, 0 to 100. */

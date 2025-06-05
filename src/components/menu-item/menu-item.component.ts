@@ -50,7 +50,10 @@ export default class SlMenuItem extends ShoelaceElement {
   private cachedTextLabel: string;
   private readonly localize = new LocalizeController(this);
 
+  /** @internal */
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
+
+  /** @internal */
   @query('.menu-item') menuItem: HTMLElement;
 
   /** The type of menu item to render. To use `checked`, this value must be set to `checkbox`. */
@@ -112,6 +115,7 @@ export default class SlMenuItem extends ShoelaceElement {
     event.stopPropagation();
   };
 
+  /** @internal */
   @watch('checked')
   handleCheckedChange() {
     // For proper accessibility, users have to use type="checkbox" to use the checked attribute
@@ -129,11 +133,13 @@ export default class SlMenuItem extends ShoelaceElement {
     }
   }
 
+  /** @internal */
   @watch('disabled')
   handleDisabledChange() {
     this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
   }
 
+  /** @internal */
   @watch('type')
   handleTypeChange() {
     if (this.type === 'checkbox') {
@@ -150,6 +156,7 @@ export default class SlMenuItem extends ShoelaceElement {
     return getTextContent(this.defaultSlot);
   }
 
+  /** @internal */
   isSubmenu() {
     return this.hasSlotController.test('submenu');
   }

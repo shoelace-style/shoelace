@@ -8,6 +8,10 @@ meta:
 
 Shoelace offers a React version of every component to provide an idiomatic experience for React users. You can easily toggle between HTML and React examples throughout the documentation.
 
+:::tip
+If you are using React 19+, you may want to try out our [JSX types](/frameworks/jsx/) to use the web components directly in your React components.
+:::
+
 ## Installation
 
 To add Shoelace to your React app, install the package from npm.

@@ -18,8 +18,10 @@ import type { CSSResultGroup } from 'lit';
 export default class SlButtonGroup extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
+  /** @internal */
   @query('slot') defaultSlot: HTMLSlotElement;
 
+  /** @internal */
   @state() disableRole = false;
 
   /**

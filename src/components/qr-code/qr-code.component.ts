@@ -19,6 +19,7 @@ import type { CSSResultGroup } from 'lit';
 export default class SlQrCode extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
+  /** @internal */
   @query('canvas') canvas: HTMLElement;
 
   /** The QR code's value. */
@@ -46,6 +47,7 @@ export default class SlQrCode extends ShoelaceElement {
     this.generate();
   }
 
+  /** @internal */
   @watch(['background', 'errorCorrection', 'fill', 'radius', 'size', 'value'])
   generate() {
     if (!this.hasUpdated) {

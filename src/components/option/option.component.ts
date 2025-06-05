@@ -36,11 +36,17 @@ export default class SlOption extends ShoelaceElement {
 
   private isInitialized = false;
 
+  /** @internal */
   @query('.option__label') defaultSlot: HTMLSlotElement;
 
-  @state() current = false; // the user has keyed into the option, but hasn't selected it yet (shows a highlight)
-  @state() selected = false; // the option is selected and has aria-selected="true"
-  @state() hasHover = false; // we need this because Safari doesn't honor :hover styles while dragging
+  /** @internal the user has keyed into the option, but hasn't selected it yet (shows a highlight) */
+  @state() current = false;
+  
+  /** @internal the option is selected and has aria-selected="true" */
+  @state() selected = false;
+
+  /** @internal we need this because Safari doesn't honor :hover styles while dragging */
+  @state() hasHover = false;
 
   /**
    * The option's value. When selected, the containing form control will receive this value. The value must be unique
@@ -80,16 +86,19 @@ export default class SlOption extends ShoelaceElement {
     this.hasHover = false;
   }
 
+  /** @internal */
   @watch('disabled')
   handleDisabledChange() {
     this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
   }
 
+  /** @internal */
   @watch('selected')
   handleSelectedChange() {
     this.setAttribute('aria-selected', this.selected ? 'true' : 'false');
   }
 
+  /** @internal */
   @watch('value')
   handleValueChange() {
     // Ensure the value is a string. This ensures the next line doesn't error and allows framework users to pass numbers

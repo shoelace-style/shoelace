@@ -82,11 +82,18 @@ export default class SlDrawer extends ShoelaceElement {
   private readonly hasSlotController = new HasSlotController(this, 'footer');
   private readonly localize = new LocalizeController(this);
   private originalTrigger: HTMLElement | null;
-  public modal = new Modal(this);
   private closeWatcher: CloseWatcher | null;
+  
+  /** @internal */
+  public modal = new Modal(this);
 
+  /** @internal */
   @query('.drawer') drawer: HTMLElement;
+
+  /** @internal */
   @query('.drawer__panel') panel: HTMLElement;
+
+  /** @internal */
   @query('.drawer__overlay') overlay: HTMLElement;
 
   /**
@@ -179,6 +186,7 @@ export default class SlDrawer extends ShoelaceElement {
     }
   };
 
+  /** @internal */
   @watch('open', { waitUntilFirstUpdate: true })
   async handleOpenChange() {
     if (this.open) {
@@ -281,6 +289,7 @@ export default class SlDrawer extends ShoelaceElement {
     }
   }
 
+  /** @internal */
   @watch('contained', { waitUntilFirstUpdate: true })
   handleNoModalChange() {
     if (this.open && !this.contained) {

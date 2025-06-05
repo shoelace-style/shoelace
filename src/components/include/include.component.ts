@@ -42,6 +42,7 @@ export default class SlInclude extends ShoelaceElement {
     script.parentNode!.replaceChild(newScript, script);
   }
 
+  /** @internal */
   @watch('src')
   async handleSrcChange() {
     try {

@@ -34,7 +34,10 @@ export default class SlRadioButton extends ShoelaceElement {
 
   private readonly hasSlotController = new HasSlotController(this, '[default]', 'prefix', 'suffix');
 
+  /** @internal */
   @query('.button') input: HTMLInputElement;
+
+  /** @internal */
   @query('.hidden-input') hiddenInput: HTMLInputElement;
 
   @state() protected hasFocus = false;
@@ -85,17 +88,18 @@ export default class SlRadioButton extends ShoelaceElement {
     this.emit('sl-focus');
   }
 
+  /** @internal */
   @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
   }
 
-  /** Sets focus on the radio button. */
+  /** @internal Sets focus on the radio button. */
   focus(options?: FocusOptions) {
     this.input.focus(options);
   }
 
-  /** Removes focus from the radio button. */
+  /** @internal Removes focus from the radio button. */
   blur() {
     this.input.blur();
   }

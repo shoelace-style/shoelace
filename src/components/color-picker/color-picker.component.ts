@@ -106,10 +106,19 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
   private isSafeValue = false;
   private readonly localize = new LocalizeController(this);
 
+  /** @internal */
   @query('[part~="base"]') base: HTMLElement;
+
+  /** @internal */
   @query('[part~="input"]') input: SlInput;
+
+  /** @internal */
   @query('.color-dropdown') dropdown: SlDropdown;
+
+  /** @internal */
   @query('[part~="preview"]') previewButton: HTMLButtonElement;
+
+  /** @internal */
   @query('[part~="trigger"]') trigger: HTMLButtonElement;
 
   @state() private hasFocus = false;
