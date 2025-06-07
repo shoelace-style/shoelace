@@ -95,7 +95,11 @@ export default class SlAlert extends ShoelaceElement {
     this.base.hidden = !this.open;
   }
 
-  private restartAutoHide() {
+  private async restartAutoHide() {
+    const { countdownElement } = this;
+    if (!countdownElement) {
+      await this.updateComplete;
+    }
     this.handleCountdownChange();
     clearTimeout(this.autoHideTimeout);
     clearInterval(this.remainingTimeInterval);
@@ -147,7 +151,7 @@ export default class SlAlert extends ShoelaceElement {
       this.emit('sl-show');
 
       if (this.duration < Infinity) {
-        this.restartAutoHide();
+        await this.restartAutoHide();
       }
 
       await stopAnimations(this.base);
@@ -174,8 +178,8 @@ export default class SlAlert extends ShoelaceElement {
   }
 
   @watch('duration')
-  handleDurationChange() {
-    this.restartAutoHide();
+  async handleDurationChange() {
+    await this.restartAutoHide();
   }
 
   /** Shows the alert. */
