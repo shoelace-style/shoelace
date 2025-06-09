@@ -560,7 +560,7 @@ This can be hard to conceptualize, so heres a fairly large example showing how l
 
   <div style="display: flex; gap: 16px;">
     <sl-button type="reset">Reset</sl-button>
-    <sl-button type="submit" variant="brand">Show FormData</sl-button>
+    <sl-button type="submit" variant="primary">Show FormData</sl-button>
   </div>
 
   <br>
