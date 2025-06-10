@@ -50,6 +50,7 @@ import type SlCarouselItem from '../carousel-item/carousel-item.component.js';
 export default class SlCarousel extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = { 'sl-icon': SlIcon };
+  static idUniqueCounter = 0;
 
   /** When set, allows the user to navigate the carousel in the same direction indefinitely. */
   @property({ type: Boolean, reflect: true }) loop = false;
@@ -96,6 +97,7 @@ export default class SlCarousel extends ShoelaceElement {
   private readonly localize = new LocalizeController(this);
   private mutationObserver: MutationObserver;
   private pendingSlideChange = false;
+  private idUniquePrefix = `sl-carousel${++SlCarousel.idUniqueCounter}-`;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -292,8 +294,11 @@ export default class SlCarousel extends ShoelaceElement {
 
         for (const entry of entries) {
           const slide = entry.target;
-          slide.toggleAttribute('inert', !entry.isIntersecting);
           slide.classList.toggle('--in-view', entry.isIntersecting);
+          if (this.loop && slide.hasAttribute('data-clone')) {
+            continue;
+          }
+          slide.toggleAttribute('inert', !entry.isIntersecting);
           slide.setAttribute('aria-hidden', entry.isIntersecting ? 'false' : 'true');
         }
 
@@ -371,10 +376,10 @@ export default class SlCarousel extends ShoelaceElement {
       slide.setAttribute('aria-label', this.localize.term('slideNum', index + 1));
 
       if (this.pagination) {
-        slide.setAttribute('id', `slide-${index + 1}`);
+        slide.setAttribute('id', `${this.idUniquePrefix}slide-${index + 1}`);
         slide.setAttribute('role', 'tabpanel');
         slide.removeAttribute('aria-label');
-        slide.setAttribute('aria-labelledby', `tab-${index + 1}`);
+        slide.setAttribute('aria-labelledby', `${this.idUniquePrefix}tab-${index + 1}`);
       }
 
       if (slide.hasAttribute('data-clone')) {
@@ -405,12 +410,22 @@ export default class SlCarousel extends ShoelaceElement {
     lastSlides.reverse().forEach((slide, i) => {
       const clone = slide.cloneNode(true) as HTMLElement;
       clone.setAttribute('data-clone', String(slides.length - i - 1));
+      clone.removeAttribute('id');
+      clone.removeAttribute('role');
+      clone.removeAttribute('aria-labelledby');
+      clone.setAttribute('inert', '');
+      clone.setAttribute('aria-hidden', 'true');
       this.prepend(clone);
     });
 
     firstSlides.forEach((slide, i) => {
       const clone = slide.cloneNode(true) as HTMLElement;
       clone.setAttribute('data-clone', String(i));
+      clone.removeAttribute('id');
+      clone.removeAttribute('role');
+      clone.removeAttribute('aria-labelledby');
+      clone.setAttribute('inert', '');
+      clone.setAttribute('aria-hidden', 'true');
       this.append(clone);
     });
   }
@@ -630,8 +645,8 @@ export default class SlCarousel extends ShoelaceElement {
                         'carousel__pagination-item--active': isActive
                       })}"
                       role="tab"
-                      id="tab-${index + 1}"
-                      aria-controls="slide-${index + 1}"
+                      id="${this.idUniquePrefix}tab-${index + 1}"
+                      aria-controls="${this.idUniquePrefix}slide-${index + 1}"
                       aria-selected="${isActive ? 'true' : 'false'}"
                       aria-label="${isActive
                         ? this.localize.term('slideNum', index + 1)
