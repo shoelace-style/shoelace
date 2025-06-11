@@ -74,6 +74,10 @@ npm run demo
 The demo will be served locally with BrowserSync and can be accessed from your
 browser at the printed URL.
 
+The example layout includes a responsive sidebar and several widgets built with
+Shoelace components. On small screens, the sidebar collapses into a drawer for
+easy navigation.
+
 ### Creating New Components
 
 To scaffold a new component, run the following command, replacing `sl-tag-name` with the desired tag name.

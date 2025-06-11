@@ -7,7 +7,12 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/dist/themes/light.css" />
   <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/dist/shoelace.js"></script>
   <style>
-    body { margin: 0; display: flex; flex-direction: column; height: 100vh; }
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
     header {
       display: flex;
       align-items: center;
@@ -16,8 +21,15 @@
       color: var(--sl-color-neutral-0);
       height: 3.5rem;
     }
-    header sl-input { max-width: 250px; margin-left: 1rem; }
-    main { display: flex; flex: 1; overflow: hidden; }
+    header sl-input {
+      max-width: 250px;
+      margin-left: 1rem;
+    }
+    main {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
     nav.sidebar {
       width: 220px;
       padding: 1rem;
@@ -35,6 +47,17 @@
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 1rem;
     }
+    sl-card.widget {
+      --padding: 1rem;
+    }
+    @media (max-width: 600px) {
+      nav.sidebar {
+        display: none;
+      }
+      header button.menu-toggle {
+        display: inline-flex;
+      }
+    }
   </style>
 </head>
 <body>
@@ -43,6 +66,9 @@
     <strong>Dashboard</strong>
     <sl-input placeholder="Search" size="small"></sl-input>
     <div style="flex: 1;"></div>
+    <sl-button class="menu-toggle" variant="text" size="small" onclick="document.getElementById('drawer').show()" style="display:none; margin-right:0.25rem;">
+      <sl-icon slot="prefix" name="list"></sl-icon>
+    </sl-button>
     <sl-icon-button name="bell" label="Notifications"></sl-icon-button>
     <sl-icon-button name="gear" label="Settings"></sl-icon-button>
   </header>
@@ -69,14 +95,32 @@
         </sl-card>
         <sl-card class="widget">
           <strong slot="header">Server Load</strong>
-          <sl-progress-ring value="40"></sl-progress-ring>
+          <sl-progress-ring value="40" style="--size: 60px;"></sl-progress-ring>
         </sl-card>
         <sl-card class="widget">
           <strong slot="header">Satisfaction</strong>
           <sl-rating value="4"></sl-rating>
         </sl-card>
+        <sl-card class="widget">
+          <strong slot="header">Uptime</strong>
+          <sl-progress-ring value="98" style="--size: 60px; --track-color: var(--sl-color-success-100); --indicator-color: var(--sl-color-success-600);"></sl-progress-ring>
+        </sl-card>
+        <sl-card class="widget">
+          <strong slot="header">Daily Signups</strong>
+          <sl-progress-bar value="55"></sl-progress-bar>
+        </sl-card>
       </div>
     </section>
   </main>
+
+  <sl-drawer id="drawer" contained placement="start" label="Menu">
+    <sl-menu>
+      <sl-menu-item>Overview</sl-menu-item>
+      <sl-menu-item>Reports</sl-menu-item>
+      <sl-menu-item>Analytics</sl-menu-item>
+      <sl-divider></sl-divider>
+      <sl-menu-item>Settings</sl-menu-item>
+    </sl-menu>
+  </sl-drawer>
 </body>
 </html>
