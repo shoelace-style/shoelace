@@ -27,4 +27,7 @@ jobs:
           cache: 'npm'
       - run: npx playwright install --with-deps
       - run: npm ci
+      - run: npm ls playwright
+      - run: npx playwright --version
+      - run: ls -la ~/.cache/ms-playwright/      
       - run: npm run verify
