@@ -127,6 +127,9 @@ const systemLibrary: IconLibrary = {
       return `data:image/svg+xml,${encodeURIComponent(icons[name])}`;
     }
     return '';
+  },
+  add: (name: string, svgData: string) => {
+    (icons as any)[name] = svgData
   }
 };
 
