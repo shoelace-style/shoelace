@@ -49,6 +49,12 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  * @csspart clear-button - The clear button.
  * @csspart password-toggle-button - The password toggle button.
  * @csspart suffix - The container that wraps the suffix.
+ *
+ * @attr {string} help-text - The input's help text. If you need to display HTML, use the `help-text` slot instead.
+ * @attr {boolean} password-toggle - Adds a button to toggle the password's visibility. Only applies to password types.
+ * @attr {boolean} password-visible - Determines whether or not the password is currently visible. Only applies to
+ * password input types.
+ * @attr {boolean} no-spin-buttons - Hides the browser's built-in increment/decrement spin buttons for number inputs.
  */
 export default class SlInput extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];

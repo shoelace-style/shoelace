@@ -15,6 +15,8 @@ import type { CSSResultGroup } from 'lit';
  * @since 2.0
  *
  * @csspart base - The component's base wrapper.
+ *
+ * @attr {"L" | "M" | "Q" | "H"} error-correction - The level of error correction to use.
  */
 export default class SlQrCode extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];

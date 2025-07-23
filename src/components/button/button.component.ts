@@ -37,6 +37,13 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  * @csspart suffix - The container that wraps the suffix.
  * @csspart caret - The button's caret icon, an `<sl-icon>` element.
  * @csspart spinner - The spinner that shows when the button is in the loading state.
+ *
+ * @attr {string} formaction - Used to override the form owner's `action` attribute.
+ * @attr {"application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain"} formenctype - Used to override
+ * the form owner's `enctype` attribute.
+ * @attr {"post" | "get"} formmethod - Used to override the form owner's `method` attribute.
+ * @attr {boolean} formnovalidate - Used to override the form owner's `novalidate` attribute.
+ * @attr {string} formtarget - Used to override the form owner's `target` attribute.
  */
 export default class SlButton extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, styles];

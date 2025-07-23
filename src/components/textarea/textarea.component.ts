@@ -35,6 +35,8 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  * @csspart form-control-help-text - The help text's wrapper.
  * @csspart base - The component's base wrapper.
  * @csspart textarea - The internal `<textarea>` control.
+ *
+ * @attr {string} help-text - The textarea's help text. If you need to display HTML, use the `help-text` slot instead.
  */
 export default class SlTextarea extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];

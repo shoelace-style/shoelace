@@ -44,6 +44,8 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  * @cssproperty --track-color-inactive - The of the portion of the track that represents the remaining value.
  * @cssproperty --track-height - The height of the track.
  * @cssproperty --track-active-offset - The point of origin of the active track.
+ *
+ * @attr {string} help-text - The range's help text. If you need to display HTML, use the `help-text` slot instead.
  */
 export default class SlRange extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];

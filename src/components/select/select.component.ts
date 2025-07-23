@@ -68,6 +68,12 @@ import type SlOption from '../option/option.component.js';
  * @csspart tag__remove-button__base - The tag's remove button base part.
  * @csspart clear-button - The clear button.
  * @csspart expand-icon - The container that wraps the expand icon.
+ *
+ * @attr {string} value - The default value of the form control. Primarily used for resetting the form control.
+ * @attr {number} max-options-visible - The maximum number of selected options to show when `multiple` is true. After
+ * the maximum, "+n" will be shown to indicate the number of additional items that are selected. Set to 0 to remove the
+ * limit.
+ * @attr {string} help-text - The select's help text. If you need to display HTML, use the `help-text` slot instead.
  */
 export default class SlSelect extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];

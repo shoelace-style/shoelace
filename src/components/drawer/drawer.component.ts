@@ -74,6 +74,9 @@ import type { CSSResultGroup } from 'lit';
  * @property modal - Exposes the internal modal utility that controls focus trapping. To temporarily disable focus
  *   trapping and allow third-party modals spawned from an active Shoelace modal, call `modal.activateExternal()` when
  *   the third-party modal opens. Upon closing, call `modal.deactivateExternal()` to restore Shoelace's focus trapping.
+ *
+ * @attr {boolean} no-header - Disables the header. This will also remove the default close button, so please ensure
+ * you provide an easy, accessible way for users to dismiss the dialog.
  */
 export default class SlDrawer extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];

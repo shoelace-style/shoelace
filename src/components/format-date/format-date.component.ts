@@ -8,6 +8,10 @@ import ShoelaceElement from '../../internal/shoelace-element.js';
  * @documentation https://shoelace.style/components/format-date
  * @status stable
  * @since 2.0
+ *
+ * @attr {"short" | "long"} time-zone-name - The format for displaying the time zone name.
+ * @attr {string} time-zone - The time zone to express the time in.
+ * @attr {"auto" | "12" | "24"} hour-format - The format for displaying the hour.
  */
 export default class SlFormatDate extends ShoelaceElement {
   private readonly localize = new LocalizeController(this);

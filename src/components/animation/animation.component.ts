@@ -19,6 +19,12 @@ import type { CSSResultGroup } from 'lit';
  *
  * @slot - The element to animate. Avoid slotting in more than one element, as subsequent ones will be ignored. To
  *  animate multiple elements, either wrap them in a single container or use multiple `<sl-animation>` elements.
+ *
+ * @attr {number} end-delay - The number of milliseconds to delay after the active period of an animation sequence.
+ * @attr {number} iteration-start - The offset at which to start the animation, usually between 0 (start) and 1 (end).
+ * @attr {number} playback-rate - Sets the animation's playback rate. The default is `1`, which plays the animation at
+ * a normal speed. Setting this to `2`, for example, will double the animation's speed. A negative value can be used
+ * to reverse the animation. This value can be changed without causing the animation to restart.
  */
 export default class SlAnimation extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];

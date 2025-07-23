@@ -38,6 +38,8 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  * @cssproperty --width - The width of the switch.
  * @cssproperty --height - The height of the switch.
  * @cssproperty --thumb-size - The size of the thumb.
+ *
+ * @attr {string} help-text - The switch's help text. If you need to display HTML, use the `help-text` slot instead.
  */
 export default class SlSwitch extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];

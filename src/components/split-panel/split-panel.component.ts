@@ -51,6 +51,10 @@ export const SNAP_NONE = () => null;
  *  usually wider than the divider to facilitate easier dragging.
  * @cssproperty [--min=0] - The minimum allowed size of the primary panel.
  * @cssproperty [--max=100%] - The maximum allowed size of the primary panel.
+ *
+ * @attr {number} position-in-pixels - The current position of the divider from the primary panel's edge in pixels.
+ * @attr {string} primary-panel - Designates which panel is the primary panel. The primary panel will be constrained by
+ * the `min` and `max` properties.
  */
 export default class SlSplitPanel extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];

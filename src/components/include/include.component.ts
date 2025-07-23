@@ -15,6 +15,9 @@ import type { CSSResultGroup } from 'lit';
  *
  * @event sl-load - Emitted when the included file is loaded.
  * @event {{ status: number }} sl-error - Emitted when the included file fails to load due to an error.
+ *
+ * @attr {boolean} allow-scripts - Allows included scripts to be executed. Be sure you trust the content you are
+ * including as it will be executed as code and can result in XSS attacks.
  */
 export default class SlInclude extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];

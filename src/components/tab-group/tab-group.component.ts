@@ -41,6 +41,9 @@ import type SlTabPanel from '../tab-panel/tab-panel.js';
  * @cssproperty --indicator-color - The color of the active tab indicator.
  * @cssproperty --track-color - The color of the indicator's track (the line that separates tabs from panels).
  * @cssproperty --track-width - The width of the indicator's track (the line that separates tabs from panels).
+ *
+ * @attr {boolean} no-scroll-controls - Disables the scroll arrows that appear when tabs overflow.
+ * @attr {boolean} fixed-scroll-controls - Prevent scroll buttons from being hidden when inactive.
  */
 export default class SlTabGroup extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];

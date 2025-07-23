@@ -40,6 +40,8 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  * @csspart indeterminate-icon - The indeterminate icon, an `<sl-icon>` element.
  * @csspart label - The container that wraps the checkbox's label.
  * @csspart form-control-help-text - The help text's wrapper.
+ *
+ * @attr {string} help-text - The checkbox's help text. If you need to display HTML, use the `help-text` slot instead.
  */
 export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];

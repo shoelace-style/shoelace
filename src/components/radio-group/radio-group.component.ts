@@ -42,6 +42,9 @@ import type SlRadioButton from '../radio-button/radio-button.js';
  * @csspart form-control-help-text - The help text's wrapper.
  * @csspart button-group - The button group that wraps radio buttons.
  * @csspart button-group__base - The button group's `base` part.
+ *
+ * @attr {string} help-text - The radio group's help text. If you need to display HTML, use the `help-text` slot
+ * instead.
  */
 export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];

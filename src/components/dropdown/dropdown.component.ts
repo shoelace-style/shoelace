@@ -42,6 +42,9 @@ import type SlMenu from '../menu/menu.js';
  *
  * @animation dropdown.show - The animation to use when showing the dropdown.
  * @animation dropdown.hide - The animation to use when hiding the dropdown.
+ *
+ * @attr {boolean} stay-open-on-select - By default, the dropdown is closed when an item is selected. This
+ * attribute will keep it open instead. Useful for dropdowns that allow for multiple interactions.
  */
 export default class SlDropdown extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];

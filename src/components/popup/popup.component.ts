@@ -51,6 +51,29 @@ function isVirtualElement(e: unknown): e is VirtualElement {
  * @cssproperty [--auto-size-available-height] - A read-only custom property that determines the amount of height the
  *  popup can be before overflowing. Useful for positioning child elements that need to overflow. This property is only
  *  available when using `auto-size`.
+ *
+ * @attr {"start" | "end" | "center" | "anchor"} arrow-placement - The placement of the arrow. The default is `anchor`,
+ * which will align the arrow as close to the center of the anchor as possible, considering available space and
+ * `arrow-padding`. A value of `start`, `end`, or `center` will align the arrow to the start, end, or center of the
+ * popover instead.
+ * @attr {number} arrow-padding - The amount of padding between the arrow and the edges of the popup. If the popup has a
+ * border-radius, for example, this will prevent it from overflowing the corners.
+ * @attr {string} flip-fallback-placements - If the preferred placement doesn't fit, popup will be tested in these
+ * fallback placements until one fits. Must be a string of any number of placements separated by a space, e.g. "top
+ * bottom left". If no placement fits, the flip fallback strategy will be used instead.
+ * @attr {"start" | "end" | "center" | "anchor"} flip-fallback-strategy - When neither the preferred placement nor the
+ * fallback placements fit, this value will be used to determine whether the popup should be positioned using the best
+ * available fit based on available space or as it was initially preferred.
+ * @attr {number} flip-padding - The amount of padding, in pixels, to exceed before the flip behavior will occur.
+ * @attr {number} shift-padding - The amount of padding, in pixels, to exceed before the shift behavior will occur.
+ * @attr {"horizontal" | "vertical" | "both"} auto-size - When set, this will cause the popup to automatically resize
+ * itself to prevent it from overflowing.
+ * @attr {number} auto-size-padding - The amount of padding, in pixels, to exceed before the auto-size behavior will
+ * occur.
+ * @attr {boolean} hover-bridge - When a gap exists between the anchor and the popup element, this option will add a
+ * "hover bridge" that fills the gap using an invisible element. This makes listening for events such as `mouseenter`
+ * and `mouseleave` more sane because the pointer never technically leaves the element. The hover bridge will only be
+ * drawn when the popover is active.
  */
 export default class SlPopup extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];

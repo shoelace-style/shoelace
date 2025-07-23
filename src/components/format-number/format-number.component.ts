@@ -7,6 +7,16 @@ import ShoelaceElement from '../../internal/shoelace-element.js';
  * @documentation https://shoelace.style/components/format-number
  * @status stable
  * @since 2.0
+ *
+ * @attr {boolean} no-grouping - Turns off grouping separators.
+ * @attr {"symbol" | "narrowSymbol" | "code" | "name"} currency-display - How to display the currency.
+ * @attr {number} minimum-integer-digits - The minimum number of integer digits to use. Possible values are 1-21.
+ * @attr {number} minimum-fraction-digits - The minimum number of fraction digits to use. Possible values are 0-20.
+ * @attr {number} maximum-fraction-digits - The maximum number of fraction digits to use. Possible values are 0-20.
+ * @attr {number} minimum-significant-digits - The minimum number of significant digits to use. Possible values are
+ * 1-21.
+ * @attr {number} maximum-significant-digits - The maximum number of significant digits to use. Possible values are
+ * 1-21.
  */
 export default class SlFormatNumber extends ShoelaceElement {
   private readonly localize = new LocalizeController(this);

@@ -89,6 +89,8 @@ declare const EyeDropper: EyeDropperConstructor;
  * @cssproperty --slider-height - The height of the hue and alpha sliders.
  * @cssproperty --slider-handle-size - The diameter of the slider's handle.
  * @cssproperty --swatch-size - The size of each predefined color swatch.
+ *
+ * @attr {boolean} no-format-toggle - Removes the button that lets users toggle between format.
  */
 export default class SlColorPicker extends ShoelaceElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, styles];

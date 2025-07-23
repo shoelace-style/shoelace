@@ -40,6 +40,12 @@ import type { CSSResultGroup } from 'lit';
  *
  * @animation copy.in - The animation to use when feedback icons animate in.
  * @animation copy.out - The animation to use when feedback icons animate out.
+ *
+ * @attr {string} copy-label - A custom label to show in the tooltip.
+ * @attr {string} success-label - A custom label to show in the tooltip after copying.
+ * @attr {string} error-label - A custom label to show in the tooltip when a copy error occurs.
+ * @attr {number} feedback-duration - The length of time to show feedback before restoring the default trigger.
+ * @attr {"top" | "right" | "bottom" | "left"} tooltip-placement - The preferred placement of the tooltip.
  */
 export default class SlCopyButton extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];

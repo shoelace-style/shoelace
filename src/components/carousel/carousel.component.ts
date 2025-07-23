@@ -46,6 +46,13 @@ import type SlCarouselItem from '../carousel-item/carousel-item.component.js';
  * @cssproperty [--aspect-ratio=16/9] - The aspect ratio of each slide.
  * @cssproperty --scroll-hint - The amount of padding to apply to the scroll area, allowing adjacent slides to become
  *  partially visible as a scroll hint.
+ *
+ * @attr {number} autoplay-interval - Specifies the amount of time, in milliseconds, between each automatic scroll.
+ * @attr {number} slides-per-page - Specifies how many slides should be shown at a given time.
+ * @attr {number} slides-per-move - Specifies the number of slides the carousel will advance when scrolling, useful
+ * when specifying a `slides-per-page` greater than one.
+ * @attr {boolean} mouse-dragging - When set, it is possible to scroll through the slides by dragging them with the
+ * mouse.
  */
 export default class SlCarousel extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];

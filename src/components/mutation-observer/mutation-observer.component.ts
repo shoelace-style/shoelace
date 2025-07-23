@@ -15,6 +15,13 @@ import type { CSSResultGroup } from 'lit';
  * @event {{ mutationList: MutationRecord[] }} sl-mutation - Emitted when a mutation occurs.
  *
  * @slot - The content to watch for mutations.
+ *
+ * @attr {boolean} attr-old-value - Indicates whether or not the attribute's previous value should be recorded when
+ * monitoring changes.
+ * @attr {boolean} char-data - Watches for changes to the character data contained within the node.
+ * @attr {boolean} char-data-old-value - Indicates whether or not the previous value of the node's text should be
+ * recorded.
+ * @attr {boolean} child-list - Watches for the addition or removal of new child nodes.
  */
 export default class SlMutationObserver extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];
