@@ -1,3 +1,11 @@
+# Introducing Web Awesome
+
+Web Awesome is the new name for Shoelace, and version 3 is now in beta! [Come check it out!](https://webawesome.com/) 🧡
+
+**Heads up!** Most of the project's activity is now happening [in the new repo](https://github.com/shoelace-style/webawesome).
+
+---
+
 # Shoelace
 
 A forward-thinking library of web components.
@@ -8,8 +16,6 @@ A forward-thinking library of web components.
 - Includes an official dark theme 🌛
 - Built with accessibility in mind ♿️
 - Open source 😸
-
-Designed in New Hampshire by [Cory LaViska](https://twitter.com/cory_laviska).
 
 ---
 
@@ -77,6 +83,6 @@ Shoelace is an open source project and contributions are encouraged! If you're i
 
 ## License
 
-Shoelace was created by [Cory LaViska](https://twitter.com/cory_laviska) and is available under the terms of the MIT license.
+Shoelace is available under the terms of the MIT license.
 
 Whether you're building Shoelace or building something _with_ Shoelace — have fun creating! 🥾

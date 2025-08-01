@@ -1424,7 +1424,10 @@ body[data-page^='/tokens/'] .table-wrapper td:first-child code {
   font-size: 0.9375rem;
   align-items: center;
   justify-content: space-between;
-  background: #1a3256;
+  background: #f36a44;
+  background-image: linear-gradient(color-mix(in oklab, #f36a44, orangered 40%) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, #f36a44, orangered 40%) 1px, transparent 1px);
+  background-size: 2rem 2rem;
   border-radius: var(--sl-border-radius-large);
   padding: 1rem 1.25rem;
   color: #fdfdfd;
@@ -1455,11 +1458,11 @@ body[data-page^='/tokens/'] .table-wrapper td:first-child code {
   align-items: center;
   height: 30px;
   background: white;
-  border: solid 1px #d4d4d4;
   border-radius: var(--sl-border-radius-medium);
   font-size: 0.8375rem;
+  font-weight: 500;
   color: #353439;
-  padding: 0.5rem 1rem;
+  padding: 1.125rem;
   white-space: nowrap;
 }
 
