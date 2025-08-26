@@ -234,6 +234,19 @@ describe('<sl-input>', () => {
       expect(json.a).to.equal('1');
     });
 
+    it('should aggregate multiple controls with the same name into an array (hits push branch)', async () => {
+      const form = await fixture<HTMLFormElement>(html`
+        <form>
+          <sl-input name="colors" value="red"></sl-input>
+          <sl-input name="colors" value="blue"></sl-input>
+          <sl-input name="colors" value="green"></sl-input>          
+        </form>
+      `);
+      
+      const json = serialize(form) as { colors: string[] };
+      expect(json.colors).to.deep.equal(['red', 'blue', 'green']);
+    });
+
     it('should submit the form when pressing enter in a form without a submit button', async () => {
       const form = await fixture<HTMLFormElement>(html` <form><sl-input></sl-input></form> `);
       const input = form.querySelector('sl-input')!;
