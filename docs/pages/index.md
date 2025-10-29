@@ -81,10 +81,10 @@ layout: blank.njk
         <wa-card>
             <div class="wa-stack">
                 <h3 class="wa-heading-m">Sign In</h3>
-                <wa-input tabindex="-1" label="Email" placeholder="ddjarin@mandalore.gov" inert>
+                <wa-input tabindex="-1" label="Email" placeholder="ddjarin@mandalore.gov">
                     <wa-icon slot="start" name="envelope" variant="regular"></wa-icon>
                 </wa-input>
-                <wa-input tabindex="-1" label="Password" type="password" inert>
+                <wa-input tabindex="-1" label="Password" type="password">
                     <wa-icon slot="start" name="lock" variant="regular"></wa-icon>
                 </wa-input>
                 <wa-button tabindex="-1" variant="brand">Sign In</wa-button>
@@ -434,8 +434,6 @@ layout: blank.njk
     html,
     body,
     .theme-showcase {
-        height: 100vh;
-        overflow: hidden;
         background-color: var(--wa-color-surface-lowered);
     }
 
