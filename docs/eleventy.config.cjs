@@ -22,7 +22,7 @@ const assetsDir = 'assets';
 const cdndir = 'cdn';
 const npmdir = 'dist';
 const allComponents = getAllComponents();
-let hasBuiltSearchIndex = false;
+const hasBuiltSearchIndex = false;
 
 module.exports = function (eleventyConfig) {
   //
@@ -156,64 +156,64 @@ module.exports = function (eleventyConfig) {
     return content;
   });
 
-  //
-  // Build a search index
-  //
-  eleventyConfig.on('eleventy.after', ({ results }) => {
-    // We only want to build the search index on the first run so all pages get indexed.
-    if (hasBuiltSearchIndex) {
-      return;
-    }
+  // //
+  // // Build a search index
+  // //
+  // eleventyConfig.on('eleventy.after', ({ results }) => {
+  //   // We only want to build the search index on the first run so all pages get indexed.
+  //   if (hasBuiltSearchIndex) {
+  //     return;
+  //   }
 
-    const map = {};
-    const searchIndexFilename = path.join(eleventyConfig.dir.output, assetsDir, 'search.json');
-    const lunrInput = path.resolve('../node_modules/lunr/lunr.min.js');
-    const lunrOutput = path.join(eleventyConfig.dir.output, assetsDir, 'scripts/lunr.js');
-    const searchIndex = lunr(function () {
-      // The search index uses these field names extensively, so shortening them can save some serious bytes. The
-      // initial index file went from 468 KB => 401 KB by using single-character names!
-      this.ref('id'); // id
-      this.field('t', { boost: 50 }); // title
-      this.field('h', { boost: 25 }); // headings
-      this.field('c'); // content
+  //   const map = {};
+  //   const searchIndexFilename = path.join(eleventyConfig.dir.output, assetsDir, 'search.json');
+  //   const lunrInput = path.resolve('../node_modules/lunr/lunr.min.js');
+  //   const lunrOutput = path.join(eleventyConfig.dir.output, assetsDir, 'scripts/lunr.js');
+  //   const searchIndex = lunr(function () {
+  //     // The search index uses these field names extensively, so shortening them can save some serious bytes. The
+  //     // initial index file went from 468 KB => 401 KB by using single-character names!
+  //     this.ref('id'); // id
+  //     this.field('t', { boost: 50 }); // title
+  //     this.field('h', { boost: 25 }); // headings
+  //     this.field('c'); // content
 
-      results.forEach((result, index) => {
-        const url = path
-          .join('/', path.relative(eleventyConfig.dir.output, result.outputPath))
-          .replace(/\\/g, '/') // convert backslashes to forward slashes
-          .replace(/\/index.html$/, '/'); // convert trailing /index.html to /
-        const doc = new JSDOM(result.content, {
-          // We must set a default URL so links are parsed with a hostname. Let's use a bogus TLD so we can easily
-          // identify which ones are internal and which ones are external.
-          url: `https://internal/`
-        }).window.document;
-        const content = doc.querySelector('#content');
+  //     results.forEach((result, index) => {
+  //       const url = path
+  //         .join('/', path.relative(eleventyConfig.dir.output, result.outputPath))
+  //         .replace(/\\/g, '/') // convert backslashes to forward slashes
+  //         .replace(/\/index.html$/, '/'); // convert trailing /index.html to /
+  //       const doc = new JSDOM(result.content, {
+  //         // We must set a default URL so links are parsed with a hostname. Let's use a bogus TLD so we can easily
+  //         // identify which ones are internal and which ones are external.
+  //         url: `https://internal/`
+  //       }).window.document;
+  //       const content = doc.querySelector('#content');
 
-        // Get title and headings
-        const title = (doc.querySelector('title')?.textContent || path.basename(result.outputPath)).trim();
-        const headings = [...content.querySelectorAll('h1, h2, h3, h4')]
-          .map(heading => heading.textContent)
-          .join(' ')
-          .replace(/\s+/g, ' ')
-          .trim();
+  //       // Get title and headings
+  //       const title = (doc.querySelector('title')?.textContent || path.basename(result.outputPath)).trim();
+  //       const headings = [...content.querySelectorAll('h1, h2, h3, h4')]
+  //         .map(heading => heading.textContent)
+  //         .join(' ')
+  //         .replace(/\s+/g, ' ')
+  //         .trim();
 
-        // Remove code blocks and whitespace from content
-        [...content.querySelectorAll('code[class|=language]')].forEach(code => code.remove());
-        const textContent = content.textContent.replace(/\s+/g, ' ').trim();
+  //       // Remove code blocks and whitespace from content
+  //       [...content.querySelectorAll('code[class|=language]')].forEach(code => code.remove());
+  //       const textContent = content.textContent.replace(/\s+/g, ' ').trim();
 
-        // Update the index and map
-        this.add({ id: index, t: title, h: headings, c: textContent });
-        map[index] = { title, url };
-      });
-    });
+  //       // Update the index and map
+  //       this.add({ id: index, t: title, h: headings, c: textContent });
+  //       map[index] = { title, url };
+  //     });
+  //   });
 
-    // Copy the Lunr search client and write the index
-    fs.mkdirSync(path.dirname(lunrOutput), { recursive: true });
-    fs.copyFileSync(lunrInput, lunrOutput);
-    fs.writeFileSync(searchIndexFilename, JSON.stringify({ searchIndex, map }), 'utf-8');
+  //   // Copy the Lunr search client and write the index
+  //   fs.mkdirSync(path.dirname(lunrOutput), { recursive: true });
+  //   fs.copyFileSync(lunrInput, lunrOutput);
+  //   fs.writeFileSync(searchIndexFilename, JSON.stringify({ searchIndex, map }), 'utf-8');
 
-    hasBuiltSearchIndex = true;
-  });
+  //   hasBuiltSearchIndex = true;
+  // });
 
   //
   // Send a signal to stdout that let's the build know we've reached this point
