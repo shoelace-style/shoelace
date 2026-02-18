@@ -1414,3 +1414,146 @@ body[data-page^='/tokens/'] .table-wrapper td:first-child code {
   }
 }
 
+/* custom styling - WA dialog */
+#wa-dialog {
+  --action-color: #cd491c;
+  --action-color-hover: color-mix(in oklab, var(--action-color), var(--sl-color-neutral-1000) 5%);
+}
+
+#wa-dialog a {
+  color: var(--action-color);
+}
+
+#wa-dialog a:hover {
+  color: var(--action-color-hover);
+}
+
+#wa-dialog::part(header) {
+  display: none;
+}
+
+#wa-dialog::part(body) {
+  padding: 0;
+}
+
+#wa-dialog::part(footer) {
+  background-color: var(--sl-color-gray-50);
+  font-size: var(--sl-font-size-small);
+  text-align: start;
+}
+
+#wa-dialog::part(panel) {
+  overflow: clip; /* preserve border-radius of panel w/ footer + billboard backgrounds */
+}
+
+#wa-dialog .dialog-body {
+  padding: var(--sl-spacing-x-large) var(--body-spacing);
+}
+
+#wa-dialog .dialog-billboard {
+  position: relative;
+  padding: var(--sl-spacing-3x-large) var(--sl-spacing-2x-large);
+  gap: var(--sl-spacing-medium);
+  background: linear-gradient(to bottom, #f46a45, #cd491c);
+  color: var(--sl-color-neutral-0);
+}
+
+#wa-dialog .dialog-billboard::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: transparent;
+  background-image: url('/assets/images/wa-bg-pattern.svg');
+  background-repeat: repeat;
+  opacity: 0.3;
+}
+
+#wa-dialog .dialog-billboard-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sl-spacing-x-small);
+}
+
+#wa-dialog .dialog-billboard-content .wa-logo {
+  inline-size: auto;
+  max-inline-size: 100%;
+  block-size: 4rem;
+}
+
+#wa-dialog .dialog-billboard-content h2 {
+  margin-block: 0;
+  border-bottom: none;
+  text-align: center;
+  line-height: 1.4;
+  font-weight: var(--sl-font-weight-bold);
+  font-size: var(--sl-font-size-x-large);
+}
+
+#wa-dialog p {
+  margin-block-end: var(--sl-spacing-small);
+}
+
+#wa-dialog p:last-of-type {
+  margin-block-end: 0;
+}
+
+#wa-dialog h4,
+#wa-dialog p {
+  margin-block-start: 0;
+}
+
+#wa-dialog .dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sl-spacing-x-small);
+  justify-content: space-between;
+  align-items: center;
+}
+
+#wa-dialog .dialog-actions .wa-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sl-spacing-x-small);
+  align-items: center;
+}
+
+#wa-dialog sl-divider {
+  --spacing: var(--sl-spacing-x-large);
+}
+
+#wa-dialog .wa-cta::part(base) {
+  border-color: var(--action-color);
+}
+
+#wa-dialog .close-wa-dialog::part(label) {
+  color: var(--action-color);
+}
+
+#wa-dialog .close-wa-dialog::part(label):hover {
+  color: var(--action-color-hover);
+}
+
+#wa-dialog .close-wa-cta::part(label):hover {
+  color: var(--sl-color-neutral-0);
+}
+
+#wa-dialog .wa-cta::part(base) {
+  color: var(--action-color);
+}
+
+#wa-dialog .wa-pro-cta::part(base) {
+  background-color: var(--action-color);
+  border-color: var(--action-color);
+}
+
+#wa-dialog .wa-cta::part(base):hover,
+#wa-dialog .wa-pro-cta::part(base):hover {
+  background-color: var(--action-color-hover);
+  border-color: var(--action-color-hover);
+  color: var(--sl-color-neutral-0);
+}

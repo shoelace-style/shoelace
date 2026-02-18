@@ -95,20 +95,46 @@
       </sl-dropdown>
     </div>
 
-    <sl-dialog id="wa-banner" label="Shoelace is in maintenance mode">
-      <p>We're no longer actively developing Shoelace, but the latest version is available under a new name.</p>
-      <p>Check out <a href="https://webawesome.com/" target="_blank">Web Awesome</a>, the next evolution of Shoelace!</p>
-      <sl-button slot="footer" variant="primary">Got it</sl-button>
+    <sl-dialog id="wa-dialog" label="Shoelace is now Web Awesome!">
+      <div class="dialog-billboard">
+        <div class="dialog-billboard-content">
+          {% include 'wa-logo-icon.njk' %}
+          <h2>Shoelace is now Web Awesome!</h2>
+        </div>
+      </div>
+
+      <div class="dialog-body">
+        <p>Web Awesome, like Shoelace before it, has an even larger library of free web <a href="https://webawesome.com/docs/components/?utm_source=shoelace-docs&utm_medium=web&utm_campaign=wa-dialog" target="_blank">components</a>. Plus, it has <a href="https://webawesome.com/docs/themes/?utm_source=shoelace-docs&utm_medium=web&utm_campaign=wa-dialog" target="_blank">themes</a>, <a href="https://webawesome.com/docs/utilities/?utm_source=shoelace-docs&utm_medium=web&utm_campaign=wa-dialog" target="_blank">utilities</a>, <a href="https://webawesome.com/docs/patterns/?utm_source=shoelace-docs&utm_medium=web&utm_campaign=wa-dialog" target="_blank">patterns</a>, and more.</p>
+
+        <p>Switch from Shoelace for free today. <strong>Grab Web Awesome Pro and get even more at a 20% discount!</strong></p>
+
+        <sl-divider></sl-divider>
+
+        <div class="dialog-actions">
+          <sl-button variant="text" class="close-wa-dialog">Okay, got it</sl-button>
+          <div class="wa-ctas">
+            <sl-button variant="primary" outline class="wa-cta" href="https://webawesome.com/docs?utm_source=shoelace-docs&utm_medium=web&utm_campaign=wa-dialog" target="_blank">Try Web Awesome</sl-button>
+            <sl-button variant="primary" class="wa-pro-cta" href="https://webawesome.com/purchase?discount=TRYPRO20&utm_source=shoelace-docs&utm_medium=web&utm_campaign=wa-dialog" target="_blank">Save 20% on Pro!</sl-button>
+          </div>
+        </div>
+      </div>
+
+      <div slot="footer">
+        <div class="sl-status">
+          <strong>FYI, Shoelace is no longer actively being developed</strong>
+          <p>The latest version is still available for use and may receive fixes and updates as needed.</p>
+        </div>
+      </div>
     </sl-dialog>
     <script>
-      if (!sessionStorage.getItem('wa-banner-dismissed')) {
+      if (!sessionStorage.getItem('wa-dialog-dismissed')) {
         customElements.whenDefined('sl-dialog').then(() => {
-          const dialog = document.getElementById('wa-banner');
-          const closeButton = dialog.querySelector('sl-button[slot="footer"]');
+          const dialog = document.getElementById('wa-dialog');
+          const closeButton = dialog.querySelector('sl-button.close-wa-dialog');
 
           closeButton.addEventListener('click', () => dialog.hide());
           dialog.addEventListener('sl-after-hide', () => {
-            sessionStorage.setItem('wa-banner-dismissed', 'true');
+            sessionStorage.setItem('wa-dialog-dismissed', 'true');
           }, { once: true });
 
           dialog.show();
