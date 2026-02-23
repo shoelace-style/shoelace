@@ -1,8 +1,10 @@
-# Introducing Web Awesome
+# Shoelace is now Web Awesome 🧡!
 
-Web Awesome is the new name for Shoelace, and version 3 is now in beta! [Come check it out!](https://webawesome.com/) 🧡
+> [!IMPORTANT]  
+> **Shoelace is in maintenance mode (LTS)**. It is no longer actively being developed but remains available for use under the MIT license. Critical fixes may be released as needed; there is no fixed end date.
+> For active development and new features, check out Web Awesome at [https://webawesome.com](https://webawesome.com) and [https://github.com/shoelace-style/webawesome](https://github.com/shoelace-style/webawesome).
 
-**Heads up!** Most of the project's activity is now happening [in the new repo](https://github.com/shoelace-style/webawesome).
+Web Awesome has an even larger library of free web [components](https://webawesome.com/docs/components/), plus [themes](https://webawesome.com/docs/themes/), [utilities](https://webawesome.com/docs/utilities/), [patterns](https://webawesome.com/docs/patterns/), and more.
 
 ---
 
@@ -19,11 +21,9 @@ A forward-thinking library of web components.
 
 ---
 
-Documentation: [shoelace.style](https://shoelace.style)
-
-Source: [github.com/shoelace-style/shoelace](https://github.com/shoelace-style/shoelace)
-
-Twitter: [@shoelace_style](https://twitter.com/shoelace_style)
+- Documentation: [shoelace.style](https://shoelace.style)
+- Shoelace Source (Maintenance Mode - LTS): [github.com/shoelace-style/shoelace](https://github.com/shoelace-style/shoelace)
+- Web Awesome Source (Active Development): [github.com/shoelace-style/webawesome](https://github.com/shoelace-style/webawesome)
 
 ---
 
@@ -79,7 +79,7 @@ This will generate a source file, a stylesheet, and a docs page for you. When yo
 
 ### Contributing
 
-Shoelace is an open source project and contributions are encouraged! If you're interesting in contributing, please review the [contribution guidelines](CONTRIBUTING.md) first.
+Shoelace is open source under the MIT license. Bug fixes and maintenance updates may still be considered; for new features and active development, see [Web Awesome](https://webawesome.com). If you want to contribute here, please review the [contribution guidelines](CONTRIBUTING.md) first.
 
 ## License
 
