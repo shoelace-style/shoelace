@@ -23,6 +23,11 @@ export default css`
     position: relative;
   }
 
+  /* Remove row-gap when pagination is not enabled to avoid extra space below the slides */
+  :host(:not([pagination])) .carousel {
+    row-gap: 0;
+  }
+
   .carousel__pagination {
     grid-area: pagination;
     display: flex;
