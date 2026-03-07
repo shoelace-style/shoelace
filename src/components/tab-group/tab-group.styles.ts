@@ -21,6 +21,7 @@ export default css`
 
   .tab-group__indicator {
     position: absolute;
+    box-sizing: content-box;
     transition:
       var(--sl-transition-fast) translate ease,
       var(--sl-transition-fast) width ease;
