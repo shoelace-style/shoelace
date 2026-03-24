@@ -9,7 +9,7 @@
 
 **What “Sunset” Means:** Shoelace has **no active development**. **Issues, pull requests, and feature requests** belong on **[Web Awesome](https://github.com/shoelace-style/webawesome)**, not this repository. The published package remains available under the MIT license for existing use. **Archiving** this repo on GitHub (optional but recommended) is how you mark it **read-only** on the platform—see _For Repository Maintainers_ below.
 
-Web Awesome, like Shoelace before it, offers an even larger library of free web [components](https://webawesome.com/docs/components/), plus [themes](https://webawesome.com/docs/themes/), [utilities](https://webawesome.com/docs/utilities/), [patterns](https://webawesome.com/docs/patterns/), and more.
+Web Awesome, like Shoelace before it, offers an even larger library of free [components](https://webawesome.com/docs/components/), plus [themes](https://webawesome.com/docs/themes/), [utilities](https://webawesome.com/docs/utilities/), [patterns](https://webawesome.com/docs/patterns/), and more.
 
 ---
 
