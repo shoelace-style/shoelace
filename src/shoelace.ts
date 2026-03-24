@@ -44,6 +44,7 @@ export { default as SlRating } from './components/rating/rating.js';
 export { default as SlRelativeTime } from './components/relative-time/relative-time.js';
 export { default as SlResizeObserver } from './components/resize-observer/resize-observer.js';
 export { default as SlSelect } from './components/select/select.js';
+export { default as SlSearchSelect } from './components/search-select/search-select.js';
 export { default as SlSkeleton } from './components/skeleton/skeleton.js';
 export { default as SlSpinner } from './components/spinner/spinner.js';
 export { default as SlSplitPanel } from './components/split-panel/split-panel.js';
