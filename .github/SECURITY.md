@@ -1,7 +1,7 @@
 # Reporting Security Issues
 
-We take security issues in Shoelace very seriously and appreciate your efforts to disclose your findings responsibly.
+**Active development** has moved to [Web Awesome](https://webawesome.com) ([source](https://github.com/shoelace-style/webawesome)). For security issues in the current supported product, please follow the reporting process documented on the **Web Awesome** repository.
 
-To report a security issue, email [cory@abeautifulsite.net](mailto:cory@abeautifulsite.net) and include "SHOELACE SECURITY" in the subject line.
+**Shoelace** (this repository) is sunset. If you need to report a security issue that applies only to the legacy Shoelace codebase, email [cory@abeautifulsite.net](mailto:cory@abeautifulsite.net) and include "SHOELACE SECURITY" in the subject line. We cannot guarantee ongoing fixes; migrating to Web Awesome is recommended.
 
-We'll respond as soon as possible and keep you updated throughout the process.
+We take responsible disclosure seriously and appreciate your efforts to report findings appropriately.

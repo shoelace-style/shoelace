@@ -1,35 +1,22 @@
 ---
 name: Bug Report
-about: Create a bug report to help us fix a demonstrable problem with code in the library.
+about: Shoelace is sunset — use Web Awesome for bug reports. (Legacy template only.)
 title: ''
 labels: bug
 assignees: 
 ---
 
-### Describe the bug
-A bug is _a demonstrable problem_ caused by code in the library. Please provide a clear and concise description of what the bug is here.
+**This repository is sunset and does not triage new bug reports.** Please open issues on **[Web Awesome](https://github.com/shoelace-style/webawesome/issues)** for the active product line.
 
-### To Reproduce
-Steps to reproduce the behavior:
+For security-sensitive reports, see [SECURITY.md](https://github.com/shoelace-style/shoelace/blob/current/.github/SECURITY.md) instead of a public issue.
 
-1. Go to '...'
-2. Click on '...'
-3. Scroll down to '...'
-4. See error
+---
 
-### Demo
+If you are only documenting something for a **private fork** of Shoelace (this repo is not actively maintained), describe it below.
 
-If the bug isn't obvious, please provide a link to a CodePen or Fiddle with a minimal reproduction. Bugs that have repros get attention faster than those that don't.
+### Description
 
-Tip: use the CodePen button on any example in the docs!
+### Environment (optional)
 
-### Screenshots
-If applicable, add screenshots to help explain the bug.
-
-### Browser / OS
- - OS: [e.g. Mac, Windows]
- - Browser: [e.g. Chrome, Firefox, Safari]
- - Browser version: [e.g. 22]
-
-### Additional information
-Provide any additional information about the bug here.
+- OS:
+- Browser:

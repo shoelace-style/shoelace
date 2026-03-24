@@ -1,10 +1,15 @@
-# Shoelace is now Web Awesome 🧡!
+<div align="center">
+
+[![Shoelace is now Web Awesome — visit webawesome.com](.github/readme-banner.png)](https://webawesome.com)
+
+</div>
 
 > [!IMPORTANT]  
-> **Shoelace is in maintenance mode (LTS)**. It is no longer actively being developed but remains available for use under the MIT license. Critical fixes may be released as needed; there is no fixed end date.
-> For active development and new features, check out Web Awesome at [https://webawesome.com](https://webawesome.com) and [https://github.com/shoelace-style/webawesome](https://github.com/shoelace-style/webawesome).
+> **Shoelace is sunset.** There is no active development on this codebase. The library remains available under the MIT license for existing use, but **please do not open issues, pull requests, or feature requests here**—direct those to **[Web Awesome](https://webawesome.com)**, the successor project, at [github.com/shoelace-style/webawesome](https://github.com/shoelace-style/webawesome).
 
-Web Awesome has an even larger library of free web [components](https://webawesome.com/docs/components/), plus [themes](https://webawesome.com/docs/themes/), [utilities](https://webawesome.com/docs/utilities/), [patterns](https://webawesome.com/docs/patterns/), and more.
+**What “Sunset” Means:** Shoelace has **no active development**. **Issues, pull requests, and feature requests** belong on **[Web Awesome](https://github.com/shoelace-style/webawesome)**, not this repository. The published package remains available under the MIT license for existing use. **Archiving** this repo on GitHub (optional but recommended) is how you mark it **read-only** on the platform—see _For Repository Maintainers_ below.
+
+Web Awesome, like Shoelace before it, offers an even larger library of free [components](https://webawesome.com/docs/components/), plus [themes](https://webawesome.com/docs/themes/), [utilities](https://webawesome.com/docs/utilities/), [patterns](https://webawesome.com/docs/patterns/), and more.
 
 ---
 
@@ -22,18 +27,16 @@ A forward-thinking library of web components.
 ---
 
 - Documentation: [shoelace.style](https://shoelace.style)
-- Shoelace Source (Maintenance Mode - LTS): [github.com/shoelace-style/shoelace](https://github.com/shoelace-style/shoelace)
-- Web Awesome Source (Active Development): [github.com/shoelace-style/webawesome](https://github.com/shoelace-style/webawesome)
+- Shoelace source (sunset): [github.com/shoelace-style/shoelace](https://github.com/shoelace-style/shoelace)
+- Web Awesome (active development): [website](https://webawesome.com) · [source](https://github.com/shoelace-style/webawesome)
 
 ---
 
 ## Shoemakers 🥾
 
-Shoemakers, or "Shoelace developers," can use this documentation to learn how to build Shoelace from source. You will need Node >= 14.17 to build and run the project locally.
+The sections below are **for historical reference**—for example, running the docs or a build from source, auditing the codebase, or maintaining a **private fork**. **New components and ongoing development belong on [Web Awesome](https://webawesome.com), not here.** You will need Node >= 14.17 to build and run the project locally.
 
-**You don't need to do any of this to use Shoelace!** This page is for people who want to contribute to the project, tinker with the source, or create a custom build of Shoelace.
-
-If that's not what you're trying to do, the [documentation website](https://shoelace.style) is where you want to be.
+**You do not need any of this to use Shoelace as a dependency.** For installation and usage, see the [documentation website](https://shoelace.style).
 
 ### What are you using to build Shoelace?
 
@@ -41,7 +44,7 @@ Components are built with [LitElement](https://lit-element.polymer-project.org/)
 
 ### Forking the Repo
 
-Start by [forking the repo](https://github.com/shoelace-style/shoelace/fork) on GitHub, then clone it locally and install dependencies.
+You can still [fork the repo](https://github.com/shoelace-style/shoelace/fork) on GitHub for your own experiments, then clone it locally and install dependencies.
 
 ```bash
 git clone https://github.com/YOUR_GITHUB_USERNAME/shoelace
@@ -67,22 +70,16 @@ To generate a production build, run the following command.
 npm run build
 ```
 
-### Creating New Components
+### New Components
 
-To scaffold a new component, run the following command, replacing `sl-tag-name` with the desired tag name.
-
-```bash
-npm run create sl-tag-name
-```
-
-This will generate a source file, a stylesheet, and a docs page for you. When you start the dev server, you'll find the new component in the "Components" section of the sidebar.
+**Develop new components on [Web Awesome](https://webawesome.com),** not in this repository. If you maintain a private fork and still use the old tooling, the historical scaffold was `npm run create <tag-name>`—that workflow is unsupported.
 
 ### Contributing
 
-Shoelace is open source under the MIT license. Bug fixes and maintenance updates may still be considered; for new features and active development, see [Web Awesome](https://webawesome.com). If you want to contribute here, please review the [contribution guidelines](CONTRIBUTING.md) first.
+Shoelace is open source under the MIT license, but **this repository is not accepting contributions.** For bug reports, features, and pull requests, use **[Web Awesome](https://webawesome.com)** ([repository](https://github.com/shoelace-style/webawesome)). See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
 Shoelace is available under the terms of the MIT license.
 
-Whether you're building Shoelace or building something _with_ Shoelace — have fun creating! 🥾
+Whether you are using Shoelace in a project or exploring this source tree — have fun creating! 🥾
