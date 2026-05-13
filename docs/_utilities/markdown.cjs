@@ -22,7 +22,7 @@ markdown.use(markdownItMark);
 markdown.use(markdownItReplaceIt);
 
 // Callouts
-['tip', 'warning', 'danger'].forEach(type => {
+['tip', 'warning', 'danger', 'webawesome'].forEach(type => {
   markdown.use(markdownItContainer, type, {
     render: function (tokens, idx) {
       if (tokens[idx].nesting === 1) {
