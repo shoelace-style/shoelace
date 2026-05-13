@@ -1494,6 +1494,11 @@ body[data-page^='/tokens/'] .table-wrapper td:first-child code {
   font-size: var(--sl-font-size-x-large);
 }
 
+#wa-dialog .dialog-billboard-content h2 a,
+#wa-dialog .dialog-billboard-content h2 a:hover {
+  color: inherit;
+}
+
 #wa-dialog p {
   margin-block-end: var(--sl-spacing-small);
 }
@@ -1520,6 +1525,12 @@ body[data-page^='/tokens/'] .table-wrapper td:first-child code {
   flex-wrap: wrap;
   gap: var(--sl-spacing-x-small);
   align-items: center;
+  inline-size: 100%;
+}
+
+#wa-dialog .wa-pro-cta {
+  flex: 1 1 0;
+  min-inline-size: 0;
 }
 
 #wa-dialog sl-divider {
