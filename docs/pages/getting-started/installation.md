@@ -6,6 +6,10 @@ meta:
 
 # Installation
 
+:::webawesome
+**Shoelace is now [Web Awesome](https://webawesome.com/docs?utm_source=shoelace-docs&utm_medium=web&utm_campaign=installation)** — there's no active development here. Already using Shoelace? Follow the [migration guide](https://webawesome.com/docs/resources/migrating-from-shoelace?utm_source=shoelace-docs&utm_medium=web&utm_campaign=installation), or [point an AI coding agent at it](https://webawesome.com/docs/resources/migrating-from-shoelace?utm_source=shoelace-docs&utm_medium=web&utm_campaign=installation#choose-your-migration-path) for a faster path.
+:::
+
 You can load Shoelace via CDN or by installing it locally. If you're using a framework, make sure to check out the pages for [React](/frameworks/react), [Vue](/frameworks/vue), and [Angular](/frameworks/angular) for additional information.
 
 ## CDN Installation (Easiest)

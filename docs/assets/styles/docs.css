@@ -612,6 +612,48 @@ pre:hover .copy-code-button,
   background-color: var(--sl-color-danger-600);
 }
 
+/* Web Awesome brand (matches WA dialog / webawesome.com accent) */
+.callout--webawesome {
+  --wa-callout-accent: #cd491c;
+  --wa-callout-accent-bright: #f46a45;
+  background-color: color-mix(in oklab, var(--wa-callout-accent) 12%, var(--sl-color-neutral-0));
+  border-left-color: var(--wa-callout-accent);
+  color: #3d2420;
+}
+
+.callout--webawesome::before {
+  content: '!';
+  background-color: var(--wa-callout-accent);
+}
+
+.callout--webawesome a {
+  color: var(--wa-callout-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.callout--webawesome a:hover {
+  color: color-mix(in oklab, var(--wa-callout-accent), var(--sl-color-neutral-1000) 12%);
+}
+
+html.sl-theme-dark .callout--webawesome {
+  background-color: color-mix(in oklab, var(--wa-callout-accent) 24%, var(--sl-color-neutral-950));
+  border-left-color: var(--wa-callout-accent-bright);
+  color: color-mix(in oklab, var(--sl-color-neutral-0) 92%, var(--wa-callout-accent-bright) 8%);
+}
+
+html.sl-theme-dark .callout--webawesome::before {
+  background-color: var(--wa-callout-accent-bright);
+}
+
+html.sl-theme-dark .callout--webawesome a {
+  color: #ff9b75;
+}
+
+html.sl-theme-dark .callout--webawesome a:hover {
+  color: #ffc8b0;
+}
+
 .callout + .callout {
   margin-top: calc(-0.5 * var(--docs-content-vertical-spacing));
 }
@@ -1494,6 +1536,11 @@ body[data-page^='/tokens/'] .table-wrapper td:first-child code {
   font-size: var(--sl-font-size-x-large);
 }
 
+#wa-dialog .dialog-billboard-content h2 a,
+#wa-dialog .dialog-billboard-content h2 a:hover {
+  color: inherit;
+}
+
 #wa-dialog p {
   margin-block-end: var(--sl-spacing-small);
 }
@@ -1520,6 +1567,12 @@ body[data-page^='/tokens/'] .table-wrapper td:first-child code {
   flex-wrap: wrap;
   gap: var(--sl-spacing-x-small);
   align-items: center;
+  inline-size: 100%;
+}
+
+#wa-dialog .wa-pro-cta {
+  flex: 1 1 0;
+  min-inline-size: 0;
 }
 
 #wa-dialog sl-divider {
