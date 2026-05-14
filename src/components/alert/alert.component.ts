@@ -60,8 +60,10 @@ export default class SlAlert extends ShoelaceElement {
     return this.currentToastStack;
   }
 
+  /** @internal */
   @query('[part~="base"]') base: HTMLElement;
 
+  /** @internal */
   @query('.alert__countdown-elapsed') countdownElement: HTMLElement;
 
   /**

@@ -41,7 +41,10 @@ export default class SlImageComparer extends ShoelaceElement {
 
   private readonly localize = new LocalizeController(this);
 
+  /** @internal */
   @query('.image-comparer') base: HTMLElement;
+
+  /** @internal */
   @query('.image-comparer__handle') handle: HTMLElement;
 
   /** The position of the divider as a percentage. */
@@ -90,6 +93,7 @@ export default class SlImageComparer extends ShoelaceElement {
     }
   }
 
+  /** @internal */
   @watch('position', { waitUntilFirstUpdate: true })
   handlePositionChange() {
     this.emit('sl-change');

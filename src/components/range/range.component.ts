@@ -53,11 +53,16 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
   private readonly localize = new LocalizeController(this);
   private resizeObserver: ResizeObserver;
 
+  /** @internal */
   @query('.range__control') input: HTMLInputElement;
+
+  /** @internal */
   @query('.range__tooltip') output: HTMLOutputElement | null;
 
   @state() private hasFocus = false;
   @state() private hasTooltip = false;
+
+  /** @internal */
   @property() title = ''; // make reactive to pass through
 
   /** The name of the range, submitted as a name/value pair with form data. */
@@ -191,6 +196,7 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
     }
   }
 
+  /** @internal */
   @watch('value', { waitUntilFirstUpdate: true })
   handleValueChange() {
     this.formControlController.updateValidity();
@@ -203,12 +209,14 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
     this.syncRange();
   }
 
+  /** @internal */
   @watch('disabled', { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     // Disabled form controls are always valid
     this.formControlController.setValidity(this.disabled);
   }
 
+  /** @internal */
   @watch('hasTooltip', { waitUntilFirstUpdate: true })
   syncRange() {
     const percent = Math.max(0, (this.value - this.min) / (this.max - this.min));
@@ -226,12 +234,12 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
     this.formControlController.emitInvalidEvent(event);
   }
 
-  /** Sets focus on the range. */
+  /** @internal Sets focus on the range. */
   focus(options?: FocusOptions) {
     this.input.focus(options);
   }
 
-  /** Removes focus from the range. */
+  /** @internal Removes focus from the range. */
   blur() {
     this.input.blur();
   }

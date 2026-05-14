@@ -52,11 +52,16 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
   private customValidityMessage = '';
   private validationTimeout: number;
 
+  /** @internal */
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
+
+  /** @internal */
   @query('.radio-group__validation-input') validationInput: HTMLInputElement;
 
   @state() private hasButtonGroup = false;
   @state() private errorMessage = '';
+
+  /** @internal */
   @state() defaultValue = '';
 
   /**
@@ -261,11 +266,13 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     this.formControlController.setValidity(this.validity.valid);
   }
 
+  /** @internal */
   @watch('size', { waitUntilFirstUpdate: true })
   handleSizeChange() {
     this.syncRadios();
   }
 
+  /** @internal */
   @watch('value')
   handleValueChange() {
     if (this.hasUpdated) {
@@ -318,7 +325,7 @@ export default class SlRadioGroup extends ShoelaceElement implements ShoelaceFor
     this.formControlController.updateValidity();
   }
 
-  /** Sets focus on the radio-group. */
+  /** @internal Sets focus on the radio-group. */
   public focus(options?: FocusOptions) {
     const radios = this.getAllRadios();
     const checked = radios.find(radio => radio.checked);

@@ -52,10 +52,15 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
   private readonly hasSlotController = new HasSlotController(this, '[default]', 'prefix', 'suffix');
   private readonly localize = new LocalizeController(this);
 
+  /** @internal */
   @query('.button') button: HTMLButtonElement | HTMLLinkElement;
 
   @state() private hasFocus = false;
+
+  /** @internal */
   @state() invalid = false;
+
+  /** @internal */
   @property() title = ''; // make reactive to pass through
 
   /** The button's theme variant. */

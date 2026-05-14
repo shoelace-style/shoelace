@@ -48,11 +48,19 @@ export default class SlDetails extends ShoelaceElement {
 
   private readonly localize = new LocalizeController(this);
 
+  /** @internal */
   @query('.details') details: HTMLDetailsElement;
+
+  /** @internal */
   @query('.details__header') header: HTMLElement;
+
+  /** @internal */
   @query('.details__body') body: HTMLElement;
+
+  /** @internal */
   @query('.details__expand-icon-slot') expandIconSlot: HTMLSlotElement;
 
+  /** @internal */
   detailsObserver: MutationObserver;
 
   /**
@@ -127,6 +135,7 @@ export default class SlDetails extends ShoelaceElement {
     }
   }
 
+  /** @internal */
   @watch('open', { waitUntilFirstUpdate: true })
   async handleOpenChange() {
     if (this.open) {

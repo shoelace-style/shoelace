@@ -50,12 +50,22 @@ export default class SlCopyButton extends ShoelaceElement {
 
   private readonly localize = new LocalizeController(this);
 
+  /** @internal */
   @query('slot[name="copy-icon"]') copyIcon: HTMLSlotElement;
+
+  /** @internal */
   @query('slot[name="success-icon"]') successIcon: HTMLSlotElement;
+
+  /** @internal */
   @query('slot[name="error-icon"]') errorIcon: HTMLSlotElement;
+
+  /** @internal */
   @query('sl-tooltip') tooltip: SlTooltip;
 
+  /** @internal */
   @state() isCopying = false;
+
+  /** @internal */
   @state() status: 'rest' | 'success' | 'error' = 'rest';
 
   /** The text value to copy. */

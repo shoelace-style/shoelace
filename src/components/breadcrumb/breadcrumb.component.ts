@@ -28,7 +28,10 @@ export default class SlBreadcrumb extends ShoelaceElement {
   private readonly localize = new LocalizeController(this);
   private separatorDir = this.localize.dir();
 
+  /** @internal */
   @query('slot') defaultSlot: HTMLSlotElement;
+
+  /** @internal */
   @query('slot[name="separator"]') separatorSlot: HTMLSlotElement;
 
   /**

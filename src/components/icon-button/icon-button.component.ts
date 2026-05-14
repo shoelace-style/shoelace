@@ -25,6 +25,7 @@ export default class SlIconButton extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = { 'sl-icon': SlIcon };
 
+  /** @internal */
   @query('.icon-button') button: HTMLButtonElement | HTMLLinkElement;
 
   @state() private hasFocus = false;
@@ -76,17 +77,17 @@ export default class SlIconButton extends ShoelaceElement {
     }
   }
 
-  /** Simulates a click on the icon button. */
+  /** @internal Simulates a click on the icon button. */
   click() {
     this.button.click();
   }
 
-  /** Sets focus on the icon button. */
+  /** @internal Sets focus on the icon button. */
   focus(options?: FocusOptions) {
     this.button.focus(options);
   }
 
-  /** Removes focus from the icon button. */
+  /** @internal Removes focus from the icon button. */
   blur() {
     this.button.blur();
   }

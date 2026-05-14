@@ -81,14 +81,19 @@ export default class SlCarousel extends ShoelaceElement {
   /** When set, it is possible to scroll through the slides by dragging them with the mouse. */
   @property({ type: Boolean, reflect: true, attribute: 'mouse-dragging' }) mouseDragging = false;
 
+  /** @internal */
   @query('.carousel__slides') scrollContainer: HTMLElement;
+
+  /** @internal */
   @query('.carousel__pagination') paginationContainer: HTMLElement;
 
-  // The index of the active slide
+  /** @internal The index of the active slide */
   @state() activeSlide = 0;
 
+  /** @internal */
   @state() scrolling = false;
 
+  /** @internal */
   @state() dragging = false;
 
   private autoplayController = new AutoplayController(this, () => this.next());

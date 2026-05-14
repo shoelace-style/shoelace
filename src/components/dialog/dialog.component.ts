@@ -76,11 +76,18 @@ export default class SlDialog extends ShoelaceElement {
   private readonly hasSlotController = new HasSlotController(this, 'footer');
   private readonly localize = new LocalizeController(this);
   private originalTrigger: HTMLElement | null;
-  public modal = new Modal(this);
   private closeWatcher: CloseWatcher | null;
 
+  /** @internal */
+  public modal = new Modal(this);
+
+  /** @internal */
   @query('.dialog') dialog: HTMLElement;
+
+  /** @internal */
   @query('.dialog__panel') panel: HTMLElement;
+
+  /** @internal */
   @query('.dialog__overlay') overlay: HTMLElement;
 
   /**
@@ -155,6 +162,7 @@ export default class SlDialog extends ShoelaceElement {
     }
   };
 
+  /** @internal */
   @watch('open', { waitUntilFirstUpdate: true })
   async handleOpenChange() {
     if (this.open) {
@@ -333,6 +341,7 @@ setDefaultAnimation('dialog.show', {
   options: { duration: 250, easing: 'ease' }
 });
 
+/** @internal */
 setDefaultAnimation('dialog.hide', {
   keyframes: [
     { opacity: 1, scale: 1 },

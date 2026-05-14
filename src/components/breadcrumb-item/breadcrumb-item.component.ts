@@ -32,6 +32,7 @@ export default class SlBreadcrumbItem extends ShoelaceElement {
 
   private readonly hasSlotController = new HasSlotController(this, 'prefix', 'suffix');
 
+  /** @internal */
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
 
   @state() private renderType: 'button' | 'link' | 'dropdown' = 'button';

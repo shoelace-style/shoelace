@@ -23,6 +23,7 @@ export interface MenuSelectEventDetail {
 export default class SlMenu extends ShoelaceElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
+  /** @internal */
   @query('slot') defaultSlot: HTMLSlotElement;
 
   connectedCallback() {
