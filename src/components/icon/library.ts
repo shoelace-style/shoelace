@@ -9,6 +9,8 @@ export interface IconLibrary {
   resolver: IconLibraryResolver;
   mutator?: IconLibraryMutator;
   spriteSheet?: boolean;
+  add: (name: string, svgData: string) => void;
+  inlineIcons?: Record<string, string>
 }
 
 let registry: IconLibrary[] = [defaultLibrary, systemLibrary];
@@ -32,11 +34,22 @@ export function getIconLibrary(name?: string) {
 /** Adds an icon library to the registry, or overrides an existing one. */
 export function registerIconLibrary(name: string, options: Omit<IconLibrary, 'name'>) {
   unregisterIconLibrary(name);
+  const inlineIcons = options.inlineIcons || {};
   registry.push({
     name,
-    resolver: options.resolver,
+    resolver: (name: string) => {
+      if (name in inlineIcons) {
+        return `data:image/svg+xml,${encodeURIComponent(inlineIcons[name])}`;
+      } else {
+        return options.resolver(name)
+      }
+    },
     mutator: options.mutator,
-    spriteSheet: options.spriteSheet
+    spriteSheet: options.spriteSheet,
+    inlineIcons,
+    add: (name: string, svgData: string) => {
+      inlineIcons[name] = svgData;
+    }
   });
 
   // Redraw watched icons
