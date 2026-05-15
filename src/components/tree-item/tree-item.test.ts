@@ -177,4 +177,25 @@ describe('<sl-tree-item>', () => {
       expect(lazyChangeSpy).to.have.been.calledTwice;
     });
   });
+
+  it('should update children select state after loading', async () => {
+    // Arrange
+    const lazyLoadSpy = sinon.spy();
+
+    parentItem.addEventListener('sl-lazy-load', lazyLoadSpy);
+    parentItem.selected = true;
+    parentItem.lazy = true;
+
+    // Act
+    parentItem.expanded = true;
+    await waitUntil(() => lazyLoadSpy.calledOnce);
+    parentItem.loading = false;
+    await parentItem.updateComplete;
+
+    // Assert
+    expect(parentItem.childElementCount).to.be.greaterThan(0);
+    parentItem.getChildrenItems().forEach(child => {
+      expect(child.selected).to.be.true;
+    });
+  });
 });

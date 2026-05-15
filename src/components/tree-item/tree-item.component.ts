@@ -170,6 +170,9 @@ export default class SlTreeItem extends ShoelaceElement {
     this.setAttribute('aria-busy', this.loading ? 'true' : 'false');
 
     if (!this.loading) {
+      this.getChildrenItems().forEach(item => {
+        item.selected = this.selected;
+      });
       this.animateExpand();
     }
   }

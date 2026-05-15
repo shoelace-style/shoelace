@@ -235,69 +235,6 @@ const App = () => (
 
 {% endraw %}
 
-### Lazy Loading
-
-Use the `lazy` attribute on a tree item to indicate that the content is not yet present and will be loaded later. When the user tries to expand the node, the `loading` state is set to `true` and the `sl-lazy-load` event will be emitted to allow you to load data asynchronously. The item will remain in a loading state until its content is changed.
-
-If you want to disable this behavior after the first load, simply remove the `lazy` attribute and, on the next expand, the existing content will be shown instead.
-
-```html:preview
-<sl-tree>
-  <sl-tree-item lazy>Available Trees</sl-tree-item>
-</sl-tree>
-
-<script type="module">
-  const lazyItem = document.querySelector('sl-tree-item[lazy]');
-
-  lazyItem.addEventListener('sl-lazy-load', () => {
-    // Simulate asynchronous loading
-    setTimeout(() => {
-      const subItems = ['Birch', 'Cedar', 'Maple', 'Pine'];
-
-      for (const item of subItems) {
-        const treeItem = document.createElement('sl-tree-item');
-        treeItem.innerText = item;
-        lazyItem.append(treeItem);
-      }
-
-      // Disable lazy mode once the content has been loaded
-      lazyItem.lazy = false;
-    }, 1000);
-  });
-</script>
-```
-
-```jsx:react
-import SlTree from '@shoelace-style/shoelace/dist/react/tree';
-import SlTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
-
-const App = () => {
-  const [childItems, setChildItems] = useState([]);
-  const [lazy, setLazy] = useState(true);
-
-  const handleLazyLoad = () => {
-    // Simulate asynchronous loading
-    setTimeout(() => {
-      setChildItems(['Birch', 'Cedar', 'Maple', 'Pine']);
-
-      // Disable lazy mode once the content has been loaded
-      setLazy(false);
-    }, 1000);
-  };
-
-  return (
-    <SlTree>
-      <SlTreeItem lazy={lazy} onSlLazyLoad={handleLazyLoad}>
-        Available Trees
-        {childItems.map(item => (
-          <SlTreeItem>{item}</SlTreeItem>
-        ))}
-      </SlTreeItem>
-    </SlTree>
-  );
-};
-```
-
 ### Customizing the Expand and Collapse Icons
 
 Use the `expand-icon` and `collapse-icon` slots to change the expand and collapse icons, respectively. To disable the animation, override the `rotate` property on the `expand-button` part as shown below.
