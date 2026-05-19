@@ -195,16 +195,16 @@ export class SubmenuController implements ReactiveController {
   private handlePopupReposition = () => {
     const submenuSlot: HTMLSlotElement | null = this.host.renderRoot.querySelector("slot[name='submenu']");
     const menu = submenuSlot?.assignedElements({ flatten: true }).filter(el => el.localName === 'sl-menu')[0];
-    const isRtl = getComputedStyle(this.host).direction === 'rtl';
+    const isOnLeft = this.popupRef.value?.attributes?.['data-current-placement']?.startsWith('left');
     if (!menu) {
       return;
     }
 
     const { left, top, width, height } = menu.getBoundingClientRect();
 
-    this.host.style.setProperty('--safe-triangle-submenu-start-x', `${isRtl ? left + width : left}px`);
+    this.host.style.setProperty('--safe-triangle-submenu-start-x', `${isOnLeft ? left + width : left}px`);
     this.host.style.setProperty('--safe-triangle-submenu-start-y', `${top}px`);
-    this.host.style.setProperty('--safe-triangle-submenu-end-x', `${isRtl ? left + width : left}px`);
+    this.host.style.setProperty('--safe-triangle-submenu-end-x', `${isOnLeft ? left + width : left}px`);
     this.host.style.setProperty('--safe-triangle-submenu-end-y', `${top + height}px`);
   };
 
