@@ -104,6 +104,9 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
    */
   @property() value = '';
 
+  /** The default value of the button, used when resetting the form. Set to the initial value when the component is first updated. */
+  defaultValue = '';
+
   /** When set, the underlying button will be rendered as an `<a>` with this `href` instead of a `<button>`. */
   @property() href = '';
 
@@ -165,6 +168,9 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
     if (this.isButton()) {
       this.formControlController.updateValidity();
     }
+
+    // Store the initial value as the default value for form reset
+    this.defaultValue = this.value;
   }
 
   private handleBlur() {

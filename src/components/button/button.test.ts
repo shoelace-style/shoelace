@@ -264,6 +264,27 @@ describe('<sl-button>', () => {
       expect(submitter.formTarget).to.equal('_blank');
       expect(submitter.formNoValidate).to.be.true;
     });
+
+    it('should preserve the button value when the form is reset', async () => {
+      const el = await fixture(html`
+        <form>
+          <sl-button type="submit" name="action" value="save">Save</sl-button>
+          <sl-button type="reset">Reset</sl-button>
+        </form>
+      `);
+      const submitButton = el.querySelector<SlButton>('sl-button[type="submit"]')!;
+      const resetButton = el.querySelector<SlButton>('sl-button[type="reset"]')!;
+
+      // Verify initial value
+      expect(submitButton.value).to.equal('save');
+
+      // Reset the form
+      resetButton.click();
+      await submitButton.updateComplete;
+
+      // Value should still be 'save' after reset
+      expect(submitButton.value).to.equal('save');
+    });
   });
 
   describe('when using methods', () => {
