@@ -106,5 +106,5 @@ Now you can start using Shoelace components with Rails!
 
 ## Additional Resources
 
-- There is a third-party [example repo](https://github.com/ParamagicDev/rails-shoelace-example), courtesy of [ParamagicDev](https://github.com/ParamagicDev) available to help you get started.
+- There is a third-party [example repo](https://github.com/KonnorRogers/rails-shoelace-example), courtesy of [KonnorRogers](https://github.com/KonnorRogers) available to help you get started.
 - If you would like to avoid repeating this process, check out the associated [Railsbyte for Shoelace](https://railsbytes.com/templates/X8BsEb).
