@@ -301,7 +301,7 @@ export default css`
     display: flex;
     align-items: center;
     transition: var(--sl-transition-medium) rotate ease;
-    rotate: 0;
+    rotate: 0deg;
     margin-inline-start: var(--sl-spacing-small);
   }
 

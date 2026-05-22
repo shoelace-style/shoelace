@@ -11,7 +11,7 @@ export default css`
 
   .radio {
     display: inline-flex;
-    align-items: top;
+    align-items: flex-start;
     font-family: var(--sl-input-font-family);
     font-size: var(--sl-input-font-size-medium);
     font-weight: var(--sl-input-font-weight);
