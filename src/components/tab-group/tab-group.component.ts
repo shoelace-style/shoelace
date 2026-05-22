@@ -1,6 +1,6 @@
 import '../../internal/scrollend-polyfill.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { eventOptions, property, query, state } from 'lit/decorators.js';
+import { eventOptions, property, query, queryAssignedElements, state } from 'lit/decorators.js';
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
 import { scrollIntoView } from '../../internal/scroll.js';
@@ -49,10 +49,11 @@ export default class SlTabGroup extends ShoelaceElement {
   private activeTab?: SlTab;
   private mutationObserver: MutationObserver;
   private resizeObserver: ResizeObserver;
-  private tabs: SlTab[] = [];
   private focusableTabs: SlTab[] = [];
-  private panels: SlTabPanel[] = [];
   private readonly localize = new LocalizeController(this);
+
+  @queryAssignedElements({ slot: 'nav', selector: 'sl-tab' }) tabs: SlTab[];
+  @queryAssignedElements({ selector: 'sl-tab-panel' }) panels: SlTabPanel[];
 
   @query('.tab-group') tabGroup: HTMLElement;
   @query('.tab-group__body') body: HTMLSlotElement;
@@ -165,16 +166,6 @@ export default class SlTabGroup extends ShoelaceElement {
     if (this.nav) {
       this.resizeObserver?.unobserve(this.nav);
     }
-  }
-
-  private getAllTabs() {
-    const slot = this.shadowRoot!.querySelector<HTMLSlotElement>('slot[name="nav"]')!;
-
-    return slot.assignedElements() as SlTab[];
-  }
-
-  private getAllPanels() {
-    return [...this.body.assignedElements()].filter(el => el.tagName.toLowerCase() === 'sl-tab-panel') as [SlTabPanel];
   }
 
   private getActiveTab() {
@@ -341,8 +332,7 @@ export default class SlTabGroup extends ShoelaceElement {
 
     // We can't used offsetLeft/offsetTop here due to a shadow parent issue where neither can getBoundingClientRect
     // because it provides invalid values for animating elements: https://bugs.chromium.org/p/chromium/issues/detail?id=920069
-    const allTabs = this.getAllTabs();
-    const precedingTabs = allTabs.slice(0, allTabs.indexOf(currentTab));
+    const precedingTabs = this.tabs.slice(0, this.tabs.indexOf(currentTab));
     const offset = precedingTabs.reduce(
       (previous, current) => ({
         left: previous.left + current.clientWidth,
@@ -368,12 +358,9 @@ export default class SlTabGroup extends ShoelaceElement {
     }
   }
 
-  // This stores tabs and panels so we can refer to a cache instead of calling querySelectorAll() multiple times.
   private syncTabsAndPanels() {
-    this.tabs = this.getAllTabs();
     this.focusableTabs = this.tabs.filter(el => !el.disabled);
 
-    this.panels = this.getAllPanels();
     this.syncIndicator();
 
     // After updating, show or hide scroll controls as needed
