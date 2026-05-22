@@ -153,7 +153,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
     this.resizeObserver = new ResizeObserver(() => this.setTextareaHeight());
 
     this.updateComplete.then(() => {
-      this.setTextareaHeight();
+      this.setTextareaHeight(true);
       this.resizeObserver.observe(this.input);
     });
   }
@@ -195,13 +195,14 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
     this.formControlController.emitInvalidEvent(event);
   }
 
-  private setTextareaHeight() {
+  private setTextareaHeight(isProgrammatic?: boolean) {
     if (this.resize === 'auto') {
       // This prevents layout shifts. We use `clientHeight` instead of `scrollHeight` to account for if the `<textarea>` has a max-height set on it. In my tests, this has worked fine. Im not aware of any edge cases. [Konnor]
       this.sizeAdjuster.style.height = `${this.input.clientHeight}px`;
       this.input.style.height = 'auto';
       this.input.style.height = `${this.input.scrollHeight}px`;
-    } else {
+    } else if(isProgrammatic){
+      // The height only be changed by user resize, so no need to reset the value.
       this.input.style.height = '';
     }
   }
@@ -214,7 +215,7 @@ export default class SlTextarea extends ShoelaceElement implements ShoelaceFormC
 
   @watch('rows', { waitUntilFirstUpdate: true })
   handleRowsChange() {
-    this.setTextareaHeight();
+    this.setTextareaHeight(true);
   }
 
   @watch('value', { waitUntilFirstUpdate: true })
