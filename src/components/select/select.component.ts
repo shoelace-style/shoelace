@@ -115,7 +115,9 @@ export default class SlSelect extends ShoelaceElement implements ShoelaceFormCon
   @state()
   set value(val: string | string[]) {
     if (this.multiple) {
-      val = Array.isArray(val) ? val : val.split(' ');
+      if (!Array.isArray(val)) {
+        val = typeof val === 'string' ? val.split(' ') : [val].filter(Boolean);
+      }
     } else {
       val = Array.isArray(val) ? val.join(' ') : val;
     }
