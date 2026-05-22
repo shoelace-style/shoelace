@@ -44,6 +44,20 @@ export default css`
     cursor: not-allowed;
   }
 
+  .option__icon-container {
+    display: flex;
+    width: 20px;
+    margin-inline-end: var(--sl-spacing-2x-small);
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .option__empty-icon {
+    width: 20px;
+    height: 20px;
+  }
+
   .option__label {
     flex: 1 1 auto;
     display: inline-block;
@@ -55,12 +69,8 @@ export default css`
     display: flex;
     align-items: center;
     justify-content: center;
-    visibility: hidden;
-    padding-inline-end: var(--sl-spacing-2x-small);
-  }
-
-  .option--selected .option__check {
-    visibility: visible;
+    width: 100%;
+    height: 100%;
   }
 
   .option__prefix,

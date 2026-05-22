@@ -20,9 +20,12 @@ import type { CSSResultGroup } from 'lit';
  * @slot - The option's label.
  * @slot prefix - Used to prepend an icon or similar element to the menu item.
  * @slot suffix - Used to append an icon or similar element to the menu item.
+ * @slot checked-icon - The icon to show when the option is selected.
  *
- * @csspart checked-icon - The checked icon, an `<sl-icon>` element.
  * @csspart base - The component's base wrapper.
+ * @csspart checked-icon - The checked icon.
+ * @csspart checked-icon-container - The container for the checked icon.
+ * @csspart empty-icon - The placeholder icon space when not selected.
  * @csspart label - The option's label.
  * @csspart prefix - The container that wraps the prefix.
  * @csspart suffix - The container that wraps the suffix.
@@ -138,7 +141,14 @@ export default class SlOption extends ShoelaceElement {
         @mouseenter=${this.handleMouseEnter}
         @mouseleave=${this.handleMouseLeave}
       >
-        <sl-icon part="checked-icon" class="option__check" name="check" library="system" aria-hidden="true"></sl-icon>
+        <div class="option__icon-container" part="checked-icon-container">
+          <div ?hidden=${!this.selected}>
+            <slot name="checked-icon" class="option__check">
+              <sl-icon name="check" library="system" aria-hidden="true"></sl-icon>
+            </slot>
+          </div>
+          <div class="option__empty-icon" part="empty-icon" ?hidden=${this.selected}></div>
+        </div>
         <slot part="prefix" name="prefix" class="option__prefix"></slot>
         <slot part="label" class="option__label" @slotchange=${this.handleDefaultSlotChange}></slot>
         <slot part="suffix" name="suffix" class="option__suffix"></slot>

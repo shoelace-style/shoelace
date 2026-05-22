@@ -25,6 +25,8 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  *
  * @slot - The checkbox's label.
  * @slot help-text - Text that describes how to use the checkbox. Alternatively, you can use the `help-text` attribute.
+ * @slot checked-icon - The icon to show when the checkbox is checked.
+ * @slot indeterminate-icon - The icon to show when the checkbox is indeterminate.
  *
  * @event sl-blur - Emitted when the checkbox loses focus.
  * @event sl-change - Emitted when the checked state changes.
@@ -36,8 +38,10 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  * @csspart control - The square container that wraps the checkbox's checked state.
  * @csspart control--checked - Matches the control part when the checkbox is checked.
  * @csspart control--indeterminate - Matches the control part when the checkbox is indeterminate.
- * @csspart checked-icon - The checked icon, an `<sl-icon>` element.
- * @csspart indeterminate-icon - The indeterminate icon, an `<sl-icon>` element.
+ * @csspart checked-icon - The checked icon.
+ * @csspart indeterminate-icon - The indeterminate icon.
+ * @csspart checked-icon-container - The container for the checked icon.
+ * @csspart indeterminate-icon-container - The container for the indeterminate icon.
  * @csspart label - The container that wraps the checkbox's label.
  * @csspart form-control-help-text - The help text's wrapper.
  */
@@ -50,7 +54,7 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
     defaultValue: (control: SlCheckbox) => control.defaultChecked,
     setValue: (control: SlCheckbox, checked: boolean) => (control.checked = checked)
   });
-  private readonly hasSlotController = new HasSlotController(this, 'help-text');
+  private readonly hasSlotController = new HasSlotController(this, 'help-text', 'checked-icon', 'indeterminate-icon');
 
   @query('input[type="checkbox"]') input: HTMLInputElement;
 
@@ -243,21 +247,27 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
               : ''}"
             class="checkbox__control"
           >
-            ${this.checked
-              ? html`
-                  <sl-icon part="checked-icon" class="checkbox__checked-icon" library="system" name="check"></sl-icon>
-                `
-              : ''}
-            ${!this.checked && this.indeterminate
-              ? html`
-                  <sl-icon
-                    part="indeterminate-icon"
-                    class="checkbox__indeterminate-icon"
-                    library="system"
-                    name="indeterminate"
-                  ></sl-icon>
-                `
-              : ''}
+            <div
+              part="checked-icon-container"
+              class="checkbox__icon-container"
+              ?hidden=${!this.checked}
+              aria-hidden=${!this.checked ? 'true' : 'false'}
+            >
+              <slot name="checked-icon" class="checkbox__checked-icon">
+                <sl-icon library="system" name="check"></sl-icon>
+              </slot>
+            </div>
+
+            <div
+              part="indeterminate-icon-container"
+              class="checkbox__icon-container"
+              ?hidden=${!this.indeterminate || this.checked}
+              aria-hidden=${!this.indeterminate || this.checked ? 'true' : 'false'}
+            >
+              <slot name="indeterminate-icon" class="checkbox__indeterminate-icon">
+                <sl-icon library="system" name="indeterminate"></sl-icon>
+              </slot>
+            </div>
           </span>
 
           <div part="label" class="checkbox__label">

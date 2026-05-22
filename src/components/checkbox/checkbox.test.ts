@@ -352,18 +352,45 @@ describe('<sl-checkbox>', () => {
   describe('indeterminate', () => {
     it('should render indeterminate icon until checked', async () => {
       const el = await fixture<SlCheckbox>(html`<sl-checkbox indeterminate></sl-checkbox>`);
-      let indeterminateIcon = el.shadowRoot!.querySelector('[part~="indeterminate-icon"]')!;
+      const container = el.shadowRoot!.querySelector('[part="indeterminate-icon-container"]');
 
-      expect(indeterminateIcon).not.to.be.null;
+      expect(container).not.to.be.null;
+      expect(container!.hasAttribute('hidden')).to.be.false;
 
       el.click();
       await el.updateComplete;
 
-      indeterminateIcon = el.shadowRoot!.querySelector('[part~="indeterminate-icon"]')!;
-
-      expect(indeterminateIcon).to.be.null;
+      expect(container!.hasAttribute('hidden')).to.be.true;
     });
 
     runFormControlBaseTests('sl-checkbox');
+  });
+
+  describe('custom icons', () => {
+    it('should allow custom checked icon via slot', async () => {
+      const el = await fixture<SlCheckbox>(html`
+        <sl-checkbox checked>
+          <div slot="checked-icon" class="custom-icon">✓</div>
+        </sl-checkbox>
+      `);
+      const slot = el.shadowRoot!.querySelector('slot[name="checked-icon"]')!;
+      const assignedElements = (slot as HTMLSlotElement).assignedElements() as Element[];
+
+      expect(assignedElements.length).to.equal(1);
+      expect(assignedElements[0].textContent).to.equal('✓');
+    });
+
+    it('should allow custom indeterminate icon via slot', async () => {
+      const el = await fixture<SlCheckbox>(html`
+        <sl-checkbox indeterminate>
+          <div slot="indeterminate-icon" class="custom-icon">-</div>
+        </sl-checkbox>
+      `);
+      const slot = el.shadowRoot!.querySelector('slot[name="indeterminate-icon"]')!;
+      const assignedElements = (slot as HTMLSlotElement).assignedElements() as Element[];
+
+      expect(assignedElements.length).to.equal(1);
+      expect(assignedElements[0].textContent).to.equal('-');
+    });
   });
 });

@@ -45,4 +45,25 @@ describe('<sl-option>', () => {
     const el = await fixture<SlOption>(html` <sl-option><strong>Option</strong></sl-option> `);
     expect(el.getTextLabel()).to.equal('Option');
   });
+
+  it('should render a custom check icon when provided via slot', async () => {
+    const el = await fixture<SlOption>(html`
+      <sl-option selected>
+        <div slot="checked-icon" class="custom-icon">✓</div>
+        Option 1
+      </sl-option>
+    `);
+
+    await el.updateComplete;
+
+    const iconContainer = el.shadowRoot!.querySelector('.option__icon-container')!;
+    expect(iconContainer).to.be.visible;
+
+    const slotElement = iconContainer.querySelector('slot[name="checked-icon"]');
+    expect(slotElement).to.be.visible;
+
+    const customIcon = el.querySelector('div[slot="checked-icon"]');
+    expect(customIcon).to.be.visible;
+    expect(customIcon!.textContent).to.equal('✓');
+  });
 });
